@@ -1,11 +1,13 @@
 
 /**
-* Breve descrição do código
+* Breve descriï¿½ï¿½o do cï¿½digo
 *
 * @sid 2013
 * @aid 1.1
 */
 
 public class Payment {
+	
+	private int a;
 
 }
