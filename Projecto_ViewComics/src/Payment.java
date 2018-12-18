@@ -11,7 +11,7 @@ public class Payment {
 	private int a;
 	//teste 
 	private double valor;
-	
+	private double valor1;
 	
 	// teste2
 
