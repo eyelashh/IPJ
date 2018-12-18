@@ -10,6 +10,9 @@ public class Payment {
 	
 	private int a;
 	//teste 
+	private double valor;
 	
+	
+	// teste2
 
 }
