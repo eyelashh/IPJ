@@ -17,7 +17,7 @@ public class Admin extends User {
 	public Admin(String userName, String name, int contacto, int password) {
 		super(userName, name, contacto, password);
 		int i=0;
-		int f=0;
+		
 		// TODO Auto-generated constructor stub
 	}
 
