@@ -24,11 +24,16 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.ImageIcon;
 import java.awt.ScrollPane;
 import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JSlider;
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane;
 
 public class JavaBankProgram {
-
 	private JFrame frame;
-
+	private JTextField tbAdmFunPesq;
 	/**
 	 * Launch the application.
 	 */
@@ -100,18 +105,12 @@ public class JavaBankProgram {
 		lblBemVindo.setBounds(384, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
-		JLabel lblUtilizador = new JLabel("Utilizador");
-		lblUtilizador.setVerifyInputWhenFocusTarget(false);
-		lblUtilizador.setForeground(new Color(0, 0, 0));
-		lblUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lblUtilizador.setBounds(673, 13, 277, 74);
-		JpanelCabecalho.add(lblUtilizador);
-		
-		JPanel JpanelPrincipal = new JPanel();
-		JpanelPrincipal.setBackground(Color.WHITE);
-		JpanelPrincipal.setBounds(194, 126, 1056, 582);
-		frame.getContentPane().add(JpanelPrincipal);
-		JpanelPrincipal.setLayout(null);
+		JLabel lUtilizador = new JLabel("Utilizador");
+		lUtilizador.setVerifyInputWhenFocusTarget(false);
+		lUtilizador.setForeground(new Color(0, 0, 0));
+		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
+		lUtilizador.setBounds(673, 13, 277, 74);
+		JpanelCabecalho.add(lUtilizador);
 		
 		
 		JPanel JpanelMenu = new JPanel();
@@ -126,25 +125,25 @@ public class JavaBankProgram {
 		JPanelAdmin.setBounds(0, 0, 170, 580);
 		JpanelMenu.add(JPanelAdmin);
 		
-		JButton BAdmEstatistica = new JButton("Estatist\u00EDcas");
-		BAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BAdmEstatistica.setBounds(12, 13, 146, 130);
-		JPanelAdmin.add(BAdmEstatistica);
+		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
+		btAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmEstatistica.setBounds(12, 13, 146, 130);
+		JPanelAdmin.add(btAdmEstatistica);
 		
-		JButton BAdmFuncionarios = new JButton("Funcion\u00E1rios");
-		BAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		BAdmFuncionarios.setBounds(12, 156, 146, 130);
-		JPanelAdmin.add(BAdmFuncionarios);
+		JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
+		btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btAdmFuncionarios.setBounds(12, 156, 146, 130);
+		JPanelAdmin.add(btAdmFuncionarios);
 		
-		JButton BAdmClientes = new JButton("Cart\u00E3o");
-		BAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BAdmClientes.setBounds(12, 299, 146, 130);
-		JPanelAdmin.add(BAdmClientes);
+		JButton btAdmClientes = new JButton("Cart\u00E3o");
+		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmClientes.setBounds(12, 299, 146, 130);
+		JPanelAdmin.add(btAdmClientes);
 		
-		JButton BAdmGestao = new JButton("Gest\u00E3o");
-		BAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BAdmGestao.setBounds(12, 442, 146, 130);
-		JPanelAdmin.add(BAdmGestao);
+		JButton btAdmGestao = new JButton("Gest\u00E3o");
+		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmGestao.setBounds(12, 442, 146, 130);
+		JPanelAdmin.add(btAdmGestao);
 		
 		JPanel JPanelCliente = new JPanel();
 		JPanelCliente.setBounds(0, 0, 170, 580);
@@ -152,29 +151,29 @@ public class JavaBankProgram {
 		JPanelCliente.setLayout(null);
 		JPanelCliente.setBackground(Color.WHITE);
 		
-		JButton BCltConmov = new JButton("Conta\r\n/Movimentos");
-		BCltConmov.addActionListener(new ActionListener() {
+		JButton btCltConmov = new JButton("Conta\r\n/Movimentos");
+		btCltConmov.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		BCltConmov.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		BCltConmov.setBounds(12, 13, 146, 130);
-		JPanelCliente.add(BCltConmov);
+		btCltConmov.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btCltConmov.setBounds(12, 13, 146, 130);
+		JPanelCliente.add(btCltConmov);
 		
-		JButton BCltTransferencia = new JButton("Transfer\u00EAncia");
-		BCltTransferencia.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		BCltTransferencia.setBounds(12, 156, 146, 130);
-		JPanelCliente.add(BCltTransferencia);
+		JButton btCltTransferencia = new JButton("Transfer\u00EAncia");
+		btCltTransferencia.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btCltTransferencia.setBounds(12, 156, 146, 130);
+		JPanelCliente.add(btCltTransferencia);
 		
-		JButton BCltCartao = new JButton("Cart\u00E3o");
-		BCltCartao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BCltCartao.setBounds(12, 299, 146, 130);
-		JPanelCliente.add(BCltCartao);
+		JButton btCltCartao = new JButton("Cart\u00E3o");
+		btCltCartao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btCltCartao.setBounds(12, 299, 146, 130);
+		JPanelCliente.add(btCltCartao);
 		
-		JButton BCltGestao = new JButton("Gest\u00E3o");
-		BCltGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BCltGestao.setBounds(12, 442, 146, 130);
-		JPanelCliente.add(BCltGestao);
+		JButton btCltGestao = new JButton("Gest\u00E3o");
+		btCltGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btCltGestao.setBounds(12, 442, 146, 130);
+		JPanelCliente.add(btCltGestao);
 		
 		JPanel JPanelFuncionario = new JPanel();
 		JPanelFuncionario.setBounds(0, 0, 170, 580);
@@ -182,42 +181,161 @@ public class JavaBankProgram {
 		JPanelFuncionario.setBackground(Color.WHITE);
 		JPanelFuncionario.setLayout(null);
 		
-		JButton BFunCliente = new JButton("Clientes");
-		BFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BFunCliente.setBounds(12, 13, 146, 130);
-		JPanelFuncionario.add(BFunCliente);
+		JButton btFunCliente = new JButton("Clientes");
+		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunCliente.setBounds(12, 13, 146, 130);
+		JPanelFuncionario.add(btFunCliente);
 		
-		JButton BFunConta = new JButton("Conta");
-		BFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BFunConta.setBounds(12, 156, 146, 130);
-		JPanelFuncionario.add(BFunConta);
+		JButton btFunConta = new JButton("Conta");
+		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunConta.setBounds(12, 156, 146, 130);
+		JPanelFuncionario.add(btFunConta);
 		
-		JButton BFunOperaes = new JButton("Opera\u00E7\u00F5es");
-		BFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BFunOperaes.setBounds(12, 299, 146, 130);
-		JPanelFuncionario.add(BFunOperaes);
+		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
+		btFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunOperaes.setBounds(12, 299, 146, 130);
+		JPanelFuncionario.add(btFunOperaes);
 		
-		JButton BFunGesto = new JButton("Gest\u00E3o");
-		BFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		BFunGesto.setBounds(12, 442, 146, 130);
-		JPanelFuncionario.add(BFunGesto);
+		JButton btFunGesto = new JButton("Gest\u00E3o");
+		btFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunGesto.setBounds(12, 442, 146, 130);
+		JPanelFuncionario.add(btFunGesto);
 		
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+		JPanel JpanelPrincipal = new JPanel();
+		JpanelPrincipal.setBackground(Color.WHITE);
+		JpanelPrincipal.setBounds(194, 126, 1056, 582);
+		frame.getContentPane().add(JpanelPrincipal);
+		JpanelPrincipal.setLayout(null);
+		
+		JPanel JPAdm = new JPanel();
+		JPAdm.setBackground(Color.WHITE);
+		JPAdm.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(JPAdm);
+		JPAdm.setLayout(null);
+		
+		JPanel JPAdmFuncionario = new JPanel();
+		JPAdmFuncionario.setLayout(null);
+		JPAdmFuncionario.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmFuncionario);
+		
+		JComboBox cbAdmFunPesq = new JComboBox();
+		cbAdmFunPesq.setBounds(12, 13, 240, 30);
+		JPAdmFuncionario.add(cbAdmFunPesq);
+		
+		tbAdmFunPesq = new JTextField();
+		tbAdmFunPesq.setBounds(12, 52, 240, 30);
+		JPAdmFuncionario.add(tbAdmFunPesq);
+		tbAdmFunPesq.setColumns(10);
+		
+		JList lbLAdmFunLivros = new JList();
+		lbLAdmFunLivros.setBounds(12, 102, 240, 441);
+		JPAdmFuncionario.add(lbLAdmFunLivros);
+		
+		JButton btAdmFunPesq = new JButton("Procurar");
+		btAdmFunPesq.setBounds(264, 13, 97, 30);
+		JPAdmFuncionario.add(btAdmFunPesq);
+		
+		JButton btAdmFunNovo = new JButton("Novo");
+		btAdmFunNovo.setBounds(396, 13, 97, 30);
+		JPAdmFuncionario.add(btAdmFunNovo);
+		
+		JButton btAdmFunEliminar = new JButton("Eliminar");
+		btAdmFunEliminar.setBounds(520, 13, 97, 30);
+		JPAdmFuncionario.add(btAdmFunEliminar);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(391, 102, 47, 30);
+		JPAdmFuncionario.add(lblNewLabel_1);
+		
+		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
+		lblDataDeNascimento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDataDeNascimento.setBounds(296, 137, 142, 30);
+		JPAdmFuncionario.add(lblDataDeNascimento);
+		
+		JLabel lblDocumento = new JLabel("Documento:");
+		lblDocumento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDocumento.setBounds(357, 177, 81, 30);
+		JPAdmFuncionario.add(lblDocumento);
+		
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNumero.setBounds(381, 220, 57, 30);
+		JPAdmFuncionario.add(lblNumero);
+		
+		JLabel lblContacto = new JLabel("Contacto:");
+		lblContacto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContacto.setBounds(381, 268, 69, 30);
+		JPAdmFuncionario.add(lblContacto);
+		
+		JLabel lblUsername = new JLabel("UserName:");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsername.setBounds(369, 311, 81, 30);
+		JPAdmFuncionario.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword.setBounds(372, 354, 66, 30);
+		JPAdmFuncionario.add(lblPassword);
+		
+		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
+		rbAdmFunCC.setBounds(446, 181, 57, 25);
+		JPAdmFuncionario.add(rbAdmFunCC);
+		
+		JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
+		rbAdmFunBI.setBounds(507, 181, 57, 25);
+		JPAdmFuncionario.add(rbAdmFunBI);
+		
+		JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
+		rbAdmFunPass.setBounds(571, 181, 97, 25);
+		JPAdmFuncionario.add(rbAdmFunPass);
+		
+		JTextPane tbAdmFunNome = new JTextPane();
+		tbAdmFunNome.setBounds(450, 110, 496, 22);
+		JPAdmFuncionario.add(tbAdmFunNome);
+		
+		JTextPane tbAdmFunDtnasc = new JTextPane();
+		tbAdmFunDtnasc.setBounds(450, 145, 496, 22);
+		JPAdmFuncionario.add(tbAdmFunDtnasc);
+		
+		JTextPane tbAdmFunNIden = new JTextPane();
+		tbAdmFunNIden.setBounds(456, 220, 490, 22);
+		JPAdmFuncionario.add(tbAdmFunNIden);
+		
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setBounds(462, 268, 484, 22);
+		JPAdmFuncionario.add(textPane_3);
+		
+		JTextPane textPane_4 = new JTextPane();
+		textPane_4.setBounds(460, 311, 486, 22);
+		JPAdmFuncionario.add(textPane_4);
+		
+		JTextPane textPane_5 = new JTextPane();
+		textPane_5.setBounds(460, 354, 486, 22);
+		JPAdmFuncionario.add(textPane_5);
+		
+		JButton btAdmFunConfirmar = new JButton("Confirmar");
+		btAdmFunConfirmar.setBounds(467, 428, 97, 30);
+		JPAdmFuncionario.add(btAdmFunConfirmar);
+		
+		JButton btAdmFunConfirmarLimpar = new JButton("Limpar");
+		btAdmFunConfirmarLimpar.setBounds(685, 428, 97, 30);
+		JPAdmFuncionario.add(btAdmFunConfirmarLimpar);
+		
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
+		
+		JPanel JPAdmCartao = new JPanel();
+		JPAdmCartao.setLayout(null);
+		JPAdmCartao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmCartao);
+		
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmGestao);
+		
 	}
 }
