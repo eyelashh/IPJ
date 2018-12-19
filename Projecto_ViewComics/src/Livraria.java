@@ -1,5 +1,5 @@
 
-public class Banco {
+public class Livraria {
 
 	private double valor;
 }
