@@ -22,7 +22,6 @@ public class Login extends JDialog {
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
 
-
 	/**
 	 * Create the dialog.
 	 */
@@ -58,18 +57,18 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Login");
+				
+				// fazer login:
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						 
-						// fazer login 
-						
 						if(jLoginUsername.getText().equals("j") && new String(jLoginPassword.getPassword()).equals("j"))
 						{
 							BancoAppClt bc = new BancoAppClt();
 							bc.run();
 							dispose();
 						}
-						
+		
 						if(jLoginUsername.getText().equals("b") && new String(jLoginPassword.getPassword()).equals("b"))
 						{
 							BancoAppFun bf = new BancoAppFun();
