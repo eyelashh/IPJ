@@ -146,20 +146,8 @@ public class BancoAppClt {
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 		
-		JPanel JPCltTransf = new JPanel();
-		JPCltTransf.setBounds(12, 13, 1032, 556);
-		JpanelPrincipal.add(JPCltTransf);
-		
-		JPanel JPCltCartao = new JPanel();
-		JPCltCartao.setBounds(0, 0, 1032, 556);
-		JpanelPrincipal.add(JPCltCartao);
-		
-		JPanel JPCltGestao = new JPanel();
-		JPCltGestao.setBounds(12, 13, 1032, 556);
-		JpanelPrincipal.add(JPCltGestao);
-		
 		JPanel JPCltCM = new JPanel();
-		JPCltCM.setBounds(0, 0, 1, 1);
+		JPCltCM.setBounds(12, 13, 1032, 556);
 		JpanelPrincipal.add(JPCltCM);
 		JPCltCM.setLayout(null);
 		
