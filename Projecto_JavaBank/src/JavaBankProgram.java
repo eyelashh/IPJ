@@ -321,5 +321,9 @@ public class JavaBankProgram {
 		JPAdm.add(JPAdmEstatistica);
 		JPAdmEstatistica.setLayout(null);
 		
+		
+		
+		
+		// teste!!! Consegues ver????
 	}
 }
