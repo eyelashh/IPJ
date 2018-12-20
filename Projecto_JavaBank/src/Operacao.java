@@ -15,7 +15,7 @@ public class Operacao {
 		this.dataOperacao = dataOperacao;
 		this.valor = valor;
 	}
-
+ 
 
 	public int getIdOperacao() {
 		return idOperacao;

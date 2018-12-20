@@ -60,7 +60,7 @@ public class Login extends JDialog {
 				JButton okButton = new JButton("Login");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						 
 						// fazer login 
 						
 						if(jLoginUsername.getText().equals("Bruno") && new String(jLoginPassword.getPassword()).equals("pass"))

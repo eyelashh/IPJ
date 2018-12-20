@@ -11,7 +11,7 @@ public class Banco {
 	public Banco() {
 		super();
 	} 
-
+ 
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
 			ArrayList<Utilizador> utlizadores) {
 		super();

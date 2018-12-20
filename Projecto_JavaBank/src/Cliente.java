@@ -12,7 +12,7 @@ public class Cliente extends Utilizador {
 				username, password);
 		this.contas = contas;
 	}
-
+ 
 	public ArrayList<Conta> getContas() {
 		return contas;
 	}
