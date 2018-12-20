@@ -155,6 +155,21 @@ public class BancoAppAdm {
 		JpanelPrincipal.add(JPAdm);
 		JPAdm.setLayout(null);
 		
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmGestao);
+		
+		JPanel JPAdmCartao = new JPanel();
+		JPAdmCartao.setLayout(null);
+		JPAdmCartao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmCartao);
+		
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
+		
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1032, 556);
@@ -267,21 +282,6 @@ public class BancoAppAdm {
 		JButton btAdmFunConfirmarLimpar = new JButton("Limpar");
 		btAdmFunConfirmarLimpar.setBounds(685, 428, 97, 30);
 		JPAdmFuncionario.add(btAdmFunConfirmarLimpar);
-		
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmGestao);
-		
-		JPanel JPAdmCartao = new JPanel();
-		JPAdmCartao.setLayout(null);
-		JPAdmCartao.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmCartao);
-		
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmEstatistica);
-		JPAdmEstatistica.setLayout(null);
 	}
 
 }

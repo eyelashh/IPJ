@@ -135,7 +135,10 @@ public class BancoAppFun {
 		JpanelPrincipal.setBounds(194, 126, 1056, 582);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(panel);
 
 	}
-
 }
