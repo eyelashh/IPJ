@@ -28,17 +28,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 
-public class JavaBankProgram2 {
+public class teste {
+
 	private JFrame frame;
-	private JTextField tbAdmFunPesq;
-	private JLabel imagem_1;
 
-	
-	
-
-	
-	
-	
 	/**
 	 * Launch the application.
 	 */
@@ -46,7 +39,7 @@ public class JavaBankProgram2 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JavaBankProgram2 window = new JavaBankProgram2();
+					teste window = new teste();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,16 +51,16 @@ public class JavaBankProgram2 {
 	/**
 	 * Create the application.
 	 */
-	public JavaBankProgram2() {
+	public teste() {
 		initialize();
-		
-		
 	}
- 
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,10 +119,10 @@ public class JavaBankProgram2 {
 		
 		
 		//dentro do painel
-		imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-cópia (1).jpg"));
-		imagem_1.setBounds(0, 0, 1238, 100);
-		JpanelCabecalho.add(imagem_1);
-		imagem_1.setVisible(true);
+		//imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-coÌ�pia (1).jpg"));
+		//imagem_1.setBounds(0, 0, 1238, 100);
+		//JpanelCabecalho.add(imagem_1);
+		//imagem_1.setVisible(true);
 		
 		
 		JPanel JpanelMenu = new JPanel();
@@ -164,62 +157,6 @@ public class JavaBankProgram2 {
 		btAdmGestao.setBounds(12, 442, 146, 130);
 		JPanelAdmin.add(btAdmGestao);
 		
-		JPanel JPanelFuncionario = new JPanel();
-		JPanelFuncionario.setBounds(0, 0, 170, 580);
-		JpanelMenu.add(JPanelFuncionario);
-		JPanelFuncionario.setBackground(Color.WHITE);
-		JPanelFuncionario.setLayout(null);
-		
-		JButton btFunCliente = new JButton("Clientes");
-		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunCliente.setBounds(12, 13, 146, 130);
-		JPanelFuncionario.add(btFunCliente);
-		
-		JButton btFunConta = new JButton("Conta");
-		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunConta.setBounds(12, 156, 146, 130);
-		JPanelFuncionario.add(btFunConta);
-		
-		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
-		btFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunOperaes.setBounds(12, 299, 146, 130);
-		JPanelFuncionario.add(btFunOperaes);
-		
-		JButton btFunGesto = new JButton("Gest\u00E3o");
-		btFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunGesto.setBounds(12, 442, 146, 130);
-		JPanelFuncionario.add(btFunGesto);
-		
-		JPanel JPanelCliente = new JPanel();
-		JPanelCliente.setBounds(0, 0, 170, 580);
-		JpanelMenu.add(JPanelCliente);
-		JPanelCliente.setLayout(null);
-		JPanelCliente.setBackground(Color.WHITE);
-		
-		JButton btCltConmov = new JButton("Conta\r\n/Movimentos");
-		btCltConmov.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btCltConmov.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btCltConmov.setBounds(12, 13, 146, 130);
-		JPanelCliente.add(btCltConmov);
-		
-		JButton btCltTransferencia = new JButton("Transfer\u00EAncia");
-		btCltTransferencia.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btCltTransferencia.setBounds(12, 156, 146, 130);
-		JPanelCliente.add(btCltTransferencia);
-		
-		JButton btCltCartao = new JButton("Cart\u00E3o");
-		btCltCartao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btCltCartao.setBounds(12, 299, 146, 130);
-		JPanelCliente.add(btCltCartao);
-		
-		JButton btCltGestao = new JButton("Gest\u00E3o");
-		btCltGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btCltGestao.setBounds(12, 442, 146, 130);
-		JPanelCliente.add(btCltGestao);
-		
 		JPanel JpanelPrincipal = new JPanel();
 		JpanelPrincipal.setBackground(Color.WHITE);
 		JpanelPrincipal.setBounds(194, 126, 1056, 582);
@@ -241,7 +178,7 @@ public class JavaBankProgram2 {
 		cbAdmFunPesq.setBounds(12, 13, 240, 30);
 		JPAdmFuncionario.add(cbAdmFunPesq);
 		
-		tbAdmFunPesq = new JTextField();
+		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
 		JPAdmFuncionario.add(tbAdmFunPesq);
 		tbAdmFunPesq.setColumns(10);
@@ -359,9 +296,6 @@ public class JavaBankProgram2 {
 		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
 		JPAdm.add(JPAdmEstatistica);
 		JPAdmEstatistica.setLayout(null);
-		
-		
-		
 	}
-	
+
 }
