@@ -103,29 +103,29 @@ public class JavaBankProgram {
 		
 		
 		JLabel lblNewLabel = new JLabel("JavaBank");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 35));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		lblNewLabel.setVerifyInputWhenFocusTarget(false);
 		lblNewLabel.setForeground(new Color(188, 127, 82));
-		lblNewLabel.setBounds(37, 13, 175, 74);
+		lblNewLabel.setBounds(47, 11, 175, 74);
 		JpanelCabecalho.add(lblNewLabel);
 	
 		
 		JLabel lblBemVindo = new JLabel("Bem-Vindo(a) -");
 		lblBemVindo.setVerifyInputWhenFocusTarget(false);
 		lblBemVindo.setForeground(new Color(0, 0, 0));
-		lblBemVindo.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lblBemVindo.setBounds(332, 13, 277, 74);
+		lblBemVindo.setFont(new Font("Geneva", Font.BOLD, 35));
+		lblBemVindo.setBounds(374, 15, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
 		JLabel lUtilizador = new JLabel("Utilizador");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
-		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lUtilizador.setBounds(673, 13, 189, 74);
+		lUtilizador.setFont(new Font("Geneva", Font.BOLD, 35));
+		lUtilizador.setBounds(651, 13, 189, 74);
 		JpanelCabecalho.add(lUtilizador);
 		
 		
-		//dentro do painel
+		//imagem degrade no panel do cabeçalho 
 		imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-cópia (1).jpg"));
 		imagem_1.setBounds(0, 0, 1238, 100);
 		JpanelCabecalho.add(imagem_1);

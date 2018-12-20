@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -84,4 +84,4 @@ public class ViewComicsProgram {
 	}
 
 }
->>>>>>> 11965f26e46a54d0187481d73180582aea4bd951
+
