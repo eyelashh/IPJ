@@ -36,21 +36,21 @@ public class Login extends JDialog {
 		
 		JLabel lblNewLabel = new JLabel("Username:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(12, 13, 114, 26);
+		lblNewLabel.setBounds(59, 73, 114, 26);
 		contentPanel.add(lblNewLabel);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPassword.setBounds(22, 52, 91, 26);
+		lblPassword.setBounds(69, 112, 91, 26);
 		contentPanel.add(lblPassword);
 		
 		jLoginUsername = new JTextField();
-		jLoginUsername.setBounds(138, 18, 192, 22);
+		jLoginUsername.setBounds(185, 78, 192, 22);
 		contentPanel.add(jLoginUsername);
 		jLoginUsername.setColumns(10);
 		
 		jLoginPassword = new JPasswordField();
-		jLoginPassword.setBounds(135, 57, 195, 22);
+		jLoginPassword.setBounds(182, 117, 195, 22);
 		contentPanel.add(jLoginPassword);
 		{
 			JPanel buttonPane = new JPanel();
