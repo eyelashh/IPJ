@@ -113,38 +113,70 @@ public class BancoAppAdm {
 		// JpanelCabecalho.add(imagem_1);
 		// imagem_1.setVisible(true);
 
+		//Painel do menu
 		JPanel JpanelMenu = new JPanel();
 		JpanelMenu.setBackground(new Color(255, 255, 255));
 		JpanelMenu.setBounds(12, 126, 170, 580);
 		frame.getContentPane().add(JpanelMenu);
 		JpanelMenu.setLayout(null);
 
+		//Painel do Administrador
 		JPanel JPanelAdmin = new JPanel();
 		JPanelAdmin.setLayout(null);
 		JPanelAdmin.setBackground(Color.WHITE);
 		JPanelAdmin.setBounds(0, 0, 170, 580);
 		JpanelMenu.add(JPanelAdmin);
 
+		//Botão da estatistica
 		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
 		btAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btAdmEstatistica.setBounds(12, 13, 146, 130);
 		JPanelAdmin.add(btAdmEstatistica);
 
+		//Botão dos funcionarios
 		JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
 		btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btAdmFuncionarios.setBounds(12, 156, 146, 130);
 		JPanelAdmin.add(btAdmFuncionarios);
 
-		JButton btAdmClientes = new JButton("Cart\u00E3o");
+		//Botão dos Clientes
+		JButton btAdmClientes = new JButton("Cliente");
+		btAdmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btAdmClientes.setBounds(12, 299, 146, 130);
 		JPanelAdmin.add(btAdmClientes);
 
+		
+		//Painel branco 
+		JPanel JpanelPrincipal = new JPanel();
+		JpanelPrincipal.setBackground(Color.WHITE);
+		JpanelPrincipal.setBounds(194, 126, 1056, 582);
+		frame.getContentPane().add(JpanelPrincipal);
+		JpanelPrincipal.setLayout(null);
+
+		//Painel da gestao do administrador
+		JPanel JPAdm = new JPanel();
+		JPAdm.setBackground(Color.WHITE);
+		JPAdm.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(JPAdm);
+		JPAdm.setLayout(null);
+		//Painel da gestao do administrador
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setVisible(false);
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmGestao);
+
+		
+		//Botão de gestao
 		JButton btAdmGestao = new JButton("Gest\u00E3o");
 		btAdmGestao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JPanelAdmin.setVisible(true);
+				JPAdmGestao.setVisible(true);
 				JPanelFuncionario.setVisible(true);
 				JPanelAdmin.setVisible(true);
 			}
@@ -152,25 +184,7 @@ public class BancoAppAdm {
 		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btAdmGestao.setBounds(12, 442, 146, 130);
 		JPanelAdmin.add(btAdmGestao);
-
-		JPanel JpanelPrincipal = new JPanel();
-		JpanelPrincipal.setBackground(Color.WHITE);
-		JpanelPrincipal.setBounds(194, 126, 1056, 582);
-		frame.getContentPane().add(JpanelPrincipal);
-		JpanelPrincipal.setLayout(null);
-
-		JPanel JPAdm = new JPanel();
-		JPAdm.setBackground(Color.WHITE);
-		JPAdm.setBounds(12, 13, 1032, 556);
-		JpanelPrincipal.add(JPAdm);
-		JPAdm.setLayout(null);
-
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setVisible(false);
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmGestao);
-
+		
 		textField = new JTextField();
 		textField.setBounds(154, 133, 271, 33);
 		JPAdmGestao.add(textField);
@@ -223,6 +237,7 @@ public class BancoAppAdm {
 		btnCancelar.setBounds(294, 415, 131, 41);
 		JPAdmGestao.add(btnCancelar);
 
+		//Painel 
 		JPanel JPAdmCartao = new JPanel();
 		JPAdmCartao.setVisible(false);
 		JPAdmCartao.setLayout(null);
