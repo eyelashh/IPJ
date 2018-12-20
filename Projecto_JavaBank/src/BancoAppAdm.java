@@ -97,13 +97,11 @@ public class BancoAppAdm {
 		lblBemVindo.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
-<<<<<<< HEAD
+
 		
-		JLabel lUtilizador = new JLabel("Administrador");
-=======
+	
 
 		JLabel lUtilizador = new JLabel("Utilizador");
->>>>>>> 546157566a66105e8f90dc151828549c94372c1e
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
@@ -176,19 +174,7 @@ public class BancoAppAdm {
 		JPAdm.add(JPAdmGestao);
 
 		
-		//Botão de gestao
-		JButton btAdmGestao = new JButton("Gest\u00E3o");
-		btAdmGestao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				JPAdmGestao.setVisible(true);
-				JPanelFuncionario.setVisible(true);
-				JPanelAdmin.setVisible(true);
-			}
-		});
-		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btAdmGestao.setBounds(12, 442, 146, 130);
-		JPanelAdmin.add(btAdmGestao);
+		
 		
 		textField = new JTextField();
 		textField.setBounds(144, 134, 271, 33);
@@ -233,6 +219,8 @@ public class BancoAppAdm {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 			}
 		});
 		btnConfirmar.setBounds(144, 415, 131, 41);
@@ -242,19 +230,21 @@ public class BancoAppAdm {
 		btnCancelar.setBounds(294, 415, 131, 41);
 		JPAdmGestao.add(btnCancelar);
 
-		//Painel 
+		//Painel do cartao da parte administrador
 		JPanel JPAdmCartao = new JPanel();
 		JPAdmCartao.setVisible(false);
 		JPAdmCartao.setLayout(null);
 		JPAdmCartao.setBounds(0, 0, 1032, 556);
 		JPAdm.add(JPAdmCartao);
 
+		//Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
 		JPAdmEstatistica.setVisible(false);
 		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
 		JPAdm.add(JPAdmEstatistica);
 		JPAdmEstatistica.setLayout(null);
 
+		//Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
 		JPAdmFuncionario.setLayout(null);
@@ -282,6 +272,8 @@ public class BancoAppAdm {
 		btAdmFunNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
+			
+			
 		});
 		btAdmFunNovo.setBounds(396, 13, 97, 30);
 		JPAdmFuncionario.add(btAdmFunNovo);
@@ -368,5 +360,22 @@ public class BancoAppAdm {
 		JButton btAdmFunConfirmarLimpar = new JButton("Limpar");
 		btAdmFunConfirmarLimpar.setBounds(685, 428, 97, 30);
 		JPAdmFuncionario.add(btAdmFunConfirmarLimpar);
+		
+		
+		
+		//Botão de gestao
+				JButton btAdmGestao = new JButton("Gest\u00E3o");
+				btAdmGestao.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						JPAdmGestao.setVisible(true);
+						JPAdmCartao.setVisible(false);
+						JPanelAdmin.setVisible(false);
+						JPAdmEstatistica.setVisible(false);
+					}
+				});
+				btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+				btAdmGestao.setBounds(12, 442, 146, 130);
+				JPanelAdmin.add(btAdmGestao);
 	}
 }
