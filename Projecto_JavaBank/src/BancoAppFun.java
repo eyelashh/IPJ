@@ -18,8 +18,6 @@ public class BancoAppFun {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					BancoAppFun window = new BancoAppFun();
@@ -28,8 +26,6 @@ public class BancoAppFun {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -84,18 +80,18 @@ public class BancoAppFun {
 		JpanelCabecalho.add(lblNewLabel);
 	
 		
-		JLabel lblBemVindo = new JLabel("Bem-Vindo(a) -");
+		JLabel lblBemVindo = new JLabel("Bem-Vindo(a) ");
 		lblBemVindo.setVerifyInputWhenFocusTarget(false);
 		lblBemVindo.setForeground(new Color(0, 0, 0));
 		lblBemVindo.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
-		JLabel lUtilizador = new JLabel("Utilizador");
+		JLabel lUtilizador = new JLabel("Funcionario");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lUtilizador.setBounds(673, 13, 189, 74);
+		lUtilizador.setBounds(673, 13, 216, 74);
 		JpanelCabecalho.add(lUtilizador);
 		
 		JPanel JpanelMenu = new JPanel();

@@ -96,7 +96,7 @@ public class BancoAppAdm {
 		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
-		JLabel lUtilizador = new JLabel("Utilizador");
+		JLabel lUtilizador = new JLabel("Administrador");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
