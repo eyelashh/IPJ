@@ -11,3 +11,6 @@ java.io.IOException: The process cannot access the file because another process 
 	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:239)
 	at org.eclipse.egit.ui.internal.staging.StagingView$53.run(StagingView.java:3394)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.equinox.security 1 0 2018-12-20 11:29:47.516
+!MESSAGE New keyring password generated. 
