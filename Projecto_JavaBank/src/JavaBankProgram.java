@@ -109,7 +109,7 @@ public class JavaBankProgram {
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lUtilizador.setBounds(673, 13, 277, 74);
+		lUtilizador.setBounds(673, 13, 189, 74);
 		JpanelCabecalho.add(lUtilizador);
 		
 		
@@ -119,31 +119,31 @@ public class JavaBankProgram {
 		frame.getContentPane().add(JpanelMenu);
 		JpanelMenu.setLayout(null);
 		
-		JPanel JPanelAdmin = new JPanel();
-		JPanelAdmin.setLayout(null);
-		JPanelAdmin.setBackground(Color.WHITE);
-		JPanelAdmin.setBounds(0, 0, 170, 580);
-		JpanelMenu.add(JPanelAdmin);
+		JPanel JPanelFuncionario = new JPanel();
+		JPanelFuncionario.setBounds(0, 0, 170, 580);
+		JpanelMenu.add(JPanelFuncionario);
+		JPanelFuncionario.setBackground(Color.WHITE);
+		JPanelFuncionario.setLayout(null);
 		
-		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
-		btAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btAdmEstatistica.setBounds(12, 13, 146, 130);
-		JPanelAdmin.add(btAdmEstatistica);
+		JButton btFunCliente = new JButton("Clientes");
+		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunCliente.setBounds(12, 13, 146, 130);
+		JPanelFuncionario.add(btFunCliente);
 		
-		JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
-		btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btAdmFuncionarios.setBounds(12, 156, 146, 130);
-		JPanelAdmin.add(btAdmFuncionarios);
+		JButton btFunConta = new JButton("Conta");
+		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunConta.setBounds(12, 156, 146, 130);
+		JPanelFuncionario.add(btFunConta);
 		
-		JButton btAdmClientes = new JButton("Cart\u00E3o");
-		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btAdmClientes.setBounds(12, 299, 146, 130);
-		JPanelAdmin.add(btAdmClientes);
+		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
+		btFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunOperaes.setBounds(12, 299, 146, 130);
+		JPanelFuncionario.add(btFunOperaes);
 		
-		JButton btAdmGestao = new JButton("Gest\u00E3o");
-		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btAdmGestao.setBounds(12, 442, 146, 130);
-		JPanelAdmin.add(btAdmGestao);
+		JButton btFunGesto = new JButton("Gest\u00E3o");
+		btFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btFunGesto.setBounds(12, 442, 146, 130);
+		JPanelFuncionario.add(btFunGesto);
 		
 		JPanel JPanelCliente = new JPanel();
 		JPanelCliente.setBounds(0, 0, 170, 580);
@@ -175,31 +175,31 @@ public class JavaBankProgram {
 		btCltGestao.setBounds(12, 442, 146, 130);
 		JPanelCliente.add(btCltGestao);
 		
-		JPanel JPanelFuncionario = new JPanel();
-		JPanelFuncionario.setBounds(0, 0, 170, 580);
-		JpanelMenu.add(JPanelFuncionario);
-		JPanelFuncionario.setBackground(Color.WHITE);
-		JPanelFuncionario.setLayout(null);
+		JPanel JPanelAdmin = new JPanel();
+		JPanelAdmin.setLayout(null);
+		JPanelAdmin.setBackground(Color.WHITE);
+		JPanelAdmin.setBounds(0, 0, 170, 580);
+		JpanelMenu.add(JPanelAdmin);
 		
-		JButton btFunCliente = new JButton("Clientes");
-		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunCliente.setBounds(12, 13, 146, 130);
-		JPanelFuncionario.add(btFunCliente);
+		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
+		btAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmEstatistica.setBounds(12, 13, 146, 130);
+		JPanelAdmin.add(btAdmEstatistica);
 		
-		JButton btFunConta = new JButton("Conta");
-		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunConta.setBounds(12, 156, 146, 130);
-		JPanelFuncionario.add(btFunConta);
+		JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
+		btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btAdmFuncionarios.setBounds(12, 156, 146, 130);
+		JPanelAdmin.add(btAdmFuncionarios);
 		
-		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
-		btFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunOperaes.setBounds(12, 299, 146, 130);
-		JPanelFuncionario.add(btFunOperaes);
+		JButton btAdmClientes = new JButton("Cart\u00E3o");
+		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmClientes.setBounds(12, 299, 146, 130);
+		JPanelAdmin.add(btAdmClientes);
 		
-		JButton btFunGesto = new JButton("Gest\u00E3o");
-		btFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunGesto.setBounds(12, 442, 146, 130);
-		JPanelFuncionario.add(btFunGesto);
+		JButton btAdmGestao = new JButton("Gest\u00E3o");
+		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btAdmGestao.setBounds(12, 442, 146, 130);
+		JPanelAdmin.add(btAdmGestao);
 		
 		JPanel JpanelPrincipal = new JPanel();
 		JpanelPrincipal.setBackground(Color.WHITE);
@@ -322,20 +322,20 @@ public class JavaBankProgram {
 		btAdmFunConfirmarLimpar.setBounds(685, 428, 97, 30);
 		JPAdmFuncionario.add(btAdmFunConfirmarLimpar);
 		
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmEstatistica);
-		JPAdmEstatistica.setLayout(null);
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmGestao);
 		
 		JPanel JPAdmCartao = new JPanel();
 		JPAdmCartao.setLayout(null);
 		JPAdmCartao.setBounds(0, 0, 1032, 556);
 		JPAdm.add(JPAdmCartao);
 		
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmGestao);
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
 		
 	}
 }
