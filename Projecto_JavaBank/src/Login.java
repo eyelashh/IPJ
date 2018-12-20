@@ -72,12 +72,14 @@ public class Login extends JDialog {
 						
 						if(jLoginUsername.getText().equals("Joana") && new String(jLoginPassword.getPassword()).equals("pass"))
 						{
-							
+							BancoAppFun bf = new BancoAppFun();
+							bf.run();
 							dispose();
 						}
 						if(jLoginUsername.getText().equals("Tamara") && new String(jLoginPassword.getPassword()).equals("Coimbra"))
 						{
-							
+							BancoAppAdm ba = new BancoAppAdm();
+							ba.run();
 							dispose();
 						}
 						
