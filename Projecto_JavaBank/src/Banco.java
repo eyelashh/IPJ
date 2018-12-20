@@ -22,7 +22,7 @@ public class Banco {
 		this.contas = contas;
 		this.utlizadores = utlizadores;
 	}
-
+ 
 	public int getIdBanco() {
 		return idBanco;
 	}
