@@ -186,7 +186,7 @@ public class BancoAppAdm {
 		JPanelAdmin.add(btAdmGestao);
 		
 		textField = new JTextField();
-		textField.setBounds(154, 133, 271, 33);
+		textField.setBounds(144, 134, 271, 33);
 		JPAdmGestao.add(textField);
 		textField.setColumns(10);
 
