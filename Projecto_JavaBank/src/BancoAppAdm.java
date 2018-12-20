@@ -98,9 +98,6 @@ public class BancoAppAdm {
 		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 
-		
-	
-
 		JLabel lUtilizador = new JLabel("Utilizador");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
@@ -146,6 +143,12 @@ public class BancoAppAdm {
 		JButton btAdmClientes = new JButton("Cliente");
 		btAdmClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				
+				JPanelAdmin.setVisible(true);
+				//JPanelFuncionario.setVisible(true);
+				JPanelAdmin.setVisible(true);
+
 			}
 		});
 		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
