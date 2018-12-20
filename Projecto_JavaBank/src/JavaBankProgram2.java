@@ -1,8 +1,14 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,10 +20,25 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import java.awt.Component;
+
+import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
 
 public class JavaBankProgram2 {
 	private JFrame frame;
 	private JTextField tbAdmFunPesq;
+	private JLabel imagem_1;
+
+	
+	
+
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +60,8 @@ public class JavaBankProgram2 {
 	 */
 	public JavaBankProgram2() {
 		initialize();
+		
+		
 	}
  
 	/**
@@ -51,11 +74,13 @@ public class JavaBankProgram2 {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
+		
 		JPanel JpanelCabecalho = new JPanel();
 		JpanelCabecalho.setBackground(new Color(65, 106, 105));
 		JpanelCabecalho.setBounds(12, 13, 1238, 100);
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
+		
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -72,21 +97,24 @@ public class JavaBankProgram2 {
 				}
 			}
 		});
-		btnLogin.setBounds(1129, 35, 97, 25);
+		btnLogin.setBounds(1070, 30, 117, 38);
 		JpanelCabecalho.add(btnLogin);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("JavaBank");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lblNewLabel.setVerifyInputWhenFocusTarget(false);
 		lblNewLabel.setForeground(new Color(188, 127, 82));
-		lblNewLabel.setBounds(12, 13, 175, 74);
+		lblNewLabel.setBounds(37, 13, 175, 74);
 		JpanelCabecalho.add(lblNewLabel);
+	
 		
 		JLabel lblBemVindo = new JLabel("Bem-Vindo(a) -");
 		lblBemVindo.setVerifyInputWhenFocusTarget(false);
 		lblBemVindo.setForeground(new Color(0, 0, 0));
 		lblBemVindo.setFont(new Font("Tahoma", Font.BOLD, 35));
-		lblBemVindo.setBounds(384, 13, 277, 74);
+		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
 		JLabel lUtilizador = new JLabel("Utilizador");
@@ -95,6 +123,13 @@ public class JavaBankProgram2 {
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
 		lUtilizador.setBounds(673, 13, 189, 74);
 		JpanelCabecalho.add(lUtilizador);
+		
+		
+		//dentro do painel
+		imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-cópia (1).jpg"));
+		imagem_1.setBounds(0, 0, 1238, 100);
+		JpanelCabecalho.add(imagem_1);
+		imagem_1.setVisible(true);
 		
 		
 		JPanel JpanelMenu = new JPanel();
@@ -328,4 +363,5 @@ public class JavaBankProgram2 {
 		
 		
 	}
+	
 }

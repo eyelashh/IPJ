@@ -23,17 +23,12 @@
 	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="C:\Users\Joana\eclipse-workspace\IPJ\.git">
-			<item value="false"/>
-			<item value="Joana &lt;joannapestanna@gmail.com&gt;"/>
-			<item value="# WARNING: head commit changed in the meantime&#x0D;&#x0A;&#x0D;&#x0A;sp"/>
-			<item value="Joana &lt;joannapestanna@gmail.com&gt;"/>
-			<item value="af253815d0748c9b08dec008a1f4cadb0cf36696"/>
-			<item value="0"/>
+			<item value="empty"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
 		<item value="500,500" key="STAGING_SASH_FORM_WEIGHT"/>
-		<item value="false" key="sortItemState"/>
+		<item value="true" key="sortItemState"/>
 		<item value="500,500" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
 	</section>
 </section>
