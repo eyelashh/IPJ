@@ -63,20 +63,20 @@ public class Login extends JDialog {
 						 
 						// fazer login 
 						
-						if(jLoginUsername.getText().equals("Bruno") && new String(jLoginPassword.getPassword()).equals("pass"))
+						if(jLoginUsername.getText().equals("1") && new String(jLoginPassword.getPassword()).equals("1"))
 						{
 							BancoAppClt bc = new BancoAppClt();
 							bc.run();
 							dispose();
 						}
 						
-						if(jLoginUsername.getText().equals("Joana") && new String(jLoginPassword.getPassword()).equals("pass"))
+						if(jLoginUsername.getText().equals("1") && new String(jLoginPassword.getPassword()).equals("1"))
 						{
 							BancoAppFun bf = new BancoAppFun();
 							bf.run();
 							dispose();
 						}
-						if(jLoginUsername.getText().equals("Tamara") && new String(jLoginPassword.getPassword()).equals("Coimbra"))
+						if(jLoginUsername.getText().equals("1") && new String(jLoginPassword.getPassword()).equals("1"))
 						{
 							BancoAppAdm ba = new BancoAppAdm();
 							ba.run();
