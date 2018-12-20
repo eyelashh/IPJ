@@ -60,16 +60,25 @@ public class Login extends JDialog {
 				JButton okButton = new JButton("Login");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						
 						// fazer login 
 						
-						if(jLoginUsername.getText().equals("Bruno") && new String(jLoginPassword.getPassword()).equals("Supegal"))
+						if(jLoginUsername.getText().equals("Bruno") && new String(jLoginPassword.getPassword()).equals("pass"))
 						{
-							JOptionPane.showMessageDialog(null, "Login efectuado com sucesso");
+							BancoAppClt bc = new BancoAppClt();
+							bc.run();
 							dispose();
 						}
-						else
+						
+						if(jLoginUsername.getText().equals("Joana") && new String(jLoginPassword.getPassword()).equals("pass"))
 						{
-							JOptionPane.showMessageDialog(null, "Login não efectuado! So as pessoas do Supegal sao Fixes");
+							
+							dispose();
+						}
+						if(jLoginUsername.getText().equals("Tamara") && new String(jLoginPassword.getPassword()).equals("Coimbra"))
+						{
+							
+							dispose();
 						}
 						
 					}

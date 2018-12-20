@@ -10,16 +10,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class BancoAppClt {
 
 	private JFrame frame;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	//public static void main(String[] args) {
+	//	EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					BancoAppClt window = new BancoAppClt();
@@ -28,8 +33,8 @@ public class BancoAppClt {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
+		//});
+	//}
 
 	/**
 	 * Create the application.
@@ -91,7 +96,7 @@ public class BancoAppClt {
 		lblBemVindo.setBounds(332, 13, 277, 74);
 		JpanelCabecalho.add(lblBemVindo);
 		
-		JLabel lUtilizador = new JLabel("Utilizador");
+		JLabel lUtilizador = new JLabel("Cliente");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Tahoma", Font.BOLD, 35));
@@ -141,9 +146,64 @@ public class BancoAppClt {
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 		
+		JPanel JPCltTransf = new JPanel();
+		JPCltTransf.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(JPCltTransf);
+		
+		JPanel JPCltCartao = new JPanel();
+		JPCltCartao.setBounds(0, 0, 1032, 556);
+		JpanelPrincipal.add(JPCltCartao);
+		
+		JPanel JPCltGestao = new JPanel();
+		JPCltGestao.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(JPCltGestao);
+		
+		JPanel JPCltCM = new JPanel();
+		JPCltCM.setBounds(0, 0, 1, 1);
+		JpanelPrincipal.add(JPCltCM);
+		JPCltCM.setLayout(null);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(12, 13, 270, 30);
+		JPCltCM.add(comboBox);
+		
+		JTextField comboBox_1 = new JTextField();
+		comboBox_1.setBounds(12, 52, 270, 30);
+		JPCltCM.add(comboBox_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("Numero:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(12, 119, 94, 16);
+		JPCltCM.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(12, 148, 270, 30);
+		JPCltCM.add(textField);
+		
+		JLabel lblDataDeCriaao = new JLabel("Data de Criaçao:");
+		lblDataDeCriaao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDataDeCriaao.setBounds(12, 196, 270, 16);
+		JPCltCM.add(lblDataDeCriaao);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(12, 225, 270, 30);
+		JPCltCM.add(textField_1);
+		
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSaldo.setBounds(12, 287, 270, 16);
+		JPCltCM.add(lblSaldo);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(12, 316, 270, 30);
+		JPCltCM.add(textField_2);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(87, 404, 97, 25);
+		JPCltCM.add(btnNewButton);
+		
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
 		tbAdmFunPesq.setColumns(10);
 	}
-
 }
