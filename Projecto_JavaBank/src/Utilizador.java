@@ -12,7 +12,7 @@ public class Utilizador {
 	private int contacto;
 	private String username;
 	private String password;
-	
+	 
 	
 	public Utilizador(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,

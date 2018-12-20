@@ -7,5 +7,5 @@ public class JavaBank {
 		log.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		log.setVisible(true);
 	}
-
+ 
 }

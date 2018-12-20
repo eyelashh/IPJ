@@ -6,7 +6,7 @@ public class Levantamento extends Operacao{
 		super(idOperacao, responsavel, dataOperacao, valor);
 		// TODO Auto-generated constructor stub
 	}
-
+ 
 	
 	
 }

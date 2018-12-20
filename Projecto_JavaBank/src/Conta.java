@@ -14,7 +14,7 @@ public class Conta {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+ 
 	public Conta(int idConta, LocalDate dataCriacao, double saldo, ArrayList<Operacao> operacoes,
 			ArrayList<Cliente> clientes, double valorMaxLevantamento, double valorMaxDia) {
 		super();

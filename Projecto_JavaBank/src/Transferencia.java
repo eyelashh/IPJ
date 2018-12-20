@@ -16,7 +16,7 @@ public class Transferencia extends Operacao {
 		return contaDestino;
 	}
 
-
+ 
 	public void setContaDestino(Conta contaDestino) {
 		this.contaDestino = contaDestino;
 	}
