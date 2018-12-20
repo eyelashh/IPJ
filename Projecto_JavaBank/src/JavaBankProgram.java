@@ -1,34 +1,18 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Window.Type;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Canvas;
-import java.awt.Panel;
-import javax.swing.JInternalFrame;
-import javax.swing.JSplitPane;
-import javax.swing.Box;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.ImageIcon;
-import java.awt.ScrollPane;
-import java.awt.Font;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import javax.swing.JList;
-import javax.swing.JSlider;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 public class JavaBankProgram {
