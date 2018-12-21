@@ -35,22 +35,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import javax.swing.JCheckBoxMenuItem;
+import java.awt.Choice;
+import java.awt.Panel;
+import java.awt.TextField;
+import java.awt.List;
 
-public class ViewComicsPrograma {
+public class ClientePesquisarLivro {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
 
 	/**
 	 * Launch the application.
@@ -60,7 +55,7 @@ public class ViewComicsPrograma {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewComicsPrograma window = new ViewComicsPrograma();
+					ClientePesquisarLivro window = new ClientePesquisarLivro();
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -73,7 +68,7 @@ public class ViewComicsPrograma {
 	/**
 	 * Create the application.
 	 */
-	public ViewComicsPrograma() {
+	public ClientePesquisarLivro() {
 		initialize();
 	}
 
@@ -110,12 +105,14 @@ public class ViewComicsPrograma {
 	
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		JLabel lblViewcomics = new JLabel()
@@ -142,7 +139,7 @@ public class ViewComicsPrograma {
 		};
 		
 		lblViewcomics.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViewcomics.setBounds(10, 0, 1055, 103);
+		lblViewcomics.setBounds(-80, 0, 1144, 115);
 		lblViewcomics.setFont(new Font("Papyrus", Font.BOLD, 46));
 		panel.setLayout(null);
 		
@@ -172,190 +169,6 @@ public class ViewComicsPrograma {
 		btnCarrinhoDeCompras.setBackground(SystemColor.controlHighlight);
 		btnCarrinhoDeCompras.setBounds(47, 234, 176, 60);
 		panel.add(btnCarrinhoDeCompras);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(257, 141, 787, 373);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblTtulo = new JLabel("T\u00EDtulo do livro");
-		lblTtulo.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		lblTtulo.setBounds(22, 22, 144, 26);
-		panel_1.add(lblTtulo);
-		
-		JLabel lblQuantidade = new JLabel("Quantidade");
-		lblQuantidade.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		lblQuantidade.setBounds(290, 22, 91, 26);
-		panel_1.add(lblQuantidade);
-		
-		JLabel lblPreo = new JLabel("Pre\u00E7oUnit\u00E1rio");
-		lblPreo.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		lblPreo.setBounds(428, 22, 111, 26);
-		panel_1.add(lblPreo);
-		
-		JLabel lblValorTotal = new JLabel("Valor total");
-		lblValorTotal.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		lblValorTotal.setBounds(579, 22, 82, 26);
-		panel_1.add(lblValorTotal);
-		
-		JLabel lblLimpar = new JLabel("Limpar");
-		lblLimpar.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		lblLimpar.setBounds(701, 22, 61, 26);
-		panel_1.add(lblLimpar);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(306, 72, 49, 36);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(306, 137, 49, 36);
-		panel_1.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(306, 200, 49, 36);
-		panel_1.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(306, 263, 49, 36);
-		panel_1.add(textField_4);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(306, 313, 49, 36);
-		panel_1.add(textField_5);
-		
-		JButton btnNewButton_1 = new JButton("-");
-		btnNewButton_1.setBounds(252, 72, 44, 36);
-		panel_1.add(btnNewButton_1);
-		
-		JButton button = new JButton("+");
-		button.setBounds(365, 72, 49, 36);
-		panel_1.add(button);
-		
-		JButton button_1 = new JButton("-");
-		button_1.setBounds(252, 137, 44, 36);
-		panel_1.add(button_1);
-		
-		JButton button_2 = new JButton("-");
-		button_2.setBounds(252, 200, 44, 36);
-		panel_1.add(button_2);
-		
-		JButton button_3 = new JButton("-");
-		button_3.setBounds(252, 263, 44, 36);
-		panel_1.add(button_3);
-		
-		JButton button_4 = new JButton("-");
-		button_4.setBounds(252, 313, 44, 36);
-		panel_1.add(button_4);
-		
-		JButton button_5 = new JButton("+");
-		button_5.setBounds(365, 137, 49, 36);
-		panel_1.add(button_5);
-		
-		JButton button_6 = new JButton("+");
-		button_6.setBounds(365, 200, 49, 36);
-		panel_1.add(button_6);
-		
-		JButton button_7 = new JButton("+");
-		button_7.setBounds(365, 263, 49, 36);
-		panel_1.add(button_7);
-		
-		JButton button_8 = new JButton("+");
-		button_8.setBounds(365, 313, 49, 36);
-		panel_1.add(button_8);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(448, 72, 49, 36);
-		panel_1.add(lblNewLabel);
-		
-		JLabel label = new JLabel("New label");
-		label.setBounds(448, 137, 49, 36);
-		panel_1.add(label);
-		
-		JLabel label_1 = new JLabel("New label");
-		label_1.setBounds(448, 200, 49, 36);
-		panel_1.add(label_1);
-		
-		JLabel label_2 = new JLabel("New label");
-		label_2.setBounds(448, 263, 49, 36);
-		panel_1.add(label_2);
-		
-		JLabel label_3 = new JLabel("New label");
-		label_3.setBounds(448, 313, 49, 36);
-		panel_1.add(label_3);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(10, 72, 220, 36);
-		panel_1.add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(10, 137, 220, 36);
-		panel_1.add(textField_7);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(10, 200, 220, 36);
-		panel_1.add(textField_8);
-		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(10, 263, 220, 36);
-		panel_1.add(textField_9);
-		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(10, 313, 220, 36);
-		panel_1.add(textField_10);
-		
-		JLabel label_4 = new JLabel("New label");
-		label_4.setBounds(579, 72, 82, 36);
-		panel_1.add(label_4);
-		
-		JLabel label_5 = new JLabel("New label");
-		label_5.setBounds(579, 137, 82, 36);
-		panel_1.add(label_5);
-		
-		JLabel label_6 = new JLabel("New label");
-		label_6.setBounds(579, 200, 82, 36);
-		panel_1.add(label_6);
-		
-		JLabel label_7 = new JLabel("New label");
-		label_7.setBounds(579, 263, 82, 36);
-		panel_1.add(label_7);
-		
-		JLabel label_8 = new JLabel("New label");
-		label_8.setBounds(579, 313, 82, 36);
-		panel_1.add(label_8);
-		
-		JButton btnNewButton_2 = new JButton("limpar");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton_2.setBounds(690, 76, 72, 29);
-		panel_1.add(btnNewButton_2);
-		
-		JButton button_9 = new JButton("limpar");
-		button_9.setBounds(688, 141, 72, 29);
-		panel_1.add(button_9);
-		
-		JButton button_10 = new JButton("limpar");
-		button_10.setBounds(690, 204, 72, 29);
-		panel_1.add(button_10);
-		
-		JButton button_11 = new JButton("limpar");
-		button_11.setBounds(690, 267, 72, 29);
-		panel_1.add(button_11);
-		
-		JButton button_12 = new JButton("limpar");
-		button_12.setBounds(690, 317, 72, 29);
-		panel_1.add(button_12);
 		
 		// painel da área restrita 
 		JPanel panel_2 = new JPanel() {
@@ -415,6 +228,34 @@ public class ViewComicsPrograma {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(59, 167, 89, 23);
 		panel_2.add(btnEntrar);
+		
+		JButton btnNewButton_2 = new JButton("Limpar");
+		btnNewButton_2.setBounds(483, 141, 115, 20);
+		panel.add(btnNewButton_2);
+		
+		Choice choice = new Choice();
+		choice.setBounds(262, 141, 200, 44);
+		panel.add(choice);
+		
+		TextField textField_1 = new TextField();
+		textField_1.setBounds(262, 174, 200, 22);
+		panel.add(textField_1);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(483, 174, 115, 20);
+		panel.add(btnPesquisar);
+		
+		List list = new List();
+		list.setBounds(262, 234, 200, 348);
+		panel.add(list);
+		
+		TextField textField_2 = new TextField();
+		textField_2.setBounds(484, 301, 225, 208);
+		panel.add(textField_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		frame.getContentPane().setLayout(groupLayout);
 		
 		
