@@ -41,7 +41,8 @@ public class Login extends JDialog {
 
 			{
 				JButton okButton = new JButton("Login");
-				okButton.setBounds(436, 622, 124, 43);
+				okButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+				okButton.setBounds(490, 621, 124, 43);
 
 				// fazer login:
 				okButton.addActionListener(new ActionListener() {
@@ -76,7 +77,8 @@ public class Login extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setBounds(617, 624, 127, 41);
+				cancelButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+				cancelButton.setBounds(671, 623, 127, 41 );
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
@@ -87,21 +89,21 @@ public class Login extends JDialog {
 			}
 
 			jLoginUsername = new JTextField();
-			jLoginUsername.setBounds(438, 365, 297, 36);
+			jLoginUsername.setBounds(492, 364, 297, 43);
 			painelGeral.add(jLoginUsername);
 			jLoginUsername.setColumns(10);
 
 			jLoginPassword = new JPasswordField();
-			jLoginPassword.setBounds(438, 506, 297, 36);
+			jLoginPassword.setBounds(492, 505, 297, 43);
 			painelGeral.add(jLoginPassword);
 
 			JLabel lblNewLabel = new JLabel("Username:");
-			lblNewLabel.setBounds(508, 301, 166, 52);
+			lblNewLabel.setBounds(562, 300, 166, 52);
 			painelGeral.add(lblNewLabel);
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 
 			JLabel lblPassword = new JLabel("Password:");
-			lblPassword.setBounds(508, 455, 136, 25);
+			lblPassword.setBounds(562, 454, 136, 25);
 			painelGeral.add(lblPassword);
 			lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			
@@ -110,14 +112,14 @@ public class Login extends JDialog {
 			tituloJava.setVerifyInputWhenFocusTarget(false);
 			tituloJava.setFont(new Font("Tahoma", Font.BOLD, 90));
 			tituloJava.setForeground(new Color(188, 127, 82));
-			tituloJava.setBounds(351, 114, 438, 138);
+			tituloJava.setBounds(406, 113, 438, 138);
 			painelGeral.add(tituloJava);
 
 			
-			JLabel imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/mLncE-cópia (1).jpg"));
+			JLabel imagem_1 = new JLabel(new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/12.jpg"));
 			imagem_1.setOpaque(true);
 			imagem_1.setBackground(new Color(0, 128, 128));
-			imagem_1.setBounds(0, 0, 1294, 767);
+			imagem_1.setBounds(-1, -1, 1289, 755);
 			painelGeral.add(imagem_1);
 			imagem_1.setVisible(true);
 		}
