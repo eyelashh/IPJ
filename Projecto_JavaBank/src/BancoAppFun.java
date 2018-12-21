@@ -27,7 +27,10 @@ public class BancoAppFun {
 	private JTextField tbCltContacto;
 	private JTextField tbCltUser;
 	private JPasswordField tbCltPass;
-	private JTextField textField;
+	private JTextField tbContasOrdenar;
+	private JTextField tbContasnum;
+	private JTextField tbContasdtcriacao;
+	private JTextField tbContaslimitelev;
 
 	/**
 	 * Launch the application.
@@ -148,34 +151,81 @@ public class BancoAppFun {
 		JpanelPrincipal.add(jpanelContas);
 		jpanelContas.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(12, 13, 279, 31);
-		jpanelContas.add(comboBox);
+		JComboBox cbContaspesqconta = new JComboBox();
+		cbContaspesqconta.setBounds(12, 13, 279, 31);
+		jpanelContas.add(cbContaspesqconta);
 		
-		JTextField comboBox_1 = new JTextField();
-		comboBox_1.setBounds(12, 57, 279, 31);
-		jpanelContas.add(comboBox_1);
+		JTextField tbContaspesqconta = new JTextField();
+		tbContaspesqconta.setBounds(12, 57, 279, 31);
+		jpanelContas.add(tbContaspesqconta);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(366, 13, 279, 31);
-		jpanelContas.add(comboBox_2);
+		JComboBox cbContasOrdenar = new JComboBox();
+		cbContasOrdenar.setBounds(366, 13, 279, 31);
+		jpanelContas.add(cbContasOrdenar);
 		
-		textField = new JTextField();
-		textField.setBounds(366, 57, 279, 31);
-		jpanelContas.add(textField);
+		tbContasOrdenar = new JTextField();
+		tbContasOrdenar.setBounds(366, 57, 279, 31);
+		jpanelContas.add(tbContasOrdenar);
 		
-		JList list = new JList();
-		list.setBounds(12, 101, 279, 442);
-		jpanelContas.add(list);
+		JList lContas = new JList();
+		lContas.setBounds(12, 101, 279, 442);
+		jpanelContas.add(lContas);
 		
-		JList list_1 = new JList();
-		list_1.setBounds(741, 101, 279, 442);
-		jpanelContas.add(list_1);
+		JList lClientes = new JList();
+		lClientes.setBounds(741, 101, 279, 442);
+		jpanelContas.add(lClientes);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(306, 118, 67, 24);
+		lblNewLabel_2.setBounds(366, 124, 113, 24);
 		jpanelContas.add(lblNewLabel_2);
+		
+		JLabel lblDataDeOperao = new JLabel("Data de Cria\u00E7\u00E3o:");
+		lblDataDeOperao.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDataDeOperao.setBounds(366, 205, 113, 24);
+		jpanelContas.add(lblDataDeOperao);
+		
+		JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
+		lblLimiteDeLevantamento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblLimiteDeLevantamento.setBounds(366, 286, 171, 24);
+		jpanelContas.add(lblLimiteDeLevantamento);
+		
+		tbContasnum = new JTextField();
+		tbContasnum.setBounds(366, 161, 279, 31);
+		jpanelContas.add(tbContasnum);
+		
+		tbContasdtcriacao = new JTextField();
+		tbContasdtcriacao.setBounds(366, 242, 279, 31);
+		jpanelContas.add(tbContasdtcriacao);
+		
+		tbContaslimitelev = new JTextField();
+		tbContaslimitelev.setBounds(366, 316, 279, 31);
+		jpanelContas.add(tbContaslimitelev);
+		
+		JButton btContasConfirmar = new JButton("Confirmar");
+		btContasConfirmar.setBounds(366, 391, 97, 25);
+		jpanelContas.add(btContasConfirmar);
+		
+		JButton btContasCancelar = new JButton("Limpar");
+		btContasCancelar.setBounds(548, 391, 97, 25);
+		jpanelContas.add(btContasCancelar);
+		
+		JButton btContasNovo = new JButton("Novo");
+		btContasNovo.setBounds(350, 471, 97, 25);
+		jpanelContas.add(btContasNovo);
+		
+		JButton btContasEliminar = new JButton("Eliminar");
+		btContasEliminar.setBounds(461, 471, 97, 25);
+		jpanelContas.add(btContasEliminar);
+		
+		JButton btContasLimpar = new JButton("Cancelar");
+		btContasLimpar.setBounds(570, 471, 97, 25);
+		jpanelContas.add(btContasLimpar);
+		
+		JLabel lblClientes_1 = new JLabel("Clientes");
+		lblClientes_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblClientes_1.setBounds(741, 64, 57, 24);
+		jpanelContas.add(lblClientes_1);
 		jpanelClientes.setBounds(12, 13, 1032, 556);
 		JpanelPrincipal.add(jpanelClientes);
 		jpanelClientes.setLayout(null);
