@@ -46,6 +46,7 @@ public class ClientePesquisarLivro {
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -114,6 +115,136 @@ public class ClientePesquisarLivro {
 					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		panel.setLayout(null);
+		
+		JButton btnNewButton = new JButton("Livros");
+		btnNewButton.setBounds(45, 177, 176, 55);
+		btnNewButton.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
+		btnNewButton.setBackground(SystemColor.controlHighlight);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		JButton btnNewButton_1 = new JButton("Entrar");
+		btnNewButton_1.setBackground(SystemColor.controlHighlight);
+		btnNewButton_1.setBounds(1135, 97, 103, 27);
+		panel.add(btnNewButton_1);
+		panel.add(btnNewButton);
+		
+		JButton btnCarrinhoDeCompras = new JButton("Carrinho");
+		btnCarrinhoDeCompras.setForeground(Color.BLACK);
+		btnCarrinhoDeCompras.setBounds(45, 254, 176, 60);
+		btnCarrinhoDeCompras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCarrinhoDeCompras.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 30));
+		btnCarrinhoDeCompras.setBackground(SystemColor.controlHighlight);
+		panel.add(btnCarrinhoDeCompras);
+		
+		JButton btnNewButton_2 = new JButton("Limpar");
+		btnNewButton_2.setBackground(SystemColor.controlHighlight);
+		btnNewButton_2.setBounds(481, 177, 115, 20);
+		panel.add(btnNewButton_2);
+		
+		Choice choice = new Choice();
+		choice.setBounds(260, 177, 200, 20);
+		panel.add(choice);
+		
+		TextField textField_1 = new TextField();
+		textField_1.setBounds(260, 210, 200, 22);
+		panel.add(textField_1);
+		
+		List list = new List();
+		list.setBounds(261, 254, 289, 348);
+		panel.add(list);
+		
+		TextField textField_2 = new TextField();
+		textField_2.setBounds(571, 254, 260, 211);
+		panel.add(textField_2);
+		
+		JPanel panel_1 = new JPanel() {
+protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo.jpg"));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
+		panel_1.setBounds(857, 254, 333, 211);
+		panel_1.setLayout(null);
+		panel_1.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panel.add(panel_1);
+		
+		JLabel lblAdicionarAoCarrinho = new JLabel("Adicionar ao carrinho");
+		lblAdicionarAoCarrinho.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdicionarAoCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblAdicionarAoCarrinho.setBounds(38, 27, 274, 34);
+		panel_1.add(lblAdicionarAoCarrinho);
+		
+		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		btnAdicionar.setBounds(96, 149, 152, 42);
+		panel_1.add(btnAdicionar);
+		
+		JButton btnEntrar = new JButton("-");
+		btnEntrar.setBounds(62, 90, 54, 48);
+		panel_1.add(btnEntrar);
+		btnEntrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JButton button = new JButton("-");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button.setBounds(226, 90, 54, 48);
+		panel_1.add(button);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(141, 99, 61, 34);
+		panel_1.add(textField_3);
+		
+		JLabel lblAreaRestrita = new JLabel("\u00C1rea restrita (funcion\u00E1rio ou admin)");
+		lblAreaRestrita.setBounds(908, 13, 356, 27);
+		panel.add(lblAreaRestrita);
+		lblAreaRestrita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAreaRestrita.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setBounds(1025, 46, 98, 27);
+		panel.add(lblUsername);
+		lblUsername.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
+		
+		textField = new JTextField();
+		textField.setBounds(934, 123, 189, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(1028, 97, 89, 29);
+		panel.add(lblPassword);
+		lblPassword.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 21));
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(934, 74, 189, 20);
+		panel.add(passwordField);
+		
+		JLabel lblNewLabel_1 = new JLabel("ViewComics Inc.");
+		lblNewLabel_1.setBounds(97, 13, 795, 85);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 95));
+		panel.add(lblNewLabel_1);
 		
 		JLabel lblViewcomics = new JLabel()
 		{
@@ -137,125 +268,17 @@ public class ClientePesquisarLivro {
 				
 			}
 		};
+		lblViewcomics.setBounds(-90, 0, 1354, 166);
 		
 		lblViewcomics.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViewcomics.setBounds(-80, 0, 1144, 115);
 		lblViewcomics.setFont(new Font("Papyrus", Font.BOLD, 46));
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel("ViewComics Inc.");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 67));
-		lblNewLabel_1.setBounds(262, 13, 569, 85);
-		panel.add(lblNewLabel_1);
 		panel.add(lblViewcomics);
 		
-		JButton btnNewButton = new JButton("Livros");
-		btnNewButton.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
-		btnNewButton.setBackground(SystemColor.controlHighlight);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(47, 141, 176, 55);
-		panel.add(btnNewButton);
-		
-		JButton btnCarrinhoDeCompras = new JButton("Carrinho");
-		btnCarrinhoDeCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnCarrinhoDeCompras.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 30));
-		btnCarrinhoDeCompras.setBackground(SystemColor.controlHighlight);
-		btnCarrinhoDeCompras.setBounds(47, 234, 176, 60);
-		panel.add(btnCarrinhoDeCompras);
-		
-		// painel da área restrita 
-		JPanel panel_2 = new JPanel() {
-			@Override
-			//o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-				
-				super.paintComponent(g);
-				Image img;
-				try {
-					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo.jpg"));
-					g.drawImage(img,0,0,null); 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		};
-		panel_2.setBorder(new SoftBevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panel_2.setBounds(1064, 0, 200, 220);
-		panel.add(panel_2);
-		panel_2.setLayout(null);
-		
-		
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(101, 46, 98, 27);
-		panel_2.add(lblUsername);
-		lblUsername.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
-		
-		JLabel lblAreaRestrita = new JLabel("\u00C1rea restrita");
-		lblAreaRestrita.setHorizontalAlignment(SwingConstants.CENTER);
-		//para mudar a cor de uma label temos que primeiro mete-la opaca e depois a cor
-
-		lblAreaRestrita.setBounds(0, 0, 199, 34);
-		panel_2.add(lblAreaRestrita);
-		lblAreaRestrita.setFont(new Font("Tempus Sans ITC", Font.BOLD, 17));
-		
-		textField = new JTextField();
-		textField.setBounds(10, 73, 189, 27);
-		panel_2.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(110, 99, 89, 29);
-		panel_2.add(lblPassword);
-		lblPassword.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 21));
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(10, 129, 189, 27);
-		panel_2.add(passwordField);
-		
-		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(59, 167, 89, 23);
-		panel_2.add(btnEntrar);
-		
-		JButton btnNewButton_2 = new JButton("Limpar");
-		btnNewButton_2.setBounds(483, 141, 115, 20);
-		panel.add(btnNewButton_2);
-		
-		Choice choice = new Choice();
-		choice.setBounds(262, 141, 200, 44);
-		panel.add(choice);
-		
-		TextField textField_1 = new TextField();
-		textField_1.setBounds(262, 174, 200, 22);
-		panel.add(textField_1);
-		
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBounds(483, 174, 115, 20);
+		btnPesquisar.setBackground(SystemColor.controlHighlight);
+		btnPesquisar.setBounds(481, 212, 115, 20);
 		panel.add(btnPesquisar);
 		
-		List list = new List();
-		list.setBounds(262, 234, 200, 348);
-		panel.add(list);
-		
-		TextField textField_2 = new TextField();
-		textField_2.setBounds(484, 301, 225, 208);
-		panel.add(textField_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		frame.getContentPane().setLayout(groupLayout);
 		
 		
