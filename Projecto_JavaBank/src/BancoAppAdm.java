@@ -25,6 +25,8 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class BancoAppAdm {
 
@@ -32,13 +34,16 @@ public class BancoAppAdm {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
 	 */
 
 	public void run() {
-		
+
 		try {
 			BancoAppAdm window = new BancoAppAdm();
 			window.frame.setVisible(true);
@@ -51,7 +56,7 @@ public class BancoAppAdm {
 	 * Create the application.
 	 */
 	public BancoAppAdm() {
-	
+
 		initialize();
 	}
 
@@ -59,7 +64,7 @@ public class BancoAppAdm {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 1280, 768);
@@ -70,20 +75,21 @@ public class BancoAppAdm {
 		// Painel de cabeçalho
 		JPanel JpanelCabecalho = new JPanel();
 		JpanelCabecalho.setBackground(new Color(65, 106, 105));
-		JpanelCabecalho.setBounds(0, 0, 1280, 148);
+		JpanelCabecalho.setBounds(0, 0, 1280, 130);
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
-		
+
 		// Painel de cabeçalho imagem
-				// imagem_1 = new JLabel(new
-				// ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-co�pia
-				// (1).jpg"));
-				// imagem_1.setBounds(0, 0, 1238, 100);
-				// JpanelCabecalho.add(imagem_1);
-				// imagem_1.setVisible(true);
+		// imagem_1 = new JLabel(new
+		// ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-co�pia
+		// (1).jpg"));
+		// imagem_1.setBounds(0, 0, 1238, 100);
+		// JpanelCabecalho.add(imagem_1);
+		// imagem_1.setVisible(true);
 
 		// Botao de login, metodo que vai buscar a class
 		JButton btnLogin = new JButton("Logout");
+		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -98,7 +104,7 @@ public class BancoAppAdm {
 				}
 			}
 		});
-		btnLogin.setBounds(1037, 54, 163, 42);
+		btnLogin.setBounds(1077, 41, 143, 42);
 		JpanelCabecalho.add(btnLogin);
 
 		// texto no cabeçalho :Java
@@ -106,52 +112,50 @@ public class BancoAppAdm {
 		lblNewLabel.setVerifyInputWhenFocusTarget(false);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 45));
 		lblNewLabel.setForeground(new Color(188, 127, 82));
-		lblNewLabel.setBounds(51, 37, 225, 74);
+		lblNewLabel.setBounds(41, 26, 225, 74);
 		JpanelCabecalho.add(lblNewLabel);
 
 		// texto no cabeçalho : Bem vindo
 		JLabel lblBemVindo = new JLabel("Bem-Vindo(a) -");
 		lblBemVindo.setVerifyInputWhenFocusTarget(false);
 		lblBemVindo.setForeground(new Color(0, 0, 0));
-		lblBemVindo.setFont(new Font("Gujarati MT", Font.BOLD, 35));
-		lblBemVindo.setBounds(375, 37, 277, 74);
+		lblBemVindo.setFont(new Font("Helvetica", Font.PLAIN, 33));
+		lblBemVindo.setBounds(348, 41, 243, 52);
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel("Utilizador");
+		JLabel lUtilizador = new JLabel("Tamara Barros");
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
-		lUtilizador.setFont(new Font("Tamil MN", Font.BOLD, 35));
-		lUtilizador.setBounds(656, 31, 189, 74);
+		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
+		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setForeground(Color.BLACK);
 		separator.setAlignmentX(0.0f);
-		separator.setBounds(925, 19, 29, 107);
+		separator.setBounds(983, 19, 29, 94);
 		JpanelCabecalho.add(separator);
-		
-				// Painel do Administrador que tem os botoes
-				JPanel JPanelAdmin = new JPanel();
-				JPanelAdmin.setBounds(10, 160, 170, 580);
-				JPanelAdmin.setBackground(Color.WHITE);
-				frame.getContentPane().add(JPanelAdmin);
-				JPanelAdmin.setLayout(null);
-				
-						
+
+		// Painel do Administrador que tem os botoes
+		JPanel JPanelAdmin = new JPanel();
+		JPanelAdmin.setBounds(10, 135, 170, 605);
+		JPanelAdmin.setBackground(Color.WHITE);
+		frame.getContentPane().add(JPanelAdmin);
+		JPanelAdmin.setLayout(null);
 
 		// Painel branco
 		JPanel JpanelPrincipal = new JPanel();
 		// JpanelPrincipal.setBackground(Color.LIGHT_GRAY);
-		JpanelPrincipal.setBounds(204, 160, 1056, 580);
+		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 
-		// Painel da gestao do administrador
+		// Painel do administrador
 		JPanel JPAdm = new JPanel();
 		JPAdm.setBackground(Color.WHITE);
-		JPAdm.setBounds(12, 13, 1032, 556);
+		JPAdm.setBounds(12, 13, 1042, 576);
 		JpanelPrincipal.add(JPAdm);
 		JPAdm.setLayout(null);
 
@@ -162,7 +166,7 @@ public class BancoAppAdm {
 				// Painel da gestao do administrador
 				JPanel JPAdmGestao = new JPanel();
 				JPAdmGestao.setLayout(null);
-				JPAdmGestao.setBounds(0, 0, 1032, 556);
+				JPAdmGestao.setBounds(0, 0, 1042, 576);
 				JPAdm.add(JPAdmGestao);
 				
 						// linha que separa na parte da gestao
@@ -170,14 +174,14 @@ public class BancoAppAdm {
 						separator_1.setForeground(Color.BLACK);
 						separator_1.setOrientation(SwingConstants.VERTICAL);
 						separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-						separator_1.setBounds(475, 68, 29, 433);
+						separator_1.setBounds(483, 68, 29, 433);
 						JPAdmGestao.add(separator_1);
 						
 								// texto : username
-								JLabel lblUsername_1 = new JLabel("Username");
+								JLabel lblUsername_1 = new JLabel("Username :");
 								lblUsername_1.setVerifyInputWhenFocusTarget(false);
 								lblUsername_1.setFont(new Font("Arial", Font.PLAIN, 20));
-								lblUsername_1.setBounds(144, 81, 99, 41);
+								lblUsername_1.setBounds(144, 81, 131, 41);
 								JPAdmGestao.add(lblUsername_1);
 								
 										// campo de texto na gestão da parte do administrador
@@ -187,7 +191,7 @@ public class BancoAppAdm {
 										textField.setColumns(10);
 										
 												// texto : password
-												JLabel lblPassword_1 = new JLabel("Password");
+												JLabel lblPassword_1 = new JLabel("Password :");
 												lblPassword_1.setVerifyInputWhenFocusTarget(false);
 												lblPassword_1.setFont(new Font("Arial", Font.PLAIN, 20));
 												lblPassword_1.setBounds(144, 178, 99, 41);
@@ -196,11 +200,11 @@ public class BancoAppAdm {
 														// campo de texto na gestão da parte do administrador
 														textField_1 = new JTextField();
 														textField_1.setColumns(10);
-														textField_1.setBounds(154, 230, 271, 33);
+														textField_1.setBounds(144, 230, 271, 33);
 														JPAdmGestao.add(textField_1);
 														
 																// texto : novausername
-																JLabel lblNovaUsername = new JLabel("Nova Username");
+																JLabel lblNovaUsername = new JLabel("Nova Username :");
 																lblNovaUsername.setVerifyInputWhenFocusTarget(false);
 																lblNovaUsername.setFont(new Font("Arial", Font.PLAIN, 20));
 																lblNovaUsername.setBounds(144, 275, 191, 41);
@@ -209,11 +213,12 @@ public class BancoAppAdm {
 																		// campo de texto na gestão da parte do administrador
 																		textField_2 = new JTextField();
 																		textField_2.setColumns(10);
-																		textField_2.setBounds(154, 327, 271, 33);
+																		textField_2.setBounds(144, 327, 271, 33);
 																		JPAdmGestao.add(textField_2);
 																		
 																				// botao de confimar - submete a nova username
 																				JButton btnConfirmar = new JButton("Confirmar");
+																				btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 																				btnConfirmar.addActionListener(new ActionListener() {
 																					public void actionPerformed(ActionEvent e) {
 
@@ -224,18 +229,69 @@ public class BancoAppAdm {
 																				
 																						// botao de cancelar - limpar
 																						JButton btnCancelar = new JButton("Cancelar");
+																						btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 																						btnCancelar.setBounds(294, 415, 131, 41);
 																						JPAdmGestao.add(btnCancelar);
+																						
+																								textField_3 = new JTextField();
+																								textField_3.setColumns(10);
+																								textField_3.setBounds(579, 134, 271, 33);
+																								JPAdmGestao.add(textField_3);
+																								
+																										JLabel lblPassword_2 = new JLabel("Password :");
+																										lblPassword_2.setVerifyInputWhenFocusTarget(false);
+																										lblPassword_2.setFont(new Font("Arial", Font.PLAIN, 20));
+																										lblPassword_2.setBounds(579, 81, 99, 41);
+																										JPAdmGestao.add(lblPassword_2);
+																										
+																												JLabel lblNovaPassword = new JLabel("Nova Password :");
+																												lblNovaPassword.setVerifyInputWhenFocusTarget(false);
+																												lblNovaPassword.setFont(new Font("Arial", Font.PLAIN, 20));
+																												lblNovaPassword.setBounds(579, 178, 168, 41);
+																												JPAdmGestao.add(lblNovaPassword);
+																												
+																														textField_4 = new JTextField();
+																														textField_4.setColumns(10);
+																														textField_4.setBounds(579, 230, 271, 33);
+																														JPAdmGestao.add(textField_4);
+																														
+																																JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Nova Password :");
+																																lblConfirmarNovaUsername.setVerifyInputWhenFocusTarget(false);
+																																lblConfirmarNovaUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+																																lblConfirmarNovaUsername.setBounds(579, 275, 271, 41);
+																																JPAdmGestao.add(lblConfirmarNovaUsername);
+																																
+																																		textField_5 = new JTextField();
+																																		textField_5.setColumns(10);
+																																		textField_5.setBounds(579, 327, 271, 33);
+																																		JPAdmGestao.add(textField_5);
+																																		
+																																				JButton button = new JButton("Confirmar");
+																																				button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																				button.setBounds(579, 415, 131, 41);
+																																				JPAdmGestao.add(button);
+																																				
+																																						JButton button_1 = new JButton("Cancelar");
+																																						button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																						button_1.setBounds(729, 415, 131, 41);
+																																						JPAdmGestao.add(button_1);
+		JPAdmFuncionario.setLayout(null);
+		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmFuncionario);
 
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
-		JPAdmCliente.setBounds(0, 0, 1032, 556);
+		JPAdmCliente.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmCliente);
 		JPAdmCliente.setVisible(false);
 		JPAdmCliente.setLayout(null);
-		JPAdmFuncionario.setLayout(null);
-		JPAdmFuncionario.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmFuncionario);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(false);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
 
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario
 		JComboBox cbAdmFunPesq = new JComboBox();
@@ -370,25 +426,19 @@ public class BancoAppAdm {
 		btAdmFunConfirmar.setBounds(467, 428, 97, 30);
 		JPAdmFuncionario.add(btAdmFunConfirmar);
 
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(false);
-		JPAdmEstatistica.setBounds(0, 0, 1032, 556);
-		JPAdm.add(JPAdmEstatistica);
-		JPAdmEstatistica.setLayout(null);
-		
 		// Botão da estatistica do menu
 		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
 		btAdmEstatistica.setBorderPainted(false);
 		btAdmEstatistica.setOpaque(true);
 		btAdmEstatistica.setForeground(Color.BLACK);
-		btAdmEstatistica.setBounds(0, 0, 170, 130);
-		btAdmEstatistica.setBackground(new Color(188, 127, 82));			
+		btAdmEstatistica.setBounds(0, 6, 170, 130);
+		btAdmEstatistica.setBackground(new Color(188, 127, 82));
 		btAdmEstatistica.setIcon(null);
-
 		JPanelAdmin.add(btAdmEstatistica);
+
+		// quando carrego no batao estatistica, os outros paineis nao ficam visiveis
 		btAdmEstatistica.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 
 				JPAdmEstatistica.setVisible(true);
@@ -398,60 +448,183 @@ public class BancoAppAdm {
 			}
 		});
 		btAdmEstatistica.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
-				// Botão dos Clientes do menu
-				JButton btAdmClientes = new JButton("Cliente");
-				btAdmClientes.setOpaque(true);
-				btAdmClientes.setBorderPainted(false);
+
+		// Botão dos Clientes do menu
+		JButton btAdmClientes = new JButton("Cliente");
+		btAdmClientes.setOpaque(true);
+		btAdmClientes.setBorderPainted(false);
+		btAdmClientes.setBackground(new Color(188, 127, 82));
+		btAdmClientes.setBounds(0, 304, 170, 139);
+		JPanelAdmin.add(btAdmClientes);
+
+		// quando carrego no batao cliente, os outros paineis nao ficam visiveis
+		btAdmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				JPAdmGestao.setVisible(false);
+				JPAdmCliente.setVisible(true);
+				JPAdmFuncionario.setVisible(false);
+				JPAdmEstatistica.setVisible(false);
+			}
+		});
+		btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+		// Botão de gestao do menu
+		JButton btAdmGestao = new JButton("Gest\u00E3o");
+		btAdmGestao.setBorderPainted(false);
+		btAdmGestao.setOpaque(true);
+		btAdmGestao.setBounds(0, 455, 170, 150);
+		btAdmGestao.setBackground(new Color(188, 127, 82));
+		JPanelAdmin.add(btAdmGestao);
+
+		// quando carrego no batao gestao, os outros paineis nao ficam visiveis
+		btAdmGestao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				JPAdmGestao.setVisible(true);
+				JPAdmCliente.setVisible(false);
+				JPAdmFuncionario.setVisible(false);
+				JPAdmEstatistica.setVisible(false);
+			}
+		});
+		btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+		// Botão dos funcionarios do menu
+		JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
+		btAdmFuncionarios.setBorderPainted(false);
+		btAdmFuncionarios.setBorder(UIManager.getBorder("Button.border"));
+		btAdmFuncionarios.setOpaque(true);
+		btAdmFuncionarios.setBackground(new Color(188, 127, 82));
+		btAdmFuncionarios.setBounds(0, 148, 170, 144);
+		JPanelAdmin.add(btAdmFuncionarios);
+
+		// quando carrego no batao funcionario, os outros paineis nao ficam visiveis
+		btAdmFuncionarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				JPAdmGestao.setVisible(false);
+				JPAdmCliente.setVisible(false);
+				JPAdmFuncionario.setVisible(true);
+				JPAdmEstatistica.setVisible(false);
+			}
+		});
+		btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
+
+		// botao estatistica accao que muda de cor
+		btAdmEstatistica.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btAdmEstatistica.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btAdmEstatistica.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btAdmEstatistica.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btAdmEstatistica.setBackground(new Color(65, 106, 105));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btAdmEstatistica.setBackground(new Color(65, 106, 105));
+			}
+		});
+
+		// botao cliente accao que muda de cor
+		btAdmClientes.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
 				btAdmClientes.setBackground(new Color(188, 127, 82));
-				btAdmClientes.setBounds(0, 283, 170, 139);
-				JPanelAdmin.add(btAdmClientes);
-				btAdmClientes.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+			}
 
-						JPAdmGestao.setVisible(false);
-						JPAdmCliente.setVisible(true);
-						JPAdmFuncionario.setVisible(false);
-						JPAdmEstatistica.setVisible(false);
-					}
-				});
-				btAdmClientes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-				
-						// Botão de gestao do menu
-						JButton btAdmGestao = new JButton("Gest\u00E3o");
-						btAdmGestao.setBorderPainted(false);
-						btAdmGestao.setOpaque(true);
-						btAdmGestao.setBounds(0, 430, 170, 150);
-						btAdmGestao.setBackground(new Color(188, 127, 82));
-						JPanelAdmin.add(btAdmGestao);
-						btAdmGestao.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btAdmClientes.setBackground(new Color(188, 127, 82));
+			}
 
-								JPAdmGestao.setVisible(true);
-								JPAdmCliente.setVisible(false);
-								JPAdmFuncionario.setVisible(false);
-								JPAdmEstatistica.setVisible(false);
-							}
-						});
-						btAdmGestao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-						
-								// Botão dos funcionarios do menu
-								JButton btAdmFuncionarios = new JButton("Funcion\u00E1rios");
-								btAdmFuncionarios.setBorderPainted(false);
-								btAdmFuncionarios.setBorder(UIManager.getBorder("Button.border"));
-								btAdmFuncionarios.setOpaque(true);
-								btAdmFuncionarios.setBackground(new Color(188, 127, 82));
-								btAdmFuncionarios.setBounds(0, 140, 170, 132);
-								JPanelAdmin.add(btAdmFuncionarios);
-								btAdmFuncionarios.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btAdmClientes.setBackground(new Color(188, 127, 82));
+			}
 
-										JPAdmGestao.setVisible(false);
-										JPAdmCliente.setVisible(false);
-										JPAdmFuncionario.setVisible(true);
-										JPAdmEstatistica.setVisible(false);
-									}
-								});
-								btAdmFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 17));
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btAdmClientes.setBackground(new Color(65, 106, 105));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btAdmClientes.setBackground(new Color(65, 106, 105));
+			}
+		});
+
+		// botao funcionario accao que muda de cor
+		btAdmFuncionarios.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btAdmFuncionarios.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btAdmFuncionarios.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btAdmFuncionarios.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btAdmFuncionarios.setBackground(new Color(65, 106, 105));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btAdmFuncionarios.setBackground(new Color(65, 106, 105));
+			}
+		});
+
+		// botao funcionario accao que muda de cor
+		btAdmGestao.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btAdmGestao.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btAdmGestao.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btAdmGestao.setBackground(new Color(188, 127, 82));
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btAdmGestao.setBackground(new Color(65, 106, 105));
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btAdmGestao.setBackground(new Color(65, 106, 105));
+			}
+		});
+
 	}
 }
