@@ -10,10 +10,24 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Choice;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import java.awt.List;
 
 public class BancoAppFun {
 
 	private JFrame frame;
+	private JTextField tbCltNome;
+	private JTextField tbCltDnasc;
+	private JTextField tbCltNum;
+	private JTextField tbCltContacto;
+	private JTextField tbCltUser;
+	private JPasswordField tbCltPass;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -95,46 +109,193 @@ public class BancoAppFun {
 		JpanelCabecalho.add(lUtilizador);
 		
 		JPanel JpanelMenu = new JPanel();
-		JpanelMenu.setBackground(new Color(255, 255, 255));
+		JpanelMenu.setBackground(new Color(240, 240, 240));
 		JpanelMenu.setBounds(12, 126, 170, 580);
 		frame.getContentPane().add(JpanelMenu);
 		JpanelMenu.setLayout(null);
 		
-		JPanel JPanelFuncionario = new JPanel();
-		JPanelFuncionario.setBounds(0, 0, 170, 580);
-		JpanelMenu.add(JPanelFuncionario);
-		JPanelFuncionario.setBackground(Color.WHITE);
-		JPanelFuncionario.setLayout(null);
-		
 		JButton btFunCliente = new JButton("Clientes");
-		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btFunCliente.setBounds(12, 13, 146, 130);
-		JPanelFuncionario.add(btFunCliente);
+		JpanelMenu.add(btFunCliente);
+		btFunCliente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
-		JButton btFunConta = new JButton("Conta");
-		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JButton btFunConta = new JButton("Contas");
 		btFunConta.setBounds(12, 156, 146, 130);
-		JPanelFuncionario.add(btFunConta);
+		JpanelMenu.add(btFunConta);
+		btFunConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
 		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
+		btFunOperaes.setBounds(12, 303, 146, 130);
+		JpanelMenu.add(btFunOperaes);
 		btFunOperaes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunOperaes.setBounds(12, 299, 146, 130);
-		JPanelFuncionario.add(btFunOperaes);
 		
 		JButton btFunGesto = new JButton("Gest\u00E3o");
+		btFunGesto.setBounds(12, 446, 146, 130);
+		JpanelMenu.add(btFunGesto);
 		btFunGesto.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btFunGesto.setBounds(12, 442, 146, 130);
-		JPanelFuncionario.add(btFunGesto);
 		
 		JPanel JpanelPrincipal = new JPanel();
-		JpanelPrincipal.setBackground(Color.WHITE);
+		JpanelPrincipal.setBackground(new Color(240, 240, 240));
 		JpanelPrincipal.setBounds(194, 126, 1056, 582);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 13, 1032, 556);
-		JpanelPrincipal.add(panel);
+		JPanel jpanelClientes = new JPanel();
+		jpanelClientes.setVisible(false);
+		
+		JPanel jpanelContas = new JPanel();
+		jpanelContas.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(jpanelContas);
+		jpanelContas.setLayout(null);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(12, 13, 279, 31);
+		jpanelContas.add(comboBox);
+		
+		JTextField comboBox_1 = new JTextField();
+		comboBox_1.setBounds(12, 57, 279, 31);
+		jpanelContas.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(366, 13, 279, 31);
+		jpanelContas.add(comboBox_2);
+		
+		textField = new JTextField();
+		textField.setBounds(366, 57, 279, 31);
+		jpanelContas.add(textField);
+		
+		JList list = new JList();
+		list.setBounds(12, 101, 279, 442);
+		jpanelContas.add(list);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(741, 101, 279, 442);
+		jpanelContas.add(list_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(306, 118, 67, 24);
+		jpanelContas.add(lblNewLabel_2);
+		jpanelClientes.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(jpanelClientes);
+		jpanelClientes.setLayout(null);
+		
+		JComboBox cbCltPesq = new JComboBox();
+		cbCltPesq.setBounds(12, 13, 250, 30);
+		jpanelClientes.add(cbCltPesq);
+		
+		JTextField tbCltPesq = new JTextField();
+		tbCltPesq.setBounds(12, 56, 250, 30);
+		jpanelClientes.add(tbCltPesq);
+		
+		JList lbClt = new JList();
+		lbClt.setBounds(12, 142, 250, 401);
+		jpanelClientes.add(lbClt);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(387, 99, 44, 30);
+		jpanelClientes.add(lblNewLabel_1);
+		
+		JLabel lblDNascimento = new JLabel("D. Nascimento:");
+		lblDNascimento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDNascimento.setBounds(330, 142, 101, 30);
+		jpanelClientes.add(lblDNascimento);
+		
+		JLabel lblDocumento = new JLabel("Documento:");
+		lblDocumento.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDocumento.setBounds(351, 185, 80, 30);
+		jpanelClientes.add(lblDocumento);
+		
+		JLabel lblNmero = new JLabel("N\u00FAmero:");
+		lblNmero.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNmero.setBounds(369, 228, 62, 30);
+		jpanelClientes.add(lblNmero);
+		
+		JLabel lblContacto = new JLabel("Contacto:");
+		lblContacto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContacto.setBounds(368, 271, 63, 30);
+		jpanelClientes.add(lblContacto);
+		
+		JLabel lblUsername = new JLabel("UserName:");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsername.setBounds(351, 314, 80, 30);
+		jpanelClientes.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword.setBounds(359, 357, 72, 30);
+		jpanelClientes.add(lblPassword);
+		
+		tbCltNome = new JTextField();
+		tbCltNome.setBounds(443, 97, 250, 30);
+		jpanelClientes.add(tbCltNome);
+		
+		tbCltDnasc = new JTextField();
+		tbCltDnasc.setBounds(443, 147, 250, 30);
+		jpanelClientes.add(tbCltDnasc);
+		
+		tbCltNum = new JTextField();
+		tbCltNum.setBounds(443, 233, 250, 30);
+		jpanelClientes.add(tbCltNum);
+		
+		tbCltContacto = new JTextField();
+		tbCltContacto.setBounds(443, 276, 250, 30);
+		jpanelClientes.add(tbCltContacto);
+		
+		tbCltUser = new JTextField();
+		tbCltUser.setBounds(443, 319, 250, 30);
+		jpanelClientes.add(tbCltUser);
+		
+		tbCltPass = new JPasswordField();
+		tbCltPass.setBounds(443, 362, 250, 30);
+		jpanelClientes.add(tbCltPass);
+		
+		JList lbCltConta = new JList();
+		lbCltConta.setBounds(770, 142, 250, 401);
+		jpanelClientes.add(lbCltConta);
+		
+		JButton btCltPesquisa = new JButton("Pesquisa");
+		btCltPesquisa.setBounds(280, 16, 97, 30);
+		jpanelClientes.add(btCltPesquisa);
+		
+		JButton btCltNovo = new JButton("Novo");
+		btCltNovo.setBounds(387, 16, 97, 30);
+		jpanelClientes.add(btCltNovo);
+		
+		JButton btCltEliminar = new JButton("Eliminar");
+		btCltEliminar.setBounds(496, 16, 97, 30);
+		jpanelClientes.add(btCltEliminar);
+		
+		JButton btCltconfirmar = new JButton("Confirmar");
+		btCltconfirmar.setBounds(443, 405, 97, 30);
+		jpanelClientes.add(btCltconfirmar);
+		
+		JButton btCltLimpar = new JButton("Limpar");
+		btCltLimpar.setBounds(596, 405, 97, 30);
+		jpanelClientes.add(btCltLimpar);
+		
+		JLabel lblClientes = new JLabel("Clientes");
+		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblClientes.setBounds(12, 99, 56, 30);
+		jpanelClientes.add(lblClientes);
+		
+		JLabel lblContas = new JLabel("Contas");
+		lblContas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContas.setBounds(770, 99, 56, 30);
+		jpanelClientes.add(lblContas);
+		
+		JRadioButton rbCltcc = new JRadioButton("C.C.");
+		rbCltcc.setBounds(439, 189, 56, 25);
+		jpanelClientes.add(rbCltcc);
+		
+		JRadioButton rbCltbi = new JRadioButton("B.I.");
+		rbCltbi.setBounds(512, 189, 56, 25);
+		jpanelClientes.add(rbCltbi);
+		
+		JRadioButton rbCltPassaporte = new JRadioButton("Passaporte");
+		rbCltPassaporte.setBounds(582, 189, 111, 25);
+		jpanelClientes.add(rbCltPassaporte);
 
 	}
 }
