@@ -17,6 +17,13 @@ import javax.swing.JList;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import java.awt.List;
+import java.awt.Panel;
+import java.awt.SystemColor;
+import java.awt.Canvas;
+import javax.swing.JSeparator;
+import java.awt.Component;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 public class BancoAppFun {
 
@@ -31,6 +38,20 @@ public class BancoAppFun {
 	private JTextField tbContasnum;
 	private JTextField tbContasdtcriacao;
 	private JTextField tbContaslimitelev;
+	private JTextField tbGestaoUsername;
+	private JTextField tbGestaopass;
+	private JTextField tbGestaoNovoUser;
+	private JPasswordField tbGestaoPass;
+	private JPasswordField tbGestaoNovapass;
+	private JPasswordField tbGestaoConfirmPass;
+	private JTextField textField;
+	private JTextField tbDepMontante;
+	private JTextField tbDepData;
+	private JTextField tbLevMontante;
+	private JTextField tbLevData;
+	private JTextField tbTransMontante;
+	private JTextField tbTransContaDestino;
+	private JTextField tbTransData;
 
 	/**
 	 * Launch the application.
@@ -84,10 +105,11 @@ public class BancoAppFun {
 				}
 			}
 		});
+		
+		// Botoes e paineis:
+		
 		btnLogin.setBounds(1070, 30, 117, 38);
 		JpanelCabecalho.add(btnLogin);
-		
-		
 		
 		JLabel lblNewLabel = new JLabel("JavaBank");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 35));
@@ -144,9 +166,268 @@ public class BancoAppFun {
 		JpanelPrincipal.setLayout(null);
 		
 		JPanel jpanelClientes = new JPanel();
-		jpanelClientes.setVisible(false);
+		
+		JPanel jpanelOperacoes = new JPanel();
+		jpanelOperacoes.setVisible(false);
+		jpanelOperacoes.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(jpanelOperacoes);
+		jpanelOperacoes.setLayout(null);
+		
+		JComboBox cbOperacoespesqClt = new JComboBox();
+		cbOperacoespesqClt.setBounds(12, 13, 250, 30);
+		jpanelOperacoes.add(cbOperacoespesqClt);
+		
+		JTextField tbOperacoespesqClt = new JTextField();
+		tbOperacoespesqClt.setBounds(12, 56, 250, 30);
+		jpanelOperacoes.add(tbOperacoespesqClt);
+		
+		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.setBounds(12, 99, 97, 30);
+		jpanelOperacoes.add(btnNewButton);
+		
+		JComboBox cbOperacoesConta = new JComboBox();
+		cbOperacoesConta.setBounds(295, 56, 250, 30);
+		jpanelOperacoes.add(cbOperacoesConta);
+		
+		JLabel lblNewLabel_3 = new JLabel("Saldo Disponivel:");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_3.setBounds(677, 14, 162, 23);
+		jpanelOperacoes.add(lblNewLabel_3);
+		
+		textField = new JTextField();
+		textField.setBounds(633, 56, 250, 30);
+		jpanelOperacoes.add(textField);
+		
+		JLabel lblConta = new JLabel("Conta:");
+		lblConta.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblConta.setBounds(388, 20, 64, 23);
+		jpanelOperacoes.add(lblConta);
+		
+		JButton cbOperacoDep = new JButton("Deposito");
+		cbOperacoDep.setBounds(170, 143, 97, 30);
+		jpanelOperacoes.add(cbOperacoDep);
+		
+		JButton btnLevantamento = new JButton("Levantamento");
+		btnLevantamento.setBounds(355, 143, 113, 30);
+		jpanelOperacoes.add(btnLevantamento);
+		
+		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
+		btnTransferncia.setBounds(633, 143, 113, 30);
+		jpanelOperacoes.add(btnTransferncia);
+		
+		JPanel JpanelOpTransferencia = new JPanel();
+		JpanelOpTransferencia.setVisible(false);
+		
+		JPanel JpanelOpDeposito = new JPanel();
+		JpanelOpDeposito.setVisible(false);
+		JpanelOpDeposito.setBackground(SystemColor.inactiveCaptionBorder);
+		JpanelOpDeposito.setBounds(170, 180, 575, 360);
+		jpanelOperacoes.add(JpanelOpDeposito);
+		JpanelOpDeposito.setLayout(null);
+		
+		tbDepMontante = new JTextField();
+		tbDepMontante.setBounds(183, 105, 162, 30);
+		JpanelOpDeposito.add(tbDepMontante);
+		
+		JLabel lblData = new JLabel("Data:");
+		lblData.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblData.setBounds(239, 161, 50, 23);
+		JpanelOpDeposito.add(lblData);
+		
+		JLabel lblMontantem = new JLabel("Montante:");
+		lblMontantem.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblMontantem.setBounds(216, 69, 97, 23);
+		JpanelOpDeposito.add(lblMontantem);
+		
+		tbDepData = new JTextField();
+		tbDepData.setBounds(183, 197, 162, 30);
+		JpanelOpDeposito.add(tbDepData);
+		
+		JButton btDepConfirmar = new JButton("Confirmar");
+		btDepConfirmar.setBounds(148, 274, 97, 30);
+		JpanelOpDeposito.add(btDepConfirmar);
+		
+		JButton btDepCancelar = new JButton("Cancelar");
+		btDepCancelar.setBounds(272, 274, 97, 30);
+		JpanelOpDeposito.add(btDepCancelar);
+		
+		JLabel lblDeposito = new JLabel("Deposito:");
+		lblDeposito.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblDeposito.setBounds(201, 13, 144, 43);
+		JpanelOpDeposito.add(lblDeposito);
+		JpanelOpTransferencia.setLayout(null);
+		JpanelOpTransferencia.setBackground(SystemColor.inactiveCaptionBorder);
+		JpanelOpTransferencia.setBounds(170, 180, 575, 360);
+		jpanelOperacoes.add(JpanelOpTransferencia);
+		
+		tbTransMontante = new JTextField();
+		tbTransMontante.setBounds(183, 105, 162, 30);
+		JpanelOpTransferencia.add(tbTransMontante);
+		
+		JLabel lblContaDestino = new JLabel("Conta destino:");
+		lblContaDestino.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblContaDestino.setBounds(196, 148, 137, 23);
+		JpanelOpTransferencia.add(lblContaDestino);
+		
+		JLabel label_5 = new JLabel("Montante:");
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_5.setBounds(216, 69, 97, 23);
+		JpanelOpTransferencia.add(label_5);
+		
+		tbTransContaDestino = new JTextField();
+		tbTransContaDestino.setBounds(183, 183, 162, 30);
+		JpanelOpTransferencia.add(tbTransContaDestino);
+		
+		JButton btTransConfirmar = new JButton("Confirmar");
+		btTransConfirmar.setBounds(146, 317, 97, 30);
+		JpanelOpTransferencia.add(btTransConfirmar);
+		
+		JButton btTransCancelar = new JButton("Cancelar");
+		btTransCancelar.setBounds(275, 317, 97, 30);
+		JpanelOpTransferencia.add(btTransCancelar);
+		
+		JLabel lblTransferencia = new JLabel("Transferencia:");
+		lblTransferencia.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblTransferencia.setBounds(168, 13, 193, 43);
+		JpanelOpTransferencia.add(lblTransferencia);
+		
+		JLabel label_7 = new JLabel("Data:");
+		label_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_7.setBounds(239, 226, 50, 23);
+		JpanelOpTransferencia.add(label_7);
+		
+		tbTransData = new JTextField();
+		tbTransData.setBounds(183, 253, 162, 30);
+		JpanelOpTransferencia.add(tbTransData);
+		
+		JPanel JpanelOpLevantamento = new JPanel();
+		JpanelOpLevantamento.setVisible(false);
+		JpanelOpLevantamento.setBounds(170, 180, 575, 360);
+		jpanelOperacoes.add(JpanelOpLevantamento);
+		JpanelOpLevantamento.setLayout(null);
+		JpanelOpLevantamento.setBackground(SystemColor.inactiveCaptionBorder);
+		
+		tbLevMontante = new JTextField();
+		tbLevMontante.setBounds(183, 105, 162, 30);
+		JpanelOpLevantamento.add(tbLevMontante);
+		
+		JLabel label = new JLabel("Data:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label.setBounds(239, 148, 50, 23);
+		JpanelOpLevantamento.add(label);
+		
+		JLabel label_1 = new JLabel("Montante:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(216, 69, 97, 23);
+		JpanelOpLevantamento.add(label_1);
+		
+		tbLevData = new JTextField();
+		tbLevData.setBounds(183, 183, 162, 30);
+		JpanelOpLevantamento.add(tbLevData);
+		
+		JButton btLevConfirmar = new JButton("Confirmar");
+		btLevConfirmar.setBounds(161, 241, 97, 30);
+		JpanelOpLevantamento.add(btLevConfirmar);
+		
+		JButton btLevCancelar = new JButton("Cancelar");
+		btLevCancelar.setBounds(270, 241, 97, 30);
+		JpanelOpLevantamento.add(btLevCancelar);
+		
+		JLabel lblLevantamento = new JLabel("Levantamento:");
+		lblLevantamento.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblLevantamento.setBounds(162, 13, 205, 43);
+		JpanelOpLevantamento.add(lblLevantamento);
+		
+		JPanel jpanelGestao = new JPanel();
+		jpanelGestao.setVisible(false);
+		jpanelGestao.setBounds(12, 13, 1032, 556);
+		JpanelPrincipal.add(jpanelGestao);
+		jpanelGestao.setLayout(null);
+		
+		JLabel lblUsername_1 = new JLabel("UserName:");
+		lblUsername_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsername_1.setBounds(96, 118, 113, 24);
+		jpanelGestao.add(lblUsername_1);
+		
+		tbGestaoUsername = new JTextField();
+		tbGestaoUsername.setBounds(96, 155, 279, 31);
+		jpanelGestao.add(tbGestaoUsername);
+		
+		JLabel lblPassword_1 = new JLabel("Password:");
+		lblPassword_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword_1.setBounds(96, 199, 113, 24);
+		jpanelGestao.add(lblPassword_1);
+		
+		tbGestaopass = new JTextField();
+		tbGestaopass.setBounds(96, 236, 279, 31);
+		jpanelGestao.add(tbGestaopass);
+		
+		JLabel lblNovaPassword = new JLabel("Novo UserName:");
+		lblNovaPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNovaPassword.setBounds(96, 280, 171, 24);
+		jpanelGestao.add(lblNovaPassword);
+		
+		tbGestaoNovoUser = new JTextField();
+		tbGestaoNovoUser.setBounds(96, 310, 279, 31);
+		jpanelGestao.add(tbGestaoNovoUser);
+		
+		JButton btGestaouserconfirmar = new JButton("Confirmar");
+		btGestaouserconfirmar.setBounds(96, 385, 97, 25);
+		jpanelGestao.add(btGestaouserconfirmar);
+		
+		JButton btGestaouserCancelar = new JButton("Cancelar");
+		btGestaouserCancelar.setBounds(278, 385, 97, 25);
+		jpanelGestao.add(btGestaouserCancelar);
+		
+		JLabel lblPassword_2 = new JLabel("Password:");
+		lblPassword_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword_2.setBounds(669, 118, 113, 24);
+		jpanelGestao.add(lblPassword_2);
+		
+		tbGestaoPass = new JPasswordField();
+		tbGestaoPass.setBounds(669, 155, 279, 31);
+		jpanelGestao.add(tbGestaoPass);
+		
+		JLabel lblPassword_3 = new JLabel("Nova Password:");
+		lblPassword_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPassword_3.setBounds(669, 199, 113, 24);
+		jpanelGestao.add(lblPassword_3);
+		
+		tbGestaoNovapass = new JPasswordField();
+		tbGestaoNovapass.setBounds(669, 236, 279, 31);
+		jpanelGestao.add(tbGestaoNovapass);
+		
+		JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
+		lblConfirmarPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblConfirmarPassword.setBounds(669, 280, 171, 24);
+		jpanelGestao.add(lblConfirmarPassword);
+		
+		tbGestaoConfirmPass = new JPasswordField();
+		tbGestaoConfirmPass.setBounds(669, 310, 279, 31);
+		jpanelGestao.add(tbGestaoConfirmPass);
+		
+		JButton btGestaopassConfirmar = new JButton("Confirmar");
+		btGestaopassConfirmar.setBounds(669, 385, 97, 25);
+		jpanelGestao.add(btGestaopassConfirmar);
+		
+		JButton btGestaopassCancelar = new JButton("Cancelar");
+		btGestaopassCancelar.setBounds(851, 385, 97, 25);
+		jpanelGestao.add(btGestaopassCancelar);
+		
+		JLabel lblAlterarUsername = new JLabel("Alterar UserName:");
+		lblAlterarUsername.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblAlterarUsername.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblAlterarUsername.setBounds(134, 74, 203, 31);
+		jpanelGestao.add(lblAlterarUsername);
+		
+		JLabel lblAlterarPassword = new JLabel("Alterar PassWord:");
+		lblAlterarPassword.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblAlterarPassword.setAlignmentX(0.5f);
+		lblAlterarPassword.setBounds(707, 74, 203, 31);
+		jpanelGestao.add(lblAlterarPassword);
 		
 		JPanel jpanelContas = new JPanel();
+		jpanelContas.setVisible(false);
 		jpanelContas.setBounds(12, 13, 1032, 556);
 		JpanelPrincipal.add(jpanelContas);
 		jpanelContas.setLayout(null);
@@ -346,6 +627,77 @@ public class BancoAppFun {
 		JRadioButton rbCltPassaporte = new JRadioButton("Passaporte");
 		rbCltPassaporte.setBounds(582, 189, 111, 25);
 		jpanelClientes.add(rbCltPassaporte);
+		
+		// Eventos:
+		//coloca o painel cliente visivel:
+		btFunCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelClientes.setVisible(true);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(false);
+				jpanelOperacoes.setVisible(false);
+			}
+		});
+		
+		//coloca o painel conta visivel:
+		btFunConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(true);
+				jpanelGestao.setVisible(false);
+				jpanelOperacoes.setVisible(false);
+			}
+		});
+		
+		//coloca o painel operacoes visivel:
+		btFunOperaes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(false);
+				jpanelOperacoes.setVisible(true);
+			}
+		});
+		
+		
+		//coloca o painel gestao visivel:
+		btFunGesto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(true);
+				jpanelOperacoes.setVisible(false);
+			}
+		});
+		
+		//Dentro do painel gestao:
+		//coloca o painel depositos  visivel:
+		cbOperacoDep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JpanelOpDeposito.setVisible(true);
+				JpanelOpLevantamento.setVisible(false);
+				JpanelOpTransferencia.setVisible(false);
+				
+			}
+		});
+		
+		//coloca o painel depositos  visivel:
+		btnLevantamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JpanelOpDeposito.setVisible(false);
+				JpanelOpLevantamento.setVisible(true);
+				JpanelOpTransferencia.setVisible(false);
+			}
+		});
+		
+		//coloca o painel depositos  visivel:
+		btnTransferncia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JpanelOpDeposito.setVisible(false);
+				JpanelOpLevantamento.setVisible(false);
+				JpanelOpTransferencia.setVisible(true);
+			}
+		});
 
 	}
 }
