@@ -527,6 +527,7 @@ public class BancoAppFun {
 		JTextField tbCltPesq = new JTextField();
 		tbCltPesq.setBounds(12, 56, 250, 30);
 		jpanelClientes.add(tbCltPesq);
+		
 
 		JList lbClt = new JList();
 		lbClt.setBounds(12, 142, 250, 401);

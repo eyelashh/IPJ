@@ -195,6 +195,7 @@ public class BancoAppAdm {
 						scrollBarAdminClie.setBounds(281, 85, 15, 441);
 						JPAdmCliente.add(scrollBarAdminClie);
 						
+						
 								JList listaAdminClie = new JList();
 								listaAdminClie.setBounds(56, 85, 240, 441);
 								JPAdmCliente.add(listaAdminClie);
