@@ -121,13 +121,13 @@ public class Login extends JDialog {
 			painelGeral.add(tituloJava);
 
 			// imagem de fundo
-			JLabel imagem_1 = new JLabel(
+			JLabel imagemfundo = new JLabel(
 					new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/12.jpg"));
-			imagem_1.setOpaque(true);
-			imagem_1.setBackground(new Color(0, 128, 128));
-			imagem_1.setBounds(-1, -1, 1289, 755);
-			painelGeral.add(imagem_1);
-			imagem_1.setVisible(true);
+			imagemfundo.setOpaque(true);
+			imagemfundo.setBackground(new Color(0, 128, 128));
+			imagemfundo.setBounds(-1, -1, 1289, 755);
+			painelGeral.add(imagemfundo);
+			imagemfundo.setVisible(true);
 		}
 	}
 }

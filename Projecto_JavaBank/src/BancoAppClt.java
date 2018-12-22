@@ -18,10 +18,16 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.JScrollBar;
 
 public class BancoAppClt {
 
 	private JFrame frame;
+	private JTextField textFieldCltNumero;
+	private JTextField textFieldCltData;
+	private JTextField textFieldCltSaldo;
+	private JTextField textFieldCltCartao;
+	private JTextField textFieldCltSaldo2;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -82,7 +88,7 @@ public class BancoAppClt {
 				try {
 
 					Login dialog = new Login();
-					
+
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationRelativeTo(frame);
 					dialog.setVisible(true);
@@ -143,55 +149,138 @@ public class BancoAppClt {
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
-		JPCltCM.setBounds(12, 13, 1032, 556);
+		JPCltCM.setBounds(16, 16, 1032, 563);
 		JpanelPrincipal.add(JPCltCM);
 		JPCltCM.setLayout(null);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(222, 51, 270, 30);
-		JPCltCM.add(comboBox);
+		// box onde escolhemos qual conta o cliente quer ver
+		JComboBox comboBoxCltConta = new JComboBox();
+		comboBoxCltConta.setBounds(121, 67, 287, 39);
+		JPCltCM.add(comboBoxCltConta);
 
-		JTextField comboBox_1 = new JTextField();
-		comboBox_1.setBounds(222, 90, 270, 30);
-		JPCltCM.add(comboBox_1);
+		JLabel textFieldCltNumero1 = new JLabel("Número:");
+		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textFieldCltNumero1.setBounds(121, 148, 94, 16);
+		JPCltCM.add(textFieldCltNumero1);
 
-		JLabel lblNewLabel_1 = new JLabel("Numero:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(222, 157, 94, 16);
-		JPCltCM.add(lblNewLabel_1);
+		textFieldCltNumero = new JTextField();
+		textFieldCltNumero.setBounds(121, 177, 322, 30);
+		JPCltCM.add(textFieldCltNumero);
 
-		textField = new JTextField();
-		textField.setBounds(222, 186, 270, 30);
-		JPCltCM.add(textField);
+		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
+		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textFieldCltData1.setBounds(121, 219, 270, 16);
+		JPCltCM.add(textFieldCltData1);
 
-		JLabel lblDataDeCriaao = new JLabel("Data de Criaçao:");
-		lblDataDeCriaao.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblDataDeCriaao.setBounds(222, 234, 270, 16);
-		JPCltCM.add(lblDataDeCriaao);
-
-		textField_1 = new JTextField();
-		textField_1.setBounds(222, 263, 270, 30);
-		JPCltCM.add(textField_1);
+		textFieldCltData = new JTextField();
+		textFieldCltData.setBounds(121, 246, 185, 30);
+		JPCltCM.add(textFieldCltData);
 
 		JLabel lblSaldo = new JLabel("Saldo:");
-		lblSaldo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSaldo.setBounds(222, 325, 270, 16);
+		lblSaldo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblSaldo.setBounds(121, 293, 270, 16);
 		JPCltCM.add(lblSaldo);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(222, 354, 270, 30);
-		JPCltCM.add(textField_2);
+		textFieldCltSaldo = new JTextField();
+		textFieldCltSaldo.setBounds(121, 322, 185, 30);
+		JPCltCM.add(textFieldCltSaldo);
 
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(297, 442, 97, 25);
-		JPCltCM.add(btnNewButton);
+		JButton btnCltLimpar = new JButton("Limpar");
+		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnCltLimpar.setBounds(209, 404, 120, 38);
+		JPCltCM.add(btnCltLimpar);
+
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(889, 149, 20, 355);
+		JPCltCM.add(scrollBar);
+
+		JList listCltListaMovimentos = new JList();
+		listCltListaMovimentos.setBounds(527, 150, 379, 354);
+		JPCltCM.add(listCltListaMovimentos);
+
+		JLabel textCltCartao = new JLabel("Cartão:");
+		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textCltCartao.setBounds(527, 67, 270, 16);
+		JPCltCM.add(textCltCartao);
+
+		textFieldCltCartao = new JTextField();
+		textFieldCltCartao.setBounds(527, 94, 344, 30);
+		JPCltCM.add(textFieldCltCartao);
+
+		// Painel principal transferencia
+		JPanel JPCltTransf = new JPanel();
+		JPCltTransf.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltTransf);
+		JPCltTransf.setLayout(null);
+
+		// Box pesquisa da conta do cliente
+		JComboBox comboBoxCLTPesquisa = new JComboBox();
+		comboBoxCLTPesquisa.setBounds(211, 67, 287, 39);
+		JPCltTransf.add(comboBoxCLTPesquisa);
+
+		JLabel labelClt = new JLabel("Saldo:");
+		labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		labelClt.setBounds(550, 67, 66, 16);
+		JPCltTransf.add(labelClt);
+
+		textFieldCltSaldo2 = new JTextField();
+		textFieldCltSaldo2.setBounds(550, 96, 185, 30);
+		JPCltTransf.add(textFieldCltSaldo2);
+
+		textField = new JTextField();
+		textField.setBounds(423, 200, 185, 30);
+		JPCltTransf.add(textField);
+
+		JLabel lblMontante = new JLabel("Montante:");
+		lblMontante.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMontante.setBounds(413, 172, 131, 16);
+		JPCltTransf.add(lblMontante);
+
+		textField_1 = new JTextField();
+		textField_1.setBounds(423, 283, 287, 30);
+		JPCltTransf.add(textField_1);
+
+		JLabel lblContaDestino = new JLabel("Conta Destino:");
+		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContaDestino.setBounds(413, 255, 147, 16);
+		JPCltTransf.add(lblContaDestino);
+
+		textField_2 = new JTextField();
+		textField_2.setBounds(423, 372, 185, 30);
+		JPCltTransf.add(textField_2);
+
+		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
+		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDaOperao.setBounds(413, 344, 190, 16);
+		JPCltTransf.add(lblDataDaOperao);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnConfirmar.setBounds(378, 448, 120, 38);
+		JPCltTransf.add(btnConfirmar);
+
+		JButton button_1 = new JButton("Limpar");
+		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_1.setBounds(550, 448, 120, 38);
+		JPCltTransf.add(button_1);
+
+		// Painel principal gestao
+		JPanel JPCltGestao = new JPanel();
+		JPCltGestao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltGestao);
+
+		// Painel principal cartao
+		JPanel JPCltCartao = new JPanel();
+		JPCltCartao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltCartao);
 
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
 		tbAdmFunPesq.setColumns(10);
 
 		// Botão conta/movimentos do menu
-		JButton btCltConmov = new JButton("Conta/" + "\n" + "Movimentos");
+		JButton btCltConmov = new JButton();
+		btCltConmov.setText("Conta");
 		btCltConmov.setBorderPainted(false);
 		btCltConmov.setOpaque(true);
 		btCltConmov.setForeground(Color.BLACK);
@@ -206,13 +295,13 @@ public class BancoAppClt {
 			public void actionPerformed(ActionEvent e) {
 
 				JPCltCM.setVisible(true);
-				// JPAdmCliente.setVisible(false);
-				// JPAdmFuncionario.setVisible(false);
-				// JPAdmGestao.setVisible(false);
+				JPCltCartao.setVisible(false);
+				JPCltTransf.setVisible(false);
+				JPCltGestao.setVisible(false);
 
 			}
 		});
-		btCltConmov.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btCltConmov.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
 		// Botão transferencia do menu
 		JButton btCltTransferencia = new JButton("Transfer\u00EAncia");
@@ -228,9 +317,9 @@ public class BancoAppClt {
 			public void actionPerformed(ActionEvent e) {
 
 				JPCltCM.setVisible(false);
-				// JPAdmCliente.setVisible(false);
-				// JPAdmFuncionario.setVisible(false);
-				// JPAdmGestao.setVisible(false);
+				JPCltCartao.setVisible(false);
+				JPCltTransf.setVisible(true);
+				JPCltGestao.setVisible(false);
 			}
 		});
 
@@ -249,11 +338,10 @@ public class BancoAppClt {
 			public void actionPerformed(ActionEvent e) {
 
 				JPCltCM.setVisible(false);
-				// JPAdmCliente.setVisible(false);
-				// JPAdmFuncionario.setVisible(false);
-				// JPAdmGestao.setVisible(false);
-				
-				
+				JPCltCartao.setVisible(true);
+				JPCltTransf.setVisible(false);
+				JPCltGestao.setVisible(false);
+
 			}
 		});
 
@@ -272,9 +360,9 @@ public class BancoAppClt {
 			public void actionPerformed(ActionEvent e) {
 
 				JPCltCM.setVisible(false);
-				// JPAdmCliente.setVisible(false);
-				// JPAdmFuncionario.setVisible(false);
-				// JPAdmGestao.setVisible(false);
+				JPCltCartao.setVisible(false);
+				JPCltTransf.setVisible(false);
+				JPCltGestao.setVisible(true);
 			}
 		});
 

@@ -169,7 +169,7 @@ public class BancoAppFun {
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
 		jpanelClientes.setVisible(false);
-		jpanelClientes.setBounds(12, 13, 1032, 579);
+		jpanelClientes.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelClientes);
 		jpanelClientes.setLayout(null);
 
