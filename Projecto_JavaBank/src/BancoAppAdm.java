@@ -110,6 +110,7 @@ public class BancoAppAdm {
 				try {
 
 					Login dialog = new Login();
+					
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationRelativeTo(frame);
 					dialog.setVisible(true);
@@ -442,6 +443,7 @@ public class BancoAppAdm {
 		JPAdm.add(JPAdmCliente);
 		JPAdmCliente.setVisible(false);
 		JPAdmCliente.setLayout(null);
+		
 
 		JComboBox boxAdminCliePesquisa = new JComboBox();
 		boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
