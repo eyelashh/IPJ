@@ -34,24 +34,24 @@ import javax.swing.JScrollBar;
 public class BancoAppAdm {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_17;
+	private JTextField lblAdminGestUsername;
+	private JTextField textAdminGestPass;
+	private JTextField textFieldAdminGestNovaUser;
+	private JTextField textFieldAdminGestPass1;
+	private JTextField textFieldAdminGestNovaPass;
+	private JTextField textFieldAdminGestConf;
+	private JTextField textAdminCliePesquisa;
+	private JTextField textAdminClieNome;
+	private JTextField textAdminClieData;
+	private JTextField textAdminClieContato;
+	private JTextField textAdminClieEndereco;
+	private JTextField textAdminClieNif;
+	private JTextField textAdmFunNome;
+	private JTextField textAdmFunData;
+	private JTextField textAdmFunNumero;
+	private JTextField textAdmFunContato;
+	private JTextField textAdmFunUser;
+	private JTextField textAdmFunPass;
 
 	/**
 	 * Launch the application.
@@ -82,7 +82,6 @@ public class BancoAppAdm {
 	private void initialize() {
 
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -103,7 +102,7 @@ public class BancoAppAdm {
 		// JpanelCabecalho.add(imagem_1);
 		// imagem_1.setVisible(true);
 
-		// Botao de login, metodo que vai buscar a class
+		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogin = new JButton("Logout");
 		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		btnLogin.addActionListener(new ActionListener() {
@@ -120,7 +119,7 @@ public class BancoAppAdm {
 				}
 			}
 		});
-		btnLogin.setBounds(1077, 41, 143, 42);
+		btnLogin.setBounds(1070, 30, 143, 42);
 		JpanelCabecalho.add(btnLogin);
 
 		// texto no cabeçalho :Java
@@ -128,7 +127,7 @@ public class BancoAppAdm {
 		lblNewLabel.setVerifyInputWhenFocusTarget(false);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 45));
 		lblNewLabel.setForeground(new Color(188, 127, 82));
-		lblNewLabel.setBounds(41, 26, 225, 74);
+		lblNewLabel.setBounds(34, 21, 227, 74);
 		JpanelCabecalho.add(lblNewLabel);
 
 		// texto no cabeçalho : Bem vindo
@@ -147,6 +146,7 @@ public class BancoAppAdm {
 		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
 
+		// separador no cabeçalho
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setForeground(Color.BLACK);
@@ -161,9 +161,8 @@ public class BancoAppAdm {
 		frame.getContentPane().add(JPanelAdmin);
 		JPanelAdmin.setLayout(null);
 
-		// Painel branco
+		// Painel principal
 		JPanel JpanelPrincipal = new JPanel();
-		// JpanelPrincipal.setBackground(Color.LIGHT_GRAY);
 		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
@@ -175,97 +174,154 @@ public class BancoAppAdm {
 		JpanelPrincipal.add(JPAdm);
 		JPAdm.setLayout(null);
 
-		// Painel do cliente da parte administrador
-		JPanel JPAdmCliente = new JPanel();
-		JPAdmCliente.setBounds(0, 0, 1042, 576);
-		JPAdm.add(JPAdmCliente);
-		JPAdmCliente.setVisible(false);
-		JPAdmCliente.setLayout(null);
+		// Painel da funcionario da parte administrador
+		JPanel JPAdmFuncionario = new JPanel();
+		JPAdmFuncionario.setVisible(false);
+		JPAdmFuncionario.setLayout(null);
+		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmFuncionario);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(400, 16, 218, 38);
-		JPAdmCliente.add(comboBox);
+		// box onde escolhemos como queremos fazer a pesquisa do funcionario
+		JComboBox cbAdmFunPesq = new JComboBox();
+		cbAdmFunPesq.setBounds(123, 28, 249, 39);
+		JPAdmFuncionario.add(cbAdmFunPesq);
 
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(281, 85, 15, 441);
-		JPAdmCliente.add(scrollBar);
+		// caixa de texto para escrever a procura do funcionario
+		JTextField tbAdmFunPesq = new JTextField();
+		tbAdmFunPesq.setBounds(123, 79, 249, 31);
+		JPAdmFuncionario.add(tbAdmFunPesq);
+		tbAdmFunPesq.setColumns(10);
 
-		JList list = new JList();
-		list.setBounds(56, 85, 240, 441);
-		JPAdmCliente.add(list);
+		// Botao de procurar
+		JButton btAdmFunProc = new JButton("Procurar");
+		btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btAdmFunProc.setBounds(443, 38, 120, 38);
+		JPAdmFuncionario.add(btAdmFunProc);
 
-		textField_6 = new JTextField();
-		textField_6.setBounds(410, 55, 196, 31);
-		JPAdmCliente.add(textField_6);
-		textField_6.setColumns(10);
+		// Botao para criar novo funcionario
+		JButton btAdmFunNovo = new JButton("Novo");
+		btAdmFunNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btAdmFunNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
 
-		JLabel lblNome = new JLabel("Nome :");
-		lblNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNome.setBounds(356, 115, 79, 23);
-		JPAdmCliente.add(lblNome);
+		});
+		btAdmFunNovo.setBounds(585, 38, 120, 38);
+		JPAdmFuncionario.add(btAdmFunNovo);
 
-		JLabel lblDataDeNascimento_1 = new JLabel("Data de Nascimento :");
-		lblDataDeNascimento_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDeNascimento_1.setBounds(356, 181, 218, 23);
-		JPAdmCliente.add(lblDataDeNascimento_1);
+		// texto : Nome
+		JLabel lblAdmFunNome = new JLabel("Nome:");
+		lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunNome.setBounds(453, 88, 57, 30);
+		JPAdmFuncionario.add(lblAdmFunNome);
 
-		JLabel lblContacto_1 = new JLabel("Contacto :");
-		lblContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContacto_1.setBounds(356, 318, 127, 23);
-		JPAdmCliente.add(lblContacto_1);
+		// texto : data de nascimento
+		JLabel lblAdmFunDataDeNascimento = new JLabel("Data de Nascimento:");
+		lblAdmFunDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunDataDeNascimento.setBounds(453, 148, 177, 30);
+		JPAdmFuncionario.add(lblAdmFunDataDeNascimento);
 
-		JLabel lblEndereo = new JLabel("Endereço :");
-		lblEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblEndereo.setBounds(356, 383, 127, 23);
-		JPAdmCliente.add(lblEndereo);
+		// texto : documento
+		JLabel lblAdmFunDocumento = new JLabel("Documento:");
+		lblAdmFunDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunDocumento.setBounds(453, 209, 108, 30);
+		JPAdmFuncionario.add(lblAdmFunDocumento);
 
-		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(961, 85, 15, 441);
-		JPAdmCliente.add(scrollBar_1);
+		// radiobutton : documento
+		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
+		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunCC.setBounds(564, 212, 66, 25);
+		JPAdmFuncionario.add(rbAdmFunCC);
 
-		JList list_1 = new JList();
-		list_1.setBounds(736, 85, 240, 441);
-		JPAdmCliente.add(list_1);
+		// radiobutton : documento
+		JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
+		rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunBI.setBounds(643, 212, 57, 25);
+		JPAdmFuncionario.add(rbAdmFunBI);
 
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(366, 144, 297, 31);
-		JPAdmCliente.add(textField_7);
+		// radiobutton : documento
+		JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
+		rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunPass.setBounds(712, 212, 138, 25);
+		JPAdmFuncionario.add(rbAdmFunPass);
 
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(366, 209, 169, 31);
-		JPAdmCliente.add(textField_8);
+		// texto : numero do documento
+		JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
+		lblAdmFunNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunNumero.setBounds(453, 237, 227, 30);
+		JPAdmFuncionario.add(lblAdmFunNumero);
 
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(366, 347, 169, 31);
-		JPAdmCliente.add(textField_9);
+		// texto : contato
+		JLabel lblAdmFunContacto = new JLabel("Contacto:");
+		lblAdmFunContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunContacto.setBounds(453, 303, 81, 31);
+		JPAdmFuncionario.add(lblAdmFunContacto);
 
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(366, 415, 297, 31);
-		JPAdmCliente.add(textField_10);
+		JScrollBar scrollAdmFunLista = new JScrollBar();
+		scrollAdmFunLista.setBounds(357, 122, 15, 428);
+		JPAdmFuncionario.add(scrollAdmFunLista);
 
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(366, 281, 169, 31);
-		JPAdmCliente.add(textField_11);
+		// lista dos funcionarios
+		JList lbLAdmFunLista = new JList();
+		lbLAdmFunLista.setBounds(123, 122, 249, 428);
+		JPAdmFuncionario.add(lbLAdmFunLista);
 
-		JLabel lblNif = new JLabel("NIF :");
-		lblNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNif.setBounds(356, 252, 127, 23);
-		JPAdmCliente.add(lblNif);
+		// texto : username
+		JLabel lblAdmFunUsername = new JLabel("UserName:");
+		lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunUsername.setBounds(453, 367, 120, 30);
+		JPAdmFuncionario.add(lblAdmFunUsername);
 
-		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnNewButton.setBounds(376, 488, 120, 38);
-		JPAdmCliente.add(btnNewButton);
+		// texto : username
+		JLabel lblAdmFunPassword = new JLabel("Password:");
+		lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunPassword.setBounds(453, 427, 153, 30);
+		JPAdmFuncionario.add(lblAdmFunPassword);
 
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnLimpar.setBounds(522, 488, 120, 38);
-		JPAdmCliente.add(btnLimpar);
+		JButton btnAdmFunEliminar = new JButton("Eliminar");
+		btnAdmFunEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmFunEliminar.setBounds(727, 38, 120, 38);
+		JPAdmFuncionario.add(btnAdmFunEliminar);
+
+		textAdmFunNome = new JTextField();
+		textAdmFunNome.setColumns(10);
+		textAdmFunNome.setBounds(463, 119, 351, 31);
+		JPAdmFuncionario.add(textAdmFunNome);
+
+		textAdmFunData = new JTextField();
+		textAdmFunData.setColumns(10);
+		textAdmFunData.setBounds(463, 179, 225, 31);
+		JPAdmFuncionario.add(textAdmFunData);
+
+		textAdmFunNumero = new JTextField();
+		textAdmFunNumero.setColumns(10);
+		textAdmFunNumero.setBounds(463, 270, 225, 31);
+		JPAdmFuncionario.add(textAdmFunNumero);
+
+		textAdmFunContato = new JTextField();
+		textAdmFunContato.setColumns(10);
+		textAdmFunContato.setBounds(463, 334, 225, 31);
+		JPAdmFuncionario.add(textAdmFunContato);
+
+		textAdmFunUser = new JTextField();
+		textAdmFunUser.setColumns(10);
+		textAdmFunUser.setBounds(463, 395, 225, 31);
+		JPAdmFuncionario.add(textAdmFunUser);
+
+		textAdmFunPass = new JTextField();
+		textAdmFunPass.setColumns(10);
+		textAdmFunPass.setBounds(463, 456, 225, 31);
+		JPAdmFuncionario.add(textAdmFunPass);
+
+		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
+		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmFunConfirmar_1.setBounds(512, 511, 120, 38);
+		JPAdmFuncionario.add(btnAdmFunConfirmar_1);
+
+		JButton btnAdmFunLimpar = new JButton("Limpar");
+		btnAdmFunLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmFunLimpar.setBounds(675, 509, 120, 38);
+		JPAdmFuncionario.add(btnAdmFunLimpar);
 
 		// Painel da gestao do administrador
 		JPanel JPAdmGestao = new JPanel();
@@ -289,10 +345,10 @@ public class BancoAppAdm {
 		JPAdmGestao.add(lblUsername_1);
 
 		// campo de texto na gestão da parte do administrador
-		textField = new JTextField();
-		textField.setBounds(144, 134, 271, 33);
-		JPAdmGestao.add(textField);
-		textField.setColumns(10);
+		lblAdminGestUsername = new JTextField();
+		lblAdminGestUsername.setBounds(144, 134, 271, 33);
+		JPAdmGestao.add(lblAdminGestUsername);
+		lblAdminGestUsername.setColumns(10);
 
 		// texto : password
 		JLabel lblPassword_1 = new JLabel("Password :");
@@ -302,45 +358,45 @@ public class BancoAppAdm {
 		JPAdmGestao.add(lblPassword_1);
 
 		// campo de texto na gestão da parte do administrador
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(144, 230, 271, 33);
-		JPAdmGestao.add(textField_1);
+		textAdminGestPass = new JTextField();
+		textAdminGestPass.setColumns(10);
+		textAdminGestPass.setBounds(144, 230, 271, 33);
+		JPAdmGestao.add(textAdminGestPass);
 
 		// texto : novausername
-		JLabel lblNovaUsername = new JLabel("Nova Username :");
-		lblNovaUsername.setVerifyInputWhenFocusTarget(false);
-		lblNovaUsername.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblNovaUsername.setBounds(144, 275, 191, 41);
-		JPAdmGestao.add(lblNovaUsername);
+		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
+		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
+		textFieldAdminGestUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+		textFieldAdminGestUsername.setBounds(144, 275, 191, 41);
+		JPAdmGestao.add(textFieldAdminGestUsername);
 
 		// campo de texto na gestão da parte do administrador
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(144, 327, 271, 33);
-		JPAdmGestao.add(textField_2);
+		textFieldAdminGestNovaUser = new JTextField();
+		textFieldAdminGestNovaUser.setColumns(10);
+		textFieldAdminGestNovaUser.setBounds(144, 327, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaUser);
 
 		// botao de confimar - submete a nova username
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.addActionListener(new ActionListener() {
+		JButton btnAdminGestConfirmar = new JButton("Confirmar");
+		btnAdminGestConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 			}
 		});
-		btnConfirmar.setBounds(144, 415, 131, 41);
-		JPAdmGestao.add(btnConfirmar);
+		btnAdminGestConfirmar.setBounds(144, 415, 131, 41);
+		JPAdmGestao.add(btnAdminGestConfirmar);
 
 		// botao de cancelar - limpar
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCancelar.setBounds(294, 415, 131, 41);
-		JPAdmGestao.add(btnCancelar);
+		JButton btnAdminGestCancelar = new JButton("Cancelar");
+		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestCancelar.setBounds(294, 415, 131, 41);
+		JPAdmGestao.add(btnAdminGestCancelar);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(579, 134, 271, 33);
-		JPAdmGestao.add(textField_3);
+		textFieldAdminGestPass1 = new JTextField();
+		textFieldAdminGestPass1.setColumns(10);
+		textFieldAdminGestPass1.setBounds(579, 134, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestPass1);
 
 		JLabel lblPassword_2 = new JLabel("Password :");
 		lblPassword_2.setVerifyInputWhenFocusTarget(false);
@@ -354,10 +410,10 @@ public class BancoAppAdm {
 		lblNovaPassword.setBounds(579, 178, 168, 41);
 		JPAdmGestao.add(lblNovaPassword);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(579, 230, 271, 33);
-		JPAdmGestao.add(textField_4);
+		textFieldAdminGestNovaPass = new JTextField();
+		textFieldAdminGestNovaPass.setColumns(10);
+		textFieldAdminGestNovaPass.setBounds(579, 230, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaPass);
 
 		JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Nova Password :");
 		lblConfirmarNovaUsername.setVerifyInputWhenFocusTarget(false);
@@ -365,176 +421,119 @@ public class BancoAppAdm {
 		lblConfirmarNovaUsername.setBounds(579, 275, 271, 41);
 		JPAdmGestao.add(lblConfirmarNovaUsername);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(579, 327, 271, 33);
-		JPAdmGestao.add(textField_5);
+		textFieldAdminGestConf = new JTextField();
+		textFieldAdminGestConf.setColumns(10);
+		textFieldAdminGestConf.setBounds(579, 327, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestConf);
 
-		JButton button = new JButton("Confirmar");
-		button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button.setBounds(579, 415, 131, 41);
-		JPAdmGestao.add(button);
+		JButton buttonAdminGestConf = new JButton("Confirmar");
+		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestConf.setBounds(579, 415, 131, 41);
+		JPAdmGestao.add(buttonAdminGestConf);
 
-		JButton button_1 = new JButton("Cancelar");
-		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_1.setBounds(729, 415, 131, 41);
-		JPAdmGestao.add(button_1);
-						
-								// Painel da funcionario da parte administrador
-								JPanel JPAdmFuncionario = new JPanel();
-								JPAdmFuncionario.setVisible(false);
-								JPAdmFuncionario.setLayout(null);
-								JPAdmFuncionario.setBounds(0, 0, 1042, 576);
-								JPAdm.add(JPAdmFuncionario);
-								
-										// box onde escolhemos como queremos fazer a pesquisa do funcionario
-										JComboBox cbAdmFunPesq = new JComboBox();
-										cbAdmFunPesq.setBounds(123, 28, 249, 39);
-										JPAdmFuncionario.add(cbAdmFunPesq);
-										
-												// caixa de texto para escrever a procura do funcionario
-												JTextField tbAdmFunPesq = new JTextField();
-												tbAdmFunPesq.setBounds(123, 79, 249, 31);
-												JPAdmFuncionario.add(tbAdmFunPesq);
-												tbAdmFunPesq.setColumns(10);
-												
-														// Botao de procurar
-														JButton btAdmFunPesq = new JButton("Procurar");
-														btAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-														btAdmFunPesq.setBounds(443, 38, 120, 38);
-														JPAdmFuncionario.add(btAdmFunPesq);
-														
-																// Botao para criar novo funcionario
-																JButton btAdmFunNovo = new JButton("Novo");
-																btAdmFunNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																btAdmFunNovo.addActionListener(new ActionListener() {
-																	public void actionPerformed(ActionEvent e) {
-																	}
+		JButton buttonAdminGestCan = new JButton("Cancelar");
+		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestCan.setBounds(729, 415, 131, 41);
+		JPAdmGestao.add(buttonAdminGestCan);
 
-																});
-																btAdmFunNovo.setBounds(585, 38, 120, 38);
-																JPAdmFuncionario.add(btAdmFunNovo);
-																
-																		// texto : Nome
-																		JLabel lblNewLabel_1 = new JLabel("Nome:");
-																		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																		lblNewLabel_1.setBounds(453, 88, 57, 30);
-																		JPAdmFuncionario.add(lblNewLabel_1);
-																		
-																				// texto : data de nascimento
-																				JLabel lblDataDeNascimento = new JLabel("Data de Nascimento:");
-																				lblDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																				lblDataDeNascimento.setBounds(453, 148, 177, 30);
-																				JPAdmFuncionario.add(lblDataDeNascimento);
-																				
-																						// texto : documento
-																						JLabel lblDocumento = new JLabel("Documento:");
-																						lblDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																						lblDocumento.setBounds(453, 209, 108, 30);
-																						JPAdmFuncionario.add(lblDocumento);
-																						
-																								// radiobutton : documento
-																								JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
-																								rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																								rbAdmFunCC.setBounds(564, 212, 66, 25);
-																								JPAdmFuncionario.add(rbAdmFunCC);
-																								
-																										// radiobutton : documento
-																										JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
-																										rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																										rbAdmFunBI.setBounds(643, 212, 57, 25);
-																										JPAdmFuncionario.add(rbAdmFunBI);
-																										
-																												// radiobutton : documento
-																												JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
-																												rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																												rbAdmFunPass.setBounds(712, 212, 138, 25);
-																												JPAdmFuncionario.add(rbAdmFunPass);
-																												
-																														// texto : numero do documento
-																														JLabel lblNumero = new JLabel("Número de Identificação:");
-																														lblNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																														lblNumero.setBounds(453, 237, 227, 30);
-																														JPAdmFuncionario.add(lblNumero);
-																														
-																																// texto : contato
-																																JLabel lblContacto = new JLabel("Contacto:");
-																																lblContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																lblContacto.setBounds(453, 303, 81, 31);
-																																JPAdmFuncionario.add(lblContacto);
-																																
-																																		JScrollBar scrollAdmFunLista = new JScrollBar();
-																																		scrollAdmFunLista.setBounds(357, 122, 15, 428);
-																																		JPAdmFuncionario.add(scrollAdmFunLista);
-																																		
-																																				// lista dos funcionarios
-																																				JList lbLAdmFunLista = new JList();
-																																				lbLAdmFunLista.setBounds(123, 122, 249, 428);
-																																				JPAdmFuncionario.add(lbLAdmFunLista);
-																																				
-																																						// texto : username
-																																						JLabel lblUsername = new JLabel("UserName:");
-																																						lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																						lblUsername.setBounds(453, 367, 120, 30);
-																																						JPAdmFuncionario.add(lblUsername);
-																																						
-																																								// texto : username
-																																								JLabel lblPassword = new JLabel("Password:");
-																																								lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																								lblPassword.setBounds(453, 427, 153, 30);
-																																								JPAdmFuncionario.add(lblPassword);
-																																								
-																																										JButton btnEliminar = new JButton("Eliminar");
-																																										btnEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																										btnEliminar.setBounds(727, 38, 120, 38);
-																																										JPAdmFuncionario.add(btnEliminar);
-																																										
-																																										textField_12 = new JTextField();
-																																										textField_12.setColumns(10);
-																																										textField_12.setBounds(463, 119, 351, 31);
-																																										JPAdmFuncionario.add(textField_12);
-																																										
-																																										textField_13 = new JTextField();
-																																										textField_13.setColumns(10);
-																																										textField_13.setBounds(463, 179, 225, 31);
-																																										JPAdmFuncionario.add(textField_13);
-																																										
-																																										textField_14 = new JTextField();
-																																										textField_14.setColumns(10);
-																																										textField_14.setBounds(463, 270, 225, 31);
-																																										JPAdmFuncionario.add(textField_14);
-																																										
-																																										textField_15 = new JTextField();
-																																										textField_15.setColumns(10);
-																																										textField_15.setBounds(463, 334, 225, 31);
-																																										JPAdmFuncionario.add(textField_15);
-																																										
-																																										textField_16 = new JTextField();
-																																										textField_16.setColumns(10);
-																																										textField_16.setBounds(463, 395, 225, 31);
-																																										JPAdmFuncionario.add(textField_16);
-																																										
-																																										textField_17 = new JTextField();
-																																										textField_17.setColumns(10);
-																																										textField_17.setBounds(463, 456, 225, 31);
-																																										JPAdmFuncionario.add(textField_17);
-																																										
-																																										JButton btnConfirmar_1 = new JButton("Confirmar");
-																																										btnConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																										btnConfirmar_1.setBounds(512, 511, 120, 38);
-																																										JPAdmFuncionario.add(btnConfirmar_1);
-																																										
-																																										JButton btnLimpar_1 = new JButton("Limpar");
-																																										btnLimpar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																										btnLimpar_1.setBounds(675, 509, 120, 38);
-																																										JPAdmFuncionario.add(btnLimpar_1);
-																																										
-																																												// Painel da estatistica da parte administrador
-																																												JPanel JPAdmEstatistica = new JPanel();
-																																												JPAdmEstatistica.setVisible(false);
-																																												JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-																																												JPAdm.add(JPAdmEstatistica);
-																																												JPAdmEstatistica.setLayout(null);
+		// Painel do cliente da parte administrador
+		JPanel JPAdmCliente = new JPanel();
+		JPAdmCliente.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmCliente);
+		JPAdmCliente.setVisible(false);
+		JPAdmCliente.setLayout(null);
+
+		JComboBox boxAdminCliePesquisa = new JComboBox();
+		boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
+		JPAdmCliente.add(boxAdminCliePesquisa);
+
+		JScrollBar scrollBarAdminClie = new JScrollBar();
+		scrollBarAdminClie.setBounds(281, 85, 15, 441);
+		JPAdmCliente.add(scrollBarAdminClie);
+
+		JList listaAdminClie = new JList();
+		listaAdminClie.setBounds(56, 85, 240, 441);
+		JPAdmCliente.add(listaAdminClie);
+
+		textAdminCliePesquisa = new JTextField();
+		textAdminCliePesquisa.setBounds(410, 55, 196, 31);
+		JPAdmCliente.add(textAdminCliePesquisa);
+		textAdminCliePesquisa.setColumns(10);
+
+		JLabel lblAdminClieNome = new JLabel("Nome :");
+		lblAdminClieNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNome.setBounds(356, 115, 79, 23);
+		JPAdmCliente.add(lblAdminClieNome);
+
+		JLabel LblAdminClieDataDeNascimento = new JLabel("Data de Nascimento :");
+		LblAdminClieDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		LblAdminClieDataDeNascimento.setBounds(356, 181, 218, 23);
+		JPAdmCliente.add(LblAdminClieDataDeNascimento);
+
+		JLabel lblAdminClieContacto_1 = new JLabel("Contacto :");
+		lblAdminClieContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieContacto_1.setBounds(356, 318, 127, 23);
+		JPAdmCliente.add(lblAdminClieContacto_1);
+
+		JLabel lblAdminClieEndereo = new JLabel("Endereço :");
+		lblAdminClieEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
+		JPAdmCliente.add(lblAdminClieEndereo);
+
+		JScrollBar scrollBarAdminClieContas = new JScrollBar();
+		scrollBarAdminClieContas.setBounds(961, 85, 15, 441);
+		JPAdmCliente.add(scrollBarAdminClieContas);
+
+		JList listAdminClie = new JList();
+		listAdminClie.setBounds(736, 85, 240, 441);
+		JPAdmCliente.add(listAdminClie);
+
+		textAdminClieNome = new JTextField();
+		textAdminClieNome.setColumns(10);
+		textAdminClieNome.setBounds(366, 144, 297, 31);
+		JPAdmCliente.add(textAdminClieNome);
+
+		textAdminClieData = new JTextField();
+		textAdminClieData.setColumns(10);
+		textAdminClieData.setBounds(366, 209, 169, 31);
+		JPAdmCliente.add(textAdminClieData);
+
+		textAdminClieContato = new JTextField();
+		textAdminClieContato.setColumns(10);
+		textAdminClieContato.setBounds(366, 347, 169, 31);
+		JPAdmCliente.add(textAdminClieContato);
+
+		textAdminClieEndereco = new JTextField();
+		textAdminClieEndereco.setColumns(10);
+		textAdminClieEndereco.setBounds(366, 415, 297, 31);
+		JPAdmCliente.add(textAdminClieEndereco);
+
+		textAdminClieNif = new JTextField();
+		textAdminClieNif.setColumns(10);
+		textAdminClieNif.setBounds(366, 281, 169, 31);
+		JPAdmCliente.add(textAdminClieNif);
+
+		JLabel lblAdminClieNif = new JLabel("NIF :");
+		lblAdminClieNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNif.setBounds(356, 252, 127, 23);
+		JPAdmCliente.add(lblAdminClieNif);
+
+		JButton btnadminClieConfirmar = new JButton("Confirmar");
+		btnadminClieConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnadminClieConfirmar.setBounds(376, 488, 120, 38);
+		JPAdmCliente.add(btnadminClieConfirmar);
+
+		JButton btnAdminClieLimpar = new JButton("Limpar");
+		btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminClieLimpar.setBounds(522, 488, 120, 38);
+		JPAdmCliente.add(btnAdminClieLimpar);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(false);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
 
 		// Botão da estatistica do menu
 		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
