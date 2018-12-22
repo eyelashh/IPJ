@@ -102,14 +102,14 @@ public class Login extends JDialog {
 			lblNewLabel.setForeground(new Color(0, 0, 0));
 			lblNewLabel.setBounds(562, 300, 166, 52);
 			painelGeral.add(lblNewLabel);
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 
 			// text : password
 			JLabel lblPassword = new JLabel("Password:");
 			lblPassword.setForeground(new Color(0, 0, 0));
-			lblPassword.setBounds(562, 454, 136, 25);
+			lblPassword.setBounds(562, 454, 155, 25);
 			painelGeral.add(lblPassword);
-			lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 30));
+			lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 
 			// titulo :Java
 			JLabel tituloJava = new JLabel("JavaBank");
