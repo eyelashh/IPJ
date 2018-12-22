@@ -549,7 +549,6 @@ public class BancoAppAdm {
 
 		// quando carrego no batao estatistica, os outros paineis nao ficam visiveis
 		btAdmEstatistica.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 
 				JPAdmEstatistica.setVisible(true);
