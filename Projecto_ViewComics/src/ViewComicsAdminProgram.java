@@ -38,6 +38,8 @@ import java.awt.List;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import java.awt.Label;
+import java.awt.FlowLayout;
 
 public class ViewComicsAdminProgram {
 
@@ -50,6 +52,19 @@ public class ViewComicsAdminProgram {
 	private JTextField tbLivrosAutor;
 	private JTextField tbLivrosTitulo;
 	private JTextField tbLivrosPesq;
+	private JTextField tbFuncionariopesq;
+	private JTextField tbFuncionarioNfun;
+	private JTextField tbFuncionarioNome;
+	private JTextField tbFuncionarioContacto;
+	private JTextField tbFuncionarioUser;
+	private JPasswordField tbFuncionarioPass;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
 
 	/**
 	 * Launch the application.
@@ -159,25 +174,218 @@ public class ViewComicsAdminProgram {
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		
+		JPanel panelStock = new JPanel();
+		panelStock.setBounds(0, 0, 1022, 545);
+		panelPrincipal.add(panelStock);
+		panelStock.setLayout(null);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(12, 26, 251, 30);
+		panelStock.add(comboBox);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(12, 61, 251, 30);
+		panelStock.add(textField);
+		
+		JButton button = new JButton("Limpar");
+		button.setBackground(SystemColor.controlHighlight);
+		button.setBounds(275, 27, 115, 29);
+		panelStock.add(button);
+		
+		JButton button_1 = new JButton("Pesquisar");
+		button_1.setBackground(SystemColor.controlHighlight);
+		button_1.setBounds(275, 62, 115, 29);
+		panelStock.add(button_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(459, 108, 277, 22);
+		panelStock.add(textField_1);
+		
+		JLabel label = new JLabel("Nome:");
+		label.setBounds(396, 104, 44, 30);
+		panelStock.add(label);
+		
+		JLabel label_1 = new JLabel("Autor:");
+		label_1.setBounds(396, 158, 44, 30);
+		panelStock.add(label_1);
+		
+		JLabel label_2 = new JLabel("Data:");
+		label_2.setBounds(404, 216, 36, 30);
+		panelStock.add(label_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(459, 220, 277, 22);
+		panelStock.add(textField_3);
+		
+		JLabel label_3 = new JLabel("Descri\u00E7\u00E3o:");
+		label_3.setBounds(374, 278, 66, 30);
+		panelStock.add(label_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setDropMode(DropMode.ON_OR_INSERT_ROWS);
+		textField_4.setColumns(10);
+		textField_4.setBounds(459, 282, 277, 118);
+		panelStock.add(textField_4);
+		
+		JLabel label_4 = new JLabel("Pre\u00E7o:");
+		label_4.setBounds(396, 402, 44, 30);
+		panelStock.add(label_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(459, 406, 277, 22);
+		panelStock.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(459, 162, 277, 22);
+		panelStock.add(textField_6);
+		
+		JList lGestaoLivros = new JList();
+		lGestaoLivros.setBounds(12, 104, 251, 428);
+		panelStock.add(lGestaoLivros);
+		
+		JButton btnNewButton = new JButton("-");
+		btnNewButton.setBounds(516, 436, 44, 25);
+		panelStock.add(btnNewButton);
+		
+		JButton button_7 = new JButton("+");
+		button_7.setBounds(637, 436, 44, 25);
+		panelStock.add(button_7);
+		
+		textField_7 = new JTextField();
+		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_7.setText("1");
+		textField_7.setColumns(10);
+		textField_7.setBounds(561, 437, 75, 22);
+		panelStock.add(textField_7);
+		
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setBounds(396, 440, 44, 30);
+		panelStock.add(lblStock);
+		
+		JButton button_8 = new JButton("Novo");
+		button_8.setBounds(432, 26, 97, 30);
+		panelStock.add(button_8);
+		
+		JButton button_9 = new JButton("Eliminar");
+		button_9.setBounds(541, 26, 97, 30);
+		panelStock.add(button_9);
+		
+		JButton button_10 = new JButton("Limpar");
+		button_10.setBounds(656, 26, 97, 30);
+		panelStock.add(button_10);
+		
+		JButton button_11 = new JButton("Ok");
+		button_11.setBounds(459, 491, 97, 30);
+		panelStock.add(button_11);
+		
+		JButton button_12 = new JButton("Cancelar");
+		button_12.setBounds(639, 491, 97, 30);
+		panelStock.add(button_12);
+		
 		JPanel panelFuncionarios = new JPanel();
 		panelFuncionarios.setBounds(0, 0, 1022, 545);
 		panelPrincipal.add(panelFuncionarios);
 		panelFuncionarios.setLayout(null);
 		
-		JPanel panelStock = new JPanel();
-		panelStock.setLayout(null);
-		panelStock.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelStock);
+		JComboBox cbFuncionariopesq = new JComboBox();
+		cbFuncionariopesq.setBounds(12, 26, 308, 30);
+		panelFuncionarios.add(cbFuncionariopesq);
 		
-		JPanel panelEstatistica = new JPanel();
-		panelEstatistica.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelEstatistica);
-		panelEstatistica.setLayout(null);
+		tbFuncionariopesq = new JTextField();
+		tbFuncionariopesq.setBounds(12, 69, 308, 30);
+		panelFuncionarios.add(tbFuncionariopesq);
+		tbFuncionariopesq.setColumns(10);
 		
-		JPanel panelGesConta = new JPanel();
-		panelGesConta.setLayout(null);
-		panelGesConta.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelGesConta);
+		JList lFuncionario = new JList();
+		lFuncionario.setBounds(12, 150, 308, 382);
+		panelFuncionarios.add(lFuncionario);
+		
+		tbFuncionarioNfun = new JTextField();
+		tbFuncionarioNfun.setColumns(10);
+		tbFuncionarioNfun.setBounds(470, 150, 308, 30);
+		panelFuncionarios.add(tbFuncionarioNfun);
+		
+		tbFuncionarioNome = new JTextField();
+		tbFuncionarioNome.setColumns(10);
+		tbFuncionarioNome.setBounds(470, 198, 308, 30);
+		panelFuncionarios.add(tbFuncionarioNome);
+		
+		tbFuncionarioContacto = new JTextField();
+		tbFuncionarioContacto.setColumns(10);
+		tbFuncionarioContacto.setBounds(470, 248, 308, 30);
+		panelFuncionarios.add(tbFuncionarioContacto);
+		
+		tbFuncionarioUser = new JTextField();
+		tbFuncionarioUser.setColumns(10);
+		tbFuncionarioUser.setBounds(470, 307, 308, 30);
+		panelFuncionarios.add(tbFuncionarioUser);
+		
+		tbFuncionarioPass = new JPasswordField();
+		tbFuncionarioPass.setColumns(10);
+		tbFuncionarioPass.setBounds(470, 362, 308, 30);
+		panelFuncionarios.add(tbFuncionarioPass);
+		
+		JButton btFuncionarioLimparpesq = new JButton("Limpar");
+		btFuncionarioLimparpesq.setBounds(332, 29, 97, 30);
+		panelFuncionarios.add(btFuncionarioLimparpesq);
+		
+		JButton btFuncionarioPesquisar = new JButton("Pesquisar");
+		btFuncionarioPesquisar.setBounds(332, 72, 97, 30);
+		panelFuncionarios.add(btFuncionarioPesquisar);
+		
+		JButton btFuncionarioOk = new JButton("Ok");
+		btFuncionarioOk.setBounds(470, 419, 97, 30);
+		panelFuncionarios.add(btFuncionarioOk);
+		
+		JButton btFuncionarioCancelar = new JButton("Cancelar");
+		btFuncionarioCancelar.setBounds(681, 419, 97, 30);
+		panelFuncionarios.add(btFuncionarioCancelar);
+		
+		JButton btFuncionarioNovo = new JButton("Novo");
+		btFuncionarioNovo.setBounds(470, 29, 97, 30);
+		panelFuncionarios.add(btFuncionarioNovo);
+		
+		JButton btFuncionarioEliminar = new JButton("Eliminar");
+		btFuncionarioEliminar.setBounds(579, 29, 97, 30);
+		panelFuncionarios.add(btFuncionarioEliminar);
+		
+		JButton btFuncionarioLimpar = new JButton("Limpar");
+		btFuncionarioLimpar.setBounds(694, 29, 97, 30);
+		panelFuncionarios.add(btFuncionarioLimpar);
+		
+		JLabel lblFuncionario = new JLabel("Funcionario:");
+		lblFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblFuncionario.setBounds(12, 112, 82, 30);
+		panelFuncionarios.add(lblFuncionario);
+		
+		JLabel lblNFuncionario = new JLabel("N\u00BA Funcionario:");
+		lblNFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNFuncionario.setBounds(332, 150, 105, 30);
+		panelFuncionarios.add(lblNFuncionario);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNome.setBounds(381, 198, 56, 30);
+		panelFuncionarios.add(lblNome);
+		
+		JLabel lblContacto = new JLabel("Contacto:");
+		lblContacto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContacto.setBounds(369, 248, 68, 30);
+		panelFuncionarios.add(lblContacto);
+		
+		JLabel lblUsername = new JLabel("UserName:");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblUsername.setBounds(355, 307, 82, 30);
+		panelFuncionarios.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(369, 362, 68, 30);
+		panelFuncionarios.add(lblPassword);
 		
 		JPanel panelLivros = new JPanel();
 		panelLivros.setLayout(null);
