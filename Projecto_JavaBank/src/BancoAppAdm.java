@@ -110,7 +110,7 @@ public class BancoAppAdm {
 				try {
 
 					Login dialog = new Login();
-					
+
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationRelativeTo(frame);
 					dialog.setVisible(true);
@@ -178,100 +178,98 @@ public class BancoAppAdm {
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
-		
-				// Painel do cliente da parte administrador
-				JPanel JPAdmCliente = new JPanel();
-				JPAdmCliente.setBounds(0, 0, 1042, 576);
-				JPAdm.add(JPAdmCliente);
-				JPAdmCliente.setVisible(false);
-				JPAdmCliente.setLayout(null);
-				
 
-				JComboBox boxAdminCliePesquisa = new JComboBox();
-				boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
-				JPAdmCliente.add(boxAdminCliePesquisa);
-				
-						JScrollBar scrollBarAdminClie = new JScrollBar();
-						scrollBarAdminClie.setBounds(281, 85, 15, 441);
-						JPAdmCliente.add(scrollBarAdminClie);
-						
-						
-								JList listaAdminClie = new JList();
-								listaAdminClie.setBounds(56, 85, 240, 441);
-								JPAdmCliente.add(listaAdminClie);
-								
-										textAdminCliePesquisa = new JTextField();
-										textAdminCliePesquisa.setBounds(410, 55, 196, 31);
-										JPAdmCliente.add(textAdminCliePesquisa);
-										textAdminCliePesquisa.setColumns(10);
-										
-												JLabel lblAdminClieNome = new JLabel("Nome :");
-												lblAdminClieNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-												lblAdminClieNome.setBounds(356, 115, 79, 23);
-												JPAdmCliente.add(lblAdminClieNome);
-												
-														JLabel LblAdminClieDataDeNascimento = new JLabel("Data de Nascimento :");
-														LblAdminClieDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-														LblAdminClieDataDeNascimento.setBounds(356, 181, 218, 23);
-														JPAdmCliente.add(LblAdminClieDataDeNascimento);
-														
-																JLabel lblAdminClieContacto_1 = new JLabel("Contacto :");
-																lblAdminClieContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																lblAdminClieContacto_1.setBounds(356, 318, 127, 23);
-																JPAdmCliente.add(lblAdminClieContacto_1);
-																
-																		JLabel lblAdminClieEndereo = new JLabel("Endereço :");
-																		lblAdminClieEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
-																		JPAdmCliente.add(lblAdminClieEndereo);
-																		
-																				JScrollBar scrollBarAdminClieContas = new JScrollBar();
-																				scrollBarAdminClieContas.setBounds(961, 85, 15, 441);
-																				JPAdmCliente.add(scrollBarAdminClieContas);
-																				
-																						JList listAdminClie = new JList();
-																						listAdminClie.setBounds(736, 85, 240, 441);
-																						JPAdmCliente.add(listAdminClie);
-																						
-																								textAdminClieNome = new JTextField();
-																								textAdminClieNome.setColumns(10);
-																								textAdminClieNome.setBounds(366, 144, 297, 31);
-																								JPAdmCliente.add(textAdminClieNome);
-																								
-																										textAdminClieData = new JTextField();
-																										textAdminClieData.setColumns(10);
-																										textAdminClieData.setBounds(366, 209, 169, 31);
-																										JPAdmCliente.add(textAdminClieData);
-																										
-																												textAdminClieContato = new JTextField();
-																												textAdminClieContato.setColumns(10);
-																												textAdminClieContato.setBounds(366, 347, 169, 31);
-																												JPAdmCliente.add(textAdminClieContato);
-																												
-																														textAdminClieEndereco = new JTextField();
-																														textAdminClieEndereco.setColumns(10);
-																														textAdminClieEndereco.setBounds(366, 415, 297, 31);
-																														JPAdmCliente.add(textAdminClieEndereco);
-																														
-																																textAdminClieNif = new JTextField();
-																																textAdminClieNif.setColumns(10);
-																																textAdminClieNif.setBounds(366, 281, 169, 31);
-																																JPAdmCliente.add(textAdminClieNif);
-																																
-																																		JLabel lblAdminClieNif = new JLabel("NIF :");
-																																		lblAdminClieNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																		lblAdminClieNif.setBounds(356, 252, 127, 23);
-																																		JPAdmCliente.add(lblAdminClieNif);
-																																		
-																																				JButton btnadminClieConfirmar = new JButton("Confirmar");
-																																				btnadminClieConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																				btnadminClieConfirmar.setBounds(376, 488, 120, 38);
-																																				JPAdmCliente.add(btnadminClieConfirmar);
-																																				
-																																						JButton btnAdminClieLimpar = new JButton("Limpar");
-																																						btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																						btnAdminClieLimpar.setBounds(522, 488, 120, 38);
-																																						JPAdmCliente.add(btnAdminClieLimpar);
+		// Painel do cliente da parte administrador
+		JPanel JPAdmCliente = new JPanel();
+		JPAdmCliente.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmCliente);
+		JPAdmCliente.setVisible(false);
+		JPAdmCliente.setLayout(null);
+
+		JComboBox boxAdminCliePesquisa = new JComboBox();
+		boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
+		JPAdmCliente.add(boxAdminCliePesquisa);
+
+		JScrollBar scrollBarAdminClie = new JScrollBar();
+		scrollBarAdminClie.setBounds(281, 85, 15, 441);
+		JPAdmCliente.add(scrollBarAdminClie);
+
+		JList listaAdminClie = new JList();
+		listaAdminClie.setBounds(56, 85, 240, 441);
+		JPAdmCliente.add(listaAdminClie);
+
+		textAdminCliePesquisa = new JTextField();
+		textAdminCliePesquisa.setBounds(410, 55, 196, 31);
+		JPAdmCliente.add(textAdminCliePesquisa);
+		textAdminCliePesquisa.setColumns(10);
+
+		JLabel lblAdminClieNome = new JLabel("Nome :");
+		lblAdminClieNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNome.setBounds(356, 115, 79, 23);
+		JPAdmCliente.add(lblAdminClieNome);
+
+		JLabel LblAdminClieDataDeNascimento = new JLabel("Data de Nascimento :");
+		LblAdminClieDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		LblAdminClieDataDeNascimento.setBounds(356, 181, 218, 23);
+		JPAdmCliente.add(LblAdminClieDataDeNascimento);
+
+		JLabel lblAdminClieContacto_1 = new JLabel("Contacto :");
+		lblAdminClieContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieContacto_1.setBounds(356, 318, 127, 23);
+		JPAdmCliente.add(lblAdminClieContacto_1);
+
+		JLabel lblAdminClieEndereo = new JLabel("Endereço :");
+		lblAdminClieEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
+		JPAdmCliente.add(lblAdminClieEndereo);
+
+		JScrollBar scrollBarAdminClieContas = new JScrollBar();
+		scrollBarAdminClieContas.setBounds(961, 85, 15, 441);
+		JPAdmCliente.add(scrollBarAdminClieContas);
+
+		JList listAdminClie = new JList();
+		listAdminClie.setBounds(736, 85, 240, 441);
+		JPAdmCliente.add(listAdminClie);
+
+		textAdminClieNome = new JTextField();
+		textAdminClieNome.setColumns(10);
+		textAdminClieNome.setBounds(366, 144, 297, 31);
+		JPAdmCliente.add(textAdminClieNome);
+
+		textAdminClieData = new JTextField();
+		textAdminClieData.setColumns(10);
+		textAdminClieData.setBounds(366, 209, 169, 31);
+		JPAdmCliente.add(textAdminClieData);
+
+		textAdminClieContato = new JTextField();
+		textAdminClieContato.setColumns(10);
+		textAdminClieContato.setBounds(366, 347, 169, 31);
+		JPAdmCliente.add(textAdminClieContato);
+
+		textAdminClieEndereco = new JTextField();
+		textAdminClieEndereco.setColumns(10);
+		textAdminClieEndereco.setBounds(366, 415, 297, 31);
+		JPAdmCliente.add(textAdminClieEndereco);
+
+		textAdminClieNif = new JTextField();
+		textAdminClieNif.setColumns(10);
+		textAdminClieNif.setBounds(366, 281, 169, 31);
+		JPAdmCliente.add(textAdminClieNif);
+
+		JLabel lblAdminClieNif = new JLabel("NIF :");
+		lblAdminClieNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNif.setBounds(356, 252, 127, 23);
+		JPAdmCliente.add(lblAdminClieNif);
+
+		JButton btnadminClieConfirmar = new JButton("Confirmar");
+		btnadminClieConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnadminClieConfirmar.setBounds(376, 488, 120, 38);
+		JPAdmCliente.add(btnadminClieConfirmar);
+
+		JButton btnAdminClieLimpar = new JButton("Limpar");
+		btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminClieLimpar.setBounds(522, 488, 120, 38);
+		JPAdmCliente.add(btnAdminClieLimpar);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
@@ -285,7 +283,6 @@ public class BancoAppAdm {
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(123, 79, 249, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
-		
 
 		// Botao de procurar
 		JButton btAdmFunProc = new JButton("Procurar");
@@ -715,9 +712,7 @@ public class BancoAppAdm {
 			public void mouseReleased(MouseEvent e) {
 				btAdmGestao.setBackground(new Color(188, 127, 82));
 			}
-			
 
-			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				btAdmGestao.setBackground(new Color(188, 127, 82));

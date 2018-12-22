@@ -108,7 +108,7 @@ public class BancoAppFun {
 				try {
 
 					Login dialog = new Login();
-					
+
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationRelativeTo(frame);
 					dialog.setVisible(true);
@@ -527,7 +527,6 @@ public class BancoAppFun {
 		JTextField tbCltPesq = new JTextField();
 		tbCltPesq.setBounds(12, 56, 250, 30);
 		jpanelClientes.add(tbCltPesq);
-		
 
 		JList lbClt = new JList();
 		lbClt.setBounds(12, 142, 250, 401);
@@ -754,8 +753,6 @@ public class BancoAppFun {
 			public void mouseReleased(MouseEvent e) {
 				btFunCliente.setBackground(new Color(188, 127, 82));
 			}
-			
-			
 
 			@Override
 			public void mousePressed(MouseEvent e) {
