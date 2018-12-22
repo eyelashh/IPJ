@@ -251,6 +251,7 @@ public class BancoAppClt {
 				// JPAdmCliente.setVisible(false);
 				// JPAdmFuncionario.setVisible(false);
 				// JPAdmGestao.setVisible(false);
+				
 			}
 		});
 

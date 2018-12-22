@@ -713,6 +713,7 @@ public class BancoAppAdm {
 			public void mouseReleased(MouseEvent e) {
 				btAdmGestao.setBackground(new Color(188, 127, 82));
 			}
+			
 
 			@Override
 			public void mousePressed(MouseEvent e) {
