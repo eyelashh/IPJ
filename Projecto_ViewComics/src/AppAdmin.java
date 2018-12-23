@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-public class AppEsqueleto {
+public class AppAdmin {
 
 	private JFrame frame;
 
@@ -25,7 +25,7 @@ public class AppEsqueleto {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppEsqueleto window = new AppEsqueleto();
+					AppAdmin window = new AppAdmin();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class AppEsqueleto {
 	/**
 	 * Create the application.
 	 */
-	public AppEsqueleto() {
+	public AppAdmin() {
 		initialize();
 	}
 
@@ -92,7 +92,7 @@ public class AppEsqueleto {
 					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Tamara\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo2.jpg"));
+					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo2.jpg"));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

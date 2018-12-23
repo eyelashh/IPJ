@@ -104,8 +104,8 @@ public class AppFunc {
 		JPanelCabecalho.setLayout(null);
 		
 		JLabel label = new JLabel("ViewComics Inc.");
-		label.setBounds(176, 30, 624, 118);
-		label.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 90));
+		label.setBounds(176, 30, 819, 118);
+		label.setFont(new Font("Tempus Sans ITC", Font.BOLD, 98));
 		JPanelCabecalho.add(label);
 		
 		JPanel JPanelMenu = new JPanel() {
@@ -182,7 +182,115 @@ public class AppFunc {
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
-		JPanel JPCarrinhos = new JPanel();
+			
+			JPanel JPLivros = new JPanel() {
+				@Override
+				//o paint component vai pintar literalmente o componente
+				protected void paintComponent(Graphics g) {
+					
+					super.paintComponent(g);
+					Image img;
+					try {
+						
+						// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+						
+						// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+						img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\calvinHobes.jpg"));
+						g.drawImage(img,0,0,null); 
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			};
+			JPLivros.setBounds(0, 0, 1009, 544);
+			JPanelPrincipal.add(JPLivros);
+			JPLivros.setLayout(null);
+			JPLivros.setVisible(false);
+			
+			Choice choice = new Choice();
+			choice.setBounds(27, 41, 200, 20);
+			JPLivros.add(choice);
+			
+			TextField textField_7 = new TextField();
+			textField_7.setBounds(27, 68, 200, 22);
+			JPLivros.add(textField_7);
+			
+			JButton button = new JButton("Limpar");
+			button.setBackground(SystemColor.controlHighlight);
+			button.setBounds(264, 41, 115, 20);
+			JPLivros.add(button);
+			
+			JButton button_1 = new JButton("Pesquisar");
+			button_1.setBackground(SystemColor.controlHighlight);
+			button_1.setBounds(264, 68, 115, 20);
+			JPLivros.add(button_1);
+			
+			List list_1 = new List();
+			list_1.setBounds(27, 116, 289, 348);
+			JPLivros.add(list_1);
+			
+			TextField textField_8 = new TextField();
+			textField_8.setBounds(334, 116, 260, 211);
+			JPLivros.add(textField_8);
+			
+			JButton button_2 = new JButton("-");
+			button_2.setBackground(SystemColor.controlHighlight);
+			button_2.setFont(new Font("Tahoma", Font.PLAIN, 28));
+			button_2.setBounds(639, 141, 54, 48);
+			JPLivros.add(button_2);
+			
+			textField_9 = new JTextField();
+			textField_9.setColumns(10);
+			textField_9.setBounds(703, 150, 61, 34);
+			JPLivros.add(textField_9);
+			
+			JButton button_4 = new JButton("+");
+			button_4.setBackground(SystemColor.controlHighlight);
+			button_4.setFont(new Font("Tahoma", Font.PLAIN, 28));
+			button_4.setBounds(774, 141, 54, 48);
+			JPLivros.add(button_4);
+			
+			JButton btnAdicionarAoCarrinho = new JButton("<HTML>Adicionar ao carrinho<HTML>");
+			btnAdicionarAoCarrinho.setBackground(SystemColor.controlHighlight);
+			btnAdicionarAoCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 19));
+			btnAdicionarAoCarrinho.setBounds(639, 200, 189, 63);
+			JPLivros.add(btnAdicionarAoCarrinho);
+			
+			TextField textField_10 = new TextField();
+			textField_10.setBounds(433, 68, 200, 22);
+			JPLivros.add(textField_10);
+			
+			JLabel lblNifDoCliente = new JLabel("NIF DO CLIENTE");
+			lblNifDoCliente.setBounds(439, 41, 115, 14);
+			JPLivros.add(lblNifDoCliente);
+			
+			JLabel lblPesquisarPorCampo = new JLabel("PESQUISAR POR CAMPO");
+			lblPesquisarPorCampo.setBounds(27, 21, 200, 14);
+			JPLivros.add(lblPesquisarPorCampo);
+		
+		JPanel JPCarrinhos = new JPanel() {
+			@Override
+			//o paint component vai pintar literalmente o componente
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo4.jpg"));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
 		JPCarrinhos.setBounds(0, 0, 1009, 544);
 		JPanelPrincipal.add(JPCarrinhos);
 		JPCarrinhos.setLayout(null);
@@ -225,7 +333,7 @@ public class AppFunc {
 		
 		JButton btnPagar = new JButton("Realizar pagamento");
 		
-		btnPagar.setBounds(367, 421, 141, 41);
+		btnPagar.setBounds(367, 421, 164, 41);
 		JPCarrinhos.add(btnPagar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -254,15 +362,15 @@ public class AppFunc {
 		JPCarrinhos.add(lblNewLabel_3);
 		
 		JLabel lblLivro = new JLabel("Livro");
-		lblLivro.setBounds(284, 97, 30, 23);
+		lblLivro.setBounds(284, 97, 65, 23);
 		JPCarrinhos.add(lblLivro);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade");
-		lblQuantidade.setBounds(359, 97, 61, 23);
+		lblQuantidade.setBounds(359, 97, 97, 23);
 		JPCarrinhos.add(lblQuantidade);
 		
 		JLabel lblValorAPagar_2 = new JLabel("Valor a pagar");
-		lblValorAPagar_2.setBounds(466, 97, 70, 23);
+		lblValorAPagar_2.setBounds(466, 97, 115, 23);
 		JPCarrinhos.add(lblValorAPagar_2);
 		
 		JLabel lblNewLabel_4 = new JLabel("livro1");
@@ -409,82 +517,11 @@ public class AppFunc {
 		comboBoxPagamento.addItem("(Seleccione o mï¿½todo de pagamento)");
 		comboBoxPagamento.addItem("Dinheiro");
 		comboBoxPagamento.addItem("Multibanco");
-	
-		
-		JPanel JPLivros = new JPanel();
-		JPLivros.setBounds(0, 0, 1009, 544);
-		JPanelPrincipal.add(JPLivros);
-		JPLivros.setLayout(null);
-		JPLivros.setVisible(false);
 		
 		textField_13 = new JTextField();
 		textField_13.setEditable(false);
 		textField_13.setColumns(10);
 		textField_13.setBounds(190, 145, 46, 25);
-		
-		Choice choice = new Choice();
-		choice.setBounds(61, 70, 200, 20);
-		JPLivros.add(choice);
-		
-		TextField textField_7 = new TextField();
-		textField_7.setBounds(61, 103, 200, 22);
-		JPLivros.add(textField_7);
-		
-		JButton button = new JButton("Limpar");
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(282, 70, 115, 20);
-		JPLivros.add(button);
-		
-		JButton button_1 = new JButton("Pesquisar");
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(282, 105, 115, 20);
-		JPLivros.add(button_1);
-		
-		List list_1 = new List();
-		list_1.setBounds(61, 147, 289, 348);
-		JPLivros.add(list_1);
-		
-		TextField textField_8 = new TextField();
-		textField_8.setBounds(372, 147, 260, 211);
-		JPLivros.add(textField_8);
-		
-		JLabel label_21 = new JLabel("Adicionar ao carrinho");
-		label_21.setHorizontalAlignment(SwingConstants.CENTER);
-		label_21.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_21.setBounds(696, 174, 274, 34);
-		JPLivros.add(label_21);
-		
-		JButton button_2 = new JButton("-");
-		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_2.setBounds(720, 237, 54, 48);
-		JPLivros.add(button_2);
-		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(799, 246, 61, 34);
-		JPLivros.add(textField_9);
-		
-		JButton button_4 = new JButton("-");
-		button_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_4.setBounds(884, 237, 54, 48);
-		JPLivros.add(button_4);
-		
-		JButton button_5 = new JButton("Adicionar");
-		button_5.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		button_5.setBounds(754, 296, 152, 42);
-		JPLivros.add(button_5);
-		
-		TextField textField_10 = new TextField();
-		textField_10.setBounds(706, 116, 200, 22);
-		JPLivros.add(textField_10);
-		
-		JLabel lblNifDoCliente = new JLabel("NIF DO CLIENTE");
-		lblNifDoCliente.setBounds(706, 89, 115, 14);
-		JPLivros.add(lblNifDoCliente);
-		
-		JLabel lblPesquisarPorCampo = new JLabel("PESQUISAR POR CAMPO");
-		lblPesquisarPorCampo.setBounds(61, 50, 136, 14);
-		JPLivros.add(lblPesquisarPorCampo);
 		
 		JPanel JPdinheiro = new JPanel();
 		JPdinheiro.setBounds(0, 0, 237, 282);
