@@ -175,7 +175,12 @@ public class AppCliente {
 		
 		//painel principal que contem o painel Carrinho e o painel Livros
 		
-		JPanel JPanelPrincipal = new JPanel(){
+		JPanel JPanelPrincipal = new JPanel();
+		JPanelPrincipal.setBounds(255, 185, 933, 544);
+		frame.getContentPane().add(JPanelPrincipal);
+		JPanelPrincipal.setLayout(null);
+		
+		JPanel JPLivros = new JPanel(){
 			@Override
 			//o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
@@ -187,7 +192,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
+					img = ImageIO.read(new File( "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel1.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -196,11 +201,6 @@ public class AppCliente {
 				
 			}
 		};
-		JPanelPrincipal.setBounds(255, 185, 933, 544);
-		frame.getContentPane().add(JPanelPrincipal);
-		JPanelPrincipal.setLayout(null);
-		
-		JPanel JPLivros = new JPanel();
 		JPLivros.setBounds(0, 0, 931, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
@@ -232,59 +232,32 @@ public class AppCliente {
 		txtSpecsLivro.setBounds(376, 140, 260, 211);
 		JPLivros.add(txtSpecsLivro);
 		
-		JLabel label_17 = new JLabel("Adicionar ao carrinho");
-		label_17.setHorizontalAlignment(SwingConstants.CENTER);
-		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_17.setBounds(655, 140, 274, 34);
-		JPLivros.add(label_17);
-		
 		JButton btnRemoverUnidade = new JButton("-");
+		btnRemoverUnidade.setBackground(SystemColor.controlHighlight);
 		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRemoverUnidade.setBounds(693, 185, 54, 48);
+		btnRemoverUnidade.setBounds(444, 63, 57, 39);
 		JPLivros.add(btnRemoverUnidade);
 		
 		textField_12 = new JTextField();
 		textField_12.setColumns(10);
-		textField_12.setBounds(757, 194, 61, 34);
+		textField_12.setBounds(511, 67, 61, 34);
 		JPLivros.add(textField_12);
 		
-		JButton btnAddUnidade = new JButton("-");
+		JButton btnAddUnidade = new JButton("+");
+		btnAddUnidade.setBackground(SystemColor.controlHighlight);
 		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddUnidade.setBounds(828, 185, 54, 48);
+		btnAddUnidade.setBounds(582, 63, 54, 39);
 		JPLivros.add(btnAddUnidade);
 		
-		JButton btnAddCarrinho = new JButton("Adicionar");
-		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		btnAddCarrinho.setBounds(716, 238, 152, 42);
+		JButton btnAddCarrinho = new JButton("Adicionar ao carrinho");
+		btnAddCarrinho.setBackground(SystemColor.controlHighlight);
+		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnAddCarrinho.setBounds(428, 11, 219, 42);
 		JPLivros.add(btnAddCarrinho);
 		
 		//painel para o carrinho
 		
-		JPanel JPCarrinho = new JPanel() {
-			//imagem de fundo do painel carrinho
-			@Override
-			protected void paintComponent(Graphics g) {
-				
-				super.paintComponent(g);
-				Image img;
-				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
-					g.drawImage(img,0,0,null); 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		};
-		
-		
-		
-		
+		JPanel JPCarrinho = new JPanel();
 		JPCarrinho.setBounds(0, 0, 931, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
