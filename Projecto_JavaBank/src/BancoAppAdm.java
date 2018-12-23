@@ -175,6 +175,8 @@ public class BancoAppAdm {
 		JpanelPrincipal.add(JPAdm);
 		JPAdm.setLayout(null);
 
+		;
+
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
@@ -326,8 +328,6 @@ public class BancoAppAdm {
 		btAdmFunNovo.setBounds(585, 38, 120, 38);
 		JPAdmFuncionario.add(btAdmFunNovo);
 
-		;
-
 		textAdmFunNome = new JTextField();
 		textAdmFunNome.setColumns(10);
 		textAdmFunNome.setBounds(463, 119, 351, 31);
@@ -375,7 +375,7 @@ public class BancoAppAdm {
 		// texto : username
 		JLabel lblUsername_1 = new JLabel("Username :");
 		lblUsername_1.setVerifyInputWhenFocusTarget(false);
-		lblUsername_1.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblUsername_1.setBounds(144, 81, 131, 41);
 		JPAdmGestao.add(lblUsername_1);
 
@@ -383,13 +383,12 @@ public class BancoAppAdm {
 		lblAdminGestUsername = new JTextField();
 		lblAdminGestUsername.setBounds(144, 134, 271, 33);
 		JPAdmGestao.add(lblAdminGestUsername);
-		lblAdminGestUsername.setColumns(10);
 
 		// texto : password
 		JLabel lblPassword_1 = new JLabel("Password :");
 		lblPassword_1.setVerifyInputWhenFocusTarget(false);
-		lblPassword_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPassword_1.setBounds(144, 178, 99, 41);
+		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_1.setBounds(144, 178, 131, 41);
 		JPAdmGestao.add(lblPassword_1);
 
 		// campo de texto na gestão da parte do administrador
@@ -401,7 +400,7 @@ public class BancoAppAdm {
 		// texto : novausername
 		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
 		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
-		textFieldAdminGestUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		textFieldAdminGestUsername.setBounds(144, 275, 191, 41);
 		JPAdmGestao.add(textFieldAdminGestUsername);
 
@@ -435,13 +434,13 @@ public class BancoAppAdm {
 
 		JLabel lblPassword_2 = new JLabel("Password :");
 		lblPassword_2.setVerifyInputWhenFocusTarget(false);
-		lblPassword_2.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblPassword_2.setBounds(579, 81, 99, 41);
+		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_2.setBounds(579, 81, 131, 41);
 		JPAdmGestao.add(lblPassword_2);
 
 		JLabel lblNovaPassword = new JLabel("Nova Password :");
 		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
-		lblNovaPassword.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblNovaPassword.setBounds(579, 178, 168, 41);
 		JPAdmGestao.add(lblNovaPassword);
 
@@ -450,9 +449,9 @@ public class BancoAppAdm {
 		textFieldAdminGestNovaPass.setBounds(579, 230, 271, 33);
 		JPAdmGestao.add(textFieldAdminGestNovaPass);
 
-		JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Nova Password :");
+		JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Password :");
 		lblConfirmarNovaUsername.setVerifyInputWhenFocusTarget(false);
-		lblConfirmarNovaUsername.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblConfirmarNovaUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblConfirmarNovaUsername.setBounds(579, 275, 271, 41);
 		JPAdmGestao.add(lblConfirmarNovaUsername);
 

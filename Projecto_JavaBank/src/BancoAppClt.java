@@ -146,6 +146,68 @@ public class BancoAppClt {
 		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
+				
+						// Painel principal gestao
+						JPanel JPCltGestao = new JPanel();
+						JPCltGestao.setBounds(16, 16, 1032, 563);
+						JpanelPrincipal.add(JPCltGestao);
+		
+				// Painel principal transferencia
+				JPanel JPCltTransf = new JPanel();
+				JPCltTransf.setBounds(16, 16, 1032, 563);
+				JpanelPrincipal.add(JPCltTransf);
+				JPCltTransf.setLayout(null);
+				
+						// Box pesquisa da conta do cliente
+						JComboBox comboBoxCLTPesquisa = new JComboBox();
+						comboBoxCLTPesquisa.setBounds(211, 67, 249, 39);
+						JPCltTransf.add(comboBoxCLTPesquisa);
+						
+								JLabel labelClt = new JLabel("Saldo:");
+								labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+								labelClt.setBounds(550, 67, 66, 16);
+								JPCltTransf.add(labelClt);
+								
+										textFieldCltSaldo2 = new JTextField();
+										textFieldCltSaldo2.setBounds(560, 95, 185, 30);
+										JPCltTransf.add(textFieldCltSaldo2);
+										
+												textField = new JTextField();
+												textField.setBounds(367, 204, 185, 30);
+												JPCltTransf.add(textField);
+												
+														JLabel lblMontante = new JLabel("Montante:");
+														lblMontante.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+														lblMontante.setBounds(357, 176, 131, 16);
+														JPCltTransf.add(lblMontante);
+														
+																textField_1 = new JTextField();
+																textField_1.setBounds(367, 285, 287, 30);
+																JPCltTransf.add(textField_1);
+																
+																		JLabel lblContaDestino = new JLabel("Conta Destino:");
+																		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																		lblContaDestino.setBounds(357, 257, 147, 16);
+																		JPCltTransf.add(lblContaDestino);
+																		
+																				textField_2 = new JTextField();
+																				textField_2.setBounds(367, 367, 185, 30);
+																				JPCltTransf.add(textField_2);
+																				
+																						JLabel lblDataDaOperao = new JLabel("Data da Operação:");
+																						lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																						lblDataDaOperao.setBounds(357, 339, 190, 16);
+																						JPCltTransf.add(lblDataDaOperao);
+																						
+																								JButton btnConfirmar = new JButton("Confirmar");
+																								btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																								btnConfirmar.setBounds(337, 435, 120, 38);
+																								JPCltTransf.add(btnConfirmar);
+																								
+																										JButton button_1 = new JButton("Limpar");
+																										button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																										button_1.setBounds(509, 435, 120, 38);
+																										JPCltTransf.add(button_1);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
@@ -206,68 +268,6 @@ public class BancoAppClt {
 		textFieldCltCartao = new JTextField();
 		textFieldCltCartao.setBounds(527, 94, 344, 30);
 		JPCltCM.add(textFieldCltCartao);
-
-		// Painel principal transferencia
-		JPanel JPCltTransf = new JPanel();
-		JPCltTransf.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltTransf);
-		JPCltTransf.setLayout(null);
-
-		// Box pesquisa da conta do cliente
-		JComboBox comboBoxCLTPesquisa = new JComboBox();
-		comboBoxCLTPesquisa.setBounds(211, 67, 287, 39);
-		JPCltTransf.add(comboBoxCLTPesquisa);
-
-		JLabel labelClt = new JLabel("Saldo:");
-		labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		labelClt.setBounds(550, 67, 66, 16);
-		JPCltTransf.add(labelClt);
-
-		textFieldCltSaldo2 = new JTextField();
-		textFieldCltSaldo2.setBounds(550, 96, 185, 30);
-		JPCltTransf.add(textFieldCltSaldo2);
-
-		textField = new JTextField();
-		textField.setBounds(423, 200, 185, 30);
-		JPCltTransf.add(textField);
-
-		JLabel lblMontante = new JLabel("Montante:");
-		lblMontante.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontante.setBounds(413, 172, 131, 16);
-		JPCltTransf.add(lblMontante);
-
-		textField_1 = new JTextField();
-		textField_1.setBounds(423, 283, 287, 30);
-		JPCltTransf.add(textField_1);
-
-		JLabel lblContaDestino = new JLabel("Conta Destino:");
-		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContaDestino.setBounds(413, 255, 147, 16);
-		JPCltTransf.add(lblContaDestino);
-
-		textField_2 = new JTextField();
-		textField_2.setBounds(423, 372, 185, 30);
-		JPCltTransf.add(textField_2);
-
-		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
-		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDaOperao.setBounds(413, 344, 190, 16);
-		JPCltTransf.add(lblDataDaOperao);
-
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.setBounds(378, 448, 120, 38);
-		JPCltTransf.add(btnConfirmar);
-
-		JButton button_1 = new JButton("Limpar");
-		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_1.setBounds(550, 448, 120, 38);
-		JPCltTransf.add(button_1);
-
-		// Painel principal gestao
-		JPanel JPCltGestao = new JPanel();
-		JPCltGestao.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltGestao);
 
 		// Painel principal cartao
 		JPanel JPCltCartao = new JPanel();
