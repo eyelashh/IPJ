@@ -126,6 +126,18 @@ public class AppCliente {
 		JPanelCabecalho.add(txtUsername);
 		
 		JButton btnLogIn = new JButton("Entrar");
+		btnLogIn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(txtUsername.getText()=="a" && new String(txtPassword.getPassword()).equals("a"))
+				{
+					
+				}
+				if(txtUsername.getText()=="f" && new String(txtPassword.getPassword()).equals("f"))
+				{
+					
+				}
+			}
+		});
 		btnLogIn.setBackground(SystemColor.controlHighlight);
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
