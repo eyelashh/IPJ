@@ -18,23 +18,25 @@ import java.awt.TextField;
 import java.awt.List;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AppCliente {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private JTextField txtTitulo1;
+	private JTextField txtTitulo2;
+	private JTextField txtTitulo3;
+	private JTextField txtTitulo4;
+	private JTextField txtTitulo5;
+	private JTextField txtUnid1;
+	private JTextField txtUnid2;
+	private JTextField txtUnid3;
+	private JTextField txtUnid4;
+	private JTextField txtUnid5;
 	private JTextField textField_12;
-	private JPasswordField passwordField;
-	private JTextField textField_13;
+	private JPasswordField txtPassword;
+	private JTextField txtUsername;
 
 	/**
 	 * Launch the application.
@@ -109,24 +111,24 @@ public class AppCliente {
 		label_19.setBounds(1015, 44, 98, 27);
 		JPanelCabecalho.add(label_19);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(924, 72, 189, 20);
-		JPanelCabecalho.add(passwordField);
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(918, 121, 189, 20);
+		JPanelCabecalho.add(txtPassword);
 		
 		JLabel label_20 = new JLabel("Password:");
 		label_20.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 21));
 		label_20.setBounds(1018, 95, 89, 29);
 		JPanelCabecalho.add(label_20);
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBounds(924, 121, 189, 20);
-		JPanelCabecalho.add(textField_13);
+		txtUsername = new JTextField();
+		txtUsername.setColumns(10);
+		txtUsername.setBounds(919, 70, 189, 20);
+		JPanelCabecalho.add(txtUsername);
 		
-		JButton button_22 = new JButton("Entrar");
-		button_22.setBackground(SystemColor.controlHighlight);
-		button_22.setBounds(1125, 95, 103, 27);
-		JPanelCabecalho.add(button_22);
+		JButton btnLogIn = new JButton("Entrar");
+		btnLogIn.setBackground(SystemColor.controlHighlight);
+		btnLogIn.setBounds(1125, 95, 103, 27);
+		JPanelCabecalho.add(btnLogIn);
 		
 		JPanel JPanelMenu = new JPanel() {
 			@Override
@@ -153,17 +155,21 @@ public class AppCliente {
 		frame.getContentPane().add(JPanelMenu);
 		JPanelMenu.setLayout(null);
 		
-		JButton button = new JButton("Livros");
-		button.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(26, 36, 176, 55);
-		JPanelMenu.add(button);
+		JButton btnLivros = new JButton("Livros");
 		
-		JButton button_1 = new JButton("Carrinho");
-		button_1.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 30));
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(26, 115, 176, 60);
-		JPanelMenu.add(button_1);
+		btnLivros.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
+		btnLivros.setBackground(SystemColor.controlHighlight);
+		btnLivros.setBounds(26, 36, 176, 55);
+		JPanelMenu.add(btnLivros);
+		
+		JButton btnCarrinho = new JButton("Carrinho");
+		
+		btnCarrinho.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 30));
+		btnCarrinho.setBackground(SystemColor.controlHighlight);
+		btnCarrinho.setBounds(26, 115, 176, 60);
+		JPanelMenu.add(btnCarrinho);
+		
+		//painel principal que contem o painel Carrinho e o painel Livros
 		
 		JPanel JPanelPrincipal = new JPanel(){
 			@Override
@@ -190,230 +196,199 @@ public class AppCliente {
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
-		JPanel JPLivros = new JPanel();
-		JPLivros.setBounds(0, 0, 1009, 544);
-		JPanelPrincipal.add(JPLivros);
-		JPLivros.setLayout(null);
-		
-		Choice choice = new Choice();
-		choice.setBounds(65, 27, 200, 20);
-		JPLivros.add(choice);
-		
-		TextField textField_10 = new TextField();
-		textField_10.setBounds(65, 60, 200, 22);
-		JPLivros.add(textField_10);
-		
-		JButton button_17 = new JButton("Limpar");
-		button_17.setBackground(SystemColor.controlHighlight);
-		button_17.setBounds(286, 27, 115, 20);
-		JPLivros.add(button_17);
-		
-		JButton button_18 = new JButton("Pesquisar");
-		button_18.setBackground(SystemColor.controlHighlight);
-		button_18.setBounds(286, 62, 115, 20);
-		JPLivros.add(button_18);
-		
-		List list = new List();
-		list.setBounds(66, 104, 289, 348);
-		JPLivros.add(list);
-		
-		TextField textField_11 = new TextField();
-		textField_11.setBounds(376, 104, 260, 211);
-		JPLivros.add(textField_11);
-		
-		JLabel label_17 = new JLabel("Adicionar ao carrinho");
-		label_17.setHorizontalAlignment(SwingConstants.CENTER);
-		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_17.setBounds(700, 131, 274, 34);
-		JPLivros.add(label_17);
-		
-		JButton button_19 = new JButton("-");
-		button_19.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_19.setBounds(724, 194, 54, 48);
-		JPLivros.add(button_19);
-		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(803, 203, 61, 34);
-		JPLivros.add(textField_12);
-		
-		JButton button_20 = new JButton("-");
-		button_20.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_20.setBounds(888, 194, 54, 48);
-		JPLivros.add(button_20);
-		
-		JButton button_21 = new JButton("Adicionar");
-		button_21.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		button_21.setBounds(758, 253, 152, 42);
-		JPLivros.add(button_21);
+		//painel para o carrinho
 		
 		JPanel JPCarrinho = new JPanel() {
+			//imagem de fundo do painel carrinho
+			@Override
 			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		};
+		
+		
+		
+		
 		JPCarrinho.setBounds(0, 0, 1009, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
+		
+		//O painel nao inicia visivel
+		JPCarrinho.setVisible(false);
 		
 		JLabel label_1 = new JLabel("T\u00EDtulo do livro");
 		label_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_1.setBounds(68, 32, 144, 26);
 		JPCarrinho.add(label_1);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(68, 82, 220, 36);
-		JPCarrinho.add(textField);
+		txtTitulo1 = new JTextField();
+		txtTitulo1.setColumns(10);
+		txtTitulo1.setBounds(68, 82, 220, 36);
+		JPCarrinho.add(txtTitulo1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(68, 147, 220, 36);
-		JPCarrinho.add(textField_1);
+		txtTitulo2 = new JTextField();
+		txtTitulo2.setColumns(10);
+		txtTitulo2.setBounds(68, 147, 220, 36);
+		JPCarrinho.add(txtTitulo2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(68, 210, 220, 36);
-		JPCarrinho.add(textField_2);
+		txtTitulo3 = new JTextField();
+		txtTitulo3.setColumns(10);
+		txtTitulo3.setBounds(68, 210, 220, 36);
+		JPCarrinho.add(txtTitulo3);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(68, 273, 220, 36);
-		JPCarrinho.add(textField_3);
+		txtTitulo4 = new JTextField();
+		txtTitulo4.setColumns(10);
+		txtTitulo4.setBounds(68, 273, 220, 36);
+		JPCarrinho.add(txtTitulo4);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(68, 336, 220, 36);
-		JPCarrinho.add(textField_4);
+		txtTitulo5 = new JTextField();
+		txtTitulo5.setColumns(10);
+		txtTitulo5.setBounds(68, 336, 220, 36);
+		JPCarrinho.add(txtTitulo5);
 		
-		JButton button_2 = new JButton("-");
-		button_2.setBounds(310, 336, 44, 36);
-		JPCarrinho.add(button_2);
+		JButton btnRemoveUnid5 = new JButton("-");
+		btnRemoveUnid5.setBounds(310, 336, 44, 36);
+		JPCarrinho.add(btnRemoveUnid5);
 		
-		JButton button_3 = new JButton("-");
-		button_3.setBounds(310, 273, 44, 36);
-		JPCarrinho.add(button_3);
+		JButton btnRemoveUnid4 = new JButton("-");
+		btnRemoveUnid4.setBounds(310, 273, 44, 36);
+		JPCarrinho.add(btnRemoveUnid4);
 		
-		JButton button_4 = new JButton("-");
-		button_4.setBounds(310, 210, 44, 36);
-		JPCarrinho.add(button_4);
+		JButton btnRemoveUnid3 = new JButton("-");
+		btnRemoveUnid3.setBounds(310, 210, 44, 36);
+		JPCarrinho.add(btnRemoveUnid3);
 		
-		JButton button_5 = new JButton("-");
-		button_5.setBounds(310, 147, 44, 36);
-		JPCarrinho.add(button_5);
+		JButton btnRemoveUnid2 = new JButton("-");
+		btnRemoveUnid2.setBounds(310, 147, 44, 36);
+		JPCarrinho.add(btnRemoveUnid2);
 		
-		JButton button_6 = new JButton("-");
-		button_6.setBounds(310, 82, 44, 36);
-		JPCarrinho.add(button_6);
+		JButton btnRemoveUnid1 = new JButton("-");
+		btnRemoveUnid1.setBounds(310, 82, 44, 36);
+		JPCarrinho.add(btnRemoveUnid1);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(364, 82, 49, 36);
-		JPCarrinho.add(textField_5);
+		txtUnid1 = new JTextField();
+		txtUnid1.setColumns(10);
+		txtUnid1.setBounds(364, 82, 49, 36);
+		JPCarrinho.add(txtUnid1);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(364, 147, 49, 36);
-		JPCarrinho.add(textField_6);
+		txtUnid2 = new JTextField();
+		txtUnid2.setColumns(10);
+		txtUnid2.setBounds(364, 147, 49, 36);
+		JPCarrinho.add(txtUnid2);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(364, 210, 49, 36);
-		JPCarrinho.add(textField_7);
+		txtUnid3 = new JTextField();
+		txtUnid3.setColumns(10);
+		txtUnid3.setBounds(364, 210, 49, 36);
+		JPCarrinho.add(txtUnid3);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(364, 273, 49, 36);
-		JPCarrinho.add(textField_8);
+		txtUnid4 = new JTextField();
+		txtUnid4.setColumns(10);
+		txtUnid4.setBounds(364, 273, 49, 36);
+		JPCarrinho.add(txtUnid4);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(364, 336, 49, 36);
-		JPCarrinho.add(textField_9);
+		txtUnid5 = new JTextField();
+		txtUnid5.setColumns(10);
+		txtUnid5.setBounds(364, 336, 49, 36);
+		JPCarrinho.add(txtUnid5);
 		
-		JButton button_7 = new JButton("+");
-		button_7.setBounds(423, 336, 49, 36);
-		JPCarrinho.add(button_7);
+		JButton btnAddUnid5 = new JButton("+");
+		btnAddUnid5.setBounds(423, 336, 49, 36);
+		JPCarrinho.add(btnAddUnid5);
 		
-		JButton button_8 = new JButton("+");
-		button_8.setBounds(423, 273, 49, 36);
-		JPCarrinho.add(button_8);
+		JButton btnAddUnid4 = new JButton("+");
+		btnAddUnid4.setBounds(423, 273, 49, 36);
+		JPCarrinho.add(btnAddUnid4);
 		
-		JButton button_9 = new JButton("+");
-		button_9.setBounds(423, 210, 49, 36);
-		JPCarrinho.add(button_9);
+		JButton btnAddUnid3 = new JButton("+");
+		btnAddUnid3.setBounds(423, 210, 49, 36);
+		JPCarrinho.add(btnAddUnid3);
 		
-		JButton button_10 = new JButton("+");
-		button_10.setBounds(423, 147, 49, 36);
-		JPCarrinho.add(button_10);
+		JButton btnAddUnid2 = new JButton("+");
+		btnAddUnid2.setBounds(423, 147, 49, 36);
+		JPCarrinho.add(btnAddUnid2);
 		
-		JButton button_11 = new JButton("+");
-		button_11.setBounds(423, 82, 49, 36);
-		JPCarrinho.add(button_11);
+		JButton btnAddUnid1 = new JButton("+");
+		btnAddUnid1.setBounds(423, 82, 49, 36);
+		JPCarrinho.add(btnAddUnid1);
 		
-		JLabel label_2 = new JLabel("New label");
-		label_2.setBounds(532, 82, 49, 36);
-		JPCarrinho.add(label_2);
+		JLabel lblPreco1 = new JLabel("New label");
+		lblPreco1.setBounds(532, 82, 49, 36);
+		JPCarrinho.add(lblPreco1);
 		
-		JLabel label_3 = new JLabel("New label");
-		label_3.setBounds(532, 147, 49, 36);
-		JPCarrinho.add(label_3);
+		JLabel lblPreco2 = new JLabel("New label");
+		lblPreco2.setBounds(532, 147, 49, 36);
+		JPCarrinho.add(lblPreco2);
 		
-		JLabel label_4 = new JLabel("New label");
-		label_4.setBounds(532, 210, 49, 36);
-		JPCarrinho.add(label_4);
+		JLabel lblPreco3 = new JLabel("New label");
+		lblPreco3.setBounds(532, 210, 49, 36);
+		JPCarrinho.add(lblPreco3);
 		
-		JLabel label_5 = new JLabel("New label");
-		label_5.setBounds(532, 273, 49, 36);
-		JPCarrinho.add(label_5);
+		JLabel lblPreco4 = new JLabel("New label");
+		lblPreco4.setBounds(532, 273, 49, 36);
+		JPCarrinho.add(lblPreco4);
 		
-		JLabel label_6 = new JLabel("New label");
-		label_6.setBounds(532, 336, 49, 36);
-		JPCarrinho.add(label_6);
+		JLabel lblPreco5 = new JLabel("New label");
+		lblPreco5.setBounds(532, 336, 49, 36);
+		JPCarrinho.add(lblPreco5);
 		
-		JLabel label_7 = new JLabel("New label");
-		label_7.setBounds(651, 336, 49, 36);
-		JPCarrinho.add(label_7);
+		JLabel lblTotal5 = new JLabel("New label");
+		lblTotal5.setBounds(651, 336, 49, 36);
+		JPCarrinho.add(lblTotal5);
 		
-		JLabel label_8 = new JLabel("New label");
-		label_8.setBounds(651, 273, 82, 36);
-		JPCarrinho.add(label_8);
+		JLabel lblTotal4 = new JLabel("New label");
+		lblTotal4.setBounds(651, 273, 82, 36);
+		JPCarrinho.add(lblTotal4);
 		
-		JLabel label_9 = new JLabel("New label");
-		label_9.setBounds(651, 210, 82, 36);
-		JPCarrinho.add(label_9);
+		JLabel lblTotal3 = new JLabel("New label");
+		lblTotal3.setBounds(651, 210, 82, 36);
+		JPCarrinho.add(lblTotal3);
 		
-		JLabel label_10 = new JLabel("New label");
-		label_10.setBounds(651, 147, 82, 36);
-		JPCarrinho.add(label_10);
+		JLabel lblTotal2 = new JLabel("New label");
+		lblTotal2.setBounds(651, 147, 82, 36);
+		JPCarrinho.add(lblTotal2);
 		
-		JLabel label_11 = new JLabel("New label");
-		label_11.setBounds(651, 82, 82, 36);
-		JPCarrinho.add(label_11);
+		JLabel lblTotal1 = new JLabel("New label");
+		lblTotal1.setBounds(651, 82, 82, 36);
+		JPCarrinho.add(lblTotal1);
 		
-		JButton button_12 = new JButton("limpar");
-		button_12.setBackground(SystemColor.controlHighlight);
-		button_12.setBounds(759, 340, 72, 29);
-		JPCarrinho.add(button_12);
+		JButton btnLimpar5 = new JButton("limpar");
+		btnLimpar5.setBackground(SystemColor.controlHighlight);
+		btnLimpar5.setBounds(759, 340, 72, 29);
+		JPCarrinho.add(btnLimpar5);
 		
-		JButton button_13 = new JButton("limpar");
-		button_13.setBackground(SystemColor.controlHighlight);
-		button_13.setBounds(759, 277, 72, 29);
-		JPCarrinho.add(button_13);
+		JButton btnLimpar4 = new JButton("limpar");
+		btnLimpar4.setBackground(SystemColor.controlHighlight);
+		btnLimpar4.setBounds(759, 277, 72, 29);
+		JPCarrinho.add(btnLimpar4);
 		
-		JButton button_14 = new JButton("limpar");
-		button_14.setBackground(SystemColor.controlHighlight);
-		button_14.setBounds(759, 214, 72, 29);
-		JPCarrinho.add(button_14);
+		JButton btnLimpar3 = new JButton("limpar");
+		btnLimpar3.setBackground(SystemColor.controlHighlight);
+		btnLimpar3.setBounds(759, 214, 72, 29);
+		JPCarrinho.add(btnLimpar3);
 		
-		JButton button_15 = new JButton("limpar");
-		button_15.setBackground(SystemColor.controlHighlight);
-		button_15.setBounds(759, 151, 72, 29);
-		JPCarrinho.add(button_15);
+		JButton btnLimpar2 = new JButton("limpar");
+		btnLimpar2.setBackground(SystemColor.controlHighlight);
+		btnLimpar2.setBounds(759, 151, 72, 29);
+		JPCarrinho.add(btnLimpar2);
 		
-		JButton button_16 = new JButton("limpar");
-		button_16.setBackground(SystemColor.controlHighlight);
-		button_16.setBounds(759, 86, 72, 29);
-		JPCarrinho.add(button_16);
+		JButton btnLimpar1 = new JButton("limpar");
+		btnLimpar1.setBackground(SystemColor.controlHighlight);
+		btnLimpar1.setBounds(759, 86, 72, 29);
+		JPCarrinho.add(btnLimpar1);
 		
 		JLabel label_12 = new JLabel("Limpar");
 		label_12.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
@@ -443,13 +418,13 @@ public class AppCliente {
 		lblPreoAPagar.setBounds(73, 450, 72, 26);
 		JPCarrinho.add(lblPreoAPagar);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(235, 430, 46, 14);
-		JPCarrinho.add(lblNewLabel);
+		JLabel lblQtddArtigos = new JLabel("New label");
+		lblQtddArtigos.setBounds(235, 430, 46, 14);
+		JPCarrinho.add(lblQtddArtigos);
 		
-		JLabel label_16 = new JLabel("New label");
-		label_16.setBounds(166, 456, 46, 14);
-		JPCarrinho.add(label_16);
+		JLabel lblPreco = new JLabel("New label");
+		lblPreco.setBounds(166, 456, 46, 14);
+		JPCarrinho.add(lblPreco);
 		
 		JButton btnPagar = new JButton("PAGAR");
 		btnPagar.setBounds(332, 414, 107, 36);
@@ -458,5 +433,83 @@ public class AppCliente {
 		JButton btnCancelar = new JButton("CANCELAR");
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
+		
+		JPanel JPLivros = new JPanel();
+		JPLivros.setBounds(0, 0, 1009, 544);
+		JPanelPrincipal.add(JPLivros);
+		JPLivros.setLayout(null);
+		JPLivros.setVisible(false);
+		
+		Choice choiceAtributo = new Choice();
+		choiceAtributo.setBounds(65, 27, 200, 20);
+		JPLivros.add(choiceAtributo);
+		
+		TextField txtNomeAtributo = new TextField();
+		txtNomeAtributo.setBounds(65, 60, 200, 22);
+		JPLivros.add(txtNomeAtributo);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBounds(286, 27, 115, 20);
+		JPLivros.add(btnLimpar);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBackground(SystemColor.controlHighlight);
+		btnPesquisar.setBounds(286, 62, 115, 20);
+		JPLivros.add(btnPesquisar);
+		
+		List listaLivros = new List();
+		listaLivros.setBounds(65, 104, 289, 348);
+		JPLivros.add(listaLivros);
+		
+		TextField txtSpecsLivro = new TextField();
+		txtSpecsLivro.setBounds(376, 104, 260, 211);
+		JPLivros.add(txtSpecsLivro);
+		
+		JLabel label_17 = new JLabel("Adicionar ao carrinho");
+		label_17.setHorizontalAlignment(SwingConstants.CENTER);
+		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		label_17.setBounds(700, 131, 274, 34);
+		JPLivros.add(label_17);
+		
+		JButton btnRemoverUnidade = new JButton("-");
+		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRemoverUnidade.setBounds(724, 194, 54, 48);
+		JPLivros.add(btnRemoverUnidade);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(803, 203, 61, 34);
+		JPLivros.add(textField_12);
+		
+		JButton btnAddUnidade = new JButton("-");
+		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAddUnidade.setBounds(888, 194, 54, 48);
+		JPLivros.add(btnAddUnidade);
+		
+		JButton btnAddCarrinho = new JButton("Adicionar");
+		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		btnAddCarrinho.setBounds(758, 253, 152, 42);
+		JPLivros.add(btnAddCarrinho);
+		
+		//tornar os respectivos paineis visíveis ao clicar
+		
+		btnLivros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JPLivros.setVisible(true);
+					
+			}
+		});
+		
+		btnCarrinho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JPCarrinho.setVisible(true);		
+				
+			}
+		});
+		
+		
+		
 	}
 }
