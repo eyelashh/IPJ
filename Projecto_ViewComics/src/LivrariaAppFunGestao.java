@@ -135,12 +135,12 @@ public class LivrariaAppFunGestao {
 		
 		JButton btnLogout = new JButton("LogOut");
 		btnLogout.setBackground(SystemColor.controlHighlight);
-		btnLogout.setBounds(1156, 33, 67, 43);
+		btnLogout.setBounds(1143, 33, 80, 43);
 		panel.add(btnLogout);
 		
 		JLabel lblViewcomicsInc = new JLabel("ViewComics Inc.");
 		lblViewcomicsInc.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 90));
-		lblViewcomicsInc.setBounds(170, 33, 693, 71);
+		lblViewcomicsInc.setBounds(312, 34, 693, 71);
 		panel.add(lblViewcomicsInc);
 		
 		JLabel lblViewcomics = new JLabel()
@@ -188,96 +188,96 @@ public class LivrariaAppFunGestao {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(SystemColor.control);
-		panel_1.setBounds(317, 131, 275, 598);
+		panel_1.setBounds(386, 140, 275, 637);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label = new JLabel("Actualizar nome");
-		label.setBounds(26, 30, 223, 26);
+		label.setBounds(10, 57, 223, 26);
 		panel_1.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
 		
 		JLabel label_1 = new JLabel("Nome actual");
 		label_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_1.setBounds(26, 86, 144, 26);
+		label_1.setBounds(10, 113, 144, 26);
 		panel_1.add(label_1);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(26, 118, 220, 36);
+		textField.setBounds(10, 145, 220, 36);
 		panel_1.add(textField);
 		
 		JLabel label_2 = new JLabel("Password");
 		label_2.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_2.setBounds(26, 184, 144, 26);
+		label_2.setBounds(10, 211, 144, 26);
 		panel_1.add(label_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(26, 221, 220, 36);
+		textField_1.setBounds(10, 248, 220, 36);
 		panel_1.add(textField_1);
 		
 		JLabel label_3 = new JLabel("Novo nome");
 		label_3.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_3.setBounds(26, 268, 144, 26);
+		label_3.setBounds(10, 295, 144, 26);
 		panel_1.add(label_3);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(26, 305, 220, 36);
+		textField_2.setBounds(10, 332, 220, 36);
 		panel_1.add(textField_2);
 		
 		JButton button_1 = new JButton("CONFIRMAR");
 		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(72, 369, 125, 29);
+		button_1.setBounds(56, 396, 125, 29);
 		panel_1.add(button_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(SystemColor.control);
-		panel_2.setBounds(674, 131, 275, 598);
+		panel_2.setBounds(753, 140, 275, 637);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel label_4 = new JLabel("Alterar palavra passe");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
 		label_4.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
-		label_4.setBounds(10, 30, 226, 26);
+		label_4.setBounds(10, 57, 226, 26);
 		panel_2.add(label_4);
 		
 		JLabel label_5 = new JLabel("Palavra passe actual");
 		label_5.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_5.setBounds(16, 81, 195, 26);
+		label_5.setBounds(16, 108, 195, 26);
 		panel_2.add(label_5);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(16, 113, 220, 36);
+		textField_3.setBounds(16, 140, 220, 36);
 		panel_2.add(textField_3);
 		
 		JLabel label_6 = new JLabel("Nova palavra passe");
 		label_6.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_6.setBounds(16, 160, 220, 26);
+		label_6.setBounds(16, 187, 220, 26);
 		panel_2.add(label_6);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(16, 197, 220, 36);
+		textField_4.setBounds(16, 224, 220, 36);
 		panel_2.add(textField_4);
 		
 		JLabel label_7 = new JLabel("Confirmar nova palavra passe");
 		label_7.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
-		label_7.setBounds(16, 244, 257, 26);
+		label_7.setBounds(16, 271, 257, 26);
 		panel_2.add(label_7);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(16, 281, 220, 36);
+		textField_5.setBounds(16, 308, 220, 36);
 		panel_2.add(textField_5);
 		
 		JButton button = new JButton("CONFIRMAR");
 		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(61, 350, 125, 29);
+		button.setBounds(61, 377, 125, 29);
 		panel_2.add(button);
 		frame.getContentPane().setLayout(groupLayout);
 		
