@@ -224,7 +224,7 @@ public class BancoAppClt {
 		JPCltCartao.add(lblRedeVisaE);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("/Users/tamarabarros/Desktop/cartao34.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/cartao34.jpg"));
 		lblNewLabel_1.setBounds(99, 93, 335, 207);
 		JPCltCartao.add(lblNewLabel_1);
 		
