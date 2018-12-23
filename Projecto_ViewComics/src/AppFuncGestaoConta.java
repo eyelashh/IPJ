@@ -36,7 +36,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 
-public class LivrariaAppFunGestao {
+public class AppFuncGestaoConta {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -54,7 +54,7 @@ public class LivrariaAppFunGestao {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LivrariaAppFunGestao window = new LivrariaAppFunGestao();
+					AppFuncGestaoConta window = new AppFuncGestaoConta();
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -67,7 +67,7 @@ public class LivrariaAppFunGestao {
 	/**
 	 * Create the application.
 	 */
-	public LivrariaAppFunGestao() {
+	public AppFuncGestaoConta() {
 		initialize();
 	}
 
