@@ -41,7 +41,7 @@ import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.List;
 
-public class ClientePesquisarLivro {
+public class AppClientePesquisarLivro {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -56,7 +56,7 @@ public class ClientePesquisarLivro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClientePesquisarLivro window = new ClientePesquisarLivro();
+					AppClientePesquisarLivro window = new AppClientePesquisarLivro();
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -69,7 +69,7 @@ public class ClientePesquisarLivro {
 	/**
 	 * Create the application.
 	 */
-	public ClientePesquisarLivro() {
+	public AppClientePesquisarLivro() {
 		initialize();
 	}
 
@@ -241,7 +241,7 @@ protected void paintComponent(Graphics g) {
 		panel.add(passwordField);
 		
 		JLabel lblNewLabel_1 = new JLabel("ViewComics Inc.");
-		lblNewLabel_1.setBounds(97, 13, 795, 85);
+		lblNewLabel_1.setBounds(89, 28, 795, 85);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 95));
 		panel.add(lblNewLabel_1);
