@@ -192,12 +192,12 @@ public class AppCliente {
 				
 			}
 		};
-		JPanelPrincipal.setBounds(255, 185, 1009, 544);
+		JPanelPrincipal.setBounds(255, 185, 933, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
 		JPanel JPLivros = new JPanel();
-		JPLivros.setBounds(0, 0, 1009, 544);
+		JPLivros.setBounds(0, 0, 931, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
 		JPLivros.setVisible(false);
@@ -231,27 +231,27 @@ public class AppCliente {
 		JLabel label_17 = new JLabel("Adicionar ao carrinho");
 		label_17.setHorizontalAlignment(SwingConstants.CENTER);
 		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_17.setBounds(700, 167, 274, 34);
+		label_17.setBounds(655, 140, 274, 34);
 		JPLivros.add(label_17);
 		
 		JButton btnRemoverUnidade = new JButton("-");
 		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRemoverUnidade.setBounds(724, 230, 54, 48);
+		btnRemoverUnidade.setBounds(693, 185, 54, 48);
 		JPLivros.add(btnRemoverUnidade);
 		
 		textField_12 = new JTextField();
 		textField_12.setColumns(10);
-		textField_12.setBounds(803, 239, 61, 34);
+		textField_12.setBounds(757, 194, 61, 34);
 		JPLivros.add(textField_12);
 		
 		JButton btnAddUnidade = new JButton("-");
 		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddUnidade.setBounds(888, 230, 54, 48);
+		btnAddUnidade.setBounds(828, 185, 54, 48);
 		JPLivros.add(btnAddUnidade);
 		
 		JButton btnAddCarrinho = new JButton("Adicionar");
 		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		btnAddCarrinho.setBounds(758, 289, 152, 42);
+		btnAddCarrinho.setBounds(716, 238, 152, 42);
 		JPLivros.add(btnAddCarrinho);
 		
 		//painel para o carrinho
@@ -281,7 +281,7 @@ public class AppCliente {
 		
 		
 		
-		JPCarrinho.setBounds(0, 0, 1009, 544);
+		JPCarrinho.setBounds(0, 0, 931, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
 		
