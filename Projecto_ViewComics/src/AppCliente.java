@@ -196,6 +196,64 @@ public class AppCliente {
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
+		JPanel JPLivros = new JPanel();
+		JPLivros.setBounds(0, 0, 1009, 544);
+		JPanelPrincipal.add(JPLivros);
+		JPLivros.setLayout(null);
+		JPLivros.setVisible(false);
+		
+		Choice choiceAtributo = new Choice();
+		choiceAtributo.setBounds(65, 63, 200, 20);
+		JPLivros.add(choiceAtributo);
+		
+		TextField txtNomeAtributo = new TextField();
+		txtNomeAtributo.setBounds(65, 96, 200, 22);
+		JPLivros.add(txtNomeAtributo);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBackground(SystemColor.controlHighlight);
+		btnLimpar.setBounds(286, 63, 115, 20);
+		JPLivros.add(btnLimpar);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBackground(SystemColor.controlHighlight);
+		btnPesquisar.setBounds(286, 98, 115, 20);
+		JPLivros.add(btnPesquisar);
+		
+		List listaLivros = new List();
+		listaLivros.setBounds(65, 140, 289, 348);
+		JPLivros.add(listaLivros);
+		
+		TextField txtSpecsLivro = new TextField();
+		txtSpecsLivro.setBounds(376, 140, 260, 211);
+		JPLivros.add(txtSpecsLivro);
+		
+		JLabel label_17 = new JLabel("Adicionar ao carrinho");
+		label_17.setHorizontalAlignment(SwingConstants.CENTER);
+		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		label_17.setBounds(700, 167, 274, 34);
+		JPLivros.add(label_17);
+		
+		JButton btnRemoverUnidade = new JButton("-");
+		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRemoverUnidade.setBounds(724, 230, 54, 48);
+		JPLivros.add(btnRemoverUnidade);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(803, 239, 61, 34);
+		JPLivros.add(textField_12);
+		
+		JButton btnAddUnidade = new JButton("-");
+		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAddUnidade.setBounds(888, 230, 54, 48);
+		JPLivros.add(btnAddUnidade);
+		
+		JButton btnAddCarrinho = new JButton("Adicionar");
+		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		btnAddCarrinho.setBounds(758, 289, 152, 42);
+		JPLivros.add(btnAddCarrinho);
+		
 		//painel para o carrinho
 		
 		JPanel JPCarrinho = new JPanel() {
@@ -434,69 +492,11 @@ public class AppCliente {
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
 		
-		JPanel JPLivros = new JPanel();
-		JPLivros.setBounds(0, 0, 1009, 544);
-		JPanelPrincipal.add(JPLivros);
-		JPLivros.setLayout(null);
-		JPLivros.setVisible(false);
-		
-		Choice choiceAtributo = new Choice();
-		choiceAtributo.setBounds(65, 27, 200, 20);
-		JPLivros.add(choiceAtributo);
-		
-		TextField txtNomeAtributo = new TextField();
-		txtNomeAtributo.setBounds(65, 60, 200, 22);
-		JPLivros.add(txtNomeAtributo);
-		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBackground(SystemColor.controlHighlight);
-		btnLimpar.setBounds(286, 27, 115, 20);
-		JPLivros.add(btnLimpar);
-		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBackground(SystemColor.controlHighlight);
-		btnPesquisar.setBounds(286, 62, 115, 20);
-		JPLivros.add(btnPesquisar);
-		
-		List listaLivros = new List();
-		listaLivros.setBounds(65, 104, 289, 348);
-		JPLivros.add(listaLivros);
-		
-		TextField txtSpecsLivro = new TextField();
-		txtSpecsLivro.setBounds(376, 104, 260, 211);
-		JPLivros.add(txtSpecsLivro);
-		
-		JLabel label_17 = new JLabel("Adicionar ao carrinho");
-		label_17.setHorizontalAlignment(SwingConstants.CENTER);
-		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_17.setBounds(700, 131, 274, 34);
-		JPLivros.add(label_17);
-		
-		JButton btnRemoverUnidade = new JButton("-");
-		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRemoverUnidade.setBounds(724, 194, 54, 48);
-		JPLivros.add(btnRemoverUnidade);
-		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(803, 203, 61, 34);
-		JPLivros.add(textField_12);
-		
-		JButton btnAddUnidade = new JButton("-");
-		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddUnidade.setBounds(888, 194, 54, 48);
-		JPLivros.add(btnAddUnidade);
-		
-		JButton btnAddCarrinho = new JButton("Adicionar");
-		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		btnAddCarrinho.setBounds(758, 253, 152, 42);
-		JPLivros.add(btnAddCarrinho);
-		
 		//tornar os respectivos paineis visíveis ao clicar
 		
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				JPCarrinho.setVisible(false);
 				JPLivros.setVisible(true);
 					
 			}
@@ -504,6 +504,7 @@ public class AppCliente {
 		
 		btnCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JPLivros.setVisible(false);
 				JPCarrinho.setVisible(true);		
 				
 			}
