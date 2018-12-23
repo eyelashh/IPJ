@@ -19,11 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JPasswordField;
-import net.miginfocom.swing.MigLayout;
+/*import net.miginfocom.swing.MigLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.RowSpec;*/
 import javax.swing.JButton;
 import java.awt.Button;
 import javax.swing.BoxLayout;
