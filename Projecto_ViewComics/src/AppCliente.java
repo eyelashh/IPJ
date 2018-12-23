@@ -79,10 +79,10 @@ public class AppCliente {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo.jpg"));
+					img = ImageIO.read(new File("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg \r\n"));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -139,10 +139,10 @@ public class AppCliente {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo2.jpg"));
+					img = ImageIO.read(new File(  "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -180,10 +180,10 @@ public class AppCliente {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
+					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -265,7 +265,7 @@ public class AppCliente {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
 					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
@@ -492,7 +492,7 @@ public class AppCliente {
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
 		
-		//tornar os respectivos paineis visíveis ao clicar
+		//tornar os respectivos paineis visï¿½veis ao clicar
 		
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

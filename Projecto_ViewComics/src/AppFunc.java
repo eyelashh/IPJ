@@ -86,10 +86,11 @@ public class AppFunc {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo.jpg"));
+					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg \r\n" + 
+							""));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -116,10 +117,10 @@ public class AppFunc {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo2.jpg"));
+					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -165,10 +166,10 @@ public class AppFunc {
 				Image img;
 				try {
 					
-					// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
+					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -513,7 +514,7 @@ public class AppFunc {
 		JComboBox comboBoxPagamento = new JComboBox();
 		comboBoxPagamento.setBounds(65, 34, 199, 22);
 		JPpagamento.add(comboBoxPagamento);
-		comboBoxPagamento.addItem("(Seleccione o método de pagamento)");
+		comboBoxPagamento.addItem("(Seleccione o mï¿½todo de pagamento)");
 		comboBoxPagamento.addItem("Dinheiro");
 		comboBoxPagamento.addItem("Multibanco");
 		
@@ -566,7 +567,7 @@ public class AppFunc {
 		JPanelPrincipal.add(JPmultibanco);
 		JPmultibanco.setVisible(false);
 		
-		//Acçoes dos botões
+		//Acï¿½oes dos botï¿½es
 		
 		btnGestaoFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -615,7 +616,7 @@ public class AppFunc {
 				
 			}
 		});
-		//selecionar o método de pagamento para determinar qual a janela a aparecer a seguir
+		//selecionar o mï¿½todo de pagamento para determinar qual a janela a aparecer a seguir
 		
 		if (comboBoxPagamento.getSelectedItem().equals("Multibanco")) {
 			JPmultibanco.setVisible(true);
