@@ -10,10 +10,16 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class AppEsqueleto {
 
 	private JFrame frame;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -101,7 +107,7 @@ public class AppEsqueleto {
 		JPanelMenu.setBounds(0, 185, 245, 544);
 		frame.getContentPane().add(JPanelMenu);
 		
-		JPanel JPanelPrincipal = new JPanel(){
+		JPanel JPanelPagamento = new JPanel(){
 			@Override
 			//o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
@@ -122,8 +128,57 @@ public class AppEsqueleto {
 				
 			}
 		};
-		JPanelPrincipal.setBounds(255, 185, 1009, 544);
-		frame.getContentPane().add(JPanelPrincipal);
+		JPanelPagamento.setBounds(326, 235, 322, 397);
+		frame.getContentPane().add(JPanelPagamento);
+		JPanelPagamento.setLayout(null);
+		
+		JComboBox comboBoxPagamento = new JComboBox();
+		comboBoxPagamento.setBounds(65, 34, 199, 22);
+		JPanelPagamento.add(comboBoxPagamento);
+		comboBoxPagamento.addItem("Multibanco");
+		comboBoxPagamento.addItem("Dinheiro");
+		
+		
+		JPanel JPDinheiro = new JPanel();
+		JPDinheiro.setBounds(45, 90, 237, 282);
+		JPanelPagamento.add(JPDinheiro);
+		JPDinheiro.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(24, 35, 145, 27);
+		JPDinheiro.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(24, 113, 174, 27);
+		JPDinheiro.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(24, 197, 145, 27);
+		JPDinheiro.add(textField_2);
+		
+		JLabel lblQuantiaRecebida = new JLabel("Quantia recebida :");
+		lblQuantiaRecebida.setBounds(24, 84, 126, 14);
+		JPDinheiro.add(lblQuantiaRecebida);
+		
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(24, 162, 86, 14);
+		JPDinheiro.add(lblTroco);
+		
+		JLabel lblAPagar = new JLabel("A pagar :");
+		lblAPagar.setBounds(24, 10, 105, 14);
+		JPDinheiro.add(lblAPagar);
+		
+		JButton btnConcluirPagamento = new JButton("Concluir pagamento");
+		btnConcluirPagamento.setBounds(32, 248, 180, 23);
+		JPDinheiro.add(btnConcluirPagamento);
+		
+		JPanel JPMultibanco = new JPanel();
+		JPMultibanco.setBounds(45, 90, 237, 282);
+		JPanelPagamento.add(JPMultibanco);
 	}
-
 }
