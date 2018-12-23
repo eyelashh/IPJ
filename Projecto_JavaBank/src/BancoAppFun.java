@@ -167,6 +167,105 @@ public class BancoAppFun {
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 
+<<<<<<< HEAD
+=======
+		// Painel principal CLientes
+		JPanel jpanelClientes = new JPanel();
+		jpanelClientes.setVisible(false);
+		
+				// Painel da gestao do administrador
+				JPanel jpanelGestao = new JPanel();
+				jpanelGestao.setVisible(false);
+				jpanelGestao.setBounds(0, 0, 1042, 576);
+				JpanelPrincipal.add(jpanelGestao);
+				jpanelGestao.setLayout(null);
+				
+						JLabel lblUsername_1 = new JLabel("UserName:");
+						lblUsername_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+						lblUsername_1.setBounds(96, 118, 113, 24);
+						jpanelGestao.add(lblUsername_1);
+						
+								tbGestaoUsername = new JTextField();
+								tbGestaoUsername.setBounds(96, 155, 279, 31);
+								jpanelGestao.add(tbGestaoUsername);
+								
+										JLabel lblPassword_1 = new JLabel("Password:");
+										lblPassword_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+										lblPassword_1.setBounds(96, 199, 113, 24);
+										jpanelGestao.add(lblPassword_1);
+										
+												tbGestaopass = new JTextField();
+												tbGestaopass.setBounds(96, 236, 279, 31);
+												jpanelGestao.add(tbGestaopass);
+												
+														JLabel lblNovaPassword = new JLabel("Novo UserName:");
+														lblNovaPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+														lblNovaPassword.setBounds(96, 280, 171, 24);
+														jpanelGestao.add(lblNovaPassword);
+														
+																tbGestaoNovoUser = new JTextField();
+																tbGestaoNovoUser.setBounds(96, 310, 279, 31);
+																jpanelGestao.add(tbGestaoNovoUser);
+																
+																		JButton btGestaouserconfirmar = new JButton("Confirmar");
+																		btGestaouserconfirmar.setBounds(96, 385, 97, 25);
+																		jpanelGestao.add(btGestaouserconfirmar);
+																		
+																				JButton btGestaouserCancelar = new JButton("Cancelar");
+																				btGestaouserCancelar.setBounds(278, 385, 97, 25);
+																				jpanelGestao.add(btGestaouserCancelar);
+																				
+																						JLabel lblPassword_2 = new JLabel("Password:");
+																						lblPassword_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																						lblPassword_2.setBounds(669, 118, 113, 24);
+																						jpanelGestao.add(lblPassword_2);
+																						
+																								tbGestaoPass = new JPasswordField();
+																								tbGestaoPass.setBounds(669, 155, 279, 31);
+																								jpanelGestao.add(tbGestaoPass);
+																								
+																										JLabel lblPassword_3 = new JLabel("Nova Password:");
+																										lblPassword_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																										lblPassword_3.setBounds(669, 199, 113, 24);
+																										jpanelGestao.add(lblPassword_3);
+																										
+																												tbGestaoNovapass = new JPasswordField();
+																												tbGestaoNovapass.setBounds(669, 236, 279, 31);
+																												jpanelGestao.add(tbGestaoNovapass);
+																												
+																														JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
+																														lblConfirmarPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																														lblConfirmarPassword.setBounds(669, 280, 171, 24);
+																														jpanelGestao.add(lblConfirmarPassword);
+																														
+																																tbGestaoConfirmPass = new JPasswordField();
+																																tbGestaoConfirmPass.setBounds(669, 310, 279, 31);
+																																jpanelGestao.add(tbGestaoConfirmPass);
+																																
+																																		JButton btGestaopassConfirmar = new JButton("Confirmar");
+																																		btGestaopassConfirmar.setBounds(669, 385, 97, 25);
+																																		jpanelGestao.add(btGestaopassConfirmar);
+																																		
+																																				JButton btGestaopassCancelar = new JButton("Cancelar");
+																																				btGestaopassCancelar.setBounds(851, 385, 97, 25);
+																																				jpanelGestao.add(btGestaopassCancelar);
+																																				
+																																						JLabel lblAlterarUsername = new JLabel("Alterar UserName:");
+																																						lblAlterarUsername.setAlignmentX(Component.CENTER_ALIGNMENT);
+																																						lblAlterarUsername.setFont(new Font("Tahoma", Font.PLAIN, 25));
+																																						lblAlterarUsername.setBounds(134, 74, 203, 31);
+																																						jpanelGestao.add(lblAlterarUsername);
+																																						
+																																								JLabel lblAlterarPassword = new JLabel("Alterar PassWord:");
+																																								lblAlterarPassword.setFont(new Font("Tahoma", Font.PLAIN, 25));
+																																								lblAlterarPassword.setAlignmentX(0.5f);
+																																								lblAlterarPassword.setBounds(707, 74, 203, 31);
+																																								jpanelGestao.add(lblAlterarPassword);
+		jpanelClientes.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelClientes);
+		jpanelClientes.setLayout(null);
+
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
 		jpanelOperacoes.setVisible(false);
@@ -342,6 +441,7 @@ public class BancoAppFun {
 		btLevCancelar.setBounds(273, 224, 120, 38);
 		JpanelOpLevantamento.add(btLevCancelar);
 
+<<<<<<< HEAD
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
@@ -434,6 +534,12 @@ public class BancoAppFun {
 		separator_1.setAlignmentX(0.0f);
 		separator_1.setBounds(483, 68, 29, 433);
 		jpanelGestao.add(separator_1);
+=======
+		JLabel lblLevantamento = new JLabel("Levantamento:");
+		lblLevantamento.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblLevantamento.setBounds(162, 13, 205, 43);
+		JpanelOpLevantamento.add(lblLevantamento);
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();

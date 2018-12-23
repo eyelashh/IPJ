@@ -45,26 +45,28 @@ public class ViewComicsAdminProgram {
 
 	private JFrame frame;
 	private JTextField textField_2;
-	private JTextField tbLivrosStock;
-	private JTextField tbLivrosPreco;
-	private JTextField tbLivrosDescricao;
-	private JTextField tbLivrosData;
-	private JTextField tbLivrosAutor;
-	private JTextField tbLivrosTitulo;
-	private JTextField tbLivrosPesq;
-	private JTextField tbFuncionariopesq;
-	private JTextField tbFuncionarioNfun;
-	private JTextField tbFuncionarioNome;
-	private JTextField tbFuncionarioContacto;
-	private JTextField tbFuncionarioUser;
-	private JPasswordField tbFuncionarioPass;
+	private JTextField textField_4;
+	private JPanel jpAdmFuncionarios;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_3;
-	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_11;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
+	private JPasswordField passwordField_2;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
+	private JTextField textField_15;
+	private JTextField textField_16;
+	private JTextField textField_17;
+	private JTextField textField_18;
 
 	/**
 	 * Launch the application.
@@ -136,6 +138,10 @@ public class ViewComicsAdminProgram {
 		Paineltotal.add(panelMenu);
 		
 		JButton button_2 = new JButton("Livros");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		button_2.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
 		button_2.setBackground(SystemColor.controlHighlight);
 		button_2.setBounds(25, 13, 176, 55);
@@ -174,301 +180,302 @@ public class ViewComicsAdminProgram {
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		
-		JPanel panelStock = new JPanel();
-		panelStock.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelStock);
-		panelStock.setLayout(null);
+		JPanel jpAdmStock = new JPanel();
+		jpAdmStock.setLayout(null);
+		jpAdmStock.setBounds(12, 13, 998, 519);
+		panelPrincipal.add(jpAdmStock);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(12, 13, 200, 30);
+		jpAdmStock.add(comboBox_1);
+		
+		JButton button_9 = new JButton("Pesquisar");
+		button_9.setBounds(224, 16, 97, 25);
+		jpAdmStock.add(button_9);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(12, 57, 200, 30);
+		jpAdmStock.add(textField_12);
+		
+		JButton button_10 = new JButton("Limpar");
+		button_10.setBounds(224, 60, 97, 25);
+		jpAdmStock.add(button_10);
+		
+		JLabel label_11 = new JLabel("Nome:");
+		label_11.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_11.setBounds(263, 120, 48, 16);
+		jpAdmStock.add(label_11);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(333, 114, 345, 30);
+		jpAdmStock.add(textField_13);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(333, 164, 345, 30);
+		jpAdmStock.add(textField_14);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(333, 213, 345, 30);
+		jpAdmStock.add(textField_15);
+		
+		JLabel label_12 = new JLabel("Data:");
+		label_12.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_12.setBounds(271, 219, 40, 16);
+		jpAdmStock.add(label_12);
+		
+		JLabel label_13 = new JLabel("Autor:");
+		label_13.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_13.setBounds(263, 170, 48, 16);
+		jpAdmStock.add(label_13);
+		
+		JLabel label_14 = new JLabel("Descri\u00E7\u00E3o:");
+		label_14.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_14.setBounds(224, 266, 87, 16);
+		jpAdmStock.add(label_14);
+		
+		textField_16 = new JTextField();
+		textField_16.setColumns(10);
+		textField_16.setBounds(333, 260, 345, 117);
+		jpAdmStock.add(textField_16);
+		
+		JLabel label_15 = new JLabel("Pre\u00E7o:");
+		label_15.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_15.setBounds(263, 396, 48, 16);
+		jpAdmStock.add(label_15);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(333, 390, 345, 30);
+		jpAdmStock.add(textField_17);
+		
+		JLabel label_16 = new JLabel("Stock:");
+		label_16.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_16.setBounds(263, 430, 48, 16);
+		jpAdmStock.add(label_16);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(12, 120, 200, 363);
+		jpAdmStock.add(list_1);
+		
+		JButton button_11 = new JButton("Pesquisar");
+		button_11.setBounds(363, 16, 97, 25);
+		jpAdmStock.add(button_11);
+		
+		JButton button_12 = new JButton("Pesquisar");
+		button_12.setBounds(472, 16, 97, 25);
+		jpAdmStock.add(button_12);
+		
+		JButton button_13 = new JButton("Pesquisar");
+		button_13.setBounds(581, 16, 97, 25);
+		jpAdmStock.add(button_13);
+		
+		JButton btnNewButton_1 = new JButton("-");
+		btnNewButton_1.setBounds(437, 427, 48, 25);
+		jpAdmStock.add(btnNewButton_1);
+		
+		JButton button_14 = new JButton("+");
+		button_14.setBounds(556, 427, 48, 25);
+		jpAdmStock.add(button_14);
+		
+		textField_18 = new JTextField();
+		textField_18.setColumns(10);
+		textField_18.setBounds(497, 424, 48, 30);
+		jpAdmStock.add(textField_18);
+		
+		JButton button_15 = new JButton("Pesquisar");
+		button_15.setBounds(333, 481, 97, 25);
+		jpAdmStock.add(button_15);
+		
+		JButton button_16 = new JButton("Pesquisar");
+		button_16.setBounds(581, 481, 97, 25);
+		jpAdmStock.add(button_16);
+		
+		JPanel jpAdmLivros = new JPanel();
+		jpAdmLivros.setLayout(null);
+		jpAdmLivros.setBounds(12, 13, 998, 519);
+		panelPrincipal.add(jpAdmLivros);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(12, 26, 251, 30);
-		panelStock.add(comboBox);
+		comboBox.setBounds(12, 13, 200, 30);
+		jpAdmLivros.add(comboBox);
 		
 		textField = new JTextField();
+		textField.setBounds(12, 57, 200, 30);
+		jpAdmLivros.add(textField);
 		textField.setColumns(10);
-		textField.setBounds(12, 61, 251, 30);
-		panelStock.add(textField);
 		
-		JButton button = new JButton("Limpar");
-		button.setBackground(SystemColor.controlHighlight);
-		button.setBounds(275, 27, 115, 29);
-		panelStock.add(button);
+		JList list = new JList();
+		list.setBounds(22, 111, 190, 395);
+		jpAdmLivros.add(list);
 		
-		JButton button_1 = new JButton("Pesquisar");
-		button_1.setBackground(SystemColor.controlHighlight);
-		button_1.setBounds(275, 62, 115, 29);
-		panelStock.add(button_1);
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(263, 120, 48, 16);
+		jpAdmLivros.add(lblNewLabel);
+		
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAutor.setBounds(263, 170, 48, 16);
+		jpAdmLivros.add(lblAutor);
+		
+		JLabel lblDescrio = new JLabel("Data:");
+		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDescrio.setBounds(271, 219, 40, 16);
+		jpAdmLivros.add(lblDescrio);
+		
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblStock.setBounds(263, 455, 48, 16);
+		jpAdmLivros.add(lblStock);
+		
+		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
+		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo_1.setBounds(263, 404, 48, 16);
+		jpAdmLivros.add(lblPreo_1);
+		
+		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
+		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo.setBounds(224, 266, 87, 16);
+		jpAdmLivros.add(lblPreo);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(459, 108, 277, 22);
-		panelStock.add(textField_1);
-		
-		JLabel label = new JLabel("Nome:");
-		label.setBounds(396, 104, 44, 30);
-		panelStock.add(label);
-		
-		JLabel label_1 = new JLabel("Autor:");
-		label_1.setBounds(396, 158, 44, 30);
-		panelStock.add(label_1);
-		
-		JLabel label_2 = new JLabel("Data:");
-		label_2.setBounds(404, 216, 36, 30);
-		panelStock.add(label_2);
+		textField_1.setBounds(333, 114, 345, 30);
+		jpAdmLivros.add(textField_1);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(459, 220, 277, 22);
-		panelStock.add(textField_3);
-		
-		JLabel label_3 = new JLabel("Descri\u00E7\u00E3o:");
-		label_3.setBounds(374, 278, 66, 30);
-		panelStock.add(label_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setDropMode(DropMode.ON_OR_INSERT_ROWS);
-		textField_4.setColumns(10);
-		textField_4.setBounds(459, 282, 277, 118);
-		panelStock.add(textField_4);
-		
-		JLabel label_4 = new JLabel("Pre\u00E7o:");
-		label_4.setBounds(396, 402, 44, 30);
-		panelStock.add(label_4);
+		textField_3.setBounds(333, 164, 345, 30);
+		jpAdmLivros.add(textField_3);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(459, 406, 277, 22);
-		panelStock.add(textField_5);
+		textField_5.setBounds(333, 213, 345, 30);
+		jpAdmLivros.add(textField_5);
 		
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
-		textField_6.setBounds(459, 162, 277, 22);
-		panelStock.add(textField_6);
-		
-		JList lGestaoLivros = new JList();
-		lGestaoLivros.setBounds(12, 104, 251, 428);
-		panelStock.add(lGestaoLivros);
-		
-		JButton btnNewButton = new JButton("-");
-		btnNewButton.setBounds(516, 436, 44, 25);
-		panelStock.add(btnNewButton);
-		
-		JButton button_7 = new JButton("+");
-		button_7.setBounds(637, 436, 44, 25);
-		panelStock.add(button_7);
+		textField_6.setBounds(333, 260, 345, 117);
+		jpAdmLivros.add(textField_6);
 		
 		textField_7 = new JTextField();
-		textField_7.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_7.setText("1");
 		textField_7.setColumns(10);
-		textField_7.setBounds(561, 437, 75, 22);
-		panelStock.add(textField_7);
+		textField_7.setBounds(333, 402, 345, 30);
+		jpAdmLivros.add(textField_7);
 		
-		JLabel lblStock = new JLabel("Stock:");
-		lblStock.setBounds(396, 440, 44, 30);
-		panelStock.add(lblStock);
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(333, 453, 345, 30);
+		jpAdmLivros.add(textField_8);
 		
-		JButton button_8 = new JButton("Novo");
-		button_8.setBounds(432, 26, 97, 30);
-		panelStock.add(button_8);
+		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.setBounds(224, 16, 97, 25);
+		jpAdmLivros.add(btnNewButton);
 		
-		JButton button_9 = new JButton("Eliminar");
-		button_9.setBounds(541, 26, 97, 30);
-		panelStock.add(button_9);
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBounds(224, 60, 97, 25);
+		jpAdmLivros.add(btnLimpar);
 		
-		JButton button_10 = new JButton("Limpar");
-		button_10.setBounds(656, 26, 97, 30);
-		panelStock.add(button_10);
+		JPanel jpAdmConta = new JPanel();
+		jpAdmConta.setBounds(12, 13, 998, 519);
+		panelPrincipal.add(jpAdmConta);
+		jpAdmConta.setLayout(null);
 		
-		JButton button_11 = new JButton("Ok");
-		button_11.setBounds(459, 491, 97, 30);
-		panelStock.add(button_11);
+		JLabel label = new JLabel("Alterar UserName:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label.setAlignmentX(0.5f);
+		label.setBounds(111, 87, 203, 31);
+		jpAdmConta.add(label);
 		
-		JButton button_12 = new JButton("Cancelar");
-		button_12.setBounds(639, 491, 97, 30);
-		panelStock.add(button_12);
+		JLabel label_1 = new JLabel("UserName:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(73, 131, 113, 24);
+		jpAdmConta.add(label_1);
 		
-		JPanel panelFuncionarios = new JPanel();
-		panelFuncionarios.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelFuncionarios);
-		panelFuncionarios.setLayout(null);
+		textField_9 = new JTextField();
+		textField_9.setBounds(73, 168, 279, 31);
+		jpAdmConta.add(textField_9);
 		
-		JComboBox cbFuncionariopesq = new JComboBox();
-		cbFuncionariopesq.setBounds(12, 26, 308, 30);
-		panelFuncionarios.add(cbFuncionariopesq);
+		JLabel label_2 = new JLabel("Password:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(73, 212, 113, 24);
+		jpAdmConta.add(label_2);
 		
-		tbFuncionariopesq = new JTextField();
-		tbFuncionariopesq.setBounds(12, 69, 308, 30);
-		panelFuncionarios.add(tbFuncionariopesq);
-		tbFuncionariopesq.setColumns(10);
+		textField_10 = new JTextField();
+		textField_10.setBounds(73, 249, 279, 31);
+		jpAdmConta.add(textField_10);
 		
-		JList lFuncionario = new JList();
-		lFuncionario.setBounds(12, 150, 308, 382);
-		panelFuncionarios.add(lFuncionario);
+		JLabel label_3 = new JLabel("Novo UserName:");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_3.setBounds(73, 293, 171, 24);
+		jpAdmConta.add(label_3);
 		
-		tbFuncionarioNfun = new JTextField();
-		tbFuncionarioNfun.setColumns(10);
-		tbFuncionarioNfun.setBounds(470, 150, 308, 30);
-		panelFuncionarios.add(tbFuncionarioNfun);
+		textField_11 = new JTextField();
+		textField_11.setBounds(73, 323, 279, 31);
+		jpAdmConta.add(textField_11);
 		
-		tbFuncionarioNome = new JTextField();
-		tbFuncionarioNome.setColumns(10);
-		tbFuncionarioNome.setBounds(470, 198, 308, 30);
-		panelFuncionarios.add(tbFuncionarioNome);
+		JButton button = new JButton("Confirmar");
+		button.setBounds(73, 398, 97, 25);
+		jpAdmConta.add(button);
 		
-		tbFuncionarioContacto = new JTextField();
-		tbFuncionarioContacto.setColumns(10);
-		tbFuncionarioContacto.setBounds(470, 248, 308, 30);
-		panelFuncionarios.add(tbFuncionarioContacto);
+		JButton button_1 = new JButton("Cancelar");
+		button_1.setBounds(255, 398, 97, 25);
+		jpAdmConta.add(button_1);
 		
-		tbFuncionarioUser = new JTextField();
-		tbFuncionarioUser.setColumns(10);
-		tbFuncionarioUser.setBounds(470, 307, 308, 30);
-		panelFuncionarios.add(tbFuncionarioUser);
+		JLabel label_4 = new JLabel("Alterar PassWord:");
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label_4.setAlignmentX(0.5f);
+		label_4.setBounds(684, 87, 203, 31);
+		jpAdmConta.add(label_4);
 		
-		tbFuncionarioPass = new JPasswordField();
-		tbFuncionarioPass.setColumns(10);
-		tbFuncionarioPass.setBounds(470, 362, 308, 30);
-		panelFuncionarios.add(tbFuncionarioPass);
+		JLabel label_5 = new JLabel("Password:");
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_5.setBounds(646, 131, 113, 24);
+		jpAdmConta.add(label_5);
 		
-		JButton btFuncionarioLimparpesq = new JButton("Limpar");
-		btFuncionarioLimparpesq.setBounds(332, 29, 97, 30);
-		panelFuncionarios.add(btFuncionarioLimparpesq);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(646, 168, 279, 31);
+		jpAdmConta.add(passwordField);
 		
-		JButton btFuncionarioPesquisar = new JButton("Pesquisar");
-		btFuncionarioPesquisar.setBounds(332, 72, 97, 30);
-		panelFuncionarios.add(btFuncionarioPesquisar);
+		JLabel label_9 = new JLabel("Nova Password:");
+		label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_9.setBounds(646, 212, 113, 24);
+		jpAdmConta.add(label_9);
 		
-		JButton btFuncionarioOk = new JButton("Ok");
-		btFuncionarioOk.setBounds(470, 419, 97, 30);
-		panelFuncionarios.add(btFuncionarioOk);
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(646, 249, 279, 31);
+		jpAdmConta.add(passwordField_1);
 		
-		JButton btFuncionarioCancelar = new JButton("Cancelar");
-		btFuncionarioCancelar.setBounds(681, 419, 97, 30);
-		panelFuncionarios.add(btFuncionarioCancelar);
+		JLabel label_10 = new JLabel("Confirmar Password:");
+		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_10.setBounds(646, 293, 171, 24);
+		jpAdmConta.add(label_10);
 		
-		JButton btFuncionarioNovo = new JButton("Novo");
-		btFuncionarioNovo.setBounds(470, 29, 97, 30);
-		panelFuncionarios.add(btFuncionarioNovo);
+		passwordField_2 = new JPasswordField();
+		passwordField_2.setBounds(646, 323, 279, 31);
+		jpAdmConta.add(passwordField_2);
 		
-		JButton btFuncionarioEliminar = new JButton("Eliminar");
-		btFuncionarioEliminar.setBounds(579, 29, 97, 30);
-		panelFuncionarios.add(btFuncionarioEliminar);
+		JButton button_7 = new JButton("Confirmar");
+		button_7.setBounds(646, 398, 97, 25);
+		jpAdmConta.add(button_7);
 		
-		JButton btFuncionarioLimpar = new JButton("Limpar");
-		btFuncionarioLimpar.setBounds(694, 29, 97, 30);
-		panelFuncionarios.add(btFuncionarioLimpar);
+		JButton button_8 = new JButton("Cancelar");
+		button_8.setBounds(828, 398, 97, 25);
+		jpAdmConta.add(button_8);
 		
-		JLabel lblFuncionario = new JLabel("Funcionario:");
-		lblFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblFuncionario.setBounds(12, 112, 82, 30);
-		panelFuncionarios.add(lblFuncionario);
+		jpAdmFuncionarios = new JPanel();
+		jpAdmFuncionarios.setLayout(null);
+		jpAdmFuncionarios.setBounds(12, 13, 998, 519);
+		panelPrincipal.add(jpAdmFuncionarios);
 		
-		JLabel lblNFuncionario = new JLabel("N\u00BA Funcionario:");
-		lblNFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNFuncionario.setBounds(332, 150, 105, 30);
-		panelFuncionarios.add(lblNFuncionario);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNome.setBounds(381, 198, 56, 30);
-		panelFuncionarios.add(lblNome);
-		
-		JLabel lblContacto = new JLabel("Contacto:");
-		lblContacto.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContacto.setBounds(369, 248, 68, 30);
-		panelFuncionarios.add(lblContacto);
-		
-		JLabel lblUsername = new JLabel("UserName:");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblUsername.setBounds(355, 307, 82, 30);
-		panelFuncionarios.add(lblUsername);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(369, 362, 68, 30);
-		panelFuncionarios.add(lblPassword);
-		
-		JPanel panelLivros = new JPanel();
-		panelLivros.setLayout(null);
-		panelLivros.setBounds(0, 0, 1022, 545);
-		panelPrincipal.add(panelLivros);
-		
-		JButton btLivrosLimpar = new JButton("Limpar");
-		btLivrosLimpar.setBackground(SystemColor.controlHighlight);
-		btLivrosLimpar.setBounds(275, 27, 115, 29);
-		panelLivros.add(btLivrosLimpar);
-		
-		JButton btLivrosPesquisar = new JButton("Pesquisar");
-		btLivrosPesquisar.setBackground(SystemColor.controlHighlight);
-		btLivrosPesquisar.setBounds(275, 62, 115, 29);
-		panelLivros.add(btLivrosPesquisar);
-		
-		JLabel label_27 = new JLabel("Stock:");
-		label_27.setBounds(297, 437, 44, 30);
-		panelLivros.add(label_27);
-		
-		tbLivrosStock = new JTextField();
-		tbLivrosStock.setColumns(10);
-		tbLivrosStock.setBounds(360, 441, 277, 22);
-		panelLivros.add(tbLivrosStock);
-		
-		tbLivrosPreco = new JTextField();
-		tbLivrosPreco.setColumns(10);
-		tbLivrosPreco.setBounds(360, 406, 277, 22);
-		panelLivros.add(tbLivrosPreco);
-		
-		JLabel label_28 = new JLabel("Pre\u00E7o:");
-		label_28.setBounds(297, 402, 44, 30);
-		panelLivros.add(label_28);
-		
-		tbLivrosDescricao = new JTextField();
-		tbLivrosDescricao.setDropMode(DropMode.ON_OR_INSERT_ROWS);
-		tbLivrosDescricao.setColumns(10);
-		tbLivrosDescricao.setBounds(360, 282, 277, 118);
-		panelLivros.add(tbLivrosDescricao);
-		
-		JLabel label_29 = new JLabel("Descri\u00E7\u00E3o:");
-		label_29.setBounds(275, 278, 66, 30);
-		panelLivros.add(label_29);
-		
-		tbLivrosData = new JTextField();
-		tbLivrosData.setColumns(10);
-		tbLivrosData.setBounds(360, 220, 277, 22);
-		panelLivros.add(tbLivrosData);
-		
-		JLabel label_30 = new JLabel("Data:");
-		label_30.setBounds(305, 216, 36, 30);
-		panelLivros.add(label_30);
-		
-		tbLivrosAutor = new JTextField();
-		tbLivrosAutor.setColumns(10);
-		tbLivrosAutor.setBounds(360, 162, 277, 22);
-		panelLivros.add(tbLivrosAutor);
-		
-		JLabel label_31 = new JLabel("Autor:");
-		label_31.setBounds(297, 158, 44, 30);
-		panelLivros.add(label_31);
-		
-		JLabel label_32 = new JLabel("Nome:");
-		label_32.setBounds(297, 104, 44, 30);
-		panelLivros.add(label_32);
-		
-		tbLivrosTitulo = new JTextField();
-		tbLivrosTitulo.setColumns(10);
-		tbLivrosTitulo.setBounds(360, 108, 277, 22);
-		panelLivros.add(tbLivrosTitulo);
-		
-		JComboBox cbLivrosPesq = new JComboBox();
-		cbLivrosPesq.setBounds(12, 26, 251, 30);
-		panelLivros.add(cbLivrosPesq);
-		
-		tbLivrosPesq = new JTextField();
-		tbLivrosPesq.setColumns(10);
-		tbLivrosPesq.setBounds(12, 61, 251, 30);
-		panelLivros.add(tbLivrosPesq);
-		
-		JList lLivros = new JList();
-		lLivros.setBounds(12, 104, 251, 428);
-		panelLivros.add(lLivros);
+		JPanel jpAdmEstatisticas = new JPanel();
+		jpAdmEstatisticas.setLayout(null);
+		jpAdmEstatisticas.setBounds(12, 13, 998, 519);
+		panelPrincipal.add(jpAdmEstatisticas);
 		
 	}
 }
