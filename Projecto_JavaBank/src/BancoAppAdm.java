@@ -61,8 +61,8 @@ public class BancoAppAdm {
 
 		try {
 			BancoAppAdm window = new BancoAppAdm();
-
 			window.frame.setVisible(true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,6 +180,118 @@ public class BancoAppAdm {
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
+
+		// Painel da gestao do administrador
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmGestao);
+		JPAdmGestao.setLayout(null);
+
+		// linha que separa na parte da gestao
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
+		separator_1.setBounds(483, 68, 29, 433);
+		JPAdmGestao.add(separator_1);
+
+		// texto : username
+		JLabel lblUsername_1 = new JLabel("Username :");
+		lblUsername_1.setVerifyInputWhenFocusTarget(false);
+		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblUsername_1.setBounds(144, 81, 131, 41);
+		JPAdmGestao.add(lblUsername_1);
+
+		// campo de texto na gestão da parte do administrador
+		lblAdminGestUsername = new JTextField();
+		lblAdminGestUsername.setBounds(144, 134, 271, 33);
+		JPAdmGestao.add(lblAdminGestUsername);
+
+		// texto : password
+		JLabel lblPassword_1 = new JLabel("Password :");
+		lblPassword_1.setVerifyInputWhenFocusTarget(false);
+		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_1.setBounds(144, 178, 131, 41);
+		JPAdmGestao.add(lblPassword_1);
+
+		// campo de texto na gestão da parte do administrador
+		textAdminGestPass = new JTextField();
+		textAdminGestPass.setColumns(10);
+		textAdminGestPass.setBounds(144, 230, 271, 33);
+		JPAdmGestao.add(textAdminGestPass);
+
+		// texto : novausername
+		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
+		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
+		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		textFieldAdminGestUsername.setBounds(144, 275, 191, 41);
+		JPAdmGestao.add(textFieldAdminGestUsername);
+
+		// campo de texto na gestão da parte do administrador
+		textFieldAdminGestNovaUser = new JTextField();
+		textFieldAdminGestNovaUser.setColumns(10);
+		textFieldAdminGestNovaUser.setBounds(144, 327, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaUser);
+
+		// botao de confimar - submete a nova username
+		JButton btnAdminGestConfirmar = new JButton("Confirmar");
+		btnAdminGestConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		btnAdminGestConfirmar.setBounds(144, 415, 131, 41);
+		JPAdmGestao.add(btnAdminGestConfirmar);
+
+		// botao de cancelar - limpar
+		JButton btnAdminGestCancelar = new JButton("Cancelar");
+		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestCancelar.setBounds(294, 415, 131, 41);
+		JPAdmGestao.add(btnAdminGestCancelar);
+
+		textFieldAdminGestPass1 = new JTextField();
+		textFieldAdminGestPass1.setColumns(10);
+		textFieldAdminGestPass1.setBounds(579, 134, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestPass1);
+
+		JLabel lblPassword_2 = new JLabel("Password :");
+		lblPassword_2.setVerifyInputWhenFocusTarget(false);
+		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_2.setBounds(579, 81, 131, 41);
+		JPAdmGestao.add(lblPassword_2);
+
+		JLabel lblNovaPassword = new JLabel("Nova Password :");
+		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
+		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNovaPassword.setBounds(579, 178, 168, 41);
+		JPAdmGestao.add(lblNovaPassword);
+
+		textFieldAdminGestNovaPass = new JTextField();
+		textFieldAdminGestNovaPass.setColumns(10);
+		textFieldAdminGestNovaPass.setBounds(579, 230, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaPass);
+
+		JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Password :");
+		lblConfirmarNovaUsername.setVerifyInputWhenFocusTarget(false);
+		lblConfirmarNovaUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblConfirmarNovaUsername.setBounds(579, 275, 271, 41);
+		JPAdmGestao.add(lblConfirmarNovaUsername);
+
+		textFieldAdminGestConf = new JTextField();
+		textFieldAdminGestConf.setColumns(10);
+		textFieldAdminGestConf.setBounds(579, 327, 271, 33);
+		JPAdmGestao.add(textFieldAdminGestConf);
+
+		JButton buttonAdminGestConf = new JButton("Confirmar");
+		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestConf.setBounds(579, 415, 131, 41);
+		JPAdmGestao.add(buttonAdminGestConf);
+
+		JButton buttonAdminGestCan = new JButton("Cancelar");
+		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestCan.setBounds(729, 415, 131, 41);
+		JPAdmGestao.add(buttonAdminGestCan);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
@@ -358,124 +470,13 @@ public class BancoAppAdm {
 		textAdmFunPass.setBounds(463, 456, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
 
-		// Painel da gestao do administrador
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setBounds(0, 0, 1042, 576);
-		JPAdm.add(JPAdmGestao);
-
-		// linha que separa na parte da gestao
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		separator_1.setBounds(483, 68, 29, 433);
-		JPAdmGestao.add(separator_1);
-
-		// texto : username
-		JLabel lblUsername_1 = new JLabel("Username :");
-		lblUsername_1.setVerifyInputWhenFocusTarget(false);
-		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblUsername_1.setBounds(144, 81, 131, 41);
-		JPAdmGestao.add(lblUsername_1);
-
-		// campo de texto na gestão da parte do administrador
-		lblAdminGestUsername = new JTextField();
-		lblAdminGestUsername.setBounds(144, 134, 271, 33);
-		JPAdmGestao.add(lblAdminGestUsername);
-
-		// texto : password
-		JLabel lblPassword_1 = new JLabel("Password :");
-		lblPassword_1.setVerifyInputWhenFocusTarget(false);
-		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_1.setBounds(144, 178, 131, 41);
-		JPAdmGestao.add(lblPassword_1);
-
-		// campo de texto na gestão da parte do administrador
-		textAdminGestPass = new JTextField();
-		textAdminGestPass.setColumns(10);
-		textAdminGestPass.setBounds(144, 230, 271, 33);
-		JPAdmGestao.add(textAdminGestPass);
-
-		// texto : novausername
-		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
-		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
-		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		textFieldAdminGestUsername.setBounds(144, 275, 191, 41);
-		JPAdmGestao.add(textFieldAdminGestUsername);
-
-		// campo de texto na gestão da parte do administrador
-		textFieldAdminGestNovaUser = new JTextField();
-		textFieldAdminGestNovaUser.setColumns(10);
-		textFieldAdminGestNovaUser.setBounds(144, 327, 271, 33);
-		JPAdmGestao.add(textFieldAdminGestNovaUser);
-
-		// botao de confimar - submete a nova username
-		JButton btnAdminGestConfirmar = new JButton("Confirmar");
-		btnAdminGestConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminGestConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		btnAdminGestConfirmar.setBounds(144, 415, 131, 41);
-		JPAdmGestao.add(btnAdminGestConfirmar);
-
-		// botao de cancelar - limpar
-		JButton btnAdminGestCancelar = new JButton("Cancelar");
-		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminGestCancelar.setBounds(294, 415, 131, 41);
-		JPAdmGestao.add(btnAdminGestCancelar);
-
-		textFieldAdminGestPass1 = new JTextField();
-		textFieldAdminGestPass1.setColumns(10);
-		textFieldAdminGestPass1.setBounds(579, 134, 271, 33);
-		JPAdmGestao.add(textFieldAdminGestPass1);
-
-		JLabel lblPassword_2 = new JLabel("Password :");
-		lblPassword_2.setVerifyInputWhenFocusTarget(false);
-		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_2.setBounds(579, 81, 131, 41);
-		JPAdmGestao.add(lblPassword_2);
-
-		JLabel lblNovaPassword = new JLabel("Nova Password :");
-		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
-		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNovaPassword.setBounds(579, 178, 168, 41);
-		JPAdmGestao.add(lblNovaPassword);
-
-		textFieldAdminGestNovaPass = new JTextField();
-		textFieldAdminGestNovaPass.setColumns(10);
-		textFieldAdminGestNovaPass.setBounds(579, 230, 271, 33);
-		JPAdmGestao.add(textFieldAdminGestNovaPass);
-
-		JLabel lblConfirmarNovaUsername = new JLabel("Confirmar Password :");
-		lblConfirmarNovaUsername.setVerifyInputWhenFocusTarget(false);
-		lblConfirmarNovaUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblConfirmarNovaUsername.setBounds(579, 275, 271, 41);
-		JPAdmGestao.add(lblConfirmarNovaUsername);
-
-		textFieldAdminGestConf = new JTextField();
-		textFieldAdminGestConf.setColumns(10);
-		textFieldAdminGestConf.setBounds(579, 327, 271, 33);
-		JPAdmGestao.add(textFieldAdminGestConf);
-
-		JButton buttonAdminGestConf = new JButton("Confirmar");
-		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestConf.setBounds(579, 415, 131, 41);
-		JPAdmGestao.add(buttonAdminGestConf);
-
-		JButton buttonAdminGestCan = new JButton("Cancelar");
-		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestCan.setBounds(729, 415, 131, 41);
-		JPAdmGestao.add(buttonAdminGestCan);
-
 		// Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
 		JPAdmEstatistica.setVisible(false);
 		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmEstatistica);
 		JPAdmEstatistica.setLayout(null);
+		
 
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
