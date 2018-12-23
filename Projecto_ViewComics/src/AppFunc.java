@@ -48,8 +48,8 @@ public class AppFunc {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+
+		//EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					AppFunc window = new AppFunc();
@@ -58,8 +58,8 @@ public class AppFunc {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
+		//});
+	//}
 
 	/**
 	 * Create the application.

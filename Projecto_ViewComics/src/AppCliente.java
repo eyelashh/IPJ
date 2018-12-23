@@ -15,8 +15,12 @@ import java.awt.SystemColor;
 import javax.swing.JTextField;
 import java.awt.Choice;
 import java.awt.TextField;
+import java.awt.Window;
 import java.awt.List;
 import javax.swing.SwingConstants;
+
+import sun.jvm.hotspot.debugger.windows.amd64.WindowsAMD64CFrame;
+
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -41,8 +45,9 @@ public class AppCliente {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	
+	//public static void main(String[] args) {
+		//EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					AppCliente window = new AppCliente();
@@ -51,8 +56,8 @@ public class AppCliente {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
+		//});
+	//}
 
 	/**
 	 * Create the application.
@@ -124,20 +129,7 @@ public class AppCliente {
 		txtUsername.setColumns(10);
 		txtUsername.setBounds(919, 70, 189, 20);
 		JPanelCabecalho.add(txtUsername);
-		
 		JButton btnLogIn = new JButton("Entrar");
-		btnLogIn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtUsername.getText()=="a" && new String(txtPassword.getPassword()).equals("a"))
-				{
-					
-				}
-				if(txtUsername.getText()=="f" && new String(txtPassword.getPassword()).equals("f"))
-				{
-					
-				}
-			}
-		});
 		btnLogIn.setBackground(SystemColor.controlHighlight);
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
@@ -522,7 +514,25 @@ public class AppCliente {
 			}
 		});
 		
-		
+		btnLogIn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
+				{
+					AppAdmin adm = new AppAdmin();
+					adm.run();
+					frame.setVisible(false);
+					
+				}
+				if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
+				{
+					AppFunc fun = new AppFunc();
+					fun.run();
+					frame.setVisible(false);
+					
+				}
+			}
+		});
 		
 	}
 }

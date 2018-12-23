@@ -59,11 +59,9 @@ public class BancoAppAdm {
 	 */
 
 	public void run() {
-
 		try {
 			BancoAppAdm window = new BancoAppAdm();
 			window.frame.setVisible(true);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
