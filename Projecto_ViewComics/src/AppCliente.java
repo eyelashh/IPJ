@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import java.awt.Choice;
+import java.awt.Color;
 import java.awt.TextField;
 import java.awt.Window;
 import java.awt.List;
@@ -21,6 +22,8 @@ import javax.swing.SwingConstants;
 
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class AppCliente {
@@ -86,7 +89,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg \r\n"));
+					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -145,7 +148,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(  "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
+					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -175,14 +178,14 @@ public class AppCliente {
 		//painel principal que contem o painel Carrinho e o painel Livros
 		
 		JPanel JPanelPrincipal = new JPanel();
-		JPanelPrincipal.setBounds(255, 185, 933, 544);
+		JPanelPrincipal.setBounds(255, 185, 1009, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
 		//painel para o carrinho
 		
 		JPanel JPCarrinho = new JPanel();
-		JPCarrinho.setBounds(0, 0, 931, 544);
+		JPCarrinho.setBounds(-57, 0, 1065, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
 		
@@ -414,7 +417,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel1.jpg "));
+					img = ImageIO.read(new File( "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/calvinHobes.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -423,7 +426,7 @@ public class AppCliente {
 				
 			}
 		};
-		JPLivros.setBounds(0, 0, 931, 544);
+		JPLivros.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
 		JPLivros.setVisible(false);
@@ -495,6 +498,8 @@ public class AppCliente {
 			}
 		});
 		
+		//btn LogIn
+		
 		btnLogIn.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -515,5 +520,47 @@ public class AppCliente {
 			}
 		});
 		
+		//mudar a cor de um botao ao passar o cursor do rato
+		
+				// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
+				//deixar a cor fixa ao clicar(mouse Clicked)
+				//retirar a cor do anterior ao clicar em outro botão(mouse Clicked)
+				
+				//Livros
+
+				btnLivros.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						btnLivros.setBackground(Color.YELLOW);
+					}
+
+					public void mouseExited(MouseEvent arg0) {
+						btnLivros.setBackground(SystemColor.controlHighlight);
+					}
+
+					public void mouseClicked(MouseEvent arg0) {
+						btnLivros.setBackground(Color.YELLOW);
+						btnCarrinho.setBackground(SystemColor.controlHighlight);
+						
+					}
+				});
+				
+				//Carrinho
+				
+				btnCarrinho.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						btnCarrinho.setBackground(Color.YELLOW);
+					}
+
+					public void mouseExited(MouseEvent arg0) {
+						btnCarrinho.setBackground(SystemColor.controlHighlight);
+					}
+
+					public void mouseClicked(MouseEvent arg0) {
+						btnCarrinho.setBackground(Color.YELLOW);
+						btnLivros.setBackground(SystemColor.controlHighlight);
+					}
+				});
 	}
 }
