@@ -79,34 +79,36 @@ public class AppCliente {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel JPanelCabecalho = new JPanel() {
-			@Override
-			//o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-				
-				super.paintComponent(g);
-				Image img;
-				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
-					g.drawImage(img,0,0,null); 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		};
+		JPanel JPanelCabecalho = new JPanel(); 
+//		{
+//			@Override
+//			//o paint component vai pintar literalmente o componente
+//			protected void paintComponent(Graphics g) {
+//				
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//					
+//					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
+//					
+//					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
+//					g.drawImage(img,0,0,null); 
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//		};
+		JPanelCabecalho.setBackground(new Color(255, 215, 0));
 		JPanelCabecalho.setBounds(0, 0, 1264, 183);
 		frame.getContentPane().add(JPanelCabecalho);
 		JPanelCabecalho.setLayout(null);
 		
 		JLabel label = new JLabel("ViewComics Inc.");
-		label.setBounds(176, 30, 624, 118);
-		label.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 90));
+		label.setBounds(59, 30, 785, 118);
+		label.setFont(new Font("Tempus Sans ITC", Font.BOLD, 92));
 		JPanelCabecalho.add(label);
 		
 		JLabel label_18 = new JLabel("\u00C1rea restrita (funcion\u00E1rio ou admin)");
@@ -181,7 +183,27 @@ public class AppCliente {
 		
 		//painel principal que contem o painel Carrinho e o painel Livros
 		
-		JPanel JPanelPrincipal = new JPanel();
+		JPanel JPanelPrincipal = new JPanel(){
+			@Override
+			//o paint component vai pintar literalmente o componente
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
 		JPanelPrincipal.setBounds(255, 185, 1009, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
