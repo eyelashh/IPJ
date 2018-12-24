@@ -19,8 +19,6 @@ import java.awt.Window;
 import java.awt.List;
 import javax.swing.SwingConstants;
 
-import sun.jvm.hotspot.debugger.windows.amd64.WindowsAMD64CFrame;
-
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

@@ -297,6 +297,282 @@ public class AppFunc {
 
 			}
 		};
+<<<<<<< HEAD
+		JPanelPrincipal.setBounds(255, 185, 1009, 544);
+		frame.getContentPane().add(JPanelPrincipal);
+		JPanelPrincipal.setLayout(null);
+			
+			JPanel JPpagamento = new JPanel() {
+				protected void paintComponent(Graphics g) {
+				}
+			};
+			JPpagamento.setBounds(0, 0, 322, 397);
+			JPanelPrincipal.add(JPpagamento);
+			JPpagamento.setLayout(null);
+			JPpagamento.setVisible(false);
+			
+			
+			JComboBox comboBoxPagamento = new JComboBox();
+			comboBoxPagamento.setBounds(65, 34, 199, 22);
+			JPpagamento.add(comboBoxPagamento);
+			comboBoxPagamento.addItem("(Seleccione o mï¿½todo de pagamento)");
+			comboBoxPagamento.addItem("Dinheiro");
+			comboBoxPagamento.addItem("Multibanco");
+			
+			
+			
+			JPanel JPGestao = new JPanel();
+			JPGestao.setLayout(null);
+			JPGestao.setBounds(0, 0, 1009, 544);
+			JPanelPrincipal.add(JPGestao);
+			JPGestao.setVisible(false);
+			
+			textField = new JTextField();
+			textField.setColumns(10);
+			textField.setBounds(148, 144, 256, 26);
+			JPGestao.add(textField);
+			
+			textField_1 = new JTextField();
+			textField_1.setColumns(10);
+			textField_1.setBounds(148, 231, 256, 25);
+			JPGestao.add(textField_1);
+			
+			textField_2 = new JTextField();
+			textField_2.setColumns(10);
+			textField_2.setBounds(148, 329, 256, 26);
+			JPGestao.add(textField_2);
+			
+			textField_3 = new JTextField();
+			textField_3.setColumns(10);
+			textField_3.setBounds(493, 230, 256, 26);
+			JPGestao.add(textField_3);
+			
+			textField_4 = new JTextField();
+			textField_4.setColumns(10);
+			textField_4.setBounds(493, 329, 256, 26);
+			JPGestao.add(textField_4);
+			
+			textField_5 = new JTextField();
+			textField_5.setColumns(10);
+			textField_5.setBounds(493, 143, 256, 26);
+			JPGestao.add(textField_5);
+			
+			JLabel label_1 = new JLabel("Username actual");
+			label_1.setBounds(151, 122, 81, 14);
+			JPGestao.add(label_1);
+			
+			JLabel label_2 = new JLabel("Palavra passe:");
+			label_2.setBounds(148, 209, 81, 14);
+			JPGestao.add(label_2);
+			
+			JLabel label_3 = new JLabel("Novo username:");
+			label_3.setBounds(148, 304, 81, 14);
+			JPGestao.add(label_3);
+			
+			JLabel label_4 = new JLabel("Palavra passe actual :");
+			label_4.setBounds(497, 118, 148, 14);
+			JPGestao.add(label_4);
+			
+			JLabel label_5 = new JLabel("Nova palavra passe :");
+			label_5.setBounds(493, 205, 152, 14);
+			JPGestao.add(label_5);
+			
+			JLabel label_6 = new JLabel("Confirma\u00E7\u00E3o da nova palavra passe :");
+			label_6.setBounds(493, 304, 189, 14);
+			JPGestao.add(label_6);
+			
+			JLabel label_7 = new JLabel("Actualizar nome :");
+			label_7.setFont(new Font("Tahoma", Font.BOLD, 20));
+			label_7.setBounds(148, 75, 201, 36);
+			JPGestao.add(label_7);
+			
+			JLabel label_8 = new JLabel("Actualizar palavra passe :");
+			label_8.setFont(new Font("Tahoma", Font.BOLD, 20));
+			label_8.setBounds(493, 71, 298, 36);
+			JPGestao.add(label_8);
+			
+			JButton button_3 = new JButton("Confirmar novo username");
+			button_3.setBounds(184, 383, 165, 23);
+			JPGestao.add(button_3);
+			
+			JButton button_6 = new JButton("Confirmar nova palavra passe ");
+			button_6.setBounds(529, 383, 189, 23);
+			JPGestao.add(button_6);
+			
+			JPanel JPCarrinhos = new JPanel() {
+				@Override
+				//o paint component vai pintar literalmente o componente
+				protected void paintComponent(Graphics g) {
+					
+					super.paintComponent(g);
+					Image img;
+					try {
+						
+						// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+						
+						// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+						img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\fundo4.jpg"));
+						g.drawImage(img,0,0,null); 
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			};
+			JPCarrinhos.setBounds(0, 0, 1009, 544);
+			JPanelPrincipal.add(JPCarrinhos);
+			JPCarrinhos.setLayout(null);
+			JPCarrinhos.setVisible(false);
+			
+			textField_6 = new JTextField();
+			textField_6.setBounds(59, 23, 153, 32);
+			JPCarrinhos.add(textField_6);
+			textField_6.setColumns(10);
+			
+			JLabel lblNewLabel = new JLabel("NIF");
+			lblNewLabel.setBounds(26, 32, 46, 14);
+			JPCarrinhos.add(lblNewLabel);
+			
+			JList list = new JList();
+			list.setBounds(59, 97, 153, 394);
+			JPCarrinhos.add(list);
+			
+			JButton btnPesquisar = new JButton("Pesquisar");
+			btnPesquisar.setBounds(238, 28, 89, 23);
+			JPCarrinhos.add(btnPesquisar);
+			
+			JLabel lblNewLabel_1 = new JLabel("TOTAL :");
+			lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblNewLabel_1.setBounds(378, 366, 46, 14);
+			JPCarrinhos.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("New label");
+			lblNewLabel_2.setBounds(425, 366, 46, 14);
+			JPCarrinhos.add(lblNewLabel_2);
+			
+			JLabel lblValorAPagar = new JLabel("VALOR A PAGAR: ");
+			lblValorAPagar.setFont(new Font("Tahoma", Font.BOLD, 11));
+			lblValorAPagar.setBounds(378, 391, 105, 14);
+			JPCarrinhos.add(lblValorAPagar);
+			
+			JLabel label_9 = new JLabel("New label");
+			label_9.setBounds(490, 391, 46, 14);
+			JPCarrinhos.add(label_9);
+			
+			JButton btnPagar = new JButton("Realizar pagamento");
+			
+			btnPagar.setBounds(367, 421, 164, 41);
+			JPCarrinhos.add(btnPagar);
+			
+			JButton btnCancelar = new JButton("Cancelar");
+			btnCancelar.setBounds(537, 421, 89, 41);
+			JPCarrinhos.add(btnCancelar);
+			
+			JButton btnEliminar2 = new JButton("Eliminar");
+			btnEliminar2.setBounds(588, 195, 70, 23);
+			JPCarrinhos.add(btnEliminar2);
+			
+			JButton btnEliminar1 = new JButton("Eliminar");
+			btnEliminar1.setBounds(588, 145, 70, 23);
+			JPCarrinhos.add(btnEliminar1);
+			
+			JButton btnEliminar3 = new JButton("Eliminar");
+			btnEliminar3.setBounds(588, 244, 70, 23);
+			JPCarrinhos.add(btnEliminar3);
+			
+			JButton btnEliminar4 = new JButton("Eliminar");
+			btnEliminar4.setBounds(588, 293, 70, 23);
+			JPCarrinhos.add(btnEliminar4);
+			
+			JLabel lblNewLabel_3 = new JLabel("DETALHES DO CARRINHO :");
+			lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 13));
+			lblNewLabel_3.setBounds(283, 62, 188, 23);
+			JPCarrinhos.add(lblNewLabel_3);
+			
+			JLabel lblLivro = new JLabel("Livro");
+			lblLivro.setBounds(284, 97, 65, 23);
+			JPCarrinhos.add(lblLivro);
+			
+			JLabel lblQuantidade = new JLabel("Quantidade");
+			lblQuantidade.setBounds(359, 97, 97, 23);
+			JPCarrinhos.add(lblQuantidade);
+			
+			JLabel lblValorAPagar_2 = new JLabel("Valor a pagar");
+			lblValorAPagar_2.setBounds(466, 97, 115, 23);
+			JPCarrinhos.add(lblValorAPagar_2);
+			
+			JLabel lblNewLabel_4 = new JLabel("livro1");
+			lblNewLabel_4.setBounds(284, 154, 30, 14);
+			JPCarrinhos.add(lblNewLabel_4);
+			
+			JLabel label_10 = new JLabel("livro1");
+			label_10.setBounds(284, 204, 30, 14);
+			JPCarrinhos.add(label_10);
+			
+			JLabel label_11 = new JLabel("livro1");
+			label_11.setBounds(284, 253, 30, 14);
+			JPCarrinhos.add(label_11);
+			
+			JLabel label_12 = new JLabel("livro1");
+			label_12.setBounds(369, 154, 30, 14);
+			JPCarrinhos.add(label_12);
+			
+			JLabel label_13 = new JLabel("livro1");
+			label_13.setBounds(369, 204, 30, 14);
+			JPCarrinhos.add(label_13);
+			
+			JLabel label_14 = new JLabel("livro1");
+			label_14.setBounds(369, 253, 30, 14);
+			JPCarrinhos.add(label_14);
+			
+			JLabel label_15 = new JLabel("livro1");
+			label_15.setBounds(284, 302, 30, 14);
+			JPCarrinhos.add(label_15);
+			
+			JLabel label_16 = new JLabel("livro1");
+			label_16.setBounds(369, 302, 30, 14);
+			JPCarrinhos.add(label_16);
+			
+			JLabel label_17 = new JLabel("livro1");
+			label_17.setBounds(478, 154, 30, 14);
+			JPCarrinhos.add(label_17);
+			
+			JLabel label_18 = new JLabel("livro1");
+			label_18.setBounds(478, 204, 30, 14);
+			JPCarrinhos.add(label_18);
+			
+			JLabel label_19 = new JLabel("livro1");
+			label_19.setBounds(478, 253, 30, 14);
+			JPCarrinhos.add(label_19);
+			
+			JLabel label_20 = new JLabel("livro1");
+			label_20.setBounds(478, 302, 30, 14);
+			JPCarrinhos.add(label_20);
+			
+			
+		
+			
+			JPanel JPLivros = new JPanel() {
+				@Override
+				//o paint component vai pintar literalmente o componente
+				protected void paintComponent(Graphics g) {
+					
+					super.paintComponent(g);
+					Image img;
+					try {
+						
+						// importar imagem para o background do panel, podemos fazê-lo da internet ou do ficheiro 
+						
+						// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+						img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\calvinHobes.jpg"));
+						g.drawImage(img,0,0,null); 
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+=======
 		JPCarrinhos.setBounds(0, 0, 1009, 544);
 		JPanelPrincipal.add(JPCarrinhos);
 		JPCarrinhos.setLayout(null);
@@ -459,6 +735,7 @@ public class AppFunc {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+>>>>>>> 0242b0e07b91dc899e4d1ac7032217b6fd79997b
 				}
 
 			}
@@ -654,7 +931,24 @@ public class AppFunc {
 			}
 		});
 		
+<<<<<<< HEAD
+		btnPagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JPCarrinhos.setVisible(false);
+				JPLivros.setVisible(false);
+				JPpagamento.setVisible(true);
+				JPmultibanco.setVisible(false);
+				JPdinheiro.setVisible(false);
+				JPGestao.setVisible(false);
+				
+				
+				
+			}
+		});
+		
+=======
 		//Carrinhos
+>>>>>>> 0242b0e07b91dc899e4d1ac7032217b6fd79997b
 		
 		btnCarrinhos.addMouseListener(new MouseAdapter() {
 			@Override
