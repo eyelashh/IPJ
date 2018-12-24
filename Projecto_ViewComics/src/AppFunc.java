@@ -572,7 +572,6 @@ public class AppFunc {
 						e.printStackTrace();
 					}
 					
-=======
 		JPCarrinhos.setBounds(0, 0, 1009, 544);
 		JPanelPrincipal.add(JPCarrinhos);
 		JPCarrinhos.setLayout(null);
