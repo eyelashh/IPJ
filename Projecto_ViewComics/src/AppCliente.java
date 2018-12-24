@@ -524,7 +524,8 @@ public class AppCliente {
 			}
 		});
 		
-		//fazer logIn premindo Enter
+		//fazer logIn premindo Enter (foi apenas isto que acrescentei)
+		
 		txtPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent event) {
