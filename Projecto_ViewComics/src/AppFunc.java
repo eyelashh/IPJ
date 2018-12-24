@@ -71,7 +71,6 @@ public class AppFunc {
 	public AppFunc() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
