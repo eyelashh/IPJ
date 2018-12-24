@@ -672,6 +672,9 @@ public class AppFunc {
 				btnGestaoFunc.setBackground(SystemColor.controlHighlight);
 			}
 		});
+		
+		// gestao
+		
 		btnGestaoFunc.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

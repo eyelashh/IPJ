@@ -28,6 +28,7 @@ import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
@@ -645,10 +646,110 @@ public class AppAdmin {
 		
 		//mudar a cor de um botao ao passar o cursor do rato
 		
+		// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
+		//deixar a cor fixa ao clicar(mouse Clicked)
+		//retirar a cor do anterior ao clicar em outro botão(mouse Clicked)
 		
-	}
-	public void mouseEntered(MouseEvent e) {
-		JButton btn =(JButton)e.getSource();
-		btn.setBackground(Color.GREEN);
-	}
-}
+		//Livros
+
+		btnLivros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnLivros.setBackground(Color.YELLOW);
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				btnLivros.setBackground(SystemColor.controlHighlight);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnLivros.setBackground(Color.YELLOW);
+				btnGestao.setBackground(SystemColor.controlHighlight);
+				btnStock.setBackground(SystemColor.controlHighlight);
+				btnFuncionarios.setBackground(SystemColor.controlHighlight);
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+			}
+		});
+		
+		//GestaoConta
+		
+		btnGestao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnGestao.setBackground(Color.YELLOW);
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				btnGestao.setBackground(SystemColor.controlHighlight);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnGestao.setBackground(Color.YELLOW);
+				btnLivros.setBackground(SystemColor.controlHighlight);
+				btnStock.setBackground(SystemColor.controlHighlight);
+				btnFuncionarios.setBackground(SystemColor.controlHighlight);
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+			}
+		});
+		
+		// Stock
+		
+		btnStock.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnStock.setBackground(Color.YELLOW);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnStock.setBackground(Color.YELLOW);
+				btnLivros.setBackground(SystemColor.controlHighlight);
+				btnGestao.setBackground(SystemColor.controlHighlight);
+				btnFuncionarios.setBackground(SystemColor.controlHighlight);
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnStock.setBackground(SystemColor.controlHighlight);
+			}
+		});
+		
+		//Funcionarios
+		
+		btnFuncionarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnFuncionarios.setBackground(Color.YELLOW);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnFuncionarios.setBackground(Color.YELLOW);
+				btnLivros.setBackground(SystemColor.controlHighlight);
+				btnGestao.setBackground(SystemColor.controlHighlight);
+				btnStock.setBackground(SystemColor.controlHighlight);
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnFuncionarios.setBackground(SystemColor.controlHighlight);
+			}
+		});
+		
+		//Estatisticas
+		
+		btnStock.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnEstatisticas.setBackground(Color.YELLOW);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnEstatisticas.setBackground(Color.YELLOW);
+				btnLivros.setBackground(SystemColor.controlHighlight);
+				btnGestao.setBackground(SystemColor.controlHighlight);
+				btnFuncionarios.setBackground(SystemColor.controlHighlight);
+				btnGestao.setBackground(SystemColor.controlHighlight);
+			}
+			public void mouseExited(MouseEvent arg0) {
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+			}
+		});
+		
+}}
