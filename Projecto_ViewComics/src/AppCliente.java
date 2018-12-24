@@ -25,6 +25,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AppCliente {
 
@@ -119,6 +121,7 @@ public class AppCliente {
 		JPanelCabecalho.add(label_19);
 		
 		txtPassword = new JPasswordField();
+		
 		txtPassword.setBounds(918, 121, 189, 20);
 		JPanelCabecalho.add(txtPassword);
 		
@@ -132,6 +135,7 @@ public class AppCliente {
 		txtUsername.setBounds(919, 70, 189, 20);
 		JPanelCabecalho.add(txtUsername);
 		JButton btnLogIn = new JButton("Entrar");
+		
 		btnLogIn.setBackground(SystemColor.controlHighlight);
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
@@ -520,6 +524,33 @@ public class AppCliente {
 			}
 		});
 		
+		//fazer logIn premindo Enter
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent event) {
+				if (event.getKeyCode()==KeyEvent.VK_ENTER) {
+					if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
+					{
+						AppAdmin adm = new AppAdmin();
+						adm.run();
+						frame.setVisible(false);
+						
+					}
+					if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
+					{
+						AppFunc fun = new AppFunc();
+						fun.run();
+						frame.setVisible(false);
+						
+					}
+					
+					
+				}
+				
+			}
+		});
+		
+		
 		//mudar a cor de um botao ao passar o cursor do rato
 		
 				// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
@@ -535,15 +566,19 @@ public class AppCliente {
 					}
 
 					public void mouseExited(MouseEvent arg0) {
+						
 						btnLivros.setBackground(SystemColor.controlHighlight);
+						
 					}
-
 					public void mouseClicked(MouseEvent arg0) {
+						btnLivros.isSelected();
 						btnLivros.setBackground(Color.YELLOW);
 						btnCarrinho.setBackground(SystemColor.controlHighlight);
 						
 					}
+				
 				});
+				
 				
 				//Carrinho
 				
