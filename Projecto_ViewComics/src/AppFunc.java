@@ -71,7 +71,6 @@ public class AppFunc {
 	public AppFunc() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -572,7 +571,6 @@ public class AppFunc {
 						e.printStackTrace();
 					}
 					
-=======
 		JPCarrinhos.setBounds(0, 0, 1009, 544);
 		JPanelPrincipal.add(JPCarrinhos);
 		JPCarrinhos.setLayout(null);
