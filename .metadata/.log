@@ -1012,3 +1012,53 @@ java.io.IOException: The process cannot access the file because another process 
 	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:239)
 	at org.eclipse.egit.ui.internal.staging.StagingView$53.run(StagingView.java:3394)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.egit.core 4 0 2018-12-24 19:05:26.278
+!MESSAGE An exception occurred during push on URI https://github.com/eyelashh/IPJ.git: https://github.com/eyelashh/IPJ.git: cannot open git-receive-pack
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/eyelashh/IPJ.git: cannot open git-receive-pack
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:180)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:217)
+	at org.eclipse.egit.ui.internal.push.PushJob.performJob(PushJob.java:86)
+	at org.eclipse.egit.ui.internal.jobs.RepositoryJob.run(RepositoryJob.java:59)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/eyelashh/IPJ.git: cannot open git-receive-pack
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:587)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:438)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:160)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1346)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:170)
+	... 4 more
+Caused by: java.net.ConnectException: Connection time out: github.com
+	at org.eclipse.jgit.util.HttpSupport.response(HttpSupport.java:214)
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:501)
+	... 8 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-12-24 19:05:26.280
+!MESSAGE Can't connect to any repository: https://github.com/eyelashh/IPJ.git (https://github.com/eyelashh/IPJ.git: cannot open git-receive-pack)
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-12-24 19:06:50.269
+!MESSAGE The process cannot access the file because another process has locked a portion of the file
+!STACK 0
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileInputStream.readBytes(Native Method)
+	at java.base/java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:289)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:141)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:122)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:239)
+	at org.eclipse.egit.ui.internal.staging.StagingView$53.run(StagingView.java:3394)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-12-24 19:18:59.102
+!MESSAGE The process cannot access the file because another process has locked a portion of the file
+!STACK 0
+java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.base/java.io.FileInputStream.readBytes(Native Method)
+	at java.base/java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:289)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:141)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:122)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:239)
+	at org.eclipse.egit.ui.internal.staging.StagingView$53.run(StagingView.java:3394)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
