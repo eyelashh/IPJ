@@ -108,6 +108,16 @@ public class AppFunc {
 		label.setFont(new Font("Tempus Sans ITC", Font.BOLD, 98));
 		JPanelCabecalho.add(label);
 		
+		JButton btnLogout = new JButton("LogOut");
+		btnLogout.setBounds(1142, 56, 89, 23);
+		JPanelCabecalho.add(btnLogout);
+		
+		JLabel lblBemVindonome = new JLabel("Bem Vindo -Nome - Funcion\u00E1rio");
+		lblBemVindonome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBemVindonome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblBemVindonome.setBounds(902, 11, 335, 27);
+		JPanelCabecalho.add(lblBemVindonome);
+		
 		JPanel JPanelMenu = new JPanel() {
 			@Override
 			//o paint component vai pintar literalmente o componente
