@@ -185,6 +185,7 @@ public class BancoAppAdm {
 		JPAdm.add(JPAdmCliente);
 		JPAdmCliente.setVisible(false);
 		JPAdmCliente.setLayout(null);
+		
 
 		JComboBox boxAdminCliePesquisa = new JComboBox();
 		boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
