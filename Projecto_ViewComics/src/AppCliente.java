@@ -516,7 +516,7 @@ public class AppCliente {
 				}
 				if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
 				{
-					AppFunc fun = new AppFunc();
+					AppFuncionario fun = new AppFuncionario();
 					fun.run();
 					frame.setVisible(false);
 					
@@ -539,7 +539,7 @@ public class AppCliente {
 					}
 					if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
 					{
-						AppFunc fun = new AppFunc();
+						AppFuncionario fun = new AppFuncionario();
 						fun.run();
 						frame.setVisible(false);
 						
