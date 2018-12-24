@@ -440,19 +440,7 @@ public class AppFunc {
 			label_20.setBounds(478, 302, 30, 14);
 			JPCarrinhos.add(label_20);
 			
-			btnPagar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					JPCarrinhos.setVisible(false);
-					JPLivros.setVisible(false);
-					JPpagamento.setVisible(true);
-					JPmultibanco.setVisible(false);
-					JPdinheiro.setVisible(false);
-					JPGestao.setVisible(false);
-					
-					
-					
-				}
-			});
+			
 		
 			
 			JPanel JPLivros = new JPanel() {
@@ -635,6 +623,20 @@ public class AppFunc {
 			JPdinheiro.setVisible(true);
 		}
 		
+		
+		btnPagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JPCarrinhos.setVisible(false);
+				JPLivros.setVisible(false);
+				JPpagamento.setVisible(true);
+				JPmultibanco.setVisible(false);
+				JPdinheiro.setVisible(false);
+				JPGestao.setVisible(false);
+				
+				
+				
+			}
+		});
 		
 		
 	}
