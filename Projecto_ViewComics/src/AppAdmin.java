@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -27,6 +28,8 @@ import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -138,6 +141,7 @@ public class AppAdmin {
 		panelcabecalho.add(label_8);
 		
 		JButton btnLogOut = new JButton("LogOut");
+		
 		btnLogOut.setBackground(SystemColor.controlHighlight);
 		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
@@ -580,6 +584,8 @@ public class AppAdmin {
 		panelPrincipal.add(jpAdmEstatisticas);
 		jpAdmEstatisticas.setLayout(null);
 		
+		//encaminhar para os respectivos paineis ao clicar nos botoes
+		
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpAdmStock.setVisible(false);
@@ -626,5 +632,23 @@ public class AppAdmin {
 				jpAdmFuncionarios.setVisible(false);
 			}
 		});
+		
+		//logOut 
+		
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AppCliente clt = new AppCliente();
+				clt.run();
+				frame.setVisible(false);
+			}
+		});
+		
+		//mudar a cor de um botao ao passar o cursor do rato
+		
+		
+	}
+	public void mouseEntered(MouseEvent e) {
+		JButton btn =(JButton)e.getSource();
+		btn.setBackground(Color.GREEN);
 	}
 }
