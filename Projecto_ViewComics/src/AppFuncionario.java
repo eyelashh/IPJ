@@ -175,6 +175,26 @@ public class AppFuncionario {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+												
+												JPanel jpPagamento = new JPanel();
+												jpPagamento.setBounds(0, 0, 219, 336);
+												panelPrincipal.add(jpPagamento);
+												jpPagamento.setLayout(null);
+												jpPagamento.setVisible(false);
+												
+												JComboBox comboBoxTipoPagamento = new JComboBox();
+												comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+												jpPagamento.add(comboBoxTipoPagamento);
+												
+												textField_8 = new JTextField();
+												textField_8.setBounds(20, 94, 172, 22);
+												jpPagamento.add(textField_8);
+												textField_8.setColumns(10);
+												
+												JLabel lblNif_1 = new JLabel("NIF");
+												lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+												lblNif_1.setBounds(22, 69, 46, 14);
+												jpPagamento.add(lblNif_1);
 										
 												JPanel jpFuncCarrinhos = new JPanel();
 												jpFuncCarrinhos.setBounds(0, 0, 998, 519);
@@ -182,71 +202,10 @@ public class AppFuncionario {
 												jpFuncCarrinhos.setVisible(false);
 														jpFuncCarrinhos.setLayout(null);
 														
-														JButton btnConcluirPagamento = new JButton("Concluir");
-														btnConcluirPagamento.addActionListener(new ActionListener() {
-															public void actionPerformed(ActionEvent arg0) {
-															}
-														});
-														btnConcluirPagamento.setBounds(413, 338, 125, 30);
-														jpFuncCarrinhos.add(btnConcluirPagamento);
-														
 														JPanel panelConteudoCarrinho = new JPanel();
 														panelConteudoCarrinho.setBounds(266, 49, 542, 299);
 														jpFuncCarrinhos.add(panelConteudoCarrinho);
 														panelConteudoCarrinho.setLayout(null);
-														
-														JPanel jpPagamento = new JPanel();
-														jpPagamento.setBounds(103, 23, 219, 336);
-														panelConteudoCarrinho.add(jpPagamento);
-														jpPagamento.setLayout(null);
-														jpPagamento.setVisible(false);
-														
-														JPanel panel = new JPanel();
-														panel.setBounds(10, 141, 199, 171);
-														jpPagamento.add(panel);
-														panel.setLayout(null);
-														panel.setVisible(false);
-														
-														JLabel lblNewLabel_1 = new JLabel("A pagar :");
-														lblNewLabel_1.setBounds(10, 11, 76, 23);
-														panel.add(lblNewLabel_1);
-														
-														JLabel lblRecebido = new JLabel("Recebido : ");
-														lblRecebido.setBounds(10, 45, 76, 23);
-														panel.add(lblRecebido);
-														
-														JLabel lblTroco = new JLabel("Troco :");
-														lblTroco.setBounds(10, 79, 76, 23);
-														panel.add(lblTroco);
-														
-														textField_9 = new JTextField();
-														textField_9.setBounds(72, 12, 86, 20);
-														panel.add(textField_9);
-														textField_9.setColumns(10);
-														
-														textField_10 = new JTextField();
-														textField_10.setColumns(10);
-														textField_10.setBounds(72, 45, 86, 20);
-														panel.add(textField_10);
-														
-														textField_11 = new JTextField();
-														textField_11.setColumns(10);
-														textField_11.setBounds(72, 80, 86, 20);
-														panel.add(textField_11);
-														
-														JComboBox comboBox = new JComboBox();
-														comboBox.setBounds(20, 24, 172, 22);
-														jpPagamento.add(comboBox);
-														
-														textField_8 = new JTextField();
-														textField_8.setBounds(20, 94, 172, 22);
-														jpPagamento.add(textField_8);
-														textField_8.setColumns(10);
-														
-														JLabel lblNif_1 = new JLabel("NIF");
-														lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-														lblNif_1.setBounds(22, 69, 46, 14);
-														jpPagamento.add(lblNif_1);
 														
 														JLabel label_11 = new JLabel("Titulo ");
 														label_11.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -460,6 +419,47 @@ public class AppFuncionario {
 																JLabel label_27 = new JLabel("New label");
 																label_27.setBounds(486, 385, 135, 14);
 																jpFuncCarrinhos.add(label_27);
+										
+										JPanel jpDinheiro = new JPanel();
+										jpDinheiro.setBounds(0, 0, 199, 171);
+										panelPrincipal.add(jpDinheiro);
+										jpDinheiro.setLayout(null);
+										jpDinheiro.setVisible(false);
+										
+										JLabel lblNewLabel_1 = new JLabel("A pagar :");
+										lblNewLabel_1.setBounds(10, 11, 76, 23);
+										jpDinheiro.add(lblNewLabel_1);
+										
+										JLabel lblRecebido = new JLabel("Recebido : ");
+										lblRecebido.setBounds(10, 45, 76, 23);
+										jpDinheiro.add(lblRecebido);
+										
+										JLabel lblTroco = new JLabel("Troco :");
+										lblTroco.setBounds(10, 79, 76, 23);
+										jpDinheiro.add(lblTroco);
+										
+										textField_9 = new JTextField();
+										textField_9.setBounds(72, 12, 86, 20);
+										jpDinheiro.add(textField_9);
+										textField_9.setColumns(10);
+										
+										textField_10 = new JTextField();
+										textField_10.setColumns(10);
+										textField_10.setBounds(72, 45, 86, 20);
+										jpDinheiro.add(textField_10);
+										
+										textField_11 = new JTextField();
+										textField_11.setColumns(10);
+										textField_11.setBounds(72, 80, 86, 20);
+										jpDinheiro.add(textField_11);
+										
+										JButton btnConcluirPagamento = new JButton("Concluir");
+										btnConcluirPagamento.setBounds(33, 114, 125, 30);
+										jpDinheiro.add(btnConcluirPagamento);
+										btnConcluirPagamento.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent arg0) {
+											}
+										});
 								
 										JPanel jpFuncLivros = new JPanel();
 										jpFuncLivros.setLayout(null);
@@ -636,8 +636,11 @@ public class AppFuncionario {
 																																												btnCancelarPasse.setBounds(676, 359, 97, 25);
 																																												jpFuncConta.add(btnCancelarPasse);
 
-		// encaminhar para os respectivos paineis ao clicar nos botoes
+		
+																																												
+	// encaminhar para os respectivos paineis ao clicar nos botoes
 
+		
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpFuncCarrinhos.setVisible(false);
@@ -648,7 +651,7 @@ public class AppFuncionario {
 		});
 		btnCarrinhos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				jpFuncCarrinhos.setVisible(false);
+				jpFuncCarrinhos.setVisible(true);
 				jpFuncLivros.setVisible(false);
 				jpFuncConta.setVisible(false);
 				jpPagamento.setVisible(false);
@@ -662,6 +665,26 @@ public class AppFuncionario {
 				jpPagamento.setVisible(false);
 			}
 		});
+		
+		btnPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				jpFuncCarrinhos.setVisible(false);
+				jpFuncLivros.setVisible(false);
+				jpFuncConta.setVisible(false);
+				jpPagamento.setVisible(true);
+				
+			}
+		});
+		
+		//selecçao do metodo de pagamento
+		
+		comboBoxTipoPagamento.addItem("(escolha o método de pagamento)");
+		comboBoxTipoPagamento.addItem("Dinheiro");
+		comboBoxTipoPagamento.addItem("Multibanco");
+		
+		if (comboBoxTipoPagamento.equals("Dinheiro")) {
+			jpDinheiro.setVisible(true);
+		}
 
 		// logOut
 
@@ -713,6 +736,7 @@ public class AppFuncionario {
 				btnCarrinhos.setBackground(SystemColor.controlHighlight);
 			}
 		});
+		
 
 		// Funcionarios
 
