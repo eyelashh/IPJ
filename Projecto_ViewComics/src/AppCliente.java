@@ -14,12 +14,19 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import java.awt.Choice;
+import java.awt.Color;
 import java.awt.TextField;
+import java.awt.Window;
 import java.awt.List;
 import javax.swing.SwingConstants;
+
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AppCliente {
 
@@ -34,15 +41,17 @@ public class AppCliente {
 	private JTextField txtUnid3;
 	private JTextField txtUnid4;
 	private JTextField txtUnid5;
-	private JTextField textField_12;
+	private JTextField txtQuantidadeCarrinhoCliente;
 	private JPasswordField txtPassword;
 	private JTextField txtUsername;
+	private JTextField txtNifCliente;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+	
+	//public static void main(String[] args) {
+		//EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					AppCliente window = new AppCliente();
@@ -51,8 +60,8 @@ public class AppCliente {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
+		//});
+	//}
 
 	/**
 	 * Create the application.
@@ -82,7 +91,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg \r\n"));
+					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -112,6 +121,7 @@ public class AppCliente {
 		JPanelCabecalho.add(label_19);
 		
 		txtPassword = new JPasswordField();
+		
 		txtPassword.setBounds(918, 121, 189, 20);
 		JPanelCabecalho.add(txtPassword);
 		
@@ -124,8 +134,8 @@ public class AppCliente {
 		txtUsername.setColumns(10);
 		txtUsername.setBounds(919, 70, 189, 20);
 		JPanelCabecalho.add(txtUsername);
-		
 		JButton btnLogIn = new JButton("Entrar");
+		
 		btnLogIn.setBackground(SystemColor.controlHighlight);
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
@@ -142,7 +152,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(  "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
+					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -171,117 +181,15 @@ public class AppCliente {
 		
 		//painel principal que contem o painel Carrinho e o painel Livros
 		
-		JPanel JPanelPrincipal = new JPanel(){
-			@Override
-			//o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-				
-				super.paintComponent(g);
-				Image img;
-				try {
-					
-					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
-					g.drawImage(img,0,0,null); 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		};
+		JPanel JPanelPrincipal = new JPanel();
 		JPanelPrincipal.setBounds(255, 185, 1009, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 		
-		JPanel JPLivros = new JPanel();
-		JPLivros.setBounds(0, 0, 1009, 544);
-		JPanelPrincipal.add(JPLivros);
-		JPLivros.setLayout(null);
-		JPLivros.setVisible(false);
-		
-		Choice choiceAtributo = new Choice();
-		choiceAtributo.setBounds(65, 63, 200, 20);
-		JPLivros.add(choiceAtributo);
-		
-		TextField txtNomeAtributo = new TextField();
-		txtNomeAtributo.setBounds(65, 96, 200, 22);
-		JPLivros.add(txtNomeAtributo);
-		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBackground(SystemColor.controlHighlight);
-		btnLimpar.setBounds(286, 63, 115, 20);
-		JPLivros.add(btnLimpar);
-		
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.setBackground(SystemColor.controlHighlight);
-		btnPesquisar.setBounds(286, 98, 115, 20);
-		JPLivros.add(btnPesquisar);
-		
-		List listaLivros = new List();
-		listaLivros.setBounds(65, 140, 289, 348);
-		JPLivros.add(listaLivros);
-		
-		TextField txtSpecsLivro = new TextField();
-		txtSpecsLivro.setBounds(376, 140, 260, 211);
-		JPLivros.add(txtSpecsLivro);
-		
-		JLabel label_17 = new JLabel("Adicionar ao carrinho");
-		label_17.setHorizontalAlignment(SwingConstants.CENTER);
-		label_17.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		label_17.setBounds(700, 167, 274, 34);
-		JPLivros.add(label_17);
-		
-		JButton btnRemoverUnidade = new JButton("-");
-		btnRemoverUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRemoverUnidade.setBounds(724, 230, 54, 48);
-		JPLivros.add(btnRemoverUnidade);
-		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(803, 239, 61, 34);
-		JPLivros.add(textField_12);
-		
-		JButton btnAddUnidade = new JButton("-");
-		btnAddUnidade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddUnidade.setBounds(888, 230, 54, 48);
-		JPLivros.add(btnAddUnidade);
-		
-		JButton btnAddCarrinho = new JButton("Adicionar");
-		btnAddCarrinho.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		btnAddCarrinho.setBounds(758, 289, 152, 42);
-		JPLivros.add(btnAddCarrinho);
-		
 		//painel para o carrinho
 		
-		JPanel JPCarrinho = new JPanel() {
-			//imagem de fundo do painel carrinho
-			@Override
-			protected void paintComponent(Graphics g) {
-				
-				super.paintComponent(g);
-				Image img;
-				try {
-					
-					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "C:\\Users\\Joana\\Dropbox\\IPJ_ProjectoFinal\\Design\\ViewComics\\wallpaperMarvel.jpg"));
-					g.drawImage(img,0,0,null); 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		};
-		
-		
-		
-		
-		JPCarrinho.setBounds(0, 0, 1009, 544);
+		JPanel JPCarrinho = new JPanel();
+		JPCarrinho.setBounds(-57, 0, 1065, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
 		
@@ -492,6 +400,90 @@ public class AppCliente {
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
 		
+		txtNifCliente = new JTextField();
+		txtNifCliente.setColumns(10);
+		txtNifCliente.setBounds(480, 440, 220, 26);
+		JPCarrinho.add(txtNifCliente);
+		
+		JLabel lblNewLabel = new JLabel("Antes do pagamento introduza o seu NIF");
+		lblNewLabel.setBounds(485, 414, 215, 14);
+		JPCarrinho.add(lblNewLabel);
+		
+		JPanel JPLivros = new JPanel(){
+			@Override
+			//o paint component vai pintar literalmente o componente
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File( "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/calvinHobes.jpg "));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
+		JPLivros.setBounds(0, 0, 1008, 544);
+		JPanelPrincipal.add(JPLivros);
+		JPLivros.setLayout(null);
+		JPLivros.setVisible(false);
+		
+		Choice choiceAtributoLivroCliente = new Choice();
+		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
+		JPLivros.add(choiceAtributoLivroCliente);
+		
+		TextField txtNomeAtributoLivroCliente = new TextField();
+		txtNomeAtributoLivroCliente.setBounds(65, 96, 200, 22);
+		JPLivros.add(txtNomeAtributoLivroCliente);
+		
+		JButton btnLimparPesquisaCliente = new JButton("Limpar");
+		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
+		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
+		JPLivros.add(btnLimparPesquisaCliente);
+		
+		JButton btnPesquisarLivroCliente = new JButton("Pesquisar");
+		btnPesquisarLivroCliente.setBackground(SystemColor.controlHighlight);
+		btnPesquisarLivroCliente.setBounds(286, 98, 115, 20);
+		JPLivros.add(btnPesquisarLivroCliente);
+		
+		List listaLivros = new List();
+		listaLivros.setBounds(65, 140, 289, 348);
+		JPLivros.add(listaLivros);
+		
+		TextField txtSpecsLivro = new TextField();
+		txtSpecsLivro.setBounds(376, 140, 260, 211);
+		JPLivros.add(txtSpecsLivro);
+		
+		JButton btnRemoveCarrinhoCliente = new JButton("-");
+		btnRemoveCarrinhoCliente.setBackground(SystemColor.controlHighlight);
+		btnRemoveCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnRemoveCarrinhoCliente.setBounds(444, 63, 57, 39);
+		JPLivros.add(btnRemoveCarrinhoCliente);
+		
+		txtQuantidadeCarrinhoCliente = new JTextField();
+		txtQuantidadeCarrinhoCliente.setColumns(10);
+		txtQuantidadeCarrinhoCliente.setBounds(511, 67, 61, 34);
+		JPLivros.add(txtQuantidadeCarrinhoCliente);
+		
+		JButton btnAddCarrinhoCliente = new JButton("+");
+		btnAddCarrinhoCliente.setBackground(SystemColor.controlHighlight);
+		btnAddCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAddCarrinhoCliente.setBounds(582, 63, 54, 39);
+		JPLivros.add(btnAddCarrinhoCliente);
+		
+		JButton btnAddCarrinhoFinalCliente = new JButton("Adicionar ao carrinho");
+		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
+		btnAddCarrinhoFinalCliente.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnAddCarrinhoFinalCliente.setBounds(428, 11, 219, 42);
+		JPLivros.add(btnAddCarrinhoFinalCliente);
+		
 		//tornar os respectivos paineis visï¿½veis ao clicar
 		
 		btnLivros.addActionListener(new ActionListener() {
@@ -510,7 +502,101 @@ public class AppCliente {
 			}
 		});
 		
+		//btn LogIn
+		
+		btnLogIn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
+				{
+					AppAdmin adm = new AppAdmin();
+					adm.run();
+					frame.setVisible(false);
+					
+				}
+				if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
+				{
+					AppFuncionario fun = new AppFuncionario();
+					fun.run();
+					frame.setVisible(false);
+					
+				}
+			}
+		});
+		
+		//fazer logIn premindo Enter (foi apenas isto que acrescentei)
+		
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent event) {
+				if (event.getKeyCode()==KeyEvent.VK_ENTER) {
+					if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
+					{
+						AppAdmin adm = new AppAdmin();
+						adm.run();
+						frame.setVisible(false);
+						
+					}
+					if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
+					{
+						AppFuncionario fun = new AppFuncionario();
+						fun.run();
+						frame.setVisible(false);
+						
+					}
+					
+					
+				}
+				
+			}
+		});
 		
 		
+		//mudar a cor de um botao ao passar o cursor do rato
+		
+				// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
+				//deixar a cor fixa ao clicar(mouse Clicked)
+				//retirar a cor do anterior ao clicar em outro botão(mouse Clicked)
+				
+				//Livros
+
+				btnLivros.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						btnLivros.setBackground(Color.YELLOW);
+					}
+
+					public void mouseExited(MouseEvent arg0) {
+						
+						btnLivros.setBackground(SystemColor.controlHighlight);
+						
+					}
+					public void mouseClicked(MouseEvent arg0) {
+						btnLivros.isSelected();
+						btnLivros.setBackground(Color.YELLOW);
+						btnCarrinho.setBackground(SystemColor.controlHighlight);
+						
+					}
+				
+				});
+				
+				
+				//Carrinho
+				
+				btnCarrinho.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						btnCarrinho.setBackground(Color.YELLOW);
+					}
+
+					public void mouseExited(MouseEvent arg0) {
+						btnCarrinho.setBackground(SystemColor.controlHighlight);
+					}
+
+					public void mouseClicked(MouseEvent arg0) {
+						btnCarrinho.setBackground(Color.YELLOW);
+						btnLivros.setBackground(SystemColor.controlHighlight);
+					}
+				});
 	}
 }
