@@ -111,7 +111,25 @@ public class AppFuncionario {
 		frame.getContentPane().add(Paineltotal);
 		Paineltotal.setLayout(null);
 
-		JPanel panelcabecalho = new JPanel();
+		JPanel panelcabecalho = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
+		
 		panelcabecalho.setLayout(null);
 		panelcabecalho.setBounds(0, 0, 1262, 176);
 		Paineltotal.add(panelcabecalho);
@@ -131,11 +149,11 @@ public class AppFuncionario {
 		label_7.setBounds(101, 5, 730, 125);
 		panelcabecalho.add(label_7);
 
-		JLabel label_8 = new JLabel("Bem Vindo -Nome - Administrador");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
-		label_8.setBounds(892, 13, 335, 27);
-		panelcabecalho.add(label_8);
+		JLabel lblBemVindonome = new JLabel("Bem Vindo -Nome - Funcionario");
+		lblBemVindonome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBemVindonome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblBemVindonome.setBounds(892, 13, 335, 27);
+		panelcabecalho.add(lblBemVindonome);
 
 		JButton btnLogOut = new JButton("LogOut");
 
@@ -143,7 +161,24 @@ public class AppFuncionario {
 		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
 
-		JPanel panelMenu = new JPanel();
+		JPanel panelMenu = new JPanel(){
+			@Override
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg"));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
 		panelMenu.setLayout(null);
 		panelMenu.setBounds(0, 176, 241, 545);
 		Paineltotal.add(panelMenu);
@@ -419,47 +454,6 @@ public class AppFuncionario {
 																JLabel label_27 = new JLabel("New label");
 																label_27.setBounds(486, 385, 135, 14);
 																jpFuncCarrinhos.add(label_27);
-										
-										JPanel jpDinheiro = new JPanel();
-										jpDinheiro.setBounds(0, 0, 199, 171);
-										panelPrincipal.add(jpDinheiro);
-										jpDinheiro.setLayout(null);
-										jpDinheiro.setVisible(false);
-										
-										JLabel lblNewLabel_1 = new JLabel("A pagar :");
-										lblNewLabel_1.setBounds(10, 11, 76, 23);
-										jpDinheiro.add(lblNewLabel_1);
-										
-										JLabel lblRecebido = new JLabel("Recebido : ");
-										lblRecebido.setBounds(10, 45, 76, 23);
-										jpDinheiro.add(lblRecebido);
-										
-										JLabel lblTroco = new JLabel("Troco :");
-										lblTroco.setBounds(10, 79, 76, 23);
-										jpDinheiro.add(lblTroco);
-										
-										textField_9 = new JTextField();
-										textField_9.setBounds(72, 12, 86, 20);
-										jpDinheiro.add(textField_9);
-										textField_9.setColumns(10);
-										
-										textField_10 = new JTextField();
-										textField_10.setColumns(10);
-										textField_10.setBounds(72, 45, 86, 20);
-										jpDinheiro.add(textField_10);
-										
-										textField_11 = new JTextField();
-										textField_11.setColumns(10);
-										textField_11.setBounds(72, 80, 86, 20);
-										jpDinheiro.add(textField_11);
-										
-										JButton btnConcluirPagamento = new JButton("Concluir");
-										btnConcluirPagamento.setBounds(33, 114, 125, 30);
-										jpDinheiro.add(btnConcluirPagamento);
-										btnConcluirPagamento.addActionListener(new ActionListener() {
-											public void actionPerformed(ActionEvent arg0) {
-											}
-										});
 								
 										JPanel jpFuncLivros = new JPanel();
 										jpFuncLivros.setLayout(null);
@@ -676,15 +670,63 @@ public class AppFuncionario {
 			}
 		});
 		
-		//selecçao do metodo de pagamento
+		//selecçao do metodo de pagamento e aparecimento da respectiva janela
 		
 		comboBoxTipoPagamento.addItem("(escolha o método de pagamento)");
 		comboBoxTipoPagamento.addItem("Dinheiro");
 		comboBoxTipoPagamento.addItem("Multibanco");
 		
-		if (comboBoxTipoPagamento.equals("Dinheiro")) {
-			jpDinheiro.setVisible(true);
-		}
+		JPanel jpDinheiro = new JPanel();
+		jpDinheiro.setBounds(10, 190, 199, 171);
+		jpPagamento.add(jpDinheiro);
+		jpDinheiro.setLayout(null);
+		jpDinheiro.setVisible(false);
+		
+		JLabel lblNewLabel_1 = new JLabel("A pagar :");
+		lblNewLabel_1.setBounds(10, 11, 76, 23);
+		jpDinheiro.add(lblNewLabel_1);
+		
+		JLabel lblRecebido = new JLabel("Recebido : ");
+		lblRecebido.setBounds(10, 45, 76, 23);
+		jpDinheiro.add(lblRecebido);
+		
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(10, 79, 76, 23);
+		jpDinheiro.add(lblTroco);
+		
+		textField_9 = new JTextField();
+		textField_9.setBounds(72, 12, 86, 20);
+		jpDinheiro.add(textField_9);
+		textField_9.setColumns(10);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(72, 45, 86, 20);
+		jpDinheiro.add(textField_10);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(72, 80, 86, 20);
+		jpDinheiro.add(textField_11);
+		
+		JButton btnConcluirPagamento = new JButton("Concluir");
+		btnConcluirPagamento.setBounds(33, 114, 125, 30);
+		jpDinheiro.add(btnConcluirPagamento);
+		btnConcluirPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		comboBoxTipoPagamento.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent ae) {
+		        // check whether there is any selection
+		        if(comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")){
+		            jpDinheiro.setVisible(true);
+		        }
+		    }
+		});
 
 		// logOut
 
