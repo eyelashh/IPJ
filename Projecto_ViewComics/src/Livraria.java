@@ -10,6 +10,11 @@ public class Livraria {
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
 
+	public Livraria() {
+		super();
+		
+	}
+	
 	public Livraria(int idLivraria, String nome) {
 		super();
 		this.idLivraria = idLivraria;

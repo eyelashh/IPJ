@@ -853,5 +853,13 @@ public class AppFuncionario {
 
 		});
 
+		
+		//criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
+		
+		Livraria l=new Livraria();
+		Carrinho c=new Carrinho();
+		
+		
 	}
+	
 }

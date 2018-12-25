@@ -3,18 +3,22 @@ import java.util.HashMap;
 public class Carrinho {
 
 	private int nif;
-	private double montando;
+	private double montante;
 	private boolean finalizado;
-	private HashMap<Integer, Integer> compras;
+	private HashMap<Livro, Integer> conteudo;
 
-	public Carrinho(int nif, double montando, boolean finalizado, HashMap<Integer, Integer> compras) {
+	public Carrinho() {
+		super();
+	}
+	
+	public Carrinho(int nif, double montante, boolean finalizado, HashMap<Integer, Integer> compras) {
 		super();
 		this.nif = nif;
-		this.montando = montando;
+		this.montante = montante;
 		this.finalizado = finalizado;
 
 		// hashMap(int idLivro, int quantidade)
-		this.compras = new HashMap<Integer, Integer>();
+		this.conteudo = new HashMap<Livro, Integer>();
 
 	}
 
@@ -27,11 +31,11 @@ public class Carrinho {
 	}
 
 	public double getMontando() {
-		return montando;
+		return montante;
 	}
 
 	public void setMontando(double montando) {
-		this.montando = montando;
+		this.montante = montando;
 	}
 
 	public boolean isFinalizado() {
@@ -42,17 +46,17 @@ public class Carrinho {
 		this.finalizado = finalizado;
 	}
 
-	public HashMap<Integer, Integer> getCompras() {
-		return compras;
+	public HashMap<Livro, Integer> getCompras() {
+		return conteudo;
 	}
 
-	public void setCompras(HashMap<Integer, Integer> compras) {
-		this.compras = compras;
+	public void setCompras(HashMap<Livro, Integer> compras) {
+		this.conteudo = compras;
 	}
 
 	@Override
 	public String toString() {
-		return "Carrinho [nif=" + nif + ", montando=" + montando + ", finalizado=" + finalizado + ", compras=" + compras
+		return "Carrinho [nif=" + nif + ", montando=" + montante + ", finalizado=" + finalizado + ", compras=" + conteudo
 				+ "]";
 	}
 
