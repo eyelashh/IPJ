@@ -30,11 +30,11 @@ public class Carrinho {
 		this.nif = nif;
 	}
 
-	public double getMontando() {
+	public double getMontante() {
 		return montante;
 	}
 
-	public void setMontando(double montando) {
+	public void setMontante(double montando) {
 		this.montante = montando;
 	}
 
@@ -58,6 +58,9 @@ public class Carrinho {
 	public String toString() {
 		return "Carrinho [nif=" + nif + ", montando=" + montante + ", finalizado=" + finalizado + ", compras=" + conteudo
 				+ "]";
+	}
+	public void precoTotal() {
+		
 	}
 
 }

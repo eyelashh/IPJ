@@ -859,6 +859,14 @@ public class AppFuncionario {
 		Livraria l=new Livraria();
 		Carrinho c=new Carrinho();
 		
+		//fazer o carrinho
+		//nif - a textBox retorna tudo como string, para passar a int fazer ParseInt pois o setter
+		//do nif está programado para receber um int.
+		c.setNif(Integer.parseInt(txtNifCarrinho.getText()));
+		
+		
+		l.addCarrinho(c);
+		
 		
 	}
 	
