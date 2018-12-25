@@ -83,4 +83,30 @@ public class Livraria {
 				+ livros + ", transacoes=" + transacoes + ", sessoes=" + sessoes + ", carrinhos=" + carrinhos + "]";
 	}
 
+	public void addLivro(Livro l) {
+		this.livros.add(l);
+	}
+
+	public void removeLivros(Livro l) {
+		this.livros.remove(l);
+	}
+
+	public void addUtilizador(Utilizador u) {
+		this.utilizadores.add(u);
+	}
+
+	public void removeUtilizador(Utilizador u) {
+		this.utilizadores.remove(u);
+	}
+
+	public void addTransacao(Transacao t) {
+		this.transacoes.add(t);
+	}
+	public void addCarrinho(Carrinho c) {
+		this.carrinhos.add(c);
+	}
+	public void removeCarrinho(Carrinho c) {
+		this.carrinhos.remove(c);
+	}
+	
 }
