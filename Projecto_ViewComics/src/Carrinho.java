@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Carrinho {
 
@@ -20,6 +21,11 @@ public class Carrinho {
 		// hashMap(int idLivro, int quantidade)
 		this.conteudo = new HashMap<Integer, Integer>();
 
+	}
+	//construtor com nif para criar automaticamente o carrinho assim que o cliente ou func insere o nif
+	public Carrinho(int nif) {
+		super();
+		this.nif = nif;
 	}
 
 	public int getNif() {
@@ -46,21 +52,20 @@ public class Carrinho {
 		this.finalizado = finalizado;
 	}
 
-	public HashMap<Integer, Integer> getCompras() {
+	public HashMap<Integer, Integer> getConteudo() {
 		return conteudo;
 	}
 
-	public void setCompras(HashMap<Integer, Integer> compras) {
-		this.conteudo = compras;
+	public void setConteudo(HashMap<Integer, Integer> conteudo) {
+		this.conteudo = conteudo;
 	}
 
 	@Override
 	public String toString() {
-		return "Carrinho [nif=" + nif + ", montando=" + montante + ", finalizado=" + finalizado + ", compras=" + conteudo
-				+ "]";
+		return "Carrinho [nif=" + nif + ", montante=" + montante + ", finalizado=" + finalizado + ", conteudo="
+				+ conteudo + "]";
 	}
-	public void precoTotal() {
-		
-	}
+	
+	
 
 }

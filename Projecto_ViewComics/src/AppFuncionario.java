@@ -44,6 +44,9 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import java.awt.Label;
 import java.awt.FlowLayout;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import javax.swing.JTextArea;
 
 public class AppFuncionario {
 
@@ -436,10 +439,6 @@ public class AppFuncionario {
 																				txtNifCarrinho.setBounds(25, 49, 200, 30);
 																				txtNifCarrinho.setColumns(10);
 																				jpFuncCarrinhos.add(txtNifCarrinho);
-																				
-																						JList list_1 = new JList();
-																						list_1.setBounds(25, 126, 200, 363);
-																						jpFuncCarrinhos.add(list_1);
 																						
 																						JLabel lblNif = new JLabel("NIF");
 																						lblNif.setBounds(27, 24, 46, 14);
@@ -447,6 +446,7 @@ public class AppFuncionario {
 																						jpFuncCarrinhos.add(lblNif);
 																						
 																						JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
+																				
 																						btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
 																						btnPesquisarCarrinhos.setBounds(56, 90, 130, 30);
 																						jpFuncCarrinhos.add(btnPesquisarCarrinhos);
@@ -478,6 +478,11 @@ public class AppFuncionario {
 																						JLabel label_27 = new JLabel("New label");
 																						label_27.setBounds(486, 385, 135, 14);
 																						jpFuncCarrinhos.add(label_27);
+																						
+																						JTextArea txtCarrinho = new JTextArea();
+																						txtCarrinho.setLineWrap(true);
+																						txtCarrinho.setBounds(25, 144, 200, 320);
+																						jpFuncCarrinhos.add(txtCarrinho);
 																						
 																						
 														
@@ -857,17 +862,27 @@ public class AppFuncionario {
 		//criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
 		
 		Livraria l=new Livraria();
-		Carrinho c=new Carrinho();
 		
-		//fazer o carrinho
+		//criar ou procurar o carrinho
 		//nif - a textBox retorna tudo como string, para passar a int fazer ParseInt pois o setter
-		//do nif está programado para receber um int.
-		c.setNif(Integer.parseInt(txtNifCarrinho.getText()));
+		//do nif está programado para receber uma String
+		
+		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int nif=Integer.parseInt(txtNifCarrinho.getText());
+				// ver método na classe Livraria
+				Carrinho c= l.devolverCarrinho(nif);
+//				Carrinho c1=new Carrinho(236925792);
+				txtCarrinho.setText(c.toString());
+			
+				
+			}
+		});
 		
 		
-		l.addCarrinho(c);
 		
 		
 	}
-	
 }
