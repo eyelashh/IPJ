@@ -5,7 +5,7 @@ public class Carrinho {
 	private int nif;
 	private double montante;
 	private boolean finalizado;
-	private HashMap<Livro, Integer> conteudo;
+	private HashMap<Integer, Integer> conteudo;
 
 	public Carrinho() {
 		super();
@@ -18,7 +18,7 @@ public class Carrinho {
 		this.finalizado = finalizado;
 
 		// hashMap(int idLivro, int quantidade)
-		this.conteudo = new HashMap<Livro, Integer>();
+		this.conteudo = new HashMap<Integer, Integer>();
 
 	}
 
@@ -46,11 +46,11 @@ public class Carrinho {
 		this.finalizado = finalizado;
 	}
 
-	public HashMap<Livro, Integer> getCompras() {
+	public HashMap<Integer, Integer> getCompras() {
 		return conteudo;
 	}
 
-	public void setCompras(HashMap<Livro, Integer> compras) {
+	public void setCompras(HashMap<Integer, Integer> compras) {
 		this.conteudo = compras;
 	}
 
