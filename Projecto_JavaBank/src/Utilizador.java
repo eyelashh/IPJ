@@ -1,20 +1,19 @@
 import java.time.LocalDate;
 
 public class Utilizador {
-	
+
 	private int idUtilizador;
 	private String nome;
 	private String sobrenome;
-	private LocalDate dataDeNascimento;
+	private String dataDeNascimento;
 	private String tipoIndentificacao;
 	private int numidentificacao;
 	private String morada;
 	private int contacto;
 	private String username;
 	private String password;
-	 
-	
-	public Utilizador(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
+
+	public Utilizador(int idUtilizador, String nome, String sobrenome, String dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 		super();
@@ -58,11 +57,11 @@ public class Utilizador {
 		this.sobrenome = sobrenome;
 	}
 
-	public LocalDate getDataDeNascimento() {
+	public String getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 
-	public void setDataDeNascimento(LocalDate dataDeNascimento) {
+	public void setDataDeNascimento(String dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
@@ -113,12 +112,5 @@ public class Utilizador {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }
