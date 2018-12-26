@@ -76,5 +76,15 @@ public class Banco {
 		System.out.println("Run!!!");
 	}
 	
+	// adiciona utilizadores
+		public void addUtilizador(Utilizador u) {
+			this.utlizadores.add(u);
+		}
+
+		// remove utilizadores
+		public void removeUtilizador(Utilizador u) {
+			this.utlizadores.remove(u);
+		}
+	
 
 }

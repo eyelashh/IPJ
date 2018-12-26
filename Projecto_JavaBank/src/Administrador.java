@@ -10,6 +10,11 @@ public class Administrador extends Utilizador {
 				password);
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "Administrador []";
+	}
 	
 	 
  
