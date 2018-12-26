@@ -342,6 +342,7 @@ public class BancoAppAdm {
 				//experimentar
 				if(rbAdmFunCC.isSelected())
 				func.setTipoIndentificacao("C.C.");
+				
 
 			}
 		});
