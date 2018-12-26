@@ -1,21 +1,31 @@
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Carrinho {
 
 	private int nif;
-	private double montando;
+	private double montante;
 	private boolean finalizado;
-	private HashMap<Integer, Integer> compras;
+	private HashMap<Integer, Integer> conteudo;
 
-	public Carrinho(int nif, double montando, boolean finalizado, HashMap<Integer, Integer> compras) {
+	public Carrinho() {
+		super();
+	}
+	
+	public Carrinho(int nif, double montante, boolean finalizado, HashMap<Integer, Integer> compras) {
 		super();
 		this.nif = nif;
-		this.montando = montando;
+		this.montante = montante;
 		this.finalizado = finalizado;
 
 		// hashMap(int idLivro, int quantidade)
-		this.compras = new HashMap<Integer, Integer>();
+		this.conteudo = new HashMap<Integer, Integer>();
 
+	}
+	//construtor com nif para criar automaticamente o carrinho assim que o cliente ou func insere o nif
+	public Carrinho(int nif) {
+		super();
+		this.nif = nif;
 	}
 
 	public int getNif() {
@@ -26,12 +36,12 @@ public class Carrinho {
 		this.nif = nif;
 	}
 
-	public double getMontando() {
-		return montando;
+	public double getMontante() {
+		return montante;
 	}
 
-	public void setMontando(double montando) {
-		this.montando = montando;
+	public void setMontante(double montando) {
+		this.montante = montando;
 	}
 
 	public boolean isFinalizado() {
@@ -42,18 +52,20 @@ public class Carrinho {
 		this.finalizado = finalizado;
 	}
 
-	public HashMap<Integer, Integer> getCompras() {
-		return compras;
+	public HashMap<Integer, Integer> getConteudo() {
+		return conteudo;
 	}
 
-	public void setCompras(HashMap<Integer, Integer> compras) {
-		this.compras = compras;
+	public void setConteudo(HashMap<Integer, Integer> conteudo) {
+		this.conteudo = conteudo;
 	}
 
 	@Override
 	public String toString() {
-		return "Carrinho [nif=" + nif + ", montando=" + montando + ", finalizado=" + finalizado + ", compras=" + compras
-				+ "]";
+		return "Carrinho [nif=" + nif + ", montante=" + montante + ", finalizado=" + finalizado + ", conteudo="
+				+ conteudo + "]";
 	}
+	
+	
 
 }

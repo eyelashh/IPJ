@@ -79,6 +79,7 @@ public class AppCliente {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+<<<<<<< HEAD
 		JPanel JPanelCabecalho = new JPanel() {
 			@Override
 			//o paint component vai pintar literalmente o componente
@@ -100,13 +101,38 @@ public class AppCliente {
 				
 			}
 		};
+=======
+		JPanel JPanelCabecalho = new JPanel(); 
+//		{
+//			@Override
+//			//o paint component vai pintar literalmente o componente
+//			protected void paintComponent(Graphics g) {
+//				
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//					
+//					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
+//					
+//					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
+//					g.drawImage(img,0,0,null); 
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//		};
+		JPanelCabecalho.setBackground(new Color(255, 215, 0));
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		JPanelCabecalho.setBounds(0, 0, 1264, 183);
 		frame.getContentPane().add(JPanelCabecalho);
 		JPanelCabecalho.setLayout(null);
 		
 		JLabel label = new JLabel("ViewComics Inc.");
-		label.setBounds(176, 30, 624, 118);
-		label.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 90));
+		label.setBounds(59, 30, 785, 118);
+		label.setFont(new Font("Tempus Sans ITC", Font.BOLD, 92));
 		JPanelCabecalho.add(label);
 		
 		JLabel label_18 = new JLabel("\u00C1rea restrita (funcion\u00E1rio ou admin)");
@@ -181,7 +207,27 @@ public class AppCliente {
 		
 		//painel principal que contem o painel Carrinho e o painel Livros
 		
-		JPanel JPanelPrincipal = new JPanel();
+		JPanel JPanelPrincipal = new JPanel(){
+			@Override
+			//o paint component vai pintar literalmente o componente
+			protected void paintComponent(Graphics g) {
+				
+				super.paintComponent(g);
+				Image img;
+				try {
+					
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
+					
+					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
+					g.drawImage(img,0,0,null); 
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		};
 		JPanelPrincipal.setBounds(255, 185, 1009, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
@@ -227,22 +273,27 @@ public class AppCliente {
 		JPCarrinho.add(txtTitulo5);
 		
 		JButton btnRemoveUnid5 = new JButton("-");
+		btnRemoveUnid5.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid5.setBounds(310, 336, 44, 36);
 		JPCarrinho.add(btnRemoveUnid5);
 		
 		JButton btnRemoveUnid4 = new JButton("-");
+		btnRemoveUnid4.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid4.setBounds(310, 273, 44, 36);
 		JPCarrinho.add(btnRemoveUnid4);
 		
 		JButton btnRemoveUnid3 = new JButton("-");
+		btnRemoveUnid3.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid3.setBounds(310, 210, 44, 36);
 		JPCarrinho.add(btnRemoveUnid3);
 		
 		JButton btnRemoveUnid2 = new JButton("-");
+		btnRemoveUnid2.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid2.setBounds(310, 147, 44, 36);
 		JPCarrinho.add(btnRemoveUnid2);
 		
 		JButton btnRemoveUnid1 = new JButton("-");
+		btnRemoveUnid1.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid1.setBounds(310, 82, 44, 36);
 		JPCarrinho.add(btnRemoveUnid1);
 		
@@ -272,22 +323,27 @@ public class AppCliente {
 		JPCarrinho.add(txtUnid5);
 		
 		JButton btnAddUnid5 = new JButton("+");
+		btnAddUnid5.setBackground(SystemColor.controlHighlight);
 		btnAddUnid5.setBounds(423, 336, 49, 36);
 		JPCarrinho.add(btnAddUnid5);
 		
 		JButton btnAddUnid4 = new JButton("+");
+		btnAddUnid4.setBackground(SystemColor.controlHighlight);
 		btnAddUnid4.setBounds(423, 273, 49, 36);
 		JPCarrinho.add(btnAddUnid4);
 		
 		JButton btnAddUnid3 = new JButton("+");
+		btnAddUnid3.setBackground(SystemColor.controlHighlight);
 		btnAddUnid3.setBounds(423, 210, 49, 36);
 		JPCarrinho.add(btnAddUnid3);
 		
 		JButton btnAddUnid2 = new JButton("+");
+		btnAddUnid2.setBackground(SystemColor.controlHighlight);
 		btnAddUnid2.setBounds(423, 147, 49, 36);
 		JPCarrinho.add(btnAddUnid2);
 		
 		JButton btnAddUnid1 = new JButton("+");
+		btnAddUnid1.setBackground(SystemColor.controlHighlight);
 		btnAddUnid1.setBounds(423, 82, 49, 36);
 		JPCarrinho.add(btnAddUnid1);
 		
@@ -393,10 +449,12 @@ public class AppCliente {
 		JPCarrinho.add(lblPreco);
 		
 		JButton btnPagar = new JButton("PAGAR");
+		btnPagar.setBackground(SystemColor.controlHighlight);
 		btnPagar.setBounds(332, 414, 107, 36);
 		JPCarrinho.add(btnPagar);
 		
 		JButton btnCancelar = new JButton("CANCELAR");
+		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
 		
@@ -406,7 +464,7 @@ public class AppCliente {
 		JPCarrinho.add(txtNifCliente);
 		
 		JLabel lblNewLabel = new JLabel("Antes do pagamento introduza o seu NIF");
-		lblNewLabel.setBounds(485, 414, 215, 14);
+		lblNewLabel.setBounds(485, 414, 270, 14);
 		JPCarrinho.add(lblNewLabel);
 		
 		JPanel JPLivros = new JPanel(){
@@ -524,7 +582,7 @@ public class AppCliente {
 			}
 		});
 		
-		//fazer logIn premindo Enter (foi apenas isto que acrescentei)
+		//fazer logIn premindo Enter 
 		
 		txtPassword.addKeyListener(new KeyAdapter() {
 			@Override
