@@ -19,8 +19,9 @@ public class Banco {
 		this.nome = nome;
 		this.contacto = contacto;
 		this.morada = morada;
-		this.contas = contas;
-		this.utlizadores = utlizadores;
+		this.contas = new ArrayList<Conta>();
+		this.utlizadores = new ArrayList<Utilizador>();
+		
 	}
  
 	public int getIdBanco() {
