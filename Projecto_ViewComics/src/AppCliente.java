@@ -49,19 +49,19 @@ public class AppCliente {
 	/**
 	 * Launch the application.
 	 */
-	
-	//public static void main(String[] args) {
-		//EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AppCliente window = new AppCliente();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		//});
-	//}
+
+	// public static void main(String[] args) {
+	// EventQueue.invokeLater(new Runnable() {
+	public void run() {
+		try {
+			AppCliente window = new AppCliente();
+			window.frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// });
+	// }
 
 	/**
 	 * Create the application.
@@ -78,583 +78,563 @@ public class AppCliente {
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-<<<<<<< HEAD
+
 		JPanel JPanelCabecalho = new JPanel() {
 			@Override
-			//o paint component vai pintar literalmente o componente
+			// o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
-				
+
 				super.paintComponent(g);
 				Image img;
 				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do
+					// ficheiro
+
+					// img = ImageIO.read(new URL(
+					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
 					img = ImageIO.read(new File(""));
-					g.drawImage(img,0,0,null); 
+					g.drawImage(img, 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		};
-=======
-		JPanel JPanelCabecalho = new JPanel(); 
-//		{
-//			@Override
-//			//o paint component vai pintar literalmente o componente
-//			protected void paintComponent(Graphics g) {
-//				
-//				super.paintComponent(g);
-//				Image img;
-//				try {
-//					
-//					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-//					
-//					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-//					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
-//					g.drawImage(img,0,0,null); 
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//		};
+
 		JPanelCabecalho.setBackground(new Color(255, 215, 0));
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 		JPanelCabecalho.setBounds(0, 0, 1264, 183);
 		frame.getContentPane().add(JPanelCabecalho);
 		JPanelCabecalho.setLayout(null);
-		
+
 		JLabel label = new JLabel("ViewComics Inc.");
 		label.setBounds(59, 30, 785, 118);
 		label.setFont(new Font("Tempus Sans ITC", Font.BOLD, 92));
 		JPanelCabecalho.add(label);
-		
+
 		JLabel label_18 = new JLabel("\u00C1rea restrita (funcion\u00E1rio ou admin)");
 		label_18.setHorizontalAlignment(SwingConstants.CENTER);
 		label_18.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		label_18.setBounds(898, 11, 356, 27);
 		JPanelCabecalho.add(label_18);
-		
+
 		JLabel label_19 = new JLabel("Username:");
 		label_19.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 20));
 		label_19.setBounds(1015, 44, 98, 27);
 		JPanelCabecalho.add(label_19);
-		
+
 		txtPassword = new JPasswordField();
-		
+
 		txtPassword.setBounds(918, 121, 189, 20);
 		JPanelCabecalho.add(txtPassword);
-		
+
 		JLabel label_20 = new JLabel("Password:");
 		label_20.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 21));
 		label_20.setBounds(1018, 95, 89, 29);
 		JPanelCabecalho.add(label_20);
-		
+
 		txtUsername = new JTextField();
 		txtUsername.setColumns(10);
 		txtUsername.setBounds(919, 70, 189, 20);
 		JPanelCabecalho.add(txtUsername);
 		JButton btnLogIn = new JButton("Entrar");
-		
+
 		btnLogIn.setBackground(SystemColor.controlHighlight);
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
-		
+
 		JPanel JPanelMenu = new JPanel() {
 			@Override
-			//o paint component vai pintar literalmente o componente
+			// o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
-				
+
 				super.paintComponent(g);
 				Image img;
 				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do
+					// ficheiro
+
+					// img = ImageIO.read(new URL(
+					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
 					img = ImageIO.read(new File(""));
-					g.drawImage(img,0,0,null); 
+					g.drawImage(img, 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		};
 		JPanelMenu.setBounds(0, 185, 245, 544);
 		frame.getContentPane().add(JPanelMenu);
 		JPanelMenu.setLayout(null);
-		
+
 		JButton btnLivros = new JButton("Livros");
-		
+
 		btnLivros.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
 		btnLivros.setBackground(SystemColor.controlHighlight);
 		btnLivros.setBounds(26, 36, 176, 55);
 		JPanelMenu.add(btnLivros);
-		
+
 		JButton btnCarrinho = new JButton("Carrinho");
-		
+
 		btnCarrinho.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 30));
 		btnCarrinho.setBackground(SystemColor.controlHighlight);
 		btnCarrinho.setBounds(26, 115, 176, 60);
 		JPanelMenu.add(btnCarrinho);
-		
-		//painel principal que contem o painel Carrinho e o painel Livros
-		
-		JPanel JPanelPrincipal = new JPanel(){
+
+		// painel principal que contem o painel Carrinho e o painel Livros
+
+		JPanel JPanelPrincipal = new JPanel() {
 			@Override
-			//o paint component vai pintar literalmente o componente
+			// o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
-				
+
 				super.paintComponent(g);
 				Image img;
 				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
-					g.drawImage(img,0,0,null); 
+
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do
+					// ficheiro
+
+					// img = ImageIO.read(new URL(
+					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(
+							new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/wallpaperMarvel.jpg "));
+					g.drawImage(img, 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		};
 		JPanelPrincipal.setBounds(255, 185, 1009, 544);
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
-		
-		//painel para o carrinho
-		
+
+		// painel para o carrinho
+
 		JPanel JPCarrinho = new JPanel();
 		JPCarrinho.setBounds(-57, 0, 1065, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
-		
-		//O painel nao inicia visivel
+
+		// O painel nao inicia visivel
 		JPCarrinho.setVisible(false);
-		
+
 		JLabel label_1 = new JLabel("T\u00EDtulo do livro");
 		label_1.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_1.setBounds(68, 32, 144, 26);
 		JPCarrinho.add(label_1);
-		
+
 		txtTitulo1 = new JTextField();
 		txtTitulo1.setColumns(10);
 		txtTitulo1.setBounds(68, 82, 220, 36);
 		JPCarrinho.add(txtTitulo1);
-		
+
 		txtTitulo2 = new JTextField();
 		txtTitulo2.setColumns(10);
 		txtTitulo2.setBounds(68, 147, 220, 36);
 		JPCarrinho.add(txtTitulo2);
-		
+
 		txtTitulo3 = new JTextField();
 		txtTitulo3.setColumns(10);
 		txtTitulo3.setBounds(68, 210, 220, 36);
 		JPCarrinho.add(txtTitulo3);
-		
+
 		txtTitulo4 = new JTextField();
 		txtTitulo4.setColumns(10);
 		txtTitulo4.setBounds(68, 273, 220, 36);
 		JPCarrinho.add(txtTitulo4);
-		
+
 		txtTitulo5 = new JTextField();
 		txtTitulo5.setColumns(10);
 		txtTitulo5.setBounds(68, 336, 220, 36);
 		JPCarrinho.add(txtTitulo5);
-		
+
 		JButton btnRemoveUnid5 = new JButton("-");
 		btnRemoveUnid5.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid5.setBounds(310, 336, 44, 36);
 		JPCarrinho.add(btnRemoveUnid5);
-		
+
 		JButton btnRemoveUnid4 = new JButton("-");
 		btnRemoveUnid4.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid4.setBounds(310, 273, 44, 36);
 		JPCarrinho.add(btnRemoveUnid4);
-		
+
 		JButton btnRemoveUnid3 = new JButton("-");
 		btnRemoveUnid3.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid3.setBounds(310, 210, 44, 36);
 		JPCarrinho.add(btnRemoveUnid3);
-		
+
 		JButton btnRemoveUnid2 = new JButton("-");
 		btnRemoveUnid2.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid2.setBounds(310, 147, 44, 36);
 		JPCarrinho.add(btnRemoveUnid2);
-		
+
 		JButton btnRemoveUnid1 = new JButton("-");
 		btnRemoveUnid1.setBackground(SystemColor.controlHighlight);
 		btnRemoveUnid1.setBounds(310, 82, 44, 36);
 		JPCarrinho.add(btnRemoveUnid1);
-		
+
 		txtUnid1 = new JTextField();
 		txtUnid1.setColumns(10);
 		txtUnid1.setBounds(364, 82, 49, 36);
 		JPCarrinho.add(txtUnid1);
-		
+
 		txtUnid2 = new JTextField();
 		txtUnid2.setColumns(10);
 		txtUnid2.setBounds(364, 147, 49, 36);
 		JPCarrinho.add(txtUnid2);
-		
+
 		txtUnid3 = new JTextField();
 		txtUnid3.setColumns(10);
 		txtUnid3.setBounds(364, 210, 49, 36);
 		JPCarrinho.add(txtUnid3);
-		
+
 		txtUnid4 = new JTextField();
 		txtUnid4.setColumns(10);
 		txtUnid4.setBounds(364, 273, 49, 36);
 		JPCarrinho.add(txtUnid4);
-		
+
 		txtUnid5 = new JTextField();
 		txtUnid5.setColumns(10);
 		txtUnid5.setBounds(364, 336, 49, 36);
 		JPCarrinho.add(txtUnid5);
-		
+
 		JButton btnAddUnid5 = new JButton("+");
 		btnAddUnid5.setBackground(SystemColor.controlHighlight);
 		btnAddUnid5.setBounds(423, 336, 49, 36);
 		JPCarrinho.add(btnAddUnid5);
-		
+
 		JButton btnAddUnid4 = new JButton("+");
 		btnAddUnid4.setBackground(SystemColor.controlHighlight);
 		btnAddUnid4.setBounds(423, 273, 49, 36);
 		JPCarrinho.add(btnAddUnid4);
-		
+
 		JButton btnAddUnid3 = new JButton("+");
 		btnAddUnid3.setBackground(SystemColor.controlHighlight);
 		btnAddUnid3.setBounds(423, 210, 49, 36);
 		JPCarrinho.add(btnAddUnid3);
-		
+
 		JButton btnAddUnid2 = new JButton("+");
 		btnAddUnid2.setBackground(SystemColor.controlHighlight);
 		btnAddUnid2.setBounds(423, 147, 49, 36);
 		JPCarrinho.add(btnAddUnid2);
-		
+
 		JButton btnAddUnid1 = new JButton("+");
 		btnAddUnid1.setBackground(SystemColor.controlHighlight);
 		btnAddUnid1.setBounds(423, 82, 49, 36);
 		JPCarrinho.add(btnAddUnid1);
-		
+
 		JLabel lblPreco1 = new JLabel("New label");
 		lblPreco1.setBounds(532, 82, 49, 36);
 		JPCarrinho.add(lblPreco1);
-		
+
 		JLabel lblPreco2 = new JLabel("New label");
 		lblPreco2.setBounds(532, 147, 49, 36);
 		JPCarrinho.add(lblPreco2);
-		
+
 		JLabel lblPreco3 = new JLabel("New label");
 		lblPreco3.setBounds(532, 210, 49, 36);
 		JPCarrinho.add(lblPreco3);
-		
+
 		JLabel lblPreco4 = new JLabel("New label");
 		lblPreco4.setBounds(532, 273, 49, 36);
 		JPCarrinho.add(lblPreco4);
-		
+
 		JLabel lblPreco5 = new JLabel("New label");
 		lblPreco5.setBounds(532, 336, 49, 36);
 		JPCarrinho.add(lblPreco5);
-		
+
 		JLabel lblTotal5 = new JLabel("New label");
 		lblTotal5.setBounds(651, 336, 49, 36);
 		JPCarrinho.add(lblTotal5);
-		
+
 		JLabel lblTotal4 = new JLabel("New label");
 		lblTotal4.setBounds(651, 273, 82, 36);
 		JPCarrinho.add(lblTotal4);
-		
+
 		JLabel lblTotal3 = new JLabel("New label");
 		lblTotal3.setBounds(651, 210, 82, 36);
 		JPCarrinho.add(lblTotal3);
-		
+
 		JLabel lblTotal2 = new JLabel("New label");
 		lblTotal2.setBounds(651, 147, 82, 36);
 		JPCarrinho.add(lblTotal2);
-		
+
 		JLabel lblTotal1 = new JLabel("New label");
 		lblTotal1.setBounds(651, 82, 82, 36);
 		JPCarrinho.add(lblTotal1);
-		
+
 		JButton btnLimpar5 = new JButton("limpar");
 		btnLimpar5.setBackground(SystemColor.controlHighlight);
 		btnLimpar5.setBounds(759, 340, 72, 29);
 		JPCarrinho.add(btnLimpar5);
-		
+
 		JButton btnLimpar4 = new JButton("limpar");
 		btnLimpar4.setBackground(SystemColor.controlHighlight);
 		btnLimpar4.setBounds(759, 277, 72, 29);
 		JPCarrinho.add(btnLimpar4);
-		
+
 		JButton btnLimpar3 = new JButton("limpar");
 		btnLimpar3.setBackground(SystemColor.controlHighlight);
 		btnLimpar3.setBounds(759, 214, 72, 29);
 		JPCarrinho.add(btnLimpar3);
-		
+
 		JButton btnLimpar2 = new JButton("limpar");
 		btnLimpar2.setBackground(SystemColor.controlHighlight);
 		btnLimpar2.setBounds(759, 151, 72, 29);
 		JPCarrinho.add(btnLimpar2);
-		
+
 		JButton btnLimpar1 = new JButton("limpar");
 		btnLimpar1.setBackground(SystemColor.controlHighlight);
 		btnLimpar1.setBounds(759, 86, 72, 29);
 		JPCarrinho.add(btnLimpar1);
-		
+
 		JLabel label_12 = new JLabel("Limpar");
 		label_12.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_12.setBounds(770, 32, 61, 26);
 		JPCarrinho.add(label_12);
-		
+
 		JLabel label_13 = new JLabel("Valor total");
 		label_13.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_13.setBounds(637, 32, 82, 26);
 		JPCarrinho.add(label_13);
-		
+
 		JLabel label_14 = new JLabel("Pre\u00E7oUnit\u00E1rio");
 		label_14.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_14.setBounds(497, 32, 111, 26);
 		JPCarrinho.add(label_14);
-		
+
 		JLabel label_15 = new JLabel("Quantidade");
 		label_15.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
 		label_15.setBounds(348, 32, 91, 26);
 		JPCarrinho.add(label_15);
-		
+
 		JLabel lblNmeroDeArtigos = new JLabel("N\u00FAmero de artigos no carrinho:");
 		lblNmeroDeArtigos.setBounds(73, 424, 176, 26);
 		JPCarrinho.add(lblNmeroDeArtigos);
-		
+
 		JLabel lblPreoAPagar = new JLabel("Pre\u00E7o a pagar:");
 		lblPreoAPagar.setBounds(73, 450, 72, 26);
 		JPCarrinho.add(lblPreoAPagar);
-		
+
 		JLabel lblQtddArtigos = new JLabel("New label");
 		lblQtddArtigos.setBounds(235, 430, 46, 14);
 		JPCarrinho.add(lblQtddArtigos);
-		
+
 		JLabel lblPreco = new JLabel("New label");
 		lblPreco.setBounds(166, 456, 46, 14);
 		JPCarrinho.add(lblPreco);
-		
+
 		JButton btnPagar = new JButton("PAGAR");
 		btnPagar.setBackground(SystemColor.controlHighlight);
 		btnPagar.setBounds(332, 414, 107, 36);
 		JPCarrinho.add(btnPagar);
-		
+
 		JButton btnCancelar = new JButton("CANCELAR");
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(332, 470, 107, 36);
 		JPCarrinho.add(btnCancelar);
-		
+
 		txtNifCliente = new JTextField();
 		txtNifCliente.setColumns(10);
 		txtNifCliente.setBounds(480, 440, 220, 26);
 		JPCarrinho.add(txtNifCliente);
-		
+
 		JLabel lblNewLabel = new JLabel("Antes do pagamento introduza o seu NIF");
 		lblNewLabel.setBounds(485, 414, 270, 14);
 		JPCarrinho.add(lblNewLabel);
-		
-		JPanel JPLivros = new JPanel(){
+
+		JPanel JPLivros = new JPanel() {
 			@Override
-			//o paint component vai pintar literalmente o componente
+			// o paint component vai pintar literalmente o componente
 			protected void paintComponent(Graphics g) {
-				
+
 				super.paintComponent(g);
 				Image img;
 				try {
-					
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou do ficheiro 
-					
-					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( " "));
-					g.drawImage(img,0,0,null); 
+
+					// importar imagem para o background do panel, podemos faz�-lo da internet ou do
+					// ficheiro
+
+					// img = ImageIO.read(new URL(
+					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+					img = ImageIO.read(new File(" "));
+					g.drawImage(img, 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		};
 		JPLivros.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
 		JPLivros.setVisible(false);
-		
+
 		Choice choiceAtributoLivroCliente = new Choice();
 		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
-		
+
 		TextField txtNomeAtributoLivroCliente = new TextField();
 		txtNomeAtributoLivroCliente.setBounds(65, 96, 200, 22);
 		JPLivros.add(txtNomeAtributoLivroCliente);
-		
+
 		JButton btnLimparPesquisaCliente = new JButton("Limpar");
 		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
 		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
 		JPLivros.add(btnLimparPesquisaCliente);
-		
+
 		JButton btnPesquisarLivroCliente = new JButton("Pesquisar");
 		btnPesquisarLivroCliente.setBackground(SystemColor.controlHighlight);
 		btnPesquisarLivroCliente.setBounds(286, 98, 115, 20);
 		JPLivros.add(btnPesquisarLivroCliente);
-		
+
 		List listaLivros = new List();
 		listaLivros.setBounds(65, 140, 289, 348);
 		JPLivros.add(listaLivros);
-		
+
 		TextField txtSpecsLivro = new TextField();
 		txtSpecsLivro.setBounds(376, 140, 260, 211);
 		JPLivros.add(txtSpecsLivro);
-		
+
 		JButton btnRemoveCarrinhoCliente = new JButton("-");
 		btnRemoveCarrinhoCliente.setBackground(SystemColor.controlHighlight);
 		btnRemoveCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRemoveCarrinhoCliente.setBounds(444, 63, 57, 39);
 		JPLivros.add(btnRemoveCarrinhoCliente);
-		
+
 		txtQuantidadeCarrinhoCliente = new JTextField();
 		txtQuantidadeCarrinhoCliente.setColumns(10);
 		txtQuantidadeCarrinhoCliente.setBounds(511, 67, 61, 34);
 		JPLivros.add(txtQuantidadeCarrinhoCliente);
-		
+
 		JButton btnAddCarrinhoCliente = new JButton("+");
 		btnAddCarrinhoCliente.setBackground(SystemColor.controlHighlight);
 		btnAddCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAddCarrinhoCliente.setBounds(582, 63, 54, 39);
 		JPLivros.add(btnAddCarrinhoCliente);
-		
+
 		JButton btnAddCarrinhoFinalCliente = new JButton("Adicionar ao carrinho");
 		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
 		btnAddCarrinhoFinalCliente.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAddCarrinhoFinalCliente.setBounds(428, 11, 219, 42);
 		JPLivros.add(btnAddCarrinhoFinalCliente);
-		
-		//tornar os respectivos paineis vis�veis ao clicar
-		
+
+		// tornar os respectivos paineis vis�veis ao clicar
+
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JPCarrinho.setVisible(false);
 				JPLivros.setVisible(true);
-					
+
 			}
 		});
-		
+
 		btnCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JPLivros.setVisible(false);
-				JPCarrinho.setVisible(true);		
-				
+				JPCarrinho.setVisible(true);
+
 			}
 		});
-		
-		//btn LogIn
-		
+
+		// btn LogIn
+
 		btnLogIn.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
-				{
+				if (txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a")) {
 					AppAdmin adm = new AppAdmin();
 					adm.run();
 					frame.setVisible(false);
-					
+
 				}
-				if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
-				{
+				if (txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f")) {
 					AppFuncionario fun = new AppFuncionario();
 					fun.run();
 					frame.setVisible(false);
-					
+
 				}
 			}
 		});
-		
-		//fazer logIn premindo Enter 
-		
+
+		// fazer logIn premindo Enter
+
 		txtPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent event) {
-				if (event.getKeyCode()==KeyEvent.VK_ENTER) {
-					if(txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a"))
-					{
+				if (event.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a")) {
 						AppAdmin adm = new AppAdmin();
 						adm.run();
 						frame.setVisible(false);
-						
+
 					}
-					if(txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f"))
-					{
+					if (txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f")) {
 						AppFuncionario fun = new AppFuncionario();
 						fun.run();
 						frame.setVisible(false);
-						
+
 					}
-					
-					
+
 				}
-				
+
 			}
 		});
-		
-		
-		//mudar a cor de um botao ao passar o cursor do rato
-		
-				// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
-				//deixar a cor fixa ao clicar(mouse Clicked)
-				//retirar a cor do anterior ao clicar em outro bot�o(mouse Clicked)
-				
-				//Livros
 
-				btnLivros.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						btnLivros.setBackground(Color.YELLOW);
-					}
+		// mudar a cor de um botao ao passar o cursor do rato
 
-					public void mouseExited(MouseEvent arg0) {
-						
-						btnLivros.setBackground(SystemColor.controlHighlight);
-						
-					}
-					public void mouseClicked(MouseEvent arg0) {
-						btnLivros.isSelected();
-						btnLivros.setBackground(Color.YELLOW);
-						btnCarrinho.setBackground(SystemColor.controlHighlight);
-						
-					}
-				
-				});
-				
-				
-				//Carrinho
-				
-				btnCarrinho.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						btnCarrinho.setBackground(Color.YELLOW);
-					}
+		// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
+		// deixar a cor fixa ao clicar(mouse Clicked)
+		// retirar a cor do anterior ao clicar em outro bot�o(mouse Clicked)
 
-					public void mouseExited(MouseEvent arg0) {
-						btnCarrinho.setBackground(SystemColor.controlHighlight);
-					}
+		// Livros
 
-					public void mouseClicked(MouseEvent arg0) {
-						btnCarrinho.setBackground(Color.YELLOW);
-						btnLivros.setBackground(SystemColor.controlHighlight);
-					}
-				});
+		btnLivros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnLivros.setBackground(Color.YELLOW);
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+
+				btnLivros.setBackground(SystemColor.controlHighlight);
+
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnLivros.isSelected();
+				btnLivros.setBackground(Color.YELLOW);
+				btnCarrinho.setBackground(SystemColor.controlHighlight);
+
+			}
+
+		});
+
+		// Carrinho
+
+		btnCarrinho.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnCarrinho.setBackground(Color.YELLOW);
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				btnCarrinho.setBackground(SystemColor.controlHighlight);
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				btnCarrinho.setBackground(Color.YELLOW);
+				btnLivros.setBackground(SystemColor.controlHighlight);
+			}
+		});
 	}
 }
