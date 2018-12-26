@@ -236,6 +236,190 @@ public class AppFuncionario {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+																				
+																				
+														
+																JPanel jpFuncConta = new JPanel();
+																jpFuncConta.setBounds(0, 0, 825, 545);
+																panelPrincipal.add(jpFuncConta);
+																jpFuncConta.setLayout(null);
+																jpFuncConta.setVisible(false);
+																
+																		JLabel label = new JLabel("Alterar UserName:");
+																		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
+																		label.setAlignmentX(0.5f);
+																		label.setBounds(105, 48, 203, 31);
+																		jpFuncConta.add(label);
+																		
+																				JLabel label_1 = new JLabel("UserName:");
+																				label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																				label_1.setBounds(67, 92, 113, 24);
+																				jpFuncConta.add(label_1);
+																				
+																						txtUsername = new JTextField();
+																						txtUsername.setEditable(false);
+																						txtUsername.setBounds(67, 129, 279, 31);
+																						jpFuncConta.add(txtUsername);
+																						
+																								JLabel label_2 = new JLabel("Password:");
+																								label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																								label_2.setBounds(67, 173, 113, 24);
+																								jpFuncConta.add(label_2);
+																								
+																										txtPassword = new JTextField();
+																										txtPassword.setBounds(67, 210, 279, 31);
+																										jpFuncConta.add(txtPassword);
+																										
+																												JLabel label_3 = new JLabel("Novo UserName:");
+																												label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																												label_3.setBounds(67, 254, 171, 24);
+																												jpFuncConta.add(label_3);
+																												
+																														txtNovoUsername = new JTextField();
+																														txtNovoUsername.setBounds(67, 284, 279, 31);
+																														jpFuncConta.add(txtNovoUsername);
+																														
+																																JButton btnConfirmarUsername = new JButton("Confirmar");
+																																btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
+																																btnConfirmarUsername.setBounds(67, 359, 97, 25);
+																																jpFuncConta.add(btnConfirmarUsername);
+																																
+																																		JButton btnCancelarUsername = new JButton("Cancelar");
+																																		btnCancelarUsername.setBackground(SystemColor.controlHighlight);
+																																		btnCancelarUsername.setBounds(249, 359, 97, 25);
+																																		jpFuncConta.add(btnCancelarUsername);
+																																		
+																																				JLabel label_4 = new JLabel("Alterar PassWord:");
+																																				label_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
+																																				label_4.setAlignmentX(0.5f);
+																																				label_4.setBounds(520, 50, 203, 31);
+																																				jpFuncConta.add(label_4);
+																																				
+																																						JLabel label_5 = new JLabel("Password:");
+																																						label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																																						label_5.setBounds(520, 92, 113, 24);
+																																						jpFuncConta.add(label_5);
+																																						
+																																								passwordField = new JPasswordField();
+																																								passwordField.setBounds(520, 129, 279, 31);
+																																								jpFuncConta.add(passwordField);
+																																								
+																																										JLabel label_9 = new JLabel("Nova Password:");
+																																										label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																																										label_9.setBounds(520, 173, 113, 24);
+																																										jpFuncConta.add(label_9);
+																																										
+																																												passwordField_1 = new JPasswordField();
+																																												passwordField_1.setBounds(520, 210, 279, 31);
+																																												jpFuncConta.add(passwordField_1);
+																																												
+																																														JLabel label_10 = new JLabel("Confirmar Password:");
+																																														label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
+																																														label_10.setBounds(520, 254, 171, 24);
+																																														jpFuncConta.add(label_10);
+																																														
+																																																passwordField_2 = new JPasswordField();
+																																																passwordField_2.setBounds(520, 284, 279, 31);
+																																																jpFuncConta.add(passwordField_2);
+																																																
+																																																		JButton btnConfirmarPasse = new JButton("Confirmar");
+																																																		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
+																																																		btnConfirmarPasse.setBounds(520, 359, 97, 25);
+																																																		jpFuncConta.add(btnConfirmarPasse);
+																																																		
+																																																				JButton btnCancelarPasse = new JButton("Cancelar");
+																																																				btnCancelarPasse.setBackground(SystemColor.controlHighlight);
+																																																				btnCancelarPasse.setBounds(676, 359, 97, 25);
+																																																				jpFuncConta.add(btnCancelarPasse);
+																		
+																				JPanel jpFuncLivros = new JPanel();
+																				jpFuncLivros.setLayout(null);
+																				jpFuncLivros.setBounds(0, 0, 825, 545);
+																				panelPrincipal.add(jpFuncLivros);
+																				jpFuncLivros.setVisible(false);
+																				
+																						JComboBox comboBoxAtributoLivro = new JComboBox();
+																						comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+																						jpFuncLivros.add(comboBoxAtributoLivro);
+																						
+																								txtAtributoPesquisaLivro = new JTextField();
+																								txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+																								jpFuncLivros.add(txtAtributoPesquisaLivro);
+																								txtAtributoPesquisaLivro.setColumns(10);
+																								
+																										JList listaLivros = new JList();
+																										listaLivros.setBounds(22, 111, 190, 395);
+																										jpFuncLivros.add(listaLivros);
+																										
+																												JLabel lblNewLabel = new JLabel("Nome:");
+																												lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+																												lblNewLabel.setBounds(263, 120, 48, 16);
+																												jpFuncLivros.add(lblNewLabel);
+																												
+																														JLabel lblAutor = new JLabel("Autor:");
+																														lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
+																														lblAutor.setBounds(263, 170, 48, 16);
+																														jpFuncLivros.add(lblAutor);
+																														
+																																JLabel lblDescrio = new JLabel("Data:");
+																																lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																lblDescrio.setBounds(271, 219, 40, 16);
+																																jpFuncLivros.add(lblDescrio);
+																																
+																																		JLabel lblStock = new JLabel("Stock:");
+																																		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																		lblStock.setBounds(263, 455, 48, 16);
+																																		jpFuncLivros.add(lblStock);
+																																		
+																																				JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
+																																				lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																				lblPreo_1.setBounds(263, 404, 48, 16);
+																																				jpFuncLivros.add(lblPreo_1);
+																																				
+																																						JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
+																																						lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																						lblPreo.setBounds(224, 266, 87, 16);
+																																						jpFuncLivros.add(lblPreo);
+																																						
+																																								txtTituloLivro = new JTextField();
+																																								txtTituloLivro.setColumns(10);
+																																								txtTituloLivro.setBounds(333, 114, 345, 30);
+																																								jpFuncLivros.add(txtTituloLivro);
+																																								
+																																										txtAutorLivro = new JTextField();
+																																										txtAutorLivro.setColumns(10);
+																																										txtAutorLivro.setBounds(333, 164, 345, 30);
+																																										jpFuncLivros.add(txtAutorLivro);
+																																										
+																																												txtDataLivro = new JTextField();
+																																												txtDataLivro.setColumns(10);
+																																												txtDataLivro.setBounds(333, 213, 345, 30);
+																																												jpFuncLivros.add(txtDataLivro);
+																																												
+																																														txtDescricaoLivro = new JTextField();
+																																														txtDescricaoLivro.setColumns(10);
+																																														txtDescricaoLivro.setBounds(333, 260, 345, 117);
+																																														jpFuncLivros.add(txtDescricaoLivro);
+																																														
+																																																txtPrecoLivro = new JTextField();
+																																																txtPrecoLivro.setColumns(10);
+																																																txtPrecoLivro.setBounds(333, 402, 345, 30);
+																																																jpFuncLivros.add(txtPrecoLivro);
+																																																
+																																																		txtStockLivro = new JTextField();
+																																																		txtStockLivro.setColumns(10);
+																																																		txtStockLivro.setBounds(333, 453, 345, 30);
+																																																		jpFuncLivros.add(txtStockLivro);
+																																																		
+																																																				JButton btnPesquisarLivro = new JButton("Pesquisar");
+																																																				btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
+																																																				btnPesquisarLivro.setBounds(224, 16, 97, 25);
+																																																				jpFuncLivros.add(btnPesquisarLivro);
+																																																				
+																																																						JButton btnLimparLivro = new JButton("Limpar");
+																																																						btnLimparLivro.setBackground(SystemColor.controlHighlight);
+																																																						btnLimparLivro.setBounds(224, 60, 97, 25);
+																																																						jpFuncLivros.add(btnLimparLivro);
 																
 																		JPanel jpFuncCarrinhos = new JPanel();
 																		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
@@ -483,189 +667,6 @@ public class AppFuncionario {
 																						txtCarrinho.setLineWrap(true);
 																						txtCarrinho.setBounds(25, 144, 200, 320);
 																						jpFuncCarrinhos.add(txtCarrinho);
-																						
-																						
-														
-																JPanel jpFuncConta = new JPanel();
-																jpFuncConta.setBounds(0, 0, 825, 545);
-																panelPrincipal.add(jpFuncConta);
-																jpFuncConta.setLayout(null);
-																jpFuncConta.setVisible(false);
-																
-																		JLabel label = new JLabel("Alterar UserName:");
-																		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
-																		label.setAlignmentX(0.5f);
-																		label.setBounds(105, 48, 203, 31);
-																		jpFuncConta.add(label);
-																		
-																				JLabel label_1 = new JLabel("UserName:");
-																				label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																				label_1.setBounds(67, 92, 113, 24);
-																				jpFuncConta.add(label_1);
-																				
-																						txtUsername = new JTextField();
-																						txtUsername.setBounds(67, 129, 279, 31);
-																						jpFuncConta.add(txtUsername);
-																						
-																								JLabel label_2 = new JLabel("Password:");
-																								label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																								label_2.setBounds(67, 173, 113, 24);
-																								jpFuncConta.add(label_2);
-																								
-																										txtPassword = new JTextField();
-																										txtPassword.setBounds(67, 210, 279, 31);
-																										jpFuncConta.add(txtPassword);
-																										
-																												JLabel label_3 = new JLabel("Novo UserName:");
-																												label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																												label_3.setBounds(67, 254, 171, 24);
-																												jpFuncConta.add(label_3);
-																												
-																														txtNovoUsername = new JTextField();
-																														txtNovoUsername.setBounds(67, 284, 279, 31);
-																														jpFuncConta.add(txtNovoUsername);
-																														
-																																JButton btnConfirmarUsername = new JButton("Confirmar");
-																																btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
-																																btnConfirmarUsername.setBounds(67, 359, 97, 25);
-																																jpFuncConta.add(btnConfirmarUsername);
-																																
-																																		JButton btnCancelarUsername = new JButton("Cancelar");
-																																		btnCancelarUsername.setBackground(SystemColor.controlHighlight);
-																																		btnCancelarUsername.setBounds(249, 359, 97, 25);
-																																		jpFuncConta.add(btnCancelarUsername);
-																																		
-																																				JLabel label_4 = new JLabel("Alterar PassWord:");
-																																				label_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
-																																				label_4.setAlignmentX(0.5f);
-																																				label_4.setBounds(520, 50, 203, 31);
-																																				jpFuncConta.add(label_4);
-																																				
-																																						JLabel label_5 = new JLabel("Password:");
-																																						label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																						label_5.setBounds(520, 92, 113, 24);
-																																						jpFuncConta.add(label_5);
-																																						
-																																								passwordField = new JPasswordField();
-																																								passwordField.setBounds(520, 129, 279, 31);
-																																								jpFuncConta.add(passwordField);
-																																								
-																																										JLabel label_9 = new JLabel("Nova Password:");
-																																										label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																										label_9.setBounds(520, 173, 113, 24);
-																																										jpFuncConta.add(label_9);
-																																										
-																																												passwordField_1 = new JPasswordField();
-																																												passwordField_1.setBounds(520, 210, 279, 31);
-																																												jpFuncConta.add(passwordField_1);
-																																												
-																																														JLabel label_10 = new JLabel("Confirmar Password:");
-																																														label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
-																																														label_10.setBounds(520, 254, 171, 24);
-																																														jpFuncConta.add(label_10);
-																																														
-																																																passwordField_2 = new JPasswordField();
-																																																passwordField_2.setBounds(520, 284, 279, 31);
-																																																jpFuncConta.add(passwordField_2);
-																																																
-																																																		JButton btnConfirmarPasse = new JButton("Confirmar");
-																																																		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
-																																																		btnConfirmarPasse.setBounds(520, 359, 97, 25);
-																																																		jpFuncConta.add(btnConfirmarPasse);
-																																																		
-																																																				JButton btnCancelarPasse = new JButton("Cancelar");
-																																																				btnCancelarPasse.setBackground(SystemColor.controlHighlight);
-																																																				btnCancelarPasse.setBounds(676, 359, 97, 25);
-																																																				jpFuncConta.add(btnCancelarPasse);
-												
-														JPanel jpFuncLivros = new JPanel();
-														jpFuncLivros.setLayout(null);
-														jpFuncLivros.setBounds(0, 0, 825, 545);
-														panelPrincipal.add(jpFuncLivros);
-														jpFuncLivros.setVisible(false);
-														
-																JComboBox comboBoxAtributoLivro = new JComboBox();
-																comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-																jpFuncLivros.add(comboBoxAtributoLivro);
-																
-																		txtAtributoPesquisaLivro = new JTextField();
-																		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-																		jpFuncLivros.add(txtAtributoPesquisaLivro);
-																		txtAtributoPesquisaLivro.setColumns(10);
-																		
-																				JList listaLivros = new JList();
-																				listaLivros.setBounds(22, 111, 190, 395);
-																				jpFuncLivros.add(listaLivros);
-																				
-																						JLabel lblNewLabel = new JLabel("Nome:");
-																						lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-																						lblNewLabel.setBounds(263, 120, 48, 16);
-																						jpFuncLivros.add(lblNewLabel);
-																						
-																								JLabel lblAutor = new JLabel("Autor:");
-																								lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
-																								lblAutor.setBounds(263, 170, 48, 16);
-																								jpFuncLivros.add(lblAutor);
-																								
-																										JLabel lblDescrio = new JLabel("Data:");
-																										lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-																										lblDescrio.setBounds(271, 219, 40, 16);
-																										jpFuncLivros.add(lblDescrio);
-																										
-																												JLabel lblStock = new JLabel("Stock:");
-																												lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
-																												lblStock.setBounds(263, 455, 48, 16);
-																												jpFuncLivros.add(lblStock);
-																												
-																														JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
-																														lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-																														lblPreo_1.setBounds(263, 404, 48, 16);
-																														jpFuncLivros.add(lblPreo_1);
-																														
-																																JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
-																																lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
-																																lblPreo.setBounds(224, 266, 87, 16);
-																																jpFuncLivros.add(lblPreo);
-																																
-																																		txtTituloLivro = new JTextField();
-																																		txtTituloLivro.setColumns(10);
-																																		txtTituloLivro.setBounds(333, 114, 345, 30);
-																																		jpFuncLivros.add(txtTituloLivro);
-																																		
-																																				txtAutorLivro = new JTextField();
-																																				txtAutorLivro.setColumns(10);
-																																				txtAutorLivro.setBounds(333, 164, 345, 30);
-																																				jpFuncLivros.add(txtAutorLivro);
-																																				
-																																						txtDataLivro = new JTextField();
-																																						txtDataLivro.setColumns(10);
-																																						txtDataLivro.setBounds(333, 213, 345, 30);
-																																						jpFuncLivros.add(txtDataLivro);
-																																						
-																																								txtDescricaoLivro = new JTextField();
-																																								txtDescricaoLivro.setColumns(10);
-																																								txtDescricaoLivro.setBounds(333, 260, 345, 117);
-																																								jpFuncLivros.add(txtDescricaoLivro);
-																																								
-																																										txtPrecoLivro = new JTextField();
-																																										txtPrecoLivro.setColumns(10);
-																																										txtPrecoLivro.setBounds(333, 402, 345, 30);
-																																										jpFuncLivros.add(txtPrecoLivro);
-																																										
-																																												txtStockLivro = new JTextField();
-																																												txtStockLivro.setColumns(10);
-																																												txtStockLivro.setBounds(333, 453, 345, 30);
-																																												jpFuncLivros.add(txtStockLivro);
-																																												
-																																														JButton btnPesquisarLivro = new JButton("Pesquisar");
-																																														btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
-																																														btnPesquisarLivro.setBounds(224, 16, 97, 25);
-																																														jpFuncLivros.add(btnPesquisarLivro);
-																																														
-																																																JButton btnLimparLivro = new JButton("Limpar");
-																																																btnLimparLivro.setBackground(SystemColor.controlHighlight);
-																																																btnLimparLivro.setBounds(224, 60, 97, 25);
-																																																jpFuncLivros.add(btnLimparLivro);
 												
 												JPanel jpPagamento = new JPanel();
 												jpPagamento.setBounds(0, 0, 219, 336);
@@ -858,6 +859,7 @@ public class AppFuncionario {
 
 		});
 
+	//CARRINHOS 
 		
 		//criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
 		
@@ -874,12 +876,15 @@ public class AppFuncionario {
 				int nif=Integer.parseInt(txtNifCarrinho.getText());
 				// ver método na classe Livraria
 				Carrinho c= l.devolverCarrinho(nif);
+				//ver metodo na classe Livraria
+				c.setMontante(l.precoTotalCarrinho(c));
 //				Carrinho c1=new Carrinho(236925792);
 				txtCarrinho.setText(c.toString());
 			
-				
 			}
 		});
+		
+	//GESTAO CONTA PESSOAL
 		
 		
 		
