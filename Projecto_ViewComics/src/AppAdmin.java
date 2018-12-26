@@ -647,7 +647,7 @@ public class AppAdmin {
 
 		// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
 		// deixar a cor fixa ao clicar(mouse Clicked)
-		// retirar a cor do anterior ao clicar em outro botão(mouse Clicked)
+		// retirar a cor do anterior ao clicar em outro botï¿½o(mouse Clicked)
 
 		// Livros
 
@@ -656,9 +656,11 @@ public class AppAdmin {
 			public void mouseEntered(MouseEvent arg0) {
 				btnLivros.setBackground(Color.YELLOW);
 			}
+
 			public void mouseExited(MouseEvent arg0) {
 				btnLivros.setBackground(SystemColor.controlHighlight);
 			}
+
 			public void mouseClicked(MouseEvent arg0) {
 				btnLivros.setBackground(Color.YELLOW);
 				btnGestao.setBackground(SystemColor.controlHighlight);
@@ -675,10 +677,12 @@ public class AppAdmin {
 			public void mouseEntered(MouseEvent arg0) {
 				btnGestao.setBackground(Color.YELLOW);
 			}
+
 			public void mouseExited(MouseEvent arg0) {
 
 				btnGestao.setBackground(SystemColor.controlHighlight);
 			}
+
 			public void mouseClicked(MouseEvent arg0) {
 				btnGestao.setBackground(Color.YELLOW);
 				btnLivros.setBackground(SystemColor.controlHighlight);
@@ -739,10 +743,12 @@ public class AppAdmin {
 			public void mouseEntered(MouseEvent arg0) {
 				btnEstatisticas.setBackground(Color.YELLOW);
 			}
+
 			public void mouseExited(MouseEvent arg0) {
-					btnEstatisticas.setBackground(SystemColor.controlHighlight);
-				
+				btnEstatisticas.setBackground(SystemColor.controlHighlight);
+
 			}
+
 			public void mouseClicked(MouseEvent arg0) {
 
 				btnEstatisticas.setBackground(Color.YELLOW);

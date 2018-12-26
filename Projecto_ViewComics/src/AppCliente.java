@@ -91,7 +91,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo.jpg"));
+					img = ImageIO.read(new File(""));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -152,7 +152,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(  "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg "));
+					img = ImageIO.read(new File(""));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -421,7 +421,7 @@ public class AppCliente {
 					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do ficheiro 
 					
 					// img = ImageIO.read(new URL( "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File( "/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/calvinHobes.jpg "));
+					img = ImageIO.read(new File( " "));
 					g.drawImage(img,0,0,null); 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -556,7 +556,7 @@ public class AppCliente {
 		
 				// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
 				//deixar a cor fixa ao clicar(mouse Clicked)
-				//retirar a cor do anterior ao clicar em outro botão(mouse Clicked)
+				//retirar a cor do anterior ao clicar em outro botï¿½o(mouse Clicked)
 				
 				//Livros
 
