@@ -1,55 +1,28 @@
-import java.awt.EventQueue;
-
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
-
 import javax.imageio.ImageIO;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import java.awt.Button;
-import javax.swing.BoxLayout;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import java.awt.Color;
-import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
-import javax.swing.JCheckBoxMenuItem;
-import java.awt.Choice;
-import java.awt.Panel;
-import java.awt.TextField;
-import java.awt.List;
-import javax.swing.DropMode;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import java.awt.Label;
-import java.awt.FlowLayout;
 
 public class AppAdmin {
 
 	private JFrame frame;
-	private JTextField textField_2;
-	private JTextField textField_4;
 	private JPanel jpAdmFuncionarios;
 	private JTextField txtAtributoPesquisaLivro;
 	private JTextField txtTituloLivro;

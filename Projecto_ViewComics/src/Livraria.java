@@ -105,10 +105,12 @@ public class Livraria {
 		this.livros.remove(l);
 	}
 
+	// adiciona utilizadores
 	public void addUtilizador(Utilizador u) {
 		this.utilizadores.add(u);
 	}
 
+	// remove utilizadores
 	public void removeUtilizador(Utilizador u) {
 		this.utilizadores.remove(u);
 	}
@@ -122,11 +124,11 @@ public class Livraria {
 	public void removeCarrinho(Carrinho c) {
 		this.carrinhos.remove(c);
 	}
-	//metodo para obter o preco de um livro atraves do seu id, útil para calcular o preco de um carrinho
+	//metodo para obter o preco de um livro atraves do seu id, ï¿½til para calcular o preco de um carrinho
 	public double precoLivro(int id) {
 		
 		double preco=0;
-		//procura no array de livros se o id do livro existe, se sim retorna o preço da uma unidade do livro
+		//procura no array de livros se o id do livro existe, se sim retorna o preï¿½o da uma unidade do livro
 		for (Livro l : this.livros) {
 			if (l.getIdLivro()==id) {
 				preco = l.getPreco();
@@ -135,8 +137,8 @@ public class Livraria {
 		return preco;
 	}
 	
-	//procurar por um carrinho com determinado nif na lista, se nao existir criar um novo carrinho com esse nif e acrescentá-lo à lista
-	//retorna um carrinho cujo único atributo é o nif que ficou automaticamente na lita de carrinhos
+	//procurar por um carrinho com determinado nif na lista, se nao existir criar um novo carrinho com esse nif e acrescentï¿½-lo ï¿½ lista
+	//retorna um carrinho cujo ï¿½nico atributo ï¿½ o nif que ficou automaticamente na lita de carrinhos
 	public Carrinho devolverCarrinho(int nif) {
 		
 		Carrinho c1=new Carrinho(nif) ;
@@ -168,7 +170,7 @@ public class Livraria {
 		//num foreach
 		Set<Map.Entry<Integer,Integer>> set =hm.entrySet();
 		
-		//percorrer o hm no foreach de modo a somar todos os preços
+		//percorrer o hm no foreach de modo a somar todos os preï¿½os
 		for (Map.Entry<Integer, Integer> me : set) {
 			for (Livro l : this.livros) {
 				if (l.getIdLivro()==me.getKey()) {
