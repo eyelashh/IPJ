@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -18,6 +20,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
 
@@ -40,6 +45,7 @@ public class BancoAppAdm {
 	private JTextField textAdmFunContato;
 	private JTextField textAdmFunUser;
 	private JTextField textAdmFunPass;
+	private JTextField textAdmFunSobrenome;
 
 	/**
 	 * Launch the application.
@@ -215,6 +221,11 @@ public class BancoAppAdm {
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
+		rbAdmFunCC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		rbAdmFunCC.setBounds(564, 212, 66, 25);
 		JPAdmFuncionario.add(rbAdmFunCC);
@@ -230,6 +241,12 @@ public class BancoAppAdm {
 		rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		rbAdmFunPass.setBounds(712, 212, 138, 25);
 		JPAdmFuncionario.add(rbAdmFunPass);
+
+		//Agrupei num grupo os radio button
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(rbAdmFunCC);
+		bg.add(rbAdmFunBI);
+		bg.add(rbAdmFunPass);
 
 		// texto : numero do documento
 		JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
@@ -273,7 +290,7 @@ public class BancoAppAdm {
 		// Campos de texto - nome
 		textAdmFunNome = new JTextField();
 		textAdmFunNome.setColumns(10);
-		textAdmFunNome.setBounds(463, 119, 351, 31);
+		textAdmFunNome.setBounds(463, 119, 217, 31);
 		JPAdmFuncionario.add(textAdmFunNome);
 
 		// Campos de texto - numero
@@ -300,10 +317,31 @@ public class BancoAppAdm {
 		textAdmFunPass.setBounds(463, 456, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
 
+		// Data do funcionario
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateChooser.setBounds(463, 179, 217, 31);
+		JPAdmFuncionario.add(dateChooser);
+
 		// botao confirmar funcionario
 		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// formato da data
+				String dataNascimento = df.format(dateChooser.getDate());// converter para String
+
+				Utilizador func = new Utilizador();
+
+				func.setNome(textAdmFunNome.getText());
+				func.setSobrenome(textAdmFunSobrenome.getText());
+				func.setDataDeNascimento(dataNascimento);
+				if(rbAdmFunCC.isSelected())
+				func.setTipoIndentificacao("C.C.");
+
 			}
 		});
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -320,8 +358,8 @@ public class BancoAppAdm {
 
 				textAdmFunNome.setText("");
 				rbAdmFunCC.setSelected(false);
-				rbAdmFunBI.setSelected(false);;
-				rbAdmFunPass.setSelected(false);;
+				rbAdmFunBI.setSelected(false);
+				rbAdmFunPass.setSelected(false);
 				textAdmFunNumero.setText("");
 				textAdmFunContato.setText("");
 				textAdmFunUser.setText("");
@@ -331,14 +369,15 @@ public class BancoAppAdm {
 		});
 		JPAdmFuncionario.add(btnAdmFunLimpar);
 
-		// Data do funcionario
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		dateChooser.setBounds(463, 179, 217, 31);
-		JPAdmFuncionario.add(dateChooser);
+		JLabel lblSobrenome = new JLabel("Sobrenome:");
+		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblSobrenome.setBounds(699, 86, 120, 30);
+		JPAdmFuncionario.add(lblSobrenome);
+
+		textAdmFunSobrenome = new JTextField();
+		textAdmFunSobrenome.setColumns(10);
+		textAdmFunSobrenome.setBounds(709, 117, 217, 31);
+		JPAdmFuncionario.add(textAdmFunSobrenome);
 
 		// Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
