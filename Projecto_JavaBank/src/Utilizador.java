@@ -5,7 +5,7 @@ public class Utilizador {
 	private int idUtilizador;
 	private String nome;
 	private String sobrenome;
-	private String dataDeNascimento;
+	private LocalDate dataDeNascimento;
 	private String tipoIndentificacao;
 	private int numidentificacao;
 	private String morada;
@@ -13,7 +13,7 @@ public class Utilizador {
 	private String username;
 	private String password;
 
-	public Utilizador(int idUtilizador, String nome, String sobrenome, String dataDeNascimento,
+	public Utilizador(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 		super();
@@ -57,11 +57,11 @@ public class Utilizador {
 		this.sobrenome = sobrenome;
 	}
 
-	public String getDataDeNascimento() {
+	public LocalDate getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 
-	public void setDataDeNascimento(String dataDeNascimento) {
+	public void setDataDeNascimento(LocalDate dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
