@@ -1,11 +1,15 @@
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Utilizador {
 
 	private int idUtilizador;
 	private String nome;
 	private String sobrenome;
+<<<<<<< HEAD
 	private LocalDate dataDeNascimento;
+=======
+	private Date dataDeNascimento;
+>>>>>>> 7bf8d357392635a94d97902236e1c818ce772146
 	private String tipoIndentificacao;
 	private int numidentificacao;
 	private String morada;
@@ -13,7 +17,11 @@ public class Utilizador {
 	private String username;
 	private String password;
 
+<<<<<<< HEAD
 	public Utilizador(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
+=======
+	public Utilizador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
+>>>>>>> 7bf8d357392635a94d97902236e1c818ce772146
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 		super();
@@ -57,11 +65,19 @@ public class Utilizador {
 		this.sobrenome = sobrenome;
 	}
 
+<<<<<<< HEAD
 	public LocalDate getDataDeNascimento() {
 		return dataDeNascimento;
 	}
 
 	public void setDataDeNascimento(LocalDate dataDeNascimento) {
+=======
+	public Date getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+	public void setDataDeNascimento(Date dataDeNascimento) {
+>>>>>>> 7bf8d357392635a94d97902236e1c818ce772146
 		this.dataDeNascimento = dataDeNascimento;
 	}
 

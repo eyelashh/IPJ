@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
@@ -223,7 +224,7 @@ public class BancoAppAdm {
 		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
 		rbAdmFunCC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -242,7 +243,7 @@ public class BancoAppAdm {
 		rbAdmFunPass.setBounds(712, 212, 138, 25);
 		JPAdmFuncionario.add(rbAdmFunPass);
 
-		//Agrupei num grupo os radio button
+		// Agrupei num grupo os radio button
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(rbAdmFunCC);
 		bg.add(rbAdmFunBI);
@@ -331,18 +332,15 @@ public class BancoAppAdm {
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");// formato da data
-				String dataNascimento = df.format(dateChooser.getDate());// converter para String
-
 				Utilizador func = new Utilizador();
 
 				func.setNome(textAdmFunNome.getText());
 				func.setSobrenome(textAdmFunSobrenome.getText());
-				func.setDataDeNascimento(dataNascimento);
-				//experimentar
-				if(rbAdmFunCC.isSelected())
-				func.setTipoIndentificacao("C.C.");
-				
+				func.setDataDeNascimento(dateChooser.getDate());
+			
+				// experimentar
+				if (rbAdmFunCC.isSelected())
+					func.setTipoIndentificacao("C.C.");
 
 			}
 		});
@@ -359,6 +357,7 @@ public class BancoAppAdm {
 			public void actionPerformed(ActionEvent e) {
 
 				textAdmFunNome.setText("");
+
 				rbAdmFunCC.setSelected(false);
 				rbAdmFunBI.setSelected(false);
 				rbAdmFunPass.setSelected(false);
