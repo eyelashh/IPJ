@@ -46,7 +46,7 @@ public class BancoAppClt {
 	private JTextField textField_10;
 	private JTextField textField_11;
 	private static String nome;
-
+  
 	/**
 	 * Launch the application.
 	 */

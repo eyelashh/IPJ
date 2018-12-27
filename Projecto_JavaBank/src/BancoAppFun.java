@@ -55,7 +55,7 @@ public class BancoAppFun {
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
 	private static String nome;
-
+  
 	/**
 	 * Launch the application.
 	 */
