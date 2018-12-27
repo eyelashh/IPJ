@@ -67,8 +67,8 @@ public class AppFuncionario {
 	private JTextField txtPassword;
 	private JTextField txtNovoUsername;
 	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JPasswordField passwordField_2;
+	private JPasswordField txtNovaPassword;
+	private JPasswordField txtNovaPasswordConfirm;
 	private JTextField txtNifCarrinho;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -318,18 +318,18 @@ public class AppFuncionario {
 		label_9.setBounds(520, 173, 113, 24);
 		jpFuncConta.add(label_9);
 
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(520, 210, 279, 31);
-		jpFuncConta.add(passwordField_1);
+		txtNovaPassword = new JPasswordField();
+		txtNovaPassword.setBounds(520, 210, 279, 31);
+		jpFuncConta.add(txtNovaPassword);
 
 		JLabel label_10 = new JLabel("Confirmar Password:");
 		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_10.setBounds(520, 254, 171, 24);
 		jpFuncConta.add(label_10);
 
-		passwordField_2 = new JPasswordField();
-		passwordField_2.setBounds(520, 284, 279, 31);
-		jpFuncConta.add(passwordField_2);
+		txtNovaPasswordConfirm = new JPasswordField();
+		txtNovaPasswordConfirm.setBounds(520, 284, 279, 31);
+		jpFuncConta.add(txtNovaPasswordConfirm);
 
 		JButton btnConfirmarPasse = new JButton("Confirmar");
 		
@@ -902,22 +902,39 @@ public class AppFuncionario {
 		
 		btnConfirmarUsername.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean verificacao=l.verificarPassword(novoUsername, password);
-				boolean alteracaoConcluida=l.alterarUsername(f.getId(), novoUsername);
-				if (verificacao=true){
+				
+				boolean verificacaoPassword=l.verificarPassword(username, password);
+				boolean alteracaoUserConcluida=l.alterarUsername(f.getId(), novoUsername);
+				
+				if ((verificacaoPassword))//&&(alteracaoUserConcluida)) 
+						{
 					JOptionPane.showConfirmDialog(null, "O seu username foi alterado com sucesso");
 					txtUsername.setText(txtNovoUsername.getText());
 				} 
-				if (verificacao=false){
+				else {
 					JOptionPane.showConfirmDialog(null, "Username e/ou password incorrectos");
 				}
 			}
 		});
 
 			//ALTERACAO PASSWORD
+		//um jPasswordField tem que é um array de chars, portanto para obter a string 
+		//respectiva tem que se converter esse array de chars para string
+		String novaPassword=new String(txtNovaPassword.getPassword());
+		String novaPasswordConfirm=new String(txtNovaPasswordConfirm.getPassword());
 		
 		btnConfirmarPasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				boolean verificacao=l.verificarPassword(novoUsername, password);
+				boolean alteracaoPasseConcluida=l.alterarPassword(f.getId(),novaPassword);
+				if ((verificacao=true)&&(novaPassword.equals(novaPasswordConfirm))) {
+					JOptionPane.showConfirmDialog(null, "A sua password foi alterada com sucesso");
+					txtPassword.setText(novaPassword);
+				} 
+				if (verificacao=false){
+					JOptionPane.showConfirmDialog(null, "Dados incorrectos");
+				}
+				
 				
 			}
 		});

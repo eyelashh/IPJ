@@ -212,7 +212,8 @@ public class Livraria {
 		boolean dadosCorrectos = false;
 
 		for (Sessao s : this.sessoes) {
-			if ((s.getUser().getUsername().equals(username)) && (s.getUser().getPassword().equals(password))) {
+			Utilizador u=s.getUser();
+			if ((u.getUsername().equals(username)) && (u.getPassword().equals(password))) {
 				dadosCorrectos = true;
 			}
 		}
