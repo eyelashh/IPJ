@@ -62,6 +62,7 @@ public class Login extends JDialog {
 						//Converti para string o nome
 						String nome =  Banco.getInstance().logado(user, pass).getNome();
 						
+						//vai buscar o metodo do banco onde verifica se a pass e o user estao bem
 						boolean v = Banco.getInstance().verificarUserPass(user, pass);
 						
 						if (v) {
