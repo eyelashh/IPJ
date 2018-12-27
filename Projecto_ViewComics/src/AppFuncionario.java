@@ -64,11 +64,9 @@ public class AppFuncionario {
 	private JTextField txtPrecoLivro;
 	private JTextField txtStockLivro;
 	private JTextField txtUsername;
-	private JTextField txtPassword;
 	private JTextField txtNovoUsername;
-	private JPasswordField passwordField;
-	private JPasswordField txtNovaPassword;
-	private JPasswordField txtNovaPasswordConfirm;
+	private JPasswordField passwordAntiga;
+	private JPasswordField passwordNovaConfirm;
 	private JTextField txtNifCarrinho;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -80,6 +78,8 @@ public class AppFuncionario {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	private JPasswordField passwordNova;
+	private JPasswordField passwordAlterarUser;
 
 	/**
 	 * Launch the application.
@@ -274,10 +274,6 @@ public class AppFuncionario {
 		label_2.setBounds(67, 173, 113, 24);
 		jpFuncConta.add(label_2);
 
-		txtPassword = new JTextField();
-		txtPassword.setBounds(67, 210, 279, 31);
-		jpFuncConta.add(txtPassword);
-
 		JLabel label_3 = new JLabel("Novo UserName:");
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_3.setBounds(67, 254, 171, 24);
@@ -309,27 +305,23 @@ public class AppFuncionario {
 		label_5.setBounds(520, 92, 113, 24);
 		jpFuncConta.add(label_5);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(520, 129, 279, 31);
-		jpFuncConta.add(passwordField);
+		passwordAntiga = new JPasswordField();
+		passwordAntiga.setBounds(520, 129, 279, 31);
+		jpFuncConta.add(passwordAntiga);
 
 		JLabel label_9 = new JLabel("Nova Password:");
 		label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_9.setBounds(520, 173, 113, 24);
 		jpFuncConta.add(label_9);
 
-		txtNovaPassword = new JPasswordField();
-		txtNovaPassword.setBounds(520, 210, 279, 31);
-		jpFuncConta.add(txtNovaPassword);
-
 		JLabel label_10 = new JLabel("Confirmar Password:");
 		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_10.setBounds(520, 254, 171, 24);
 		jpFuncConta.add(label_10);
 
-		txtNovaPasswordConfirm = new JPasswordField();
-		txtNovaPasswordConfirm.setBounds(520, 284, 279, 31);
-		jpFuncConta.add(txtNovaPasswordConfirm);
+		passwordNovaConfirm = new JPasswordField();
+		passwordNovaConfirm.setBounds(520, 284, 279, 31);
+		jpFuncConta.add(passwordNovaConfirm);
 
 		JButton btnConfirmarPasse = new JButton("Confirmar");
 		
@@ -763,6 +755,14 @@ public class AppFuncionario {
 		textField_11.setColumns(10);
 		textField_11.setBounds(72, 80, 86, 20);
 		jpDinheiro.add(textField_11);
+		
+		passwordNova = new JPasswordField();
+		passwordNova.setBounds(520, 210, 235, 31);
+		jpFuncConta.add(passwordNova);
+		
+		passwordAlterarUser = new JPasswordField();
+		passwordAlterarUser.setBounds(67, 202, 140, 31);
+		jpFuncConta.add(passwordAlterarUser);
 
 		JButton btnConcluirPagamento = new JButton("Concluir");
 		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
@@ -890,9 +890,10 @@ public class AppFuncionario {
 		
 			// Colocar o username do funcionario automaticamente na caixa de texto de
 			// username antigo antes de mudar
+		
 		String username = f.getUsername();
 		txtUsername.setText(username);
-		String password = txtPassword.getText();
+		String passwordUser = new String(passwordNova.getPassword());
 
 			// ao clicar no botao de confirmacao para alteracao do username verificar se
 			// o username e a password coincidem (método verificarPassword na classe
@@ -903,7 +904,7 @@ public class AppFuncionario {
 		btnConfirmarUsername.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				boolean verificacaoPassword=l.verificarPassword(username, password);
+				boolean verificacaoPassword=l.verificarPassword(username, passwordUser);
 				boolean alteracaoUserConcluida=l.alterarUsername(f.getId(), novoUsername);
 				
 				if ((verificacaoPassword))//&&(alteracaoUserConcluida)) 
@@ -916,20 +917,18 @@ public class AppFuncionario {
 				}
 			}
 		});
-
-			//ALTERACAO PASSWORD
-		//um jPasswordField tem que é um array de chars, portanto para obter a string 
-		//respectiva tem que se converter esse array de chars para string
-		String novaPassword=new String(txtNovaPassword.getPassword());
-		String novaPasswordConfirm=new String(txtNovaPasswordConfirm.getPassword());
+		//String novaPassword
+		String novaPasswordConfirm=new String(passwordNovaConfirm.getPassword());
+		String novaPassword=new String(passwordNova.getPassword());
+		String passwordAnt =new String(passwordAntiga.getPassword());
 		
 		btnConfirmarPasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean verificacao=l.verificarPassword(novoUsername, password);
+			boolean verificacao=l.verificarPassword(novoUsername, passwordAnt);
 				boolean alteracaoPasseConcluida=l.alterarPassword(f.getId(),novaPassword);
-				if ((verificacao=true)&&(novaPassword.equals(novaPasswordConfirm))) {
+				if ((verificacao)&&(novaPassword.equals(novaPasswordConfirm))) {
 					JOptionPane.showConfirmDialog(null, "A sua password foi alterada com sucesso");
-					txtPassword.setText(novaPassword);
+					
 				} 
 				if (verificacao=false){
 					JOptionPane.showConfirmDialog(null, "Dados incorrectos");
