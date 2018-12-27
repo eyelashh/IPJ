@@ -385,7 +385,7 @@ public class BancoAppAdm {
 
 		// Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(false);
+		JPAdmEstatistica.setVisible(true);
 		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmEstatistica);
 		JPAdmEstatistica.setLayout(null);
@@ -502,6 +502,7 @@ public class BancoAppAdm {
 		JPAdmGestao.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmGestao);
 		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setVisible(false);
 
 		// linha que separa na parte da gestao
 		JSeparator separator_1 = new JSeparator();
