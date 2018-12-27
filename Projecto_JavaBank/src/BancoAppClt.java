@@ -67,9 +67,9 @@ public class BancoAppClt {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppClt(String nome) {
+	public BancoAppClt(String n) {
 		initialize();
-		this.nome = nome;
+		this.nome = n;
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class BancoAppClt {
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
 		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
-
+	
 		// separador no cabeçalho
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);

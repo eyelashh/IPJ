@@ -9,10 +9,10 @@ public class Cliente extends Utilizador {
 
 	public Cliente(int idUtilizador, String nome, String sobrenome,Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
-			String password, ArrayList<Conta> contas) {
+			String password) {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto,
 				username, password);
-		this.contas = contas;
+		this.contas = new ArrayList<Conta>();
 	}
  
 	public ArrayList<Conta> getContas() {

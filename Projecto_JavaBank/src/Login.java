@@ -16,7 +16,6 @@ public class Login extends JDialog {
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
 
-	
 //	public void run() {
 //		try {
 //			Login window = new Login();
@@ -26,7 +25,7 @@ public class Login extends JDialog {
 //		
 //		}
 //	}
-	
+
 	/**
 	 * 
 	 * Create the dialog.
@@ -53,45 +52,39 @@ public class Login extends JDialog {
 				okButton.setBounds(490, 621, 124, 43);
 
 				// fazer login:
-				
-
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						String pass = new String(jLoginPassword.getPassword());
-
-						for (int i = 0; i < gb.totta.getUtlizadores().size(); i++) {
-
-							if ((gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
-									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass)) && (gb.totta.getUtlizadores().get(i) instanceof Funcionario))
-
-							{
-								BancoAppFun bc = new BancoAppFun(gb.totta.getUtlizadores().get(i).getUsername());
-								bc.run();
-								dispose();
+						
+						String user=jLoginUsername.getText();
+						String pass=new String(jLoginPassword.getPassword());
+						//vai buscar o metodo do banco onde verifica o utilizador
+						Utilizador logado = Banco.getInstance().logado(user, pass);
+						//Converti para string o nome
+						String nome =  Banco.getInstance().logado(user, pass).getNome();
+						
+						boolean v = Banco.getInstance().verificarUserPass(user, pass);
+						
+						if (v) {
+				
+							if(logado instanceof Funcionario) {
 								
-							}
+							BancoAppFun fun = new BancoAppFun(nome);
+							fun.run();
 							
-							if (gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
-									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass) && gb.totta.getUtlizadores().get(i) instanceof Cliente)
-
-							{
-								BancoAppClt bcCl = new BancoAppClt(gb.totta.getUtlizadores().get(i).getUsername());
-								bcCl.run();
-								dispose();
-								
-							}
 							
-							if (gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
-									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass) && gb.totta.getUtlizadores().get(i) instanceof Administrador)
+						} else if (logado instanceof Administrador) {
+							
+							BancoAppAdm adm = new BancoAppAdm(nome);
+							adm.run();
 
-							{
-								BancoAppAdm bc = new BancoAppAdm(gb.totta.getUtlizadores().get(i).getUsername());
-								bc.run();
-								dispose();
-								
-							}
+						}else if(logado instanceof Cliente) {
+							
+							BancoAppClt clt = new BancoAppClt(nome);
+							clt.run();
+							
 						}
-
+						
+						}
 					}
 				});
 

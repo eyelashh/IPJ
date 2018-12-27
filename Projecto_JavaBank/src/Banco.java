@@ -6,11 +6,12 @@ public class Banco {
 	private int contacto;
 	private String morada; 
 	private ArrayList<Conta> contas;
-	private ArrayList<Utilizador> utlizadores;
+	private ArrayList<Utilizador> utilizadores;
+	private static Banco banco = new Banco();
 	
 	public Banco() {
 		super();
-		this.utlizadores = new ArrayList<Utilizador>();
+		this.utilizadores = new ArrayList<Utilizador>();
 	} 
  
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
@@ -21,9 +22,14 @@ public class Banco {
 		this.contacto = contacto;
 		this.morada = morada;
 		this.contas = new ArrayList<Conta>();
-		this.utlizadores = new ArrayList<Utilizador>();
+		this.utilizadores = new ArrayList<Utilizador>();
 		
 	}
+	
+	public static Banco getInstance() {
+		return banco;
+	}
+
  
 	public int getIdBanco() {
 		return idBanco;
@@ -66,11 +72,11 @@ public class Banco {
 	}
 
 	public ArrayList<Utilizador> getUtlizadores() {
-		return utlizadores;
+		return utilizadores;
 	}
 
 	public void setUtlizadores(ArrayList<Utilizador> utlizadores) {
-		this.utlizadores = utlizadores;
+		this.utilizadores = utlizadores;
 	}
 	
 	public void run()
@@ -80,13 +86,44 @@ public class Banco {
 	
 	// adiciona utilizadores
 		public void addUtilizador(Utilizador u) {
-			this.utlizadores.add(u);
+			this.utilizadores.add(u);
 		}
 
 		// remove utilizadores
 		public void removeUtilizador(Utilizador u) {
-			this.utlizadores.remove(u);
+			this.utilizadores.remove(u);
 		}
+		
+		
+		// verificar se a pass e o user estao corretos
+		public boolean verificarUserPass(String user, String pass) {
+
+			boolean verificar = false;
+
+			for (Utilizador u : this.utilizadores) {
+				if ((pass.equals(u.getPassword())) && (user.equals(u.getUsername()))) {
+					verificar = true;
+				}
+
+			}
+			return verificar;
+		}
+		
+		// verificar o nome da pessoa que está logado
+		public Utilizador logado(String username, String password) {
+			
+			Utilizador u_log =new Utilizador();
+			
+			for(Utilizador u: this.utilizadores) {
+				if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
+					u_log = u;
+				}
+			}
+			return u_log;
+		}
+		 
+		
+
 	
 
 }
