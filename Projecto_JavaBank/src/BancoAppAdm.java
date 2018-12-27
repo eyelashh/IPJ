@@ -725,7 +725,7 @@ public class BancoAppAdm {
 				btAdmEstatistica.setBackground(new Color(65, 106, 105));
 			}
 		});
-
+   
 		// botao cliente accao que muda de cor
 		btAdmClientes.addMouseListener(new MouseListener() {
 
