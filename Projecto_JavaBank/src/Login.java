@@ -17,7 +17,7 @@ public class Login extends JDialog {
 
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
-
+  
 
 
 	/**
