@@ -171,6 +171,7 @@ public class BancoAppFun {
 								jpanelGestao.setVisible(false);
 												
 												
+								
 														// Painel da conta da parte funcionario
 														JPanel jpanelContas = new JPanel();
 														jpanelContas.setVisible(false);
