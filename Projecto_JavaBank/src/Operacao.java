@@ -45,7 +45,7 @@ public class Operacao {
 	public void setDataOperacao(LocalDate dataOperacao) {
 		this.dataOperacao = dataOperacao;
 	}
-
+ 
 
 	public double getValor() {
 		return valor;
