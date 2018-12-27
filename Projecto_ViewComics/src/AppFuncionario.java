@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,6 +43,8 @@ import java.awt.List;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Label;
 import java.awt.FlowLayout;
 import java.awt.event.InputMethodListener;
@@ -134,7 +137,6 @@ public class AppFuncionario {
 			}
 		};
 
-	
 		panelcabecalho.setBackground(new Color(255, 215, 0));
 		panelcabecalho.setLayout(null);
 		panelcabecalho.setBounds(0, 0, 1262, 176);
@@ -222,7 +224,8 @@ public class AppFuncionario {
 				Image img;
 				try {
 
-					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou do
+					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou
+					// do
 					// ficheiro
 
 					// img = ImageIO.read(new URL(
@@ -260,6 +263,8 @@ public class AppFuncionario {
 		jpFuncConta.add(label_1);
 
 		txtUsername = new JTextField();
+		
+		
 		txtUsername.setEditable(false);
 		txtUsername.setBounds(67, 129, 279, 31);
 		jpFuncConta.add(txtUsername);
@@ -283,6 +288,7 @@ public class AppFuncionario {
 		jpFuncConta.add(txtNovoUsername);
 
 		JButton btnConfirmarUsername = new JButton("Confirmar");
+
 		btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
 		btnConfirmarUsername.setBounds(67, 359, 97, 25);
 		jpFuncConta.add(btnConfirmarUsername);
@@ -326,6 +332,7 @@ public class AppFuncionario {
 		jpFuncConta.add(passwordField_2);
 
 		JButton btnConfirmarPasse = new JButton("Confirmar");
+		
 		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
 		btnConfirmarPasse.setBounds(520, 359, 97, 25);
 		jpFuncConta.add(btnConfirmarPasse);
@@ -334,95 +341,6 @@ public class AppFuncionario {
 		btnCancelarPasse.setBackground(SystemColor.controlHighlight);
 		btnCancelarPasse.setBounds(676, 359, 97, 25);
 		jpFuncConta.add(btnCancelarPasse);
-
-		JPanel jpFuncLivros = new JPanel();
-		jpFuncLivros.setLayout(null);
-		jpFuncLivros.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncLivros);
-		jpFuncLivros.setVisible(false);
-
-		JComboBox comboBoxAtributoLivro = new JComboBox();
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpFuncLivros.add(comboBoxAtributoLivro);
-
-		txtAtributoPesquisaLivro = new JTextField();
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpFuncLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
-
-		JList listaLivros = new JList();
-		listaLivros.setBounds(22, 111, 190, 395);
-		jpFuncLivros.add(listaLivros);
-
-		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(263, 120, 48, 16);
-		jpFuncLivros.add(lblNewLabel);
-
-		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblAutor.setBounds(263, 170, 48, 16);
-		jpFuncLivros.add(lblAutor);
-
-		JLabel lblDescrio = new JLabel("Data:");
-		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDescrio.setBounds(271, 219, 40, 16);
-		jpFuncLivros.add(lblDescrio);
-
-		JLabel lblStock = new JLabel("Stock:");
-		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblStock.setBounds(263, 455, 48, 16);
-		jpFuncLivros.add(lblStock);
-
-		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
-		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo_1.setBounds(263, 404, 48, 16);
-		jpFuncLivros.add(lblPreo_1);
-
-		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo.setBounds(224, 266, 87, 16);
-		jpFuncLivros.add(lblPreo);
-
-		txtTituloLivro = new JTextField();
-		txtTituloLivro.setColumns(10);
-		txtTituloLivro.setBounds(333, 114, 345, 30);
-		jpFuncLivros.add(txtTituloLivro);
-
-		txtAutorLivro = new JTextField();
-		txtAutorLivro.setColumns(10);
-		txtAutorLivro.setBounds(333, 164, 345, 30);
-		jpFuncLivros.add(txtAutorLivro);
-
-		txtDataLivro = new JTextField();
-		txtDataLivro.setColumns(10);
-		txtDataLivro.setBounds(333, 213, 345, 30);
-		jpFuncLivros.add(txtDataLivro);
-
-		txtDescricaoLivro = new JTextField();
-		txtDescricaoLivro.setColumns(10);
-		txtDescricaoLivro.setBounds(333, 260, 345, 117);
-		jpFuncLivros.add(txtDescricaoLivro);
-
-		txtPrecoLivro = new JTextField();
-		txtPrecoLivro.setColumns(10);
-		txtPrecoLivro.setBounds(333, 402, 345, 30);
-		jpFuncLivros.add(txtPrecoLivro);
-
-		txtStockLivro = new JTextField();
-		txtStockLivro.setColumns(10);
-		txtStockLivro.setBounds(333, 453, 345, 30);
-		jpFuncLivros.add(txtStockLivro);
-
-		JButton btnPesquisarLivro = new JButton("Pesquisar");
-		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
-		btnPesquisarLivro.setBounds(224, 16, 97, 25);
-		jpFuncLivros.add(btnPesquisarLivro);
-
-		JButton btnLimparLivro = new JButton("Limpar");
-		btnLimparLivro.setBackground(SystemColor.controlHighlight);
-		btnLimparLivro.setBounds(224, 60, 97, 25);
-		jpFuncLivros.add(btnLimparLivro);
 
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
@@ -671,6 +589,95 @@ public class AppFuncionario {
 		txtCarrinho.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(txtCarrinho);
 
+		JPanel jpFuncLivros = new JPanel();
+		jpFuncLivros.setLayout(null);
+		jpFuncLivros.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncLivros);
+		jpFuncLivros.setVisible(false);
+
+		JComboBox comboBoxAtributoLivro = new JComboBox();
+		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+		jpFuncLivros.add(comboBoxAtributoLivro);
+
+		txtAtributoPesquisaLivro = new JTextField();
+		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+		jpFuncLivros.add(txtAtributoPesquisaLivro);
+		txtAtributoPesquisaLivro.setColumns(10);
+
+		JList listaLivros = new JList();
+		listaLivros.setBounds(22, 111, 190, 395);
+		jpFuncLivros.add(listaLivros);
+
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(263, 120, 48, 16);
+		jpFuncLivros.add(lblNewLabel);
+
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAutor.setBounds(263, 170, 48, 16);
+		jpFuncLivros.add(lblAutor);
+
+		JLabel lblDescrio = new JLabel("Data:");
+		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDescrio.setBounds(271, 219, 40, 16);
+		jpFuncLivros.add(lblDescrio);
+
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblStock.setBounds(263, 455, 48, 16);
+		jpFuncLivros.add(lblStock);
+
+		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
+		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo_1.setBounds(263, 404, 48, 16);
+		jpFuncLivros.add(lblPreo_1);
+
+		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
+		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo.setBounds(224, 266, 87, 16);
+		jpFuncLivros.add(lblPreo);
+
+		txtTituloLivro = new JTextField();
+		txtTituloLivro.setColumns(10);
+		txtTituloLivro.setBounds(333, 114, 345, 30);
+		jpFuncLivros.add(txtTituloLivro);
+
+		txtAutorLivro = new JTextField();
+		txtAutorLivro.setColumns(10);
+		txtAutorLivro.setBounds(333, 164, 345, 30);
+		jpFuncLivros.add(txtAutorLivro);
+
+		txtDataLivro = new JTextField();
+		txtDataLivro.setColumns(10);
+		txtDataLivro.setBounds(333, 213, 345, 30);
+		jpFuncLivros.add(txtDataLivro);
+
+		txtDescricaoLivro = new JTextField();
+		txtDescricaoLivro.setColumns(10);
+		txtDescricaoLivro.setBounds(333, 260, 345, 117);
+		jpFuncLivros.add(txtDescricaoLivro);
+
+		txtPrecoLivro = new JTextField();
+		txtPrecoLivro.setColumns(10);
+		txtPrecoLivro.setBounds(333, 402, 345, 30);
+		jpFuncLivros.add(txtPrecoLivro);
+
+		txtStockLivro = new JTextField();
+		txtStockLivro.setColumns(10);
+		txtStockLivro.setBounds(333, 453, 345, 30);
+		jpFuncLivros.add(txtStockLivro);
+
+		JButton btnPesquisarLivro = new JButton("Pesquisar");
+		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
+		btnPesquisarLivro.setBounds(224, 16, 97, 25);
+		jpFuncLivros.add(btnPesquisarLivro);
+
+		JButton btnLimparLivro = new JButton("Limpar");
+		btnLimparLivro.setBackground(SystemColor.controlHighlight);
+		btnLimparLivro.setBounds(224, 60, 97, 25);
+		jpFuncLivros.add(btnLimparLivro);
+
 		JPanel jpPagamento = new JPanel();
 		jpPagamento.setBounds(0, 0, 219, 336);
 		panelPrincipal.add(jpPagamento);
@@ -852,14 +859,69 @@ public class AppFuncionario {
 			}
 
 		});
+		
+		//instancia uma sessao ao entrar como funcionario que é adicionada à lista de 
+		//sessoes da livraria
+		Livraria l = new Livraria();
+		Funcionario f = new Funcionario(1,"Bruno",93,"bruno","b");
+		Sessao s =new Sessao(f.getId(),LocalDate.now(),10,f);
+		l.addSessao(s);
+		l.addUtilizador(f);
+		
 
 		// CARRINHOS
 
+		
+		// Botao que pesquisa por um carrinho
 		// criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
+		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// converter para int
+				int nif = Integer.parseInt(txtNifCarrinho.getText());
+				Carrinho c = l.pesquisarCarrinho(nif);
+				txtCarrinho.setText(c.toString());
 
-		Livraria l = new Livraria();
+			}
+		});
 
 		// GESTAO CONTA PESSOAL
 
+			//ALTERACAO DO USERNAME
+		
+			// Colocar o username do funcionario automaticamente na caixa de texto de
+			// username antigo antes de mudar
+		String username = f.getUsername();
+		txtUsername.setText(username);
+		String password = txtPassword.getText();
+
+			// ao clicar no botao de confirmacao para alteracao do username verificar se
+			// o username e a password coincidem (método verificarPassword na classe
+			// livraria)
+
+		String novoUsername=txtNovoUsername.getText();
+		
+		btnConfirmarUsername.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean verificacao=l.verificarPassword(novoUsername, password);
+				boolean alteracaoConcluida=l.alterarUsername(f.getId(), novoUsername);
+				if (verificacao=true){
+					JOptionPane.showConfirmDialog(null, "O seu username foi alterado com sucesso");
+					txtUsername.setText(txtNovoUsername.getText());
+				} 
+				if (verificacao=false){
+					JOptionPane.showConfirmDialog(null, "Username e/ou password incorrectos");
+				}
+			}
+		});
+
+			//ALTERACAO PASSWORD
+		
+		btnConfirmarPasse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+			
+		
 	}
 }

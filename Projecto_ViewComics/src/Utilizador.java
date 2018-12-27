@@ -6,6 +6,11 @@ public class Utilizador {
 	private int contato;
 	private String username;
 	private String password;
+	
+	public Utilizador() {
+		super();
+		
+	}
 
 	public Utilizador(int id, String nome, int contato, String username, String password) {
 		super();
