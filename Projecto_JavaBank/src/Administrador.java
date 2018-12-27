@@ -1,9 +1,9 @@
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Administrador extends Utilizador {
 
 	
-	public Administrador(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
+	public Administrador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto, username,

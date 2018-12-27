@@ -1,14 +1,15 @@
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Funcionario extends Utilizador {
 	private int idFuncionario;
 
-	public Funcionario(int idUtilizador, String nome, String sobrenome, LocalDate dataDeNascimento,
+	public Funcionario(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password, int idFuncionario) {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto,
 				username, password);
 		this.idFuncionario = idFuncionario;
+		
 	}
 
 	public int getIdFuncionario() {
