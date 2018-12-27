@@ -49,6 +49,7 @@ public class BancoAppAdm {
 	private JTextField textAdmFunSobrenome;
 	private static String nome;
 
+	
 	/**
 	 * Launch the application.
 	 */

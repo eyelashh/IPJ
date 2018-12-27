@@ -106,6 +106,7 @@ public class BancoAppFun {
 		btnLogOut.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 	
 		// logOut
+		
 
 				btnLogOut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {

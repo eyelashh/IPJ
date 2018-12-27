@@ -112,6 +112,7 @@ public class BancoAppClt {
 					logout.setLocationRelativeTo(frame);
 					logout.setVisible(true);
 					frame.setVisible(false);
+					
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
