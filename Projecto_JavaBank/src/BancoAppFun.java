@@ -76,6 +76,7 @@ public class BancoAppFun {
 		this.nome = n;
 	}
 
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -164,68 +165,68 @@ public class BancoAppFun {
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
 
-<<<<<<< HEAD
+
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
-=======
-																																																	tbLevMontante = new JTextField();
-																																																	tbLevMontante.setBounds(174, 83, 162, 31);
-																																																	JpanelOpLevantamento.add(tbLevMontante);
-																																																	
-																																																			JLabel label = new JLabel("Data:");
-																																																			label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																			label.setBounds(164, 131, 50, 23);
-																																																			JpanelOpLevantamento.add(label);
-																																																			
-																																																					JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-																																																					lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																					lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-																																																					JpanelOpLevantamento.add(lblMontanteLevantamento);
-																																																					
-																																																							
-																																																							
-																																																									JButton btLevConfirmar = new JButton("Confirmar");
-																																																									btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																									btLevConfirmar.setBounds(129, 223, 120, 38);
-																																																									JpanelOpLevantamento.add(btLevConfirmar);
-																																																									
-																																																											JButton btLevCancelar = new JButton("Cancelar");
-																																																											btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																											btLevCancelar.setBounds(273, 224, 120, 38);
-																																																											JpanelOpLevantamento.add(btLevCancelar);
-																																																											
-																																																												
-																																																													
-																																																															// Dentro do painel gestao:
-																																																															// coloca o painel depositos visivel:
-																																																															cbOperacoDep.addActionListener(new ActionListener() {
-																																																																public void actionPerformed(ActionEvent e) {
-																																																																	JpanelOpDeposito.setVisible(true);
-																																																																	JpanelOpLevantamento.setVisible(false);
-																																																																	JpanelOpTransferencia.setVisible(false);
-																																																													
-																																																																}
-																																																															});
-																																																															
-																																																																	// coloca o painel depositos visivel:
-																																																																	btnLevantamento.addActionListener(new ActionListener() {
-																																																																		public void actionPerformed(ActionEvent e) {
-																																																																			JpanelOpDeposito.setVisible(false);
-																																																																			JpanelOpLevantamento.setVisible(true);
-																																																																			JpanelOpTransferencia.setVisible(false);
-																																																																		}
-																																																																	});
-																																																																	
-																																																																			// coloca o painel depositos visivel:
-																																																																			btnTransferncia.addActionListener(new ActionListener() {
-																																																																				public void actionPerformed(ActionEvent e) {
-																																																																					JpanelOpDeposito.setVisible(false);
-																																																																					JpanelOpLevantamento.setVisible(false);
-																																																																					JpanelOpTransferencia.setVisible(true);
-																																																																				}
-																																																																			});
-														
+//
+//																																																	tbLevMontante = new JTextField();
+//																																																	tbLevMontante.setBounds(174, 83, 162, 31);
+//																																																	JpanelOpLevantamento.add(tbLevMontante);
+//																																																	
+//																																																			JLabel label = new JLabel("Data:");
+//																																																			label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																																			label.setBounds(164, 131, 50, 23);
+//																																																			JpanelOpLevantamento.add(label);
+//																																																			
+//																																																					JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+//																																																					lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																																					lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+//																																																					JpanelOpLevantamento.add(lblMontanteLevantamento);
+//																																																					
+//																																																							
+//																																																							
+//																																																									JButton btLevConfirmar = new JButton("Confirmar");
+//																																																									btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																									btLevConfirmar.setBounds(129, 223, 120, 38);
+//																																																									JpanelOpLevantamento.add(btLevConfirmar);
+//																																																									
+//																																																											JButton btLevCancelar = new JButton("Cancelar");
+//																																																											btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																											btLevCancelar.setBounds(273, 224, 120, 38);
+//																																																											JpanelOpLevantamento.add(btLevCancelar);
+//																																																											
+//																																																												
+//																																																													
+//																																																															// Dentro do painel gestao:
+//																																																															// coloca o painel depositos visivel:
+//																																																															cbOperacoDep.addActionListener(new ActionListener() {
+//																																																																public void actionPerformed(ActionEvent e) {
+//																																																																	JpanelOpDeposito.setVisible(true);
+//																																																																	JpanelOpLevantamento.setVisible(false);
+//																																																																	JpanelOpTransferencia.setVisible(false);
+//																																																													
+//																																																																}
+//																																																															});
+//																																																															
+//																																																																	// coloca o painel depositos visivel:
+//																																																																	btnLevantamento.addActionListener(new ActionListener() {
+//																																																																		public void actionPerformed(ActionEvent e) {
+//																																																																			JpanelOpDeposito.setVisible(false);
+//																																																																			JpanelOpLevantamento.setVisible(true);
+//																																																																			JpanelOpTransferencia.setVisible(false);
+//																																																																		}
+//																																																																	});
+//																																																																	
+//																																																																			// coloca o painel depositos visivel:
+//																																																																			btnTransferncia.addActionListener(new ActionListener() {
+//																																																																				public void actionPerformed(ActionEvent e) {
+//																																																																					JpanelOpDeposito.setVisible(false);
+//																																																																					JpanelOpLevantamento.setVisible(false);
+//																																																																					JpanelOpTransferencia.setVisible(true);
+//																																																																				}
+//																																																																			});
+//														
 																// Painel principal CLientes
 																JPanel jpanelClientes = new JPanel();
 																jpanelClientes.setBounds(0, 0, 1032, 556);
@@ -366,105 +367,105 @@ public class BancoAppFun {
 																																																																										JDateChooser dateChooser_3 = new JDateChooser();
 																																																																										dateChooser_3.setBounds(345, 163, 217, 31);
 																																																																										jpanelClientes.add(dateChooser_3);
-														jpanelContas.setBounds(0, 0, 1042, 576);
-														JpanelPrincipal.add(jpanelContas);
-														jpanelContas.setLayout(null);
-														
-																JComboBox cbContaspesqconta = new JComboBox();
-																cbContaspesqconta.setBounds(61, 40, 219, 38);
-																jpanelContas.add(cbContaspesqconta);
-																
-																		JTextField tbContaspesqconta = new JTextField();
-																		tbContaspesqconta.setBounds(61, 84, 219, 31);
-																		jpanelContas.add(tbContaspesqconta);
-																		
-																				JScrollBar scrollBar = new JScrollBar();
-																				scrollBar.setBounds(983, 129, 15, 441);
-																				jpanelContas.add(scrollBar);
-																				
-																						JScrollBar scrollBar_1 = new JScrollBar();
-																						scrollBar_1.setBounds(279, 127, 15, 441);
-																						jpanelContas.add(scrollBar_1);
-																						
-																								JCheckBox chckbxBruno = new JCheckBox("Bruno");
-																								chckbxBruno.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																								chckbxBruno.setBounds(776, 163, 128, 23);
-																								jpanelContas.add(chckbxBruno);
-																								
-																										JCheckBox checkBoxJoana = new JCheckBox("Joana");
-																										checkBoxJoana.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																										checkBoxJoana.setBounds(776, 233, 128, 23);
-																										jpanelContas.add(checkBoxJoana);
-																										
-																												JCheckBox checkBoxTamara = new JCheckBox("Tamara");
-																												checkBoxTamara.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																												checkBoxTamara.setBounds(776, 198, 128, 23);
-																												jpanelContas.add(checkBoxTamara);
-																												
-																														JList lContas = new JList();
-																														lContas.setBounds(54, 127, 240, 442);
-																														jpanelContas.add(lContas);
-																														
-																																JList lClientes = new JList();
-																																lClientes.setBounds(758, 128, 240, 442);
-																																jpanelContas.add(lClientes);
-																																
-																																		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
-																																		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																		lblNewLabel_2.setBounds(378, 128, 113, 24);
-																																		jpanelContas.add(lblNewLabel_2);
-																																		
-																																				JLabel lblDataDeOperao = new JLabel("Data da operação:");
-																																				lblDataDeOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																				lblDataDeOperao.setBounds(378, 205, 240, 24);
-																																				jpanelContas.add(lblDataDeOperao);
-																																				
-																																						JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
-																																						lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																						lblLimiteDeLevantamento.setBounds(378, 286, 219, 24);
-																																						jpanelContas.add(lblLimiteDeLevantamento);
-																																						
-																																								tbContasnum = new JTextField();
-																																								tbContasnum.setBounds(388, 162, 279, 31);
-																																								jpanelContas.add(tbContasnum);
-																																										
-																																												tbContaslimitelev = new JTextField();
-																																												tbContaslimitelev.setBounds(388, 316, 279, 31);
-																																												jpanelContas.add(tbContaslimitelev);
-																																												
-																																														JButton btContasConfirmar = new JButton("Confirmar");
-																																														btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																														btContasConfirmar.setBounds(389, 391, 120, 38);
-																																														jpanelContas.add(btContasConfirmar);
-																																														
-																																																JButton btContasCancelar = new JButton("Limpar");
-																																																btContasCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																btContasCancelar.setBounds(536, 391, 120, 38);
-																																																jpanelContas.add(btContasCancelar);
-																																																
-																																																		JButton btContasNovo = new JButton("Novo");
-																																																		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																		btContasNovo.setBounds(317, 464, 120, 38);
-																																																		jpanelContas.add(btContasNovo);
-																																																		
-																																																				JButton btContasEliminar = new JButton("Eliminar");
-																																																				btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																				btContasEliminar.setBounds(461, 464, 120, 38);
-																																																				jpanelContas.add(btContasEliminar);
-																																																				
-																																																						JButton btContasLimpar = new JButton("Cancelar");
-																																																						btContasLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																						btContasLimpar.setBounds(608, 464, 120, 38);
-																																																						jpanelContas.add(btContasLimpar);
-																																																						
-																																																								JLabel lblClientes_1 = new JLabel("Clientes");
-																																																								lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																								lblClientes_1.setBounds(759, 98, 164, 24);
-																																																								jpanelContas.add(lblClientes_1);
-																																																								
-																																																								JDateChooser dateChooser_2 = new JDateChooser();
-																																																								dateChooser_2.setBounds(388, 243, 279, 31);
-																																																								jpanelContas.add(dateChooser_2);
+//														jpanelContas.setBounds(0, 0, 1042, 576);
+//														JpanelPrincipal.add(jpanelContas);
+//														jpanelContas.setLayout(null);
+//														
+//																JComboBox cbContaspesqconta = new JComboBox();
+//																cbContaspesqconta.setBounds(61, 40, 219, 38);
+//																jpanelContas.add(cbContaspesqconta);
+//																
+//																		JTextField tbContaspesqconta = new JTextField();
+//																		tbContaspesqconta.setBounds(61, 84, 219, 31);
+//																		jpanelContas.add(tbContaspesqconta);
+//																		
+//																				JScrollBar scrollBar = new JScrollBar();
+//																				scrollBar.setBounds(983, 129, 15, 441);
+//																				jpanelContas.add(scrollBar);
+//																				
+//																						JScrollBar scrollBar_1 = new JScrollBar();
+//																						scrollBar_1.setBounds(279, 127, 15, 441);
+//																						jpanelContas.add(scrollBar_1);
+//																						
+//																								JCheckBox chckbxBruno = new JCheckBox("Bruno");
+//																								chckbxBruno.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																								chckbxBruno.setBounds(776, 163, 128, 23);
+//																								jpanelContas.add(chckbxBruno);
+//																								
+//																										JCheckBox checkBoxJoana = new JCheckBox("Joana");
+//																										checkBoxJoana.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																										checkBoxJoana.setBounds(776, 233, 128, 23);
+//																										jpanelContas.add(checkBoxJoana);
+//																										
+//																												JCheckBox checkBoxTamara = new JCheckBox("Tamara");
+//																												checkBoxTamara.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																												checkBoxTamara.setBounds(776, 198, 128, 23);
+//																												jpanelContas.add(checkBoxTamara);
+//																												
+//																														JList lContas = new JList();
+//																														lContas.setBounds(54, 127, 240, 442);
+//																														jpanelContas.add(lContas);
+//																														
+//																																JList lClientes = new JList();
+//																																lClientes.setBounds(758, 128, 240, 442);
+//																																jpanelContas.add(lClientes);
+//																																
+//																																		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
+//																																		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																		lblNewLabel_2.setBounds(378, 128, 113, 24);
+//																																		jpanelContas.add(lblNewLabel_2);
+//																																		
+//																																				JLabel lblDataDeOperao = new JLabel("Data da operação:");
+//																																				lblDataDeOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																				lblDataDeOperao.setBounds(378, 205, 240, 24);
+//																																				jpanelContas.add(lblDataDeOperao);
+//																																				
+//																																						JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
+//																																						lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																						lblLimiteDeLevantamento.setBounds(378, 286, 219, 24);
+//																																						jpanelContas.add(lblLimiteDeLevantamento);
+//																																						
+//																																								tbContasnum = new JTextField();
+//																																								tbContasnum.setBounds(388, 162, 279, 31);
+//																																								jpanelContas.add(tbContasnum);
+//																																										
+//																																												tbContaslimitelev = new JTextField();
+//																																												tbContaslimitelev.setBounds(388, 316, 279, 31);
+//																																												jpanelContas.add(tbContaslimitelev);
+//																																												
+//																																														JButton btContasConfirmar = new JButton("Confirmar");
+//																																														btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																														btContasConfirmar.setBounds(389, 391, 120, 38);
+//																																														jpanelContas.add(btContasConfirmar);
+//																																														
+//																																																JButton btContasCancelar = new JButton("Limpar");
+//																																																btContasCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																btContasCancelar.setBounds(536, 391, 120, 38);
+//																																																jpanelContas.add(btContasCancelar);
+//																																																
+//																																																		JButton btContasNovo = new JButton("Novo");
+//																																																		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																		btContasNovo.setBounds(317, 464, 120, 38);
+//																																																		jpanelContas.add(btContasNovo);
+//																																																		
+//																																																				JButton btContasEliminar = new JButton("Eliminar");
+//																																																				btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																				btContasEliminar.setBounds(461, 464, 120, 38);
+//																																																				jpanelContas.add(btContasEliminar);
+//																																																				
+//																																																						JButton btContasLimpar = new JButton("Cancelar");
+//																																																						btContasLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+//																																																						btContasLimpar.setBounds(608, 464, 120, 38);
+//																																																						jpanelContas.add(btContasLimpar);
+//																																																						
+//																																																								JLabel lblClientes_1 = new JLabel("Clientes");
+//																																																								lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//																																																								lblClientes_1.setBounds(759, 98, 164, 24);
+//																																																								jpanelContas.add(lblClientes_1);
+//																																																								
+//																																																								JDateChooser dateChooser_2 = new JDateChooser();
+//																																																								dateChooser_2.setBounds(388, 243, 279, 31);
+//																																																								jpanelContas.add(dateChooser_2);
 								jpanelGestao.setBounds(0, 0, 1042, 576);
 								JpanelPrincipal.add(jpanelGestao);
 								jpanelGestao.setLayout(null);
@@ -500,7 +501,7 @@ public class BancoAppFun {
 																						btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 																						btGestaouserconfirmar.addActionListener(new ActionListener() {
 																							public void actionPerformed(ActionEvent e) {
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
