@@ -169,16 +169,223 @@ public class BancoAppFun {
 								// Painel da gestao do administrador
 								JPanel jpanelGestao = new JPanel();
 								jpanelGestao.setVisible(false);
-										
-										
-												// Painel principal da operaçoes
-												JPanel jpanelOperacoes = new JPanel();
-												jpanelOperacoes.setVisible(false);
 												
 												
+								
 														// Painel da conta da parte funcionario
 														JPanel jpanelContas = new JPanel();
 														jpanelContas.setVisible(false);
+																
+																
+																		// Painel principal da operaçoes
+																		JPanel jpanelOperacoes = new JPanel();
+																		jpanelOperacoes.setBounds(0, 0, 1042, 576);
+																		JpanelPrincipal.add(jpanelOperacoes);
+																		jpanelOperacoes.setVisible(false);
+																		jpanelOperacoes.setLayout(null);
+																		
+																				JComboBox cbOperacoespesqClt = new JComboBox();
+																				cbOperacoespesqClt.setBounds(188, 49, 249, 39);
+																				jpanelOperacoes.add(cbOperacoespesqClt);
+																				
+																						JTextField tbOperacoespesqClt = new JTextField();
+																						tbOperacoespesqClt.setBounds(188, 92, 250, 31);
+																						jpanelOperacoes.add(tbOperacoespesqClt);
+																						
+																								JButton btnNewButton = new JButton("Pesquisar");
+																								btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																								btnNewButton.setBounds(258, 131, 116, 38);
+																								jpanelOperacoes.add(btnNewButton);
+																								
+																										JComboBox cbOperacoesConta = new JComboBox();
+																										cbOperacoesConta.addItem("Conta");
+																										cbOperacoesConta.setSelectedItem(null);
+																										cbOperacoesConta.setBounds(578, 72, 249, 39);
+																										jpanelOperacoes.add(cbOperacoesConta);
+																										
+																												JLabel lblNewLabel_3 = new JLabel("Saldo :");
+																												lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																												lblNewLabel_3.setBounds(568, 107, 162, 23);
+																												jpanelOperacoes.add(lblNewLabel_3);
+																												
+																														textField = new JTextField();
+																														textField.setBounds(578, 133, 169, 31);
+																														jpanelOperacoes.add(textField);
+																														
+																																JLabel lblConta = new JLabel("Conta:");
+																																lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																lblConta.setBounds(568, 49, 64, 23);
+																																jpanelOperacoes.add(lblConta);
+																																
+																																		JButton cbOperacoDep = new JButton("Depósito");
+																																		cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																		cbOperacoDep.setBounds(243, 207, 176, 38);
+																																		jpanelOperacoes.add(cbOperacoDep);
+																																		
+																																				JButton btnLevantamento = new JButton("Levantamento");
+																																				btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																				btnLevantamento.setBounds(432, 207, 176, 38);
+																																				jpanelOperacoes.add(btnLevantamento);
+																																				
+																																						JButton btnTransferncia = new JButton("Transfer\u00EAncia");
+																																						btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																						btnTransferncia.setBounds(620, 207, 176, 38);
+																																						jpanelOperacoes.add(btnTransferncia);
+																																						
+																																								JPanel JpanelOpLevantamento = new JPanel();
+																																								JpanelOpLevantamento.setVisible(false);
+																																								
+																																								JDateChooser dateChooser4 = new JDateChooser();
+																																								dateChooser4.setBounds(174, 166, 162, 31);
+																																								JpanelOpLevantamento.add(dateChooser4);
+																																								
+																																										JPanel JpanelOpDeposito = new JPanel();
+																																										JpanelOpDeposito.setVisible(false);
+																																										
+																																												JPanel JpanelOpTransferencia = new JPanel();
+																																												JpanelOpTransferencia.setVisible(false);
+																																												JpanelOpTransferencia.setLayout(null);
+																																												JpanelOpTransferencia.setBounds(263, 247, 516, 313);
+																																												jpanelOperacoes.add(JpanelOpTransferencia);
+																																												
+																																														tbTransMontante = new JTextField();
+																																														tbTransMontante.setBounds(168, 59, 162, 30);
+																																														JpanelOpTransferencia.add(tbTransMontante);
+																																														
+																																																JLabel lblContaDestino = new JLabel("Conta destino:");
+																																																lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																lblContaDestino.setBounds(158, 101, 137, 23);
+																																																JpanelOpTransferencia.add(lblContaDestino);
+																																																
+																																																		JLabel label_5 = new JLabel("Montante:");
+																																																		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																		label_5.setBounds(158, 34, 97, 23);
+																																																		JpanelOpTransferencia.add(label_5);
+																																																		
+																																																				tbTransContaDestino = new JTextField();
+																																																				tbTransContaDestino.setBounds(168, 126, 162, 30);
+																																																				JpanelOpTransferencia.add(tbTransContaDestino);
+																																																				
+																																																						JButton btTransConfirmar = new JButton("Confirmar");
+																																																						btTransConfirmar.setBounds(146, 317, 97, 30);
+																																																						JpanelOpTransferencia.add(btTransConfirmar);
+																																																						
+																																																								JButton btTransCancelar = new JButton("Cancelar");
+																																																								btTransCancelar.setBounds(275, 317, 97, 30);
+																																																								JpanelOpTransferencia.add(btTransCancelar);
+																																																								
+																																																										JLabel lblDataDaOperao = new JLabel("Data da Operação:");
+																																																										lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																										lblDataDaOperao.setBounds(158, 168, 189, 23);
+																																																										JpanelOpTransferencia.add(lblDataDaOperao);
+																																																										
+																																																												JButton btnConfirmar = new JButton("Confirmar");
+																																																												btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																												btnConfirmar.setBounds(118, 253, 116, 38);
+																																																												JpanelOpTransferencia.add(btnConfirmar);
+																																																												
+																																																														JButton btnCancelar = new JButton("Cancelar");
+																																																														btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																														btnCancelar.setBounds(256, 253, 116, 38);
+																																																														JpanelOpTransferencia.add(btnCancelar);
+																																																														
+																																																														JDateChooser dateChooser_1 = new JDateChooser();
+																																																														dateChooser_1.setBounds(168, 198, 162, 31);
+																																																														JpanelOpTransferencia.add(dateChooser_1);
+																																																														
+																																																														
+																																						JpanelOpDeposito.setBounds(263, 247, 516, 313);
+																																						jpanelOperacoes.add(JpanelOpDeposito);
+																																						JpanelOpDeposito.setLayout(null);
+																																						
+																																								tbDepMontante = new JTextField();
+																																								tbDepMontante.setBounds(174, 83, 162, 31);
+																																								JpanelOpDeposito.add(tbDepMontante);
+																																								
+																																										JLabel lblData = new JLabel("Data:");
+																																										lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										lblData.setBounds(164, 131, 50, 23);
+																																										JpanelOpDeposito.add(lblData);
+																																										
+																																												JLabel lblMontantem = new JLabel("Montante Depósito:");
+																																												lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																												lblMontantem.setBounds(164, 55, 229, 23);
+																																												JpanelOpDeposito.add(lblMontantem);
+																																												
+																																														JButton btDepConfirmar = new JButton("Confirmar");
+																																														btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																														btDepConfirmar.setBounds(129, 223, 120, 38);
+																																														JpanelOpDeposito.add(btDepConfirmar);
+																																														
+																																																JButton btDepCancelar = new JButton("Cancelar");
+																																																btDepCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																btDepCancelar.setBounds(273, 224, 120, 38);
+																																																JpanelOpDeposito.add(btDepCancelar);
+																																																
+																																																JDateChooser dateChooser = new JDateChooser();
+																																																dateChooser.setBounds(174, 166, 162, 31);
+																																																JpanelOpDeposito.add(dateChooser);
+																																																JpanelOpLevantamento.setBounds(263, 247, 516, 313);
+																																																jpanelOperacoes.add(JpanelOpLevantamento);
+																																																JpanelOpLevantamento.setLayout(null);
+																																																
+
+																																																	tbLevMontante = new JTextField();
+																																																	tbLevMontante.setBounds(174, 83, 162, 31);
+																																																	JpanelOpLevantamento.add(tbLevMontante);
+																																																	
+																																																			JLabel label = new JLabel("Data:");
+																																																			label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																			label.setBounds(164, 131, 50, 23);
+																																																			JpanelOpLevantamento.add(label);
+																																																			
+																																																					JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+																																																					lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																					lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+																																																					JpanelOpLevantamento.add(lblMontanteLevantamento);
+																																																					
+																																																							
+																																																							
+																																																									JButton btLevConfirmar = new JButton("Confirmar");
+																																																									btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																									btLevConfirmar.setBounds(129, 223, 120, 38);
+																																																									JpanelOpLevantamento.add(btLevConfirmar);
+																																																									
+																																																											JButton btLevCancelar = new JButton("Cancelar");
+																																																											btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																											btLevCancelar.setBounds(273, 224, 120, 38);
+																																																											JpanelOpLevantamento.add(btLevCancelar);
+																																																											
+																																																												
+																																																													
+																																																															// Dentro do painel gestao:
+																																																															// coloca o painel depositos visivel:
+																																																															cbOperacoDep.addActionListener(new ActionListener() {
+																																																																public void actionPerformed(ActionEvent e) {
+																																																																	JpanelOpDeposito.setVisible(true);
+																																																																	JpanelOpLevantamento.setVisible(false);
+																																																																	JpanelOpTransferencia.setVisible(false);
+																																																													
+																																																																}
+																																																															});
+																																																															
+																																																																	// coloca o painel depositos visivel:
+																																																																	btnLevantamento.addActionListener(new ActionListener() {
+																																																																		public void actionPerformed(ActionEvent e) {
+																																																																			JpanelOpDeposito.setVisible(false);
+																																																																			JpanelOpLevantamento.setVisible(true);
+																																																																			JpanelOpTransferencia.setVisible(false);
+																																																																		}
+																																																																	});
+																																																																	
+																																																																			// coloca o painel depositos visivel:
+																																																																			btnTransferncia.addActionListener(new ActionListener() {
+																																																																				public void actionPerformed(ActionEvent e) {
+																																																																					JpanelOpDeposito.setVisible(false);
+																																																																					JpanelOpLevantamento.setVisible(false);
+																																																																					JpanelOpTransferencia.setVisible(true);
+																																																																				}
+																																																																			});
 														
 																// Painel principal CLientes
 																JPanel jpanelClientes = new JPanel();
@@ -419,217 +626,6 @@ public class BancoAppFun {
 																																																								JDateChooser dateChooser_2 = new JDateChooser();
 																																																								dateChooser_2.setBounds(388, 243, 279, 31);
 																																																								jpanelContas.add(dateChooser_2);
-												jpanelOperacoes.setBounds(0, 0, 1042, 576);
-												JpanelPrincipal.add(jpanelOperacoes);
-												jpanelOperacoes.setLayout(null);
-												
-														JComboBox cbOperacoespesqClt = new JComboBox();
-														cbOperacoespesqClt.setBounds(188, 49, 249, 39);
-														jpanelOperacoes.add(cbOperacoespesqClt);
-														
-																JTextField tbOperacoespesqClt = new JTextField();
-																tbOperacoespesqClt.setBounds(188, 92, 250, 31);
-																jpanelOperacoes.add(tbOperacoespesqClt);
-																
-																		JButton btnNewButton = new JButton("Pesquisar");
-																		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																		btnNewButton.setBounds(258, 131, 116, 38);
-																		jpanelOperacoes.add(btnNewButton);
-																		
-																				JComboBox cbOperacoesConta = new JComboBox();
-																				cbOperacoesConta.addItem("Conta");
-																				cbOperacoesConta.setSelectedItem(null);
-																				cbOperacoesConta.setBounds(578, 72, 249, 39);
-																				jpanelOperacoes.add(cbOperacoesConta);
-																				
-																						JLabel lblNewLabel_3 = new JLabel("Saldo :");
-																						lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																						lblNewLabel_3.setBounds(568, 107, 162, 23);
-																						jpanelOperacoes.add(lblNewLabel_3);
-																						
-																								textField = new JTextField();
-																								textField.setBounds(578, 133, 169, 31);
-																								jpanelOperacoes.add(textField);
-																								
-																										JLabel lblConta = new JLabel("Conta:");
-																										lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																										lblConta.setBounds(568, 49, 64, 23);
-																										jpanelOperacoes.add(lblConta);
-																										
-																												JButton cbOperacoDep = new JButton("Depósito");
-																												cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																												cbOperacoDep.setBounds(243, 207, 176, 38);
-																												jpanelOperacoes.add(cbOperacoDep);
-																												
-																														JButton btnLevantamento = new JButton("Levantamento");
-																														btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																														btnLevantamento.setBounds(432, 207, 176, 38);
-																														jpanelOperacoes.add(btnLevantamento);
-																														
-																																JButton btnTransferncia = new JButton("Transfer\u00EAncia");
-																																btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																btnTransferncia.setBounds(620, 207, 176, 38);
-																																jpanelOperacoes.add(btnTransferncia);
-																																
-																																		JPanel JpanelOpLevantamento = new JPanel();
-																																		JpanelOpLevantamento.setVisible(false);
-																																		
-																																		JDateChooser dateChooser4 = new JDateChooser();
-																																		dateChooser4.setBounds(174, 166, 162, 31);
-																																		JpanelOpLevantamento.add(dateChooser4);
-																																				
-																																						JPanel JpanelOpDeposito = new JPanel();
-																																						JpanelOpDeposito.setVisible(false);
-																																						
-																																								JPanel JpanelOpTransferencia = new JPanel();
-																																								JpanelOpTransferencia.setVisible(false);
-																																								JpanelOpTransferencia.setLayout(null);
-																																								JpanelOpTransferencia.setBounds(263, 247, 516, 313);
-																																								jpanelOperacoes.add(JpanelOpTransferencia);
-																																								
-																																										tbTransMontante = new JTextField();
-																																										tbTransMontante.setBounds(168, 59, 162, 30);
-																																										JpanelOpTransferencia.add(tbTransMontante);
-																																										
-																																												JLabel lblContaDestino = new JLabel("Conta destino:");
-																																												lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																												lblContaDestino.setBounds(158, 101, 137, 23);
-																																												JpanelOpTransferencia.add(lblContaDestino);
-																																												
-																																														JLabel label_5 = new JLabel("Montante:");
-																																														label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																														label_5.setBounds(158, 34, 97, 23);
-																																														JpanelOpTransferencia.add(label_5);
-																																														
-																																																tbTransContaDestino = new JTextField();
-																																																tbTransContaDestino.setBounds(168, 126, 162, 30);
-																																																JpanelOpTransferencia.add(tbTransContaDestino);
-																																																
-																																																		JButton btTransConfirmar = new JButton("Confirmar");
-																																																		btTransConfirmar.setBounds(146, 317, 97, 30);
-																																																		JpanelOpTransferencia.add(btTransConfirmar);
-																																																		
-																																																				JButton btTransCancelar = new JButton("Cancelar");
-																																																				btTransCancelar.setBounds(275, 317, 97, 30);
-																																																				JpanelOpTransferencia.add(btTransCancelar);
-																																																				
-																																																						JLabel lblDataDaOperao = new JLabel("Data da Operação:");
-																																																						lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																						lblDataDaOperao.setBounds(158, 168, 189, 23);
-																																																						JpanelOpTransferencia.add(lblDataDaOperao);
-																																																								
-																																																										JButton btnConfirmar = new JButton("Confirmar");
-																																																										btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																										btnConfirmar.setBounds(118, 253, 116, 38);
-																																																										JpanelOpTransferencia.add(btnConfirmar);
-																																																										
-																																																												JButton btnCancelar = new JButton("Cancelar");
-																																																												btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																												btnCancelar.setBounds(256, 253, 116, 38);
-																																																												JpanelOpTransferencia.add(btnCancelar);
-																																																												
-																																																												JDateChooser dateChooser_1 = new JDateChooser();
-																																																												dateChooser_1.setBounds(168, 198, 162, 31);
-																																																												JpanelOpTransferencia.add(dateChooser_1);
-																																																												
-																																																												
-																																						JpanelOpDeposito.setBounds(263, 247, 516, 313);
-																																						jpanelOperacoes.add(JpanelOpDeposito);
-																																						JpanelOpDeposito.setLayout(null);
-																																						
-																																								tbDepMontante = new JTextField();
-																																								tbDepMontante.setBounds(174, 83, 162, 31);
-																																								JpanelOpDeposito.add(tbDepMontante);
-																																								
-																																										JLabel lblData = new JLabel("Data:");
-																																										lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																										lblData.setBounds(164, 131, 50, 23);
-																																										JpanelOpDeposito.add(lblData);
-																																										
-																																												JLabel lblMontantem = new JLabel("Montante Depósito:");
-																																												lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																												lblMontantem.setBounds(164, 55, 229, 23);
-																																												JpanelOpDeposito.add(lblMontantem);
-																																														
-																																																JButton btDepConfirmar = new JButton("Confirmar");
-																																																btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																btDepConfirmar.setBounds(129, 223, 120, 38);
-																																																JpanelOpDeposito.add(btDepConfirmar);
-																																																
-																																																		JButton btDepCancelar = new JButton("Cancelar");
-																																																		btDepCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																		btDepCancelar.setBounds(273, 224, 120, 38);
-																																																		JpanelOpDeposito.add(btDepCancelar);
-																																																		
-																																																		JDateChooser dateChooser = new JDateChooser();
-																																																		dateChooser.setBounds(174, 166, 162, 31);
-																																																		JpanelOpDeposito.add(dateChooser);
-																																																																						JpanelOpLevantamento.setBounds(263, 247, 516, 313);
-																																																																						jpanelOperacoes.add(JpanelOpLevantamento);
-																																																																						JpanelOpLevantamento.setLayout(null);
-																																																																						
-
-																																																																							tbLevMontante = new JTextField();
-																																																																							tbLevMontante.setBounds(174, 83, 162, 31);
-																																																																							JpanelOpLevantamento.add(tbLevMontante);
-																																																																							
-																																																																									JLabel label = new JLabel("Data:");
-																																																																									label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																																									label.setBounds(164, 131, 50, 23);
-																																																																									JpanelOpLevantamento.add(label);
-																																																																									
-																																																																											JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-																																																																											lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																																											lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-																																																																											JpanelOpLevantamento.add(lblMontanteLevantamento);
-																																																																											
-																																																																													tbLevData = new JTextField();
-																																																																													tbLevData.setBounds(176, 155, 162, 30);
-																																																																													JpanelOpLevantamento.add(tbLevData);
-																																																																													
-																																																																															JButton btLevConfirmar = new JButton("Confirmar");
-																																																																															btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																																															btLevConfirmar.setBounds(129, 223, 120, 38);
-																																																																															JpanelOpLevantamento.add(btLevConfirmar);
-																																																																															
-																																																																																	JButton btLevCancelar = new JButton("Cancelar");
-																																																																																	btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																																																	btLevCancelar.setBounds(273, 224, 120, 38);
-																																																																																	JpanelOpLevantamento.add(btLevCancelar);
-																																																																																	
-																																																																																			JLabel lblLevantamento = new JLabel("Levantamento:");
-																																																																																			lblLevantamento.setFont(new Font("Tahoma", Font.PLAIN, 30));
-																																																																																			lblLevantamento.setBounds(162, 13, 205, 43);
-																																																																																			JpanelOpLevantamento.add(lblLevantamento);
-																																																																																			
-																																																																																					// Dentro do painel gestao:
-																																																																																					// coloca o painel depositos visivel:
-																																																																																					cbOperacoDep.addActionListener(new ActionListener() {
-																																																																																						public void actionPerformed(ActionEvent e) {
-																																																																																							JpanelOpDeposito.setVisible(true);
-																																																																																							JpanelOpLevantamento.setVisible(false);
-																																																																																							JpanelOpTransferencia.setVisible(false);
-																																																																																			
-																																																																																						}
-																																																																																					});
-																																																																																					
-																																																																																							// coloca o painel depositos visivel:
-																																																																																							btnLevantamento.addActionListener(new ActionListener() {
-																																																																																								public void actionPerformed(ActionEvent e) {
-																																																																																									JpanelOpDeposito.setVisible(false);
-																																																																																									JpanelOpLevantamento.setVisible(true);
-																																																																																									JpanelOpTransferencia.setVisible(false);
-																																																																																								}
-																																																																																							});
-																																																																																							
-																																																																																									// coloca o painel depositos visivel:
-																																																																																									btnTransferncia.addActionListener(new ActionListener() {
-																																																																																										public void actionPerformed(ActionEvent e) {
-																																																																																											JpanelOpDeposito.setVisible(false);
-																																																																																											JpanelOpLevantamento.setVisible(false);
-																																																																																											JpanelOpTransferencia.setVisible(true);
-																																																																																										}
-																																																																																									});
 								jpanelGestao.setBounds(0, 0, 1042, 576);
 								JpanelPrincipal.add(jpanelGestao);
 								jpanelGestao.setLayout(null);
