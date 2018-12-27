@@ -338,6 +338,7 @@ public class BancoAppAdm {
 				func.setSobrenome(textAdmFunSobrenome.getText());
 				func.setDataDeNascimento(dateChooser.getDate());
 			
+				
 				// experimentar
 				if (rbAdmFunCC.isSelected())
 					func.setTipoIndentificacao("C.C.");
