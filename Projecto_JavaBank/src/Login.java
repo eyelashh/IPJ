@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -16,15 +18,7 @@ public class Login extends JDialog {
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
 
-//	public void run() {
-//		try {
-//			Login window = new Login();
-//			window.frame.setVisible(true);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		
-//		}
-//	}
+
 
 	/**
 	 * 
@@ -57,12 +51,9 @@ public class Login extends JDialog {
 						
 						String user=jLoginUsername.getText();
 						String pass=new String(jLoginPassword.getPassword());
-						//vai buscar o metodo do banco onde verifica o utilizador
 						Utilizador logado = Banco.getInstance().logado(user, pass);
-						//Converti para string o nome
 						String nome =  Banco.getInstance().logado(user, pass).getNome();
 						
-						//vai buscar o metodo do banco onde verifica se a pass e o user estao bem
 						boolean v = Banco.getInstance().verificarUserPass(user, pass);
 						
 						if (v) {
@@ -71,17 +62,18 @@ public class Login extends JDialog {
 								
 							BancoAppFun fun = new BancoAppFun(nome);
 							fun.run();
+							dispose();
 							
-							
-						} else if (logado instanceof Administrador) {
+						}if (logado instanceof Administrador) {
 							
 							BancoAppAdm adm = new BancoAppAdm(nome);
 							adm.run();
-
-						}else if(logado instanceof Cliente) {
+							dispose();
+						}if(logado instanceof Cliente) {
 							
 							BancoAppClt clt = new BancoAppClt(nome);
 							clt.run();
+							dispose();
 							
 						}
 						

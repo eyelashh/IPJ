@@ -98,25 +98,25 @@ public class BancoAppAdm {
 		// imagem_1.setVisible(true);
 
 		// Botao de logout, metodo que vai buscar a class
-		JButton btnLogin = new JButton("Logout");
-		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnLogin.addActionListener(new ActionListener() {
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 
-					Login dialog = new Login();
-
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setLocationRelativeTo(frame);
-					dialog.setVisible(true);
+					Login logout = new Login();
+					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					logout.setLocationRelativeTo(frame);
+					logout.setVisible(true);
+					frame.setVisible(false);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		});
-		btnLogin.setBounds(1070, 30, 143, 42);
-		JpanelCabecalho.add(btnLogin);
+		btnLogout.setBounds(1070, 30, 143, 42);
+		JpanelCabecalho.add(btnLogout);
 
 		// texto no cabeçalho :Java
 		JLabel lblNewLabel = new JLabel("JavaBank");
@@ -141,7 +141,6 @@ public class BancoAppAdm {
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
 		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
-		
 
 		// separador no cabeçalho
 		JSeparator separator = new JSeparator();
@@ -340,7 +339,7 @@ public class BancoAppAdm {
 				func.setNome(textAdmFunNome.getText());
 				func.setSobrenome(textAdmFunSobrenome.getText());
 				func.setDataDeNascimento(dateChooser.getDate());
-						
+
 				// experimentar
 				if (rbAdmFunCC.isSelected())
 					func.setTipoIndentificacao("C.C.");
@@ -728,7 +727,7 @@ public class BancoAppAdm {
 				btAdmEstatistica.setBackground(new Color(65, 106, 105));
 			}
 		});
-   
+
 		// botao cliente accao que muda de cor
 		btAdmClientes.addMouseListener(new MouseListener() {
 

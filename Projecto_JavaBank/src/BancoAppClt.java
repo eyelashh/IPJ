@@ -101,25 +101,25 @@ public class BancoAppClt {
 		// imagem_1.setVisible(true);
 
 		// Botao de logout, metodo que vai buscar a class
-		JButton btnLogin = new JButton("Logout");
-		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnLogin.addActionListener(new ActionListener() {
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 
-					Login dialog = new Login();
-
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setLocationRelativeTo(frame);
-					dialog.setVisible(true);
+					Login logout = new Login();
+					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					logout.setLocationRelativeTo(frame);
+					logout.setVisible(true);
+					frame.setVisible(false);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 			}
 		});
-		btnLogin.setBounds(1070, 30, 143, 42);
-		JpanelCabecalho.add(btnLogin);
+		btnLogout.setBounds(1070, 30, 143, 42);
+		JpanelCabecalho.add(btnLogout);
 
 		// texto no cabeçalho :Java
 		JLabel lblNewLabel = new JLabel("JavaBank");

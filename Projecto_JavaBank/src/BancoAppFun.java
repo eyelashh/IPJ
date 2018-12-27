@@ -21,6 +21,7 @@ import javax.swing.JRadioButton;
 import java.awt.List;
 import java.awt.Panel;
 import java.awt.SystemColor;
+import java.awt.Window;
 import java.awt.Canvas;
 import javax.swing.JSeparator;
 import java.awt.Component;
@@ -101,25 +102,22 @@ public class BancoAppFun {
 		// imagem_1.setVisible(true);
 
 		// Botao de logout, metodo que vai buscar a class
-		JButton btnLogin = new JButton("Logout");
-		btnLogin.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
+		JButton btnLogOut = new JButton("Logout");
+		btnLogOut.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+	
+		// logOut
 
-					Login dialog = new Login();
-
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setLocationRelativeTo(frame);
-					dialog.setVisible(true);
-
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
-		btnLogin.setBounds(1070, 30, 143, 42);
-		JpanelCabecalho.add(btnLogin);
+				btnLogOut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Login logout = new Login();
+						logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						logout.setLocationRelativeTo(frame);
+						logout.setVisible(true);
+						frame.setVisible(false);
+					}
+				});
+				btnLogOut.setBounds(1070, 30, 143, 42);
+		JpanelCabecalho.add(btnLogOut);
 
 		// texto no cabeçalho :Java
 		JLabel lblNewLabel = new JLabel("JavaBank");
