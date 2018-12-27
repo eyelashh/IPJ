@@ -70,9 +70,9 @@ public class BancoAppFun {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppFun(String nome) {
+	public BancoAppFun(String n) {
 		initialize();
-		this.nome = nome;
+		this.nome = n;
 	}
 
 	/**
@@ -144,6 +144,7 @@ public class BancoAppFun {
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
 		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
+		
 
 		// separador no cabeçalho
 		JSeparator separator = new JSeparator();
