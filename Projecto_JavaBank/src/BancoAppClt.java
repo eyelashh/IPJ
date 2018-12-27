@@ -45,6 +45,7 @@ public class BancoAppClt {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
+	private static String nome;
 
 	/**
 	 * Launch the application.
@@ -53,7 +54,7 @@ public class BancoAppClt {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			BancoAppClt window = new BancoAppClt();
+			BancoAppClt window = new BancoAppClt(nome);
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
@@ -66,8 +67,9 @@ public class BancoAppClt {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppClt() {
+	public BancoAppClt(String nome) {
 		initialize();
+		this.nome = nome;
 	}
 
 	/**
@@ -136,7 +138,7 @@ public class BancoAppClt {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel("Cliente");
+		JLabel lUtilizador = new JLabel(nome);
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
@@ -466,7 +468,7 @@ public class BancoAppClt {
 
 		// Botão conta/movimentos do menu
 		JButton btCltConmov = new JButton();
-		btCltConmov.setText("Conta");
+		btCltConmov.setText("<html>" + "Conta/\nMovimentos" + "<html>");
 		btCltConmov.setBorderPainted(false);
 		btCltConmov.setOpaque(true);
 		btCltConmov.setForeground(Color.BLACK);

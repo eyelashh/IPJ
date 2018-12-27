@@ -12,17 +12,30 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
 public class Login extends JDialog {
-	
 
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
 
+	
+//	public void run() {
+//		try {
+//			Login window = new Login();
+//			window.frame.setVisible(true);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		
+//		}
+//	}
+	
 	/**
+	 * 
 	 * Create the dialog.
 	 */
 	public Login() {
 
-		//frame principal
+		GestoaBanco gb = new GestoaBanco();
+
+		// frame principal
 		setResizable(false);
 		setBounds(100, 100, 1280, 768);
 		getContentPane().setLayout(null);
@@ -34,37 +47,54 @@ public class Login extends JDialog {
 			getContentPane().add(painelGeral);
 
 			{
-				//Botao login
+				// Botao login
 				JButton okButton = new JButton("Login");
 				okButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 				okButton.setBounds(490, 621, 124, 43);
+
 				// fazer login:
+				
+
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						String pass = new String(jLoginPassword.getPassword());
 
-						if (jLoginUsername.getText().equals("j")
-								&& new String(jLoginPassword.getPassword()).equals("j")) {
-							BancoAppClt bc = new BancoAppClt();
-							bc.run();
-							dispose();
-						}
+						for (int i = 0; i < gb.totta.getUtlizadores().size(); i++) {
 
-						if (jLoginUsername.getText().equals("b")
-								&& new String(jLoginPassword.getPassword()).equals("b")) {
-							BancoAppFun bf = new BancoAppFun();
-							bf.run();
-							dispose();
-						}
-						if (jLoginUsername.getText().equals("t")
-								&& new String(jLoginPassword.getPassword()).equals("t")) {
-							BancoAppAdm ba = new BancoAppAdm();
-							ba.run();
-							dispose();
+							if ((gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
+									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass)) && (gb.totta.getUtlizadores().get(i) instanceof Funcionario))
+
+							{
+								BancoAppFun bc = new BancoAppFun(gb.totta.getUtlizadores().get(i).getUsername());
+								bc.run();
+								dispose();
+								
+							}
+							
+							if (gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
+									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass) && gb.totta.getUtlizadores().get(i) instanceof Cliente)
+
+							{
+								BancoAppClt bcCl = new BancoAppClt(gb.totta.getUtlizadores().get(i).getUsername());
+								bcCl.run();
+								dispose();
+								
+							}
+							
+							if (gb.totta.getUtlizadores().get(i).getUsername().equals(jLoginUsername.getText())
+									&& new String(gb.totta.getUtlizadores().get(i).getPassword()).equals(pass) && gb.totta.getUtlizadores().get(i) instanceof Administrador)
+
+							{
+								BancoAppAdm bc = new BancoAppAdm(gb.totta.getUtlizadores().get(i).getUsername());
+								bc.run();
+								dispose();
+								
+							}
 						}
 
 					}
 				});
-				
+
 				painelGeral.setLayout(null);
 				okButton.setActionCommand("OK");
 				painelGeral.add(okButton);
@@ -78,7 +108,7 @@ public class Login extends JDialog {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
-						
+
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
