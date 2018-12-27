@@ -15,6 +15,7 @@ public class appAdministrator {
 	private JFrame frame;
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
+	private static User u;
 	
 
 	/**
@@ -23,25 +24,27 @@ public class appAdministrator {
 	
 			public void run() {
 				try {
-					appAdministrator window = new appAdministrator();
+					appAdministrator window = new appAdministrator(u);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		
+
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public appAdministrator() {
+	public appAdministrator(User u) {
 		initialize();
+		appAdministrator.u=u;
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +71,11 @@ public class appAdministrator {
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(77, 145, 135, 23);
 		frame.getContentPane().add(txtPassword);
+		
+		JLabel txtWelcome = new JLabel("New label");
+		txtWelcome.setBounds(39, 11, 228, 29);
+		frame.getContentPane().add(txtWelcome);
+		txtWelcome.setText("Welcome"+this.u.getUsername());
 		
 		
 		//addUser

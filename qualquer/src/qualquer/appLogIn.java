@@ -79,20 +79,24 @@ public class appLogIn {
 		
 //	LOGIN
 
-		String user=txtUser.getText();
-		String pass=new String(txtPass.getPassword());
+		
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
+				String user=txtUser.getText();
+				String pass=new String(txtPass.getPassword());
+				
 				txtUsers.setText(Bank.getInstance().getUsers().toString());
 
-//				boolean v = Bank.getInstance().verify(user, pass);
-//				if (v) {
-//					appAdministrator adm = new appAdministrator();
-//					adm.run();
-//				} else {
-//
-//				}
+				boolean v = Bank.getInstance().verify(user, pass);
+				if (v) {
+					User userloggedIn=Bank.getInstance().logged(user, pass);
+					appAdministrator adm = new appAdministrator(userloggedIn);
+					adm.run();
+				} else {
+
+				}
 			}
 		});
 

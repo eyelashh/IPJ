@@ -19,7 +19,6 @@ public class Bank {
 	public ArrayList<User> getUsers() {
 		return users;
 	}
-
 	public void setUsers(ArrayList<User> users) {
 		this.users = users;
 	}
@@ -45,6 +44,17 @@ public class Bank {
 
 		}
 		return verified;
+	}
+	public User logged(String username, String password) {
+		
+		User u_log=new User();
+		
+		for(User u: this.users) {
+			if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
+				u_log=u;
+			}
+		}
+		return u_log;
 	}
 	
 }
