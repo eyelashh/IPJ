@@ -47,6 +47,7 @@ public class BancoAppAdm {
 	private JTextField textAdmFunUser;
 	private JTextField textAdmFunPass;
 	private JTextField textAdmFunSobrenome;
+	private static String nome;
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,7 @@ public class BancoAppAdm {
 
 	public void run() {
 		try {
-			BancoAppAdm window = new BancoAppAdm();
+			BancoAppAdm window = new BancoAppAdm(nome);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,9 +65,10 @@ public class BancoAppAdm {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppAdm() {
+	public BancoAppAdm(String nome) {
 
 		initialize();
+		this.nome = nome;
 	}
 
 	/**
@@ -133,7 +135,7 @@ public class BancoAppAdm {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel("Tamara Barros");
+		JLabel lUtilizador = new JLabel(nome);
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
@@ -337,8 +339,7 @@ public class BancoAppAdm {
 				func.setNome(textAdmFunNome.getText());
 				func.setSobrenome(textAdmFunSobrenome.getText());
 				func.setDataDeNascimento(dateChooser.getDate());
-			
-				
+						
 				// experimentar
 				if (rbAdmFunCC.isSelected())
 					func.setTipoIndentificacao("C.C.");

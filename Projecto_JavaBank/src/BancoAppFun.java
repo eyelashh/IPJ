@@ -53,13 +53,14 @@ public class BancoAppFun {
 	private JTextField tbLevData;
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
+	private static String nome;
 
 	/**
 	 * Launch the application.
 	 */
 	public void run() {
 		try {
-			BancoAppFun window = new BancoAppFun();
+			BancoAppFun window = new BancoAppFun(nome);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,8 +70,9 @@ public class BancoAppFun {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppFun() {
+	public BancoAppFun(String nome) {
 		initialize();
+		this.nome = nome;
 	}
 
 	/**
@@ -136,7 +138,7 @@ public class BancoAppFun {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel("Funcionario");
+		JLabel lUtilizador = new JLabel(nome);
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));

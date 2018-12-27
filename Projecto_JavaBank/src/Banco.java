@@ -10,6 +10,7 @@ public class Banco {
 	
 	public Banco() {
 		super();
+		this.utlizadores = new ArrayList<Utilizador>();
 	} 
  
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
