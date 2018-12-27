@@ -244,6 +244,269 @@ public class AppFuncionario {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+		
+				JPanel jpFuncCarrinhos = new JPanel();
+				jpFuncCarrinhos.setBounds(0, 0, 825, 545);
+				panelPrincipal.add(jpFuncCarrinhos);
+				jpFuncCarrinhos.setVisible(false);
+				jpFuncCarrinhos.setLayout(null);
+				
+						JPanel panelConteudoCarrinho = new JPanel();
+						panelConteudoCarrinho.setBounds(266, 49, 542, 299);
+						jpFuncCarrinhos.add(panelConteudoCarrinho);
+						panelConteudoCarrinho.setLayout(null);
+						
+								JLabel label_11 = new JLabel("Titulo ");
+								label_11.setFont(new Font("Tahoma", Font.BOLD, 15));
+								label_11.setBounds(58, 11, 106, 32);
+								panelConteudoCarrinho.add(label_11);
+								
+										JLabel label_12 = new JLabel("New label");
+										label_12.setBounds(10, 62, 135, 14);
+										panelConteudoCarrinho.add(label_12);
+										
+												JLabel label_13 = new JLabel("New label");
+												label_13.setBounds(10, 103, 135, 14);
+												panelConteudoCarrinho.add(label_13);
+												
+														JLabel label_14 = new JLabel("New label");
+														label_14.setBounds(10, 144, 135, 14);
+														panelConteudoCarrinho.add(label_14);
+														
+																JLabel label_15 = new JLabel("New label");
+																label_15.setBounds(10, 185, 135, 14);
+																panelConteudoCarrinho.add(label_15);
+																
+																		JLabel label_16 = new JLabel("New label");
+																		label_16.setBounds(10, 226, 135, 14);
+																		panelConteudoCarrinho.add(label_16);
+																		
+																				JLabel label_17 = new JLabel("New label");
+																				label_17.setBounds(10, 267, 135, 14);
+																				panelConteudoCarrinho.add(label_17);
+																				
+																						JButton button = new JButton("OK");
+																						button.setBounds(48, 322, 97, 25);
+																						panelConteudoCarrinho.add(button);
+																						
+																								JButton btnRemove6 = new JButton("-");
+																								btnRemove6.setBackground(SystemColor.controlHighlight);
+																								btnRemove6.setBounds(167, 259, 48, 30);
+																								panelConteudoCarrinho.add(btnRemove6);
+																								
+																										JButton btnRemove5 = new JButton("-");
+																										btnRemove5.setBackground(SystemColor.controlHighlight);
+																										btnRemove5.setBounds(167, 218, 48, 30);
+																										panelConteudoCarrinho.add(btnRemove5);
+																										
+																												JButton btnRemove4 = new JButton("-");
+																												btnRemove4.setBackground(SystemColor.controlHighlight);
+																												btnRemove4.setBounds(167, 177, 48, 30);
+																												panelConteudoCarrinho.add(btnRemove4);
+																												
+																														JButton btnRemove3 = new JButton("-");
+																														btnRemove3.setBackground(SystemColor.controlHighlight);
+																														btnRemove3.setBounds(167, 136, 48, 30);
+																														panelConteudoCarrinho.add(btnRemove3);
+																														
+																																JButton btnRemove2 = new JButton("-");
+																																btnRemove2.setBackground(SystemColor.controlHighlight);
+																																btnRemove2.setBounds(167, 95, 48, 30);
+																																panelConteudoCarrinho.add(btnRemove2);
+																																
+																																		JButton btnRemove1 = new JButton("-");
+																																		btnRemove1.setBackground(SystemColor.controlHighlight);
+																																		btnRemove1.setBounds(167, 54, 48, 30);
+																																		panelConteudoCarrinho.add(btnRemove1);
+																																		
+																																				textField = new JTextField();
+																																				textField.setColumns(10);
+																																				textField.setBounds(227, 259, 48, 30);
+																																				panelConteudoCarrinho.add(textField);
+																																				
+																																						textField_1 = new JTextField();
+																																						textField_1.setColumns(10);
+																																						textField_1.setBounds(227, 218, 48, 30);
+																																						panelConteudoCarrinho.add(textField_1);
+																																						
+																																								textField_3 = new JTextField();
+																																								textField_3.setColumns(10);
+																																								textField_3.setBounds(227, 177, 48, 30);
+																																								panelConteudoCarrinho.add(textField_3);
+																																								
+																																										textField_5 = new JTextField();
+																																										textField_5.setColumns(10);
+																																										textField_5.setBounds(227, 136, 48, 30);
+																																										panelConteudoCarrinho.add(textField_5);
+																																										
+																																												textField_6 = new JTextField();
+																																												textField_6.setColumns(10);
+																																												textField_6.setBounds(227, 95, 48, 30);
+																																												panelConteudoCarrinho.add(textField_6);
+																																												
+																																														textField_7 = new JTextField();
+																																														textField_7.setColumns(10);
+																																														textField_7.setBounds(227, 54, 48, 30);
+																																														panelConteudoCarrinho.add(textField_7);
+																																														
+																																																JButton btnAdd1 = new JButton("+");
+																																																btnAdd1.setBackground(SystemColor.controlHighlight);
+																																																btnAdd1.setBounds(286, 54, 48, 30);
+																																																panelConteudoCarrinho.add(btnAdd1);
+																																																
+																																																		JButton btnAdd2 = new JButton("+");
+																																																		btnAdd2.setBackground(SystemColor.controlHighlight);
+																																																		btnAdd2.setBounds(286, 95, 48, 30);
+																																																		panelConteudoCarrinho.add(btnAdd2);
+																																																		
+																																																				JButton btnAdd3 = new JButton("+");
+																																																				btnAdd3.setBackground(SystemColor.controlHighlight);
+																																																				btnAdd3.setBounds(286, 136, 48, 30);
+																																																				panelConteudoCarrinho.add(btnAdd3);
+																																																				
+																																																						JButton btnAdd4 = new JButton("+");
+																																																						btnAdd4.setBackground(SystemColor.controlHighlight);
+																																																						btnAdd4.setBounds(286, 177, 48, 30);
+																																																						panelConteudoCarrinho.add(btnAdd4);
+																																																						
+																																																								JButton btnAdd5 = new JButton("+");
+																																																								btnAdd5.setBackground(SystemColor.controlHighlight);
+																																																								btnAdd5.setBounds(286, 218, 48, 30);
+																																																								panelConteudoCarrinho.add(btnAdd5);
+																																																								
+																																																										JButton btnAdd6 = new JButton("+");
+																																																										btnAdd6.setBackground(SystemColor.controlHighlight);
+																																																										btnAdd6.setBounds(286, 259, 48, 30);
+																																																										panelConteudoCarrinho.add(btnAdd6);
+																																																										
+																																																												JLabel label_18 = new JLabel("New label");
+																																																												label_18.setBounds(363, 267, 46, 14);
+																																																												panelConteudoCarrinho.add(label_18);
+																																																												
+																																																														JLabel label_19 = new JLabel("New label");
+																																																														label_19.setBounds(363, 185, 46, 14);
+																																																														panelConteudoCarrinho.add(label_19);
+																																																														
+																																																																JLabel label_20 = new JLabel("New label");
+																																																																label_20.setBounds(363, 226, 46, 14);
+																																																																panelConteudoCarrinho.add(label_20);
+																																																																
+																																																																		JLabel label_21 = new JLabel("New label");
+																																																																		label_21.setBounds(363, 144, 46, 14);
+																																																																		panelConteudoCarrinho.add(label_21);
+																																																																		
+																																																																				JLabel label_22 = new JLabel("New label");
+																																																																				label_22.setBounds(363, 103, 46, 14);
+																																																																				panelConteudoCarrinho.add(label_22);
+																																																																				
+																																																																						JLabel label_23 = new JLabel("New label");
+																																																																						label_23.setBounds(363, 62, 46, 14);
+																																																																						panelConteudoCarrinho.add(label_23);
+																																																																						
+																																																																								JLabel lblCustoLivro = new JLabel("Pre\u00E7o Unid");
+																																																																								lblCustoLivro.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																																																								lblCustoLivro.setBounds(345, 11, 106, 32);
+																																																																								panelConteudoCarrinho.add(lblCustoLivro);
+																																																																								
+																																																																										JButton button_13 = new JButton("Eliminar");
+																																																																										button_13.setBackground(SystemColor.controlHighlight);
+																																																																										button_13.setBounds(443, 54, 89, 23);
+																																																																										panelConteudoCarrinho.add(button_13);
+																																																																										
+																																																																												JButton button_14 = new JButton("Eliminar");
+																																																																												button_14.setBackground(SystemColor.controlHighlight);
+																																																																												button_14.setBounds(443, 95, 89, 23);
+																																																																												panelConteudoCarrinho.add(button_14);
+																																																																												
+																																																																														JButton button_15 = new JButton("Eliminar");
+																																																																														button_15.setBackground(SystemColor.controlHighlight);
+																																																																														button_15.setBounds(443, 132, 89, 23);
+																																																																														panelConteudoCarrinho.add(button_15);
+																																																																														
+																																																																																JButton button_16 = new JButton("Eliminar");
+																																																																																button_16.setBackground(SystemColor.controlHighlight);
+																																																																																button_16.setBounds(443, 172, 89, 23);
+																																																																																panelConteudoCarrinho.add(button_16);
+																																																																																
+																																																																																		JButton button_17 = new JButton("Eliminar");
+																																																																																		button_17.setBackground(SystemColor.controlHighlight);
+																																																																																		button_17.setBounds(443, 214, 89, 23);
+																																																																																		panelConteudoCarrinho.add(button_17);
+																																																																																		
+																																																																																				JButton button_18 = new JButton("Eliminar");
+																																																																																				button_18.setBackground(SystemColor.controlHighlight);
+																																																																																				button_18.setBounds(443, 255, 89, 23);
+																																																																																				panelConteudoCarrinho.add(button_18);
+																																																																																				
+																																																																																						JLabel label_25 = new JLabel("Quantidade");
+																																																																																						label_25.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																																																																						label_25.setBounds(200, 11, 122, 32);
+																																																																																						panelConteudoCarrinho.add(label_25);
+																																																																																						
+																																																																																								txtNifCarrinho = new JTextField();
+																																																																																								txtNifCarrinho.setBounds(25, 49, 200, 30);
+																																																																																								txtNifCarrinho.setColumns(10);
+																																																																																								jpFuncCarrinhos.add(txtNifCarrinho);
+																																																																																								
+																																																																																										JLabel lblNif = new JLabel("NIF");
+																																																																																										lblNif.setBounds(27, 24, 46, 14);
+																																																																																										lblNif.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																																																																										jpFuncCarrinhos.add(lblNif);
+																																																																																										
+																																																																																												JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
+																																																																																												
+																																																																																														btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
+																																																																																														btnPesquisarCarrinhos.setBounds(56, 90, 130, 30);
+																																																																																														jpFuncCarrinhos.add(btnPesquisarCarrinhos);
+																																																																																														
+																																																																																																JButton btnPagamento = new JButton("Pagamento");
+																																																																																																btnPagamento.setBackground(SystemColor.controlHighlight);
+																																																																																																btnPagamento.setBounds(303, 418, 100, 30);
+																																																																																																jpFuncCarrinhos.add(btnPagamento);
+																																																																																																
+																																																																																																		JButton btnCancelar = new JButton("Cancelar");
+																																																																																																		btnCancelar.setBackground(SystemColor.controlHighlight);
+																																																																																																		btnCancelar.setBounds(438, 418, 100, 30);
+																																																																																																		jpFuncCarrinhos.add(btnCancelar);
+																																																																																																		
+																																																																																																				JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
+																																																																																																				lblPreoDoCarrinho.setBounds(303, 359, 163, 14);
+																																																																																																				lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
+																																																																																																				jpFuncCarrinhos.add(lblPreoDoCarrinho);
+																																																																																																				
+																																																																																																						JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
+																																																																																																						lblQuantidadeDeLivros.setBounds(303, 384, 163, 14);
+																																																																																																						lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
+																																																																																																						jpFuncCarrinhos.add(lblQuantidadeDeLivros);
+																																																																																																						
+																																																																																																								JLabel label_26 = new JLabel("New label");
+																																																																																																								label_26.setBounds(486, 360, 135, 14);
+																																																																																																								jpFuncCarrinhos.add(label_26);
+																																																																																																								
+																																																																																																										JLabel label_27 = new JLabel("New label");
+																																																																																																										label_27.setBounds(486, 385, 135, 14);
+																																																																																																										jpFuncCarrinhos.add(label_27);
+																																																																																																										
+																																																																																																												JTextArea txtCarrinho = new JTextArea();
+																																																																																																												txtCarrinho.setLineWrap(true);
+																																																																																																												txtCarrinho.setBounds(25, 144, 200, 320);
+																																																																																																												jpFuncCarrinhos.add(txtCarrinho);
+																																																																																																												
+
+																																																																																																												// CARRINHOS
+
+																																																																																																												
+																																																																																																												// Botao que pesquisa por um carrinho
+																																																																																																												// criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
+																																																																																																												btnPesquisarCarrinhos.addActionListener(new ActionListener() {
+																																																																																																													public void actionPerformed(ActionEvent arg0) {
+																																																																																																														// converter para int
+																																																																																																														int nif = Integer.parseInt(txtNifCarrinho.getText());
+																																																																																																														Carrinho c = l.pesquisarCarrinho(nif);
+																																																																																																														txtCarrinho.setText(c.toString());
+
+																																																																																																													}
+																																																																																																												});
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
@@ -333,253 +596,6 @@ public class AppFuncionario {
 		btnCancelarPasse.setBackground(SystemColor.controlHighlight);
 		btnCancelarPasse.setBounds(676, 359, 97, 25);
 		jpFuncConta.add(btnCancelarPasse);
-
-		JPanel jpFuncCarrinhos = new JPanel();
-		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncCarrinhos);
-		jpFuncCarrinhos.setVisible(false);
-		jpFuncCarrinhos.setLayout(null);
-
-		JPanel panelConteudoCarrinho = new JPanel();
-		panelConteudoCarrinho.setBounds(266, 49, 542, 299);
-		jpFuncCarrinhos.add(panelConteudoCarrinho);
-		panelConteudoCarrinho.setLayout(null);
-
-		JLabel label_11 = new JLabel("Titulo ");
-		label_11.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_11.setBounds(58, 11, 106, 32);
-		panelConteudoCarrinho.add(label_11);
-
-		JLabel label_12 = new JLabel("New label");
-		label_12.setBounds(10, 62, 135, 14);
-		panelConteudoCarrinho.add(label_12);
-
-		JLabel label_13 = new JLabel("New label");
-		label_13.setBounds(10, 103, 135, 14);
-		panelConteudoCarrinho.add(label_13);
-
-		JLabel label_14 = new JLabel("New label");
-		label_14.setBounds(10, 144, 135, 14);
-		panelConteudoCarrinho.add(label_14);
-
-		JLabel label_15 = new JLabel("New label");
-		label_15.setBounds(10, 185, 135, 14);
-		panelConteudoCarrinho.add(label_15);
-
-		JLabel label_16 = new JLabel("New label");
-		label_16.setBounds(10, 226, 135, 14);
-		panelConteudoCarrinho.add(label_16);
-
-		JLabel label_17 = new JLabel("New label");
-		label_17.setBounds(10, 267, 135, 14);
-		panelConteudoCarrinho.add(label_17);
-
-		JButton button = new JButton("OK");
-		button.setBounds(48, 322, 97, 25);
-		panelConteudoCarrinho.add(button);
-
-		JButton btnRemove6 = new JButton("-");
-		btnRemove6.setBackground(SystemColor.controlHighlight);
-		btnRemove6.setBounds(167, 259, 48, 30);
-		panelConteudoCarrinho.add(btnRemove6);
-
-		JButton btnRemove5 = new JButton("-");
-		btnRemove5.setBackground(SystemColor.controlHighlight);
-		btnRemove5.setBounds(167, 218, 48, 30);
-		panelConteudoCarrinho.add(btnRemove5);
-
-		JButton btnRemove4 = new JButton("-");
-		btnRemove4.setBackground(SystemColor.controlHighlight);
-		btnRemove4.setBounds(167, 177, 48, 30);
-		panelConteudoCarrinho.add(btnRemove4);
-
-		JButton btnRemove3 = new JButton("-");
-		btnRemove3.setBackground(SystemColor.controlHighlight);
-		btnRemove3.setBounds(167, 136, 48, 30);
-		panelConteudoCarrinho.add(btnRemove3);
-
-		JButton btnRemove2 = new JButton("-");
-		btnRemove2.setBackground(SystemColor.controlHighlight);
-		btnRemove2.setBounds(167, 95, 48, 30);
-		panelConteudoCarrinho.add(btnRemove2);
-
-		JButton btnRemove1 = new JButton("-");
-		btnRemove1.setBackground(SystemColor.controlHighlight);
-		btnRemove1.setBounds(167, 54, 48, 30);
-		panelConteudoCarrinho.add(btnRemove1);
-
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(227, 259, 48, 30);
-		panelConteudoCarrinho.add(textField);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(227, 218, 48, 30);
-		panelConteudoCarrinho.add(textField_1);
-
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(227, 177, 48, 30);
-		panelConteudoCarrinho.add(textField_3);
-
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(227, 136, 48, 30);
-		panelConteudoCarrinho.add(textField_5);
-
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(227, 95, 48, 30);
-		panelConteudoCarrinho.add(textField_6);
-
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(227, 54, 48, 30);
-		panelConteudoCarrinho.add(textField_7);
-
-		JButton btnAdd1 = new JButton("+");
-		btnAdd1.setBackground(SystemColor.controlHighlight);
-		btnAdd1.setBounds(286, 54, 48, 30);
-		panelConteudoCarrinho.add(btnAdd1);
-
-		JButton btnAdd2 = new JButton("+");
-		btnAdd2.setBackground(SystemColor.controlHighlight);
-		btnAdd2.setBounds(286, 95, 48, 30);
-		panelConteudoCarrinho.add(btnAdd2);
-
-		JButton btnAdd3 = new JButton("+");
-		btnAdd3.setBackground(SystemColor.controlHighlight);
-		btnAdd3.setBounds(286, 136, 48, 30);
-		panelConteudoCarrinho.add(btnAdd3);
-
-		JButton btnAdd4 = new JButton("+");
-		btnAdd4.setBackground(SystemColor.controlHighlight);
-		btnAdd4.setBounds(286, 177, 48, 30);
-		panelConteudoCarrinho.add(btnAdd4);
-
-		JButton btnAdd5 = new JButton("+");
-		btnAdd5.setBackground(SystemColor.controlHighlight);
-		btnAdd5.setBounds(286, 218, 48, 30);
-		panelConteudoCarrinho.add(btnAdd5);
-
-		JButton btnAdd6 = new JButton("+");
-		btnAdd6.setBackground(SystemColor.controlHighlight);
-		btnAdd6.setBounds(286, 259, 48, 30);
-		panelConteudoCarrinho.add(btnAdd6);
-
-		JLabel label_18 = new JLabel("New label");
-		label_18.setBounds(363, 267, 46, 14);
-		panelConteudoCarrinho.add(label_18);
-
-		JLabel label_19 = new JLabel("New label");
-		label_19.setBounds(363, 185, 46, 14);
-		panelConteudoCarrinho.add(label_19);
-
-		JLabel label_20 = new JLabel("New label");
-		label_20.setBounds(363, 226, 46, 14);
-		panelConteudoCarrinho.add(label_20);
-
-		JLabel label_21 = new JLabel("New label");
-		label_21.setBounds(363, 144, 46, 14);
-		panelConteudoCarrinho.add(label_21);
-
-		JLabel label_22 = new JLabel("New label");
-		label_22.setBounds(363, 103, 46, 14);
-		panelConteudoCarrinho.add(label_22);
-
-		JLabel label_23 = new JLabel("New label");
-		label_23.setBounds(363, 62, 46, 14);
-		panelConteudoCarrinho.add(label_23);
-
-		JLabel lblCustoLivro = new JLabel("Pre\u00E7o Unid");
-		lblCustoLivro.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblCustoLivro.setBounds(345, 11, 106, 32);
-		panelConteudoCarrinho.add(lblCustoLivro);
-
-		JButton button_13 = new JButton("Eliminar");
-		button_13.setBackground(SystemColor.controlHighlight);
-		button_13.setBounds(443, 54, 89, 23);
-		panelConteudoCarrinho.add(button_13);
-
-		JButton button_14 = new JButton("Eliminar");
-		button_14.setBackground(SystemColor.controlHighlight);
-		button_14.setBounds(443, 95, 89, 23);
-		panelConteudoCarrinho.add(button_14);
-
-		JButton button_15 = new JButton("Eliminar");
-		button_15.setBackground(SystemColor.controlHighlight);
-		button_15.setBounds(443, 132, 89, 23);
-		panelConteudoCarrinho.add(button_15);
-
-		JButton button_16 = new JButton("Eliminar");
-		button_16.setBackground(SystemColor.controlHighlight);
-		button_16.setBounds(443, 172, 89, 23);
-		panelConteudoCarrinho.add(button_16);
-
-		JButton button_17 = new JButton("Eliminar");
-		button_17.setBackground(SystemColor.controlHighlight);
-		button_17.setBounds(443, 214, 89, 23);
-		panelConteudoCarrinho.add(button_17);
-
-		JButton button_18 = new JButton("Eliminar");
-		button_18.setBackground(SystemColor.controlHighlight);
-		button_18.setBounds(443, 255, 89, 23);
-		panelConteudoCarrinho.add(button_18);
-
-		JLabel label_25 = new JLabel("Quantidade");
-		label_25.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_25.setBounds(200, 11, 122, 32);
-		panelConteudoCarrinho.add(label_25);
-
-		txtNifCarrinho = new JTextField();
-		txtNifCarrinho.setBounds(25, 49, 200, 30);
-		txtNifCarrinho.setColumns(10);
-		jpFuncCarrinhos.add(txtNifCarrinho);
-
-		JLabel lblNif = new JLabel("NIF");
-		lblNif.setBounds(27, 24, 46, 14);
-		lblNif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		jpFuncCarrinhos.add(lblNif);
-
-		JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
-
-		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
-		btnPesquisarCarrinhos.setBounds(56, 90, 130, 30);
-		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
-
-		JButton btnPagamento = new JButton("Pagamento");
-		btnPagamento.setBackground(SystemColor.controlHighlight);
-		btnPagamento.setBounds(303, 418, 100, 30);
-		jpFuncCarrinhos.add(btnPagamento);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(SystemColor.controlHighlight);
-		btnCancelar.setBounds(438, 418, 100, 30);
-		jpFuncCarrinhos.add(btnCancelar);
-
-		JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
-		lblPreoDoCarrinho.setBounds(303, 359, 163, 14);
-		lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
-		jpFuncCarrinhos.add(lblPreoDoCarrinho);
-
-		JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
-		lblQuantidadeDeLivros.setBounds(303, 384, 163, 14);
-		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
-		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
-
-		JLabel label_26 = new JLabel("New label");
-		label_26.setBounds(486, 360, 135, 14);
-		jpFuncCarrinhos.add(label_26);
-
-		JLabel label_27 = new JLabel("New label");
-		label_27.setBounds(486, 385, 135, 14);
-		jpFuncCarrinhos.add(label_27);
-
-		JTextArea txtCarrinho = new JTextArea();
-		txtCarrinho.setLineWrap(true);
-		txtCarrinho.setBounds(25, 144, 200, 320);
-		jpFuncCarrinhos.add(txtCarrinho);
 
 		JPanel jpFuncLivros = new JPanel();
 		jpFuncLivros.setLayout(null);
@@ -867,22 +883,6 @@ public class AppFuncionario {
 		Sessao s =new Sessao(f.getId(),LocalDate.now(),10,f);
 		l.addSessao(s);
 		l.addUtilizador(f);
-		
-
-		// CARRINHOS
-
-		
-		// Botao que pesquisa por um carrinho
-		// criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
-		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				// converter para int
-				int nif = Integer.parseInt(txtNifCarrinho.getText());
-				Carrinho c = l.pesquisarCarrinho(nif);
-				txtCarrinho.setText(c.toString());
-
-			}
-		});
 
 		// GESTAO CONTA PESSOAL
 
