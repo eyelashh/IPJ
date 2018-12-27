@@ -13,7 +13,7 @@ public class Livraria {
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
 
-	public Livraria() {
+	private Livraria() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.livros = new ArrayList<Livro>();
@@ -22,8 +22,8 @@ public class Livraria {
 		this.carrinhos = new ArrayList<Carrinho>();
 
 	}
-
-	public Livraria(int idLivraria, String nome) {
+//alterei o construtor da livraria para public
+	private Livraria(int idLivraria, String nome) {
 		super();
 		this.idLivraria = idLivraria;
 		this.nome = nome;
