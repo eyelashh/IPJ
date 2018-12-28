@@ -49,6 +49,7 @@ public class Login extends JDialog implements Serializable{
 				// fazer login:
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+
 						
 						String user=jLoginUsername.getText();
 						String pass=new String(jLoginPassword.getPassword());
