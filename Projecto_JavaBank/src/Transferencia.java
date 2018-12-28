@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Transferencia extends Operacao {
+public class Transferencia extends Operacao implements Serializable {
 
 	private Conta contaDestino;
 	private Cliente titularTransf;

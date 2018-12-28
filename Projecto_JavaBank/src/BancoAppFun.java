@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -32,7 +33,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JCheckBox;
 import com.toedter.calendar.JDateChooser;
 
-public class BancoAppFun {
+public class BancoAppFun implements Serializable{
 
 	private JFrame frame;
 	private JTextField tbCltNome;
@@ -54,14 +55,15 @@ public class BancoAppFun {
 	private JTextField tbLevData;
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
-	private static String nome;
+	private static Funcionario func;
+	private static GestaoBanco gb;
   
 	/**
 	 * Launch the application.
 	 */
 	public void run() {
 		try {
-			BancoAppFun window = new BancoAppFun(nome);
+			BancoAppFun window = new BancoAppFun(func, gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,9 +73,10 @@ public class BancoAppFun {
 	/**
 	 * Create the application.
 	 */
-	public BancoAppFun(String n) {
+	public BancoAppFun(Funcionario f, GestaoBanco g) {
 		initialize();
-		this.nome = n;
+		func = f;
+		gb = g;
 	}
 
 	/**
@@ -137,7 +140,7 @@ public class BancoAppFun {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel(nome);
+		JLabel lUtilizador = new JLabel(func.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));

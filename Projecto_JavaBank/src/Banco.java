@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Banco {
+public class Banco implements Serializable{
 	private int idBanco; 
 	private String nome;
 	private int contacto;

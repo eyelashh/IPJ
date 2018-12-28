@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class Login extends JDialog {
+public class Login extends JDialog implements Serializable{
 
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
@@ -56,8 +57,8 @@ public class Login extends JDialog {
 						Utilizador logado = gb.javabank.logado(user, pass);
 						
 						//String nome =  Banco.getInstance().logado(user, pass).getNome();
-						String nome =   gb.javabank.logado(user, pass).getNome();
-						
+						Utilizador utilizadorlogado =   gb.javabank.logado(user, pass);
+	
 						//boolean v = Banco.getInstance().verificarUserPass(user, pass);
 						boolean v = gb.javabank.verificarUserPass(user, pass);
 						
@@ -65,18 +66,18 @@ public class Login extends JDialog {
 				
 							if(logado instanceof Funcionario) {
 								
-							BancoAppFun fun = new BancoAppFun(nome);
+							BancoAppFun fun = new BancoAppFun((Funcionario)utilizadorlogado,gb);
 							fun.run();
 							dispose();
 							
 						}if (logado instanceof Administrador) {
 							
-							BancoAppAdm adm = new BancoAppAdm(nome);
+							BancoAppAdm adm = new BancoAppAdm((Administrador)utilizadorlogado,gb);
 							adm.run();
 							dispose();
 						}if(logado instanceof Cliente) {
 							
-							BancoAppClt clt = new BancoAppClt(nome);
+							BancoAppClt clt = new BancoAppClt((Cliente)utilizadorlogado,gb);
 							clt.run();
 							dispose();
 							

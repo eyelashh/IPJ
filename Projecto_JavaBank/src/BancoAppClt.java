@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
@@ -27,7 +28,7 @@ import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JScrollPane;
 
-public class BancoAppClt {
+public class BancoAppClt implements Serializable{
 
 	private JFrame frame;
 	private JTextField textFieldCltNumero;
@@ -45,31 +46,29 @@ public class BancoAppClt {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	private static String nome;
+	private static Cliente clt;
+	private static GestaoBanco gb;
   
 	/**
 	 * Launch the application.
 	 */
-	// public static void main(String[] args) {
-	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			BancoAppClt window = new BancoAppClt(nome);
+			BancoAppClt window = new BancoAppClt(clt, gb);
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	// });
-	// }
 
 	/**
 	 * Create the application.
 	 */
-	public BancoAppClt(String n) {
+	public BancoAppClt(Cliente c, GestaoBanco g) {
 		initialize();
-		this.nome = n;
+		clt = c;
+		gb = g;
 	}
 
 	/**
@@ -139,7 +138,7 @@ public class BancoAppClt {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel(nome);
+		JLabel lUtilizador = new JLabel(clt.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
