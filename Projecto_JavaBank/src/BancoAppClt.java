@@ -58,7 +58,8 @@ public class BancoAppClt implements Serializable{
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Nao foi possivel abrir o cliente");
 		}
 	}
 
@@ -66,9 +67,10 @@ public class BancoAppClt implements Serializable{
 	 * Create the application.
 	 */
 	public BancoAppClt(Cliente c, GestaoBanco g) {
-		initialize();
 		clt = c;
 		gb = g;
+		initialize();
+		
 	}
 
 	/**

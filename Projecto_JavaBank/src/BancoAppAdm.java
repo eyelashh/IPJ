@@ -66,7 +66,8 @@ public class BancoAppAdm implements Serializable{
 			BancoAppAdm window = new BancoAppAdm(adm,gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Nao foi possivel abrir o funcionario");
 		}
 	}
 
@@ -74,10 +75,10 @@ public class BancoAppAdm implements Serializable{
 	 * Create the application.
 	 */
 	public BancoAppAdm(Administrador a, GestaoBanco g) {
-
-		initialize();
 		adm = a;
 		gb = g;
+		initialize();
+		
 	}
 
 	/**

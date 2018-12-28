@@ -52,32 +52,26 @@ public class Login extends JDialog implements Serializable{
 						
 						String user=jLoginUsername.getText();
 						String pass=new String(jLoginPassword.getPassword());
-						
-						//Utilizador logado = Banco.getInstance().logado(user, pass);
 						Utilizador logado = gb.javabank.logado(user, pass);
-						
-						//String nome =  Banco.getInstance().logado(user, pass).getNome();
-						Utilizador utilizadorlogado =   gb.javabank.logado(user, pass);
-	
-						//boolean v = Banco.getInstance().verificarUserPass(user, pass);
 						boolean v = gb.javabank.verificarUserPass(user, pass);
 						
 						if (v) {
-				
-							if(logado instanceof Funcionario) {
-								
-							BancoAppFun fun = new BancoAppFun((Funcionario)utilizadorlogado,gb);
+							System.out.println("Teste v");
+							if(logado instanceof Funcionario) {	
+								System.out.println("Teste fun");
+							BancoAppFun fun = new BancoAppFun((Funcionario)logado,gb);
+							
 							fun.run();
 							dispose();
 							
 						}if (logado instanceof Administrador) {
-							
-							BancoAppAdm adm = new BancoAppAdm((Administrador)utilizadorlogado,gb);
+							System.out.println("Teste adm");
+							BancoAppAdm adm = new BancoAppAdm((Administrador)logado,gb);
 							adm.run();
 							dispose();
 						}if(logado instanceof Cliente) {
-							
-							BancoAppClt clt = new BancoAppClt((Cliente)utilizadorlogado,gb);
+							System.out.println("Teste clt");
+							BancoAppClt clt = new BancoAppClt((Cliente)logado,gb);
 							clt.run();
 							dispose();
 							
