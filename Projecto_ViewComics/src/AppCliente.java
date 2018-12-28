@@ -51,9 +51,9 @@ public class AppCliente {
 	private JTextField tbData;
 	private JTextField tbLivrosAutor;
 	private JTextField tbLivrosNome;
-	
+
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
-	//na janela
+	// na janela
 
 	/**
 	 * Launch the application.
@@ -224,30 +224,31 @@ public class AppCliente {
 		frame.getContentPane().add(JPanelPrincipal);
 		JPanelPrincipal.setLayout(null);
 
-		JPanel JPLivros = new JPanel() {
-			@Override
-			// o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou
-					// do
-					// ficheiro
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(" "));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
+//		JPanel JPLivros = new JPanel() {
+//			@Override
+//			// o paint component vai pintar literalmente o componente
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// importar imagem para o background do panel, podemos faz�-lo da internet ou
+//					// do
+//					// ficheiro
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File(" "));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
+		JPanel JPLivros = new JPanel();
 		JPLivros.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
@@ -616,47 +617,25 @@ public class AppCliente {
 		btnLogIn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				String user=txtUsername.getText();
-				String pass=new String(txtPassword.getPassword());
-
+				String user = txtUsername.getText();
+				String pass = new String(txtPassword.getPassword());
 				boolean v = Livraria.getInstance().verificarPassword(user, pass);
 				if (v) {
-					Utilizador utilizadorLogado=Livraria.getInstance().loggado(user, pass);
-					if(utilizadorLogado instanceof Funcionario) {
-					AppAdmin adm = new AppAdmin(utilizadorLogado);
-					adm.run();
-				} else if (utilizadorLogado instanceof Administrador){
-					AppAdmin adm = new AppAdmin(utilizadorLogado);
-					adm.run();
-				}
+					Utilizador utilizadorLogado = Livraria.getInstance().loggado(user, pass);
+					if (utilizadorLogado instanceof Funcionario) {
+						AppFuncionario fun = new AppFuncionario(utilizadorLogado);
+						fun.run();
+					} else if (utilizadorLogado instanceof Administrador) {
+						AppAdmin adm = new AppAdmin(utilizadorLogado);
+						adm.run();
+					}
 
 				}
 			}
-			
+
 		});
 
 		// fazer logIn premindo Enter
-
-		txtPassword.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent event) {
-				String user=txtUsername.getText();
-				String pass=new String(txtPassword.getPassword());
-
-				boolean v = Livraria.getInstance().verificarPassword(user, pass);
-				if (v) {
-					Utilizador utilizadorLogado=Livraria.getInstance().loggado(user, pass);
-					
-					AppAdmin adm = new AppAdmin(utilizadorLogado);
-					adm.run();
-				} else {
-
-				}
-			}
-
-		});
-
-			
 
 		// mudar a cor de um botao ao passar o cursor do rato
 

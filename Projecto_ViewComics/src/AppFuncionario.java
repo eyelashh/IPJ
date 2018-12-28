@@ -100,7 +100,7 @@ public class AppFuncionario {
 	/**
 	 * Create the application.
 	 */
-	public AppFuncionario(Utilizador uf) {
+	public AppFuncionario(Utilizador u) {
 		initialize();
 		AppFuncionario.u=u;
 	}
@@ -160,7 +160,7 @@ public class AppFuncionario {
 		label_7.setBounds(101, 5, 730, 125);
 		panelcabecalho.add(label_7);
 
-		JLabel lblBemVindonome = new JLabel("Bem Vindo -Nome - Funcionario");
+		JLabel lblBemVindonome = new JLabel("Bem Vindo funcionário");
 		lblBemVindonome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBemVindonome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
 		lblBemVindonome.setBounds(892, 13, 335, 27);
@@ -172,25 +172,26 @@ public class AppFuncionario {
 		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
 
-		JPanel panelMenu = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(""));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
+		JPanel panelMenu = new JPanel() ;
+//		{
+//			@Override
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File(""));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
 		panelMenu.setLayout(null);
 		panelMenu.setBounds(0, 176, 241, 545);
 		Paineltotal.add(panelMenu);
