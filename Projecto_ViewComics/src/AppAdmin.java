@@ -50,6 +50,8 @@ public class AppAdmin {
 	private JTextField txtContactoFunc;
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
+	
+	private static Utilizador u;
 
 	/**
 	 * Launch the application.
@@ -57,7 +59,7 @@ public class AppAdmin {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppAdmin window = new AppAdmin();
+			AppAdmin window = new AppAdmin(u);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,8 +70,9 @@ public class AppAdmin {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin() {
+	public AppAdmin(Utilizador u) {
 		initialize();
+		AppAdmin.u=u;
 	}
 
 	/**
@@ -108,7 +111,7 @@ public class AppAdmin {
 		label_7.setBounds(101, 5, 730, 125);
 		panelcabecalho.add(label_7);
 
-		JLabel label_8 = new JLabel("Bem Vindo -Nome - Administrador");
+		JLabel label_8 = new JLabel("Bem Vindo");
 		label_8.setHorizontalAlignment(SwingConstants.CENTER);
 		label_8.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
 		label_8.setBounds(892, 13, 335, 27);
@@ -120,25 +123,26 @@ public class AppAdmin {
 		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
 
-		JPanel panelMenu = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg"));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
+		JPanel panelMenu = new JPanel();
+//				{
+//			@Override
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg"));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
 		panelMenu.setLayout(null);
 		panelMenu.setBounds(0, 176, 241, 545);
 		Paineltotal.add(panelMenu);
