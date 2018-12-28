@@ -26,7 +26,7 @@ public class Login extends JDialog {
 	 */
 	public Login() {
 
-		GestoaBanco gb = new GestoaBanco();
+		GestaoBanco gb = new GestaoBanco();
 
 		// frame principal
 		setResizable(false);
