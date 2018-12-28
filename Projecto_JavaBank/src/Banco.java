@@ -1,20 +1,21 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Banco implements Serializable{
-	private int idBanco; 
+public class Banco implements Serializable {
+	private int idBanco;
 	private String nome;
 	private int contacto;
-	private String morada; 
+	private String morada;
 	private ArrayList<Conta> contas;
 	private ArrayList<Utilizador> utilizadores;
-	//private static Banco banco = new Banco();
-	
+	// private static Banco banco = new Banco();
+
 	public Banco() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
-		ArrayList<Conta> contas = new ArrayList<Conta>();
-	} 
+		this.contas = new ArrayList<Conta>();
+	}
+
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
 			ArrayList<Utilizador> utlizadores) {
 		super();
@@ -24,14 +25,13 @@ public class Banco implements Serializable{
 		this.morada = morada;
 		this.contas = new ArrayList<Conta>();
 		this.utilizadores = new ArrayList<Utilizador>();
-		
-	}
-	
-	//public static Banco getInstance() {
-		//return banco;
-	//}
 
- 
+	}
+
+	// public static Banco getInstance() {
+	// return banco;
+	// }
+
 	public int getIdBanco() {
 		return idBanco;
 	}
@@ -79,52 +79,58 @@ public class Banco implements Serializable{
 	public void setUtlizadores(ArrayList<Utilizador> utlizadores) {
 		this.utilizadores = utlizadores;
 	}
-	
-	public void run()
-	{
+
+	public void run() {
 		System.out.println("Run!!!");
 	}
-	
+
 	// adiciona utilizadores
-		public void addUtilizador(Utilizador u) {
-			this.utilizadores.add(u);
-		}
+	public void addUtilizador(Utilizador u) {
+		this.utilizadores.add(u);
+	}
 
-		// remove utilizadores
-		public void removeUtilizador(Utilizador u) {
-			this.utilizadores.remove(u);
-		}
-		
-		
-		// verificar se a pass e o user estao corretos
-		public boolean verificarUserPass(String user, String pass) {
+	// remove utilizadores
+	public void removeUtilizador(Utilizador u) {
+		this.utilizadores.remove(u);
+	}
 
-			boolean verificar = false;
+	// verificar se a pass e o user estao corretos
+	public boolean verificarUserPass(String user, String pass) {
 
-			for (Utilizador u : this.utilizadores) {
-				if ((pass.equals(u.getPassword())) && (user.equals(u.getUsername()))) {
-					verificar = true;
-				}
+		boolean verificar = false;
 
+		for (Utilizador u : this.utilizadores) {
+			if ((pass.equals(u.getPassword())) && (user.equals(u.getUsername()))) {
+				verificar = true;
 			}
-			return verificar;
-		}
-		
-		// verificar o nome da pessoa que está logado
-		public Utilizador logado(String username, String password) {
-			
-			Utilizador u_log =new Utilizador();
-			
-			for(Utilizador u: this.utilizadores) {
-				if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
-					u_log = u;
-				}
-			}
-			return u_log;
-		}
-		 
-		
 
-	
+		}
+		return verificar;
+	}
+
+	// verificar o nome da pessoa que está logado
+	public Utilizador logado(String username, String password) {
+
+		Utilizador u_log = new Utilizador();
+
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getUsername().equals(username)) && (u.getPassword().equals(password))) {
+				u_log = u;
+			}
+		}
+		return u_log;
+	}
+
+	// 
+	public ArrayList<Utilizador> getClientes() {
+
+		ArrayList<Utilizador> clt = new ArrayList();
+		for (Utilizador u : this.utilizadores) {
+			if (u instanceof Cliente) {
+				clt.add(u);
+			}
+		}
+		return clt;
+	}
 
 }
