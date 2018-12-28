@@ -20,15 +20,23 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class BancoAppAdm {
+public class BancoAppAdm implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JFrame frame;
 	private JTextField lblAdminGestUsername;
 	private JTextField textAdminGestPass;
@@ -47,7 +55,8 @@ public class BancoAppAdm {
 	private JTextField textAdmFunUser;
 	private JTextField textAdmFunPass;
 	private JTextField textAdmFunSobrenome;
-	private static String nome;
+	private static Administrador adm;
+	private static GestaoBanco gb;
   
 	
 	/**
@@ -56,20 +65,22 @@ public class BancoAppAdm {
 
 	public void run() {
 		try {
-			BancoAppAdm window = new BancoAppAdm(nome);
+			BancoAppAdm window = new BancoAppAdm(adm,gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Nao foi possivel abrir o funcionario");
 		}
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public BancoAppAdm(String n) {
-
+	public BancoAppAdm(Administrador a, GestaoBanco g) {
+		adm = a;
+		gb = g;
 		initialize();
-		this.nome = n;
+		
 	}
 
 	/**
@@ -78,6 +89,13 @@ public class BancoAppAdm {
 	private void initialize() {
 
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+			}
+		});
+		
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -105,6 +123,8 @@ public class BancoAppAdm {
 			public void actionPerformed(ActionEvent e) {
 				try {
 
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+					
 					Login logout = new Login();
 					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					logout.setLocationRelativeTo(frame);
@@ -136,7 +156,7 @@ public class BancoAppAdm {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel(nome);
+		JLabel lUtilizador = new JLabel(adm.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));

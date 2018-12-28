@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ContaPoupanca extends Conta {
+public class ContaPoupanca extends Conta implements Serializable{
 
 	private double taxaJuros;
 	private double limiteMensalDebito;

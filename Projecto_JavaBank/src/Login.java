@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,12 +14,11 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class Login extends JDialog {
+public class Login extends JDialog implements Serializable{
 
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
-  
-
+ 
 
 	/**
 	 * 
@@ -48,35 +48,30 @@ public class Login extends JDialog {
 				// fazer login:
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+
 						
 						String user=jLoginUsername.getText();
 						String pass=new String(jLoginPassword.getPassword());
-						
-						//Utilizador logado = Banco.getInstance().logado(user, pass);
 						Utilizador logado = gb.javabank.logado(user, pass);
-						
-						//String nome =  Banco.getInstance().logado(user, pass).getNome();
-						String nome =   gb.javabank.logado(user, pass).getNome();
-						
-						//boolean v = Banco.getInstance().verificarUserPass(user, pass);
 						boolean v = gb.javabank.verificarUserPass(user, pass);
 						
 						if (v) {
-				
-							if(logado instanceof Funcionario) {
-								
-							BancoAppFun fun = new BancoAppFun(nome);
+							System.out.println("Teste v");
+							if(logado instanceof Funcionario) {	
+								System.out.println("Teste fun");
+							BancoAppFun fun = new BancoAppFun((Funcionario)logado,gb);
+							
 							fun.run();
 							dispose();
 							
 						}if (logado instanceof Administrador) {
-							
-							BancoAppAdm adm = new BancoAppAdm(nome);
+							System.out.println("Teste adm");
+							BancoAppAdm adm = new BancoAppAdm((Administrador)logado,gb);
 							adm.run();
 							dispose();
 						}if(logado instanceof Cliente) {
-							
-							BancoAppClt clt = new BancoAppClt(nome);
+							System.out.println("Teste clt");
+							BancoAppClt clt = new BancoAppClt((Cliente)logado,gb);
 							clt.run();
 							dispose();
 							

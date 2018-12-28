@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
@@ -26,8 +27,10 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JScrollPane;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class BancoAppClt {
+public class BancoAppClt implements Serializable{
 
 	private JFrame frame;
 	private JTextField textFieldCltNumero;
@@ -45,31 +48,31 @@ public class BancoAppClt {
 	private JTextField textField_9;
 	private JTextField textField_10;
 	private JTextField textField_11;
-	private static String nome;
+	private static Cliente clt;
+	private static GestaoBanco gb;
   
 	/**
 	 * Launch the application.
 	 */
-	// public static void main(String[] args) {
-	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			BancoAppClt window = new BancoAppClt(nome);
+			BancoAppClt window = new BancoAppClt(clt, gb);
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Nao foi possivel abrir o cliente");
 		}
 	}
-	// });
-	// }
 
 	/**
 	 * Create the application.
 	 */
-	public BancoAppClt(String n) {
+	public BancoAppClt(Cliente c, GestaoBanco g) {
+		clt = c;
+		gb = g;
 		initialize();
-		this.nome = n;
+		
 	}
 
 	/**
@@ -80,6 +83,12 @@ public class BancoAppClt {
 		// Incia a criaçao de todos os componentes
 
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+			}
+		});
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -106,7 +115,8 @@ public class BancoAppClt {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+					
 					Login logout = new Login();
 					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					logout.setLocationRelativeTo(frame);
@@ -139,7 +149,7 @@ public class BancoAppClt {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel(nome);
+		JLabel lUtilizador = new JLabel(clt.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Cartao {
+public class Cartao implements Serializable{
 
 	private int nCartao;
 	private String nomeTitular;

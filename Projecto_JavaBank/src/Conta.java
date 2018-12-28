@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Conta {
+public class Conta implements Serializable{
 	private int idConta;
 	private LocalDate dataCriacao;
 	private double saldo;

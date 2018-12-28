@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Serializable{
 
 	private Cartao cartao;
 

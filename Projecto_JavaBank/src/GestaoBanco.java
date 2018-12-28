@@ -10,8 +10,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class GestaoBanco implements Serializable{
+	
 	Banco javabank;
 	private File fileUtil;
+	private File fileContas;
 	private ObjectInputStream iS;
 	private ObjectOutputStream oS;
 	
@@ -22,6 +24,7 @@ public class GestaoBanco implements Serializable{
 		iS = null;
 		// CRIA FICHEIROS:
 		this.fileUtil = new File("fileUtil.dat");
+		this.fileContas = new File("fileContas.dat");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -52,14 +55,14 @@ public class GestaoBanco implements Serializable{
 			}
 			catch(IOException e)
 			{
-				System.out.println("Teste 2 falhado");
+				
 			}
 		}
+		// caso de ja existir ficheiro transfere os ficheiros o arraylist de funcionarios:
 		else
 		{
 			try
 			{
-				System.out.println(fileUtil.getName());
 				this.iS = new ObjectInputStream(new FileInputStream(this.fileUtil));
 				try
 				{
@@ -68,24 +71,84 @@ public class GestaoBanco implements Serializable{
 				}
 				catch(ClassNotFoundException y)
 				{
-					System.out.println("Teste 1 falhado");
+					
 				}
 			}
 			catch(IOException e)
 			{
-				System.out.println(e.getMessage());
+				
 			}
 		}
 		
+		// Agora para as contas:
+		// CASO NAO EXISTA FICHEIRO É CRIADO:
+		if(!this.fileContas.exists())
+		{
+			try
+			{
+				this.fileContas.createNewFile();
+				this.oS = new ObjectOutputStream(new FileOutputStream(this.fileContas));
+				oS.writeObject(javabank.getContas());
+				oS.close();
+			}
+			catch(IOException e)
+			{
+				
+			}	
+		}
+		// caso ja exista vou passar a informaçao do ficheiro para a classe:
+		else
+		{
+			
+			try
+			{
+				this.iS = new ObjectInputStream(new FileInputStream(this.fileContas));
+				try
+				{
+					this.javabank.setContas((ArrayList<Conta>) iS.readObject());
+					iS.close();
+				}
+				catch(ClassNotFoundException y)
+				{
+					
+				}
+			}
+			catch(IOException e)
+			{
+				
+			}
+			
+		}
 	
-		
-		
-		
-		
-		
-		
 	}
 	
+	// metedo que guarda os ficheiros:
+	// este metedo é chamado quando qualquer uma das janelas tipo adm/clt/fun sao fechadas ou efectuado logout.
+	protected void atualizaficheiro(ArrayList<Utilizador> util, ArrayList<Conta> conta)
+	{
+		try
+		{
+			oS = new ObjectOutputStream(new FileOutputStream(this.fileUtil));
+			oS.writeObject(util);
+			oS.close();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		
+		try
+		{
+			oS = new ObjectOutputStream(new FileOutputStream(this.fileContas));
+			oS.writeObject(conta);
+			oS.close();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		
+	}
 	
 	
 }

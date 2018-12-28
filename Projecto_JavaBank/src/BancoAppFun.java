@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -31,8 +32,10 @@ import javax.swing.UIManager;
 import javax.swing.JScrollBar;
 import javax.swing.JCheckBox;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class BancoAppFun {
+public class BancoAppFun implements Serializable {
 
 	private JFrame frame;
 	private JTextField tbCltNome;
@@ -54,26 +57,34 @@ public class BancoAppFun {
 	private JTextField tbLevData;
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
+<<<<<<< HEAD
 	private static String nome;
+=======
+	private static Funcionario func;
+	private static GestaoBanco gb;
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 
 	/**
 	 * Launch the application.
 	 */
 	public void run() {
 		try {
-			BancoAppFun window = new BancoAppFun(nome);
+			BancoAppFun window = new BancoAppFun(func, gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+				System.out.println("Nao foi possivel abrir o funcionario");
 		}
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public BancoAppFun(String n) {
+	public BancoAppFun(Funcionario f, GestaoBanco g) {
+		func = f;
+		gb = g;
 		initialize();
-		this.nome = n;
+		
 	}
 
 	/**
@@ -81,6 +92,12 @@ public class BancoAppFun {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+			}
+		});
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -109,6 +126,10 @@ public class BancoAppFun {
 
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
+=======
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 				Login logout = new Login();
 				logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				logout.setLocationRelativeTo(frame);
@@ -136,7 +157,7 @@ public class BancoAppFun {
 		JpanelCabecalho.add(lblBemVindo);
 
 		// texto no cabeçalho : utilizador
-		JLabel lUtilizador = new JLabel(nome);
+		JLabel lUtilizador = new JLabel(func.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
 		lUtilizador.setForeground(new Color(0, 0, 0));
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
