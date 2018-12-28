@@ -25,9 +25,9 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
-
 		GestaoBanco gb = new GestaoBanco();
-
+		gb.run();
+		
 		// frame principal
 		setResizable(false);
 		setBounds(100, 100, 1280, 768);
@@ -51,10 +51,15 @@ public class Login extends JDialog {
 						
 						String user=jLoginUsername.getText();
 						String pass=new String(jLoginPassword.getPassword());
-						Utilizador logado = Banco.getInstance().logado(user, pass);
-						String nome =  Banco.getInstance().logado(user, pass).getNome();
 						
-						boolean v = Banco.getInstance().verificarUserPass(user, pass);
+						//Utilizador logado = Banco.getInstance().logado(user, pass);
+						Utilizador logado = gb.javabank.logado(user, pass);
+						
+						//String nome =  Banco.getInstance().logado(user, pass).getNome();
+						String nome =   gb.javabank.logado(user, pass).getNome();
+						
+						//boolean v = Banco.getInstance().verificarUserPass(user, pass);
+						boolean v = gb.javabank.verificarUserPass(user, pass);
 						
 						if (v) {
 				
