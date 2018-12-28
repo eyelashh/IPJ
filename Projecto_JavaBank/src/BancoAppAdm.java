@@ -27,6 +27,8 @@ import java.util.Calendar;
 
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class BancoAppAdm implements Serializable{
 
@@ -87,6 +89,13 @@ public class BancoAppAdm implements Serializable{
 	private void initialize() {
 
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+			}
+		});
+		
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -114,6 +123,8 @@ public class BancoAppAdm implements Serializable{
 			public void actionPerformed(ActionEvent e) {
 				try {
 
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+					
 					Login logout = new Login();
 					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					logout.setLocationRelativeTo(frame);

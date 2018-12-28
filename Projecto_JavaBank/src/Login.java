@@ -18,8 +18,7 @@ public class Login extends JDialog implements Serializable{
 
 	private JTextField jLoginUsername;
 	private JPasswordField jLoginPassword;
-  
-
+ 
 
 	/**
 	 * 

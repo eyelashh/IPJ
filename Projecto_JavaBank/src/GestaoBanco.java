@@ -55,7 +55,7 @@ public class GestaoBanco implements Serializable{
 			}
 			catch(IOException e)
 			{
-				System.out.println("Teste 2 falhado");
+				
 			}
 		}
 		// caso de ja existir ficheiro transfere os ficheiros o arraylist de funcionarios:
@@ -119,16 +119,36 @@ public class GestaoBanco implements Serializable{
 			}
 			
 		}
-		
 	
-		
-		
-		
-		
-		
-		
 	}
 	
+	// metedo que guarda os ficheiros:
+	// este metedo é chamado quando qualquer uma das janelas tipo adm/clt/fun sao fechadas ou efectuado logout.
+	protected void atualizaficheiro(ArrayList<Utilizador> util, ArrayList<Conta> conta)
+	{
+		try
+		{
+			oS = new ObjectOutputStream(new FileOutputStream(this.fileUtil));
+			oS.writeObject(util);
+			oS.close();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		
+		try
+		{
+			oS = new ObjectOutputStream(new FileOutputStream(this.fileContas));
+			oS.writeObject(conta);
+			oS.close();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		
+	}
 	
 	
 }
