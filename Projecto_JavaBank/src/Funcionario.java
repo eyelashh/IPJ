@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class Funcionario extends Utilizador {
+public class Funcionario extends Utilizador implements Serializable {
 	private int idFuncionario;
 
 	public Funcionario(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,

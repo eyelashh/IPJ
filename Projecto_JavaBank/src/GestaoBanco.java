@@ -4,11 +4,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class GestaoBanco {
+public class GestaoBanco implements Serializable{
 	Banco javabank;
 	private File fileUtil;
 	private ObjectInputStream iS;
@@ -56,13 +57,14 @@ public class GestaoBanco {
 		}
 		else
 		{
-			/*try
+			try
 			{
 				System.out.println(fileUtil.getName());
 				this.iS = new ObjectInputStream(new FileInputStream(this.fileUtil));
 				try
 				{
-					// problema identificado nao sei c
+					this.javabank.setUtlizadores((ArrayList<Utilizador>) iS.readObject()); 
+					iS.close();
 				}
 				catch(ClassNotFoundException y)
 				{
@@ -72,7 +74,7 @@ public class GestaoBanco {
 			catch(IOException e)
 			{
 				System.out.println(e.getMessage());
-			}*/
+			}
 		}
 		
 	

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class Administrador extends Utilizador {
+public class Administrador extends Utilizador implements Serializable {
 
 	
 	public Administrador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
