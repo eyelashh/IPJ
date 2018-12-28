@@ -69,6 +69,7 @@ public class Login extends JDialog implements Serializable{
 							BancoAppAdm adm = new BancoAppAdm((Administrador)logado,gb);
 							adm.run();
 							dispose();
+							
 						}if(logado instanceof Cliente) {
 							System.out.println("Teste clt");
 							BancoAppClt clt = new BancoAppClt((Cliente)logado,gb);
