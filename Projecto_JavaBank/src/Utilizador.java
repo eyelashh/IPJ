@@ -1,6 +1,6 @@
+import java.io.Serializable;
 import java.util.Date;
-
-public class Utilizador {
+public class Utilizador implements Serializable {
 
 	private int idUtilizador;
 	private String nome;

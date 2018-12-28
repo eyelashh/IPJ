@@ -7,13 +7,13 @@ public class Banco {
 	private String morada; 
 	private ArrayList<Conta> contas;
 	private ArrayList<Utilizador> utilizadores;
-	private static Banco banco = new Banco();
+	//private static Banco banco = new Banco();
 	
 	public Banco() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
+		ArrayList<Conta> contas = new ArrayList<Conta>();
 	} 
- 
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
 			ArrayList<Utilizador> utlizadores) {
 		super();
@@ -26,9 +26,9 @@ public class Banco {
 		
 	}
 	
-	public static Banco getInstance() {
-		return banco;
-	}
+	//public static Banco getInstance() {
+		//return banco;
+	//}
 
  
 	public int getIdBanco() {

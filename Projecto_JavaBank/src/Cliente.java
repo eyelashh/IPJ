@@ -1,9 +1,10 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Cliente extends Utilizador {
+public class Cliente extends Utilizador implements Serializable {
 
 	private ArrayList<Conta> contas;
 
