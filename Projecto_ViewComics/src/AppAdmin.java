@@ -50,6 +50,8 @@ public class AppAdmin {
 	private JTextField txtContactoFunc;
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
+	
+	private static Utilizador u;
 
 	/**
 	 * Launch the application.
@@ -57,7 +59,7 @@ public class AppAdmin {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppAdmin window = new AppAdmin();
+			AppAdmin window = new AppAdmin(u);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,8 +70,9 @@ public class AppAdmin {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin() {
+	public AppAdmin(Utilizador u) {
 		initialize();
+		AppAdmin.u=u;
 	}
 
 	/**

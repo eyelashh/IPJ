@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+
+
 public class Livraria {
 
 	private int idLivraria;
@@ -12,6 +14,8 @@ public class Livraria {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
+	//criar um atributo privado estático que é da própria classe
+	public static Livraria soleinstance=new Livraria();
 
 	private Livraria() {
 		super();
@@ -22,7 +26,6 @@ public class Livraria {
 		this.carrinhos = new ArrayList<Carrinho>();
 
 	}
-//alterei o construtor da livraria para public
 	private Livraria(int idLivraria, String nome) {
 		super();
 		this.idLivraria = idLivraria;
@@ -32,6 +35,10 @@ public class Livraria {
 		this.transacoes = new ArrayList<Transacao>();
 		this.sessoes = new ArrayList<Sessao>();
 		this.carrinhos = new ArrayList<Carrinho>();
+	}
+	//criar método estático para retornar a instância da classe
+	public static Livraria getInstance() {
+		return soleinstance;
 	}
 
 	public int getIdLivraria() {
@@ -211,14 +218,24 @@ public class Livraria {
 
 		boolean dadosCorrectos = false;
 
-		for (Sessao s : this.sessoes) {
-			Utilizador u=s.getUser();
+		for (Utilizador u : this.utilizadores) {
 			if ((u.getUsername().equals(username)) && (u.getPassword().equals(password))) {
 				dadosCorrectos = true;
 			}
 		}
 		return dadosCorrectos;
 
+	}
+public Utilizador loggado(String username, String password) {
+		
+		Utilizador u_log=new Utilizador();
+		
+		for(Utilizador u: this.utilizadores) {
+			if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
+				u_log=u;
+			}
+		}
+		return u_log;
 	}
 
 	// metodo que altera o username de um funcionario

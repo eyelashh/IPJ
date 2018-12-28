@@ -51,6 +51,9 @@ public class AppCliente {
 	private JTextField tbData;
 	private JTextField tbLivrosAutor;
 	private JTextField tbLivrosNome;
+	
+//a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
+	//na janela
 
 	/**
 	 * Launch the application.
@@ -613,19 +616,23 @@ public class AppCliente {
 		btnLogIn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				if (txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a")) {
-					AppAdmin adm = new AppAdmin();
-					adm.run();
-					frame.setVisible(false);
+				String user=txtUsername.getText();
+				String pass=new String(txtPassword.getPassword());
 
+				boolean v = Livraria.getInstance().verificarPassword(user, pass);
+				if (v) {
+					Utilizador utilizadorLogado=Livraria.getInstance().loggado(user, pass);
+					if(utilizadorLogado instanceof Funcionario) {
+					AppAdmin adm = new AppAdmin(utilizadorLogado);
+					adm.run();
+				} else if (utilizadorLogado instanceof Administrador){
+					AppAdmin adm = new AppAdmin(utilizadorLogado);
+					adm.run();
 				}
-				if (txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f")) {
-					AppFuncionario fun = new AppFuncionario();
-					fun.run();
-					frame.setVisible(false);
 
 				}
 			}
+			
 		});
 
 		// fazer logIn premindo Enter
@@ -633,24 +640,23 @@ public class AppCliente {
 		txtPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent event) {
-				if (event.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (txtUsername.getText().equals("a") && new String(txtPassword.getPassword()).equals("a")) {
-						AppAdmin adm = new AppAdmin();
-						adm.run();
-						frame.setVisible(false);
+				String user=txtUsername.getText();
+				String pass=new String(txtPassword.getPassword());
 
-					}
-					if (txtUsername.getText().equals("f") && new String(txtPassword.getPassword()).equals("f")) {
-						AppFuncionario fun = new AppFuncionario();
-						fun.run();
-						frame.setVisible(false);
-
-					}
+				boolean v = Livraria.getInstance().verificarPassword(user, pass);
+				if (v) {
+					Utilizador utilizadorLogado=Livraria.getInstance().loggado(user, pass);
+					
+					AppAdmin adm = new AppAdmin(utilizadorLogado);
+					adm.run();
+				} else {
 
 				}
-
 			}
+
 		});
+
+			
 
 		// mudar a cor de um botao ao passar o cursor do rato
 

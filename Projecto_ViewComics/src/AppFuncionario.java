@@ -80,6 +80,8 @@ public class AppFuncionario {
 	private JTextField textField_11;
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
+	
+	private static Utilizador u;
 
 	/**
 	 * Launch the application.
@@ -87,7 +89,7 @@ public class AppFuncionario {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppFuncionario window = new AppFuncionario();
+			AppFuncionario window = new AppFuncionario(u);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,8 +100,9 @@ public class AppFuncionario {
 	/**
 	 * Create the application.
 	 */
-	public AppFuncionario() {
+	public AppFuncionario(Utilizador uf) {
 		initialize();
+		AppFuncionario.u=u;
 	}
 
 	/**
