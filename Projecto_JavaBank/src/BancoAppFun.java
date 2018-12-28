@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -68,8 +69,7 @@ public class BancoAppFun implements Serializable {
 			BancoAppFun window = new BancoAppFun(func, gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			// e.printStackTrace();
-			System.out.println("Nao foi possivel abrir o funcionario");
+			 e.printStackTrace();
 		}
 	}
 
@@ -200,23 +200,12 @@ public class BancoAppFun implements Serializable {
 		String [] itens = new String [] {"Nome", "ID"};
 		JComboBox cbCltPesq = new JComboBox(itens);
 		cbCltPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		cbCltPesq.setBounds(56, 12, 218, 48);
+		cbCltPesq.setBounds(47, 12, 227, 34);
 		jpanelClientes.add(cbCltPesq);
 
 		// Aqui é preciso que a textfield reconhece que temos de escrever um nome ou um numero
 		JTextField tbCltPesq = new JTextField();
-		tbCltPesq.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				if ("Nome".equals(cbCltPesq.getSelectedItem())) {
-					
-
-				}
-			}
-			
-		});
-		tbCltPesq.setBounds(56, 50, 218, 30);
+		tbCltPesq.setBounds(47, 49, 227, 30);
 		jpanelClientes.add(tbCltPesq);
 
 		JScrollBar scrollBar_2 = new JScrollBar();
@@ -325,6 +314,7 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.add(btCltEliminar);
 
 		JButton btCltconfirmar = new JButton("Confirmar");
+		
 		btCltconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltconfirmar.setBounds(394, 495, 120, 38);
 		jpanelClientes.add(btCltconfirmar);
@@ -334,7 +324,7 @@ public class BancoAppFun implements Serializable {
 		btCltLimpar.setBounds(557, 493, 120, 38);
 		jpanelClientes.add(btCltLimpar);
 
-		JRadioButton rbCltcc = new JRadioButton("C.C.");
+	JRadioButton rbCltcc = new JRadioButton("C.C.");
 		rbCltcc.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		rbCltcc.setBounds(446, 196, 66, 25);
 		jpanelClientes.add(rbCltcc);
@@ -348,6 +338,15 @@ public class BancoAppFun implements Serializable {
 		rbCltPassaporte.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		rbCltPassaporte.setBounds(594, 196, 138, 25);
 		jpanelClientes.add(rbCltPassaporte);
+		
+		// rbCltcc , rbCltbi, rbCltPassaporte 
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(rbCltcc);
+		bg.add(rbCltbi);
+		bg.add(rbCltPassaporte);
+		
+		
 
 		JDateChooser dateChooser_3 = new JDateChooser();
 		dateChooser_3.setBounds(345, 163, 217, 31);
@@ -941,5 +940,42 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
+		
+		// botao limpar:
+		btCltLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				dateChooser_3.setCalendar(null);
+				rbCltcc.setSelected(false);
+				rbCltbi.setSelected(false);
+				rbCltPassaporte.setSelected(false);
+				tbCltNum.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				
+				
+				
+			}
+		});
+		
+		// bt confirmar (adicionar ou alterar )
+		btCltconfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//if(lbClt)
+			//	{
+					
+			//	}
+				//else
+			//	{
+					
+			//	}
+				
+			}
+		});
+		
+		
 	}
 }
