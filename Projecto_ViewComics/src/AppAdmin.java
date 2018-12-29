@@ -61,7 +61,7 @@ public class AppAdmin implements Serializable {
 	private JTextField txtPassFunc;
 
 	private static Utilizador admin;
-	private static GestaoLivraria gl;
+	private GestaoLivraria gl;
 	private JTextField txtTESTE;
 
 	/**
@@ -236,18 +236,22 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(comboBoxAtributoLivro);
 
 		txtAtributoPesquisaLivro = new JTextField();
+
+		String a = gl.viewComics.getLivros().get(0).getTitulo();
+		txtAtributoPesquisaLivro.setText(a);
+
 		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
 		jpAdmLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
-		//indicar o parâmetro da lista neste caso String
+		// indicar o parâmetro da lista neste caso String
 //		String [] listaTeste2 = {"a","b","c"};
 //		DefaultListModel listModel = new DefaultListModel();
 //		
 //		
-//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-//		//JList listaLivros = new JList (ArrayLivros);
-		JList listaLivros = new JList ();
+		String[] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+		JList listaLivros = new JList(ArrayLivros);
+		// JList listaLivros = new JList ();
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
@@ -312,7 +316,7 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(txtStockLivro);
 
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
-		
+
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
 		btnPesquisarLivro.setBounds(224, 16, 97, 25);
 		jpAdmLivros.add(btnPesquisarLivro);
@@ -818,15 +822,13 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.addItem("Título");
 		comboBoxAtributoLivro.addItem("Autor");
 		comboBoxAtributoLivro.addItem("Data de lançamento");
-		//só posso seleccionar um elemento da lista
-		
-		
-		
-		 DefaultListSelectionModel m = new DefaultListSelectionModel();
-		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		    m.setLeadAnchorNotificationEnabled(false);
-		    listaLivros.setSelectionModel(m);
-		    
+		// só posso seleccionar um elemento da lista
+
+		DefaultListSelectionModel m = new DefaultListSelectionModel();
+		m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		m.setLeadAnchorNotificationEnabled(false);
+		listaLivros.setSelectionModel(m);
+
 //		    txtTESTE = new JTextField();
 //		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
 //		    System.out.println(titulo);
@@ -837,11 +839,10 @@ public class AppAdmin implements Serializable {
 
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				String [] listaTeste = {"a","b","c"};
-				listaLivros.setListData( listaTeste);
-				
-				
+
+				String[] listaTeste = { "a", "b", "c" };
+				listaLivros.setListData(listaTeste);
+
 //				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
 //					String titulo = txtAtributoPesquisaLivro.getText();
 //					
@@ -860,6 +861,6 @@ public class AppAdmin implements Serializable {
 //
 			}
 		});
-		
+
 	}
 }
