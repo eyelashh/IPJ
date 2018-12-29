@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -18,6 +19,9 @@ import javax.swing.JSeparator;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
@@ -57,6 +61,7 @@ public class BancoAppAdm implements Serializable{
 	private JTextField textAdmFunSobrenome;
 	private static Administrador adm;
 	private static GestaoBanco gb;
+	private JTextField textAdmFunMorada;
   
 	
 	/**
@@ -291,20 +296,22 @@ public class BancoAppAdm implements Serializable{
 		JPAdmFuncionario.add(scrollAdmFunLista);
 
 		// lista dos funcionarios
-		JList lbLAdmFunLista = new JList();
+		JList lbLAdmFunLista = new JList(gb.javabank.listaFunc(gb.javabank.getUtlizadores()));
 		lbLAdmFunLista.setBounds(123, 122, 249, 428);
 		JPAdmFuncionario.add(lbLAdmFunLista);
+		DefaultListModel lm  = new DefaultListModel ();
+		lm.addElement(lbLAdmFunLista);
 
 		// texto : username
 		JLabel lblAdmFunUsername = new JLabel("UserName:");
 		lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunUsername.setBounds(453, 367, 120, 30);
+		lblAdmFunUsername.setBounds(454, 441, 120, 30);
 		JPAdmFuncionario.add(lblAdmFunUsername);
 
 		// texto : username
 		JLabel lblAdmFunPassword = new JLabel("Password:");
 		lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunPassword.setBounds(453, 427, 153, 30);
+		lblAdmFunPassword.setBounds(712, 441, 153, 30);
 		JPAdmFuncionario.add(lblAdmFunPassword);
 
 		// botao eliminar funcionario
@@ -334,13 +341,13 @@ public class BancoAppAdm implements Serializable{
 		// Campos de texto - username
 		textAdmFunUser = new JTextField();
 		textAdmFunUser.setColumns(10);
-		textAdmFunUser.setBounds(463, 395, 225, 31);
+		textAdmFunUser.setBounds(464, 469, 225, 31);
 		JPAdmFuncionario.add(textAdmFunUser);
 
 		// Campos de texto - pass
 		textAdmFunPass = new JTextField();
 		textAdmFunPass.setColumns(10);
-		textAdmFunPass.setBounds(463, 456, 225, 31);
+		textAdmFunPass.setBounds(722, 469, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
 
 		// Data do funcionario
@@ -382,6 +389,16 @@ public class BancoAppAdm implements Serializable{
 		textAdmFunSobrenome.setColumns(10);
 		textAdmFunSobrenome.setBounds(709, 117, 217, 31);
 		JPAdmFuncionario.add(textAdmFunSobrenome);
+		
+		textAdmFunMorada = new JTextField();
+		textAdmFunMorada.setColumns(10);
+		textAdmFunMorada.setBounds(463, 399, 225, 31);
+		JPAdmFuncionario.add(textAdmFunMorada);
+		
+		JLabel lblMorada = new JLabel("Morada: ");
+		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMorada.setBounds(453, 366, 227, 30);
+		JPAdmFuncionario.add(lblMorada);
 
 		// Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
@@ -816,6 +833,36 @@ public class BancoAppAdm implements Serializable{
 				btAdmGestao.setBackground(new Color(65, 106, 105));
 			}
 		});
+		
+		
+//		btAdmFunProc.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				if(tbAdmFunPesq.getText() == gb.javabank.getUtlizadores()){
+//				String s = (String) lbClt.getSelectedValue();
+//				s= s.substring(0, s.indexOf("*"));
+//				Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+//
+//
+//				textAdmFunNome.setText(c.getNome());
+//				textAdmFunSobrenome.setText(c.getSobrenome());
+//				textAdmFunMorada.setText(c.getMorada());
+//				textAdmFunContato.setText(""+c.getContacto());
+//				textAdmFunUser.setText(c.getUsername());
+//				textAdmFunPass.setText(c.getPassword());
+//				textAdmFunNumero.setText(""+c.getNumidentificacao());
+//				
+//				
+//				lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
+//					public void valueChanged(ListSelectionEvent e) {
+//				c.getIdUtilizador();
+//				c.getNome();
+//			}
+//		});
+//				}
+//			}
+//		});
 
 	}
 }
+	
