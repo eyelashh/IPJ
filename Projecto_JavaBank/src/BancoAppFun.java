@@ -40,7 +40,7 @@ public class BancoAppFun implements Serializable {
 
 	private JFrame frame;
 	private JTextField tbCltNome;
-	private JTextField tbCltNum;
+	private JTextField tbCltMorada;
 	private JTextField tbCltContacto;
 	private JTextField tbCltUser;
 	private JPasswordField tbCltPass;
@@ -60,6 +60,8 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbTransContaDestino;
 	private static Funcionario func;
 	private static GestaoBanco gb;
+	private JTextField tbCltApelido;
+	private JTextField tbCltNum;
 
 	/**
 	 * Launch the application.
@@ -69,7 +71,7 @@ public class BancoAppFun implements Serializable {
 			BancoAppFun window = new BancoAppFun(func, gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -235,12 +237,12 @@ public class BancoAppFun implements Serializable {
 		
 		JLabel lblNewLabel_1 = new JLabel("Nome:");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_1.setBounds(335, 72, 57, 30);
+		lblNewLabel_1.setBounds(345, 72, 57, 30);
 		jpanelClientes.add(lblNewLabel_1);
 
 		JLabel lblDNascimento = new JLabel("D. Nascimento:");
 		lblDNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDNascimento.setBounds(335, 132, 177, 30);
+		lblDNascimento.setBounds(325, 147, 120, 30);
 		jpanelClientes.add(lblDNascimento);
 
 		JLabel lblDocumento = new JLabel("Documento:");
@@ -250,60 +252,61 @@ public class BancoAppFun implements Serializable {
 
 		JLabel lblNmero = new JLabel("N\u00FAmero:");
 		lblNmero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNmero.setBounds(335, 221, 227, 30);
+		lblNmero.setBounds(345, 236, 66, 30);
 		jpanelClientes.add(lblNmero);
 
 		JLabel lblContacto = new JLabel("Contacto:");
 		lblContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContacto.setBounds(335, 287, 81, 31);
+		lblContacto.setBounds(335, 329, 81, 31);
 		jpanelClientes.add(lblContacto);
 
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblUsername.setBounds(335, 351, 120, 30);
+		lblUsername.setBounds(330, 392, 81, 30);
 		jpanelClientes.add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblPassword.setBounds(335, 411, 153, 30);
+		lblPassword.setBounds(335, 459, 81, 30);
 		jpanelClientes.add(lblPassword);
 
 		tbCltNome = new JTextField();
-		tbCltNome.setBounds(345, 103, 351, 31);
+		tbCltNome.setBounds(345, 103, 179, 31);
 		jpanelClientes.add(tbCltNome);
 
-		tbCltNum = new JTextField();
-		tbCltNum.setBounds(345, 254, 225, 31);
-		jpanelClientes.add(tbCltNum);
+		tbCltMorada = new JTextField();
+		tbCltMorada.setBounds(420, 274, 309, 31);
+		jpanelClientes.add(tbCltMorada);
 
 		tbCltContacto = new JTextField();
-		tbCltContacto.setBounds(345, 318, 225, 31);
+		tbCltContacto.setBounds(420, 331, 309, 31);
 		jpanelClientes.add(tbCltContacto);
 
 		tbCltUser = new JTextField();
-		tbCltUser.setBounds(345, 379, 225, 31);
+		tbCltUser.setBounds(420, 394, 309, 31);
 		jpanelClientes.add(tbCltUser);
 
 		tbCltPass = new JPasswordField();
-		tbCltPass.setBounds(345, 440, 225, 31);
+		tbCltPass.setBounds(420, 461, 309, 31);
 		jpanelClientes.add(tbCltPass);
 
 		JLabel lblContas = new JLabel("Contas");
 		lblContas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContas.setBounds(760, 93, 56, 30);
+		lblContas.setBounds(780, 48, 56, 30);
 		jpanelClientes.add(lblContas);
 
 		JScrollBar scrollBar_3 = new JScrollBar();
-		scrollBar_3.setBounds(974, 92, 15, 441);
+		scrollBar_3.setBounds(1005, 92, 15, 441);
 		jpanelClientes.add(scrollBar_3);
 
 		JList lbCltConta = new JList();
-		lbCltConta.setBounds(749, 92, 240, 441);
+		lbCltConta.setBounds(780, 92, 240, 441);
 		jpanelClientes.add(lbCltConta);
 
 	
 
 		JButton btCltNovo = new JButton("Novo");
+		
 		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltNovo.setBounds(467, 22, 120, 38);
 		jpanelClientes.add(btCltNovo);
@@ -316,13 +319,8 @@ public class BancoAppFun implements Serializable {
 		JButton btCltconfirmar = new JButton("Confirmar");
 		
 		btCltconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltconfirmar.setBounds(394, 495, 120, 38);
+		btCltconfirmar.setBounds(506, 505, 120, 38);
 		jpanelClientes.add(btCltconfirmar);
-
-		JButton btCltLimpar = new JButton("Limpar");
-		btCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltLimpar.setBounds(557, 493, 120, 38);
-		jpanelClientes.add(btCltLimpar);
 
 	JRadioButton rbCltcc = new JRadioButton("C.C.");
 		rbCltcc.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -349,8 +347,26 @@ public class BancoAppFun implements Serializable {
 		
 
 		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setBounds(345, 163, 217, 31);
+		dateChooser_3.setBounds(457, 147, 260, 31);
 		jpanelClientes.add(dateChooser_3);
+		
+		tbCltApelido = new JTextField();
+		tbCltApelido.setBounds(536, 103, 193, 31);
+		jpanelClientes.add(tbCltApelido);
+		
+		JLabel lblApelido = new JLabel("Apelido:");
+		lblApelido.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblApelido.setBounds(536, 72, 72, 30);
+		jpanelClientes.add(lblApelido);
+		
+		tbCltNum = new JTextField();
+		tbCltNum.setBounds(420, 230, 309, 31);
+		jpanelClientes.add(tbCltNum);
+		
+		JLabel lblMorada = new JLabel("Morada:");
+		lblMorada.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblMorada.setBounds(345, 272, 66, 30);
+		jpanelClientes.add(lblMorada);
 
 		// Painel principal da operaÃ§oes
 		JPanel jpanelOperacoes = new JPanel();
@@ -939,43 +955,65 @@ public class BancoAppFun implements Serializable {
 				btFunGesto.setBackground(new Color(65, 106, 105));
 			}
 		});
-
 		
-		// botao limpar:
-		btCltLimpar.addActionListener(new ActionListener() {
+		//açao do botao novo:
+		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
 				dateChooser_3.setCalendar(null);
-				rbCltcc.setSelected(false);
-				rbCltbi.setSelected(false);
-				rbCltPassaporte.setSelected(false);
-				tbCltNum.setText(null);
+
+				tbCltMorada.setText(null);
 				tbCltContacto.setText(null);
 				bg.clearSelection();
 				
-				
-				
 			}
 		});
+		
 		
 		// bt confirmar (adicionar ou alterar )
 		btCltconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//if(lbClt)
-			//	{
-					
-			//	}
-				//else
-			//	{
-					
-			//	}
+				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista algum elemento selecionado da lista faz um update:
+				if(lbClt.isSelectedIndex(-1))
+				{
+				int id=	(gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
+					// adicionar Cliente:
+				if(id==0)
+				{ 
+					id++;
+				}
+				
+				/*bg.add(rbCltcc);
+				bg.add(rbCltbi);
+				bg.add(rbCltPassaporte);*/
+				String opselect ="";
+				
+				
+				
+				if(rbCltcc.isSelected())
+				{
+					opselect = rbCltcc.getText();
+				}
+				if(rbCltbi.isSelected())
+				{
+					opselect = rbCltbi.getText();
+				}
+				if(rbCltPassaporte.isSelected())
+				{
+					opselect = rbCltPassaporte.getText();vi3..bg..bg..bg.
+				}
+					String s= new String (tbCltPass.getPassword());
+					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),s);
+					gb.javabank.getUtlizadores().add(clt);
+				}
+				else
+				{
+					// atualizar Cliente:
+				}
 				
 			}
 		});
-		
-		
 	}
 }
