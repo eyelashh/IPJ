@@ -174,7 +174,7 @@ public class AppCliente implements Serializable {
 
 					// img = ImageIO.read(new URL(
 					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(""));
+					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg"));
 					g.drawImage(img, 0, 0, null);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
