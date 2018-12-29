@@ -251,20 +251,7 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
-<<<<<<< HEAD
-		// indicar o parâmetro da lista neste caso String
-=======
-		//indicar o parï¿½metro da lista neste caso String
->>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
-//		String [] listaTeste2 = {"a","b","c"};
-//		DefaultListModel listModel = new DefaultListModel();
-//		
-//		
-<<<<<<< HEAD
-		String[] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-		JList listaLivros = new JList(ArrayLivros);
-		// JList listaLivros = new JList ();
-=======
+
 //		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
 
 		//JList listaLivros = new JList (ArrayLivros);
@@ -272,7 +259,7 @@ public class AppAdmin implements Serializable {
 //		//JList listaLivros = new JList (ArrayLivros);
 
 		JList listaLivros = new JList ();
->>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
+
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
@@ -841,22 +828,22 @@ public class AppAdmin implements Serializable {
 		// FUNCIONALIDADES DOS DIFERENTES SEPARADORES
 
 		// LIVROS
-
-		comboBoxAtributoLivro.addItem("Tï¿½tulo");
-		comboBoxAtributoLivro.addItem("Autor");
-<<<<<<< HEAD
-		comboBoxAtributoLivro.addItem("Data de lançamento");
-		// só posso seleccionar um elemento da lista
-
-		DefaultListSelectionModel m = new DefaultListSelectionModel();
-		m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		m.setLeadAnchorNotificationEnabled(false);
-		listaLivros.setSelectionModel(m);
-
-=======
-		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
-		//sï¿½ posso seleccionar um elemento da lista
-		
+//
+//		comboBoxAtributoLivro.addItem("Tï¿½tulo");
+//		comboBoxAtributoLivro.addItem("Autor");
+//<<<<<<< HEAD
+//		comboBoxAtributoLivro.addItem("Data de lançamento");
+//		// só posso seleccionar um elemento da lista
+//
+//		DefaultListSelectionModel m = new DefaultListSelectionModel();
+//		m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		m.setLeadAnchorNotificationEnabled(false);
+//		listaLivros.setSelectionModel(m);
+//
+//=======
+//		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
+//		//sï¿½ posso seleccionar um elemento da lista
+//		
 		
 		
 		 DefaultListSelectionModel m = new DefaultListSelectionModel();
@@ -871,8 +858,8 @@ public class AppAdmin implements Serializable {
 		    jpAdmLivros.add(txtTESTE);
 		    txtTESTE.setColumns(10);
 
->>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
-//		    txtTESTE = new JTextField();
+//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
+////		    txtTESTE = new JTextField();
 //		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
 //		    System.out.println(titulo);
 //		    txtTESTE.setText(titulo);
@@ -881,27 +868,27 @@ public class AppAdmin implements Serializable {
 //		    txtTESTE.setColumns(10);
 
 
-		btnPesquisarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
-
-				String[] listaTeste = { "a", "b", "c" };
-				listaLivros.setListData(listaTeste);
-
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
-=======
-				
-				String [] listaTeste = {"a","b","c"};
-				listaLivros.setListData( listaTeste);
-				
-				
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
->>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
-//					String titulo = txtAtributoPesquisaLivro.getText();
-//					
-//					String [] listaT=gl.getViewComics().listaTitulo(titulo);
-//					
+//		btnPesquisarLivro.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//<<<<<<< HEAD
 //
+//				String[] listaTeste = { "a", "b", "c" };
+//				listaLivros.setListData(listaTeste);
+//
+////				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
+//=======
+//				
+//				String [] listaTeste = {"a","b","c"};
+//				listaLivros.setListData( listaTeste);
+//				
+//				
+////				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
+//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
+////					String titulo = txtAtributoPesquisaLivro.getText();
+////					
+////					String [] listaT=gl.getViewComics().listaTitulo(titulo);
+////					
+////
 //				}
 //				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
 //					
@@ -912,8 +899,8 @@ public class AppAdmin implements Serializable {
 //
 //				}
 //
-			}
-		});
+//			}
+//		});
 
 	}
 }
