@@ -2,7 +2,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
+<<<<<<< HEAD
 public class Carrinho implements  Serializable {
+=======
+public class Carrinho implements Serializable{
+>>>>>>> 3ea67d82b688c95db771c172bd92334c7496bfa5
 
 	private int nif;
 	private double montante;

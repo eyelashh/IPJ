@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
+<<<<<<< HEAD
 public class Funcionario extends Utilizador implements  Serializable {
+=======
+public class Funcionario extends Utilizador implements Serializable{
+>>>>>>> 3ea67d82b688c95db771c172bd92334c7496bfa5
 	
 	public Funcionario() {
 		super();

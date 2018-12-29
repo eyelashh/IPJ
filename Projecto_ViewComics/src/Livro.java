@@ -1,6 +1,10 @@
 import java.io.Serializable;
 
+<<<<<<< HEAD
 public class Livro implements  Serializable {
+=======
+public class Livro implements Serializable{
+>>>>>>> 3ea67d82b688c95db771c172bd92334c7496bfa5
 
 	private int idLivro;
 	private String titulo;
