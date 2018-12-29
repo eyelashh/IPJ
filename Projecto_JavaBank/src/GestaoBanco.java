@@ -35,7 +35,7 @@ public class GestaoBanco implements Serializable{
 		//
 		//
 		//
-		// Caso nao exista um ficheiro de utilizadores é criado 3 users por defeito!
+		// Caso nao exista um ficheiro de utilizadores ï¿½ criado 3 users por defeito!
 		if(!this.fileUtil.exists())
 		{
 			Utilizador adm = new Administrador(-1,"Administrador","Master",Date.valueOf(LocalDate.now()),"CC",0,"DEI",910000000,"admin","admin");
@@ -48,7 +48,7 @@ public class GestaoBanco implements Serializable{
 			
 			
 			
-			// De seguida é efectuada a criaçao do ficheiro:
+			// De seguida ï¿½ efectuada a criaï¿½ao do ficheiro:
 			try
 			{
 				this.fileUtil.createNewFile();
@@ -84,7 +84,7 @@ public class GestaoBanco implements Serializable{
 		}
 		
 		// Agora para as contas:
-		// CASO NAO EXISTA FICHEIRO É CRIADO:
+		// CASO NAO EXISTA FICHEIRO ï¿½ CRIADO:
 		if(!this.fileContas.exists())
 		{
 			try
@@ -99,7 +99,7 @@ public class GestaoBanco implements Serializable{
 				
 			}	
 		}
-		// caso ja exista vou passar a informaçao do ficheiro para a classe:
+		// caso ja exista vou passar a informaï¿½ao do ficheiro para a classe:
 		else
 		{
 			
@@ -126,7 +126,7 @@ public class GestaoBanco implements Serializable{
 	}
 	
 	// metedo que guarda os ficheiros:
-	// este metedo é chamado quando qualquer uma das janelas tipo adm/clt/fun sao fechadas ou efectuado logout.
+	// este metedo ï¿½ chamado quando qualquer uma das janelas tipo adm/clt/fun sao fechadas ou efectuado logout.
 	protected void atualizaficheiro(ArrayList<Utilizador> util, ArrayList<Conta> conta)
 	{
 		try
@@ -145,6 +145,7 @@ public class GestaoBanco implements Serializable{
 			oS = new ObjectOutputStream(new FileOutputStream(this.fileContas));
 			oS.writeObject(conta);
 			oS.close();
+			
 		}
 		catch(IOException e)
 		{
