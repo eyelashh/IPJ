@@ -913,33 +913,34 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 
-//		btAdmFunProc.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				if(tbAdmFunPesq.getText() == gb.javabank.getUtlizadores()){
-//				String s = (String) lbClt.getSelectedValue();
-//				s= s.substring(0, s.indexOf("*"));
-//				Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-//
-//
-//				textAdmFunNome.setText(c.getNome());
-//				textAdmFunSobrenome.setText(c.getSobrenome());
-//				textAdmFunMorada.setText(c.getMorada());
-//				textAdmFunContato.setText(""+c.getContacto());
-//				textAdmFunUser.setText(c.getUsername());
-//				textAdmFunPass.setText(c.getPassword());
-//				textAdmFunNumero.setText(""+c.getNumidentificacao());
-//				
-//				
-//				lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
-//					public void valueChanged(ListSelectionEvent e) {
-//				c.getIdUtilizador();
-//				c.getNome();
-//			}
-//		});
-//				}
-//			}
-//		});
+		btAdmFunProc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(tbAdmFunPesq.getText().equals(gb.javabank.getUtlizadores().get(0).getNome())){
+				
+				String s = (String) tbAdmFunPesq.getText();
+				s= s.substring(0, s.indexOf("*"));
+				Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
+
+				textAdmFunNome.setText(c.getNome());
+				textAdmFunSobrenome.setText(c.getSobrenome());
+				textAdmFunMorada.setText(c.getMorada());
+				textAdmFunContato.setText(""+c.getContacto());
+				textAdmFunUser.setText(c.getUsername());
+				textAdmFunPass.setText(c.getPassword());
+				textAdmFunNumero.setText(""+c.getNumidentificacao());
+				
+				
+				lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent e) {
+				c.getIdUtilizador();
+				c.getNome();
+			}
+		});
+				}
+		}
+		});
 
 	}
 }
