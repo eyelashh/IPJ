@@ -4,4 +4,3 @@ INDEX VERSION 1.131+C:\Users\Joana\eclipse-workspace\IPJ\.metadata\.plugins\org.
 3342898584.index
 345467981.index
 3370322411.index
-2400117395.index
