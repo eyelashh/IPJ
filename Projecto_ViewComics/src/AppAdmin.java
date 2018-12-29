@@ -21,6 +21,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -81,9 +83,9 @@ public class AppAdmin implements Serializable {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin(Utilizador admin, GestaoLivraria gl) {
+	public AppAdmin(Utilizador a, GestaoLivraria gl) {
 		initialize();
-		this.admin = admin;
+		this.admin = a;
 		this.gl = gl;
 	}
 
@@ -92,6 +94,12 @@ public class AppAdmin implements Serializable {
 	 */
 	protected void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
+			}
+		});
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -125,7 +133,6 @@ public class AppAdmin implements Serializable {
 
 		JButton btnLogOut = new JButton("LogOut");
 		btnLogOut.setBounds(1138, 54, 89, 23);
-
 		btnLogOut.setBackground(SystemColor.controlHighlight);
 		panelcabecalho.add(btnLogOut);
 
@@ -244,14 +251,28 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
+<<<<<<< HEAD
 		// indicar o parâmetro da lista neste caso String
+=======
+		//indicar o parï¿½metro da lista neste caso String
+>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
 //		String [] listaTeste2 = {"a","b","c"};
 //		DefaultListModel listModel = new DefaultListModel();
 //		
 //		
+<<<<<<< HEAD
 		String[] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
 		JList listaLivros = new JList(ArrayLivros);
 		// JList listaLivros = new JList ();
+=======
+//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+
+		//JList listaLivros = new JList (ArrayLivros);
+
+//		//JList listaLivros = new JList (ArrayLivros);
+
+		JList listaLivros = new JList ();
+>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
@@ -692,6 +713,8 @@ public class AppAdmin implements Serializable {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
+				
 				AppCliente clt = new AppCliente();
 				clt.run();
 				frame.setVisible(false);
@@ -819,8 +842,9 @@ public class AppAdmin implements Serializable {
 
 		// LIVROS
 
-		comboBoxAtributoLivro.addItem("Título");
+		comboBoxAtributoLivro.addItem("Tï¿½tulo");
 		comboBoxAtributoLivro.addItem("Autor");
+<<<<<<< HEAD
 		comboBoxAtributoLivro.addItem("Data de lançamento");
 		// só posso seleccionar um elemento da lista
 
@@ -829,6 +853,25 @@ public class AppAdmin implements Serializable {
 		m.setLeadAnchorNotificationEnabled(false);
 		listaLivros.setSelectionModel(m);
 
+=======
+		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
+		//sï¿½ posso seleccionar um elemento da lista
+		
+		
+		
+		 DefaultListSelectionModel m = new DefaultListSelectionModel();
+		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		    m.setLeadAnchorNotificationEnabled(false);
+		    listaLivros.setSelectionModel(m);
+		    
+
+		    txtTESTE = new JTextField();
+		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
+		    txtTESTE.setBounds(22, 98, 86, 20);
+		    jpAdmLivros.add(txtTESTE);
+		    txtTESTE.setColumns(10);
+
+>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
 //		    txtTESTE = new JTextField();
 //		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
 //		    System.out.println(titulo);
@@ -837,13 +880,23 @@ public class AppAdmin implements Serializable {
 //		    jpAdmLivros.add(txtTESTE);
 //		    txtTESTE.setColumns(10);
 
+
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 
 				String[] listaTeste = { "a", "b", "c" };
 				listaLivros.setListData(listaTeste);
 
 //				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
+=======
+				
+				String [] listaTeste = {"a","b","c"};
+				listaLivros.setListData( listaTeste);
+				
+				
+//				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
+>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
 //					String titulo = txtAtributoPesquisaLivro.getText();
 //					
 //					String [] listaT=gl.getViewComics().listaTitulo(titulo);
@@ -855,7 +908,7 @@ public class AppAdmin implements Serializable {
 //					
 //
 //				}
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Data de lançamento")) {
+//				if (comboBoxAtributoLivro.getSelectedItem().equals("Data de lanï¿½amento")) {
 //
 //				}
 //
