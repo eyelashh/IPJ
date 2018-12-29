@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import  javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
@@ -246,8 +245,8 @@ public class AppAdmin implements Serializable {
 //		DefaultListModel listModel = new DefaultListModel();
 //		
 //		
-		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-		//JList listaLivros = new JList (ArrayLivros);
+//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+//		//JList listaLivros = new JList (ArrayLivros);
 		JList listaLivros = new JList ();
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
@@ -828,11 +827,13 @@ public class AppAdmin implements Serializable {
 		    m.setLeadAnchorNotificationEnabled(false);
 		    listaLivros.setSelectionModel(m);
 		    
-		    txtTESTE = new JTextField();
-		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo());
-		    txtTESTE.setBounds(22, 98, 86, 20);
-		    jpAdmLivros.add(txtTESTE);
-		    txtTESTE.setColumns(10);
+//		    txtTESTE = new JTextField();
+//		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
+//		    System.out.println(titulo);
+//		    txtTESTE.setText(titulo);
+//		    txtTESTE.setBounds(22, 98, 86, 20);
+//		    jpAdmLivros.add(txtTESTE);
+//		    txtTESTE.setColumns(10);
 
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

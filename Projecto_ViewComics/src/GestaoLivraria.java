@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class GestaoLivraria implements Serializable{
 	//meti privado em vez de publico como no banco
-	private Livraria viewComics;
+	Livraria viewComics;
 	private File fileUtilizadores;
 	private File fileCarrinhos;
 	private File fileLivros;
