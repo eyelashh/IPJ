@@ -228,9 +228,6 @@ public class BancoAppFun implements Serializable {
 		addelementoslistcliente(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),dmclt);
 		jpanelClientes.add(lbClt);
 		
-		
-		
-		
 	
 		JButton btCltPesquisa = new JButton("Pesquisa");
 		btCltPesquisa.addActionListener(new ActionListener() {
@@ -746,7 +743,7 @@ public class BancoAppFun implements Serializable {
 
 		
 		
-		//// acaba a construçao dos botoes e começa todos os metedos:
+		//// acaba a construï¿½ao dos botoes e comeï¿½a todos os metedos:
 		
 		// Dentro do painel gestao:
 				// coloca o painel depositos visivel:
@@ -1034,10 +1031,11 @@ public class BancoAppFun implements Serializable {
 					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
+					
 					dmclt.removeAllElements();
 					addelementoslistcliente(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),dmclt);
 					
-					// isto é para eleminar:
+					// isto ï¿½ para eleminar:
 					lbClt.clearSelection();
 					lbCltConta.clearSelection();
 					tbCltNome.setText("");
