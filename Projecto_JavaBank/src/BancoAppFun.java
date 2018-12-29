@@ -199,7 +199,7 @@ public class BancoAppFun implements Serializable {
 
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
-		jpanelClientes.setBounds(0, 0, 1032, 556);
+		jpanelClientes.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelClientes);
 		jpanelClientes.setVisible(true);
 		jpanelClientes.setLayout(null);
@@ -311,10 +311,7 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.add(btCltNovo);
 
 		JButton btCltEliminar = new JButton("Eliminar");
-		btCltEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		btCltEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltEliminar.setBounds(609, 22, 120, 38);
 		jpanelClientes.add(btCltEliminar);
@@ -962,6 +959,8 @@ public class BancoAppFun implements Serializable {
 		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				// limpa tudo:
+				
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
@@ -973,7 +972,6 @@ public class BancoAppFun implements Serializable {
 				tbCltPass.setText("");
 				tbCltNum.setText("");
 				dateChooser_3.setDate(null);
-				// atualizar:
 
 			}
 		});
@@ -1070,6 +1068,48 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
+		
+		// botao eliminar
+		
+		btCltEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				
+				// primeiro ve qual o id selecionado!
+				String s = lbClt.getSelectedValue();
+				s = s.substring(0, s.indexOf("*"));
+				
+				// depois limpa os campos do formulario:
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				
+				gb.javabank.eliminautilizador(Integer.parseInt(s),gb.javabank.getUtlizadores());
+				
+				///
+				
+				
+				
+				
+				
+				
+				// atualiza lista:
+				dmclt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
+				
+				
+			}
+		});
+		
+		
 	}
 
 }
