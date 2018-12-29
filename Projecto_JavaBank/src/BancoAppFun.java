@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.Serializable;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -223,6 +224,9 @@ public class BancoAppFun implements Serializable {
 		JList lbClt = new JList(gb.javabank.listarClientes(gb.javabank.getUtlizadores()));
 		lbClt.setBounds(48, 92, 240, 441);
 		jpanelClientes.add(lbClt);
+		DefaultListModel lm  = new DefaultListModel ();
+		lm.addElement(lbClt);
+
 		
 		
 	
@@ -546,34 +550,7 @@ public class BancoAppFun implements Serializable {
 		btLevCancelar.setBounds(273, 224, 120, 38);
 		JpanelOpLevantamento.add(btLevCancelar);
 
-		// Dentro do painel gestao:
-		// coloca o painel depositos visivel:
-		cbOperacoDep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(true);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(false);
-
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnLevantamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(true);
-				JpanelOpTransferencia.setVisible(false);
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnTransferncia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(true);
-			}
-		});
+		
 		jpanelContas.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelContas);
 		jpanelContas.setLayout(null);
@@ -763,6 +740,40 @@ public class BancoAppFun implements Serializable {
 		separator_1.setBounds(483, 68, 29, 433);
 		jpanelGestao.add(separator_1);
 
+		
+		
+		//// acaba a construçao dos botoes e começa todos os metedos:
+		
+		// Dentro do painel gestao:
+				// coloca o painel depositos visivel:
+				cbOperacoDep.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JpanelOpDeposito.setVisible(true);
+						JpanelOpLevantamento.setVisible(false);
+						JpanelOpTransferencia.setVisible(false);
+
+					}
+				});
+
+				// coloca o painel depositos visivel:
+				btnLevantamento.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JpanelOpDeposito.setVisible(false);
+						JpanelOpLevantamento.setVisible(true);
+						JpanelOpTransferencia.setVisible(false);
+					}
+				});
+
+				// coloca o painel depositos visivel:
+				btnTransferncia.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JpanelOpDeposito.setVisible(false);
+						JpanelOpLevantamento.setVisible(false);
+						JpanelOpTransferencia.setVisible(true);
+					}
+				});
+		
+		
 		// Botao Menu Cliente
 		JButton btFunCliente = new JButton("Clientes");
 		btFunCliente.setBorderPainted(false);
@@ -973,6 +984,11 @@ public class BancoAppFun implements Serializable {
 				bg.clearSelection();
 				tbCltUser.setText("");
 				tbCltPass.setText("");
+				tbCltNum.setText("");
+				
+				// atualizar:
+				
+				lbClt.setModel((ListModel) lbClt);
 				
 				
 			}
@@ -986,15 +1002,18 @@ public class BancoAppFun implements Serializable {
 				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista algum elemento selecionado da lista faz um update:
 				if(lbClt.isSelectionEmpty())
 				{
-				int id=	(gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
 					// adicionar Cliente:
+					
+					// criar automaticamente o id;
+				int id=	(gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
 				if(id==0)
 				{ 
 					id++;
 				}
 				
+			
+				// valida qual dos botoes estao atualizados:
 				String opselect ="";
-				
 				if(rbCltcc.isSelected())
 				{
 					opselect = rbCltcc.getText();
@@ -1008,12 +1027,19 @@ public class BancoAppFun implements Serializable {
 					opselect = rbCltPassaporte.getText();
 				}
 				
+				
+					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
+					
+					
 				}
 				else
 				{
 					// atualizar Cliente:
+					
+					
+					
 				}
 				
 			}
@@ -1027,7 +1053,7 @@ public class BancoAppFun implements Serializable {
 						String s = (String) lbClt.getSelectedValue();
 						s= s.substring(0, s.indexOf("*"));
 						Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-						
+
 
 						tbCltNome.setText(c.getNome());
 						tbCltApelido.setText(c.getSobrenome());
@@ -1035,6 +1061,21 @@ public class BancoAppFun implements Serializable {
 						tbCltContacto.setText(""+c.getContacto());
 						tbCltUser.setText(c.getUsername());
 						tbCltPass.setText(c.getPassword());
+						tbCltNum.setText(""+c.getNumidentificacao());
+						
+						if(c.getTipoIndentificacao().equals("C.C."))
+						{
+							rbCltcc.setSelected(true);
+						}
+						if(c.getTipoIndentificacao().equals("B.I."))
+						{
+							rbCltbi.setSelected(true);
+						}
+						if(c.getTipoIndentificacao().equals("Passaporte"))
+						{
+							rbCltPassaporte.setSelected(true);
+						}
+						
 						
 						}
 					}
