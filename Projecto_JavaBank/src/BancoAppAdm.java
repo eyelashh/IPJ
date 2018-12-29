@@ -865,14 +865,16 @@ public class BancoAppAdm implements Serializable {
 					}
 
 					// esta a ser criar o novo funcionario:
-					Utilizador clt = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+					Utilizador func = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
 							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
 							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
 							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
-					gb.javabank.getUtlizadores().add(clt);
+					gb.javabank.getUtlizadores().add(func);
 
 				} else {
 					// atualizar Cliente:
+					
+					
 
 				}
 
