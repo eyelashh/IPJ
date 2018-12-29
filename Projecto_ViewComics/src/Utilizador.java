@@ -1,10 +1,9 @@
 import java.io.Serializable;
 
-<<<<<<< HEAD
+
 public class Utilizador implements  Serializable {
-=======
-public class Utilizador implements Serializable{
->>>>>>> 3ea67d82b688c95db771c172bd92334c7496bfa5
+
+
 
 	private int id;
 	private String nome;

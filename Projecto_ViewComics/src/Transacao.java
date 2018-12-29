@@ -1,11 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
-<<<<<<< HEAD
 public class Transacao implements  Serializable {
-=======
-public class Transacao implements Serializable{
->>>>>>> 3ea67d82b688c95db771c172bd92334c7496bfa5
+
 
 	private String tipoTrasacao;
 	private LocalDate data;
