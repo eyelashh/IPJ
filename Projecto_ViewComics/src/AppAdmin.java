@@ -24,7 +24,7 @@ import javax.swing.JList;
 
 public class AppAdmin implements Serializable {
 	
-	//atributos 
+	//atributos ssss
 
 	private JFrame frame;
 	private JPanel jpAdmFuncionarios;
