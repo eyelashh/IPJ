@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 
 import java.awt.Font;
 import javax.swing.JPasswordField;
+import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -239,7 +240,13 @@ public class AppAdmin implements Serializable {
 		txtAtributoPesquisaLivro.setColumns(10);
 
 		//indicar o parâmetro da lista neste caso String
-		JList<String> listaLivros = new JList <String>();
+//		String [] listaTeste2 = {"a","b","c"};
+//		DefaultListModel listModel = new DefaultListModel();
+//		
+//		
+//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+//		JList listaLivros = new JList (ArrayLivros);
+		JList listaLivros = new JList ();
 		listaLivros.setBounds(22, 111, 190, 395);
 		jpAdmLivros.add(listaLivros);
 

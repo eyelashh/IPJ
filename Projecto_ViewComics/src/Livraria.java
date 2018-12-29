@@ -276,27 +276,34 @@ public class Livraria implements Serializable {
 	// util para dispor na lista
 
 	// POR TITULO
+	public String[] listaLivros(ArrayList<Livro>livros) {
+
+		String t = "";
+		String[] listaTitulo = new String[this.livros.size()];
+		int i = 0;
+		for (Livro l : livros) {
+			listaTitulo[i] = l.toString();
+			i++;
+
+		}
+
+		return listaTitulo;
+	}
+
 	public String[] listaTitulo(String titulo) {
 
-		int cnt = 0;
+		ArrayList<String> listaT = new ArrayList();
+		String t = "";
 		for (Livro l : this.livros) {
-
 			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
-				cnt++;
-			}
-		}
-		String[] listaTituloArray = new String[cnt];
-		int i=0;
-
-		for (Livro l : this.livros) {
-
-			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
-				listaTituloArray[i] = l.getTitulo();
-				i++;
+				t = "" + l.getIdLivro() + "|" + l.getTitulo();
+				listaT.add(t);
 
 			}
+			t = "";
 		}
-		return listaTituloArray;
+		String[] listaTitulo = new String[listaT.size()];
+		return listaTitulo;
 	}
 
 	// POR AUTOR
@@ -312,7 +319,7 @@ public class Livraria implements Serializable {
 		return listaAutor;
 	}
 
-//POR ID
+	// POR ID
 	public ArrayList listaData(int id) {
 
 		ArrayList<Livro> listaId = new ArrayList();
