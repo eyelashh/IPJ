@@ -1002,7 +1002,7 @@ public class BancoAppFun implements Serializable {
 				}
 				if(rbCltPassaporte.isSelected())
 				{
-					opselect = rbCltPassaporte.getText();vi3..bg..bg..bg.
+					opselect = rbCltPassaporte.getText();
 				}
 					String s= new String (tbCltPass.getPassword());
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),s);
