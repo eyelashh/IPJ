@@ -21,6 +21,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -60,7 +62,7 @@ public class AppAdmin implements Serializable {
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
 
-	private static Utilizador admin;
+	private static Administrador admin;
 	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
 
@@ -81,9 +83,9 @@ public class AppAdmin implements Serializable {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin(Utilizador admin, GestaoLivraria gl) {
+	public AppAdmin(Administrador a, GestaoLivraria gl) {
 		initialize();
-		this.admin = admin;
+		this.admin = a;
 		this.gl = gl;
 	}
 
@@ -92,6 +94,12 @@ public class AppAdmin implements Serializable {
 	 */
 	protected void initialize() {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
+			}
+		});
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -125,7 +133,6 @@ public class AppAdmin implements Serializable {
 
 		JButton btnLogOut = new JButton("LogOut");
 		btnLogOut.setBounds(1138, 54, 89, 23);
-
 		btnLogOut.setBackground(SystemColor.controlHighlight);
 		panelcabecalho.add(btnLogOut);
 
@@ -240,12 +247,12 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
-		//indicar o parâmetro da lista neste caso String
+		//indicar o parï¿½metro da lista neste caso String
 //		String [] listaTeste2 = {"a","b","c"};
 //		DefaultListModel listModel = new DefaultListModel();
 //		
 //		
-		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
 		//JList listaLivros = new JList (ArrayLivros);
 		JList listaLivros = new JList ();
 		listaLivros.setBounds(22, 150, 190, 395);
@@ -688,6 +695,8 @@ public class AppAdmin implements Serializable {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
+				
 				AppCliente clt = new AppCliente();
 				clt.run();
 				frame.setVisible(false);
@@ -815,10 +824,10 @@ public class AppAdmin implements Serializable {
 
 		// LIVROS
 
-		comboBoxAtributoLivro.addItem("Título");
+		comboBoxAtributoLivro.addItem("Tï¿½tulo");
 		comboBoxAtributoLivro.addItem("Autor");
-		comboBoxAtributoLivro.addItem("Data de lançamento");
-		//só posso seleccionar um elemento da lista
+		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
+		//sï¿½ posso seleccionar um elemento da lista
 		
 		
 		
@@ -828,7 +837,7 @@ public class AppAdmin implements Serializable {
 		    listaLivros.setSelectionModel(m);
 		    
 		    txtTESTE = new JTextField();
-		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo());
+		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
 		    txtTESTE.setBounds(22, 98, 86, 20);
 		    jpAdmLivros.add(txtTESTE);
 		    txtTESTE.setColumns(10);
@@ -840,7 +849,7 @@ public class AppAdmin implements Serializable {
 				listaLivros.setListData( listaTeste);
 				
 				
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
+//				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
 //					String titulo = txtAtributoPesquisaLivro.getText();
 //					
 //					String [] listaT=gl.getViewComics().listaTitulo(titulo);
@@ -852,7 +861,7 @@ public class AppAdmin implements Serializable {
 //					
 //
 //				}
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Data de lançamento")) {
+//				if (comboBoxAtributoLivro.getSelectedItem().equals("Data de lanï¿½amento")) {
 //
 //				}
 //

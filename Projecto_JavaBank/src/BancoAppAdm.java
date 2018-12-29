@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JSeparator;
 import java.awt.Component;
 import javax.swing.SwingConstants;
@@ -252,11 +253,6 @@ public class BancoAppAdm implements Serializable{
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
-		rbAdmFunCC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		rbAdmFunCC.setBounds(564, 212, 66, 25);
 		JPAdmFuncionario.add(rbAdmFunCC);
@@ -361,21 +357,6 @@ public class BancoAppAdm implements Serializable{
 
 		// botao confirmar funcionario
 		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
-		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				Utilizador func = new Utilizador();
-
-				func.setNome(textAdmFunNome.getText());
-				func.setSobrenome(textAdmFunSobrenome.getText());
-				func.setDataDeNascimento(dateChooser.getDate());
-
-				// experimentar
-				if (rbAdmFunCC.isSelected())
-					func.setTipoIndentificacao("C.C.");
-
-			}
-		});
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnAdmFunConfirmar_1.setBounds(611, 512, 120, 38);
 		JPAdmFuncionario.add(btnAdmFunConfirmar_1);
@@ -833,7 +814,113 @@ public class BancoAppAdm implements Serializable{
 				btAdmGestao.setBackground(new Color(65, 106, 105));
 			}
 		});
-		
+
+		//acao do botao novo:
+		btAdmFunNovo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						
+						textAdmFunNome.setText(null);
+						textAdmFunSobrenome.setText(null);
+						textAdmFunContato.setText(null);
+						textAdmFunMorada.setText(null);
+						bg.clearSelection();
+						textAdmFunNumero.setText(null);
+						textAdmFunPass.setText(null);
+						textAdmFunUser.setText(null);
+						dateChooser.setCalendar(null);
+			
+						
+						
+					}
+				});
+				
+				
+				// bt confirmar (adicionar ou alterar )
+		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista algum elemento selecionado da lista faz um update:
+						if(!lbLAdmFunLista.isSelectionEmpty())
+						{
+							// adicionar Cliente:
+							
+							// criar automaticamente o id;
+						int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
+						if(id==0)
+						{ 
+							id++;
+						}
+						
+					
+						// valida qual dos botoes estao atualizados:
+						String opselect ="";
+						if(rbAdmFunCC.isSelected())
+						{
+							opselect = rbAdmFunCC.getText();
+						}
+						if(rbAdmFunBI.isSelected())
+						{
+							opselect = rbAdmFunBI.getText();
+						}
+						if(rbAdmFunPass.isSelected())
+						{
+							opselect = rbAdmFunPass.getText();
+						}
+						
+						
+							// esta a ser criar o novo funcionario:
+							Utilizador clt = new Funcionario(id,textAdmFunNome.getText(),textAdmFunSobrenome.getText(),dateChooser.getDate(),opselect, Integer.parseInt(textAdmFunNumero.getText()),textAdmFunMorada.getText(),Integer.parseInt(textAdmFunContato.getText()),textAdmFunUser.getText(),textAdmFunPass.getText(),id);
+							gb.javabank.getUtlizadores().add(clt);
+							
+							
+						}
+						else
+						{
+							// atualizar Cliente:
+							
+							
+							
+						}
+						
+					}
+				});
+				
+				// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+						lbClt.addListSelectionListener(new ListSelectionListener() {
+							public void valueChanged(ListSelectionEvent e) {
+								if(!lbClt.isSelectionEmpty())
+								{
+								String s = (String) lbClt.getSelectedValue();
+								s= s.substring(0, s.indexOf("*"));
+								Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
+
+								tbCltNome.setText(c.getNome());
+								tbCltApelido.setText(c.getSobrenome());
+								tbCltMorada.setText(c.getMorada());
+								tbCltContacto.setText(""+c.getContacto());
+								tbCltUser.setText(c.getUsername());
+								tbCltPass.setText(c.getPassword());
+								tbCltNum.setText(""+c.getNumidentificacao());
+								
+								if(c.getTipoIndentificacao().equals("C.C."))
+								{
+									rbCltcc.setSelected(true);
+								}
+								if(c.getTipoIndentificacao().equals("B.I."))
+								{
+									rbCltbi.setSelected(true);
+								}
+								if(c.getTipoIndentificacao().equals("Passaporte"))
+								{
+									rbCltPassaporte.setSelected(true);
+								}
+								
+								
+								}
+							}
+						});
 		
 //		btAdmFunProc.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
