@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Livro {
+public class Livro implements Serializable{
 
 	private int idLivro;
 	private String titulo;

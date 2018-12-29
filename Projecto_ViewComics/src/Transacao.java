@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Transacao {
+public class Transacao implements Serializable{
 
 	private String tipoTrasacao;
 	private LocalDate data;
