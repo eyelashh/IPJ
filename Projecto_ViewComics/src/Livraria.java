@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
-
-public class Livraria implements Serializable{
+public class Livraria implements Serializable {
 
 	private int idLivraria;
 	private String nome;
@@ -15,8 +13,7 @@ public class Livraria implements Serializable{
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
-	//criar um atributo privado estático que é da própria classe
-
+	// criar um atributo privado estático que é da própria classe
 
 	public Livraria() {
 		super();
@@ -27,8 +24,7 @@ public class Livraria implements Serializable{
 		this.carrinhos = new ArrayList<Carrinho>();
 
 	}
-	
-	
+
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
 			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos) {
 		super();
@@ -41,9 +37,7 @@ public class Livraria implements Serializable{
 		this.carrinhos = carrinhos;
 	}
 
-
-	//criar método estático para retornar a instância da classe
-	
+	// criar método estático para retornar a instância da classe
 
 	public int getIdLivraria() {
 		return idLivraria;
@@ -224,7 +218,7 @@ public class Livraria implements Serializable{
 
 		for (Utilizador u : this.utilizadores) {
 			String userEntrada = u.getUsername();
-			String passEntrada=u.getPassword();
+			String passEntrada = u.getPassword();
 			if ((userEntrada.equals(username)) && (passEntrada.equals(password))) {
 				dadosCorrectos = true;
 			}
@@ -232,15 +226,16 @@ public class Livraria implements Serializable{
 		return dadosCorrectos;
 
 	}
-public Utilizador loggado(String username, String password) {
-		
-		Utilizador u_log=new Utilizador();
-		
-		for(Utilizador u: this.utilizadores) {
-			String usernameIN=u.getUsername();
-			String passIN=u.getPassword();
-			if ((usernameIN.equals(username))&&(passIN.equals(password))){
-				u_log=u;
+
+	public Utilizador loggado(String username, String password) {
+
+		Utilizador u_log = new Utilizador();
+
+		for (Utilizador u : this.utilizadores) {
+			String usernameIN = u.getUsername();
+			String passIN = u.getPassword();
+			if ((usernameIN.equals(username)) && (passIN.equals(password))) {
+				u_log = u;
 			}
 		}
 		return u_log;
@@ -261,6 +256,7 @@ public Utilizador loggado(String username, String password) {
 		}
 		return usernameAlterado;
 	}
+
 	public boolean alterarPassword(int idFuncionario, String novaPassword) {
 
 		boolean passwordAlterada = false;
@@ -275,4 +271,58 @@ public Utilizador loggado(String username, String password) {
 		}
 		return passwordAlterada;
 	}
+	// DISPOR LIVROS NA LISTA POR ARRAYLISTS
+	// criar uma nova arraylist de livros consoante vários atributos
+	// util para dispor na lista
+
+	// POR TITULO
+	public String[] listaTitulo(String titulo) {
+
+		int cnt = 0;
+		for (Livro l : this.livros) {
+
+			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+				cnt++;
+			}
+		}
+		String[] listaTituloArray = new String[cnt];
+		int i=0;
+
+		for (Livro l : this.livros) {
+
+			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+				listaTituloArray[i] = l.getTitulo();
+				i++;
+
+			}
+		}
+		return listaTituloArray;
+	}
+
+	// POR AUTOR
+	public ArrayList listaAutor(String autor) {
+
+		ArrayList<Livro> listaAutor = new ArrayList();
+		for (Livro l : this.livros) {
+			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+				listaAutor.add(l);
+
+			}
+		}
+		return listaAutor;
+	}
+
+//POR ID
+	public ArrayList listaData(int id) {
+
+		ArrayList<Livro> listaId = new ArrayList();
+		for (Livro l : this.livros) {
+			if (l.getIdLivro() == id) {
+				listaId.add(l);
+
+			}
+		}
+		return listaId;
+	}
+
 }
