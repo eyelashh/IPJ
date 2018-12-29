@@ -121,16 +121,42 @@ public class Banco implements Serializable {
 		return u_log;
 	}
 
-	// 
-	public ArrayList<Utilizador> getClientes() {
-
-		ArrayList<Utilizador> clt = new ArrayList();
-		for (Utilizador u : this.utilizadores) {
-			if (u instanceof Cliente) {
-				clt.add(u);
+	
+	
+	// isto lista todos os nomes e numeros dos clientes numa arraylist de Strings para ser recebido nas listas de clientes!
+	protected String[] listarClientes(ArrayList<Utilizador> fun)
+	{
+		ArrayList<String> clts=new ArrayList<String>();
+		String s = "";
+		for(int i=0; i<fun.size();i++)
+		{
+			if(fun.get(i) instanceof Cliente)
+			{
+				s = fun.get(i).getIdUtilizador()+"*"+ fun.get(i).getNome();
+				clts.add(s);
+			}
+			s=null;	
+		}
+		
+		String[] clientes = new String[clts.size()];
+		clientes = clts.toArray(clientes);
+		
+		return clientes;
+	}
+	
+	// metedo que retorna um cliente recebendo o seu id;
+	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list)
+	{
+		Utilizador u= new Utilizador();
+		
+		for(int i=0; i<list.size();i++)
+		{
+			if(list.get(i).getIdUtilizador()==numUtil)
+			{
+				u = list.get(i);
 			}
 		}
-		return clt;
+		return u;
 	}
 
 }

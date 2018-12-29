@@ -56,21 +56,17 @@ public class Login extends JDialog implements Serializable{
 						boolean v = gb.javabank.verificarUserPass(user, pass);
 						
 						if (v) {
-							System.out.println("Teste v");
 							if(logado instanceof Funcionario) {	
-								System.out.println("Teste fun");
 							BancoAppFun fun = new BancoAppFun((Funcionario)logado,gb);
 							fun.run();
 							dispose();
 							
 						}if (logado instanceof Administrador) {
-							System.out.println("Teste adm");
 							BancoAppAdm adm = new BancoAppAdm((Administrador)logado,gb);
 							adm.run();
 							dispose();
 							
 						}if(logado instanceof Cliente) {
-							System.out.println("Teste clt");
 							BancoAppClt clt = new BancoAppClt((Cliente)logado,gb);
 							clt.run();
 							dispose();

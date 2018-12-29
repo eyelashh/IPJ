@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Funcionario extends Utilizador implements Serializable {
@@ -21,6 +22,17 @@ public class Funcionario extends Utilizador implements Serializable {
 		this.idFuncionario = idFuncionario;
 	}
 	
+	protected String[] listar(ArrayList<Funcionario> fun)
+	{
+		String[] f=new String[fun.size()];
+		String s = "";
+		for(int i=0; i<f.length;i++)
+		{
+			s = fun.get(i).getIdUtilizador()+" * "+ fun.get(i).getNome();
+			f[i]=s;
+		}
+		return f;
+	}
 	
 	
 	
