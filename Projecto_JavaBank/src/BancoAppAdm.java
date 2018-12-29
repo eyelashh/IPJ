@@ -291,11 +291,11 @@ public class BancoAppAdm implements Serializable {
 		JPAdmFuncionario.add(scrollAdmFunLista);
 
 		// lista dos funcionarios
-		JList lbLAdmFunLista = new JList(gb.javabank.listaFunc(gb.javabank.getUtlizadores()));
+		DefaultListModel<String> dmFun = new DefaultListModel<String>();
+		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
 		lbLAdmFunLista.setBounds(123, 122, 249, 428);
+		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
 		JPAdmFuncionario.add(lbLAdmFunLista);
-		DefaultListModel lm = new DefaultListModel();
-		lm.addElement(lbLAdmFunLista);
 
 		// texto : username
 		JLabel lblAdmFunUsername = new JLabel("UserName:");
@@ -837,7 +837,7 @@ public class BancoAppAdm implements Serializable {
 
 				// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista
 				// algum elemento selecionado da lista faz um update:
-				if (!lbLAdmFunLista.isSelectionEmpty()) {
+				if (lbLAdmFunLista.isSelectionEmpty()) {
 					// adicionar Cliente:
 
 					// criar automaticamente o id;
@@ -871,25 +871,37 @@ public class BancoAppAdm implements Serializable {
 							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
 					gb.javabank.getUtlizadores().add(func);
 
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+					// isto � para eleminar:
+					textAdmFunNome.setText(null);
+					textAdmFunSobrenome.setText(null);
+					textAdmFunContato.setText(null);
+					textAdmFunMorada.setText(null);
+					bg.clearSelection();
+					textAdmFunNumero.setText(null);
+					textAdmFunPass.setText(null);
+					textAdmFunUser.setText(null);
+					dateChooser.setCalendar(null);
+
 				} else {
 					// atualizar Cliente:
-					
-				
 
 				}
 
 			}
 		});
-		
-		
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
 
 		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
+				bg.clearSelection();
 				if (!lbLAdmFunLista.isSelectionEmpty()) {
-					
+
 					String s = (String) lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
@@ -917,6 +929,5 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 
-		
 	}
 }
