@@ -880,7 +880,7 @@ public class BancoAppAdm implements Serializable {
 		});
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-		lbClt.addListSelectionListener(new ListSelectionListener() {
+		/*lbClt.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!lbClt.isSelectionEmpty()) {
 					String s = (String) lbClt.getSelectedValue();
@@ -908,7 +908,7 @@ public class BancoAppAdm implements Serializable {
 
 				}
 			}
-		});
+		});*/
 
 //		btAdmFunProc.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {

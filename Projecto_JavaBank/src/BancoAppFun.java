@@ -94,6 +94,7 @@ public class BancoAppFun implements Serializable {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
 		frame.addWindowListener(new WindowAdapter() {
@@ -220,13 +221,14 @@ public class BancoAppFun implements Serializable {
 		scrollBar_2.setBounds(273, 92, 15, 441);
 		jpanelClientes.add(scrollBar_2);
 
-		
-		JList lbClt = new JList(gb.javabank.listarClientes(gb.javabank.getUtlizadores()));
+		// lista de clientes;
+		DefaultListModel<String> dmclt = new DefaultListModel<String>();
+		JList<String> lbClt = new JList<String>(dmclt);
 		lbClt.setBounds(48, 92, 240, 441);
+		addelementoslistcliente(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),dmclt);
 		jpanelClientes.add(lbClt);
-		DefaultListModel lm  = new DefaultListModel ();
-		lm.addElement(lbClt);
-
+		
+		
 		
 		
 	
@@ -309,11 +311,11 @@ public class BancoAppFun implements Serializable {
 		JList lbCltConta = new JList();
 		lbCltConta.setBounds(780, 92, 240, 441);
 		jpanelClientes.add(lbCltConta);
+		
 
 	
 
 		JButton btCltNovo = new JButton("Novo");
-		
 		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltNovo.setBounds(467, 22, 120, 38);
 		jpanelClientes.add(btCltNovo);
@@ -347,8 +349,6 @@ public class BancoAppFun implements Serializable {
 		rbCltPassaporte.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		rbCltPassaporte.setBounds(594, 196, 138, 25);
 		jpanelClientes.add(rbCltPassaporte);
-		
-		// rbCltcc , rbCltbi, rbCltPassaporte 
 		
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(rbCltcc);
@@ -1034,6 +1034,22 @@ public class BancoAppFun implements Serializable {
 					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
+					dmclt.removeAllElements();
+					addelementoslistcliente(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),dmclt);
+					
+					// isto é para eleminar:
+					lbClt.clearSelection();
+					lbCltConta.clearSelection();
+					tbCltNome.setText("");
+					tbCltApelido.setText("");
+					dateChooser_3.setCalendar(null);
+					tbCltMorada.setText(null);
+					tbCltContacto.setText(null);
+					bg.clearSelection();
+					tbCltUser.setText("");
+					tbCltPass.setText("");
+					tbCltNum.setText("");
+					
 					
 				}
 				else
@@ -1082,7 +1098,13 @@ public class BancoAppFun implements Serializable {
 						}
 					}
 				});
-		
-		
+	}
+	
+	protected void addelementoslistcliente(String[] s,DefaultListModel<String> dm)
+	{
+		for(int i=0; i<s.length;i++)
+		{
+			dm.addElement(s[i]);
+		}
 	}
 }
