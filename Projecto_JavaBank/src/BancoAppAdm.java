@@ -864,7 +864,7 @@ public class BancoAppAdm implements Serializable {
 						opselect = rbAdmFunPass.getText();
 					}
 
-					// esta a ser criar o novo funcionario:
+					// esta a criar o novo funcionario:
 					Utilizador func = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
 							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
 							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
@@ -882,10 +882,7 @@ public class BancoAppAdm implements Serializable {
 		});
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		/*lbClt.addListSelectionListener(new ListSelectionListener() {
 
 		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
