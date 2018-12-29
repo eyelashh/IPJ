@@ -154,7 +154,7 @@ public class Banco implements Serializable {
 			{
 				if(fun.get(i) instanceof Funcionario)
 				{
-					f = fun.get(i).getIdUtilizador()+" - "+ fun.get(i).getNome();
+					f = fun.get(i).getIdUtilizador()+" "+ fun.get(i).getNome();
 					func.add(f);
 				}
 				f=null;	
@@ -166,7 +166,7 @@ public class Banco implements Serializable {
 			return funcionario;
 		}
 	
-	// metedo que retorna um cliente recebendo o seu id;
+	// metedo que retorna um utilizador qualquer recebendo o seu id;
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list)
 	{
 		Utilizador u= new Utilizador();

@@ -882,30 +882,31 @@ public class BancoAppAdm implements Serializable {
 		});
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-		lbClt.addListSelectionListener(new ListSelectionListener() {
+		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				if (!lbClt.isSelectionEmpty()) {
-					String s = (String) lbClt.getSelectedValue();
-					s = s.substring(0, s.indexOf("*"));
-					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
+				if (!lbLAdmFunLista.isSelectionEmpty()) {
+					
+					String s = (String) lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
 							gb.javabank.getUtlizadores());
 
-					tbCltNome.setText(c.getNome());
-					tbCltApelido.setText(c.getSobrenome());
-					tbCltMorada.setText(c.getMorada());
-					tbCltContacto.setText("" + c.getContacto());
-					tbCltUser.setText(c.getUsername());
-					tbCltPass.setText(c.getPassword());
-					tbCltNum.setText("" + c.getNumidentificacao());
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText("" + f.getContacto());
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
 
-					if (c.getTipoIndentificacao().equals("C.C.")) {
-						rbCltcc.setSelected(true);
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
 					}
-					if (c.getTipoIndentificacao().equals("B.I.")) {
-						rbCltbi.setSelected(true);
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
 					}
-					if (c.getTipoIndentificacao().equals("Passaporte")) {
-						rbCltPassaporte.setSelected(true);
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
 					}
 
 				}
