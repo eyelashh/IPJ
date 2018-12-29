@@ -63,7 +63,7 @@ public class AppAdmin implements Serializable {
 	private JTextField txtPassFunc;
 
 	private static Utilizador admin;
-	private GestaoLivraria gl;
+	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
 
 	/**
@@ -116,10 +116,7 @@ public class AppAdmin implements Serializable {
 		Paineltotal.add(panelcabecalho);
 		panelcabecalho.setLayout(null);
 
-		JLabel label_6 = new JLabel() {
-			protected void paintComponent(Graphics g) {
-			}
-		};
+		JLabel label_6 = new JLabel(); 
 		label_6.setBounds(96, 67, 0, 0);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Papyrus", Font.BOLD, 46));
@@ -242,14 +239,14 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpAdmLivros.add(comboBoxAtributoLivro);
 
-		txtAtributoPesquisaLivro = new JTextField();
-
-		String a = gl.viewComics.getLivros().get(0).getTitulo();
-		txtAtributoPesquisaLivro.setText(a);
-
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpAdmLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
+//		txtAtributoPesquisaLivro = new JTextField();
+//
+//		String a = gl.viewComics.getLivros().get(0).getTitulo();
+//		txtAtributoPesquisaLivro.setText(a);
+//
+//		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+//		jpAdmLivros.add(txtAtributoPesquisaLivro);
+//		txtAtributoPesquisaLivro.setColumns(10);
 
 
 //		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
@@ -258,8 +255,7 @@ public class AppAdmin implements Serializable {
 
 //		//JList listaLivros = new JList (ArrayLivros);
 
-		JList listaLivros = new JList ();
-
+		JList <String>listaLivros = new JList <String> ();
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
@@ -846,17 +842,17 @@ public class AppAdmin implements Serializable {
 //		
 		
 		
-		 DefaultListSelectionModel m = new DefaultListSelectionModel();
-		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		    m.setLeadAnchorNotificationEnabled(false);
-		    listaLivros.setSelectionModel(m);
-		    
-
-		    txtTESTE = new JTextField();
-		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
-		    txtTESTE.setBounds(22, 98, 86, 20);
-		    jpAdmLivros.add(txtTESTE);
-		    txtTESTE.setColumns(10);
+//		 DefaultListSelectionModel m = new DefaultListSelectionModel();
+//		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		    m.setLeadAnchorNotificationEnabled(false);
+//		    listaLivros.setSelectionModel(m);
+//		    
+//
+//		    txtTESTE = new JTextField();
+//		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
+//		    txtTESTE.setBounds(22, 98, 86, 20);
+//		    jpAdmLivros.add(txtTESTE);
+//		    txtTESTE.setColumns(10);
 
 //>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
 ////		    txtTESTE = new JTextField();
