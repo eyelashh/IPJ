@@ -1,7 +1,8 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Sessao implements Serializable{
+
+public class Sessao implements  Serializable {
 
 	private int idSessao;
 	private LocalDate horaAbertura;
