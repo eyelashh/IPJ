@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+
 public class Banco implements Serializable {
 	private int idBanco;
 	private String nome;
@@ -154,7 +156,7 @@ public class Banco implements Serializable {
 			{
 				if(fun.get(i) instanceof Funcionario)
 				{
-					f = fun.get(i).getIdUtilizador()+" - "+ fun.get(i).getNome();
+					f = fun.get(i).getIdUtilizador()+" "+ fun.get(i).getNome();
 					func.add(f);
 				}
 				f=null;	
@@ -166,7 +168,7 @@ public class Banco implements Serializable {
 			return funcionario;
 		}
 	
-	// metedo que retorna um cliente recebendo o seu id;
+	// metedo que retorna um utilizador qualquer recebendo o seu id;
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list)
 	{
 		Utilizador u= new Utilizador();
@@ -179,6 +181,14 @@ public class Banco implements Serializable {
 			}
 		}
 		return u;
+	}
+	 // este metedo recebe o modelo da lista e o array e adiciona os elementos para a lista:
+	protected void addelementoslist(String[] s,DefaultListModel<String> dm)
+	{
+		for(int i=0; i<s.length;i++)
+		{
+			dm.addElement(s[i]);
+		}
 	}
 
 }
