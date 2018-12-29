@@ -62,6 +62,7 @@ public class AppAdmin implements Serializable {
 
 	private static Utilizador admin;
 	private static GestaoLivraria gl;
+	private JTextField txtTESTE;
 
 	/**
 	 * Launch the application.
@@ -244,10 +245,10 @@ public class AppAdmin implements Serializable {
 //		DefaultListModel listModel = new DefaultListModel();
 //		
 //		
-//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-//		JList listaLivros = new JList (ArrayLivros);
+		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
+		//JList listaLivros = new JList (ArrayLivros);
 		JList listaLivros = new JList ();
-		listaLivros.setBounds(22, 111, 190, 395);
+		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
@@ -825,6 +826,12 @@ public class AppAdmin implements Serializable {
 		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		    m.setLeadAnchorNotificationEnabled(false);
 		    listaLivros.setSelectionModel(m);
+		    
+		    txtTESTE = new JTextField();
+		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo());
+		    txtTESTE.setBounds(22, 98, 86, 20);
+		    jpAdmLivros.add(txtTESTE);
+		    txtTESTE.setColumns(10);
 
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
