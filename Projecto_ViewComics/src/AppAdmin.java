@@ -252,6 +252,7 @@ public class AppAdmin implements Serializable {
 		txtAtributoPesquisaLivro.setColumns(10);
 
 
+<<<<<<< HEAD
 		// indicar o parï¿½metro da lista neste caso String
 
 		//indicar o parï¿½metro da lista neste caso String
@@ -265,6 +266,8 @@ public class AppAdmin implements Serializable {
 		JList listaLivros = new JList(ArrayLivros);
 		// JList listaLivros = new JList ();
 
+=======
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 //		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
 
 		//JList listaLivros = new JList (ArrayLivros);
@@ -841,6 +844,7 @@ public class AppAdmin implements Serializable {
 		// FUNCIONALIDADES DOS DIFERENTES SEPARADORES
 
 		// LIVROS
+<<<<<<< HEAD
 
 		comboBoxAtributoLivro.addItem("Tï¿½tulo");
 		comboBoxAtributoLivro.addItem("Autor");
@@ -857,6 +861,24 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
 		//sï¿½ posso seleccionar um elemento da lista
 		
+=======
+//
+//		comboBoxAtributoLivro.addItem("Tï¿½tulo");
+//		comboBoxAtributoLivro.addItem("Autor");
+//<<<<<<< HEAD
+//		comboBoxAtributoLivro.addItem("Data de lançamento");
+//		// só posso seleccionar um elemento da lista
+//
+//		DefaultListSelectionModel m = new DefaultListSelectionModel();
+//		m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		m.setLeadAnchorNotificationEnabled(false);
+//		listaLivros.setSelectionModel(m);
+//
+//=======
+//		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
+//		//sï¿½ posso seleccionar um elemento da lista
+//		
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		
 		
 		 DefaultListSelectionModel m = new DefaultListSelectionModel();
@@ -871,8 +893,13 @@ public class AppAdmin implements Serializable {
 		    jpAdmLivros.add(txtTESTE);
 		    txtTESTE.setColumns(10);
 
+<<<<<<< HEAD
 
 //		    txtTESTE = new JTextField();
+=======
+//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
+////		    txtTESTE = new JTextField();
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 //		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
 //		    System.out.println(titulo);
 //		    txtTESTE.setText(titulo);
@@ -881,6 +908,7 @@ public class AppAdmin implements Serializable {
 //		    txtTESTE.setColumns(10);
 
 
+<<<<<<< HEAD
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -900,7 +928,29 @@ public class AppAdmin implements Serializable {
 //					
 //					String [] listaT=gl.getViewComics().listaTitulo(titulo);
 //					
+=======
+//		btnPesquisarLivro.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 //
+//				String[] listaTeste = { "a", "b", "c" };
+//				listaLivros.setListData(listaTeste);
+//
+////				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
+//=======
+//				
+//				String [] listaTeste = {"a","b","c"};
+//				listaLivros.setListData( listaTeste);
+//				
+//				
+////				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
+//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
+////					String titulo = txtAtributoPesquisaLivro.getText();
+////					
+////					String [] listaT=gl.getViewComics().listaTitulo(titulo);
+////					
+////
 //				}
 //				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
 //					
@@ -911,8 +961,8 @@ public class AppAdmin implements Serializable {
 //
 //				}
 //
-			}
-		});
+//			}
+//		});
 
 	}
 }
