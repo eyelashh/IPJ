@@ -279,15 +279,15 @@ public class Livraria implements Serializable {
 	public String[] listaLivros(ArrayList<Livro>livros) {
 
 		String t = "";
-		String[] listaTitulo = new String[this.livros.size()];
+		String[] listaLivros = new String[this.livros.size()];
 		int i = 0;
 		for (Livro l : livros) {
-			listaTitulo[i] = l.toString();
+			listaLivros[i] = l.toString();
 			i++;
 
 		}
 
-		return listaTitulo;
+		return listaLivros;
 	}
 
 	public String[] listaTitulo(String titulo) {
@@ -303,19 +303,27 @@ public class Livraria implements Serializable {
 			t = "";
 		}
 		String[] listaTitulo = new String[listaT.size()];
+		listaTitulo=listaT.toArray(listaTitulo);
+		
 		return listaTitulo;
 	}
 
 	// POR AUTOR
-	public ArrayList listaAutor(String autor) {
+	public String [] listaAutor(String autor) {
 
-		ArrayList<Livro> listaAutor = new ArrayList();
+		ArrayList<String> listaA = new ArrayList();
+		String a = "";
 		for (Livro l : this.livros) {
 			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
-				listaAutor.add(l);
+				a = "" + l.getIdLivro() + "|" + l.getAutor();
+				listaA.add(a);
 
 			}
+			a = "";
 		}
+		String[] listaAutor = new String[listaA.size()];
+		listaAutor=listaA.toArray(listaAutor);
+		
 		return listaAutor;
 	}
 

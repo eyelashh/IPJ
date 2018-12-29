@@ -97,7 +97,8 @@ public class AppAdmin implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
+						gl.getViewComics().getLivros());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -116,7 +117,7 @@ public class AppAdmin implements Serializable {
 		Paineltotal.add(panelcabecalho);
 		panelcabecalho.setLayout(null);
 
-		JLabel label_6 = new JLabel(); 
+		JLabel label_6 = new JLabel();
 		label_6.setBounds(96, 67, 0, 0);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Papyrus", Font.BOLD, 46));
@@ -239,23 +240,9 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpAdmLivros.add(comboBoxAtributoLivro);
 
-//		txtAtributoPesquisaLivro = new JTextField();
-//
-//		String a = gl.viewComics.getLivros().get(0).getTitulo();
-//		txtAtributoPesquisaLivro.setText(a);
-//
-//		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-//		jpAdmLivros.add(txtAtributoPesquisaLivro);
-//		txtAtributoPesquisaLivro.setColumns(10);
 
 
-//		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-
-		//JList listaLivros = new JList (ArrayLivros);
-
-//		//JList listaLivros = new JList (ArrayLivros);
-
-		JList <String>listaLivros = new JList <String> ();
+		JList<String> listaLivros = new JList<String>();
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
 
@@ -696,8 +683,9 @@ public class AppAdmin implements Serializable {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(),gl.getViewComics().getCarrinhos(), gl.getViewComics().getLivros());
-				
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
+						gl.getViewComics().getLivros());
+
 				AppCliente clt = new AppCliente();
 				clt.run();
 				frame.setVisible(false);
@@ -824,79 +812,24 @@ public class AppAdmin implements Serializable {
 		// FUNCIONALIDADES DOS DIFERENTES SEPARADORES
 
 		// LIVROS
-//
-//		comboBoxAtributoLivro.addItem("Tï¿½tulo");
-//		comboBoxAtributoLivro.addItem("Autor");
-//<<<<<<< HEAD
-//		comboBoxAtributoLivro.addItem("Data de lançamento");
-//		// só posso seleccionar um elemento da lista
-//
-//		DefaultListSelectionModel m = new DefaultListSelectionModel();
-//		m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		m.setLeadAnchorNotificationEnabled(false);
-//		listaLivros.setSelectionModel(m);
-//
-//=======
-//		comboBoxAtributoLivro.addItem("Data de lanï¿½amento");
-//		//sï¿½ posso seleccionar um elemento da lista
-//		
-		
-		
-//		 DefaultListSelectionModel m = new DefaultListSelectionModel();
-//		    m.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		    m.setLeadAnchorNotificationEnabled(false);
-//		    listaLivros.setSelectionModel(m);
-//		    
-//
-//		    txtTESTE = new JTextField();
-//		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
-//		    txtTESTE.setBounds(22, 98, 86, 20);
-//		    jpAdmLivros.add(txtTESTE);
-//		    txtTESTE.setColumns(10);
-
-//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
-////		    txtTESTE = new JTextField();
-//		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
-//		    System.out.println(titulo);
-//		    txtTESTE.setText(titulo);
-//		    txtTESTE.setBounds(22, 98, 86, 20);
-//		    jpAdmLivros.add(txtTESTE);
-//		    txtTESTE.setColumns(10);
 
 
-//		btnPesquisarLivro.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//<<<<<<< HEAD
-//
-//				String[] listaTeste = { "a", "b", "c" };
-//				listaLivros.setListData(listaTeste);
-//
-////				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
-//=======
-//				
-//				String [] listaTeste = {"a","b","c"};
-//				listaLivros.setListData( listaTeste);
-//				
-//				
-////				if (comboBoxAtributoLivro.getSelectedItem().equals("Tï¿½tulo")) {
-//>>>>>>> fe6407d6f38efd2d60c77689effbcecd9ffb96d8
-////					String titulo = txtAtributoPesquisaLivro.getText();
-////					
-////					String [] listaT=gl.getViewComics().listaTitulo(titulo);
-////					
-////
-//				}
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+		btnPesquisarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String[] listaTeste = { "a", "b", "c" };
+				listaLivros.setListData(listaTeste);
+
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
+
+//					String titulo = txtAtributoPesquisaLivro.getText();
 //					
-//					
-//
-//				}
-//				if (comboBoxAtributoLivro.getSelectedItem().equals("Data de lanï¿½amento")) {
-//
-//				}
-//
-//			}
-//		});
+//					String [] listaT=gl.getViewComics().listaTitulo(titulo);
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+				}
 
+			}
+		});
 	}
 }
