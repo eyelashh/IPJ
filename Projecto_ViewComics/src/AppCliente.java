@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -632,11 +634,16 @@ public class AppCliente implements Serializable {
 					if (utilizadorLogado instanceof Funcionario) {
 						AppFuncionario fun = new AppFuncionario(utilizadorLogado,gl);
 						fun.run();
+						frame.dispose();
 					} else if (utilizadorLogado instanceof Administrador) {
 						AppAdmin adm = new AppAdmin(utilizadorLogado,gl);
 						adm.run();
+						frame.dispose();
 					}
 
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Username e/ou password incorrectos");
 				}
 			}
 

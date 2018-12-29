@@ -98,36 +98,36 @@ public class AppAdmin implements Serializable {
 
 		JPanel panelcabecalho = new JPanel();
 		panelcabecalho.setBackground(new Color(255, 215, 0));
-		panelcabecalho.setLayout(null);
 		panelcabecalho.setBounds(0, 0, 1262, 176);
 		Paineltotal.add(panelcabecalho);
+		panelcabecalho.setLayout(null);
 
 		JLabel label_6 = new JLabel() {
 			protected void paintComponent(Graphics g) {
 			}
 		};
+		label_6.setBounds(96, 67, 0, 0);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Papyrus", Font.BOLD, 46));
-		label_6.setBounds(96, 67, 0, 0);
 		panelcabecalho.add(label_6);
 
 		JLabel label_7 = new JLabel("ViewComics Inc.");
+		label_7.setBounds(101, 5, 730, 125);
 		label_7.setHorizontalAlignment(SwingConstants.CENTER);
 		label_7.setFont(new Font("Tempus Sans ITC", Font.BOLD, 95));
-		label_7.setBounds(101, 5, 730, 125);
 		panelcabecalho.add(label_7);
 
-		JLabel label_8 = new JLabel("Bem Vindo");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
-		label_8.setBounds(892, 13, 335, 27);
-		panelcabecalho.add(label_8);
-
 		JButton btnLogOut = new JButton("LogOut");
+		btnLogOut.setBounds(1138, 54, 89, 23);
 
 		btnLogOut.setBackground(SystemColor.controlHighlight);
-		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
+		
+		JLabel lblBemVindo = new JLabel("Bem Vindo");
+		lblBemVindo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBemVindo.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblBemVindo.setBounds(941, 16, 113, 27);
+		panelcabecalho.add(lblBemVindo);
 
 		JPanel panelMenu = new JPanel();
 //				{
