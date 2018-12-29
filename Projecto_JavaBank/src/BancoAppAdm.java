@@ -35,13 +35,13 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class BancoAppAdm implements Serializable{
+public class BancoAppAdm implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JFrame frame;
 	private JTextField lblAdminGestUsername;
 	private JTextField textAdminGestPass;
@@ -63,18 +63,17 @@ public class BancoAppAdm implements Serializable{
 	private static Administrador adm;
 	private static GestaoBanco gb;
 	private JTextField textAdmFunMorada;
-  
-	
+
 	/**
 	 * Launch the application.
 	 */
 
 	public void run() {
 		try {
-			BancoAppAdm window = new BancoAppAdm(adm,gb);
+			BancoAppAdm window = new BancoAppAdm(adm, gb);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Nao foi possivel abrir o funcionario");
 		}
 	}
@@ -86,7 +85,7 @@ public class BancoAppAdm implements Serializable{
 		adm = a;
 		gb = g;
 		initialize();
-		
+
 	}
 
 	/**
@@ -98,10 +97,10 @@ public class BancoAppAdm implements Serializable{
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
 			}
 		});
-		
+
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -129,8 +128,8 @@ public class BancoAppAdm implements Serializable{
 			public void actionPerformed(ActionEvent e) {
 				try {
 
-					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
-					
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+
 					Login logout = new Login();
 					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					logout.setLocationRelativeTo(frame);
@@ -205,7 +204,7 @@ public class BancoAppAdm implements Serializable{
 		JPAdm.add(JPAdmFuncionario);
 
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
-		String[] texto = new String [] {"Nome", "ID"};
+		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		cbAdmFunPesq.setBounds(133, 40, 227, 34);
@@ -295,7 +294,7 @@ public class BancoAppAdm implements Serializable{
 		JList lbLAdmFunLista = new JList(gb.javabank.listaFunc(gb.javabank.getUtlizadores()));
 		lbLAdmFunLista.setBounds(123, 122, 249, 428);
 		JPAdmFuncionario.add(lbLAdmFunLista);
-		DefaultListModel lm  = new DefaultListModel ();
+		DefaultListModel lm = new DefaultListModel();
 		lm.addElement(lbLAdmFunLista);
 
 		// texto : username
@@ -370,12 +369,12 @@ public class BancoAppAdm implements Serializable{
 		textAdmFunSobrenome.setColumns(10);
 		textAdmFunSobrenome.setBounds(709, 117, 217, 31);
 		JPAdmFuncionario.add(textAdmFunSobrenome);
-		
+
 		textAdmFunMorada = new JTextField();
 		textAdmFunMorada.setColumns(10);
 		textAdmFunMorada.setBounds(463, 399, 225, 31);
 		JPAdmFuncionario.add(textAdmFunMorada);
-		
+
 		JLabel lblMorada = new JLabel("Morada: ");
 		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblMorada.setBounds(453, 366, 227, 30);
@@ -815,113 +814,104 @@ public class BancoAppAdm implements Serializable{
 			}
 		});
 
-		//acao do botao novo:
+		// acao do botao novo:
 		btAdmFunNovo.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						
-						textAdmFunNome.setText(null);
-						textAdmFunSobrenome.setText(null);
-						textAdmFunContato.setText(null);
-						textAdmFunMorada.setText(null);
-						bg.clearSelection();
-						textAdmFunNumero.setText(null);
-						textAdmFunPass.setText(null);
-						textAdmFunUser.setText(null);
-						dateChooser.setCalendar(null);
-			
-						
-						
-					}
-				});
-				
-				
-				// bt confirmar (adicionar ou alterar )
+			public void actionPerformed(ActionEvent e) {
+
+				textAdmFunNome.setText(null);
+				textAdmFunSobrenome.setText(null);
+				textAdmFunContato.setText(null);
+				textAdmFunMorada.setText(null);
+				bg.clearSelection();
+				textAdmFunNumero.setText(null);
+				textAdmFunPass.setText(null);
+				textAdmFunUser.setText(null);
+				dateChooser.setCalendar(null);
+
+			}
+		});
+
+		// bt confirmar (adicionar ou alterar )
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista algum elemento selecionado da lista faz um update:
-						if(!lbLAdmFunLista.isSelectionEmpty())
-						{
-							// adicionar Cliente:
-							
-							// criar automaticamente o id;
-						int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
-						if(id==0)
-						{ 
-							id++;
-						}
-						
-					
-						// valida qual dos botoes estao atualizados:
-						String opselect ="";
-						if(rbAdmFunCC.isSelected())
-						{
-							opselect = rbAdmFunCC.getText();
-						}
-						if(rbAdmFunBI.isSelected())
-						{
-							opselect = rbAdmFunBI.getText();
-						}
-						if(rbAdmFunPass.isSelected())
-						{
-							opselect = rbAdmFunPass.getText();
-						}
-						
-						
-							// esta a ser criar o novo funcionario:
-							Utilizador clt = new Funcionario(id,textAdmFunNome.getText(),textAdmFunSobrenome.getText(),dateChooser.getDate(),opselect, Integer.parseInt(textAdmFunNumero.getText()),textAdmFunMorada.getText(),Integer.parseInt(textAdmFunContato.getText()),textAdmFunUser.getText(),textAdmFunPass.getText(),id);
-							gb.javabank.getUtlizadores().add(clt);
-							
-							
-						}
-						else
-						{
-							// atualizar Cliente:
-							
-							
-							
-						}
-						
+			public void actionPerformed(ActionEvent e) {
+
+				// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista
+				// algum elemento selecionado da lista faz um update:
+				if (!lbLAdmFunLista.isSelectionEmpty()) {
+					// adicionar Cliente:
+
+					// criar automaticamente o id;
+					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
+							.getIdUtilizador()) + 1;
+					int id2 = (gb.javabank.getUtlizadores().get(id)).getIdUtilizador() + 1;
+					if (id == 0) {
+						id++;
 					}
-				});
-				
-				// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-						lbClt.addListSelectionListener(new ListSelectionListener() {
-							public void valueChanged(ListSelectionEvent e) {
-								if(!lbClt.isSelectionEmpty())
-								{
-								String s = (String) lbClt.getSelectedValue();
-								s= s.substring(0, s.indexOf("*"));
-								Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
 
+					if (id2 == id) {
+						id2++;
+					}
 
-								tbCltNome.setText(c.getNome());
-								tbCltApelido.setText(c.getSobrenome());
-								tbCltMorada.setText(c.getMorada());
-								tbCltContacto.setText(""+c.getContacto());
-								tbCltUser.setText(c.getUsername());
-								tbCltPass.setText(c.getPassword());
-								tbCltNum.setText(""+c.getNumidentificacao());
-								
-								if(c.getTipoIndentificacao().equals("C.C."))
-								{
-									rbCltcc.setSelected(true);
-								}
-								if(c.getTipoIndentificacao().equals("B.I."))
-								{
-									rbCltbi.setSelected(true);
-								}
-								if(c.getTipoIndentificacao().equals("Passaporte"))
-								{
-									rbCltPassaporte.setSelected(true);
-								}
-								
-								
-								}
-							}
-						});
-		
+					// valida qual dos botoes estao atualizados:
+					String opselect = "";
+					if (rbAdmFunCC.isSelected()) {
+						opselect = rbAdmFunCC.getText();
+					}
+					if (rbAdmFunBI.isSelected()) {
+						opselect = rbAdmFunBI.getText();
+					}
+					if (rbAdmFunPass.isSelected()) {
+						opselect = rbAdmFunPass.getText();
+					}
+
+					// esta a ser criar o novo funcionario:
+					Utilizador func = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
+					gb.javabank.getUtlizadores().add(func);
+
+				} else {
+					// atualizar Cliente:
+					
+					
+
+				}
+
+			}
+		});
+
+		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+		lbClt.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (!lbClt.isSelectionEmpty()) {
+					String s = (String) lbClt.getSelectedValue();
+					s = s.substring(0, s.indexOf("*"));
+					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
+							gb.javabank.getUtlizadores());
+
+					tbCltNome.setText(c.getNome());
+					tbCltApelido.setText(c.getSobrenome());
+					tbCltMorada.setText(c.getMorada());
+					tbCltContacto.setText("" + c.getContacto());
+					tbCltUser.setText(c.getUsername());
+					tbCltPass.setText(c.getPassword());
+					tbCltNum.setText("" + c.getNumidentificacao());
+
+					if (c.getTipoIndentificacao().equals("C.C.")) {
+						rbCltcc.setSelected(true);
+					}
+					if (c.getTipoIndentificacao().equals("B.I.")) {
+						rbCltbi.setSelected(true);
+					}
+					if (c.getTipoIndentificacao().equals("Passaporte")) {
+						rbCltPassaporte.setSelected(true);
+					}
+
+				}
+			}
+		});
+
 //		btAdmFunProc.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				
@@ -952,4 +942,3 @@ public class BancoAppAdm implements Serializable{
 
 	}
 }
-	
