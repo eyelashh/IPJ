@@ -23,6 +23,8 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 
 public class AppAdmin implements Serializable {
+	
+	//atributos 
 
 	private JFrame frame;
 	private JPanel jpAdmFuncionarios;
