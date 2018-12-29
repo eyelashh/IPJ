@@ -125,7 +125,7 @@ public class BancoAppFun implements Serializable {
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogOut = new JButton("Logout");
 		btnLogOut.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-
+		
 		// logOut
 
 		btnLogOut.addActionListener(new ActionListener() {
@@ -211,7 +211,7 @@ public class BancoAppFun implements Serializable {
 		cbCltPesq.setBounds(47, 12, 227, 34);
 		jpanelClientes.add(cbCltPesq);
 
-		// Aqui Ã© preciso que a textfield reconhece que temos de escrever um nome ou um numero
+		
 		JTextField tbCltPesq = new JTextField();
 		tbCltPesq.setBounds(47, 49, 227, 30);
 		jpanelClientes.add(tbCltPesq);
@@ -220,7 +220,7 @@ public class BancoAppFun implements Serializable {
 		scrollBar_2.setBounds(273, 92, 15, 441);
 		jpanelClientes.add(scrollBar_2);
 
-		//Aqui estive a adicionar um array de cliente que o metodo esta feito no banco
+		
 		JList lbClt = new JList(gb.javabank.listarClientes(gb.javabank.getUtlizadores()));
 		lbClt.setBounds(48, 92, 240, 441);
 		jpanelClientes.add(lbClt);
@@ -229,13 +229,11 @@ public class BancoAppFun implements Serializable {
 
 		
 		
-		//aqui estive ao carregar no botao pesquisar encontrar o cliente
+	
 		JButton btCltPesquisa = new JButton("Pesquisa");
 		btCltPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String texto = (String) tbCltPesq.getText();
-				lbClt.setToolTipText(texto);
+			
 			}
 		});
 		btCltPesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -972,7 +970,7 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 		
-		//açao do botao novo:
+		//aï¿½ao do botao novo:
 		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

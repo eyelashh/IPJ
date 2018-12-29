@@ -198,14 +198,16 @@ public class BancoAppAdm implements Serializable{
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
 
-		// box onde escolhemos como queremos fazer a pesquisa do funcionario
-		JComboBox cbAdmFunPesq = new JComboBox();
-		cbAdmFunPesq.setBounds(123, 28, 249, 39);
+		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
+		String[] texto = new String [] {"Nome", "ID"};
+		JComboBox cbAdmFunPesq = new JComboBox(texto);
+		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		cbAdmFunPesq.setBounds(133, 40, 227, 34);
 		JPAdmFuncionario.add(cbAdmFunPesq);
 
 		// caixa de texto para escrever a procura do funcionario
 		JTextField tbAdmFunPesq = new JTextField();
-		tbAdmFunPesq.setBounds(123, 79, 249, 31);
+		tbAdmFunPesq.setBounds(133, 77, 227, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
 
 		// Botao de procurar
@@ -368,30 +370,8 @@ public class BancoAppAdm implements Serializable{
 			}
 		});
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunConfirmar_1.setBounds(512, 511, 120, 38);
+		btnAdmFunConfirmar_1.setBounds(611, 512, 120, 38);
 		JPAdmFuncionario.add(btnAdmFunConfirmar_1);
-
-		// botao limpar funcionario
-		JButton btnAdmFunLimpar = new JButton("Limpar");
-		btnAdmFunLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunLimpar.setBounds(675, 509, 120, 38);
-		// metodo que limpa as textFields do funcionario
-		btnAdmFunLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				textAdmFunNome.setText("");
-
-				rbAdmFunCC.setSelected(false);
-				rbAdmFunBI.setSelected(false);
-				rbAdmFunPass.setSelected(false);
-				textAdmFunNumero.setText("");
-				textAdmFunContato.setText("");
-				textAdmFunUser.setText("");
-				textAdmFunPass.setText("");
-
-			}
-		});
-		JPAdmFuncionario.add(btnAdmFunLimpar);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
 		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
