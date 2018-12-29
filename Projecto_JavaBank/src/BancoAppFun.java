@@ -958,9 +958,9 @@ public class BancoAppFun implements Serializable {
 		// aï¿½ao do botao novo:
 		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// limpa tudo:
-				
+
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
@@ -980,12 +980,22 @@ public class BancoAppFun implements Serializable {
 		btCltconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				String opselect = "";
+				if (rbCltcc.isSelected()) {
+					opselect = rbCltcc.getText();
+				}
+				if (rbCltbi.isSelected()) {
+					opselect = rbCltbi.getText();
+				}
+				if (rbCltPassaporte.isSelected()) {
+					opselect = rbCltPassaporte.getText();
+				}
+
 				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
 				// algum elemento selecionado da lista faz um update:
 				if (lbClt.isSelectionEmpty()) {
-					
-					// adicionar Cliente:
 
+					// adicionar Cliente:
 					// criar automaticamente o id;
 					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
 							.getIdUtilizador()) + 1;
@@ -994,16 +1004,6 @@ public class BancoAppFun implements Serializable {
 					}
 
 					// valida qual dos botoes estao atualizados:
-					String opselect = "";
-					if (rbCltcc.isSelected()) {
-						opselect = rbCltcc.getText();
-					}
-					if (rbCltbi.isSelected()) {
-						opselect = rbCltbi.getText();
-					}
-					if (rbCltPassaporte.isSelected()) {
-						opselect = rbCltPassaporte.getText();
-					}
 
 					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id, tbCltNome.getText(), tbCltApelido.getText(),
@@ -1011,28 +1011,40 @@ public class BancoAppFun implements Serializable {
 							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
 							tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
-					
+
 					// faz atualizaçao da lista (elimina e de seguida preenche tudo)
 					dmclt.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
 
-					// isto ï¿½ para eleminar:
-					lbClt.clearSelection();
-					lbCltConta.clearSelection();
-					tbCltNome.setText("");
-					tbCltApelido.setText("");
-					tbCltMorada.setText(null);
-					tbCltContacto.setText(null);
-					bg.clearSelection();
-					tbCltUser.setText("");
-					tbCltPass.setText("");
-					tbCltNum.setText("");
-					dateChooser_3.setDate(null);
+					
+					
 
 				} else {
 					// atualizar Cliente:
+					// seleciona id;
+					String s = (String) lbClt.getSelectedValue();
+					s = s.substring(0, s.indexOf("*"));
+					
+					// metedo para atualizar:
+					gb.javabank.atualizautilizador(
+							(Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()),
+							tbCltNome.getText(), tbCltApelido.getText(), dateChooser_3.getDate(), opselect,
+							Integer.parseInt(tbCltNum.getText()), tbCltMorada.getText(),
+							Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(), tbCltPass.getText());
 
 				}
+				
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
 
 			}
 		});
@@ -1046,7 +1058,6 @@ public class BancoAppFun implements Serializable {
 					s = s.substring(0, s.indexOf("*"));
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
 							gb.javabank.getUtlizadores());
-					
 					tbCltNome.setText(c.getNome());
 					tbCltApelido.setText(c.getSobrenome());
 					tbCltMorada.setText(c.getMorada());
@@ -1068,17 +1079,16 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
-		
+
 		// botao eliminar
-		
+
 		btCltEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				// primeiro ve qual o id selecionado!
 				String s = lbClt.getSelectedValue();
 				s = s.substring(0, s.indexOf("*"));
-				
+
 				// depois limpa os campos do formulario:
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
@@ -1091,25 +1101,18 @@ public class BancoAppFun implements Serializable {
 				tbCltPass.setText("");
 				tbCltNum.setText("");
 				dateChooser_3.setDate(null);
-				
-				gb.javabank.eliminautilizador(Integer.parseInt(s),gb.javabank.getUtlizadores());
-				
+
+				gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
 				///
-				
-				
-				
-				
-				
-				
+
 				// atualiza lista:
 				dmclt.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-				
-				
+
 			}
 		});
-		
-		
+
 	}
 
 }
