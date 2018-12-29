@@ -62,7 +62,7 @@ public class AppAdmin implements Serializable {
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
 
-	private static Administrador admin;
+	private static Utilizador admin;
 	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
 
@@ -83,7 +83,7 @@ public class AppAdmin implements Serializable {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin(Administrador a, GestaoLivraria gl) {
+	public AppAdmin(Utilizador a, GestaoLivraria gl) {
 		initialize();
 		this.admin = a;
 		this.gl = gl;
@@ -253,11 +253,11 @@ public class AppAdmin implements Serializable {
 //		
 //		
 //		String [] ArrayLivros = gl.getViewComics().listaLivros(gl.getViewComics().getLivros());
-<<<<<<< HEAD
+
 		//JList listaLivros = new JList (ArrayLivros);
-=======
+
 //		//JList listaLivros = new JList (ArrayLivros);
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 		JList listaLivros = new JList ();
 		listaLivros.setBounds(22, 150, 190, 395);
 		jpAdmLivros.add(listaLivros);
@@ -840,13 +840,13 @@ public class AppAdmin implements Serializable {
 		    m.setLeadAnchorNotificationEnabled(false);
 		    listaLivros.setSelectionModel(m);
 		    
-<<<<<<< HEAD
+
 		    txtTESTE = new JTextField();
 		    txtTESTE.setText(gl.getViewComics().getLivros().get(0).getTitulo().toString() );
 		    txtTESTE.setBounds(22, 98, 86, 20);
 		    jpAdmLivros.add(txtTESTE);
 		    txtTESTE.setColumns(10);
-=======
+
 //		    txtTESTE = new JTextField();
 //		    String titulo =gl.getViewComics().getLivros().get(0).getTitulo();
 //		    System.out.println(titulo);
@@ -854,7 +854,7 @@ public class AppAdmin implements Serializable {
 //		    txtTESTE.setBounds(22, 98, 86, 20);
 //		    jpAdmLivros.add(txtTESTE);
 //		    txtTESTE.setColumns(10);
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
