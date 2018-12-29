@@ -237,7 +237,9 @@ public Utilizador loggado(String username, String password) {
 		Utilizador u_log=new Utilizador();
 		
 		for(Utilizador u: this.utilizadores) {
-			if ((u.getUsername().equals(username))&&(u.getPassword().equals(password))){
+			String usernameIN=u.getUsername();
+			String passIN=u.getPassword();
+			if ((usernameIN.equals(username))&&(passIN.equals(password))){
 				u_log=u;
 			}
 		}

@@ -8,6 +8,7 @@ public class Utilizador implements Serializable{
 	private String username;
 	private String password;
 	
+	
 	public Utilizador() {
 		super();
 		

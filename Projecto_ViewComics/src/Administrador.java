@@ -7,4 +7,9 @@ public class Administrador extends Utilizador {
 
 	}
 
+	public Administrador() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }
