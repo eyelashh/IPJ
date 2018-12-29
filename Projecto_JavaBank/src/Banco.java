@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+
 public class Banco implements Serializable {
 	private int idBanco;
 	private String nome;
@@ -179,6 +181,14 @@ public class Banco implements Serializable {
 			}
 		}
 		return u;
+	}
+	 // este metedo recebe o modelo da lista e o array e adiciona os elementos para a lista:
+	protected void addelementoslist(String[] s,DefaultListModel<String> dm)
+	{
+		for(int i=0; i<s.length;i++)
+		{
+			dm.addElement(s[i]);
+		}
 	}
 
 }
