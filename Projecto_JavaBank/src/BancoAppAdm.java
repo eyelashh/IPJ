@@ -882,7 +882,6 @@ public class BancoAppAdm implements Serializable {
 		});
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-<<<<<<< HEAD
 		/*lbClt.addListSelectionListener(new ListSelectionListener() {
 =======
 		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {

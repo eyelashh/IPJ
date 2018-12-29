@@ -1,4 +1,4 @@
-
+ 
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -50,7 +50,7 @@ public class BancoAppClt implements Serializable{
 	private JTextField textField_11;
 	private static Cliente clt;
 	private static GestaoBanco gb;
-  
+    
 	/**
 	 * Launch the application.
 	 */
