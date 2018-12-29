@@ -319,6 +319,10 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.add(btCltNovo);
 
 		JButton btCltEliminar = new JButton("Eliminar");
+		btCltEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btCltEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltEliminar.setBounds(609, 22, 120, 38);
 		jpanelClientes.add(btCltEliminar);
@@ -988,7 +992,6 @@ public class BancoAppFun implements Serializable {
 				
 				// atualizar:
 				
-				lbClt.setModel((ListModel) lbClt);
 				
 				
 			}
@@ -1031,7 +1034,6 @@ public class BancoAppFun implements Serializable {
 					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
-					
 					
 				}
 				else
