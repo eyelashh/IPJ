@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import java.awt.Choice;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JList;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -35,6 +36,10 @@ import javax.swing.JCheckBox;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class BancoAppFun implements Serializable {
 
@@ -43,7 +48,7 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbCltMorada;
 	private JTextField tbCltContacto;
 	private JTextField tbCltUser;
-	private JPasswordField tbCltPass;
+	private JTextField tbCltPass;
 	private JTextField tbContasnum;
 	private JTextField tbContaslimitelev;
 	private JTextField tbGestaoUsername;
@@ -215,7 +220,7 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.add(scrollBar_2);
 
 		//Aqui estive a adicionar um array de cliente que o metodo esta feito no banco
-		JList lbClt = new JList(gb.javabank.getClientes().toArray());
+		JList lbClt = new JList(gb.javabank.listarClientes(gb.javabank.getUtlizadores()));
 		lbClt.setBounds(48, 92, 240, 441);
 		jpanelClientes.add(lbClt);
 		
@@ -286,7 +291,7 @@ public class BancoAppFun implements Serializable {
 		tbCltUser.setBounds(420, 394, 309, 31);
 		jpanelClientes.add(tbCltUser);
 
-		tbCltPass = new JPasswordField();
+		tbCltPass = new JTextField();
 		tbCltPass.setBounds(420, 461, 309, 31);
 		jpanelClientes.add(tbCltPass);
 
@@ -959,14 +964,18 @@ public class BancoAppFun implements Serializable {
 		//açao do botao novo:
 		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
+				tbCltApelido.setText("");
 				dateChooser_3.setCalendar(null);
-
 				tbCltMorada.setText(null);
 				tbCltContacto.setText(null);
 				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				
 				
 			}
 		});
@@ -975,8 +984,9 @@ public class BancoAppFun implements Serializable {
 		// bt confirmar (adicionar ou alterar )
 		btCltconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista algum elemento selecionado da lista faz um update:
-				if(lbClt.isSelectedIndex(-1))
+				if(lbClt.isSelectionEmpty())
 				{
 				int id=	(gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size()-1).getIdUtilizador())+1;
 					// adicionar Cliente:
@@ -985,12 +995,7 @@ public class BancoAppFun implements Serializable {
 					id++;
 				}
 				
-				/*bg.add(rbCltcc);
-				bg.add(rbCltbi);
-				bg.add(rbCltPassaporte);*/
 				String opselect ="";
-				
-				
 				
 				if(rbCltcc.isSelected())
 				{
@@ -1004,8 +1009,8 @@ public class BancoAppFun implements Serializable {
 				{
 					opselect = rbCltPassaporte.getText();
 				}
-					String s= new String (tbCltPass.getPassword());
-					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),s);
+				
+					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
 				}
 				else
@@ -1015,5 +1020,28 @@ public class BancoAppFun implements Serializable {
 				
 			}
 		});
+		
+		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+				lbClt.addListSelectionListener(new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent e) {
+						if(!lbClt.isSelectionEmpty())
+						{
+						String s = (String) lbClt.getSelectedValue();
+						s= s.substring(0, s.indexOf("*"));
+						Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+						
+
+						tbCltNome.setText(c.getNome());
+						tbCltApelido.setText(c.getSobrenome());
+						tbCltMorada.setText(c.getMorada());
+						tbCltContacto.setText(""+c.getContacto());
+						tbCltUser.setText(c.getUsername());
+						tbCltPass.setText(c.getPassword());
+						
+						}
+					}
+				});
+		
+		
 	}
 }
