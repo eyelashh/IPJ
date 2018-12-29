@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.imageio.ImageIO;
@@ -20,7 +22,7 @@ import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 
-public class AppAdmin {
+public class AppAdmin implements Serializable {
 
 	private JFrame frame;
 	private JPanel jpAdmFuncionarios;
@@ -51,7 +53,8 @@ public class AppAdmin {
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
 	
-	private static Utilizador u;
+	private static Utilizador admin;
+	private static GestaoLivraria gl;
 
 	/**
 	 * Launch the application.
@@ -59,7 +62,7 @@ public class AppAdmin {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppAdmin window = new AppAdmin(u);
+			AppAdmin window = new AppAdmin(admin,gl);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,9 +73,10 @@ public class AppAdmin {
 	/**
 	 * Create the application.
 	 */
-	public AppAdmin(Utilizador u) {
+	public AppAdmin(Utilizador admin, GestaoLivraria gl) {
 		initialize();
-		AppAdmin.u=u;
+		this.admin=admin;
+		this.gl=gl;
 	}
 
 	/**
@@ -667,6 +671,7 @@ public class AppAdmin {
 
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				AppCliente clt = new AppCliente();
 				clt.run();
 				frame.setVisible(false);

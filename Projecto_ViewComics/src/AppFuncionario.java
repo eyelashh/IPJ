@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
 
@@ -51,7 +52,7 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JTextArea;
 
-public class AppFuncionario {
+public class AppFuncionario implements Serializable{
 
 	private JFrame frame;
 	private JTextField textField_2;
@@ -81,7 +82,8 @@ public class AppFuncionario {
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
 	
-	private static Utilizador u;
+	private static GestaoLivraria gl;
+	private static Utilizador func;
 
 	/**
 	 * Launch the application.
@@ -89,7 +91,7 @@ public class AppFuncionario {
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppFuncionario window = new AppFuncionario(u);
+			AppFuncionario window = new AppFuncionario(func,gl);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,9 +102,10 @@ public class AppFuncionario {
 	/**
 	 * Create the application.
 	 */
-	public AppFuncionario(Utilizador u) {
+	public AppFuncionario(Utilizador func,GestaoLivraria gl) {
 		initialize();
-		AppFuncionario.u=u;
+		AppFuncionario.func=func;
+		AppFuncionario.gl=gl;
 	}
 
 	/**
@@ -805,6 +808,7 @@ public class AppFuncionario {
 
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				AppCliente clt = new AppCliente();
 				clt.run();
 				frame.setVisible(false);

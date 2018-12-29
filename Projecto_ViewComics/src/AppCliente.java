@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -28,7 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class AppCliente {
+public class AppCliente implements Serializable {
 
 	private JFrame frame;
 	private JTextField txtTitulo1;
@@ -54,7 +55,7 @@ public class AppCliente {
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -79,6 +80,11 @@ public class AppCliente {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		GestaoLivraria gl = new GestaoLivraria();
+		gl.run();
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -612,21 +618,22 @@ public class AppCliente {
 			}
 		});
 
-		// btn LogIn
+		// botao para LogIn
+		
 
 		btnLogIn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				String user = txtUsername.getText();
 				String pass = new String(txtPassword.getPassword());
-				boolean v = Livraria.getInstance().verificarPassword(user, pass);
+				boolean v = gl.getViewComics().verificarPassword(user, pass);
 				if (v) {
-					Utilizador utilizadorLogado = Livraria.getInstance().loggado(user, pass);
+					Utilizador utilizadorLogado = gl.getViewComics().loggado(user, pass);
 					if (utilizadorLogado instanceof Funcionario) {
-						AppFuncionario fun = new AppFuncionario(utilizadorLogado);
+						AppFuncionario fun = new AppFuncionario(utilizadorLogado,gl);
 						fun.run();
 					} else if (utilizadorLogado instanceof Administrador) {
-						AppAdmin adm = new AppAdmin(utilizadorLogado);
+						AppAdmin adm = new AppAdmin(utilizadorLogado,gl);
 						adm.run();
 					}
 

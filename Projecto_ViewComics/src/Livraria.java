@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -5,7 +6,7 @@ import java.util.Set;
 
 
 
-public class Livraria {
+public class Livraria implements Serializable{
 
 	private int idLivraria;
 	private String nome;
@@ -15,9 +16,9 @@ public class Livraria {
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
 	//criar um atributo privado estático que é da própria classe
-	public static Livraria soleinstance=new Livraria();
 
-	private Livraria() {
+
+	public Livraria() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.livros = new ArrayList<Livro>();
@@ -26,20 +27,23 @@ public class Livraria {
 		this.carrinhos = new ArrayList<Carrinho>();
 
 	}
-	private Livraria(int idLivraria, String nome) {
+	
+	
+	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
+			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos) {
 		super();
 		this.idLivraria = idLivraria;
 		this.nome = nome;
-		this.utilizadores = new ArrayList<Utilizador>();
-		this.livros = new ArrayList<Livro>();
-		this.transacoes = new ArrayList<Transacao>();
-		this.sessoes = new ArrayList<Sessao>();
-		this.carrinhos = new ArrayList<Carrinho>();
+		this.utilizadores = utilizadores;
+		this.livros = livros;
+		this.transacoes = transacoes;
+		this.sessoes = sessoes;
+		this.carrinhos = carrinhos;
 	}
+
+
 	//criar método estático para retornar a instância da classe
-	public static Livraria getInstance() {
-		return soleinstance;
-	}
+	
 
 	public int getIdLivraria() {
 		return idLivraria;
@@ -219,7 +223,9 @@ public class Livraria {
 		boolean dadosCorrectos = false;
 
 		for (Utilizador u : this.utilizadores) {
-			if ((u.getUsername().equals(username)) && (u.getPassword().equals(password))) {
+			String userEntrada = u.getUsername();
+			String passEntrada=u.getPassword();
+			if ((userEntrada.equals(username)) && (passEntrada.equals(password))) {
 				dadosCorrectos = true;
 			}
 		}

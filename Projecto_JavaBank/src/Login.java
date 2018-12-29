@@ -60,7 +60,6 @@ public class Login extends JDialog implements Serializable{
 							if(logado instanceof Funcionario) {	
 								System.out.println("Teste fun");
 							BancoAppFun fun = new BancoAppFun((Funcionario)logado,gb);
-							
 							fun.run();
 							dispose();
 							
