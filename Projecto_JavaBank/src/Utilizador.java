@@ -27,6 +27,7 @@ public class Utilizador implements Serializable {
 		this.contacto = contacto;
 		this.username = username;
 		this.password = password;
+		
 	}
 
 	public Utilizador() {
@@ -91,6 +92,10 @@ public class Utilizador implements Serializable {
 
 	public String getUsername() {
 		return username;
+	}
+
+	public Date getDataDeNascimento() {
+		return dataDeNascimento;
 	}
 
 	public void setUsername(String username) {

@@ -961,19 +961,18 @@ public class BancoAppFun implements Serializable {
 		// aï¿½ao do botao novo:
 		btCltNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
 				tbCltApelido.setText("");
-				dateChooser_3.setCalendar(null);
 				tbCltMorada.setText(null);
 				tbCltContacto.setText(null);
 				bg.clearSelection();
 				tbCltUser.setText("");
 				tbCltPass.setText("");
 				tbCltNum.setText("");
-
+				dateChooser_3.setDate(null);
 				// atualizar:
 
 			}
@@ -986,6 +985,7 @@ public class BancoAppFun implements Serializable {
 				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
 				// algum elemento selecionado da lista faz um update:
 				if (lbClt.isSelectionEmpty()) {
+					
 					// adicionar Cliente:
 
 					// criar automaticamente o id;
@@ -1013,7 +1013,8 @@ public class BancoAppFun implements Serializable {
 							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
 							tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
-
+					
+					// faz atualizaçao da lista (elimina e de seguida preenche tudo)
 					dmclt.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
 
@@ -1022,13 +1023,13 @@ public class BancoAppFun implements Serializable {
 					lbCltConta.clearSelection();
 					tbCltNome.setText("");
 					tbCltApelido.setText("");
-					dateChooser_3.setCalendar(null);
 					tbCltMorada.setText(null);
 					tbCltContacto.setText(null);
 					bg.clearSelection();
 					tbCltUser.setText("");
 					tbCltPass.setText("");
 					tbCltNum.setText("");
+					dateChooser_3.setDate(null);
 
 				} else {
 					// atualizar Cliente:
@@ -1041,12 +1042,13 @@ public class BancoAppFun implements Serializable {
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
 		lbClt.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
+				bg.clearSelection();
 				if (!lbClt.isSelectionEmpty()) {
 					String s = (String) lbClt.getSelectedValue();
 					s = s.substring(0, s.indexOf("*"));
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
 							gb.javabank.getUtlizadores());
-
+					
 					tbCltNome.setText(c.getNome());
 					tbCltApelido.setText(c.getSobrenome());
 					tbCltMorada.setText(c.getMorada());
@@ -1054,7 +1056,7 @@ public class BancoAppFun implements Serializable {
 					tbCltUser.setText(c.getUsername());
 					tbCltPass.setText(c.getPassword());
 					tbCltNum.setText("" + c.getNumidentificacao());
-
+					dateChooser_3.setDate(c.getDataDeNascimento());
 					if (c.getTipoIndentificacao().equals("C.C.")) {
 						rbCltcc.setSelected(true);
 					}
