@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.Serializable;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -223,6 +224,9 @@ public class BancoAppFun implements Serializable {
 		JList lbClt = new JList(gb.javabank.listarClientes(gb.javabank.getUtlizadores()));
 		lbClt.setBounds(48, 92, 240, 441);
 		jpanelClientes.add(lbClt);
+		DefaultListModel lm  = new DefaultListModel ();
+		lm.addElement(lbClt);
+
 		
 		
 		//aqui estive ao carregar no botao pesquisar encontrar o cliente
@@ -984,6 +988,10 @@ public class BancoAppFun implements Serializable {
 				tbCltPass.setText("");
 				tbCltNum.setText("");
 				
+				// atualizar:
+				
+				lbClt.setModel((ListModel) lbClt);
+				
 				
 			}
 		});
@@ -1021,8 +1029,12 @@ public class BancoAppFun implements Serializable {
 					opselect = rbCltPassaporte.getText();
 				}
 				
+				
+					// esta a ser criasdo o novo cliente:
 					Utilizador clt = new Cliente(id,tbCltNome.getText(),tbCltApelido.getText(),dateChooser_3.getDate(),opselect, Integer.parseInt(tbCltNum.getText()),tbCltMorada.getText(),Integer.parseInt(tbCltContacto.getText()),tbCltUser.getText(),tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
+					
+					
 				}
 				else
 				{
