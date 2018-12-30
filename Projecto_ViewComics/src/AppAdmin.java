@@ -426,6 +426,10 @@ public class AppAdmin implements Serializable {
 		JButton btnConfirmarAlteracaoFunc = new JButton("Confirmar alteracoes");
 		btnConfirmarAlteracaoFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				txtNomeFunc.setEditable(false);
+				txtContactoFunc.setEditable(false);
+				txtPassFunc.setEditable(false);
+				txtUsernameFunc.setEditable(false);
 				String selecaoLista = listaFuncionarios.getSelectedValue();
 				Funcionario f = (Funcionario) gl.viewComics.obterFuncionarioComId(selecaoLista);
 				f.setNome(txtNomeFunc.getText());
@@ -447,7 +451,13 @@ public class AppAdmin implements Serializable {
 				txtContactoFunc.setEditable(true);
 				txtPassFunc.setEditable(true);
 				txtUsernameFunc.setEditable(true);
-
+				String selecaoLista = listaFuncionarios.getSelectedValue();
+				Funcionario f = (Funcionario) gl.viewComics.obterFuncionarioComId(selecaoLista);
+				txtIdFunc.setText(Integer.toString(f.getId()));
+				txtNomeFunc.setText(f.getNome());
+				txtContactoFunc.setText(Integer.toString(f.getContato()));
+				txtUsernameFunc.setText(f.getUsername());
+				txtPassFunc.setText(f.getPassword());
 			}
 		});
 		btnLimparPesquisaFunc.addActionListener(new ActionListener() {
