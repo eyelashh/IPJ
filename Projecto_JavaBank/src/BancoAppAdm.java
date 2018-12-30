@@ -975,6 +975,15 @@ public class BancoAppAdm implements Serializable {
 				}
 			}
 		});
+		
+		btAdmFunProc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			
+			
+				
+			}
+		});
 
 	}
 }
