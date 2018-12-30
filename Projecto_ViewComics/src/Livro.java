@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Livro implements  Serializable {
@@ -8,15 +9,16 @@ public class Livro implements  Serializable {
 	private String autor;
 	private double preco;
 	private int stock;
+	private static AtomicInteger ai=new AtomicInteger(0);
 
-	public Livro(int idLivro, String titulo, String autor, double preco, int stock) {
+	public Livro(String titulo, String autor, double preco, int stock) {
 		super();
-		this.idLivro = idLivro;
+		this.idLivro = ai.incrementAndGet();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.preco = preco;
 		this.stock = stock;
-
+ 
 	}
 
 	public int getIdLivro() {
@@ -61,7 +63,7 @@ public class Livro implements  Serializable {
 
 	@Override
 	public String toString() {
-		return "Livro [idLivro=" + idLivro + ", titulo=" + titulo + ", autor=" + autor + ", preco=" + preco + ", stock="
+		return idLivro + " | titulo=" + titulo + ", autor=" + autor + ", preco=" + preco + ", stock="
 				+ stock + "]";
 	}
 

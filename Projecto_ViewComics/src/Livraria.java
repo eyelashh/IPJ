@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.DefaultListModel;
+
 public class Livraria implements Serializable {
 
 	private int idLivraria;
@@ -276,15 +278,21 @@ public class Livraria implements Serializable {
 	// util para dispor na lista
 
 	// POR TITULO
-	public String[] listaLivros(ArrayList<Livro>livros) {
+	public String[] arrayLivros(ArrayList<Livro> livros) {
 
-		String t = "";
 		String[] listaLivros = new String[this.livros.size()];
+		String livro = "";
+//		for(int i=0; i<livros.size();i++)
+//		{
+//			livro = ""+livros.get(i).getIdLivro();
+//			listaLivros[i]= livro;
+//			livro="";
+//		}
 		int i = 0;
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-
+			livro = "";
 		}
 
 		return listaLivros;
@@ -303,13 +311,13 @@ public class Livraria implements Serializable {
 			t = "";
 		}
 		String[] listaTitulo = new String[listaT.size()];
-		listaTitulo=listaT.toArray(listaTitulo);
-		
+		listaTitulo = listaT.toArray(listaTitulo);
+
 		return listaTitulo;
 	}
 
 	// POR AUTOR
-	public String [] listaAutor(String autor) {
+	public String[] listaAutor(String autor) {
 
 		ArrayList<String> listaA = new ArrayList();
 		String a = "";
@@ -322,13 +330,13 @@ public class Livraria implements Serializable {
 			a = "";
 		}
 		String[] listaAutor = new String[listaA.size()];
-		listaAutor=listaA.toArray(listaAutor);
-		
+		listaAutor = listaA.toArray(listaAutor);
+
 		return listaAutor;
 	}
 
 	// POR ID
-	public ArrayList listaData(int id) {
+	public ArrayList listaId(int id) {
 
 		ArrayList<Livro> listaId = new ArrayList();
 		for (Livro l : this.livros) {
@@ -338,6 +346,44 @@ public class Livraria implements Serializable {
 			}
 		}
 		return listaId;
+	}
+
+	// método para adicionar um array a uma JList
+
+	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
+
+		for (int i = 0; i < s.length; i++) {
+			dm.addElement(s[i]);
+		}
+	}
+
+	// extrair o id de uma string da lista
+
+	protected int obterId(String s) {
+
+//		char a = ' ';
+//		int i = 0;
+//		while (Character.isDigit(a)) {
+//			a = s.charAt(i);
+//			i++;
+//		}
+
+		String idStr = s.split("(?=\\D)")[0];
+		int id = Integer.parseInt(idStr);
+		return id;
+
+	}
+
+	// pesquisar o livro com determinado id
+	protected Livro livroId(int id) {
+		Livro livro = null;
+		for (Livro l : this.livros) {
+			if (l.getIdLivro() == id) {
+				livro = l;
+			}
+		}
+		return livro;
+
 	}
 
 }

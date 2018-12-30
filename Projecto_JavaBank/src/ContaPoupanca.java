@@ -1,6 +1,6 @@
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ContaPoupanca extends Conta implements Serializable{
 
@@ -8,7 +8,7 @@ public class ContaPoupanca extends Conta implements Serializable{
 	private double limiteMensalDebito;
 	
 	
-	public ContaPoupanca(int idConta, LocalDate dataCriacao, double saldo, ArrayList<Operacao> operacoes,
+	public ContaPoupanca(int idConta, Date dataCriacao, double saldo, ArrayList<Operacao> operacoes,
 			ArrayList<Cliente> clientes, double valorMaxLevantamento, double valorMaxDia, double taxaJuros,
 			double limiteMensalDebito) {
 		super(idConta, dataCriacao, saldo, operacoes, clientes, valorMaxLevantamento, valorMaxDia);

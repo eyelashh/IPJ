@@ -20,12 +20,12 @@ public class GestaoLivraria implements Serializable{
 	
 	// Construtor:
 	public GestaoLivraria() {
-		// INICIALIZA O BANCO:
+		// INICIALIZA O A LIVRARIA:
 		this.viewComics = new Livraria();
 		iS = null;
 		// CRIA FICHEIROS:
 		this.fileUtilizadores = new File("fileUtilizadores.dat");
-		this.fileCarrinhos = new File("fileContas.dat");
+		this.fileCarrinhos = new File("fileCarrinhos.dat");
 		this.fileLivros = new File("fileLivros.dat");
 	}
 	
@@ -49,8 +49,8 @@ public class GestaoLivraria implements Serializable{
 		// CASO 1--> � criado 1 admin e 1 funcionario
 		if(!this.fileUtilizadores.exists())
 		{
-			Utilizador adm = new Administrador(-1,"Admin_nome",96666666,"adminusername","adminpass");
-			Utilizador fun = new Funcionario(-2,"Func_nome",93333333,"funusername","funpass");
+			Utilizador adm = new Administrador(-1,"Admin_nome",96666666,"admin","admin"); 
+			Utilizador fun = new Funcionario(-2,"Func_nome",93333333,"func","func");
 			viewComics.addUtilizador(adm);
 			viewComics.addUtilizador(fun);
 			
@@ -132,9 +132,9 @@ public class GestaoLivraria implements Serializable{
 		//CASO 1:FICHEIRO NAO EXISTE --> cria um novo ficheiro
 		if(!this.fileLivros.exists())
 		{
-			viewComics.addLivro(new Livro(1,"CapuchinhoVermelho","Autor1",2.99,10));
-			viewComics.addLivro(new Livro(1,"Tintin","Herge",11.99,5));
-			viewComics.addLivro(new Livro(1,"Asterix","Albert Underzo",7.99,20));
+			viewComics.addLivro(new Livro("CapuchinhoVermelho","Autor1",2.99,10));
+			viewComics.addLivro(new Livro("Tintin","Herge",11.99,5));
+			viewComics.addLivro(new Livro("Asterix","Albert Underzo",7.99,20));
 			try
 			{
 				this.fileLivros.createNewFile();
