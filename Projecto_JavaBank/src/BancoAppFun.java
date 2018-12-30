@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -27,6 +28,7 @@ import javax.swing.JRadioButton;
 import java.awt.List;
 import java.awt.Panel;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
 import java.awt.Window;
@@ -1263,6 +1265,7 @@ public class BancoAppFun implements Serializable {
 				tbContasnum.setText(null);
 				tbContaslimitelevdia.setText(null);
 				tblJuros.setText(null);
+				tbllimitemes.setText(null);
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
 				
@@ -1286,9 +1289,6 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dateChooser_2.setEnabled(true);
 				tbllimitemes.setText(null);
-				
-				TrayIcon trayIcon = new TrayIcon(null, "Tray Demo");
-				trayIcon.displayMessage("tudo limpo", "notification demo", MessageType.INFO);
 				
 			}
 		});
