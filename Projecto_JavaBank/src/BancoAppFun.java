@@ -1174,11 +1174,8 @@ public class BancoAppFun implements Serializable {
 
 					ArrayList<Operacao> o = new ArrayList<Operacao>();
 					ArrayList<Cliente> conta = new ArrayList<Cliente>();
-					Conta c = new Conta(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-							Double.parseDouble(tbContasSaldo.getText()), o, conta,
-							Double.parseDouble(tbContaslimitelevop.getText()),
-							Double.parseDouble(tbContaslimitelevdia.getText()));
-					gb.javabank.getContas().add(c);
+					//Conta c = new Conta(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),Double.parseDouble(tbContasSaldo.getText()), o, conta,Double.parseDouble(tbContaslimitelevop.getText()),Double.parseDouble(tbContaslimitelevdia.getText()));
+					//gb.javabank.getContas().add(c);
 				} else {
 					// atualizar:
 
