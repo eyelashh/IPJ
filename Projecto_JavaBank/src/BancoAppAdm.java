@@ -203,6 +203,7 @@ public class BancoAppAdm implements Serializable {
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
 
+		
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
@@ -976,6 +977,15 @@ public class BancoAppAdm implements Serializable {
 				}
 			}
 		});
+		
+	
 
+	// pesquisar funcionarios por atributos
+			btAdmFunProc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
+					
+				}
+			});
 	}
 }

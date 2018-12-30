@@ -178,6 +178,8 @@ public class Banco implements Serializable {
 
 		return funcionario;
 	}
+	
+
 
 	// metedo que retorna um utilizador qualquer recebendo o seu id;
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
@@ -220,6 +222,11 @@ public class Banco implements Serializable {
 			}
 		}
 	}
+	
+
+	 
+	 
+	
 
 	// atualiza dados do funcionario
 	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
@@ -278,11 +285,4 @@ public class Banco implements Serializable {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
 }
