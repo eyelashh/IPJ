@@ -248,7 +248,7 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				if(func.getPassword().equals(new String(tbGestaopassuser.getPassword())))
 				{
-					func.setNome(tbGestaoNovoUser.getText()); 
+					func.setUsername(tbGestaoNovoUser.getText()); 
 					tbGestaoUsername.setText(null);
 					tbGestaopassuser.setText(null);
 					tbGestaoNovoUser.setText(null);
@@ -304,11 +304,21 @@ public class BancoAppFun implements Serializable {
 		JButton btGestaopassConfirmar = new JButton("Confirmar");
 		btGestaopassConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(func.getPassword().equals(new String(tbGestaoPass.getPassword())))
+				
+				if((func.getPassword().equals(new String(tbGestaoPass.getPassword())))&& new String(tbGestaoNovapass.getPassword()).equals(new String(tbGestaoConfirmPass.getPassword())))
 				{
 					
+					func.setPassword(new String(tbGestaoNovapass.getPassword()));
+					JOptionPane.showMessageDialog(null, "Alteração efectuada com sucesso!");
+					tbGestaoPass.setText(null);
+					tbGestaoNovapass.setText(null);
+					tbGestaoConfirmPass.setText(null);
+					
 				}
-				
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Dados errados! Confirme os dados introduzidos!");
+				}
 			}
 		});
 		btGestaopassConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -316,6 +326,13 @@ public class BancoAppFun implements Serializable {
 		jpanelGestao.add(btGestaopassConfirmar);
 
 		JButton btGestaopassCancelar = new JButton("Cancelar");
+		btGestaopassCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tbGestaoPass.setText(null);
+				tbGestaoNovapass.setText(null);
+				tbGestaoConfirmPass.setText(null);
+			}
+		});
 		btGestaopassCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btGestaopassCancelar.setBounds(729, 415, 131, 41);
 		jpanelGestao.add(btGestaopassCancelar);
@@ -925,7 +942,7 @@ public class BancoAppFun implements Serializable {
 		// coloca o painel gestao visivel:
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tbGestaoUsername.setText(func.getNome());
+				tbGestaoUsername.setText(func.getUsername());
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
