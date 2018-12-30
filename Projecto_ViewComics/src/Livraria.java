@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.DefaultListModel;
+
 public class Livraria implements Serializable {
 
 	private int idLivraria;
@@ -276,15 +278,15 @@ public class Livraria implements Serializable {
 	// util para dispor na lista
 
 	// POR TITULO
-	public String[] listaLivros(ArrayList<Livro>livros) {
+	public String[] arrayLivros(ArrayList<Livro> livros) {
 
-		String t = "";
+		String livro = "";
 		String[] listaLivros = new String[this.livros.size()];
 		int i = 0;
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-
+			livro = "";
 		}
 
 		return listaLivros;
@@ -303,13 +305,13 @@ public class Livraria implements Serializable {
 			t = "";
 		}
 		String[] listaTitulo = new String[listaT.size()];
-		listaTitulo=listaT.toArray(listaTitulo);
-		
+		listaTitulo = listaT.toArray(listaTitulo);
+
 		return listaTitulo;
 	}
 
 	// POR AUTOR
-	public String [] listaAutor(String autor) {
+	public String[] listaAutor(String autor) {
 
 		ArrayList<String> listaA = new ArrayList();
 		String a = "";
@@ -322,8 +324,8 @@ public class Livraria implements Serializable {
 			a = "";
 		}
 		String[] listaAutor = new String[listaA.size()];
-		listaAutor=listaA.toArray(listaAutor);
-		
+		listaAutor = listaA.toArray(listaAutor);
+
 		return listaAutor;
 	}
 
@@ -338,6 +340,15 @@ public class Livraria implements Serializable {
 			}
 		}
 		return listaId;
+	}
+
+	// método para adicionar um array a uma JList
+
+	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
+
+		for (int i = 0; i < s.length; i++) {
+			dm.addElement(s[i]);
+		}
 	}
 
 }

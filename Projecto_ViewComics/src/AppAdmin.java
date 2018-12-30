@@ -28,6 +28,9 @@ import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JTree;
+import javax.swing.JTextPane;
+import javax.swing.AbstractListModel;
 
 public class AppAdmin implements Serializable {
 
@@ -65,6 +68,7 @@ public class AppAdmin implements Serializable {
 	private static Utilizador admin;
 	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -240,10 +244,12 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpAdmLivros.add(comboBoxAtributoLivro);
 
-
-
-		JList<String> listaLivros = new JList<String>();
+		//LISTAR LIVROS
+		DefaultListModel<String>modeloListaLivros=new DefaultListModel<String>();
+		JList<String> listaLivros = new JList<String>(modeloListaLivros);
 		listaLivros.setBounds(22, 150, 190, 395);
+		String [] arrayLivros= gl.viewComics.arrayLivros(gl.viewComics.getLivros());
+		gl.viewComics.addArrayLista(arrayLivros, modeloListaLivros);
 		jpAdmLivros.add(listaLivros);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
@@ -316,6 +322,11 @@ public class AppAdmin implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpAdmLivros.add(btnLimparLivro);
+		
+		textField = new JTextField();
+		textField.setBounds(12, 62, 200, 23);
+		jpAdmLivros.add(textField);
+		textField.setColumns(10);
 
 		JPanel jpAdmStock = new JPanel();
 		jpAdmStock.setBounds(0, 0, 763, 545);
@@ -813,6 +824,10 @@ public class AppAdmin implements Serializable {
 
 		// LIVROS
 
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro");
+		comboBoxAtributoLivro.addItem("Titulo");
+		comboBoxAtributoLivro.addItem("Autor");
+		comboBoxAtributoLivro.addItem("Id");
 
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -827,6 +842,8 @@ public class AppAdmin implements Serializable {
 //					String [] listaT=gl.getViewComics().listaTitulo(titulo);
 				}
 				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+					
+					
 				}
 
 			}
