@@ -475,5 +475,15 @@ public class Livraria implements Serializable {
 		return listaContacto;
 
 	}
+	protected Utilizador obterFuncionarioComId(String selecaoLista) {
+		int idFunc=this.obterId(selecaoLista);
+		Utilizador util=null;
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getId()==idFunc)&&(u instanceof Funcionario)) {
+				util = u;
+			}
+		}
+		return util;
+	}
 
 }
