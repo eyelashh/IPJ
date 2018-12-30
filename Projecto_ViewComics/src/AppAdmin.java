@@ -247,7 +247,7 @@ public class AppAdmin implements Serializable {
 		DefaultListModel<String>modeloListaLivros=new DefaultListModel<String>();
 		JList<String> listaLivros = new JList<String>(modeloListaLivros);
 		listaLivros.setBounds(22, 118, 190, 427);
-		gl.viewComics.addArrayLista( gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 		jpAdmLivros.add(listaLivros);
 
 		JLabel lblNewLabel = new JLabel("Nome:");
