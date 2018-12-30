@@ -280,24 +280,21 @@ public class Livraria implements Serializable {
 	// POR TITULO
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
-		
 		String[] listaLivros = new String[this.livros.size()];
 		String livro = "";
-		for(int i=0; i<livros.size();i++)
-		{
-			livro = ""+livros.get(i).getIdLivro();
-			listaLivros[i]= livro;
-			livro="";
+//		for(int i=0; i<livros.size();i++)
+//		{
+//			livro = ""+livros.get(i).getIdLivro();
+//			listaLivros[i]= livro;
+//			livro="";
+//		}
+		int i = 0;
+		for (Livro l : livros) {
+			listaLivros[i] = l.toString();
+			i++;
+			livro = "";
 		}
-		//int i = 0;
-		//for (Livro l : livros) {
-		//	listaLivros[i] = l.toString();
-			//i++;
-		//	livro = "";
-		//}
-		
-		
-		
+
 		return listaLivros;
 	}
 
@@ -339,7 +336,7 @@ public class Livraria implements Serializable {
 	}
 
 	// POR ID
-	public ArrayList listaData(int id) {
+	public ArrayList listaId(int id) {
 
 		ArrayList<Livro> listaId = new ArrayList();
 		for (Livro l : this.livros) {
@@ -358,6 +355,35 @@ public class Livraria implements Serializable {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
 		}
+	}
+
+	// extrair o id de uma string da lista
+
+	protected int obterId(String s) {
+
+//		char a = ' ';
+//		int i = 0;
+//		while (Character.isDigit(a)) {
+//			a = s.charAt(i);
+//			i++;
+//		}
+
+		String idStr = s.split("(?=\\D)")[0];
+		int id = Integer.parseInt(idStr);
+		return id;
+
+	}
+
+	// pesquisar o livro com determinado id
+	protected Livro livroId(int id) {
+		Livro livro = null;
+		for (Livro l : this.livros) {
+			if (l.getIdLivro() == id) {
+				livro = l;
+			}
+		}
+		return livro;
+
 	}
 
 }

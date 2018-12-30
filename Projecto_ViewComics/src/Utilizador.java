@@ -69,7 +69,7 @@ public class Utilizador implements  Serializable {
 
 	@Override
 	public String toString() {
-		return "Utilizador [id=" + id + ", nome=" + nome + ", contato=" + contato + ", username=" + username
+		return id +" | nome=" + nome + ", contato=" + contato + ", username=" + username
 				+ ", password=" + password + "]";
 	}
 

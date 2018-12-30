@@ -31,19 +31,20 @@ import javax.swing.JList;
 import javax.swing.JTree;
 import javax.swing.JTextPane;
 import javax.swing.AbstractListModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class AppAdmin implements Serializable {
-
 
 	private JFrame frame;
 	private JPanel jpAdmFuncionarios;
 	private JTextField txtAtributoPesquisaLivro;
-	private JTextField txtTituloLivro;
-	private JTextField txtAutorLivro;
-	private JTextField txtDataLivro;
-	private JTextField txtDescricaoLivro;
-	private JTextField txtPrecoLivro;
-	private JTextField txtStockLivro;
+	private JTextField txtTituloLivros;
+	private JTextField txtAutorLivros;
+	private JTextField txtDataLivros;
+	private JTextField txtDescricaoLivros;
+	private JTextField txtPrecoLivros;
+	private JTextField txtStockLivros;
 	private JTextField txtUsername;
 	private JTextField txtPassword;
 	private JTextField txtNovoUsername;
@@ -66,7 +67,7 @@ public class AppAdmin implements Serializable {
 	private static Utilizador admin;
 	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
-	private JTextField textField;
+	private JTextField txtAtributo;
 
 	/**
 	 * Launch the application.
@@ -77,7 +78,7 @@ public class AppAdmin implements Serializable {
 			AppAdmin window = new AppAdmin(admin, gl);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 	// });
@@ -89,7 +90,7 @@ public class AppAdmin implements Serializable {
 		this.admin = a;
 		this.gl = gl;
 		initialize();
-		
+
 	}
 
 	/**
@@ -100,7 +101,8 @@ public class AppAdmin implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),gl.getViewComics().getLivros());
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
+						gl.getViewComics().getLivros());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -232,6 +234,117 @@ public class AppAdmin implements Serializable {
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 
+		jpAdmFuncionarios = new JPanel();
+		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
+		panelPrincipal.add(jpAdmFuncionarios);
+		jpAdmFuncionarios.setLayout(null);
+		jpAdmFuncionarios.setVisible(false);
+
+		JList listaAtributosFunc = new JList();
+		
+		listaAtributosFunc.setBounds(42, 123, 190, 337);
+		jpAdmFuncionarios.add(listaAtributosFunc);
+
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(32, 69, 200, 30);
+		jpAdmFuncionarios.add(textField_12);
+
+		JButton btnPesquisaAtributoFunc = new JButton("Pesquisar");
+		btnPesquisaAtributoFunc.setBackground(SystemColor.controlHighlight);
+		btnPesquisaAtributoFunc.setBounds(264, 28, 97, 25);
+		jpAdmFuncionarios.add(btnPesquisaAtributoFunc);
+
+		JButton btnLimparPesquisaFunc = new JButton("Limpar");
+		btnLimparPesquisaFunc.setBackground(SystemColor.controlHighlight);
+		btnLimparPesquisaFunc.setBounds(264, 72, 97, 25);
+		jpAdmFuncionarios.add(btnLimparPesquisaFunc);
+
+		JLabel lblIdFuncionrio = new JLabel("Id funcion\u00E1rio :");
+		lblIdFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblIdFuncionrio.setBounds(264, 116, 119, 22);
+		jpAdmFuncionarios.add(lblIdFuncionrio);
+
+		txtIdFunc = new JTextField();
+		txtIdFunc.setColumns(10);
+		txtIdFunc.setBounds(395, 108, 345, 30);
+		jpAdmFuncionarios.add(txtIdFunc);
+
+		JLabel lblNome = new JLabel("Nome :");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNome.setBounds(319, 149, 64, 25);
+		jpAdmFuncionarios.add(lblNome);
+
+		txtNomeFunc = new JTextField();
+		txtNomeFunc.setColumns(10);
+		txtNomeFunc.setBounds(395, 149, 345, 30);
+		jpAdmFuncionarios.add(txtNomeFunc);
+
+		JLabel lblContacto = new JLabel("Contacto :");
+		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblContacto.setBounds(302, 186, 87, 24);
+		jpAdmFuncionarios.add(lblContacto);
+
+		txtContactoFunc = new JTextField();
+		txtContactoFunc.setColumns(10);
+		txtContactoFunc.setBounds(394, 185, 345, 30);
+		jpAdmFuncionarios.add(txtContactoFunc);
+
+		JLabel lblUsername = new JLabel("Username :");
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUsername.setBounds(292, 231, 97, 16);
+		jpAdmFuncionarios.add(lblUsername);
+
+		JLabel lblPassword = new JLabel("Password :");
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPassword.setBounds(292, 270, 97, 21);
+		jpAdmFuncionarios.add(lblPassword);
+
+		txtUsernameFunc = new JTextField();
+		txtUsernameFunc.setColumns(10);
+		txtUsernameFunc.setBounds(394, 226, 345, 30);
+		jpAdmFuncionarios.add(txtUsernameFunc);
+
+		txtPassFunc = new JTextField();
+		txtPassFunc.setColumns(10);
+		txtPassFunc.setBounds(394, 267, 345, 30);
+		jpAdmFuncionarios.add(txtPassFunc);
+
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(32, 29, 200, 22);
+		jpAdmFuncionarios.add(comboBox_1);
+
+		JButton btnConfirmFunc = new JButton("OK");
+		btnConfirmFunc.setBackground(SystemColor.controlHighlight);
+		btnConfirmFunc.setBounds(464, 437, 89, 23);
+		jpAdmFuncionarios.add(btnConfirmFunc);
+
+		JButton btnCancelarFunc = new JButton("Cancelar");
+		btnCancelarFunc.setBackground(SystemColor.controlHighlight);
+		btnCancelarFunc.setBounds(574, 437, 89, 23);
+		jpAdmFuncionarios.add(btnCancelarFunc);
+
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.info);
+		panel.setBounds(490, 308, 140, 115);
+		jpAdmFuncionarios.add(panel);
+		panel.setLayout(null);
+
+		JButton btnNovoFunc = new JButton("Novo");
+		btnNovoFunc.setBackground(SystemColor.controlHighlight);
+		btnNovoFunc.setBounds(25, 11, 89, 23);
+		panel.add(btnNovoFunc);
+
+		JButton btnEliminarFunc = new JButton("Eliminar");
+		btnEliminarFunc.setBackground(SystemColor.controlHighlight);
+		btnEliminarFunc.setBounds(25, 45, 89, 23);
+		panel.add(btnEliminarFunc);
+
+		JButton btnLimparCamposFunc = new JButton("Limpar");
+		btnLimparCamposFunc.setBackground(SystemColor.controlHighlight);
+		btnLimparCamposFunc.setBounds(25, 79, 89, 23);
+		panel.add(btnLimparCamposFunc);
+
 		JPanel jpAdmLivros = new JPanel();
 		jpAdmLivros.setLayout(null);
 		jpAdmLivros.setBounds(0, 0, 763, 545);
@@ -242,14 +355,15 @@ public class AppAdmin implements Serializable {
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpAdmLivros.add(comboBoxAtributoLivro);
 
-		//LISTAR LIVROS
-		DefaultListModel<String>modeloListaLivros=new DefaultListModel<String>();
-		JList<String> listaLivros = new JList<String>(modeloListaLivros);
+		// LISTAR LIVROS
+		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
+		JList<String> listaLivros = new JList<String>(modeloLista);
+
 		listaLivros.setBounds(22, 118, 190, 427);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 		jpAdmLivros.add(listaLivros);
 
-		JLabel lblNewLabel = new JLabel("Nome:");
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(263, 120, 48, 16);
 		jpAdmLivros.add(lblNewLabel);
@@ -279,35 +393,35 @@ public class AppAdmin implements Serializable {
 		lblPreo.setBounds(224, 266, 87, 16);
 		jpAdmLivros.add(lblPreo);
 
-		txtTituloLivro = new JTextField();
-		txtTituloLivro.setColumns(10);
-		txtTituloLivro.setBounds(333, 114, 345, 30);
-		jpAdmLivros.add(txtTituloLivro);
+		txtTituloLivros = new JTextField();
+		txtTituloLivros.setColumns(10);
+		txtTituloLivros.setBounds(333, 114, 345, 30);
+		jpAdmLivros.add(txtTituloLivros);
 
-		txtAutorLivro = new JTextField();
-		txtAutorLivro.setColumns(10);
-		txtAutorLivro.setBounds(333, 164, 345, 30);
-		jpAdmLivros.add(txtAutorLivro);
+		txtAutorLivros = new JTextField();
+		txtAutorLivros.setColumns(10);
+		txtAutorLivros.setBounds(333, 164, 345, 30);
+		jpAdmLivros.add(txtAutorLivros);
 
-		txtDataLivro = new JTextField();
-		txtDataLivro.setColumns(10);
-		txtDataLivro.setBounds(333, 213, 345, 30);
-		jpAdmLivros.add(txtDataLivro);
+		txtDataLivros = new JTextField();
+		txtDataLivros.setColumns(10);
+		txtDataLivros.setBounds(333, 213, 345, 30);
+		jpAdmLivros.add(txtDataLivros);
 
-		txtDescricaoLivro = new JTextField();
-		txtDescricaoLivro.setColumns(10);
-		txtDescricaoLivro.setBounds(333, 260, 345, 117);
-		jpAdmLivros.add(txtDescricaoLivro);
+		txtDescricaoLivros = new JTextField();
+		txtDescricaoLivros.setColumns(10);
+		txtDescricaoLivros.setBounds(333, 260, 345, 117);
+		jpAdmLivros.add(txtDescricaoLivros);
 
-		txtPrecoLivro = new JTextField();
-		txtPrecoLivro.setColumns(10);
-		txtPrecoLivro.setBounds(333, 402, 345, 30);
-		jpAdmLivros.add(txtPrecoLivro);
+		txtPrecoLivros = new JTextField();
+		txtPrecoLivros.setColumns(10);
+		txtPrecoLivros.setBounds(333, 402, 69, 30);
+		jpAdmLivros.add(txtPrecoLivros);
 
-		txtStockLivro = new JTextField();
-		txtStockLivro.setColumns(10);
-		txtStockLivro.setBounds(333, 453, 345, 30);
-		jpAdmLivros.add(txtStockLivro);
+		txtStockLivros = new JTextField();
+		txtStockLivros.setColumns(10);
+		txtStockLivros.setBounds(333, 453, 345, 30);
+		jpAdmLivros.add(txtStockLivros);
 
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
 
@@ -319,11 +433,11 @@ public class AppAdmin implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpAdmLivros.add(btnLimparLivro);
-		
-		textField = new JTextField();
-		textField.setBounds(12, 62, 200, 23);
-		jpAdmLivros.add(textField);
-		textField.setColumns(10);
+
+		txtAtributo = new JTextField();
+		txtAtributo.setBounds(12, 62, 200, 23);
+		jpAdmLivros.add(txtAtributo);
+		txtAtributo.setColumns(10);
 
 		JPanel jpAdmStock = new JPanel();
 		jpAdmStock.setBounds(0, 0, 763, 545);
@@ -521,116 +635,6 @@ public class AppAdmin implements Serializable {
 		btnCancelarPasse.setBounds(588, 357, 97, 25);
 		jpAdmConta.add(btnCancelarPasse);
 
-		jpAdmFuncionarios = new JPanel();
-		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
-		panelPrincipal.add(jpAdmFuncionarios);
-		jpAdmFuncionarios.setLayout(null);
-		jpAdmFuncionarios.setVisible(false);
-
-		JList listaAtributosFunc = new JList();
-		listaAtributosFunc.setBounds(42, 123, 190, 337);
-		jpAdmFuncionarios.add(listaAtributosFunc);
-
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(32, 69, 200, 30);
-		jpAdmFuncionarios.add(textField_12);
-
-		JButton btnPesquisaAtributoFunc = new JButton("Pesquisar");
-		btnPesquisaAtributoFunc.setBackground(SystemColor.controlHighlight);
-		btnPesquisaAtributoFunc.setBounds(264, 28, 97, 25);
-		jpAdmFuncionarios.add(btnPesquisaAtributoFunc);
-
-		JButton btnLimparPesquisaFunc = new JButton("Limpar");
-		btnLimparPesquisaFunc.setBackground(SystemColor.controlHighlight);
-		btnLimparPesquisaFunc.setBounds(264, 72, 97, 25);
-		jpAdmFuncionarios.add(btnLimparPesquisaFunc);
-
-		JLabel lblIdFuncionrio = new JLabel("Id funcion\u00E1rio :");
-		lblIdFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblIdFuncionrio.setBounds(264, 116, 119, 22);
-		jpAdmFuncionarios.add(lblIdFuncionrio);
-
-		txtIdFunc = new JTextField();
-		txtIdFunc.setColumns(10);
-		txtIdFunc.setBounds(395, 108, 345, 30);
-		jpAdmFuncionarios.add(txtIdFunc);
-
-		JLabel lblNome = new JLabel("Nome :");
-		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNome.setBounds(319, 149, 64, 25);
-		jpAdmFuncionarios.add(lblNome);
-
-		txtNomeFunc = new JTextField();
-		txtNomeFunc.setColumns(10);
-		txtNomeFunc.setBounds(395, 149, 345, 30);
-		jpAdmFuncionarios.add(txtNomeFunc);
-
-		JLabel lblContacto = new JLabel("Contacto :");
-		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblContacto.setBounds(302, 186, 87, 24);
-		jpAdmFuncionarios.add(lblContacto);
-
-		txtContactoFunc = new JTextField();
-		txtContactoFunc.setColumns(10);
-		txtContactoFunc.setBounds(394, 185, 345, 30);
-		jpAdmFuncionarios.add(txtContactoFunc);
-
-		JLabel lblUsername = new JLabel("Username :");
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUsername.setBounds(292, 231, 97, 16);
-		jpAdmFuncionarios.add(lblUsername);
-
-		JLabel lblPassword = new JLabel("Password :");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPassword.setBounds(292, 270, 97, 21);
-		jpAdmFuncionarios.add(lblPassword);
-
-		txtUsernameFunc = new JTextField();
-		txtUsernameFunc.setColumns(10);
-		txtUsernameFunc.setBounds(394, 226, 345, 30);
-		jpAdmFuncionarios.add(txtUsernameFunc);
-
-		txtPassFunc = new JTextField();
-		txtPassFunc.setColumns(10);
-		txtPassFunc.setBounds(394, 267, 345, 30);
-		jpAdmFuncionarios.add(txtPassFunc);
-
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(32, 29, 200, 22);
-		jpAdmFuncionarios.add(comboBox_1);
-
-		JButton btnConfirmFunc = new JButton("OK");
-		btnConfirmFunc.setBackground(SystemColor.controlHighlight);
-		btnConfirmFunc.setBounds(464, 437, 89, 23);
-		jpAdmFuncionarios.add(btnConfirmFunc);
-
-		JButton btnCancelarFunc = new JButton("Cancelar");
-		btnCancelarFunc.setBackground(SystemColor.controlHighlight);
-		btnCancelarFunc.setBounds(574, 437, 89, 23);
-		jpAdmFuncionarios.add(btnCancelarFunc);
-
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.info);
-		panel.setBounds(490, 308, 140, 115);
-		jpAdmFuncionarios.add(panel);
-		panel.setLayout(null);
-
-		JButton btnNovoFunc = new JButton("Novo");
-		btnNovoFunc.setBackground(SystemColor.controlHighlight);
-		btnNovoFunc.setBounds(25, 11, 89, 23);
-		panel.add(btnNovoFunc);
-
-		JButton btnEliminarFunc = new JButton("Eliminar");
-		btnEliminarFunc.setBackground(SystemColor.controlHighlight);
-		btnEliminarFunc.setBounds(25, 45, 89, 23);
-		panel.add(btnEliminarFunc);
-
-		JButton btnLimparCamposFunc = new JButton("Limpar");
-		btnLimparCamposFunc.setBackground(SystemColor.controlHighlight);
-		btnLimparCamposFunc.setBounds(25, 79, 89, 23);
-		panel.add(btnLimparCamposFunc);
-
 		JPanel jpAdmEstatisticas = new JPanel();
 		jpAdmEstatisticas.setBounds(0, 0, 763, 545);
 		panelPrincipal.add(jpAdmEstatisticas);
@@ -821,6 +825,8 @@ public class AppAdmin implements Serializable {
 
 		// LIVROS
 
+		// pesquisar livros consoante os atributos
+
 		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro");
 		comboBoxAtributoLivro.addItem("Titulo");
 		comboBoxAtributoLivro.addItem("Autor");
@@ -829,21 +835,36 @@ public class AppAdmin implements Serializable {
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				String[] listaTeste = { "a", "b", "c" };
-				listaLivros.setListData(listaTeste);
-
 				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
 
-//					String titulo = txtAtributoPesquisaLivro.getText();
-//					
-//					String [] listaT=gl.getViewComics().listaTitulo(titulo);
+					String titulo = txtAtributo.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloLista);
 				}
 				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
-					
-					
+
+					String autor = txtAtributo.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(autor), modeloLista);
 				}
 
 			}
 		});
+
+		// características do livro seleccionado na JList
+
+		listaLivros.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String livroSelecionado = listaLivros.getSelectedValue();
+				int id = gl.viewComics.obterId(livroSelecionado);
+				Livro l = gl.viewComics.livroId(id);
+				txtTituloLivros.setText(l.getTitulo());
+				txtAutorLivros.setText(l.getAutor());
+				txtStockLivros.setText(Integer.toString(l.getStock()));
+				txtPrecoLivros.setText(Double.toString(l.getPreco()) + "€");
+
+			}
+		});
+
 	}
 }
