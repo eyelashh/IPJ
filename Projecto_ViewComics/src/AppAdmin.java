@@ -34,7 +34,6 @@ import javax.swing.AbstractListModel;
 
 public class AppAdmin implements Serializable {
 
-	// atributos ssss
 
 	private JFrame frame;
 	private JPanel jpAdmFuncionarios;
@@ -64,7 +63,6 @@ public class AppAdmin implements Serializable {
 	private JTextField txtContactoFunc;
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
-
 	private static Utilizador admin;
 	private static GestaoLivraria gl;
 	private JTextField txtTESTE;
@@ -88,9 +86,9 @@ public class AppAdmin implements Serializable {
 	 * Create the application.
 	 */
 	public AppAdmin(Utilizador a, GestaoLivraria gl) {
-		initialize();
 		this.admin = a;
 		this.gl = gl;
+		initialize();
 		
 	}
 
