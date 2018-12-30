@@ -173,7 +173,7 @@ public class Banco implements Serializable {
 			f = null;
 		}
 
-		String[] funcionario = new String[func.size()+1];
+		String[] funcionario = new String[func.size() + 1];
 		funcionario = func.toArray(funcionario);
 
 		return funcionario;
@@ -219,7 +219,7 @@ public class Banco implements Serializable {
 		}
 	}
 
-	//atualiza dados do funcionario
+	// atualiza dados do funcionario
 	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -253,40 +253,24 @@ public class Banco implements Serializable {
 	}
 
 	// atualiza contas
-<<<<<<< HEAD
-	protected void atualizarconta(Conta c, double valorMaxLevantamento, double valorMaxDia, double taxaJuros, double limiteMensalDebito)
-	{
+
+	protected void atualizarconta(Conta c, double valorMaxLevantamento, double valorMaxDia, double taxaJuros,
+			double limiteMensalDebito) {
 		c.setValorMaxLevantamento(valorMaxLevantamento);
 		c.setValorMaxDia(valorMaxDia);
-		
-		if(c instanceof ContaPoupanca)
-		{
+
+		if (c instanceof ContaPoupanca) {
 			((ContaPoupanca) c).setTaxaJuros(taxaJuros);
 			((ContaPoupanca) c).setLimiteMensalDebito(limiteMensalDebito);
-			
+
 		}
-		
-		
-		
+
 	}
-	
-	
-	
-	
-	//elimina contas:
-	protected void eliminaconta(int id, ArrayList<Conta> contas)
-	{
-		for(int i=0; i<contas.size();i++)
-		{
-			if(contas.get(i).getIdConta()== id)
-			{
-=======
 
 	// elimina contas:
 	protected void eliminaconta(int id, ArrayList<Conta> contas) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
->>>>>>> 843575b80a5aa8c29ca772e67b234f4d0d2c93db
 				contas.remove(i);
 			}
 		}
