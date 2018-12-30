@@ -141,25 +141,21 @@ public class Banco implements Serializable {
 		clientes = clts.toArray(clientes);
 		return clientes;
 	}
-	
+
 	// isto lista o numero de contas num array unico:
-	
-	protected String[] listanumerodecontas(ArrayList<Conta> cont)
-	{
+
+	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
 		String[] numcontas = new String[cont.size()];
-		String s="";
-		for(int i=0; i<cont.size(); i++)
-		{
-			s= ""+cont.get(i).getIdConta();
-			numcontas[i]=s;
-			s="";
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+			s = "" + cont.get(i).getIdConta();
+			numcontas[i] = s;
+			s = "";
 		}
-		
+
 		return numcontas;
-		
+
 	}
-	
-	
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
@@ -193,6 +189,17 @@ public class Banco implements Serializable {
 		return u;
 	}
 
+	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
+		Conta c = new Conta();
+
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getIdConta() == numconta) {
+				c = contas.get(i);
+			}
+		}
+		return c;
+	}
+
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
@@ -200,7 +207,6 @@ public class Banco implements Serializable {
 			dm.addElement(s[i]);
 		}
 	}
-	
 
 	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
@@ -211,9 +217,10 @@ public class Banco implements Serializable {
 		}
 	}
 
-	protected void atualizautilizador(Cliente c, String nome, String sobrenome, Date dataDeNascimento, String tipoIndentificacao,
-			int numidentificacao, String morada, int contacto, String username, String password) {
-		
+	protected void atualizautilizador(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
 		c.setNome(nome);
 		c.setSobrenome(sobrenome);
 		c.setDataDeNascimento(dataDeNascimento);
@@ -223,8 +230,6 @@ public class Banco implements Serializable {
 		c.setContacto(contacto);
 		c.setUsername(username);
 		c.setPassword(password);
-		
-		
 
 	}
 }
