@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -124,21 +125,19 @@ public class BancoAppAdm implements Serializable {
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+
+		// logOut
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
 
-					gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
 
-					Login logout = new Login();
-					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					logout.setLocationRelativeTo(frame);
-					logout.setVisible(true);
-					frame.setVisible(false);
+				Login logout = new Login();
+				logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				logout.setLocationRelativeTo(frame);
+				logout.setVisible(true);
+				frame.setVisible(false);
 
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
 			}
 		});
 		btnLogout.setBounds(1070, 30, 143, 42);
@@ -207,12 +206,12 @@ public class BancoAppAdm implements Serializable {
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		cbAdmFunPesq.setBounds(133, 40, 227, 34);
+		cbAdmFunPesq.setBounds(111, 29, 227, 34);
 		JPAdmFuncionario.add(cbAdmFunPesq);
 
 		// caixa de texto para escrever a procura do funcionario
 		JTextField tbAdmFunPesq = new JTextField();
-		tbAdmFunPesq.setBounds(133, 77, 227, 31);
+		tbAdmFunPesq.setBounds(111, 66, 227, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
 
 		// Botao de procurar
@@ -286,16 +285,12 @@ public class BancoAppAdm implements Serializable {
 		lblAdmFunContacto.setBounds(453, 303, 81, 31);
 		JPAdmFuncionario.add(lblAdmFunContacto);
 
-		JScrollBar scrollAdmFunLista = new JScrollBar();
-		scrollAdmFunLista.setBounds(357, 122, 15, 428);
-		JPAdmFuncionario.add(scrollAdmFunLista);
-
 		// lista dos funcionarios
-		JList lbLAdmFunLista = new JList(gb.javabank.listaFunc(gb.javabank.getUtlizadores()));
-		lbLAdmFunLista.setBounds(123, 122, 249, 428);
+		DefaultListModel<String> dmFun = new DefaultListModel<String>();
+		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
+		lbLAdmFunLista.setBounds(109, 109, 240, 441);
+		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
 		JPAdmFuncionario.add(lbLAdmFunLista);
-		DefaultListModel lm = new DefaultListModel();
-		lm.addElement(lbLAdmFunLista);
 
 		// texto : username
 		JLabel lblAdmFunUsername = new JLabel("UserName:");
@@ -818,6 +813,7 @@ public class BancoAppAdm implements Serializable {
 		btAdmFunNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				lbLAdmFunLista.clearSelection();
 				textAdmFunNome.setText(null);
 				textAdmFunSobrenome.setText(null);
 				textAdmFunContato.setText(null);
@@ -835,15 +831,27 @@ public class BancoAppAdm implements Serializable {
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista
-				// algum elemento selecionado da lista faz um update:
-				if (!lbLAdmFunLista.isSelectionEmpty()) {
-					// adicionar Cliente:
+				// valida qual dos botoes estao atualizados:
+				String opselect = "";
+				if (rbAdmFunCC.isSelected()) {
+					opselect = rbAdmFunCC.getText();
+				}
+				if (rbAdmFunBI.isSelected()) {
+					opselect = rbAdmFunBI.getText();
+				}
+				if (rbAdmFunPass.isSelected()) {
+					opselect = rbAdmFunPass.getText();
+				}
 
-					// criar automaticamente o id;
+				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
+				// algum elemento selecionado da lista faz um update:
+				if (lbLAdmFunLista.isSelectionEmpty()) {
+
+					// adicionar Cliente:
+					// criar automaticamente os 2 id;
 					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
 							.getIdUtilizador()) + 1;
-					int id2 = (gb.javabank.getUtlizadores().get(id)).getIdUtilizador() + 1;
+					int id2 = (gb.javabank.getUtlizadores().get(id + 1)).getIdUtilizador() + 1;
 					if (id == 0) {
 						id++;
 					}
@@ -852,44 +860,95 @@ public class BancoAppAdm implements Serializable {
 						id2++;
 					}
 
-					// valida qual dos botoes estao atualizados:
-					String opselect = "";
-					if (rbAdmFunCC.isSelected()) {
-						opselect = rbAdmFunCC.getText();
-					}
-					if (rbAdmFunBI.isSelected()) {
-						opselect = rbAdmFunBI.getText();
-					}
-					if (rbAdmFunPass.isSelected()) {
-						opselect = rbAdmFunPass.getText();
-					}
-
 					// esta a criar o novo funcionario:
-					Utilizador func = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+					Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
 							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
 							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
 							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
-					gb.javabank.getUtlizadores().add(func);
+					gb.javabank.getUtlizadores().add(fun);
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
 
 				} else {
-					// atualizar Cliente:
-					
-					
+					// atualizar Funcionario:
+					// seleciona id;
+					String s = (String) lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+
+					// metedo para atualizar:
+					gb.javabank.actualizaFun(
+							(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
+									gb.javabank.getUtlizadores()),
+							textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
+							Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
+							Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
+							textAdmFunPass.getText());
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+					JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
 
 				}
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText("");
+				textAdmFunSobrenome.setText("");
+				textAdmFunMorada.setText(null);
+				textAdmFunContato.setText(null);
+				bg.clearSelection();
+				textAdmFunUser.setText("");
+				textAdmFunPass.setText("");
+				textAdmFunNumero.setText("");
+				dateChooser.setDate(null);
+
+			}
+		});
+
+		// metodo elimina funcionario
+		btnAdmFunEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (!lbLAdmFunLista.isSelectionEmpty()) {
+
+					// ver o id selecionado
+					String s = lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+
+					gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					JOptionPane.showMessageDialog(null, "Funcionario eliminado com sucesso!");
+				}
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText("");
+				textAdmFunSobrenome.setText("");
+				textAdmFunMorada.setText(null);
+				textAdmFunContato.setText(null);
+				bg.clearSelection();
+				textAdmFunUser.setText("");
+				textAdmFunPass.setText("");
+				textAdmFunNumero.setText("");
+				dateChooser.setDate(null);
 
 			}
 		});
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
 
-		/*lbClt.addListSelectionListener(new ListSelectionListener() {
-
 		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
+				bg.clearSelection();
 				if (!lbLAdmFunLista.isSelectionEmpty()) {
-					
+
 					String s = (String) lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
@@ -915,35 +974,6 @@ public class BancoAppAdm implements Serializable {
 
 				}
 			}
-		});*/
-
-		btAdmFunProc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(tbAdmFunPesq.getText().equals(gb.javabank.getUtlizadores().get(0).getNome())){
-				
-				String s = (String) tbAdmFunPesq.getText();
-				s= s.substring(0, s.indexOf("*"));
-				Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-
-
-				textAdmFunNome.setText(c.getNome());
-				textAdmFunSobrenome.setText(c.getSobrenome());
-				textAdmFunMorada.setText(c.getMorada());
-				textAdmFunContato.setText(""+c.getContacto());
-				textAdmFunUser.setText(c.getUsername());
-				textAdmFunPass.setText(c.getPassword());
-				textAdmFunNumero.setText(""+c.getNumidentificacao());
-				
-				
-				lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent e) {
-				c.getIdUtilizador();
-				c.getNome();
-			}
-		});
-				}
-		}
 		});
 
 	}
