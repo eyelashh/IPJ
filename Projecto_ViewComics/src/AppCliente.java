@@ -92,31 +92,7 @@ public class AppCliente implements Serializable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JPanel JPanelCabecalho = new JPanel() {
-			@Override
-			// o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou
-					// do
-					// ficheiro
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(""));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
-
+		JPanel JPanelCabecalho = new JPanel();
 		JPanelCabecalho.setBackground(new Color(255, 215, 0));
 
 		JPanelCabecalho.setBounds(0, 0, 1264, 183);

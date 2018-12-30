@@ -25,7 +25,7 @@ public class GestaoLivraria implements Serializable{
 		iS = null;
 		// CRIA FICHEIROS:
 		this.fileUtilizadores = new File("fileUtilizadores.dat");
-		this.fileCarrinhos = new File("fileContas.dat");
+		this.fileCarrinhos = new File("fileCarrinhos.dat");
 		this.fileLivros = new File("fileLivros.dat");
 	}
 	
