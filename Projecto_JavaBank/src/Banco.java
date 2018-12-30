@@ -139,27 +139,10 @@ public class Banco implements Serializable {
 
 		String[] clientes = new String[clts.size()];
 		clientes = clts.toArray(clientes);
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		return clientes;
 	}
 
-<<<<<<< HEAD
-	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
-	// Strings para ser recebido nas listas de funcionario!
-	protected String[] listaFunc(ArrayList<Utilizador> fun) {
-		ArrayList<String> func = new ArrayList<String>();
-		String f = "";
-
-		for (int i = 0; i < fun.size(); i++) {
-			if (fun.get(i) instanceof Funcionario) {
-				f = fun.get(i).getIdUtilizador() + "*" + fun.get(i).getNome();
-				func.add(f);
-			}
-			f = null;
-=======
 	// isto lista o numero de contas num array unico:
 
 	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
@@ -169,11 +152,9 @@ public class Banco implements Serializable {
 			s = "" + cont.get(i).getIdConta();
 			numcontas[i] = s;
 			s = "";
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 		}
 
-<<<<<<< HEAD
-=======
 		return numcontas;
 
 	}
@@ -186,14 +167,13 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < fun.size(); i++) {
 			if (fun.get(i) instanceof Funcionario) {
-				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome();
+				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome() + " " + fun.get(i).getSobrenome();
 				func.add(f);
 			}
 			f = null;
 		}
 
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
-		String[] funcionario = new String[func.size()];
+		String[] funcionario = new String[func.size()+1];
 		funcionario = func.toArray(funcionario);
 
 		return funcionario;
@@ -211,8 +191,6 @@ public class Banco implements Serializable {
 		return u;
 	}
 
-<<<<<<< HEAD
-=======
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
 		Conta c = new Conta();
 
@@ -224,7 +202,6 @@ public class Banco implements Serializable {
 		return c;
 	}
 
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
@@ -241,7 +218,25 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	// atualiza dados do Cliente; 
+
+	//atualiza dados do funcionario
+	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
+		f.setNome(nome);
+		f.setSobrenome(sobrenome);
+		f.setDataDeNascimento(dataDeNascimento);
+		f.setTipoIndentificacao(tipoIndentificacao);
+		f.setNumidentificacao(numidentificacao);
+		f.setMorada(morada);
+		f.setContacto(contacto);
+		f.setUsername(username);
+		f.setPassword(password);
+
+	}
+
+	// atualiza dados do Cliente;
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -256,22 +251,16 @@ public class Banco implements Serializable {
 		c.setUsername(username);
 		c.setPassword(password);
 	}
-	
+
 	// atualiza contas
-	
-	
-	
-	
-	//elimina contas:
-	protected void eliminaconta(int id, ArrayList<Conta> contas)
-	{
-		for(int i=0; i<contas.size();i++)
-		{
-			if(contas.get(i).getIdConta()== id)
-			{
+
+	// elimina contas:
+	protected void eliminaconta(int id, ArrayList<Conta> contas) {
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getIdConta() == id) {
 				contas.remove(i);
 			}
 		}
-		
+
 	}
 }
