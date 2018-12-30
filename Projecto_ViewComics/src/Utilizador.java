@@ -19,7 +19,7 @@ public class Utilizador implements  Serializable {
 
 	public Utilizador(int id, String nome, int contato, String username, String password) {
 		super();
-		this.id = count.incrementandGet();
+		this.id = id;
 		this.nome = nome;
 		this.contato = contato;
 		this.username = username;
