@@ -207,9 +207,11 @@ public class Banco implements Serializable {
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
+			
 		}
 	}
-
+	
+	
 	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
 		for (int i = 0; i < utilizador.size(); i++) {
