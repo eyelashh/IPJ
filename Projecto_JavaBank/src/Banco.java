@@ -139,9 +139,27 @@ public class Banco implements Serializable {
 
 		String[] clientes = new String[clts.size()];
 		clientes = clts.toArray(clientes);
-
 		return clientes;
 	}
+	
+	// isto lista o numero de contas num array unico:
+	
+	protected String[] listanumerodecontas(ArrayList<Conta> cont)
+	{
+		String[] numcontas = new String[cont.size()];
+		String s="";
+		for(int i=0; i<cont.size(); i++)
+		{
+			s= ""+cont.get(i).getIdConta();
+			numcontas[i]=s;
+			s="";
+		}
+		
+		return numcontas;
+		
+	}
+	
+	
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
@@ -182,7 +200,9 @@ public class Banco implements Serializable {
 			dm.addElement(s[i]);
 		}
 	}
+	
 
+	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
 		for (int i = 0; i < utilizador.size(); i++) {
 			if (utilizador.get(i).getIdUtilizador() == id) {

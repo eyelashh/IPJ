@@ -1,10 +1,11 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Conta implements Serializable{
 	private int idConta;
-	private LocalDate dataCriacao;
+	private Date dataCriacao;
 	private double saldo;
 	private ArrayList <Operacao> operacoes;
 	private ArrayList <Cliente> clientes;
@@ -16,7 +17,7 @@ public class Conta implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
  
-	public Conta(int idConta, LocalDate dataCriacao, double saldo, ArrayList<Operacao> operacoes,
+	public Conta(int idConta, Date dataCriacao, double saldo, ArrayList<Operacao> operacoes,
 			ArrayList<Cliente> clientes, double valorMaxLevantamento, double valorMaxDia) {
 		super();
 		this.idConta = idConta;
@@ -28,6 +29,8 @@ public class Conta implements Serializable{
 		this.valorMaxDia = valorMaxDia;
 	}
 
+	
+
 	public int getIdConta() {
 		return idConta;
 	}
@@ -36,11 +39,11 @@ public class Conta implements Serializable{
 		this.idConta = idConta;
 	}
 
-	public LocalDate getDataCriacao() {
+	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(LocalDate dataCriacao) {
+	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
