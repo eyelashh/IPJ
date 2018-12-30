@@ -159,6 +159,7 @@ public class BancoAppAdm implements Serializable {
 		lblBemVindo.setBounds(348, 41, 243, 52);
 		JpanelCabecalho.add(lblBemVindo);
 
+		
 		// texto no cabeçalho : utilizador
 		JLabel lUtilizador = new JLabel(adm.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
