@@ -280,15 +280,24 @@ public class Livraria implements Serializable {
 	// POR TITULO
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
-		String livro = "";
+		
 		String[] listaLivros = new String[this.livros.size()];
-		int i = 0;
-		for (Livro l : livros) {
-			listaLivros[i] = l.toString();
-			i++;
-			livro = "";
+		String livro = "";
+		for(int i=0; i<livros.size();i++)
+		{
+			livro = ""+livros.get(i).getIdLivro();
+			listaLivros[i]= livro;
+			livro="";
 		}
-
+		//int i = 0;
+		//for (Livro l : livros) {
+		//	listaLivros[i] = l.toString();
+			//i++;
+		//	livro = "";
+		//}
+		
+		
+		
 		return listaLivros;
 	}
 

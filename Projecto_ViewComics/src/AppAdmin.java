@@ -79,7 +79,7 @@ public class AppAdmin implements Serializable {
 			AppAdmin window = new AppAdmin(admin, gl);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	// });
@@ -88,9 +88,9 @@ public class AppAdmin implements Serializable {
 	 * Create the application.
 	 */
 	public AppAdmin(Utilizador a, GestaoLivraria gl) {
-		initialize();
 		this.admin = a;
 		this.gl = gl;
+		initialize();
 	}
 
 	/**
@@ -101,8 +101,7 @@ public class AppAdmin implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),gl.getViewComics().getLivros());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -247,9 +246,8 @@ public class AppAdmin implements Serializable {
 		//LISTAR LIVROS
 		DefaultListModel<String>modeloListaLivros=new DefaultListModel<String>();
 		JList<String> listaLivros = new JList<String>(modeloListaLivros);
-		listaLivros.setBounds(22, 150, 190, 395);
-		String [] arrayLivros= gl.viewComics.arrayLivros(gl.viewComics.getLivros());
-		gl.viewComics.addArrayLista(arrayLivros, modeloListaLivros);
+		listaLivros.setBounds(22, 118, 190, 427);
+		gl.viewComics.addArrayLista( gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 		jpAdmLivros.add(listaLivros);
 
 		JLabel lblNewLabel = new JLabel("Nome:");

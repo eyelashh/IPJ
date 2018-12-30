@@ -20,7 +20,7 @@ public class GestaoLivraria implements Serializable{
 	
 	// Construtor:
 	public GestaoLivraria() {
-		// INICIALIZA O BANCO:
+		// INICIALIZA O A LIVRARIA:
 		this.viewComics = new Livraria();
 		iS = null;
 		// CRIA FICHEIROS:
@@ -49,8 +49,8 @@ public class GestaoLivraria implements Serializable{
 		// CASO 1--> � criado 1 admin e 1 funcionario
 		if(!this.fileUtilizadores.exists())
 		{
-			Utilizador adm = new Administrador(-1,"Admin_nome",96666666,"adminusername","adminpass");
-			Utilizador fun = new Funcionario(-2,"Func_nome",93333333,"funusername","funpass");
+			Utilizador adm = new Administrador(-1,"Admin_nome",96666666,"admin","admin");
+			Utilizador fun = new Funcionario(-2,"Func_nome",93333333,"func","func");
 			viewComics.addUtilizador(adm);
 			viewComics.addUtilizador(fun);
 			
