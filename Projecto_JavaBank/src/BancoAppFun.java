@@ -77,6 +77,7 @@ public class BancoAppFun implements Serializable {
 	private JTextField tblJuros;
 	private JTextField tbllimitemes;
 	private JList lContas;
+	private JDateChooser dateChooser_2;
 
 	/**
 	 * Launch the application.
@@ -221,7 +222,7 @@ public class BancoAppFun implements Serializable {
 		// Lista contas painel conta:
 		DefaultListModel<String> dmconta = new DefaultListModel<String>();
 		lContas = new JList(dmconta);
-		
+
 		lContas.setBounds(24, 99, 240, 471);
 		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
 		jpanelContas.add(lContas);
@@ -267,6 +268,7 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(btContasNovo);
 
 		JButton btContasEliminar = new JButton("Eliminar");
+		
 		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btContasEliminar.setBounds(484, 523, 120, 38);
 		jpanelContas.add(btContasEliminar);
@@ -276,7 +278,7 @@ public class BancoAppFun implements Serializable {
 		lblClientes_1.setBounds(758, 19, 164, 24);
 		jpanelContas.add(lblClientes_1);
 
-		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2 = new JDateChooser();
 		dateChooser_2.setBounds(448, 168, 279, 31);
 		jpanelContas.add(dateChooser_2);
 
@@ -304,60 +306,60 @@ public class BancoAppFun implements Serializable {
 		tbContaslimitelevdia = new JTextField();
 		tbContaslimitelevdia.setBounds(448, 293, 279, 31);
 		jpanelContas.add(tbContaslimitelevdia);
-		
+
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btnPesquisar.setBounds(257, 11, 99, 38);
 		jpanelContas.add(btnPesquisar);
-		
+
 		JLabel lblTipo = new JLabel("Tipo:");
 		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblTipo.setBounds(379, 63, 44, 24);
 		jpanelContas.add(lblTipo);
-		
+
 		JLabel lblDia = new JLabel("Por Opera\u00E7ao:");
 		lblDia.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblDia.setBounds(304, 250, 119, 24);
 		jpanelContas.add(lblDia);
-		
+
 		tblJuros = new JTextField();
 		tblJuros.setVisible(false);
 		tblJuros.setBounds(448, 381, 279, 31);
 		jpanelContas.add(tblJuros);
-		
+
 		JLabel lblJuros = new JLabel("Juros (%):");
 		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblJuros.setBounds(352, 382, 83, 24);
 		jpanelContas.add(lblJuros);
 		lblJuros.setVisible(false);
-		
+
 		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
 		rdbtnContaCorrente.setSelected(true);
-		
+
 		rdbtnContaCorrente.setBounds(447, 65, 132, 25);
 		jpanelContas.add(rdbtnContaCorrente);
-		
+
 		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
-		
+
 		rdbtnContaPoupanca.setBounds(583, 65, 144, 25);
 		jpanelContas.add(rdbtnContaPoupanca);
-		
+
 		ButtonGroup bgconta = new ButtonGroup();
 		bgconta.add(rdbtnContaPoupanca);
 		bgconta.add(rdbtnContaCorrente);
-		
+
 		tbllimitemes = new JTextField();
 		tbllimitemes.setVisible(false);
 		tbllimitemes.setBounds(450, 425, 277, 31);
 		jpanelContas.add(tbllimitemes);
 		tbllimitemes.setColumns(10);
-		
+
 		JLabel lbllimitemes = new JLabel("Limite Mes:");
 		lbllimitemes.setVisible(false);
 		lbllimitemes.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lbllimitemes.setBounds(346, 426, 90, 24);
 		jpanelContas.add(lbllimitemes);
-		
+
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
 		jpanelClientes.setBounds(0, 0, 1042, 576);
@@ -1086,7 +1088,7 @@ public class BancoAppFun implements Serializable {
 					s = s.substring(0, s.indexOf("*"));
 
 					// metedo para atualizar:
-					gb.javabank.atualizautilizador(
+					gb.javabank.atualizacliente(
 							(Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()),
 							tbCltNome.getText(), tbCltApelido.getText(), dateChooser_3.getDate(), opselect,
 							Integer.parseInt(tbCltNum.getText()), tbCltMorada.getText(),
@@ -1170,64 +1172,63 @@ public class BancoAppFun implements Serializable {
 				// atualiza lista:
 				dmclt.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-				
 
 			}
 		});
 
 		// metedos depainel de contas:
-		
+
 		// muda a conta corrente e conta ordem
 		rdbtnContaCorrente.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(rdbtnContaCorrente.isSelected())
-				{
+				if (rdbtnContaCorrente.isSelected()) {
 					lblJuros.setVisible(false);
-					tblJuros.setVisible(false);	
+					tblJuros.setVisible(false);
 					lbllimitemes.setVisible(false);
 					tbllimitemes.setVisible(false);
-				
+
 				}
-				
+
 			}
 		});
-		
+
 		rdbtnContaPoupanca.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if(rdbtnContaPoupanca.isSelected())
-				{
-				lblJuros.setVisible(true);
-				tblJuros.setVisible(true);
-				lbllimitemes.setVisible(true);
-				tbllimitemes.setVisible(true);
+				if (rdbtnContaPoupanca.isSelected()) {
+					lblJuros.setVisible(true);
+					tblJuros.setVisible(true);
+					lbllimitemes.setVisible(true);
+					tbllimitemes.setVisible(true);
 				}
 			}
 		});
-		
 
 		// adicionar nova conta ou atualizar:
 		btContasConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if (lContas.isSelectionEmpty()) {
-					System.out.println("teste2");
 
 					ArrayList<Operacao> o = new ArrayList<Operacao>();
 					ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-					Cartao cartao= new Cartao();
-					
-					if(rdbtnContaCorrente.isSelected())
-					{
-						Conta c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),Double.parseDouble(tbContasSaldo.getText()), o, cliente,Double.parseDouble(tbContaslimitelevop.getText()),Double.parseDouble(tbContaslimitelevdia.getText()), cartao);
+					Cartao cartao = new Cartao();
+
+					if (rdbtnContaCorrente.isSelected()) {
+						Conta c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+								Double.parseDouble(tbContasSaldo.getText()), o, cliente,
+								Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()), cartao);
+						gb.javabank.getContas().add(c);
+					} else {
+
+						Conta c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+								Double.parseDouble(tbContasSaldo.getText()), o, cliente,
+								Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()),
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 						gb.javabank.getContas().add(c);
 					}
-					else
-					{
-						
-						Conta c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()),dateChooser_2.getDate(),Double.parseDouble(tbContasSaldo.getText()), o, cliente,Double.parseDouble(tbContaslimitelevop.getText()),Double.parseDouble(tbContaslimitelevdia.getText()),Double.parseDouble(tblJuros.getText()),Double.parseDouble(tbllimitemes.getText()));
-						gb.javabank.getContas().add(c);
-					}
-					
+
 				} else {
 					// atualizar:
 
@@ -1251,7 +1252,7 @@ public class BancoAppFun implements Serializable {
 		// limpar campos:
 		btContaslimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				lContas.clearSelection();
 				tbContasnum.setText(null);
 				dateChooser_2.setDate(null);
@@ -1259,9 +1260,11 @@ public class BancoAppFun implements Serializable {
 				tbContasSaldo.setText(null);
 				tbContasSaldo.setEditable(false);
 				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(false);
+				rdbtnContaCorrente.setSelected(true);
 				rdbtnContaPoupanca.setSelected(false);
 				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
 			}
 		});
 
@@ -1272,41 +1275,81 @@ public class BancoAppFun implements Serializable {
 				if (gb.javabank.getContas().size() == 0) {
 					numconta = 1;
 				} else {
-					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size()-1).getIdConta()+1 ;
+					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size() - 1).getIdConta() + 1;
 				}
 				lContas.clearSelection();
-				tbContasnum.setText(""+numconta);
+				tbContasnum.setText("" + numconta);
 				dateChooser_2.setDate(null);
 				tbContaslimitelevop.setText(null);
 				tbContasSaldo.setText(null);
 				tbContasSaldo.setEditable(true);
+				dateChooser_2.setEnabled(true);
 				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(false);
+				rdbtnContaCorrente.setSelected(true);
 				rdbtnContaPoupanca.setSelected(false);
 				tblJuros.setText(null);
-
-				
+				tbllimitemes.setText(null);
 
 			}
 		});
 		// selecionar conta e preencher so campos correctos:
 		lContas.addListSelectionListener(new ListSelectionListener() {
+
 			public void valueChanged(ListSelectionEvent e) {
-			Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),gb.javabank.getContas());
-			
-			if(c instanceof ContaCorrente)
-			{
-				
-			}
-			else
-			{
-				
-			}
-			
-			
-			
+				if (!lContas.isSelectionEmpty()) {
+
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+							gb.javabank.getContas());
+					tbContasnum.setText("" + c.getIdConta());
+					dateChooser_2.setDate(c.getDataCriacao());
+					dateChooser_2.setEnabled(false);
+					tbContaslimitelevop.setText("" + c.getValorMaxLevantamento());
+					tbContasSaldo.setText("" + c.getSaldo());
+					tbContasSaldo.setEditable(false);
+					tbContaslimitelevdia.setText(c.getValorMaxDia() + "");
+					
+					
+					if (c instanceof ContaPoupanca) {
+						rdbtnContaPoupanca.setSelected(true);
+						rdbtnContaCorrente.setSelected(false);
+						Double juros = ((ContaPoupanca) c).getTaxaJuros();
+						tblJuros.setText(juros + "");
+						Double limite = ((ContaPoupanca) c).getLimiteMensalDebito();
+						tbllimitemes.setText("" + limite);
+					}
+					else
+					{
+						rdbtnContaPoupanca.setSelected(false);
+						rdbtnContaCorrente.setSelected(true);
+					}
+
+				}
 			}
 		});
-	
+		
+		btContasEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(!lContas.isSelectionEmpty())
+				{
+				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());	
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				}
+				
+			}
+		});
+		
+
 	}
 }

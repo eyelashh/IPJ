@@ -216,8 +216,8 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-
-	protected void atualizautilizador(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
+	// atualiza dados do Cliente; 
+	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 
@@ -230,6 +230,23 @@ public class Banco implements Serializable {
 		c.setContacto(contacto);
 		c.setUsername(username);
 		c.setPassword(password);
-
+	}
+	
+	// atualiza contas
+	
+	
+	
+	
+	//elimina contas:
+	protected void eliminaconta(int id, ArrayList<Conta> contas)
+	{
+		for(int i=0; i<contas.size();i++)
+		{
+			if(contas.get(i).getIdConta()== id)
+			{
+				contas.remove(i);
+			}
+		}
+		
 	}
 }
