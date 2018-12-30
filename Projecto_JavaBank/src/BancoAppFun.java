@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -51,7 +52,7 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbCltUser;
 	private JTextField tbCltPass;
 	private JTextField tbContasnum;
-	private JTextField tbContaslimitelev;
+	private JTextField tbContaslimitelevop;
 	private JTextField tbGestaoUsername;
 	private JTextField tbGestaopass;
 	private JTextField tbGestaoNovoUser;
@@ -68,6 +69,9 @@ public class BancoAppFun implements Serializable {
 	private static GestaoBanco gb;
 	private JTextField tbCltApelido;
 	private JTextField tbCltNum;
+	private JTextField tbContasSaldo;
+	private JTextField tbContaslimitelevdia;
+	private JTextField tblJuros;
 
 	/**
 	 * Launch the application.
@@ -197,6 +201,128 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
 
+		jpanelContas.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelContas);
+		jpanelContas.setLayout(null);
+
+		JComboBox cbContaspesqconta = new JComboBox();
+		cbContaspesqconta.setBounds(26, 12, 219, 38);
+		jpanelContas.add(cbContaspesqconta);
+
+		JTextField tbContaspesqconta = new JTextField();
+		tbContaspesqconta.setBounds(26, 63, 219, 31);
+		jpanelContas.add(tbContaspesqconta);
+
+		// Lista contas painel conta:
+		DefaultListModel<String> dmconta = new DefaultListModel<String>();
+		JList lContas = new JList(dmconta);
+		lContas.setBounds(24, 99, 240, 471);
+		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+		jpanelContas.add(lContas);
+
+		JList lClientes = new JList();
+		lClientes.setBounds(758, 44, 240, 526);
+		jpanelContas.add(lClientes);
+
+		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
+		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNewLabel_2.setBounds(324, 157, 113, 24);
+		jpanelContas.add(lblNewLabel_2);
+
+		JLabel lblDataDeCriacao = new JLabel("Data da Cria\u00E7\u00E3o");
+		lblDataDeCriacao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDeCriacao.setBounds(305, 207, 132, 24);
+		jpanelContas.add(lblDataDeCriacao);
+
+		JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
+		lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblLimiteDeLevantamento.setBounds(486, 251, 183, 24);
+		jpanelContas.add(lblLimiteDeLevantamento);
+
+		tbContasnum = new JTextField();
+		tbContasnum.setEditable(false);
+		tbContasnum.setBounds(449, 156, 279, 31);
+		jpanelContas.add(tbContasnum);
+
+		tbContaslimitelevop = new JTextField();
+		tbContaslimitelevop.setBounds(449, 288, 279, 31);
+		jpanelContas.add(tbContaslimitelevop);
+
+		JButton btContasConfirmar = new JButton("Confirmar");
+
+		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasConfirmar.setBounds(470, 472, 120, 38);
+		jpanelContas.add(btContasConfirmar);
+
+		JButton btContasNovo = new JButton("Novo");
+
+		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasNovo.setBounds(352, 523, 120, 38);
+		jpanelContas.add(btContasNovo);
+
+		JButton btContasEliminar = new JButton("Eliminar");
+		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasEliminar.setBounds(484, 523, 120, 38);
+		jpanelContas.add(btContasEliminar);
+
+		JLabel lblClientes_1 = new JLabel("Clientes");
+		lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblClientes_1.setBounds(758, 19, 164, 24);
+		jpanelContas.add(lblClientes_1);
+
+		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2.setBounds(449, 207, 279, 31);
+		jpanelContas.add(dateChooser_2);
+
+		tbContasSaldo = new JTextField();
+		tbContasSaldo.setEditable(false);
+		tbContasSaldo.setBounds(449, 376, 279, 31);
+		jpanelContas.add(tbContasSaldo);
+
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblSaldo.setBounds(367, 377, 57, 24);
+		jpanelContas.add(lblSaldo);
+
+		JButton btContaslimpar = new JButton("Limpar");
+
+		btContaslimpar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btContaslimpar.setBounds(626, 523, 120, 38);
+		jpanelContas.add(btContaslimpar);
+
+		JLabel lblLimiteDeLevantamento_1 = new JLabel("Por dia:");
+		lblLimiteDeLevantamento_1.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblLimiteDeLevantamento_1.setBounds(357, 333, 67, 24);
+		jpanelContas.add(lblLimiteDeLevantamento_1);
+
+		tbContaslimitelevdia = new JTextField();
+		tbContaslimitelevdia.setBounds(449, 332, 279, 31);
+		jpanelContas.add(tbContaslimitelevdia);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnPesquisar.setBounds(257, 11, 99, 38);
+		jpanelContas.add(btnPesquisar);
+		
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblTipo.setBounds(380, 102, 44, 24);
+		jpanelContas.add(lblTipo);
+		
+		JLabel lblDia = new JLabel("Por Opera\u00E7ao:");
+		lblDia.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblDia.setBounds(305, 289, 119, 24);
+		jpanelContas.add(lblDia);
+		
+		tblJuros = new JTextField();
+		tblJuros.setBounds(449, 428, 279, 31);
+		jpanelContas.add(tblJuros);
+		
+		JLabel lblJuros = new JLabel("Juros (%):");
+		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblJuros.setBounds(354, 429, 83, 24);
+		jpanelContas.add(lblJuros);
+
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
 		jpanelClientes.setBounds(0, 0, 1042, 576);
@@ -220,7 +346,7 @@ public class BancoAppFun implements Serializable {
 		scrollBar_2.setBounds(273, 92, 15, 441);
 		jpanelClientes.add(scrollBar_2);
 
-		// lista de clientes;
+		// lista de clientes no painel de clientes;
 		DefaultListModel<String> dmclt = new DefaultListModel<String>();
 		JList<String> lbClt = new JList<String>(dmclt);
 		lbClt.setBounds(48, 92, 240, 441);
@@ -538,106 +664,6 @@ public class BancoAppFun implements Serializable {
 		btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btLevCancelar.setBounds(273, 224, 120, 38);
 		JpanelOpLevantamento.add(btLevCancelar);
-
-		jpanelContas.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelContas);
-		jpanelContas.setLayout(null);
-
-		JComboBox cbContaspesqconta = new JComboBox();
-		cbContaspesqconta.setBounds(61, 40, 219, 38);
-		jpanelContas.add(cbContaspesqconta);
-
-		JTextField tbContaspesqconta = new JTextField();
-		tbContaspesqconta.setBounds(61, 84, 219, 31);
-		jpanelContas.add(tbContaspesqconta);
-
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(983, 129, 15, 441);
-		jpanelContas.add(scrollBar);
-
-		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(279, 127, 15, 441);
-		jpanelContas.add(scrollBar_1);
-
-		JCheckBox chckbxBruno = new JCheckBox("Bruno");
-		chckbxBruno.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		chckbxBruno.setBounds(776, 163, 128, 23);
-		jpanelContas.add(chckbxBruno);
-
-		JCheckBox checkBoxJoana = new JCheckBox("Joana");
-		checkBoxJoana.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		checkBoxJoana.setBounds(776, 233, 128, 23);
-		jpanelContas.add(checkBoxJoana);
-
-		JCheckBox checkBoxTamara = new JCheckBox("Tamara");
-		checkBoxTamara.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		checkBoxTamara.setBounds(776, 198, 128, 23);
-		jpanelContas.add(checkBoxTamara);
-
-		JList lContas = new JList();
-		lContas.setBounds(54, 127, 240, 442);
-		jpanelContas.add(lContas);
-
-		JList lClientes = new JList();
-		lClientes.setBounds(758, 128, 240, 442);
-		jpanelContas.add(lClientes);
-
-		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
-		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_2.setBounds(378, 128, 113, 24);
-		jpanelContas.add(lblNewLabel_2);
-
-		JLabel lblDataDeOperao = new JLabel("Data da operação:");
-		lblDataDeOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDeOperao.setBounds(378, 205, 240, 24);
-		jpanelContas.add(lblDataDeOperao);
-
-		JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
-		lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblLimiteDeLevantamento.setBounds(378, 286, 219, 24);
-		jpanelContas.add(lblLimiteDeLevantamento);
-
-		tbContasnum = new JTextField();
-		tbContasnum.setBounds(388, 162, 279, 31);
-		jpanelContas.add(tbContasnum);
-
-		tbContaslimitelev = new JTextField();
-		tbContaslimitelev.setBounds(388, 316, 279, 31);
-		jpanelContas.add(tbContaslimitelev);
-
-		JButton btContasConfirmar = new JButton("Confirmar");
-		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasConfirmar.setBounds(389, 391, 120, 38);
-		jpanelContas.add(btContasConfirmar);
-
-		JButton btContasCancelar = new JButton("Limpar");
-		btContasCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasCancelar.setBounds(536, 391, 120, 38);
-		jpanelContas.add(btContasCancelar);
-
-		JButton btContasNovo = new JButton("Novo");
-		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasNovo.setBounds(317, 464, 120, 38);
-		jpanelContas.add(btContasNovo);
-
-		JButton btContasEliminar = new JButton("Eliminar");
-		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasEliminar.setBounds(461, 464, 120, 38);
-		jpanelContas.add(btContasEliminar);
-
-		JButton btContasLimpar = new JButton("Cancelar");
-		btContasLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasLimpar.setBounds(608, 464, 120, 38);
-		jpanelContas.add(btContasLimpar);
-
-		JLabel lblClientes_1 = new JLabel("Clientes");
-		lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblClientes_1.setBounds(759, 98, 164, 24);
-		jpanelContas.add(lblClientes_1);
-
-		JDateChooser dateChooser_2 = new JDateChooser();
-		dateChooser_2.setBounds(388, 243, 279, 31);
-		jpanelContas.add(dateChooser_2);
 		jpanelGestao.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelGestao);
 		jpanelGestao.setLayout(null);
@@ -976,6 +1002,8 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
+		// painel de clientes:
+
 		// bt confirmar (adicionar ou alterar )
 		btCltconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1016,15 +1044,12 @@ public class BancoAppFun implements Serializable {
 					dmclt.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
 
-					
-					
-
 				} else {
 					// atualizar Cliente:
 					// seleciona id;
 					String s = (String) lbClt.getSelectedValue();
 					s = s.substring(0, s.indexOf("*"));
-					
+
 					// metedo para atualizar:
 					gb.javabank.atualizautilizador(
 							(Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()),
@@ -1033,7 +1058,7 @@ public class BancoAppFun implements Serializable {
 							Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(), tbCltPass.getText());
 
 				}
-				
+
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
 				tbCltNome.setText("");
@@ -1089,6 +1114,9 @@ public class BancoAppFun implements Serializable {
 				String s = lbClt.getSelectedValue();
 				s = s.substring(0, s.indexOf("*"));
 
+				// elimina o cliente:
+				gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
 				// depois limpa os campos do formulario:
 				lbClt.clearSelection();
 				lbCltConta.clearSelection();
@@ -1102,10 +1130,6 @@ public class BancoAppFun implements Serializable {
 				tbCltNum.setText("");
 				dateChooser_3.setDate(null);
 
-				gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-
-				///
-
 				// atualiza lista:
 				dmclt.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
@@ -1113,6 +1137,65 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
-	}
+		// painel de contas:
 
+		// adicionar nova conta ou atualizar:
+		btContasConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		// limpar campos:
+		btContaslimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContasnum.setText(null);
+				tbContaslimitelevdia.setText(null);
+			}
+		});
+
+		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
+		btContasNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (lContas.isSelectionEmpty()) {
+
+					int numconta;
+					if (gb.javabank.getContas().size() == 0) {
+						numconta = 1;
+					} else {
+						numconta = gb.javabank.getContas().get(gb.javabank.getContas().size()).getIdConta() + 1;
+					}
+
+					ArrayList<Operacao> o = new ArrayList<Operacao>();
+					ArrayList<Cliente> conta = new ArrayList<Cliente>();
+					Conta c = new Conta(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+							Double.parseDouble(tbContasSaldo.getText()), o, conta,
+							Double.parseDouble(tbContaslimitelevop.getText()),
+							Double.parseDouble(tbContaslimitelevdia.getText()));
+					gb.javabank.getContas().add(c);
+				} else {
+					// atualizar:
+
+				}
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContasnum.setText(null);
+				tbContaslimitelevdia.setText(null);
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+
+			}
+		});
+	}
 }
