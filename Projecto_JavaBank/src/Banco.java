@@ -139,6 +139,7 @@ public class Banco implements Serializable {
 
 		String[] clientes = new String[clts.size()];
 		clientes = clts.toArray(clientes);
+
 		return clientes;
 	}
 
@@ -151,6 +152,7 @@ public class Banco implements Serializable {
 			s = "" + cont.get(i).getIdConta();
 			numcontas[i] = s;
 			s = "";
+
 		}
 
 		return numcontas;
@@ -165,13 +167,13 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < fun.size(); i++) {
 			if (fun.get(i) instanceof Funcionario) {
-				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome();
+				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome() + " " + fun.get(i).getSobrenome();
 				func.add(f);
 			}
 			f = null;
 		}
 
-		String[] funcionario = new String[func.size()];
+		String[] funcionario = new String[func.size()+1];
 		funcionario = func.toArray(funcionario);
 
 		return funcionario;
@@ -216,7 +218,25 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	// atualiza dados do Cliente; 
+
+	//atualiza dados do funcionario
+	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
+		f.setNome(nome);
+		f.setSobrenome(sobrenome);
+		f.setDataDeNascimento(dataDeNascimento);
+		f.setTipoIndentificacao(tipoIndentificacao);
+		f.setNumidentificacao(numidentificacao);
+		f.setMorada(morada);
+		f.setContacto(contacto);
+		f.setUsername(username);
+		f.setPassword(password);
+
+	}
+
+	// atualiza dados do Cliente;
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -231,22 +251,16 @@ public class Banco implements Serializable {
 		c.setUsername(username);
 		c.setPassword(password);
 	}
-	
+
 	// atualiza contas
-	
-	
-	
-	
-	//elimina contas:
-	protected void eliminaconta(int id, ArrayList<Conta> contas)
-	{
-		for(int i=0; i<contas.size();i++)
-		{
-			if(contas.get(i).getIdConta()== id)
-			{
+
+	// elimina contas:
+	protected void eliminaconta(int id, ArrayList<Conta> contas) {
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getIdConta() == id) {
 				contas.remove(i);
 			}
 		}
-		
+
 	}
 }
