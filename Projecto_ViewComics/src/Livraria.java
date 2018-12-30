@@ -348,7 +348,7 @@ public class Livraria implements Serializable {
 		return listaId;
 	}
 
-	// método para adicionar um array a uma JList
+	// método para adicionar um array a uma JList consoante determinado modelo
 
 	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
 
@@ -383,6 +383,96 @@ public class Livraria implements Serializable {
 			}
 		}
 		return livro;
+
+	}
+
+	// LISTAR FUNCIONARIOS
+
+	// retorna o array de funcionarios
+	protected String[] arrayFunc(ArrayList<Utilizador> util) {
+
+		ArrayList<String> func = new ArrayList<String>();
+
+		for (Utilizador u : this.utilizadores) {
+			if (u instanceof Funcionario) {
+				func.add(u.toString());
+			}
+		}
+
+		String[] funcArray = func.toArray(new String[func.size()]);
+		return funcArray;
+
+	}
+
+	// devolve os funcionario cujo come contem a string nome
+	public String[] listaFunPorNome(String nome) {
+
+		ArrayList<String> listaN = new ArrayList();
+		String n = "";
+		for (Utilizador u : this.utilizadores) {
+			if (u instanceof Funcionario) {
+				if (u.getNome().toLowerCase().contains(nome.toLowerCase())) {
+					n = u.toString();
+					listaN.add(n);
+
+				}
+			}
+
+			n = "";
+		}
+
+		String[] listaTitulo = new String[listaN.size()];
+		listaTitulo = listaN.toArray(listaTitulo);
+
+		return listaTitulo;
+	}
+
+	// devolve os funcionario cujo id é igual ao int id
+	protected String[] listaFuncPorId(String id) {
+
+		ArrayList<String> listaId = new ArrayList();
+
+		for (Utilizador u : this.utilizadores) {
+			if ((u instanceof Funcionario) && (Integer.toString(u.getId()).contains(id))) {
+				listaId.add(u.toString());
+			}
+		}
+		String[] listaPorId = new String[listaId.size()];
+		listaPorId = listaId.toArray(listaPorId);
+
+		return listaPorId;
+
+	}
+
+	public String[] listaFunPorUsername(String username) {
+
+		ArrayList<String> listaU = new ArrayList();
+		for (Utilizador u : this.utilizadores) {
+			if (u instanceof Funcionario) {
+				if (u.getUsername().toLowerCase().contains(username.toLowerCase())) {
+					listaU.add(u.toString());
+
+				}
+			}
+		}
+
+		String[] listaUsername = new String[listaU.size()];
+		listaUsername = listaU.toArray(listaUsername);
+
+		return listaUsername;
+	}
+
+	protected String[] listaFuncPorContacto(String contacto) {
+
+		ArrayList<String> listaC = new ArrayList();
+		for (Utilizador u : this.utilizadores) {
+			if ((u instanceof Funcionario) && (Integer.toString(u.getContato()).contains(contacto))) {
+				listaC.add(u.toString());
+			}
+		}
+		String[] listaContacto = new String[listaC.size()];
+		listaContacto = listaC.toArray(listaContacto);
+		return listaContacto;
 
 	}
 

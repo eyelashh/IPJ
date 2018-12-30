@@ -58,7 +58,7 @@ public class AppAdmin implements Serializable {
 	private JTextField txtDescricao;
 	private JTextField txtPreco;
 	private JTextField textField_18;
-	private JTextField textField_12;
+	private JTextField txtAtributoFunc;
 	private JTextField txtIdFunc;
 	private JTextField txtNomeFunc;
 	private JTextField txtContactoFunc;
@@ -239,21 +239,26 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.add(jpAdmFuncionarios);
 		jpAdmFuncionarios.setLayout(null);
 		jpAdmFuncionarios.setVisible(false);
+		// SEPARADOR FUNCIONARIOS
+		// LISTAR FUNCIONARIOS NA JLIST
+		// CRIAÇAO DE UM MODELO DE LIST PARA FUNCIONARIOS
+		DefaultListModel<String> modeloListaFunc = new DefaultListModel<String>();
+		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFunc);
+		JList<String> listaFuncionarios = new JList<String>(modeloListaFunc);
+		listaFuncionarios.setBounds(42, 123, 190, 337);
+		jpAdmFuncionarios.add(listaFuncionarios);
 
-		JList listaAtributosFunc = new JList();
-		
-		listaAtributosFunc.setBounds(42, 123, 190, 337);
-		jpAdmFuncionarios.add(listaAtributosFunc);
+		// *********************************************
 
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(32, 69, 200, 30);
-		jpAdmFuncionarios.add(textField_12);
+		txtAtributoFunc = new JTextField();
+		txtAtributoFunc.setColumns(10);
+		txtAtributoFunc.setBounds(32, 69, 200, 30);
+		jpAdmFuncionarios.add(txtAtributoFunc);
 
-		JButton btnPesquisaAtributoFunc = new JButton("Pesquisar");
-		btnPesquisaAtributoFunc.setBackground(SystemColor.controlHighlight);
-		btnPesquisaAtributoFunc.setBounds(264, 28, 97, 25);
-		jpAdmFuncionarios.add(btnPesquisaAtributoFunc);
+		JButton btnPesquisaFunc = new JButton("Pesquisar");
+		btnPesquisaFunc.setBackground(SystemColor.controlHighlight);
+		btnPesquisaFunc.setBounds(264, 28, 97, 25);
+		jpAdmFuncionarios.add(btnPesquisaFunc);
 
 		JButton btnLimparPesquisaFunc = new JButton("Limpar");
 		btnLimparPesquisaFunc.setBackground(SystemColor.controlHighlight);
@@ -310,9 +315,9 @@ public class AppAdmin implements Serializable {
 		txtPassFunc.setBounds(394, 267, 345, 30);
 		jpAdmFuncionarios.add(txtPassFunc);
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(32, 29, 200, 22);
-		jpAdmFuncionarios.add(comboBox_1);
+		JComboBox comboBoxAtributoFunc = new JComboBox();
+		comboBoxAtributoFunc.setBounds(32, 29, 200, 22);
+		jpAdmFuncionarios.add(comboBoxAtributoFunc);
 
 		JButton btnConfirmFunc = new JButton("OK");
 		btnConfirmFunc.setBackground(SystemColor.controlHighlight);
@@ -345,6 +350,44 @@ public class AppAdmin implements Serializable {
 		btnLimparCamposFunc.setBounds(25, 79, 89, 23);
 		panel.add(btnLimparCamposFunc);
 
+		comboBoxAtributoFunc.addItem("por que atributo pretende pesquisar o livro");
+		comboBoxAtributoFunc.addItem("Nome");
+		comboBoxAtributoFunc.addItem("Id");
+		comboBoxAtributoFunc.addItem("Username");
+		comboBoxAtributoFunc.addItem("Contacto");
+
+		// pesquisar funcionarios por atributos
+		btnPesquisaFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Nome")) {
+
+					String nome = txtAtributoFunc.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorNome(nome), modeloListaFunc);
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Id")) {
+
+					String id = txtAtributoFunc.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorId(id), modeloListaFunc);
+
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Username")) {
+
+					String username = txtAtributoFunc.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorUsername(username), modeloListaFunc);
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Contacto")) {
+
+					String contacto = txtAtributoFunc.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorContacto(contacto), modeloListaFunc);
+				}
+
+			}
+		});
+
 		JPanel jpAdmLivros = new JPanel();
 		jpAdmLivros.setLayout(null);
 		jpAdmLivros.setBounds(0, 0, 763, 545);
@@ -354,14 +397,6 @@ public class AppAdmin implements Serializable {
 		JComboBox comboBoxAtributoLivro = new JComboBox();
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpAdmLivros.add(comboBoxAtributoLivro);
-
-		// LISTAR LIVROS
-		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
-		JList<String> listaLivros = new JList<String>(modeloLista);
-
-		listaLivros.setBounds(22, 118, 190, 427);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
-		jpAdmLivros.add(listaLivros);
 
 		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -430,6 +465,7 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(btnPesquisarLivro);
 
 		JButton btnLimparLivro = new JButton("Limpar");
+
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpAdmLivros.add(btnLimparLivro);
@@ -438,6 +474,67 @@ public class AppAdmin implements Serializable {
 		txtAtributo.setBounds(12, 62, 200, 23);
 		jpAdmLivros.add(txtAtributo);
 		txtAtributo.setColumns(10);
+
+		// SEPARADOR LIVROS
+		// LISTAR LIVROS NA JLIST******************
+
+		DefaultListModel<String> modeloListaLivros = new DefaultListModel<String>();
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		JList<String> listaLivros = new JList<String>(modeloListaLivros);
+		listaLivros.setBounds(22, 118, 190, 427);
+		jpAdmLivros.add(listaLivros);
+
+		// ******************************************
+
+		// pesquisar livros consoante os atributos
+
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro");
+		comboBoxAtributoLivro.addItem("Titulo");
+		comboBoxAtributoLivro.addItem("Autor");
+		comboBoxAtributoLivro.addItem("Id");
+
+		btnPesquisarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
+
+					String titulo = txtAtributo.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloListaLivros);
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+
+					String autor = txtAtributo.getText();
+
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(autor), modeloListaLivros);
+				}
+
+			}
+		});
+
+		// características do livro seleccionado na JList
+
+		listaLivros.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String livroSelecionado = listaLivros.getSelectedValue();
+				int id = gl.viewComics.obterId(livroSelecionado);
+				Livro l = gl.viewComics.livroId(id);
+				txtTituloLivros.setText(l.getTitulo());
+				txtAutorLivros.setText(l.getAutor());
+				txtStockLivros.setText(Integer.toString(l.getStock()));
+				txtPrecoLivros.setText(Double.toString(l.getPreco()) + "€");
+
+			}
+		});
+
+		// botão limpar
+
+		btnLimparLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				txtAtributoPesquisaLivro.setText("");
+			}
+		});
 
 		JPanel jpAdmStock = new JPanel();
 		jpAdmStock.setBounds(0, 0, 763, 545);
@@ -821,50 +918,7 @@ public class AppAdmin implements Serializable {
 
 		});
 
-		// FUNCIONALIDADES DOS DIFERENTES SEPARADORES
-
-		// LIVROS
-
-		// pesquisar livros consoante os atributos
-
-		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro");
-		comboBoxAtributoLivro.addItem("Titulo");
-		comboBoxAtributoLivro.addItem("Autor");
-		comboBoxAtributoLivro.addItem("Id");
-
-		btnPesquisarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
-
-					String titulo = txtAtributo.getText();
-
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloLista);
-				}
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
-
-					String autor = txtAtributo.getText();
-
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(autor), modeloLista);
-				}
-
-			}
-		});
-
-		// características do livro seleccionado na JList
-
-		listaLivros.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				String livroSelecionado = listaLivros.getSelectedValue();
-				int id = gl.viewComics.obterId(livroSelecionado);
-				Livro l = gl.viewComics.livroId(id);
-				txtTituloLivros.setText(l.getTitulo());
-				txtAutorLivros.setText(l.getAutor());
-				txtStockLivros.setText(Integer.toString(l.getStock()));
-				txtPrecoLivros.setText(Double.toString(l.getPreco()) + "€");
-
-			}
-		});
+		// adicionar um funcionario à lista
 
 	}
 }

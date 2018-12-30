@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Utilizador implements  Serializable {
@@ -6,6 +7,7 @@ public class Utilizador implements  Serializable {
 
 
 	private int id;
+	private static AtomicInteger aiUtil=new AtomicInteger(0);
 	private String nome;
 	private int contato;
 	private String username;
@@ -17,9 +19,9 @@ public class Utilizador implements  Serializable {
 		
 	}
 
-	public Utilizador(int id, String nome, int contato, String username, String password) {
+	public Utilizador(String nome, int contato, String username, String password) {
 		super();
-		this.id = id;
+		this.id = aiUtil.incrementAndGet();
 		this.nome = nome;
 		this.contato = contato;
 		this.username = username;

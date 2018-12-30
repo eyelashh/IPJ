@@ -27,6 +27,8 @@ import javax.swing.JRadioButton;
 import java.awt.List;
 import java.awt.Panel;
 import java.awt.SystemColor;
+import java.awt.TrayIcon;
+import java.awt.TrayIcon.MessageType;
 import java.awt.Window;
 import java.awt.Canvas;
 import javax.swing.JSeparator;
@@ -1228,11 +1230,30 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 						gb.javabank.getContas().add(c);
 					}
+					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 				} else {
 					// atualizar:
+					
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+							gb.javabank.getContas());
+
+					
+					if(c instanceof ContaCorrente)
+					{
+						//gb.javabank.atualizarconta(c, Double.parseDouble(tbLevMontante.getText()) , Double.parseDouble(tbContaslimitelevdia.getText()) , 0.0, 0.0);
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()) , Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
+					}
+					else
+					{
+						
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()) , Double.parseDouble(tbContaslimitelevdia.getText()) , Double.parseDouble(tblJuros.getText()),Double.parseDouble(tbllimitemes.getText()));
+					}
+					
+					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
 
 				}
+				
 				lContas.clearSelection();
 				tbContasnum.setText(null);
 				dateChooser_2.setDate(null);
@@ -1244,7 +1265,7 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-				JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+				
 
 			}
 		});
@@ -1265,6 +1286,10 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dateChooser_2.setEnabled(true);
 				tbllimitemes.setText(null);
+				
+				TrayIcon trayIcon = new TrayIcon(null, "Tray Demo");
+				trayIcon.displayMessage("tudo limpo", "notification demo", MessageType.INFO);
+				
 			}
 		});
 
@@ -1345,6 +1370,10 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dateChooser_2.setEnabled(true);
 				tbllimitemes.setText(null);
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+				
 				}
 				
 			}
