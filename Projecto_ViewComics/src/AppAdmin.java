@@ -88,9 +88,10 @@ public class AppAdmin implements Serializable {
 	 * Create the application.
 	 */
 	public AppAdmin(Utilizador a, GestaoLivraria gl) {
+		initialize();
 		this.admin = a;
 		this.gl = gl;
-		initialize();
+		
 	}
 
 	/**

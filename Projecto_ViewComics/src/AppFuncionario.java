@@ -123,30 +123,33 @@ public class AppFuncionario implements Serializable{
 		frame.getContentPane().add(Paineltotal);
 		Paineltotal.setLayout(null);
 
-		JPanel panelcabecalho = new JPanel() {
-			@Override
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File(""));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
-
+		JPanel panelcabecalho = new JPanel() ;
 		panelcabecalho.setBackground(new Color(255, 215, 0));
 		panelcabecalho.setLayout(null);
 		panelcabecalho.setBounds(0, 0, 1262, 176);
 		Paineltotal.add(panelcabecalho);
+		
+//		{
+//			@Override
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO.read(new File(""));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
+
+	
 
 		JLabel label_6 = new JLabel() {
 			protected void paintComponent(Graphics g) {
