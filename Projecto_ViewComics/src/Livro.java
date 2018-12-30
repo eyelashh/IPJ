@@ -16,7 +16,7 @@ public class Livro implements  Serializable {
 		this.autor = autor;
 		this.preco = preco;
 		this.stock = stock;
-
+ 
 	}
 
 	public int getIdLivro() {
