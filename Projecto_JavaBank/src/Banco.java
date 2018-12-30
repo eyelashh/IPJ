@@ -233,6 +233,21 @@ public class Banco implements Serializable {
 	}
 	
 	// atualiza contas
+	protected void atualizarconta(Conta c, double valorMaxLevantamento, double valorMaxDia, double taxaJuros, double limiteMensalDebito)
+	{
+		c.setValorMaxLevantamento(valorMaxLevantamento);
+		c.setValorMaxDia(valorMaxDia);
+		
+		if(c instanceof ContaPoupanca)
+		{
+			((ContaPoupanca) c).setTaxaJuros(taxaJuros);
+			((ContaPoupanca) c).setLimiteMensalDebito(limiteMensalDebito);
+			
+		}
+		
+		
+		
+	}
 	
 	
 	
