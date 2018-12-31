@@ -376,6 +376,7 @@ public class BancoAppAdm implements Serializable {
 					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
 					dmCltContas.removeAllElements();
 					gb.javabank.addelementoslist(conta, dmCltContas);
+					
 				}
 
 			}

@@ -250,6 +250,7 @@ public class Banco implements Serializable {
 						}
 					}
 					return numcontas;
+					
 				}
 
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
