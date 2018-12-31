@@ -177,8 +177,6 @@ public class Banco implements Serializable {
 
 		return funcionario;
 	}
-	
-
 
 	// metedo que retorna um utilizador qualquer recebendo o seu id;
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
@@ -191,7 +189,7 @@ public class Banco implements Serializable {
 		}
 		return u;
 	}
-	
+
 	// metedo que retorna um utilizador qualquer recebendo o seu nome;
 	protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
 		Utilizador u = new Utilizador();
@@ -204,7 +202,7 @@ public class Banco implements Serializable {
 		return u;
 	}
 
-
+//seleciona a conta
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
 		Conta c = new Conta();
 
@@ -216,23 +214,59 @@ public class Banco implements Serializable {
 		return c;
 	}
 
+	// isto lista o numero de contas num array unico de um utilizador de um id:
+
+	protected String[] listacontasUtilizadorID(int id, ArrayList<Conta> cont, ArrayList<Utilizador> util) {
+
+		String[] numcontas = new String[cont.size()];
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+			for (int j = 0; j < util.size(); j++) {
+				if (cont.get(i).getClientes().get(j).getIdUtilizador() == id) {
+					s = "" + cont.get(i).getIdConta();
+					numcontas[i] = s;
+					s = "";
+				}
+			}
+		}
+		return numcontas;
+	}
+
+	// isto lista o numero de contas num array unico de um utilizador de um nome:
+
+	protected String[] listacontasUtilizadorNome(String nome, ArrayList<Conta> cont, ArrayList<Utilizador> util) {
+
+		String[] numcontas = new String[cont.size()];
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+			for (int j = 0; j < util.size(); j++) {
+				if (cont.get(i).getClientes().get(j).getNome() == nome) {
+					s = "" + cont.get(i).getIdConta();
+					numcontas[i] = s;
+					s = "";
+				}
+			}
+		}
+		return numcontas;
+
+	}
+
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
-			
+
 		}
 	}
-	
+
 	protected void addelementoslist(String[] s, DefaultComboBoxModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
-			
+
 		}
 	}
-	
-	
+
 	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
 		for (int i = 0; i < utilizador.size(); i++) {
@@ -241,11 +275,6 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	
-
-	 
-	 
-	
 
 	// atualiza dados do funcionario
 	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
