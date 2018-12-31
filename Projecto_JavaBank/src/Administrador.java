@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Administrador extends Utilizador implements Serializable {
 
-	
+	//alteracao
 	public Administrador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
