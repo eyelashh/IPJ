@@ -1,34 +1,22 @@
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Transferencia extends Operacao implements Serializable {
 
 	private Conta contaDestino;
-	private Cliente titularTransf;
 	
-	public Transferencia(int idOperacao, Funcionario responsavel, LocalDate dataOperacao, double valor,
-			Conta contaDestino, Cliente titularTransf) {
-		super(idOperacao, responsavel, dataOperacao, valor);
+	public Transferencia(int idOperacao, Funcionario responsavel, Date dataOperacao, double valor,
+			Conta contaDestino, String descricao) {
+		super(idOperacao, responsavel, dataOperacao, valor, descricao);
 		this.contaDestino = contaDestino;
-		this.titularTransf = titularTransf;
 	}
 
 	public Conta getContaDestino() {
 		return contaDestino;
 	}
 
- 
 	public void setContaDestino(Conta contaDestino) {
 		this.contaDestino = contaDestino;
-	}
-
-
-	public Cliente getTitularTransf() {
-		return titularTransf;
-	}
-
-	public void setTitularTransf(Cliente titularTransf) {
-		this.titularTransf = titularTransf;
 	}
 	
 	

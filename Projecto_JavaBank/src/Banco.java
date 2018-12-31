@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public class Banco implements Serializable {
@@ -154,9 +155,7 @@ public class Banco implements Serializable {
 			s = "";
 
 		}
-
 		return numcontas;
-
 	}
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
@@ -178,6 +177,8 @@ public class Banco implements Serializable {
 
 		return funcionario;
 	}
+	
+
 
 	// metedo que retorna um utilizador qualquer recebendo o seu id;
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
@@ -190,6 +191,19 @@ public class Banco implements Serializable {
 		}
 		return u;
 	}
+	
+	// metedo que retorna um utilizador qualquer recebendo o seu nome;
+	protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
+		Utilizador u = new Utilizador();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getNome().equals(nome)) {
+				u = list.get(i);
+			}
+		}
+		return u;
+	}
+
 
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
 		Conta c = new Conta();
@@ -211,6 +225,13 @@ public class Banco implements Serializable {
 		}
 	}
 	
+	protected void addelementoslist(String[] s, DefaultComboBoxModel<String> dm) {
+		for (int i = 0; i < s.length; i++) {
+			dm.addElement(s[i]);
+			
+		}
+	}
+	
 	
 	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
@@ -220,6 +241,11 @@ public class Banco implements Serializable {
 			}
 		}
 	}
+	
+
+	 
+	 
+	
 
 	// atualiza dados do funcionario
 	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
@@ -278,11 +304,4 @@ public class Banco implements Serializable {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
 }
