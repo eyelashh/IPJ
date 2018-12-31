@@ -87,6 +87,8 @@ public class GestaoBanco implements Serializable{
 		// CASO NAO EXISTA FICHEIRO � CRIADO:
 		if(!this.fileContas.exists())
 		{
+		
+			
 			try
 			{
 				this.fileContas.createNewFile();
