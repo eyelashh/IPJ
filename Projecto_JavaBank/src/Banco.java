@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 public class Banco implements Serializable {
@@ -154,9 +155,7 @@ public class Banco implements Serializable {
 			s = "";
 
 		}
-
 		return numcontas;
-
 	}
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
@@ -205,6 +204,13 @@ public class Banco implements Serializable {
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
+		for (int i = 0; i < s.length; i++) {
+			dm.addElement(s[i]);
+			
+		}
+	}
+	
+	protected void addelementoslist(String[] s, DefaultComboBoxModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
 			

@@ -17,16 +17,16 @@ public class Conta implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
  
-	public Conta(int idConta, Date dataCriacao, double saldo, ArrayList<Operacao> operacoes,
+	public Conta(int idConta, Date dataCriacao, double saldo,
 			ArrayList<Cliente> clientes, double valorMaxLevantamento, double valorMaxDia) {
 		super();
 		this.idConta = idConta;
 		this.dataCriacao = dataCriacao;
 		this.saldo = saldo;
-		this.operacoes = operacoes;
-		this.clientes = clientes;
 		this.valorMaxLevantamento = valorMaxLevantamento;
 		this.valorMaxDia = valorMaxDia;
+		operacoes = new ArrayList <Operacao>();
+		
 	}
 
 	
