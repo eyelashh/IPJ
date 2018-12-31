@@ -10,9 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
@@ -54,6 +57,7 @@ public class AppCliente implements Serializable {
 	private JTextField tbData;
 	private JTextField tbLivrosAutor;
 	private JTextField tbLivrosNome;
+	private static GestaoLivraria gl;
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -135,30 +139,8 @@ public class AppCliente implements Serializable {
 		btnLogIn.setBounds(1125, 95, 103, 27);
 		JPanelCabecalho.add(btnLogIn);
 
-		JPanel JPanelMenu = new JPanel() {
-			@Override
-			// o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// importar imagem para o background do panel, podemos faz�-lo da internet ou
-					// do
-					// ficheiro
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/fundo2.jpg"));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
+		JPanel JPanelMenu = new JPanel();
+		JPanelMenu.setBackground(new Color(128, 128, 0));
 		JPanelMenu.setBounds(0, 185, 245, 544);
 		frame.getContentPane().add(JPanelMenu);
 		JPanelMenu.setLayout(null);
@@ -255,10 +237,14 @@ public class AppCliente implements Serializable {
 		btnPesquisarLivroCliente.setBackground(SystemColor.controlHighlight);
 		btnPesquisarLivroCliente.setBounds(286, 98, 115, 20);
 		JPLivros.add(btnPesquisarLivroCliente);
-
-		List listaLivros = new List();
+		
+		DefaultListModel<String> modeloLista=new DefaultListModel();
+		JList <String>listaLivros = new JList<String>(modeloLista);
 		listaLivros.setBounds(65, 140, 289, 348);
 		JPLivros.add(listaLivros);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
+		
+	
 
 		JButton btnRemoveCarrinhoCliente = new JButton("-");
 		btnRemoveCarrinhoCliente.setBackground(SystemColor.controlHighlight);
