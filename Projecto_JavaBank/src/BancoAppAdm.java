@@ -217,6 +217,7 @@ public class BancoAppAdm implements Serializable {
 		cbAdmFunPesq.setBounds(111, 29, 227, 34);
 		JPAdmFuncionario.add(cbAdmFunPesq);
 
+		
 		// caixa de texto para escrever a procura do funcionario
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(111, 66, 227, 31);
