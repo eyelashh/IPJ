@@ -325,6 +325,19 @@ public class BancoAppAdm implements Serializable {
 		btnAdminClieLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				listaAdminClie.clearSelection();
+				listAdminClieContas.clearSelection();
+				textAdminClieNome.setText(null);
+				textAdminClieEndereco.setText(null);
+				textAdminClieContato.setText(null);
+				textAdminClieNif.setText(null);
+				dateChooser_1.setDate(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmClt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmClt);
+				dmCltContas.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
 			}
 		});
 		btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -340,8 +353,9 @@ public class BancoAppAdm implements Serializable {
 					int id = Integer.parseInt(textAdminCliePesquisa.getText());
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+
+//					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
+//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());
@@ -352,8 +366,7 @@ public class BancoAppAdm implements Serializable {
 					dmClt.removeAllElements();
 					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
 					dmCltContas.removeAllElements();
-					gb.javabank.addelementoslist(conta, dmCltContas);
-
+					// gb.javabank.addelementoslist(conta, dmCltContas);
 
 				}
 
@@ -362,9 +375,9 @@ public class BancoAppAdm implements Serializable {
 					String nome = textAdminCliePesquisa.getText();
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
-					
-					String[] conta = (gb.javabank.listacontasUtilizadorNome(nome, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+
+//					String[] conta = (gb.javabank.listacontasUtilizadorNome(nome, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
+//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());
@@ -375,8 +388,8 @@ public class BancoAppAdm implements Serializable {
 					dmClt.removeAllElements();
 					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
 					dmCltContas.removeAllElements();
-					gb.javabank.addelementoslist(conta, dmCltContas);
-					
+					// gb.javabank.addelementoslist(conta, dmCltContas);
+
 				}
 
 			}
