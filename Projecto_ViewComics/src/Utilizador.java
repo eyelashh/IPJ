@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Utilizador implements  Serializable {
 
 	private int id;
-	private static AtomicInteger aiUtil=new AtomicInteger(1);
+	private static AtomicInteger aiUtil=new AtomicInteger(0);
 	private String nome;
 	private int contato;
 	private String username;

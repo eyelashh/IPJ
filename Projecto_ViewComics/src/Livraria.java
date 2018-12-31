@@ -485,5 +485,37 @@ public class Livraria implements Serializable {
 		}
 		return util;
 	}
-
+//recebe duas strings, soma, e devolve o total em string (CARRINHOS)
+	protected String adicionarQuantidade(String actual, String adicionar) {
+		int actualInt =Integer.parseInt(actual);
+		int adicionarInt=Integer.parseInt(adicionar);
+		
+		int totalInt =actualInt+adicionarInt;
+		String totalStr=Integer.toString(totalInt);
+		return totalStr;
+	}
+//recebe duas string subtrai, e devolve o valor total em string (CARRINHOS)	
+	protected String removerQuantidade(String actual, String subtrair) {
+		int actualInt =Integer.parseInt(actual);
+		int subtrairInt=Integer.parseInt(subtrair);
+		
+		int totalInt =actualInt-subtrairInt;
+		String totalStr=Integer.toString(totalInt);
+		return totalStr;
+	}
+//devolve a quantidade de determinado livro em um carrinho
+	protected String quantidadeCarrinho(int idLivro, String nif) {
+		
+		int nifInteger=Integer.parseInt(nif);
+		int quantidadeInt=0;
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif()==nifInteger) {
+				quantidadeInt = c.getConteudo().get(idLivro);
+			}
+		}
+		
+		String quantidadeStr =Integer.toString(quantidadeInt);
+		
+		return quantidadeStr;
+	}
 }

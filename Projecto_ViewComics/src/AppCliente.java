@@ -33,6 +33,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class AppCliente implements Serializable {
 
@@ -47,17 +51,20 @@ public class AppCliente implements Serializable {
 	private JTextField txtUnid3;
 	private JTextField txtUnid4;
 	private JTextField txtUnid5;
-	private JTextField txtQuantidadeCarrinhoCliente;
+	private JTextField txtQuantidadeAlterarLIVROS;
 	private JPasswordField txtPassword;
 	private JTextField txtUsername;
 	private JTextField txtNifCliente;
-	private JTextField tbLivrosStock;
-	private JTextField tbLivrosPreco;
-	private JTextField tbLivrosDescricao;
-	private JTextField tbData;
-	private JTextField tbLivrosAutor;
-	private JTextField tbLivrosNome;
+	private JTextField txtStockLivros;
+	private JTextField txtPrecoLivros;
+	private JTextField txtDescricaoLivros;
+	private JTextField txtDataLivros;
+	private JTextField txtAutorLivros;
+	private JTextField txtTituloLivros;
 	private static GestaoLivraria gl;
+	private JTextField txtNifCarrinhoLIVROS;
+	private JTextField txtQuantidadeActualLivros;
+	private final ButtonGroup alterarQuantidadeCarrinhoLIVROS = new ButtonGroup();
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -233,11 +240,37 @@ public class AppCliente implements Serializable {
 		txtAtributoLivros.setBounds(65, 96, 200, 22);
 		JPLivros.add(txtAtributoLivros);
 
+		ButtonGroup alterarCarrinho = new ButtonGroup();
 		
-
+		
+		
 		//lista livros
 		DefaultListModel<String> modeloLista=new DefaultListModel();
 		JList <String>listaLivros = new JList<String>(modeloLista);
+		listaLivros.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String livroSeleccionadoSTR = listaLivros.getSelectedValue();
+				int idLivroSeleccionado =gl.viewComics.obterId(livroSeleccionadoSTR);
+				Livro l=gl.viewComics.livroId(idLivroSeleccionado);
+				txtTituloLivros.setText(l.getTitulo());
+				txtAutorLivros.setText(l.getAutor());
+				txtDataLivros.setText(Integer.toString(l.getAno()));
+				txtDescricaoLivros.setText(l.getDescricao());
+				txtStockLivros.setText(Integer.toString(l.getStock()));
+				String nif=txtNifCarrinhoLIVROS.getText();
+				String quantidadeActual=gl.viewComics.quantidadeCarrinho(idLivroSeleccionado, nif);
+				txtQuantidadeActualLivros.setText(quantidadeActual);
+				
+				
+//				String selecaoLista = listaFuncionarios.getSelectedValue();
+//				Funcionario f = (Funcionario) gl.viewComics.obterFuncionarioComId(selecaoLista);
+//				txtIdFunc.setText(Integer.toString(f.getId()));
+//				txtNomeFunc.setText(f.getNome());
+//				txtContactoFunc.setText(Integer.toString(f.getContato()));
+//				txtUsernameFunc.setText(f.getUsername());
+//				txtPassFunc.setText(f.getPassword());
+			}
+		});
 		listaLivros.setBounds(65, 140, 289, 348);
 		JPLivros.add(listaLivros);
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
@@ -276,27 +309,45 @@ public class AppCliente implements Serializable {
 		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
 		JPLivros.add(btnLimparPesquisaCliente);
 
-		JButton btnRemoveCarrinhoCliente = new JButton("-");
-		btnRemoveCarrinhoCliente.setBackground(SystemColor.controlHighlight);
-		btnRemoveCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRemoveCarrinhoCliente.setBounds(444, 63, 57, 39);
-		JPLivros.add(btnRemoveCarrinhoCliente);
-
-		txtQuantidadeCarrinhoCliente = new JTextField();
-		txtQuantidadeCarrinhoCliente.setColumns(10);
-		txtQuantidadeCarrinhoCliente.setBounds(511, 67, 61, 34);
-		JPLivros.add(txtQuantidadeCarrinhoCliente);
-
-		JButton btnAddCarrinhoCliente = new JButton("+");
-		btnAddCarrinhoCliente.setBackground(SystemColor.controlHighlight);
-		btnAddCarrinhoCliente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddCarrinhoCliente.setBounds(582, 63, 54, 39);
-		JPLivros.add(btnAddCarrinhoCliente);
-
-		JButton btnAddCarrinhoFinalCliente = new JButton("Adicionar ao carrinho");
+		txtQuantidadeAlterarLIVROS = new JTextField();
+		txtQuantidadeAlterarLIVROS.setColumns(10);
+		txtQuantidadeAlterarLIVROS.setBounds(792, 77, 40, 41);
+		JPLivros.add(txtQuantidadeAlterarLIVROS);
+		
+		JRadioButton rbAdicionarQuantidadeLIVROS = new JRadioButton("Adicionar");
+		alterarQuantidadeCarrinhoLIVROS.add(rbAdicionarQuantidadeLIVROS);
+		rbAdicionarQuantidadeLIVROS.setBounds(838, 75, 109, 23);
+		JPLivros.add(rbAdicionarQuantidadeLIVROS);
+		
+		JRadioButton rbRemoverQuantidadeLIVROS = new JRadioButton("Remover");
+		alterarQuantidadeCarrinhoLIVROS.add(rbRemoverQuantidadeLIVROS);
+		rbRemoverQuantidadeLIVROS.setBounds(838, 95, 109, 23);
+		JPLivros.add(rbRemoverQuantidadeLIVROS);
+		
+		JButton btnAddCarrinhoFinalCliente = new JButton("Alterar carrinho");
+		btnAddCarrinhoFinalCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				
+				if (rbAdicionarQuantidadeLIVROS.isSelected()) {
+					String qtdAdicionar=gl.viewComics.adicionarQuantidade(txtQuantidadeActualLivros.getText(), txtQuantidadeAlterarLIVROS.getText());
+					txtQuantidadeActualLivros.setText(qtdAdicionar);
+					
+				}
+				if (rbRemoverQuantidadeLIVROS.isSelected()) {
+					String qtdRemover=gl.viewComics.removerQuantidade(txtQuantidadeActualLivros.getText(), txtQuantidadeAlterarLIVROS.getText());
+					txtQuantidadeActualLivros.setText(qtdRemover);
+					
+				}
+				
+				
+				
+			}
+		});
 		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
 		btnAddCarrinhoFinalCliente.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnAddCarrinhoFinalCliente.setBounds(428, 11, 219, 42);
+		btnAddCarrinhoFinalCliente.setBounds(748, 24, 250, 42);
 		JPLivros.add(btnAddCarrinhoFinalCliente);
 
 		JLabel label_2 = new JLabel("Nome:");
@@ -329,35 +380,57 @@ public class AppCliente implements Serializable {
 		label_7.setBounds(443, 481, 48, 16);
 		JPLivros.add(label_7);
 
-		tbLivrosStock = new JTextField();
-		tbLivrosStock.setColumns(10);
-		tbLivrosStock.setBounds(513, 479, 345, 30);
-		JPLivros.add(tbLivrosStock);
+		txtStockLivros = new JTextField();
+		txtStockLivros.setColumns(10);
+		txtStockLivros.setBounds(513, 479, 345, 30);
+		JPLivros.add(txtStockLivros);
 
-		tbLivrosPreco = new JTextField();
-		tbLivrosPreco.setColumns(10);
-		tbLivrosPreco.setBounds(513, 428, 345, 30);
-		JPLivros.add(tbLivrosPreco);
+		txtPrecoLivros = new JTextField();
+		txtPrecoLivros.setColumns(10);
+		txtPrecoLivros.setBounds(513, 428, 345, 30);
+		JPLivros.add(txtPrecoLivros);
 
-		tbLivrosDescricao = new JTextField();
-		tbLivrosDescricao.setColumns(10);
-		tbLivrosDescricao.setBounds(513, 286, 345, 117);
-		JPLivros.add(tbLivrosDescricao);
+		txtDescricaoLivros = new JTextField();
+		txtDescricaoLivros.setColumns(10);
+		txtDescricaoLivros.setBounds(513, 286, 345, 117);
+		JPLivros.add(txtDescricaoLivros);
 
-		tbData = new JTextField();
-		tbData.setColumns(10);
-		tbData.setBounds(513, 239, 345, 30);
-		JPLivros.add(tbData);
+		txtDataLivros = new JTextField();
+		txtDataLivros.setColumns(10);
+		txtDataLivros.setBounds(513, 239, 345, 30);
+		JPLivros.add(txtDataLivros);
 
-		tbLivrosAutor = new JTextField();
-		tbLivrosAutor.setColumns(10);
-		tbLivrosAutor.setBounds(513, 190, 345, 30);
-		JPLivros.add(tbLivrosAutor);
+		txtAutorLivros = new JTextField();
+		txtAutorLivros.setColumns(10);
+		txtAutorLivros.setBounds(513, 190, 345, 30);
+		JPLivros.add(txtAutorLivros);
 
-		tbLivrosNome = new JTextField();
-		tbLivrosNome.setColumns(10);
-		tbLivrosNome.setBounds(513, 140, 345, 30);
-		JPLivros.add(tbLivrosNome);
+		txtTituloLivros = new JTextField();
+		txtTituloLivros.setColumns(10);
+		txtTituloLivros.setBounds(513, 140, 345, 30);
+		JPLivros.add(txtTituloLivros);
+		
+		txtNifCarrinhoLIVROS = new JTextField();
+		txtNifCarrinhoLIVROS.setBounds(512, 54, 175, 29);
+		JPLivros.add(txtNifCarrinhoLIVROS);
+		txtNifCarrinhoLIVROS.setColumns(10);
+		
+		JLabel lblIntroduzaOSeu = new JLabel("INTRODUZA O SEU NIF");
+		lblIntroduzaOSeu.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIntroduzaOSeu.setBounds(514, 24, 140, 20);
+		JPLivros.add(lblIntroduzaOSeu);
+		
+		txtQuantidadeActualLivros = new JTextField();
+		txtQuantidadeActualLivros.setEditable(false);
+		txtQuantidadeActualLivros.setBounds(696, 93, 40, 30);
+		JPLivros.add(txtQuantidadeActualLivros);
+		txtQuantidadeActualLivros.setColumns(10);
+		
+		JLabel lblqtddCarrinho = new JLabel("Quantidade deste item no seu carrinho:");
+		lblqtddCarrinho.setBounds(500, 96, 200, 22);
+		JPLivros.add(lblqtddCarrinho);
+		
+		
 
 		// painel para o carrinho
 
