@@ -297,7 +297,7 @@ public class Livraria implements Serializable {
 
 		return listaLivros;
 	}
-
+//listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
 
 		ArrayList<String> listaT = new ArrayList();
@@ -316,14 +316,14 @@ public class Livraria implements Serializable {
 		return listaTitulo;
 	}
 
-	// POR AUTOR
+	// listar livros em array por autor
 	public String[] listaAutor(String autor) {
 
 		ArrayList<String> listaA = new ArrayList();
 		String a = "";
 		for (Livro l : this.livros) {
 			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
-				a = "" + l.getIdLivro() + "|" + l.getAutor();
+				a = "" + l.getIdLivro() + "|" + l.getTitulo();
 				listaA.add(a);
 
 			}
@@ -336,7 +336,7 @@ public class Livraria implements Serializable {
 	}
 
 	// POR ID
-	public ArrayList listaId(int id) {
+	public String [] listaLivroId(int id) {
 
 		ArrayList<Livro> listaId = new ArrayList();
 		for (Livro l : this.livros) {
@@ -345,7 +345,10 @@ public class Livraria implements Serializable {
 
 			}
 		}
-		return listaId;
+		
+		String[] ArrayLivrosId = listaId.toArray(new String[listaId.size()]);
+		return ArrayLivrosId;
+		
 	}
 
 	// método para adicionar um array a uma JList consoante determinado modelo

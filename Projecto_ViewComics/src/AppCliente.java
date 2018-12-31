@@ -223,28 +223,58 @@ public class AppCliente implements Serializable {
 		Choice choiceAtributoLivroCliente = new Choice();
 		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
-
-		TextField txtNomeAtributoLivroCliente = new TextField();
-		txtNomeAtributoLivroCliente.setBounds(65, 96, 200, 22);
-		JPLivros.add(txtNomeAtributoLivroCliente);
-
-		JButton btnLimparPesquisaCliente = new JButton("Limpar");
-		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
-		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
-		JPLivros.add(btnLimparPesquisaCliente);
-
-		JButton btnPesquisarLivroCliente = new JButton("Pesquisar");
-		btnPesquisarLivroCliente.setBackground(SystemColor.controlHighlight);
-		btnPesquisarLivroCliente.setBounds(286, 98, 115, 20);
-		JPLivros.add(btnPesquisarLivroCliente);
+		choiceAtributoLivroCliente.add("(por que critério pretende pesquisar o livro)");
+		choiceAtributoLivroCliente.add("Titulo");
+		choiceAtributoLivroCliente.add("Autor");
+		choiceAtributoLivroCliente.add("Id");
 		
+
+		TextField txtAtributoLivros = new TextField();
+		txtAtributoLivros.setBounds(65, 96, 200, 22);
+		JPLivros.add(txtAtributoLivros);
+
+		
+
+		//lista livros
 		DefaultListModel<String> modeloLista=new DefaultListModel();
 		JList <String>listaLivros = new JList<String>(modeloLista);
 		listaLivros.setBounds(65, 140, 289, 348);
 		JPLivros.add(listaLivros);
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 		
-	
+		//botaoPesquisarLivro
+		JButton btnPesquisarLivro = new JButton("Pesquisar");
+		btnPesquisarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (choiceAtributoLivroCliente.getSelectedItem().equals("Titulo")) {
+					String titulo=txtAtributoLivros.getText();
+					modeloLista.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloLista);
+					
+				}
+				else if (choiceAtributoLivroCliente.getSelectedItem().equals("Autor")) {
+					String autor=txtAtributoLivros.getText();
+					modeloLista.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), modeloLista);
+					
+				}
+				else if (choiceAtributoLivroCliente.getSelectedItem().equals("Id")) {
+					int id =Integer.parseInt(txtAtributoLivros.getText());
+					modeloLista.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaLivroId(id), modeloLista);
+					
+				}
+				
+			}
+		});
+		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
+		btnPesquisarLivro.setBounds(286, 98, 115, 20);
+		JPLivros.add(btnPesquisarLivro);
+		
+		JButton btnLimparPesquisaCliente = new JButton("Limpar");
+		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
+		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
+		JPLivros.add(btnLimparPesquisaCliente);
 
 		JButton btnRemoveCarrinhoCliente = new JButton("-");
 		btnRemoveCarrinhoCliente.setBackground(SystemColor.controlHighlight);
