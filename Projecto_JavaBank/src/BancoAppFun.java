@@ -209,10 +209,139 @@ public class BancoAppFun implements Serializable {
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
+		
+				// Painel da gestao do administrador
+				JPanel jpanelGestao = new JPanel();
+				jpanelGestao.setVisible(false);
+				jpanelGestao.setBounds(0, 0, 1042, 576);
+				JpanelPrincipal.add(jpanelGestao);
+				jpanelGestao.setLayout(null);
+				
+						JLabel lblUsername_1 = new JLabel("Username:");
+						lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+						lblUsername_1.setBounds(144, 81, 131, 41);
+						jpanelGestao.add(lblUsername_1);
+						
+								tbGestaoUsername = new JTextField();
+								tbGestaoUsername.setEditable(false);
+								tbGestaoUsername.setBounds(144, 134, 271, 33);
+								jpanelGestao.add(tbGestaoUsername);
+								
+										JLabel lblPassword_1 = new JLabel("Password:");
+										lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+										lblPassword_1.setBounds(144, 178, 131, 41);
+										jpanelGestao.add(lblPassword_1);
+										
+												tbGestaopassuser = new JPasswordField();
+												tbGestaopassuser.setBounds(144, 230, 271, 33);
+												jpanelGestao.add(tbGestaopassuser);
+												
+														JLabel lblNovaPassword = new JLabel("Novo UserName:");
+														lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+														lblNovaPassword.setBounds(144, 275, 191, 41);
+														jpanelGestao.add(lblNovaPassword);
+														
+																tbGestaoNovoUser = new JTextField();
+																tbGestaoNovoUser.setBounds(144, 327, 271, 33);
+																jpanelGestao.add(tbGestaoNovoUser);
+																
+																		JButton btGestaouserconfirmar = new JButton("Confirmar");
+																		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																		btGestaouserconfirmar.addActionListener(new ActionListener() {
+																			public void actionPerformed(ActionEvent e) {
+																				if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
+																					func.setUsername(tbGestaoNovoUser.getText());
+																					tbGestaoUsername.setText(null);
+																					tbGestaopassuser.setText(null);
+																					tbGestaoNovoUser.setText(null);
+																					JOptionPane.showMessageDialog(null, "Alteração de Nome efectuado com sucesso");
+																				} else {
+																					JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
+																				}
+																			}
+																		});
+																		btGestaouserconfirmar.setBounds(144, 415, 131, 41);
+																		jpanelGestao.add(btGestaouserconfirmar);
+																		
+																				JButton btGestaouserCancelar = new JButton("Cancelar");
+																				btGestaouserCancelar.addActionListener(new ActionListener() {
+																					public void actionPerformed(ActionEvent e) {
+																						tbGestaopassuser.setText(null);
+																						tbGestaoNovoUser.setText(null);
+																					}
+																				});
+																				btGestaouserCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																				btGestaouserCancelar.setBounds(294, 415, 131, 41);
+																				jpanelGestao.add(btGestaouserCancelar);
+																				
+																						JLabel lblPassword_2 = new JLabel("Password:");
+																						lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+																						lblPassword_2.setBounds(579, 81, 131, 41);
+																						jpanelGestao.add(lblPassword_2);
+																						
+																								tbGestaoPass = new JPasswordField();
+																								tbGestaoPass.setBounds(579, 134, 271, 33);
+																								jpanelGestao.add(tbGestaoPass);
+																								
+																										JLabel lblPassword_3 = new JLabel("Nova Password:");
+																										lblPassword_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+																										lblPassword_3.setBounds(579, 178, 168, 41);
+																										jpanelGestao.add(lblPassword_3);
+																										
+																												tbGestaoNovapass = new JPasswordField();
+																												tbGestaoNovapass.setBounds(579, 230, 271, 33);
+																												jpanelGestao.add(tbGestaoNovapass);
+																												
+																														JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
+																														lblConfirmarPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+																														lblConfirmarPassword.setBounds(579, 275, 271, 41);
+																														jpanelGestao.add(lblConfirmarPassword);
+																														
+																																tbGestaoConfirmPass = new JPasswordField();
+																																tbGestaoConfirmPass.setBounds(579, 327, 271, 33);
+																																jpanelGestao.add(tbGestaoConfirmPass);
+																																
+																																		JButton btGestaopassConfirmar = new JButton("Confirmar");
+																																		btGestaopassConfirmar.addActionListener(new ActionListener() {
+																																			public void actionPerformed(ActionEvent e) {
 
-		// Painel da gestao do administrador
-		JPanel jpanelGestao = new JPanel();
-		jpanelGestao.setVisible(false);
+																																				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
+																																						&& new String(tbGestaoNovapass.getPassword())
+																																								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
+
+																																					func.setPassword(new String(tbGestaoNovapass.getPassword()));
+																																					JOptionPane.showMessageDialog(null, "Alteração efectuada com sucesso!");
+																																					tbGestaoPass.setText(null);
+																																					tbGestaoNovapass.setText(null);
+																																					tbGestaoConfirmPass.setText(null);
+
+																																				} else {
+																																					JOptionPane.showMessageDialog(null, "Dados errados! Confirme os dados introduzidos!");
+																																				}
+																																			}
+																																		});
+																																		btGestaopassConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																		btGestaopassConfirmar.setBounds(579, 415, 131, 41);
+																																		jpanelGestao.add(btGestaopassConfirmar);
+																																		
+																																				JButton btGestaopassCancelar = new JButton("Cancelar");
+																																				btGestaopassCancelar.addActionListener(new ActionListener() {
+																																					public void actionPerformed(ActionEvent e) {
+																																						tbGestaoPass.setText(null);
+																																						tbGestaoNovapass.setText(null);
+																																						tbGestaoConfirmPass.setText(null);
+																																					}
+																																				});
+																																				btGestaopassCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																				btGestaopassCancelar.setBounds(729, 415, 131, 41);
+																																				jpanelGestao.add(btGestaopassCancelar);
+																																				
+																																						JSeparator separator_1 = new JSeparator();
+																																						separator_1.setOrientation(SwingConstants.VERTICAL);
+																																						separator_1.setForeground(Color.BLACK);
+																																						separator_1.setAlignmentX(0.0f);
+																																						separator_1.setBounds(483, 68, 29, 433);
+																																						jpanelGestao.add(separator_1);
 
 		// Painel principal da operaÃ§oes
 		JPanel jpanelOperacoes = new JPanel();
@@ -432,135 +561,6 @@ public class BancoAppFun implements Serializable {
 				JpanelOpTransferencia.setVisible(true);
 			}
 		});
-		jpanelGestao.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelGestao);
-		jpanelGestao.setLayout(null);
-
-		JLabel lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblUsername_1.setBounds(144, 81, 131, 41);
-		jpanelGestao.add(lblUsername_1);
-
-		tbGestaoUsername = new JTextField();
-		tbGestaoUsername.setEditable(false);
-		tbGestaoUsername.setBounds(144, 134, 271, 33);
-		jpanelGestao.add(tbGestaoUsername);
-
-		JLabel lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_1.setBounds(144, 178, 131, 41);
-		jpanelGestao.add(lblPassword_1);
-
-		tbGestaopassuser = new JPasswordField();
-		tbGestaopassuser.setBounds(144, 230, 271, 33);
-		jpanelGestao.add(tbGestaopassuser);
-
-		JLabel lblNovaPassword = new JLabel("Novo UserName:");
-		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNovaPassword.setBounds(144, 275, 191, 41);
-		jpanelGestao.add(lblNovaPassword);
-
-		tbGestaoNovoUser = new JTextField();
-		tbGestaoNovoUser.setBounds(144, 327, 271, 33);
-		jpanelGestao.add(tbGestaoNovoUser);
-
-		JButton btGestaouserconfirmar = new JButton("Confirmar");
-		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaouserconfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
-					func.setUsername(tbGestaoNovoUser.getText());
-					tbGestaoUsername.setText(null);
-					tbGestaopassuser.setText(null);
-					tbGestaoNovoUser.setText(null);
-					JOptionPane.showMessageDialog(null, "Alteração de Nome efectuado com sucesso");
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
-				}
-			}
-		});
-		btGestaouserconfirmar.setBounds(144, 415, 131, 41);
-		jpanelGestao.add(btGestaouserconfirmar);
-
-		JButton btGestaouserCancelar = new JButton("Cancelar");
-		btGestaouserCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbGestaopassuser.setText(null);
-				tbGestaoNovoUser.setText(null);
-			}
-		});
-		btGestaouserCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaouserCancelar.setBounds(294, 415, 131, 41);
-		jpanelGestao.add(btGestaouserCancelar);
-
-		JLabel lblPassword_2 = new JLabel("Password:");
-		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_2.setBounds(579, 81, 131, 41);
-		jpanelGestao.add(lblPassword_2);
-
-		tbGestaoPass = new JPasswordField();
-		tbGestaoPass.setBounds(579, 134, 271, 33);
-		jpanelGestao.add(tbGestaoPass);
-
-		JLabel lblPassword_3 = new JLabel("Nova Password:");
-		lblPassword_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_3.setBounds(579, 178, 168, 41);
-		jpanelGestao.add(lblPassword_3);
-
-		tbGestaoNovapass = new JPasswordField();
-		tbGestaoNovapass.setBounds(579, 230, 271, 33);
-		jpanelGestao.add(tbGestaoNovapass);
-
-		JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
-		lblConfirmarPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblConfirmarPassword.setBounds(579, 275, 271, 41);
-		jpanelGestao.add(lblConfirmarPassword);
-
-		tbGestaoConfirmPass = new JPasswordField();
-		tbGestaoConfirmPass.setBounds(579, 327, 271, 33);
-		jpanelGestao.add(tbGestaoConfirmPass);
-
-		JButton btGestaopassConfirmar = new JButton("Confirmar");
-		btGestaopassConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
-						&& new String(tbGestaoNovapass.getPassword())
-								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
-
-					func.setPassword(new String(tbGestaoNovapass.getPassword()));
-					JOptionPane.showMessageDialog(null, "Alteração efectuada com sucesso!");
-					tbGestaoPass.setText(null);
-					tbGestaoNovapass.setText(null);
-					tbGestaoConfirmPass.setText(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados errados! Confirme os dados introduzidos!");
-				}
-			}
-		});
-		btGestaopassConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaopassConfirmar.setBounds(579, 415, 131, 41);
-		jpanelGestao.add(btGestaopassConfirmar);
-
-		JButton btGestaopassCancelar = new JButton("Cancelar");
-		btGestaopassCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbGestaoPass.setText(null);
-				tbGestaoNovapass.setText(null);
-				tbGestaoConfirmPass.setText(null);
-			}
-		});
-		btGestaopassCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaopassCancelar.setBounds(729, 415, 131, 41);
-		jpanelGestao.add(btGestaopassCancelar);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setAlignmentX(0.0f);
-		separator_1.setBounds(483, 68, 29, 433);
-		jpanelGestao.add(separator_1);
 
 		jpanelContas.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelContas);
@@ -1263,7 +1263,6 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
-
 		// adicionar nova conta ou atualizar:
 		btContasConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
