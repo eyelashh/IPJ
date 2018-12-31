@@ -4,10 +4,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Utilizador implements  Serializable {
 
-
-
 	private int id;
-	private static AtomicInteger aiUtil=new AtomicInteger(0);
+	private static AtomicInteger aiUtil=new AtomicInteger(1);
 	private String nome;
 	private int contato;
 	private String username;
@@ -16,7 +14,7 @@ public class Utilizador implements  Serializable {
 	
 	public Utilizador() {
 		super();
-		
+		this.id = aiUtil.incrementAndGet();
 	}
 
 	public Utilizador(String nome, int contato, String username, String password) {
@@ -33,9 +31,6 @@ public class Utilizador implements  Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -71,8 +66,7 @@ public class Utilizador implements  Serializable {
 
 	@Override
 	public String toString() {
-		return id +" | nome=" + nome + ", contato=" + contato + ", username=" + username
-				+ ", password=" + password + "]";
+		return id +" |" + nome ;
 	}
 
 }

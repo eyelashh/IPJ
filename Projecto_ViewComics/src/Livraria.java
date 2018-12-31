@@ -358,20 +358,16 @@ public class Livraria implements Serializable {
 	}
 
 	// extrair o id de uma string da lista
-
 	protected int obterId(String s) {
-
 //		char a = ' ';
 //		int i = 0;
 //		while (Character.isDigit(a)) {
 //			a = s.charAt(i);
 //			i++;
 //		}
-
 		String idStr = s.split("(?=\\D)")[0];
 		int id = Integer.parseInt(idStr);
 		return id;
-
 	}
 
 	// pesquisar o livro com determinado id
@@ -385,6 +381,7 @@ public class Livraria implements Serializable {
 		return livro;
 
 	}
+	
 
 	// LISTAR FUNCIONARIOS
 
@@ -427,7 +424,7 @@ public class Livraria implements Serializable {
 		return listaTitulo;
 	}
 
-	// devolve os funcionario cujo id é igual ao int id
+	// devolve o funcionario cujo id é igual ao int id
 	protected String[] listaFuncPorId(String id) {
 
 		ArrayList<String> listaId = new ArrayList();
