@@ -236,13 +236,11 @@ public class BancoAppFun implements Serializable {
 		cbOperacoesConta.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				String s = (String) cbOperacoesConta.getSelectedItem();
-				if(s!=null)
-				{
+				if (s != null) {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 					tbContasaldoc.setText("" + c.getSaldo());
 				}
-					
-					
+
 			}
 		});
 		cbOperacoesConta.setBounds(578, 72, 249, 39);
@@ -278,14 +276,63 @@ public class BancoAppFun implements Serializable {
 		btnTransferncia.setBounds(620, 207, 176, 38);
 		jpanelOperacoes.add(btnTransferncia);
 
-		JPanel JpanelOpTransferencia = new JPanel();
-		JpanelOpTransferencia.setVisible(false);
-
 		JPanel JpanelOpLevantamento = new JPanel();
 		JpanelOpLevantamento.setVisible(false);
 
 		JPanel JpanelOpDeposito = new JPanel();
 		JpanelOpDeposito.setVisible(false);
+
+		JPanel JpanelOpTransferencia = new JPanel();
+		JpanelOpTransferencia.setVisible(false);
+		JpanelOpTransferencia.setLayout(null);
+		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
+		jpanelOperacoes.add(JpanelOpTransferencia);
+
+		tbTransMontante = new JTextField();
+		tbTransMontante.setBounds(168, 59, 162, 30);
+		JpanelOpTransferencia.add(tbTransMontante);
+
+		JLabel lblContaDestino = new JLabel("Conta destino:");
+		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContaDestino.setBounds(158, 101, 137, 23);
+		JpanelOpTransferencia.add(lblContaDestino);
+
+		JLabel label_5 = new JLabel("Montante:");
+		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_5.setBounds(158, 34, 97, 23);
+		JpanelOpTransferencia.add(label_5);
+
+		tbTransContaDestino = new JTextField();
+		tbTransContaDestino.setBounds(168, 126, 162, 30);
+		JpanelOpTransferencia.add(tbTransContaDestino);
+
+		JButton btTransConfirmar = new JButton("Confirmar");
+		btTransConfirmar.setBounds(146, 317, 97, 30);
+		JpanelOpTransferencia.add(btTransConfirmar);
+
+		JButton btTransCancelar = new JButton("Cancelar");
+		btTransCancelar.setBounds(275, 317, 97, 30);
+		JpanelOpTransferencia.add(btTransCancelar);
+
+		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
+		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDaOperao.setBounds(158, 168, 189, 23);
+		JpanelOpTransferencia.add(lblDataDaOperao);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		
+		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnConfirmar.setBounds(118, 253, 116, 38);
+		JpanelOpTransferencia.add(btnConfirmar);
+
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnCancelar.setBounds(256, 253, 116, 38);
+		JpanelOpTransferencia.add(btnCancelar);
+
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(168, 198, 162, 31);
+		JpanelOpTransferencia.add(dateChooser_1);
 
 		JpanelOpDeposito.setBounds(263, 247, 516, 313);
 		jpanelOperacoes.add(JpanelOpDeposito);
@@ -344,54 +391,6 @@ public class BancoAppFun implements Serializable {
 		btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btLevCancelar.setBounds(273, 224, 120, 38);
 		JpanelOpLevantamento.add(btLevCancelar);
-		JpanelOpTransferencia.setLayout(null);
-		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpTransferencia);
-
-		tbTransMontante = new JTextField();
-		tbTransMontante.setBounds(168, 59, 162, 30);
-		JpanelOpTransferencia.add(tbTransMontante);
-
-		JLabel lblContaDestino = new JLabel("Conta destino:");
-		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContaDestino.setBounds(158, 101, 137, 23);
-		JpanelOpTransferencia.add(lblContaDestino);
-
-		JLabel label_5 = new JLabel("Montante:");
-		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_5.setBounds(158, 34, 97, 23);
-		JpanelOpTransferencia.add(label_5);
-
-		tbTransContaDestino = new JTextField();
-		tbTransContaDestino.setBounds(168, 126, 162, 30);
-		JpanelOpTransferencia.add(tbTransContaDestino);
-
-		JButton btTransConfirmar = new JButton("Confirmar");
-		btTransConfirmar.setBounds(146, 317, 97, 30);
-		JpanelOpTransferencia.add(btTransConfirmar);
-
-		JButton btTransCancelar = new JButton("Cancelar");
-		btTransCancelar.setBounds(275, 317, 97, 30);
-		JpanelOpTransferencia.add(btTransCancelar);
-
-		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
-		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDaOperao.setBounds(158, 168, 189, 23);
-		JpanelOpTransferencia.add(lblDataDaOperao);
-
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.setBounds(118, 253, 116, 38);
-		JpanelOpTransferencia.add(btnConfirmar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCancelar.setBounds(256, 253, 116, 38);
-		JpanelOpTransferencia.add(btnCancelar);
-
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(168, 198, 162, 31);
-		JpanelOpTransferencia.add(dateChooser_1);
 
 		//// acaba a constru�ao dos botoes e come�a todos os metedos:
 
@@ -937,7 +936,6 @@ public class BancoAppFun implements Serializable {
 				jpanelOperacoes.setVisible(true);
 				dcbm.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
-				
 
 			}
 		});
@@ -959,9 +957,6 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
-				
-				
-				
 
 			}
 		});
@@ -1300,8 +1295,6 @@ public class BancoAppFun implements Serializable {
 							gb.javabank.getContas());
 
 					if (c instanceof ContaCorrente) {
-						// gb.javabank.atualizarconta(c, Double.parseDouble(tbLevMontante.getText()) ,
-						// Double.parseDouble(tbContaslimitelevdia.getText()) , 0.0, 0.0);
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
 					} else {
@@ -1445,27 +1438,84 @@ public class BancoAppFun implements Serializable {
 
 				double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
 				c.setSaldo(saldo);
-				
+
 				// cria opera�ao:
 				int idop = 1;
 				if (c.getOperacoes().size() != 0) {
 					idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
 				}
 				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
-				
+
 				Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
 						Double.parseDouble(tbContasaldoc.getText()), descricao);
 				c.getOperacoes().add(op);
-				tbContasaldoc.setText(c.getSaldo()+"");
+				tbContasaldoc.setText(c.getSaldo() + "");
 				JOptionPane.showMessageDialog(null, "Deposito efectuado!");
-				
-				
 
 			}
 		});
 		
-		
-		
+		// efectuar transferencia
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double valortransf = Double.parseDouble(tbTransMontante.getText());
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+				Conta cdestino;
+				try
+				{
+					cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()), gb.javabank.getContas());
+					
+					if(corigem.getSaldo()>=valortransf && !corigem.equals(cdestino) )
+					{
+						// gerado ids:
+						int idoporigem = 1;
+						if (corigem.getOperacoes().size() != 0) {
+							idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1).getIdOperacao() + 1;
+						}
+						int iddestino = 1;
+						if (cdestino.getOperacoes().size() != 0) {
+							iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1).getIdOperacao() + 1;
+						}
+						
+						cdestino.setSaldo(cdestino.getSaldo()+valortransf);
+						corigem.setSaldo(corigem.getSaldo()-valortransf);
+						
+						// faz transferencia;
+						String descorigem = dateChooser_1.getDate() +" - Transferencia efectuada para conta "+cdestino.getIdConta()+" valor: "+valortransf;
+						String descdestino = dateChooser_1.getDate() +" - Transferencia recebida da conta "+corigem.getIdConta()+" valor: "+valortransf;
+						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf, cdestino,descorigem);
+						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf, corigem,descdestino);
+						
+						corigem.getOperacoes().add(oporigem);
+						cdestino.getOperacoes().add(opdestino);
+						
+						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+						
+					}
+					else
+					{
+						if(corigem.getSaldo()<valortransf)
+						{
+						JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+						}
+						if(corigem.equals(cdestino))
+						{
+							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+						}
+					}
+	
+					
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+				}
+				
+				
+				
+			}
+		});
 
 	}
 }
