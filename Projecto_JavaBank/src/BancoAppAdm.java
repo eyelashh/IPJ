@@ -202,441 +202,444 @@ public class BancoAppAdm implements Serializable {
 		// Agrupei num grupo os radio button
 		ButtonGroup bg = new ButtonGroup();
 
+		// Painel da funcionario da parte administrador
+		JPanel JPAdmFuncionario = new JPanel();
+		JPAdmFuncionario.setVisible(false);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(true);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmEstatistica);
+		JPAdmEstatistica.setLayout(null);
+		JPAdmFuncionario.setLayout(null);
+		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmFuncionario);
+		JComboBox cbAdmFunPesq = new JComboBox(texto);
+		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		cbAdmFunPesq.setBounds(111, 29, 227, 34);
+		JPAdmFuncionario.add(cbAdmFunPesq);
+
+		// caixa de texto para escrever a procura do funcionario
+		JTextField tbAdmFunPesq = new JTextField();
+		tbAdmFunPesq.setBounds(111, 66, 227, 31);
+		JPAdmFuncionario.add(tbAdmFunPesq);
+
+		// Botao de procurar
+		JButton btAdmFunProc = new JButton("Procurar");
+		btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btAdmFunProc.setBounds(385, 42, 120, 38);
+		JPAdmFuncionario.add(btAdmFunProc);
+
+		// texto : Nome
+		JLabel lblAdmFunNome = new JLabel("Nome:");
+		lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunNome.setBounds(453, 88, 57, 30);
+		JPAdmFuncionario.add(lblAdmFunNome);
+
+		// texto : data de nascimento
+		JLabel lblAdmFunDataDeNascimento = new JLabel("Data de Nascimento:");
+		lblAdmFunDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunDataDeNascimento.setBounds(453, 148, 177, 30);
+		JPAdmFuncionario.add(lblAdmFunDataDeNascimento);
+
+		// texto : documento
+		JLabel lblAdmFunDocumento = new JLabel("Documento:");
+		lblAdmFunDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunDocumento.setBounds(453, 209, 108, 30);
+		JPAdmFuncionario.add(lblAdmFunDocumento);
+
+		// radiobutton : documento
+		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
+		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunCC.setBounds(564, 212, 66, 25);
+		JPAdmFuncionario.add(rbAdmFunCC);
+
+		// radiobutton : documento
+		JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
+		rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunBI.setBounds(643, 212, 57, 25);
+		JPAdmFuncionario.add(rbAdmFunBI);
+
+		// radiobutton : documento
+		JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
+		rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		rbAdmFunPass.setBounds(712, 212, 138, 25);
+		JPAdmFuncionario.add(rbAdmFunPass);
+		bg.add(rbAdmFunCC);
+		bg.add(rbAdmFunBI);
+		bg.add(rbAdmFunPass);
+
+		// texto : numero do documento
+		JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
+		lblAdmFunNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunNumero.setBounds(453, 237, 227, 30);
+		JPAdmFuncionario.add(lblAdmFunNumero);
+
+		// texto : contato
+		JLabel lblAdmFunContacto = new JLabel("Contacto:");
+		lblAdmFunContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunContacto.setBounds(453, 303, 81, 31);
+		JPAdmFuncionario.add(lblAdmFunContacto);
+
+		// texto : username
+		JLabel lblAdmFunUsername = new JLabel("UserName:");
+		lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunUsername.setBounds(454, 441, 120, 30);
+		JPAdmFuncionario.add(lblAdmFunUsername);
+
+		// texto : username
+		JLabel lblAdmFunPassword = new JLabel("Password:");
+		lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdmFunPassword.setBounds(712, 441, 153, 30);
+		JPAdmFuncionario.add(lblAdmFunPassword);
+
+		// Campos de texto - nome
+		textAdmFunNome = new JTextField();
+		textAdmFunNome.setColumns(10);
+		textAdmFunNome.setBounds(463, 119, 217, 31);
+		JPAdmFuncionario.add(textAdmFunNome);
+
+		// Campos de texto - numero
+		textAdmFunNumero = new JTextField();
+		textAdmFunNumero.setColumns(10);
+		textAdmFunNumero.setBounds(463, 270, 225, 31);
+		JPAdmFuncionario.add(textAdmFunNumero);
+
+		// Campos de texto - contato
+		textAdmFunContato = new JTextField();
+		textAdmFunContato.setColumns(10);
+		textAdmFunContato.setBounds(463, 334, 225, 31);
+		JPAdmFuncionario.add(textAdmFunContato);
+
+		// Campos de texto - username
+		textAdmFunUser = new JTextField();
+		textAdmFunUser.setColumns(10);
+		textAdmFunUser.setBounds(464, 469, 225, 31);
+		JPAdmFuncionario.add(textAdmFunUser);
+
+		// Campos de texto - pass
+		textAdmFunPass = new JTextField();
+		textAdmFunPass.setColumns(10);
+		textAdmFunPass.setBounds(722, 469, 225, 31);
+		JPAdmFuncionario.add(textAdmFunPass);
+
+		// Data do funcionario
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateChooser.setBounds(463, 179, 217, 31);
+		JPAdmFuncionario.add(dateChooser);
+
+		JLabel lblSobrenome = new JLabel("Sobrenome:");
+		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblSobrenome.setBounds(699, 86, 120, 30);
+		JPAdmFuncionario.add(lblSobrenome);
+
+		textAdmFunSobrenome = new JTextField();
+		textAdmFunSobrenome.setColumns(10);
+		textAdmFunSobrenome.setBounds(709, 117, 217, 31);
+		JPAdmFuncionario.add(textAdmFunSobrenome);
+
+		textAdmFunMorada = new JTextField();
+		textAdmFunMorada.setColumns(10);
+		textAdmFunMorada.setBounds(463, 399, 225, 31);
+		JPAdmFuncionario.add(textAdmFunMorada);
+
+		JLabel lblMorada = new JLabel("Morada: ");
+		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMorada.setBounds(453, 366, 227, 30);
+		JPAdmFuncionario.add(lblMorada);
+
 		// lista dos funcionarios
 		DefaultListModel<String> dmFun = new DefaultListModel<String>();
+		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
 		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-		
-				// Painel da funcionario da parte administrador
-				JPanel JPAdmFuncionario = new JPanel();
-				JPAdmFuncionario.setVisible(false);
-				JPAdmFuncionario.setLayout(null);
-				JPAdmFuncionario.setBounds(0, 0, 1042, 576);
-				JPAdm.add(JPAdmFuncionario);
-				JComboBox cbAdmFunPesq = new JComboBox(texto);
-				cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-				cbAdmFunPesq.setBounds(111, 29, 227, 34);
-				JPAdmFuncionario.add(cbAdmFunPesq);
-				
-						// caixa de texto para escrever a procura do funcionario
-						JTextField tbAdmFunPesq = new JTextField();
-						tbAdmFunPesq.setBounds(111, 66, 227, 31);
-						JPAdmFuncionario.add(tbAdmFunPesq);
-						
-								// Botao de procurar
-								JButton btAdmFunProc = new JButton("Procurar");
-								btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-								btAdmFunProc.setBounds(385, 42, 120, 38);
-								JPAdmFuncionario.add(btAdmFunProc);
-								
-										// Botao para criar novo funcionario
-										JButton btAdmFunNovo = new JButton("Novo");
-										btAdmFunNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-										btAdmFunNovo.addActionListener(new ActionListener() {
-											public void actionPerformed(ActionEvent e) {
-											}
-										});
-										
-												btAdmFunNovo.setBounds(647, 512, 120, 38);
-												JPAdmFuncionario.add(btAdmFunNovo);
-												
-														// texto : Nome
-														JLabel lblAdmFunNome = new JLabel("Nome:");
-														lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-														lblAdmFunNome.setBounds(453, 88, 57, 30);
-														JPAdmFuncionario.add(lblAdmFunNome);
-														
-																// texto : data de nascimento
-																JLabel lblAdmFunDataDeNascimento = new JLabel("Data de Nascimento:");
-																lblAdmFunDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																lblAdmFunDataDeNascimento.setBounds(453, 148, 177, 30);
-																JPAdmFuncionario.add(lblAdmFunDataDeNascimento);
-																
-																		// texto : documento
-																		JLabel lblAdmFunDocumento = new JLabel("Documento:");
-																		lblAdmFunDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																		lblAdmFunDocumento.setBounds(453, 209, 108, 30);
-																		JPAdmFuncionario.add(lblAdmFunDocumento);
-																		
-																				// radiobutton : documento
-																				JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
-																				rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																				rbAdmFunCC.setBounds(564, 212, 66, 25);
-																				JPAdmFuncionario.add(rbAdmFunCC);
-																				
-																						// radiobutton : documento
-																						JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
-																						rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																						rbAdmFunBI.setBounds(643, 212, 57, 25);
-																						JPAdmFuncionario.add(rbAdmFunBI);
-																						
-																								// radiobutton : documento
-																								JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
-																								rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																								rbAdmFunPass.setBounds(712, 212, 138, 25);
-																								JPAdmFuncionario.add(rbAdmFunPass);
-																								bg.add(rbAdmFunCC);
-																								bg.add(rbAdmFunBI);
-																								bg.add(rbAdmFunPass);
-																								
-																										// texto : numero do documento
-																										JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
-																										lblAdmFunNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																										lblAdmFunNumero.setBounds(453, 237, 227, 30);
-																										JPAdmFuncionario.add(lblAdmFunNumero);
-																										
-																												// texto : contato
-																												JLabel lblAdmFunContacto = new JLabel("Contacto:");
-																												lblAdmFunContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																												lblAdmFunContacto.setBounds(453, 303, 81, 31);
-																												JPAdmFuncionario.add(lblAdmFunContacto);
-																												JList<String> lbLAdmFunLista = new JList<String>(dmFun);
-																												lbLAdmFunLista.setBounds(109, 109, 240, 441);
-																												JPAdmFuncionario.add(lbLAdmFunLista);
-																												
-																														// texto : username
-																														JLabel lblAdmFunUsername = new JLabel("UserName:");
-																														lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																														lblAdmFunUsername.setBounds(454, 441, 120, 30);
-																														JPAdmFuncionario.add(lblAdmFunUsername);
-																														
-																																// texto : username
-																																JLabel lblAdmFunPassword = new JLabel("Password:");
-																																lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																lblAdmFunPassword.setBounds(712, 441, 153, 30);
-																																JPAdmFuncionario.add(lblAdmFunPassword);
-																																
-																																		// botao eliminar funcionario
-																																		JButton btnAdmFunEliminar = new JButton("Eliminar");
-																																		btnAdmFunEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																		btnAdmFunEliminar.setBounds(779, 512, 120, 38);
-																																		JPAdmFuncionario.add(btnAdmFunEliminar);
-																																		
-																																				// Campos de texto - nome
-																																				textAdmFunNome = new JTextField();
-																																				textAdmFunNome.setColumns(10);
-																																				textAdmFunNome.setBounds(463, 119, 217, 31);
-																																				JPAdmFuncionario.add(textAdmFunNome);
-																																				
-																																						// Campos de texto - numero
-																																						textAdmFunNumero = new JTextField();
-																																						textAdmFunNumero.setColumns(10);
-																																						textAdmFunNumero.setBounds(463, 270, 225, 31);
-																																						JPAdmFuncionario.add(textAdmFunNumero);
-																																						
-																																								// Campos de texto - contato
-																																								textAdmFunContato = new JTextField();
-																																								textAdmFunContato.setColumns(10);
-																																								textAdmFunContato.setBounds(463, 334, 225, 31);
-																																								JPAdmFuncionario.add(textAdmFunContato);
-																																								
-																																										// Campos de texto - username
-																																										textAdmFunUser = new JTextField();
-																																										textAdmFunUser.setColumns(10);
-																																										textAdmFunUser.setBounds(464, 469, 225, 31);
-																																										JPAdmFuncionario.add(textAdmFunUser);
-																																										
-																																												// Campos de texto - pass
-																																												textAdmFunPass = new JTextField();
-																																												textAdmFunPass.setColumns(10);
-																																												textAdmFunPass.setBounds(722, 469, 225, 31);
-																																												JPAdmFuncionario.add(textAdmFunPass);
-																																												
-																																														// Data do funcionario
-																																														JDateChooser dateChooser = new JDateChooser();
-																																														dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-																																															public void actionPerformed(ActionEvent e) {
-																																															}
-																																														});
-																																														dateChooser.setBounds(463, 179, 217, 31);
-																																														JPAdmFuncionario.add(dateChooser);
-																																														
-																																																// botao confirmar funcionario
-																																																JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
-																																																btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																btnAdmFunConfirmar_1.setBounds(515, 512, 120, 38);
-																																																JPAdmFuncionario.add(btnAdmFunConfirmar_1);
-																																																
-																																																		JLabel lblSobrenome = new JLabel("Sobrenome:");
-																																																		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																		lblSobrenome.setBounds(699, 86, 120, 30);
-																																																		JPAdmFuncionario.add(lblSobrenome);
-																																																		
-																																																				textAdmFunSobrenome = new JTextField();
-																																																				textAdmFunSobrenome.setColumns(10);
-																																																				textAdmFunSobrenome.setBounds(709, 117, 217, 31);
-																																																				JPAdmFuncionario.add(textAdmFunSobrenome);
-																																																				
-																																																						textAdmFunMorada = new JTextField();
-																																																						textAdmFunMorada.setColumns(10);
-																																																						textAdmFunMorada.setBounds(463, 399, 225, 31);
-																																																						JPAdmFuncionario.add(textAdmFunMorada);
-																																																						
-																																																								JLabel lblMorada = new JLabel("Morada: ");
-																																																								lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																																																								lblMorada.setBounds(453, 366, 227, 30);
-																																																								JPAdmFuncionario.add(lblMorada);
-																																																								
-																																																										JButton btnLimpar = new JButton("Limpar ");
-																																																										btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																																																										btnLimpar.setBounds(529, 42, 120, 38);
-																																																										JPAdmFuncionario.add(btnLimpar);
-																																																										
-																																																												// acao do botao novo:
-																																																												btAdmFunNovo.addActionListener(new ActionListener() {
-																																																													public void actionPerformed(ActionEvent e) {
-																																																										
-																																																														lbLAdmFunLista.clearSelection();
-																																																														textAdmFunNome.setText(null);
-																																																														textAdmFunSobrenome.setText(null);
-																																																														textAdmFunContato.setText(null);
-																																																														textAdmFunMorada.setText(null);
-																																																														bg.clearSelection();
-																																																														textAdmFunNumero.setText(null);
-																																																														textAdmFunPass.setText(null);
-																																																														textAdmFunUser.setText(null);
-																																																														dateChooser.setCalendar(null);
-																																																										
-																																																														// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-																																																														dmFun.removeAllElements();
-																																																														gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-																																																										
-																																																													}
-																																																												});
-																																																												
-																																																														// bt confirmar (adicionar ou alterar )
-																																																														btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
-																																																															public void actionPerformed(ActionEvent e) {
-																																																												
-																																																																// valida qual dos botoes estao atualizados:
-																																																																String opselect = "";
-																																																																if (rbAdmFunCC.isSelected()) {
-																																																																	opselect = rbAdmFunCC.getText();
-																																																																}
-																																																																if (rbAdmFunBI.isSelected()) {
-																																																																	opselect = rbAdmFunBI.getText();
-																																																																}
-																																																																if (rbAdmFunPass.isSelected()) {
-																																																																	opselect = rbAdmFunPass.getText();
-																																																																}
-																																																												
-																																																																// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
-																																																																// algum elemento selecionado da lista faz um update:
-																																																																if (lbLAdmFunLista.isSelectionEmpty()) {
-																																																												
-																																																																	// adicionar Cliente:
-																																																																	// criar automaticamente os 2 id;
-																																																																	int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
-																																																																			.getIdUtilizador()) + 1;
-																																																																	int id2 = (gb.javabank.getUtlizadores().get(id + 1)).getIdUtilizador() + 1;
-																																																																	if (id == 0) {
-																																																																		id++;
-																																																																	}
-																																																												
-																																																																	if (id2 == id) {
-																																																																		id2++;
-																																																																	}
-																																																												
-																																																																	// esta a criar o novo funcionario:
-																																																																	Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
-																																																																			dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
-																																																																			textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
-																																																																			textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
-																																																																	gb.javabank.getUtlizadores().add(fun);
-																																																												
-																																																																	// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-																																																																	dmFun.removeAllElements();
-																																																																	gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-																																																																	JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
-																																																												
-																																																																} else {
-																																																																	// atualizar Funcionario:
-																																																																	// seleciona id;
-																																																																	String s = (String) lbLAdmFunLista.getSelectedValue();
-																																																																	s = s.substring(0, s.indexOf(" "));
-																																																												
-																																																																	// metedo para atualizar:
-																																																																	gb.javabank.actualizaFun(
-																																																																			(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
-																																																																					gb.javabank.getUtlizadores()),
-																																																																			textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
-																																																																			Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
-																																																																			Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
-																																																																			textAdmFunPass.getText());
-																																																												
-																																																																	// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-																																																																	dmFun.removeAllElements();
-																																																																	gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-																																																												
-																																																																	JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
-																																																												
-																																																																}
-																																																												
-																																																																lbLAdmFunLista.clearSelection();
-																																																																textAdmFunNome.setText("");
-																																																																textAdmFunSobrenome.setText("");
-																																																																textAdmFunMorada.setText(null);
-																																																																textAdmFunContato.setText(null);
-																																																																bg.clearSelection();
-																																																																textAdmFunUser.setText("");
-																																																																textAdmFunPass.setText("");
-																																																																textAdmFunNumero.setText("");
-																																																																dateChooser.setDate(null);
-																																																												
-																																																															}
-																																																														});
-																																																														
-																																																																// metodo elimina funcionario
-																																																																btnAdmFunEliminar.addActionListener(new ActionListener() {
-																																																																	public void actionPerformed(ActionEvent e) {
-																																																														
-																																																																		if (!lbLAdmFunLista.isSelectionEmpty()) {
-																																																														
-																																																																			// ver o id selecionado
-																																																																			String s = lbLAdmFunLista.getSelectedValue();
-																																																																			s = s.substring(0, s.indexOf(" "));
-																																																														
-																																																																			gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-																																																														
-																																																																			// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-																																																																			dmFun.removeAllElements();
-																																																																			gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-																																																																			JOptionPane.showMessageDialog(null, "Funcionario eliminado com sucesso!");
-																																																																		}
-																																																														
-																																																																		lbLAdmFunLista.clearSelection();
-																																																																		textAdmFunNome.setText("");
-																																																																		textAdmFunSobrenome.setText("");
-																																																																		textAdmFunMorada.setText(null);
-																																																																		textAdmFunContato.setText(null);
-																																																																		bg.clearSelection();
-																																																																		textAdmFunUser.setText("");
-																																																																		textAdmFunPass.setText("");
-																																																																		textAdmFunNumero.setText("");
-																																																																		dateChooser.setDate(null);
-																																																														
-																																																																	}
-																																																																});
-																																																																
-																																																																		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-																																																																
-																																																																		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
-																																																																
-																																																																			public void valueChanged(ListSelectionEvent e) {
-																																																																				bg.clearSelection();
-																																																																				if (!lbLAdmFunLista.isSelectionEmpty()) {
-																																																																
-																																																																					String s = (String) lbLAdmFunLista.getSelectedValue();
-																																																																					s = s.substring(0, s.indexOf(" "));
-																																																																					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
-																																																																							gb.javabank.getUtlizadores());
-																																																																
-																																																																					textAdmFunNome.setText(f.getNome());
-																																																																					textAdmFunSobrenome.setText(f.getSobrenome());
-																																																																					textAdmFunMorada.setText(f.getMorada());
-																																																																					textAdmFunContato.setText("" + f.getContacto());
-																																																																					textAdmFunUser.setText(f.getUsername());
-																																																																					textAdmFunPass.setText(f.getPassword());
-																																																																					textAdmFunNumero.setText("" + f.getNumidentificacao());
-																																																																
-																																																																					if (f.getTipoIndentificacao().equals("C.C.")) {
-																																																																						rbAdmFunCC.setSelected(true);
-																																																																					}
-																																																																					if (f.getTipoIndentificacao().equals("B.I.")) {
-																																																																						rbAdmFunBI.setSelected(true);
-																																																																					}
-																																																																					if (f.getTipoIndentificacao().equals("Passaporte")) {
-																																																																						rbAdmFunPass.setSelected(true);
-																																																																					}
-																																																																
-																																																																				}
-																																																																			}
-																																																																		});
-																																																																		
-																																																																				// pesquisar funcionarios por atributos
-																																																																				btAdmFunProc.addActionListener(new ActionListener() {
-																																																																					public void actionPerformed(ActionEvent arg0) {
-																																																																		
-																																																																						if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
-																																																																		
-																																																																							int id = Integer.parseInt(tbAdmFunPesq.getText());
-																																																																		
-																																																																							Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-																																																																		
-																																																																							textAdmFunNome.setText(f.getNome());
-																																																																							textAdmFunSobrenome.setText(f.getSobrenome());
-																																																																							textAdmFunMorada.setText(f.getMorada());
-																																																																							textAdmFunContato.setText(String.valueOf(f.getContacto()));
-																																																																							textAdmFunUser.setText(f.getUsername());
-																																																																							textAdmFunPass.setText(f.getPassword());
-																																																																							textAdmFunNumero.setText("" + f.getNumidentificacao());
-																																																																		
-																																																																							if (f.getTipoIndentificacao().equals("C.C.")) {
-																																																																								rbAdmFunCC.setSelected(true);
-																																																																							}
-																																																																							if (f.getTipoIndentificacao().equals("B.I.")) {
-																																																																								rbAdmFunBI.setSelected(true);
-																																																																							}
-																																																																							if (f.getTipoIndentificacao().equals("Passaporte")) {
-																																																																								rbAdmFunPass.setSelected(true);
-																																																																							}
-																																																																		
-																																																																							dmFun.removeAllElements();
-																																																																							dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
-																																																																						}
-																																																																		
-																																																																						if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
-																																																																		
-																																																																							String nome = tbAdmFunPesq.getText();
-																																																																		
-																																																																							Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
-																																																																		
-																																																																							textAdmFunNome.setText(f.getNome());
-																																																																							textAdmFunSobrenome.setText(f.getSobrenome());
-																																																																							textAdmFunMorada.setText(f.getMorada());
-																																																																							textAdmFunContato.setText(String.valueOf(f.getContacto()));
-																																																																							textAdmFunUser.setText(f.getUsername());
-																																																																							textAdmFunPass.setText(f.getPassword());
-																																																																							textAdmFunNumero.setText("" + f.getNumidentificacao());
-																																																																		
-																																																																							if (f.getTipoIndentificacao().equals("C.C.")) {
-																																																																								rbAdmFunCC.setSelected(true);
-																																																																							}
-																																																																							if (f.getTipoIndentificacao().equals("B.I.")) {
-																																																																								rbAdmFunBI.setSelected(true);
-																																																																							}
-																																																																							if (f.getTipoIndentificacao().equals("Passaporte")) {
-																																																																								rbAdmFunPass.setSelected(true);
-																																																																							}
-																																																																		
-																																																																							dmFun.removeAllElements();
-																																																																							dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
-																																																																						}
-																																																																		
-																																																																					}
-																																																																				});
-																																																																				
-																																																																						// limpar pesquisa
-																																																																						btnLimpar.addActionListener(new ActionListener() {
-																																																																							public void actionPerformed(ActionEvent e) {
-																																																																				
-																																																																								lbLAdmFunLista.clearSelection();
-																																																																								textAdmFunNome.setText(null);
-																																																																								textAdmFunSobrenome.setText(null);
-																																																																								textAdmFunContato.setText(null);
-																																																																								textAdmFunMorada.setText(null);
-																																																																								bg.clearSelection();
-																																																																								textAdmFunNumero.setText(null);
-																																																																								textAdmFunPass.setText(null);
-																																																																								textAdmFunUser.setText(null);
-																																																																								dateChooser.setCalendar(null);
-																																																																								tbAdmFunPesq.setText(null);
-																																																																				
-																																																																								// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-																																																																								dmFun.removeAllElements();
-																																																																								gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-																																																																				
-																																																																							}
-																																																																						});
+		lbLAdmFunLista.setBounds(109, 109, 240, 441);
+		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+
+		lbLAdmFunLista.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+				bg.clearSelection();
+				if (!lbLAdmFunLista.isSelectionEmpty()) {
+
+					String s = (String) lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
+							gb.javabank.getUtlizadores());
+
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText("" + f.getContacto());
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
+					dateChooser.setDate(f.getDataDeNascimento());
+
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
+					}
+
+				}
+			}
+		});
+		JPAdmFuncionario.add(lbLAdmFunLista);
+
+		JButton btnLimpar = new JButton("Limpar ");
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.setBounds(529, 42, 120, 38);
+		// limpar pesquisa
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText(null);
+				textAdmFunSobrenome.setText(null);
+				textAdmFunContato.setText(null);
+				textAdmFunMorada.setText(null);
+				bg.clearSelection();
+				textAdmFunNumero.setText(null);
+				textAdmFunPass.setText(null);
+				textAdmFunUser.setText(null);
+				dateChooser.setCalendar(null);
+				tbAdmFunPesq.setText(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmFun.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+			}
+		});
+		JPAdmFuncionario.add(btnLimpar);
+
+		// Botao para criar novo funcionario
+		JButton btAdmFunNovo = new JButton("Novo");
+		btAdmFunNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		// acao do botao novo:
+		btAdmFunNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText(null);
+				textAdmFunSobrenome.setText(null);
+				textAdmFunContato.setText(null);
+				textAdmFunMorada.setText(null);
+				bg.clearSelection();
+				textAdmFunNumero.setText(null);
+				textAdmFunPass.setText(null);
+				textAdmFunUser.setText(null);
+				dateChooser.setCalendar(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmFun.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+			}
+		});
+
+		btAdmFunNovo.setBounds(647, 512, 120, 38);
+		JPAdmFuncionario.add(btAdmFunNovo);
+
+		// botao confirmar funcionario
+		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
+		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmFunConfirmar_1.setBounds(515, 512, 120, 38);
+
+		// bt confirmar (adicionar ou alterar )
+		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// valida qual dos botoes estao atualizados:
+				String opselect = "";
+				if (rbAdmFunCC.isSelected()) {
+					opselect = rbAdmFunCC.getText();
+				}
+				if (rbAdmFunBI.isSelected()) {
+					opselect = rbAdmFunBI.getText();
+				}
+				if (rbAdmFunPass.isSelected()) {
+					opselect = rbAdmFunPass.getText();
+				}
+
+				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
+				// algum elemento selecionado da lista faz um update:
+				if (lbLAdmFunLista.isSelectionEmpty()) {
+
+					// adicionar Cliente:
+					// criar automaticamente os 2 id;
+					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
+							.getIdUtilizador()) + 1;
+					int id2 = (gb.javabank.getUtlizadores().get(id + 1)).getIdUtilizador() + 1;
+					if (id == 0) {
+						id++;
+					}
+
+					if (id2 == id) {
+						id2++;
+					}
+
+					// esta a criar o novo funcionario:
+					Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
+					gb.javabank.getUtlizadores().add(fun);
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
+
+				} else {
+					// atualizar Funcionario:
+					// seleciona id;
+					String s = (String) lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+
+					// metedo para atualizar:
+					gb.javabank.actualizaFun(
+							(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
+									gb.javabank.getUtlizadores()),
+							textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
+							Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
+							Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
+							textAdmFunPass.getText());
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+					JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
+
+				}
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText("");
+				textAdmFunSobrenome.setText("");
+				textAdmFunMorada.setText(null);
+				textAdmFunContato.setText(null);
+				bg.clearSelection();
+				textAdmFunUser.setText("");
+				textAdmFunPass.setText("");
+				textAdmFunNumero.setText("");
+				dateChooser.setDate(null);
+
+			}
+		});
+
+		JPAdmFuncionario.add(btnAdmFunConfirmar_1);
+
+		// botao eliminar funcionario
+		JButton btnAdmFunEliminar = new JButton("Eliminar");
+		btnAdmFunEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmFunEliminar.setBounds(779, 512, 120, 38);
+		// metodo elimina funcionario
+		btnAdmFunEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (!lbLAdmFunLista.isSelectionEmpty()) {
+
+					// ver o id selecionado
+					String s = lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+
+					gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					JOptionPane.showMessageDialog(null, "Funcionario eliminado com sucesso!");
+				}
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText("");
+				textAdmFunSobrenome.setText("");
+				textAdmFunMorada.setText(null);
+				textAdmFunContato.setText(null);
+				bg.clearSelection();
+				textAdmFunUser.setText("");
+				textAdmFunPass.setText("");
+				textAdmFunNumero.setText("");
+				dateChooser.setDate(null);
+
+			}
+		});
+		JPAdmFuncionario.add(btnAdmFunEliminar);
+
+		// pesquisar funcionarios por atributos
+		btAdmFunProc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
+
+					int id = Integer.parseInt(tbAdmFunPesq.getText());
+
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText(String.valueOf(f.getContacto()));
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
+					dateChooser.setDate(f.getDataDeNascimento());
+
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
+					}
+
+					dmFun.removeAllElements();
+					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+				}
+
+				if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
+
+					String nome = tbAdmFunPesq.getText();
+
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText(String.valueOf(f.getContacto()));
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
+					dateChooser.setDate(f.getDataDeNascimento());
+
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
+					}
+
+					dmFun.removeAllElements();
+					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+				}
+
+			}
+		});
 
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
@@ -744,13 +747,6 @@ public class BancoAppAdm implements Serializable {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(366, 209, 217, 31);
 		JPAdmCliente.add(dateChooser_1);
-
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(true);
-		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-		JPAdm.add(JPAdmEstatistica);
-		JPAdmEstatistica.setLayout(null);
 
 		// Painel da gestao do administrador
 		JPanel JPAdmGestao = new JPanel();
