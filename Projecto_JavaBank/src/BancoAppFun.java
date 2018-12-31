@@ -232,17 +232,17 @@ public class BancoAppFun implements Serializable {
 
 		DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
 		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
-		dcbm.addElement("Contas");
 		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
 		cbOperacoesConta.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
-				if (!cbOperacoesConta.getSelectedItem().equals("Contas")) {
-					String s = (String) cbOperacoesConta.getSelectedItem();
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				if(s!=null)
+				{
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 					tbContasaldoc.setText("" + c.getSaldo());
-				} else {
-					tbContasaldoc.setText("");
 				}
+					
+					
 			}
 		});
 		cbOperacoesConta.setBounds(578, 72, 249, 39);
@@ -936,8 +936,8 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(true);
 				dcbm.removeAllElements();
-				dcbm.addElement("Contas");
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
+				
 
 			}
 		});
@@ -1443,21 +1443,29 @@ public class BancoAppFun implements Serializable {
 
 				// alterar conta (faz deposito):
 
-				double saldo = (c.getSaldo()) + Double.parseDouble(tbContasaldoc.getText());
+				double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
 				c.setSaldo(saldo);
+				
 				// cria operaçao:
-				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbContasaldoc.getText();
 				int idop = 1;
 				if (c.getOperacoes().size() != 0) {
 					idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
 				}
+				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
+				
 				Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
 						Double.parseDouble(tbContasaldoc.getText()), descricao);
 				c.getOperacoes().add(op);
+				tbContasaldoc.setText(c.getSaldo()+"");
 				JOptionPane.showMessageDialog(null, "Deposito efectuado!");
+				
+				
 
 			}
 		});
+		
+		
+		
 
 	}
 }
