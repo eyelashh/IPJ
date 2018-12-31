@@ -212,7 +212,7 @@ public class BancoAppAdm implements Serializable {
 		
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
 		String[] texto = new String[] { "Nome", "ID" };
-		JComboBox<String> cbAdmFunPesq = new JComboBox<String> (texto);
+		JComboBox cbAdmFunPesq = new JComboBox (texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		cbAdmFunPesq.setBounds(111, 29, 227, 34);
 		JPAdmFuncionario.add(cbAdmFunPesq);
@@ -645,7 +645,7 @@ public class BancoAppAdm implements Serializable {
 		JPAdm.add(JPAdmCliente);
 
 		// Box de pesquisa no Cliente
-		JComboBox<String> boxAdminCliePesquisa = new JComboBox<String>();
+		JComboBox boxAdminCliePesquisa = new JComboBox();
 		boxAdminCliePesquisa.setBounds(400, 16, 218, 38);
 		JPAdmCliente.add(boxAdminCliePesquisa);
 
