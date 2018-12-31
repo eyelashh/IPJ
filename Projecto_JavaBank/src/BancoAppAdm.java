@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -159,7 +160,6 @@ public class BancoAppAdm implements Serializable {
 		lblBemVindo.setBounds(348, 41, 243, 52);
 		JpanelCabecalho.add(lblBemVindo);
 
-		
 		// texto no cabeçalho : utilizador
 		JLabel lUtilizador = new JLabel(adm.getNome());
 		lUtilizador.setVerifyInputWhenFocusTarget(false);
@@ -203,7 +203,6 @@ public class BancoAppAdm implements Serializable {
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
 
-		
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
@@ -230,7 +229,7 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 
-		btAdmFunNovo.setBounds(585, 38, 120, 38);
+		btAdmFunNovo.setBounds(699, 512, 120, 38);
 		JPAdmFuncionario.add(btAdmFunNovo);
 
 		// texto : Nome
@@ -354,7 +353,7 @@ public class BancoAppAdm implements Serializable {
 		// botao confirmar funcionario
 		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunConfirmar_1.setBounds(611, 512, 120, 38);
+		btnAdmFunConfirmar_1.setBounds(522, 512, 120, 38);
 		JPAdmFuncionario.add(btnAdmFunConfirmar_1);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
@@ -376,6 +375,11 @@ public class BancoAppAdm implements Serializable {
 		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblMorada.setBounds(453, 366, 227, 30);
 		JPAdmFuncionario.add(lblMorada);
+
+		JButton btnLimpar = new JButton("Limpar Pesquisa");
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.setBounds(587, 38, 120, 38);
+		JPAdmFuncionario.add(btnLimpar);
 
 		// Painel da estatistica da parte administrador
 		JPanel JPAdmEstatistica = new JPanel();
@@ -826,6 +830,10 @@ public class BancoAppAdm implements Serializable {
 				textAdmFunUser.setText(null);
 				dateChooser.setCalendar(null);
 
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmFun.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
 			}
 		});
 
@@ -977,15 +985,91 @@ public class BancoAppAdm implements Serializable {
 				}
 			}
 		});
-		
-	
 
-	// pesquisar funcionarios por atributos
-			btAdmFunProc.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
+		// pesquisar funcionarios por atributos
+		btAdmFunProc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-					
+				if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
+
+					int id = Integer.parseInt(tbAdmFunPesq.getText());
+
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText(String.valueOf(f.getContacto()));
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
+
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
+					}
+
+					dmFun.removeAllElements();
+					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
 				}
-			});
+
+				if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
+
+					String nome = tbAdmFunPesq.getText();
+
+					Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+
+					textAdmFunNome.setText(f.getNome());
+					textAdmFunSobrenome.setText(f.getSobrenome());
+					textAdmFunMorada.setText(f.getMorada());
+					textAdmFunContato.setText(String.valueOf(f.getContacto()));
+					textAdmFunUser.setText(f.getUsername());
+					textAdmFunPass.setText(f.getPassword());
+					textAdmFunNumero.setText("" + f.getNumidentificacao());
+
+					if (f.getTipoIndentificacao().equals("C.C.")) {
+						rbAdmFunCC.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("B.I.")) {
+						rbAdmFunBI.setSelected(true);
+					}
+					if (f.getTipoIndentificacao().equals("Passaporte")) {
+						rbAdmFunPass.setSelected(true);
+					}
+
+					dmFun.removeAllElements();
+					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+				}
+				
+
+			}
+		});
+
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText(null);
+				textAdmFunSobrenome.setText(null);
+				textAdmFunContato.setText(null);
+				textAdmFunMorada.setText(null);
+				bg.clearSelection();
+				textAdmFunNumero.setText(null);
+				textAdmFunPass.setText(null);
+				textAdmFunUser.setText(null);
+				dateChooser.setCalendar(null);
+				tbAdmFunPesq.setText(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmFun.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+
+			}
+		});
 	}
 }

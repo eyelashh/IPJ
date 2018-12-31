@@ -192,6 +192,19 @@ public class Banco implements Serializable {
 		}
 		return u;
 	}
+	
+	// metedo que retorna um utilizador qualquer recebendo o seu nome;
+	protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
+		Utilizador u = new Utilizador();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getNome().equals(nome)) {
+				u = list.get(i);
+			}
+		}
+		return u;
+	}
+
 
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
 		Conta c = new Conta();
