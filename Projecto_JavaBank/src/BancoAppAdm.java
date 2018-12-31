@@ -221,6 +221,7 @@ public class BancoAppAdm implements Serializable {
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(111, 66, 227, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
+		
 
 		// texto : Nome
 		JLabel lblAdmFunNome = new JLabel("Nome:");
