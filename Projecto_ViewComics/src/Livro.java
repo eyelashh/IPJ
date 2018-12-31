@@ -9,6 +9,7 @@ public class Livro implements  Serializable {
 	private String autor;
 	private double preco;
 	private int stock;
+	private String descricao;
 	private static AtomicInteger ai=new AtomicInteger(0);
 
 	public Livro(String titulo, String autor, double preco, int stock) {
@@ -61,10 +62,17 @@ public class Livro implements  Serializable {
 		this.stock = stock;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public String toString() {
-		return idLivro + " | titulo=" + titulo + ", autor=" + autor + ", preco=" + preco + ", stock="
-				+ stock + "]";
+		return idLivro + " | " + titulo ;
 	}
 
 }
