@@ -225,12 +225,7 @@ public class BancoAppAdm implements Serializable {
 		tbAdmFunPesq.setBounds(111, 66, 227, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
 
-		// Botao de procurar
-		JButton btAdmFunProc = new JButton("Procurar");
-		btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btAdmFunProc.setBounds(385, 42, 120, 38);
-		JPAdmFuncionario.add(btAdmFunProc);
-
+		
 		// texto : Nome
 		JLabel lblAdmFunNome = new JLabel("Nome:");
 		lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -576,70 +571,77 @@ public class BancoAppAdm implements Serializable {
 		});
 		JPAdmFuncionario.add(btnAdmFunEliminar);
 
-		// pesquisar funcionarios por atributos
-		btAdmFunProc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		// Botao de procurar
+				JButton btAdmFunProc = new JButton("Procurar");
+				btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+				btAdmFunProc.setBounds(385, 42, 120, 38);
+				// pesquisar funcionarios por atributos
+						btAdmFunProc.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
 
-				if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
+								if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
 
-					int id = Integer.parseInt(tbAdmFunPesq.getText());
+									int id = Integer.parseInt(tbAdmFunPesq.getText());
 
-					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+									Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
 
-					textAdmFunNome.setText(f.getNome());
-					textAdmFunSobrenome.setText(f.getSobrenome());
-					textAdmFunMorada.setText(f.getMorada());
-					textAdmFunContato.setText(String.valueOf(f.getContacto()));
-					textAdmFunUser.setText(f.getUsername());
-					textAdmFunPass.setText(f.getPassword());
-					textAdmFunNumero.setText("" + f.getNumidentificacao());
-					dateChooser.setDate(f.getDataDeNascimento());
+									textAdmFunNome.setText(f.getNome());
+									textAdmFunSobrenome.setText(f.getSobrenome());
+									textAdmFunMorada.setText(f.getMorada());
+									textAdmFunContato.setText(String.valueOf(f.getContacto()));
+									textAdmFunUser.setText(f.getUsername());
+									textAdmFunPass.setText(f.getPassword());
+									textAdmFunNumero.setText("" + f.getNumidentificacao());
+									dateChooser.setDate(f.getDataDeNascimento());
 
-					if (f.getTipoIndentificacao().equals("C.C.")) {
-						rbAdmFunCC.setSelected(true);
-					}
-					if (f.getTipoIndentificacao().equals("B.I.")) {
-						rbAdmFunBI.setSelected(true);
-					}
-					if (f.getTipoIndentificacao().equals("Passaporte")) {
-						rbAdmFunPass.setSelected(true);
-					}
+									if (f.getTipoIndentificacao().equals("C.C.")) {
+										rbAdmFunCC.setSelected(true);
+									}
+									if (f.getTipoIndentificacao().equals("B.I.")) {
+										rbAdmFunBI.setSelected(true);
+									}
+									if (f.getTipoIndentificacao().equals("Passaporte")) {
+										rbAdmFunPass.setSelected(true);
+									}
 
-					dmFun.removeAllElements();
-					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
-				}
+									dmFun.removeAllElements();
+									dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+								}
 
-				if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
+								if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
 
-					String nome = tbAdmFunPesq.getText();
+									String nome = tbAdmFunPesq.getText();
 
-					Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+									Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
 
-					textAdmFunNome.setText(f.getNome());
-					textAdmFunSobrenome.setText(f.getSobrenome());
-					textAdmFunMorada.setText(f.getMorada());
-					textAdmFunContato.setText(String.valueOf(f.getContacto()));
-					textAdmFunUser.setText(f.getUsername());
-					textAdmFunPass.setText(f.getPassword());
-					textAdmFunNumero.setText("" + f.getNumidentificacao());
-					dateChooser.setDate(f.getDataDeNascimento());
+									textAdmFunNome.setText(f.getNome());
+									textAdmFunSobrenome.setText(f.getSobrenome());
+									textAdmFunMorada.setText(f.getMorada());
+									textAdmFunContato.setText(String.valueOf(f.getContacto()));
+									textAdmFunUser.setText(f.getUsername());
+									textAdmFunPass.setText(f.getPassword());
+									textAdmFunNumero.setText("" + f.getNumidentificacao());
+									dateChooser.setDate(f.getDataDeNascimento());
 
-					if (f.getTipoIndentificacao().equals("C.C.")) {
-						rbAdmFunCC.setSelected(true);
-					}
-					if (f.getTipoIndentificacao().equals("B.I.")) {
-						rbAdmFunBI.setSelected(true);
-					}
-					if (f.getTipoIndentificacao().equals("Passaporte")) {
-						rbAdmFunPass.setSelected(true);
-					}
+									if (f.getTipoIndentificacao().equals("C.C.")) {
+										rbAdmFunCC.setSelected(true);
+									}
+									if (f.getTipoIndentificacao().equals("B.I.")) {
+										rbAdmFunBI.setSelected(true);
+									}
+									if (f.getTipoIndentificacao().equals("Passaporte")) {
+										rbAdmFunPass.setSelected(true);
+									}
 
-					dmFun.removeAllElements();
-					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
-				}
+									dmFun.removeAllElements();
+									dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+								}
 
-			}
-		});
+							}
+						});
+				JPAdmFuncionario.add(btAdmFunProc);
+
+		
 
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
