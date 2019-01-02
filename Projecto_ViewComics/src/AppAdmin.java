@@ -196,6 +196,422 @@ public class AppAdmin implements Serializable {
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 
+		JPanel jpAdmStock = new JPanel();
+		jpAdmStock.setBounds(0, 0, 763, 545);
+		panelPrincipal.add(jpAdmStock);
+		jpAdmStock.setVisible(false);
+		jpAdmStock.setLayout(null);
+
+		JComboBox comboBoxAtributosSTOCK = new JComboBox();
+		comboBoxAtributosSTOCK.setBounds(12, 13, 200, 30);
+		jpAdmStock.add(comboBoxAtributosSTOCK);
+		comboBoxAtributosSTOCK.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox
+		// com
+		// os atributos de pesquisa
+		comboBoxAtributosSTOCK.addItem("Titulo");
+		comboBoxAtributosSTOCK.addItem("Autor");
+		comboBoxAtributosSTOCK.addItem("Id");
+
+		JButton btnPesquisarSTOCK = new JButton("Pesquisar");
+		btnPesquisarSTOCK.setBounds(224, 16, 97, 25);
+		btnPesquisarSTOCK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Titulo")) {
+					modeloListaLivros.removeAllElements();
+					String titulo = txtAtributoSTOCK.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloListaLivros);
+				}
+				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Autor")) {
+					modeloListaLivros.removeAllElements();
+					String autor = txtAtributoSTOCK.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), modeloListaLivros);
+				}
+				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Id")) {
+					modeloListaLivros.removeAllElements();
+					String id = txtAtributoSTOCK.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaLivroId(id), modeloListaLivros);
+				}
+
+			}
+		});
+		jpAdmStock.add(btnPesquisarSTOCK);
+		JList <String>listaLivrosSTOCK = new JList<String>(modeloListaLivros);
+		listaLivrosSTOCK.setBounds(12, 115, 200, 312);
+		jpAdmStock.add(listaLivrosSTOCK);
+		txtAtributoSTOCK = new JTextField();
+		txtAtributoSTOCK.setBounds(12, 57, 200, 30);
+		txtAtributoSTOCK.setColumns(10);
+		jpAdmStock.add(txtAtributoSTOCK);
+
+		JButton btnLimparSTOCK = new JButton("Limpar");
+		btnLimparSTOCK.setBounds(224, 60, 97, 25);
+		jpAdmStock.add(btnLimparSTOCK);
+
+		JLabel lblTtulo = new JLabel("T\u00EDtulo :");
+		lblTtulo.setBounds(262, 115, 59, 24);
+		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(lblTtulo);
+
+		txtTituloSTOCK = new JTextField();
+		txtTituloSTOCK.setBounds(333, 114, 345, 30);
+		txtTituloSTOCK.setEditable(false);
+		txtTituloSTOCK.setColumns(10);
+		jpAdmStock.add(txtTituloSTOCK);
+
+		txtAutorSTOCK = new JTextField();
+		txtAutorSTOCK.setBounds(333, 155, 345, 30);
+		txtAutorSTOCK.setEditable(false);
+		txtAutorSTOCK.setColumns(10);
+		jpAdmStock.add(txtAutorSTOCK);
+
+		txtAnoSTOCK = new JTextField();
+		txtAnoSTOCK.setBounds(333, 196, 345, 30);
+		txtAnoSTOCK.setEditable(false);
+		txtAnoSTOCK.setColumns(10);
+		jpAdmStock.add(txtAnoSTOCK);
+
+		JLabel label_12 = new JLabel("Data:");
+		label_12.setBounds(281, 201, 40, 16);
+		label_12.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(label_12);
+
+		JLabel label_13 = new JLabel("Autor:");
+		label_13.setBounds(273, 160, 48, 16);
+		label_13.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(label_13);
+
+		JLabel label_14 = new JLabel("Descri\u00E7\u00E3o:");
+		label_14.setBounds(234, 237, 87, 16);
+		label_14.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(label_14);
+
+		txtDescricaoSTOCK = new JTextField();
+		txtDescricaoSTOCK.setBounds(333, 237, 345, 117);
+		txtDescricaoSTOCK.setEditable(false);
+		txtDescricaoSTOCK.setColumns(10);
+		jpAdmStock.add(txtDescricaoSTOCK);
+
+		JLabel label_15 = new JLabel("Pre\u00E7o:");
+		label_15.setBounds(273, 370, 48, 16);
+		label_15.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(label_15);
+
+		txtPrecoSTOCK = new JTextField();
+		txtPrecoSTOCK.setBounds(333, 365, 87, 30);
+		txtPrecoSTOCK.setEditable(false);
+		txtPrecoSTOCK.setColumns(10);
+		jpAdmStock.add(txtPrecoSTOCK);
+
+		JLabel label_16 = new JLabel("Stock:");
+		label_16.setBounds(273, 411, 48, 16);
+		label_16.setFont(new Font("Tahoma", Font.BOLD, 15));
+		jpAdmStock.add(label_16);
+		jpAdmStock.add(listaLivrosSTOCK);
+
+		txtStockSTOCK = new JTextField();
+		txtStockSTOCK.setBounds(333, 406, 87, 30);
+		txtStockSTOCK.setEditable(false);
+		txtStockSTOCK.setColumns(10);
+		jpAdmStock.add(txtStockSTOCK);
+
+		JRadioButton rbAdicionarStock = new JRadioButton("Adicionar ao stock");
+		rbAdicionarStock.setBounds(488, 386, 125, 23);
+		buttonGroup.add(rbAdicionarStock);
+		jpAdmStock.add(rbAdicionarStock);
+
+		JRadioButton rbRemoverAoStock = new JRadioButton("Remover ao stock");
+		rbRemoverAoStock.setBounds(488, 410, 116, 23);
+		buttonGroup.add(rbRemoverAoStock);
+		jpAdmStock.add(rbRemoverAoStock);
+
+		JButton btnAlterarStock = new JButton("Alterar stock");
+		btnAlterarStock.setBounds(531, 440, 136, 30);
+		btnAlterarStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtAlterarStock.setEditable(true);
+
+			}
+
+		});
+		jpAdmStock.add(btnAlterarStock);
+
+		txtAlterarStock = new JTextField();
+		txtAlterarStock.setBounds(619, 386, 48, 41);
+		txtAlterarStock.setEditable(false);
+		jpAdmStock.add(txtAlterarStock);
+		txtAlterarStock.setColumns(10);
+
+		JButton btnConfirmarAlteracaoSTOCK = new JButton("Confirmar altera\u00E7\u00E3o");
+		btnConfirmarAlteracaoSTOCK.setBounds(531, 476, 136, 30);
+		btnConfirmarAlteracaoSTOCK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String seleccao = listaLivrosSTOCK.getSelectedValue();
+				String quantidadeActual = txtStockSTOCK.getText();
+				String quantidadeAlterar = txtAlterarStock.getText();
+				int quantidadeNovaINT = 0;
+
+				if (rbAdicionarStock.isSelected()) {
+
+					String quantidadeNova = gl.viewComics.adicionarQuantidade(quantidadeActual, quantidadeAlterar);
+					quantidadeNovaINT = Integer.valueOf(quantidadeNova);
+					gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
+
+				} else if (rbRemoverAoStock.isSelected()) {
+					String quantidadeNova = gl.viewComics.removerQuantidade(quantidadeActual, quantidadeAlterar);
+					quantidadeNovaINT = Integer.valueOf(quantidadeNova);
+					if (Integer.parseInt(quantidadeNova) >= 0) {
+						gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"A quantidade total não poderá ser inferior a zero. Confirme os dados inseridos");
+					}
+				}
+
+				txtAlterarStock.setEditable(false);
+				txtStockSTOCK.setText(Integer.toString(quantidadeNovaINT));
+			}
+		});
+		jpAdmStock.add(btnConfirmarAlteracaoSTOCK);
+
+	
+
+		jpAdmFuncionarios = new JPanel();
+		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
+		panelPrincipal.add(jpAdmFuncionarios);
+		jpAdmFuncionarios.setLayout(null);
+		jpAdmFuncionarios.setVisible(false);
+		txtAtributoFunc = new JTextField();
+		txtAtributoFunc.setColumns(10);
+		txtAtributoFunc.setBounds(32, 69, 200, 30);
+		jpAdmFuncionarios.add(txtAtributoFunc);
+		JButton btnPesquisaFunc = new JButton("Pesquisar");
+		btnPesquisaFunc.setBackground(SystemColor.controlHighlight);
+		btnPesquisaFunc.setBounds(264, 28, 97, 25);
+		jpAdmFuncionarios.add(btnPesquisaFunc);
+		JButton btnLimparPesquisaFunc = new JButton("Limpar");
+		btnLimparPesquisaFunc.setBackground(SystemColor.controlHighlight);
+		btnLimparPesquisaFunc.setBounds(264, 72, 97, 25);
+		jpAdmFuncionarios.add(btnLimparPesquisaFunc);
+		JLabel lblIdFuncionrio = new JLabel("Id funcion\u00E1rio :");
+		lblIdFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblIdFuncionrio.setBounds(264, 116, 119, 22);
+		jpAdmFuncionarios.add(lblIdFuncionrio);
+		txtIdFunc = new JTextField();
+		txtIdFunc.setEditable(false);
+		txtIdFunc.setColumns(10);
+		txtIdFunc.setBounds(395, 108, 76, 30);
+		jpAdmFuncionarios.add(txtIdFunc);
+		JLabel lblNome = new JLabel("Nome :");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNome.setBounds(319, 149, 64, 25);
+		jpAdmFuncionarios.add(lblNome);
+
+		txtNomeFunc = new JTextField();
+		txtNomeFunc.setEditable(false);
+		txtNomeFunc.setColumns(10);
+		txtNomeFunc.setBounds(395, 149, 345, 30);
+		jpAdmFuncionarios.add(txtNomeFunc);
+
+		JLabel lblContacto = new JLabel("Contacto :");
+		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblContacto.setBounds(302, 186, 87, 24);
+		jpAdmFuncionarios.add(lblContacto);
+
+		txtContactoFunc = new JTextField();
+		txtContactoFunc.setEditable(false);
+		txtContactoFunc.setColumns(10);
+		txtContactoFunc.setBounds(394, 185, 345, 30);
+		jpAdmFuncionarios.add(txtContactoFunc);
+
+		JLabel lblUsername = new JLabel("Username :");
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUsername.setBounds(292, 231, 97, 16);
+		jpAdmFuncionarios.add(lblUsername);
+
+		JLabel lblPassword = new JLabel("Password :");
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPassword.setBounds(292, 270, 97, 21);
+		jpAdmFuncionarios.add(lblPassword);
+
+		txtUsernameFunc = new JTextField();
+		txtUsernameFunc.setEditable(false);
+		txtUsernameFunc.setColumns(10);
+		txtUsernameFunc.setBounds(394, 226, 345, 30);
+		jpAdmFuncionarios.add(txtUsernameFunc);
+
+		txtPassFunc = new JTextField();
+		txtPassFunc.setEditable(false);
+		txtPassFunc.setColumns(10);
+		txtPassFunc.setBounds(394, 267, 345, 30);
+		jpAdmFuncionarios.add(txtPassFunc);
+
+		JComboBox comboBoxAtributoFunc = new JComboBox();
+		comboBoxAtributoFunc.setBounds(32, 29, 200, 22);
+		jpAdmFuncionarios.add(comboBoxAtributoFunc);
+
+		JButton btnCancelarFunc = new JButton("Cancelar");
+		btnCancelarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtNomeFunc.setEditable(false);
+				txtContactoFunc.setEditable(false);
+				txtPassFunc.setEditable(false);
+				txtUsernameFunc.setEditable(false);
+			}
+		});
+		btnCancelarFunc.setBackground(SystemColor.controlHighlight);
+		btnCancelarFunc.setBounds(611, 411, 89, 23);
+		jpAdmFuncionarios.add(btnCancelarFunc);
+
+		JPanel panel = new JPanel();
+		panel.setBackground(SystemColor.info);
+		panel.setBounds(404, 307, 140, 115);
+		jpAdmFuncionarios.add(panel);
+		panel.setLayout(null);
+
+		JButton btnNovoFunc = new JButton("Novo");
+		btnNovoFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtIdFunc.setText("");
+				txtNomeFunc.setText("");
+				txtContactoFunc.setText("");
+				txtUsernameFunc.setText("");
+				txtPassFunc.setText("");
+				txtNomeFunc.setEditable(true);
+				txtContactoFunc.setEditable(true);
+				txtUsernameFunc.setEditable(true);
+				txtPassFunc.setEditable(true);
+			}
+		});
+		btnNovoFunc.setBackground(SystemColor.controlHighlight);
+		btnNovoFunc.setBounds(25, 11, 89, 23);
+		panel.add(btnNovoFunc);
+
+		JButton btnLimparCamposFunc = new JButton("Limpar");
+		btnLimparCamposFunc.setBackground(SystemColor.controlHighlight);
+		btnLimparCamposFunc.setBounds(25, 81, 89, 23);
+		panel.add(btnLimparCamposFunc);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		DefaultListModel<String> modeloListaFUNCIONARIOS = new DefaultListModel<String>();
+		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
+		JList<String> listaFuncionarios = new JList<String>(modeloListaFUNCIONARIOS);
+		JButton btnConfirmarNovoFunc = new JButton("Confirmar");
+		btnConfirmarNovoFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String novoFuncNome = txtNomeFunc.getText();
+				String novoFuncContacto = txtContactoFunc.getText();
+				String novoFuncUsername = txtUsernameFunc.getText();
+				String novoFuncPass = txtPassFunc.getText();
+				Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
+				txtIdFunc.setText(Integer.toString(f.getId()));
+				gl.viewComics.addUtilizador(f);
+				modeloListaFUNCIONARIOS.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
+						modeloListaFUNCIONARIOS);
+
+			}
+		});
+		btnConfirmarNovoFunc.setBounds(25, 47, 89, 23);
+		panel.add(btnConfirmarNovoFunc);
+
+		listaFuncionarios.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+
+				String selecaoLista = listaFuncionarios.getSelectedValue();
+				Funcionario f = (Funcionario) gl.viewComics.devolveFunc(selecaoLista);
+				txtIdFunc.setText(Integer.toString(f.getId()));
+				txtNomeFunc.setText(f.getNome());
+				txtContactoFunc.setText(f.getContato());
+				txtUsernameFunc.setText(f.getUsername());
+				txtPassFunc.setText(f.getPassword());
+			}
+		});
+		listaFuncionarios.setBounds(32, 123, 200, 337);
+		jpAdmFuncionarios.add(listaFuncionarios);
+		comboBoxAtributoFunc.addItem("Nome");
+		comboBoxAtributoFunc.addItem("Id");
+		comboBoxAtributoFunc.addItem("Username");
+		comboBoxAtributoFunc.addItem("Contacto");
+
+		JButton btnAlterarFunc = new JButton("Alterar dados");
+		btnAlterarFunc.setBounds(570, 308, 170, 25);
+		jpAdmFuncionarios.add(btnAlterarFunc);
+
+		btnAlterarFunc.setBackground(SystemColor.controlHighlight);
+		JButton btnEliminarFunc = new JButton("Remover funcion\u00E1rio");
+		btnEliminarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selecaoLista = listaFuncionarios.getSelectedValue();
+				gl.viewComics.removeFuncionario(selecaoLista);
+
+			}
+		});
+		btnEliminarFunc.setBounds(570, 378, 171, 23);
+		jpAdmFuncionarios.add(btnEliminarFunc);
+		btnEliminarFunc.setBackground(SystemColor.controlHighlight);
+
+		JButton btnConfirmarAlteracaoFunc = new JButton("Confirmar alteracoes");
+		btnConfirmarAlteracaoFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selecaoLista = listaFuncionarios.getSelectedValue();
+				String novoNome = txtNomeFunc.getText();
+				String novoUsername = txtUsernameFunc.getText();
+				String novaPass = txtPassFunc.getText();
+				String novoContacto = txtContactoFunc.getText();
+				gl.viewComics.alterarFuncionario(selecaoLista, novoNome, novoContacto, novoUsername, novaPass);
+				txtNomeFunc.setEditable(false);
+				txtContactoFunc.setEditable(false);
+				txtUsernameFunc.setEditable(false);
+				txtPassFunc.setEditable(false);
+			}
+		});
+		btnConfirmarAlteracaoFunc.setBounds(570, 344, 170, 23);
+		jpAdmFuncionarios.add(btnConfirmarAlteracaoFunc);
+		btnAlterarFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtNomeFunc.setEditable(true);
+				txtContactoFunc.setEditable(true);
+				txtUsernameFunc.setEditable(true);
+				txtPassFunc.setEditable(true);
+			}
+		});
+		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
+		btnLimparPesquisaFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modeloListaFUNCIONARIOS.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
+						modeloListaFUNCIONARIOS);
+			}
+		});
+
+		// pesquisar funcionarios por atributos
+		btnPesquisaFunc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Nome")) {
+					modeloListaFUNCIONARIOS.removeAllElements();
+					String nome = txtAtributoFunc.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorNome(nome), modeloListaFUNCIONARIOS);
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Id")) {
+					modeloListaFUNCIONARIOS.removeAllElements();
+					String id = txtAtributoFunc.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorId(id), modeloListaFUNCIONARIOS);
+
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Username")) {
+					modeloListaFUNCIONARIOS.removeAllElements();
+					String username = txtAtributoFunc.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorUsername(username), modeloListaFUNCIONARIOS);
+				}
+				if (comboBoxAtributoFunc.getSelectedItem().equals("Contacto")) {
+					modeloListaFUNCIONARIOS.removeAllElements();
+					String contacto = txtAtributoFunc.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorContacto(contacto), modeloListaFUNCIONARIOS);
+				}
+
+			}
+		});
+
 		JPanel jpAdmConta = new JPanel();
 		jpAdmConta.setBackground(SystemColor.menu);
 		jpAdmConta.setBounds(0, 0, 763, 545);
@@ -215,6 +631,7 @@ public class AppAdmin implements Serializable {
 		jpAdmConta.add(label_1);
 
 		txtUsernameALTERARUSER = new JTextField(usernameLogado);
+		txtUsernameALTERARUSER.setEditable(false);
 		txtUsernameALTERARUSER.setBounds(67, 129, 279, 31);
 		jpAdmConta.add(txtUsernameALTERARUSER);
 
@@ -235,12 +652,12 @@ public class AppAdmin implements Serializable {
 		JButton btnConfirmarALTERAUSER = new JButton("Confirmar");
 		btnConfirmarALTERAUSER.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String username=txtUsernameALTERARUSER.getText();
-				char[] pass=txtPasswordALTERAUSER.getPassword();
-				String novoUsername=txtNovoUsernameALTERAUSER.getText();
-				
-				
-				
+				String username = txtUsernameALTERARUSER.getText();
+				char[] pass = txtPasswordALTERAUSER.getPassword();
+				String novoUsername = txtNovoUsernameALTERAUSER.getText();
+				gl.viewComics.alterarUsername(username, pass, novoUsername);
+				txtPasswordALTERAUSER.setText("");
+				txtNovoUsernameALTERAUSER.setText("");
 			}
 		});
 		btnConfirmarALTERAUSER.setBackground(SystemColor.controlHighlight);
@@ -248,6 +665,12 @@ public class AppAdmin implements Serializable {
 		jpAdmConta.add(btnConfirmarALTERAUSER);
 
 		JButton btnCancelarALTERAUSER = new JButton("Cancelar");
+		btnCancelarALTERAUSER.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtPasswordALTERAUSER.setText("");
+				txtNovoUsernameALTERAUSER.setText("");
+			}
+		});
 		btnCancelarALTERAUSER.setBackground(SystemColor.controlHighlight);
 		btnCancelarALTERAUSER.setBounds(249, 359, 97, 25);
 		jpAdmConta.add(btnCancelarALTERAUSER);
@@ -278,137 +701,47 @@ public class AppAdmin implements Serializable {
 		jpAdmConta.add(label_10);
 
 		JButton btnConfirmarALTERAPASS = new JButton("Confirmar");
+		btnConfirmarALTERAPASS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				char[] passActualALTERAPASS = txtPasswordALTERAPASS.getPassword();
+				char[] passNovaALTERAPASS = txtNovaPassALTERAPASS.getPassword();
+				char[] passNovaConfirmALTERAPASS = txtConfirmaPassALTERAPASS.getPassword();
+				gl.viewComics.alterarPassword(usernameLogado, passActualALTERAPASS, passNovaALTERAPASS,
+						passNovaConfirmALTERAPASS);
+				txtPasswordALTERAPASS.setText("");
+				txtNovaPassALTERAPASS.setText("");
+				txtConfirmaPassALTERAPASS.setText("");
+
+			}
+		});
 		btnConfirmarALTERAPASS.setBackground(SystemColor.controlHighlight);
 		btnConfirmarALTERAPASS.setBounds(432, 357, 97, 25);
 		jpAdmConta.add(btnConfirmarALTERAPASS);
 
 		JButton btnCancelarALTERAPASS = new JButton("Cancelar");
+		btnCancelarALTERAPASS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtPasswordALTERAPASS.setText("");
+				txtPasswordALTERAPASS.setText("");
+				txtPasswordALTERAPASS.setText("");
+			}
+		});
 		btnCancelarALTERAPASS.setBackground(SystemColor.controlHighlight);
 		btnCancelarALTERAPASS.setBounds(588, 357, 97, 25);
 		jpAdmConta.add(btnCancelarALTERAPASS);
-		
+
 		txtPasswordALTERAUSER = new JPasswordField();
 		txtPasswordALTERAUSER.setBounds(67, 213, 279, 30);
 		jpAdmConta.add(txtPasswordALTERAUSER);
-		
+
 		txtNovaPassALTERAPASS = new JPasswordField();
 		txtNovaPassALTERAPASS.setBounds(432, 206, 279, 31);
 		jpAdmConta.add(txtNovaPassALTERAPASS);
-		
+
 		txtConfirmaPassALTERAPASS = new JPasswordField();
 		txtConfirmaPassALTERAPASS.setBounds(432, 285, 279, 29);
 		jpAdmConta.add(txtConfirmaPassALTERAPASS);
 
-		JPanel jpAdmStock = new JPanel();
-		jpAdmStock.setBounds(0, 0, 763, 545);
-		panelPrincipal.add(jpAdmStock);
-		jpAdmStock.setLayout(null);
-		jpAdmStock.setVisible(false);
-
-		JComboBox comboBoxAtributosSTOCK = new JComboBox();
-		comboBoxAtributosSTOCK.setBounds(12, 13, 200, 30);
-		jpAdmStock.add(comboBoxAtributosSTOCK);
-		comboBoxAtributosSTOCK.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox
-		// com
-		// os atributos de pesquisa
-		comboBoxAtributosSTOCK.addItem("Titulo");
-		comboBoxAtributosSTOCK.addItem("Autor");
-		comboBoxAtributosSTOCK.addItem("Id");
-
-		JButton btnPesquisarSTOCK = new JButton("Pesquisar");
-		btnPesquisarSTOCK.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Titulo")) {
-					modeloListaLivros.removeAllElements();
-					String titulo = txtAtributoSTOCK.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloListaLivros);
-				}
-				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Autor")) {
-					modeloListaLivros.removeAllElements();
-					String autor = txtAtributoSTOCK.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), modeloListaLivros);
-				}
-				if (comboBoxAtributosSTOCK.getSelectedItem().equals("Id")) {
-					modeloListaLivros.removeAllElements();
-					String id = txtAtributoSTOCK.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaLivroId(id), modeloListaLivros);
-				}
-
-			}
-		});
-		btnPesquisarSTOCK.setBounds(224, 16, 97, 25);
-		jpAdmStock.add(btnPesquisarSTOCK);
-
-		txtAtributoSTOCK = new JTextField();
-		txtAtributoSTOCK.setColumns(10);
-		txtAtributoSTOCK.setBounds(12, 57, 200, 30);
-		jpAdmStock.add(txtAtributoSTOCK);
-
-		JButton btnLimparSTOCK = new JButton("Limpar");
-		btnLimparSTOCK.setBounds(224, 60, 97, 25);
-		jpAdmStock.add(btnLimparSTOCK);
-
-		JLabel lblTtulo = new JLabel("T\u00EDtulo :");
-		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTtulo.setBounds(262, 115, 59, 24);
-		jpAdmStock.add(lblTtulo);
-
-		txtTituloSTOCK = new JTextField();
-		txtTituloSTOCK.setEditable(false);
-		txtTituloSTOCK.setColumns(10);
-		txtTituloSTOCK.setBounds(333, 114, 345, 30);
-		jpAdmStock.add(txtTituloSTOCK);
-
-		txtAutorSTOCK = new JTextField();
-		txtAutorSTOCK.setEditable(false);
-		txtAutorSTOCK.setColumns(10);
-		txtAutorSTOCK.setBounds(333, 155, 345, 30);
-		jpAdmStock.add(txtAutorSTOCK);
-
-		txtAnoSTOCK = new JTextField();
-		txtAnoSTOCK.setEditable(false);
-		txtAnoSTOCK.setColumns(10);
-		txtAnoSTOCK.setBounds(333, 196, 345, 30);
-		jpAdmStock.add(txtAnoSTOCK);
-
-		JLabel label_12 = new JLabel("Data:");
-		label_12.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_12.setBounds(281, 201, 40, 16);
-		jpAdmStock.add(label_12);
-
-		JLabel label_13 = new JLabel("Autor:");
-		label_13.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_13.setBounds(273, 160, 48, 16);
-		jpAdmStock.add(label_13);
-
-		JLabel label_14 = new JLabel("Descri\u00E7\u00E3o:");
-		label_14.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_14.setBounds(234, 237, 87, 16);
-		jpAdmStock.add(label_14);
-
-		txtDescricaoSTOCK = new JTextField();
-		txtDescricaoSTOCK.setEditable(false);
-		txtDescricaoSTOCK.setColumns(10);
-		txtDescricaoSTOCK.setBounds(333, 237, 345, 117);
-		jpAdmStock.add(txtDescricaoSTOCK);
-
-		JLabel label_15 = new JLabel("Pre\u00E7o:");
-		label_15.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_15.setBounds(273, 370, 48, 16);
-		jpAdmStock.add(label_15);
-
-		txtPrecoSTOCK = new JTextField();
-		txtPrecoSTOCK.setEditable(false);
-		txtPrecoSTOCK.setColumns(10);
-		txtPrecoSTOCK.setBounds(333, 365, 87, 30);
-		jpAdmStock.add(txtPrecoSTOCK);
-
-		JLabel label_16 = new JLabel("Stock:");
-		label_16.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_16.setBounds(273, 411, 48, 16);
-		jpAdmStock.add(label_16);
-
-		JList<String> listaLivrosSTOCK = new <String>JList(modeloListaLivros);
 		listaLivrosSTOCK.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String livroSelecionado = listaLivrosSTOCK.getSelectedValue();
@@ -425,72 +758,6 @@ public class AppAdmin implements Serializable {
 			}
 		});
 		listaLivrosSTOCK.setBounds(12, 120, 200, 363);
-		jpAdmStock.add(listaLivrosSTOCK);
-
-		txtStockSTOCK = new JTextField();
-		txtStockSTOCK.setEditable(false);
-		txtStockSTOCK.setColumns(10);
-		txtStockSTOCK.setBounds(333, 406, 87, 30);
-		jpAdmStock.add(txtStockSTOCK);
-
-		JRadioButton rbAdicionarStock = new JRadioButton("Adicionar ao stock");
-		buttonGroup.add(rbAdicionarStock);
-		rbAdicionarStock.setBounds(488, 386, 125, 23);
-		jpAdmStock.add(rbAdicionarStock);
-
-		JRadioButton rbRemoverAoStock = new JRadioButton("Remover ao stock");
-		buttonGroup.add(rbRemoverAoStock);
-		rbRemoverAoStock.setBounds(488, 410, 116, 23);
-		jpAdmStock.add(rbRemoverAoStock);
-
-		JButton btnAlterarStock = new JButton("Alterar stock");
-		btnAlterarStock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtAlterarStock.setEditable(true);
-
-			}
-
-		});
-		btnAlterarStock.setBounds(531, 440, 136, 30);
-		jpAdmStock.add(btnAlterarStock);
-
-		txtAlterarStock = new JTextField();
-		txtAlterarStock.setEditable(false);
-		txtAlterarStock.setBounds(619, 386, 48, 41);
-		jpAdmStock.add(txtAlterarStock);
-		txtAlterarStock.setColumns(10);
-
-		JButton btnConfirmarAlteracaoSTOCK = new JButton("Confirmar altera\u00E7\u00E3o");
-		btnConfirmarAlteracaoSTOCK.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String seleccao = listaLivrosSTOCK.getSelectedValue();
-				String quantidadeActual = txtStockSTOCK.getText();
-				String quantidadeAlterar = txtAlterarStock.getText();
-				int quantidadeNovaINT = 0;
-
-				if (rbAdicionarStock.isSelected()) {
-
-					String quantidadeNova = gl.viewComics.adicionarQuantidade(quantidadeActual, quantidadeAlterar);
-					quantidadeNovaINT = Integer.valueOf(quantidadeNova);
-					gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
-
-				} else if (rbRemoverAoStock.isSelected()) {
-					String quantidadeNova = gl.viewComics.removerQuantidade(quantidadeActual, quantidadeAlterar);
-					quantidadeNovaINT = Integer.valueOf(quantidadeNova);
-					if (Integer.parseInt(quantidadeNova) >= 0) {
-						gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
-					} else {
-						JOptionPane.showMessageDialog(null,
-								"A quantidade total não poderá ser inferior a zero. Confirme os dados inseridos");
-					}
-				}
-
-				txtAlterarStock.setEditable(false);
-				txtStockSTOCK.setText(Integer.toString(quantidadeNovaINT));
-			}
-		});
-		btnConfirmarAlteracaoSTOCK.setBounds(531, 476, 136, 30);
-		jpAdmStock.add(btnConfirmarAlteracaoSTOCK);
 		JPanel jpAdmLivros = new JPanel();
 		jpAdmLivros.setLayout(null);
 		jpAdmLivros.setBounds(0, 0, 763, 545);
@@ -700,241 +967,6 @@ public class AppAdmin implements Serializable {
 				txtAtributoLivro.setText("");
 				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-
-			}
-		});
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-
-		jpAdmFuncionarios = new JPanel();
-		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
-		panelPrincipal.add(jpAdmFuncionarios);
-		jpAdmFuncionarios.setLayout(null);
-		jpAdmFuncionarios.setVisible(false);
-		txtAtributoFunc = new JTextField();
-		txtAtributoFunc.setColumns(10);
-		txtAtributoFunc.setBounds(32, 69, 200, 30);
-		jpAdmFuncionarios.add(txtAtributoFunc);
-		JButton btnPesquisaFunc = new JButton("Pesquisar");
-		btnPesquisaFunc.setBackground(SystemColor.controlHighlight);
-		btnPesquisaFunc.setBounds(264, 28, 97, 25);
-		jpAdmFuncionarios.add(btnPesquisaFunc);
-		JButton btnLimparPesquisaFunc = new JButton("Limpar");
-		btnLimparPesquisaFunc.setBackground(SystemColor.controlHighlight);
-		btnLimparPesquisaFunc.setBounds(264, 72, 97, 25);
-		jpAdmFuncionarios.add(btnLimparPesquisaFunc);
-		JLabel lblIdFuncionrio = new JLabel("Id funcion\u00E1rio :");
-		lblIdFuncionrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblIdFuncionrio.setBounds(264, 116, 119, 22);
-		jpAdmFuncionarios.add(lblIdFuncionrio);
-		txtIdFunc = new JTextField();
-		txtIdFunc.setEditable(false);
-		txtIdFunc.setColumns(10);
-		txtIdFunc.setBounds(395, 108, 76, 30);
-		jpAdmFuncionarios.add(txtIdFunc);
-		JLabel lblNome = new JLabel("Nome :");
-		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNome.setBounds(319, 149, 64, 25);
-		jpAdmFuncionarios.add(lblNome);
-
-		txtNomeFunc = new JTextField();
-		txtNomeFunc.setEditable(false);
-		txtNomeFunc.setColumns(10);
-		txtNomeFunc.setBounds(395, 149, 345, 30);
-		jpAdmFuncionarios.add(txtNomeFunc);
-
-		JLabel lblContacto = new JLabel("Contacto :");
-		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblContacto.setBounds(302, 186, 87, 24);
-		jpAdmFuncionarios.add(lblContacto);
-
-		txtContactoFunc = new JTextField();
-		txtContactoFunc.setEditable(false);
-		txtContactoFunc.setColumns(10);
-		txtContactoFunc.setBounds(394, 185, 345, 30);
-		jpAdmFuncionarios.add(txtContactoFunc);
-
-		JLabel lblUsername = new JLabel("Username :");
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUsername.setBounds(292, 231, 97, 16);
-		jpAdmFuncionarios.add(lblUsername);
-
-		JLabel lblPassword = new JLabel("Password :");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPassword.setBounds(292, 270, 97, 21);
-		jpAdmFuncionarios.add(lblPassword);
-
-		txtUsernameFunc = new JTextField();
-		txtUsernameFunc.setEditable(false);
-		txtUsernameFunc.setColumns(10);
-		txtUsernameFunc.setBounds(394, 226, 345, 30);
-		jpAdmFuncionarios.add(txtUsernameFunc);
-
-		txtPassFunc = new JTextField();
-		txtPassFunc.setEditable(false);
-		txtPassFunc.setColumns(10);
-		txtPassFunc.setBounds(394, 267, 345, 30);
-		jpAdmFuncionarios.add(txtPassFunc);
-
-		JComboBox comboBoxAtributoFunc = new JComboBox();
-		comboBoxAtributoFunc.setBounds(32, 29, 200, 22);
-		jpAdmFuncionarios.add(comboBoxAtributoFunc);
-
-		JButton btnCancelarFunc = new JButton("Cancelar");
-		btnCancelarFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtNomeFunc.setEditable(false);
-				txtContactoFunc.setEditable(false);
-				txtPassFunc.setEditable(false);
-				txtUsernameFunc.setEditable(false);
-			}
-		});
-		btnCancelarFunc.setBackground(SystemColor.controlHighlight);
-		btnCancelarFunc.setBounds(611, 411, 89, 23);
-		jpAdmFuncionarios.add(btnCancelarFunc);
-
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.info);
-		panel.setBounds(404, 307, 140, 115);
-		jpAdmFuncionarios.add(panel);
-		panel.setLayout(null);
-
-		JButton btnNovoFunc = new JButton("Novo");
-		btnNovoFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtIdFunc.setText("");
-				txtNomeFunc.setText("");
-				txtContactoFunc.setText("");
-				txtUsernameFunc.setText("");
-				txtPassFunc.setText("");
-				txtNomeFunc.setEditable(true);
-				txtContactoFunc.setEditable(true);
-				txtUsernameFunc.setEditable(true);
-				txtPassFunc.setEditable(true);
-			}
-		});
-		btnNovoFunc.setBackground(SystemColor.controlHighlight);
-		btnNovoFunc.setBounds(25, 11, 89, 23);
-		panel.add(btnNovoFunc);
-
-		JButton btnLimparCamposFunc = new JButton("Limpar");
-		btnLimparCamposFunc.setBackground(SystemColor.controlHighlight);
-		btnLimparCamposFunc.setBounds(25, 81, 89, 23);
-		panel.add(btnLimparCamposFunc);
-		DefaultListModel<String> modeloListaFUNCIONARIOS = new DefaultListModel<String>();
-		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
-		JList<String> listaFuncionarios = new JList<String>(modeloListaFUNCIONARIOS);
-		JButton btnConfirmarNovoFunc = new JButton("Confirmar");
-		btnConfirmarNovoFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String novoFuncNome = txtNomeFunc.getText();
-				String novoFuncContacto = txtContactoFunc.getText();
-				String novoFuncUsername = txtUsernameFunc.getText();
-				String novoFuncPass = txtPassFunc.getText();
-				Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
-				txtIdFunc.setText(Integer.toString(f.getId()));
-				gl.viewComics.addUtilizador(f);
-				modeloListaFUNCIONARIOS.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-						modeloListaFUNCIONARIOS);
-
-			}
-		});
-		btnConfirmarNovoFunc.setBounds(25, 47, 89, 23);
-		panel.add(btnConfirmarNovoFunc);
-
-		listaFuncionarios.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				String selecaoLista = listaFuncionarios.getSelectedValue();
-				Funcionario f = (Funcionario) gl.viewComics.devolveFunc(selecaoLista);
-				txtIdFunc.setText(Integer.toString(f.getId()));
-				txtNomeFunc.setText(f.getNome());
-				txtContactoFunc.setText(f.getContato());
-				txtUsernameFunc.setText(f.getUsername());
-				txtPassFunc.setText(f.getPassword());
-			}
-		});
-		listaFuncionarios.setBounds(32, 123, 200, 337);
-		jpAdmFuncionarios.add(listaFuncionarios);
-		comboBoxAtributoFunc.addItem("Nome");
-		comboBoxAtributoFunc.addItem("Id");
-		comboBoxAtributoFunc.addItem("Username");
-		comboBoxAtributoFunc.addItem("Contacto");
-
-		JButton btnAlterarFunc = new JButton("Alterar dados");
-		btnAlterarFunc.setBounds(570, 308, 170, 25);
-		jpAdmFuncionarios.add(btnAlterarFunc);
-
-		btnAlterarFunc.setBackground(SystemColor.controlHighlight);
-		JButton btnEliminarFunc = new JButton("Remover funcion\u00E1rio");
-		btnEliminarFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String selecaoLista = listaFuncionarios.getSelectedValue();
-				gl.viewComics.removeFuncionario(selecaoLista);
-
-			}
-		});
-		btnEliminarFunc.setBounds(570, 378, 171, 23);
-		jpAdmFuncionarios.add(btnEliminarFunc);
-		btnEliminarFunc.setBackground(SystemColor.controlHighlight);
-
-		JButton btnConfirmarAlteracaoFunc = new JButton("Confirmar alteracoes");
-		btnConfirmarAlteracaoFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String selecaoLista = listaFuncionarios.getSelectedValue();
-				String novoNome = txtNomeFunc.getText();
-				String novoUsername = txtUsernameFunc.getText();
-				String novaPass = txtPassFunc.getText();
-				String novoContacto = txtContactoFunc.getText();
-				gl.viewComics.alterarFuncionario(selecaoLista, novoNome, novoContacto, novoUsername, novaPass);
-				txtNomeFunc.setEditable(false);
-				txtContactoFunc.setEditable(false);
-				txtUsernameFunc.setEditable(false);
-				txtPassFunc.setEditable(false);
-			}
-		});
-		btnConfirmarAlteracaoFunc.setBounds(570, 344, 170, 23);
-		jpAdmFuncionarios.add(btnConfirmarAlteracaoFunc);
-		btnAlterarFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtNomeFunc.setEditable(true);
-				txtContactoFunc.setEditable(true);
-				txtUsernameFunc.setEditable(true);
-				txtPassFunc.setEditable(true);
-			}
-		});
-		btnLimparPesquisaFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				modeloListaFUNCIONARIOS.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-						modeloListaFUNCIONARIOS);
-			}
-		});
-
-		// pesquisar funcionarios por atributos
-		btnPesquisaFunc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				if (comboBoxAtributoFunc.getSelectedItem().equals("Nome")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
-					String nome = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorNome(nome), modeloListaFUNCIONARIOS);
-				}
-				if (comboBoxAtributoFunc.getSelectedItem().equals("Id")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
-					String id = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorId(id), modeloListaFUNCIONARIOS);
-
-				}
-				if (comboBoxAtributoFunc.getSelectedItem().equals("Username")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
-					String username = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorUsername(username), modeloListaFUNCIONARIOS);
-				}
-				if (comboBoxAtributoFunc.getSelectedItem().equals("Contacto")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
-					String contacto = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorContacto(contacto), modeloListaFUNCIONARIOS);
-				}
 
 			}
 		});

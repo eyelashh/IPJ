@@ -161,6 +161,27 @@ public class Livraria implements Serializable {
 		this.carrinhos.remove(c);
 	}
 
+	public void alterarFuncionario(String idSTR, String nome, String contacto, String username, String password) {
+
+		int id = Integer.parseInt(idSTR);
+		boolean funcionarioAlterado = false;
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getId() == id) && (u instanceof Funcionario)) {
+				u.setNome(nome);
+				u.setContato(contacto);
+				u.setUsername(username);
+				u.setPassword(password);
+				funcionarioAlterado = true;
+			}
+		}
+		if (funcionarioAlterado) {
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Funcionário alterado com sucesso");
+		}
+
+	}
+
 //verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
 
@@ -238,8 +259,6 @@ public class Livraria implements Serializable {
 //
 //	}
 
-
-
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
 
@@ -297,8 +316,10 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (usernameAlterado) {
+			JOptionPane.showMessageDialog(null, "Alteracao efectuada com sucesso!Novo username: " + novoUsername);
+		} else {
 			JOptionPane.showMessageDialog(null,
-					"Alteraï¿½ï¿½o efectuada com sucesso!O seu username ï¿½ agora " + novoUsername);
+					"Não foi possível efectuar a alteração de username, confira os dados inseridos");
 		}
 
 	}
@@ -320,8 +341,10 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (passAlterada) {
+			JOptionPane.showMessageDialog(null, "Alteracao efectuada com sucesso!A sua pass é agora " + novaPassSTR);
+		} else {
 			JOptionPane.showMessageDialog(null,
-					"Alteraï¿½ï¿½o efectuada com sucesso!O seu username ï¿½ agora " + novaPassSTR);
+					"Não foi possível efectuar a alteração de password, confira os dados inseridos");
 		}
 
 	}
@@ -349,8 +372,6 @@ public class Livraria implements Serializable {
 
 		return listaLivros;
 	}
-	
-	
 
 //listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
@@ -570,19 +591,6 @@ public class Livraria implements Serializable {
 
 	}
 
-	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username,
-			String password) {
-
-		for (Utilizador u : this.utilizadores) {
-			if ((u.toString().equals(selecaoLista)) && (u instanceof Funcionario)) {
-				u.setNome(nome);
-				u.setUsername(username);
-				u.setPassword(password);
-				u.setContato(contacto);
-			}
-		}
-	}
-
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
 	protected String adicionarQuantidade(String actual, String adicionar) {
 		String totalStr = actual;
@@ -661,7 +669,7 @@ public class Livraria implements Serializable {
 	}
 
 	protected String[] listaNifs() {
-		
+
 		String[] nifs = new String[carrinhos.size()];
 		String s = "";
 		for (int i = 0; i < carrinhos.size(); i++) {
