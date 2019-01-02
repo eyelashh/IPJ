@@ -219,26 +219,13 @@ public class Livraria implements Serializable {
 
 		ArrayList<String> listaC = new ArrayList<String>();
 		String a = "";
-<<<<<<< HEAD
-		
-		for(Carrinho c : this.carrinhos) {
-			
-			if(c.getNif().equals(nif)) {
-				
-		
-				
-			String[] hm = c.listaCarrinho2();
-				
-=======
 
 		for (Carrinho c : this.carrinhos) {
 
 			if (c.getNif().equals(nif)) {
 
-				// importar o conteudo do carrinho para um hashMap chamado hm
-				HashMap<Integer, Integer> hm = c.getConteudo();
+				String[] hm = c.listaCarrinho2();
 
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 				a = hm.toString();
 				listaC.add(a);
 			}
@@ -248,55 +235,23 @@ public class Livraria implements Serializable {
 		listalivro = listaC.toArray(listalivro);
 
 		return listalivro;
-<<<<<<< HEAD
-		
+
 	}
-	
+
 //	// listar nifs	
 	protected String[] arrayNif(ArrayList<Carrinho> carrinho) {
-		
+
 		String[] listaNifs = new String[carrinho.size()];
 		String s = "";
 		for (int i = 0; i < carrinho.size(); i++) {
 			s = "" + carrinho.get(i).getNif();
 			listaNifs[i] = s;
 			s = "";
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 
-<<<<<<< HEAD
-=======
-	}
-
-	// listar nifs
-	public String[] arrayNif(ArrayList<Carrinho> car) {
-
-		String[] listaNifs = new String[this.carrinhos.size()];
-
-//			for(int i=0; i<livros.size();i++)
-//			{
-//				livro = ""+livros.get(i).getIdLivro();
-//				listaLivros[i]= livro;
-//				livro="";
-//			}
-		int i = 0;
-		for (Carrinho c : carrinhos) {
-			listaNifs[i] = c.getNif();
-			i++;
-
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		}
-<<<<<<< HEAD
-		return listaNifs;
-	}
-
-
-	
-=======
 
 		return listaNifs;
 	}
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
@@ -356,7 +311,7 @@ public class Livraria implements Serializable {
 		}
 		if (usernameAlterado) {
 			JOptionPane.showMessageDialog(null,
-					"Alteração efectuada com sucesso!O seu username é agora " + novoUsername);
+					"Alteraï¿½ï¿½o efectuada com sucesso!O seu username ï¿½ agora " + novoUsername);
 		}
 
 	}
@@ -379,7 +334,7 @@ public class Livraria implements Serializable {
 		}
 		if (passAlterada) {
 			JOptionPane.showMessageDialog(null,
-					"Alteração efectuada com sucesso!O seu username é agora " + novaPassSTR);
+					"Alteraï¿½ï¿½o efectuada com sucesso!O seu username ï¿½ agora " + novaPassSTR);
 		}
 
 	}
