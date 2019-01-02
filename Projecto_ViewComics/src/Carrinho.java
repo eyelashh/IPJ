@@ -2,11 +2,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Carrinho implements  Serializable {
+import javax.swing.JOptionPane;
 
+public class Carrinho implements Serializable {
 
-
-	private int nif;
+	private String nif;
 	private double montante;
 	private boolean finalizado;
 	private HashMap<Integer, Integer> conteudo;
@@ -14,8 +14,8 @@ public class Carrinho implements  Serializable {
 	public Carrinho() {
 		super();
 	}
-	
-	public Carrinho(int nif, double montante, boolean finalizado, HashMap<Integer, Integer> compras) {
+
+	public Carrinho(String nif, double montante, boolean finalizado, HashMap<Integer, Integer> compras) {
 		super();
 		this.nif = nif;
 		this.montante = montante;
@@ -25,17 +25,20 @@ public class Carrinho implements  Serializable {
 		this.conteudo = new HashMap<Integer, Integer>();
 
 	}
-	//construtor com nif para criar automaticamente o carrinho assim que o cliente ou func insere o nif
-	public Carrinho(int nif) {
+
+	// construtor com nif para criar automaticamente o carrinho assim que o cliente
+	// ou func insere o nif
+	public Carrinho(String nif) {
 		super();
 		this.nif = nif;
+		this.conteudo = new HashMap<Integer, Integer>();
 	}
 
-	public int getNif() {
+	public String getNif() {
 		return nif;
 	}
 
-	public void setNif(int nif) {
+	public void setNif(String nif) {
 		this.nif = nif;
 	}
 
@@ -68,7 +71,32 @@ public class Carrinho implements  Serializable {
 		return "Carrinho [nif=" + nif + ", montante=" + montante + ", finalizado=" + finalizado + ", conteudo="
 				+ conteudo + "]";
 	}
-	
-	
 
+	// verifica se o livro em especifico já existe no carrinho, se sim, altera a sua quantidade
+	// se não cria um novo par key-object (id, quantidade)
+	public void updateCarrinho(int idLivro, int quantidade) {
+
+		if (this.conteudo.containsKey(idLivro)) {
+			this.conteudo.replace(idLivro, quantidade);
+			JOptionPane.showMessageDialog(null, "A quantidade do livro no carrinho foi alterada com sucesso");
+		} else {
+			this.conteudo.put(idLivro, quantidade);
+			JOptionPane.showMessageDialog(null, "O livro escolhido e a respectiva quantidade foram adicionados ao carrinho");	
+		}
+
+	}
+	public int quantidadeLivro(int idLivro) {
+		
+		int quantidade=0;
+		
+		if (this.conteudo.containsKey(idLivro)) {
+			quantidade=this.conteudo.get(idLivro);
+			
+		} else {
+			quantidade =0;
+				
+		}
+		return quantidade;
+
+	}
 }

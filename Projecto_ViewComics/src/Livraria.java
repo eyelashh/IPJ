@@ -149,6 +149,18 @@ public class Livraria implements Serializable {
 		this.carrinhos.remove(c);
 	}
 
+//verifica se o carrinho existe, se não existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
+	public boolean carrinhoExiste(String nif) {
+	
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif().equals(nif)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
 	// obtem o preco de um livro atraves do seu id, ï¿½til para calcular o preco de
 	// um carrinho
 	public double precoLivro(int id) {
@@ -162,29 +174,6 @@ public class Livraria implements Serializable {
 			}
 		}
 		return preco;
-	}
-
-	// procura por um carrinho com determinado nif na lista
-	// se nao existir ---> cria um novo carrinho com esse nif e acrescenta a lista
-	// se exisite ---> retorna o carrinho correspondente a esse nif
-	public Carrinho pesquisarCarrinho(int nif) {
-
-		Carrinho c1 = new Carrinho(nif);
-		boolean carrinhoExiste = false;
-		for (Carrinho c : this.carrinhos) {
-//			carrinhoExiste=false;
-			if (c.getNif() == nif) {
-				c1 = c;
-				carrinhoExiste = true;
-			}
-
-		}
-
-		if (carrinhoExiste = false) {
-			c1.setNif(nif);
-			this.carrinhos.add(c1);
-		}
-		return c1;
 	}
 
 	// calcula o montante respectivo a um carrinho consoante os livros e a sua
@@ -297,6 +286,7 @@ public class Livraria implements Serializable {
 
 		return listaLivros;
 	}
+
 //listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
 
@@ -304,7 +294,7 @@ public class Livraria implements Serializable {
 		String t = "";
 		for (Livro l : this.livros) {
 			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
-				t = "" + l.getIdLivro() + "|" + l.getTitulo();
+				t = l.toString();
 				listaT.add(t);
 
 			}
@@ -323,7 +313,7 @@ public class Livraria implements Serializable {
 		String a = "";
 		for (Livro l : this.livros) {
 			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
-				a = "" + l.getIdLivro() + "|" + l.getTitulo();
+				a = l.toString();
 				listaA.add(a);
 
 			}
@@ -336,19 +326,19 @@ public class Livraria implements Serializable {
 	}
 
 	// POR ID
-	public String [] listaLivroId(int id) {
+	public String[] listaLivroId(String id) {
 
-		ArrayList<Livro> listaId = new ArrayList();
+		ArrayList<String> listaId = new ArrayList();
 		for (Livro l : this.livros) {
-			if (l.getIdLivro() == id) {
-				listaId.add(l);
+			if (Integer.toString(l.getIdLivro()).equals(id)) {
+				listaId.add(l.toString());
 
 			}
 		}
-		
+
 		String[] ArrayLivrosId = listaId.toArray(new String[listaId.size()]);
 		return ArrayLivrosId;
-		
+
 	}
 
 	// método para adicionar um array a uma JList consoante determinado modelo
@@ -361,16 +351,20 @@ public class Livraria implements Serializable {
 	}
 
 	// extrair o id de uma string da lista
+
 	protected int obterId(String s) {
-//		char a = ' ';
-//		int i = 0;
-//		while (Character.isDigit(a)) {
-//			a = s.charAt(i);
-//			i++;
-//		}
-		String idStr = s.split("(?=\\D)")[0];
-		int id = Integer.parseInt(idStr);
+
+		int id = 0;
+		for (Livro l : this.livros) {
+			if (s.equals(l.toString())) {
+				id = l.getIdLivro();
+			}
+		}
 		return id;
+
+//String subStringId = new String(s.substring(0, s.indexOf(" ")));
+//int idint=Integer.parseInt(subStringId);
+//return idint;
 	}
 
 	// pesquisar o livro com determinado id
@@ -384,7 +378,6 @@ public class Livraria implements Serializable {
 		return livro;
 
 	}
-	
 
 	// LISTAR FUNCIONARIOS
 
@@ -475,47 +468,70 @@ public class Livraria implements Serializable {
 		return listaContacto;
 
 	}
+
 	protected Utilizador obterFuncionarioComId(String selecaoLista) {
-		int idFunc=this.obterId(selecaoLista);
-		Utilizador util=null;
+		int idFunc = this.obterId(selecaoLista);
+		Utilizador util = null;
 		for (Utilizador u : this.utilizadores) {
-			if ((u.getId()==idFunc)&&(u instanceof Funcionario)) {
+			if ((u.getId() == idFunc) && (u instanceof Funcionario)) {
 				util = u;
 			}
 		}
 		return util;
 	}
+
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
 	protected String adicionarQuantidade(String actual, String adicionar) {
-		int actualInt =Integer.parseInt(actual);
-		int adicionarInt=Integer.parseInt(adicionar);
-		
-		int totalInt =actualInt+adicionarInt;
-		String totalStr=Integer.toString(totalInt);
+		int actualInt = Integer.parseInt(actual);
+		int adicionarInt = Integer.parseInt(adicionar);
+
+		int totalInt = actualInt + adicionarInt;
+		String totalStr = Integer.toString(totalInt);
 		return totalStr;
 	}
+
 //recebe duas string subtrai, e devolve o valor total em string (CARRINHOS)	
 	protected String removerQuantidade(String actual, String subtrair) {
-		int actualInt =Integer.parseInt(actual);
-		int subtrairInt=Integer.parseInt(subtrair);
-		
-		int totalInt =actualInt-subtrairInt;
-		String totalStr=Integer.toString(totalInt);
+		int actualInt = Integer.parseInt(actual);
+		int subtrairInt = Integer.parseInt(subtrair);
+
+		int totalInt = actualInt - subtrairInt;
+		String totalStr = Integer.toString(totalInt);
 		return totalStr;
 	}
-//devolve a quantidade de determinado livro em um carrinho
+
+//devolve a quantidade de determinado livro em um carrinho através do id do livro e do nif
 	protected String quantidadeCarrinho(int idLivro, String nif) {
-		
-		int nifInteger=Integer.parseInt(nif);
-		int quantidadeInt=0;
+
+		int quantidadeInt = 0;
 		for (Carrinho c : this.carrinhos) {
-			if (c.getNif()==nifInteger) {
-				quantidadeInt = c.getConteudo().get(idLivro);
+			if (c.getNif().equals(nif)) {
+				quantidadeInt = c.quantidadeLivro(idLivro);
+
 			}
 		}
-		
-		String quantidadeStr =Integer.toString(quantidadeInt);
-		
+
+		String quantidadeStr = Integer.toString(quantidadeInt);
+
 		return quantidadeStr;
 	}
+
+	protected void updateConteudoCarrinho(String nif, int idLivro, int quantidade) {
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif().equals(nif)) {
+				c.updateCarrinho(idLivro, quantidade);
+			}
+		}
+	}
+
+	protected boolean verificaNif(String nif) {
+		
+		if(nif.matches("([0-9]{9})")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 }

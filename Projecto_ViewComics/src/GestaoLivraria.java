@@ -96,6 +96,11 @@ public class GestaoLivraria implements Serializable{
 		// CASO 1: FICHEIRO NAO EXISTE--->crio um novo ficheiro
 		if(!this.fileCarrinhos.exists())
 		{
+			Carrinho c1=new Carrinho("236925792");
+			
+		//	c1.updateCarrinho(1, 2);
+			viewComics.addCarrinho(c1);
+		
 			try
 			{
 				this.fileCarrinhos.createNewFile();

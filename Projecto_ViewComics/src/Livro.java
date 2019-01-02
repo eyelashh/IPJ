@@ -81,7 +81,7 @@ public class Livro implements  Serializable {
 
 	@Override
 	public String toString() {
-		return idLivro + " | " + titulo ;
+		return idLivro + " | " + titulo + ", de "+autor ;
 	}
 
 }
