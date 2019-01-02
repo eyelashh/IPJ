@@ -130,7 +130,8 @@ public class Livraria implements Serializable {
 		for (Livro l : this.livros) {
 			if (l.toString().equals(seleccao)) {
 				l.setStock(quantidadeTotal);
-				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo() + " foi alterado com sucesso. Existem agora "+quantidadeTotal+" exemplares.");
+				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo()
+						+ " foi alterado com sucesso. Existem agora " + quantidadeTotal + " exemplares.");
 			}
 		}
 	}
@@ -218,30 +219,30 @@ public class Livraria implements Serializable {
 
 		ArrayList<String> listaC = new ArrayList<String>();
 		String a = "";
-		
-		for(Carrinho c : this.carrinhos) {
-			
-			if(c.getNif().equals(nif)) {
-				
+
+		for (Carrinho c : this.carrinhos) {
+
+			if (c.getNif().equals(nif)) {
+
 				// importar o conteudo do carrinho para um hashMap chamado hm
 				HashMap<Integer, Integer> hm = c.getConteudo();
-				
+
 				a = hm.toString();
 				listaC.add(a);
 			}
 		}
-		
+
 		String[] listalivro = new String[listaC.size()];
 		listalivro = listaC.toArray(listalivro);
 
 		return listalivro;
-		
-	}
-	
-	// listar nifs
-		public String[] arrayNif(ArrayList<Carrinho> car) {
 
-			String[] listaNifs = new String[this.carrinhos.size()];
+	}
+
+	// listar nifs
+	public String[] arrayNif(ArrayList<Carrinho> car) {
+
+		String[] listaNifs = new String[this.carrinhos.size()];
 
 //			for(int i=0; i<livros.size();i++)
 //			{
@@ -249,17 +250,15 @@ public class Livraria implements Serializable {
 //				listaLivros[i]= livro;
 //				livro="";
 //			}
-			int i = 0;
-			for (Carrinho c : carrinhos) {
-				listaNifs[i] = c.getNif();
-				i++;
+		int i = 0;
+		for (Carrinho c : carrinhos) {
+			listaNifs[i] = c.getNif();
+			i++;
 
-			}
-
-			return listaNifs;
 		}
-	
-	
+
+		return listaNifs;
+	}
 
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
@@ -307,36 +306,46 @@ public class Livraria implements Serializable {
 		return u_log;
 	}
 
-	// metodo que altera o username de um funcionario
-	public boolean alterarUsername(int idFuncionario, String novoUsername) {
+	public void alterarUsername(String username, char[] pass, String novoUsername) {
 
+		String passSTR = String.valueOf(pass);
 		boolean usernameAlterado = false;
-
-		for (Sessao s : this.sessoes) {
-			if (s.getUser().getId() == idFuncionario) {
-				s.getUser().setUsername(novoUsername);
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getUsername().equals(username)) && (u.getPassword().equals(passSTR))) {
+				u.setUsername(novoUsername);
 				usernameAlterado = true;
-
 			}
-
 		}
-		return usernameAlterado;
+		if (usernameAlterado) {
+			JOptionPane.showMessageDialog(null,
+					"Alteração efectuada com sucesso!O seu username é agora " + novoUsername);
+		}
+
 	}
 
-	public boolean alterarPassword(int idFuncionario, String novaPassword) {
+	public void alterarPassword(String username, char[] pass, char[] novaPass, char[] novaPassConfirm) {
 
-		boolean passwordAlterada = false;
+		String passSTR = String.valueOf(pass);
+		String novaPassSTR = String.valueOf(novaPass);
+		String novaPassConfirmSTR = String.valueOf(novaPassConfirm);
 
-		for (Sessao s : this.sessoes) {
-			if (s.getUser().getId() == idFuncionario) {
-				s.getUser().setPassword(novaPassword);
-				passwordAlterada = true;
+		boolean passAlterada = false;
 
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getUsername().equals(username)) && (u.getPassword().equals(passSTR))) {
+				if (novaPassSTR.equals(novaPassConfirmSTR)) {
+					u.setPassword(novaPassSTR);
+					passAlterada = true;
+				}
 			}
-
 		}
-		return passwordAlterada;
+		if (passAlterada) {
+			JOptionPane.showMessageDialog(null,
+					"Alteração efectuada com sucesso!O seu username é agora " + novaPassSTR);
+		}
+
 	}
+
 	// DISPOR LIVROS NA LISTA POR ARRAYLISTS
 	// criar uma nova arraylist de livros consoante vï¿½rios atributos
 	// util para dispor na lista
@@ -594,17 +603,16 @@ public class Livraria implements Serializable {
 
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
 	protected String adicionarQuantidade(String actual, String adicionar) {
-	String totalStr=actual;
+		String totalStr = actual;
 		if ((actual != null) && (adicionar != null)) {
 			int actualInt = Integer.valueOf(actual);
 			int adicionarInt = Integer.parseInt(adicionar);
 
 			int totalInt = actualInt + adicionarInt;
 			totalStr = Integer.toString(totalInt);
-			
-		}
-		else {
-			totalStr =actual;
+
+		} else {
+			totalStr = actual;
 		}
 		return totalStr;
 	}
