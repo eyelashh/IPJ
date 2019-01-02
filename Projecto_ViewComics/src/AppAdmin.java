@@ -236,7 +236,8 @@ public class AppAdmin implements Serializable {
 		btnConfirmarALTERAUSER.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String username=txtUsernameALTERARUSER.getText();
-				char[] pass=txtPasswordALTERAUSER.
+				char[] pass=txtPasswordALTERAUSER.getPassword();
+				String novo
 				
 				
 			}
