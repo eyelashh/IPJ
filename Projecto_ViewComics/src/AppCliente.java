@@ -257,16 +257,18 @@ public class AppCliente implements Serializable {
 		JList<String> listaLivros = new JList<String>(modeloLista);
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				
 				String livroSeleccionadoSTR = listaLivros.getSelectedValue();
 				int idLivroSeleccionado = gl.viewComics.obterIdLivro(livroSeleccionadoSTR);
 				Livro l = gl.viewComics.livroId(idLivroSeleccionado);
+				
 				txtIdLivros.setText(Integer.toString(gl.viewComics.obterIdLivro(livroSeleccionadoSTR)));
 				txtTituloLivros.setText(l.getTitulo());
 				txtAutorLivros.setText(l.getAutor());
 				txtDataLivros.setText(Integer.toString(l.getAno()));
 				txtDescricaoLivros.setText(l.getDescricao());
 				txtStockLivros.setText(Integer.toString(l.getStock()));
-				txtPrecoLivros.setText(l.getPreco() + " �");
+				txtPrecoLivros.setText(""+l.getPreco());
 				String nif = txtNifCarrinhoLIVROS.getText();
 				String quantidadeActual = gl.viewComics.quantidadeCarrinho(idLivroSeleccionado, nif);
 				txtQuantidadeActualLivros.setText(quantidadeActual);

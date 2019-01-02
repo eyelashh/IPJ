@@ -15,7 +15,7 @@ public class Livraria implements Serializable {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
-	// criar um atributo privado estático que é da própria classe
+	// criar um atributo privado estï¿½tico que ï¿½ da prï¿½pria classe
 
 	public Livraria() {
 		super();
@@ -39,7 +39,7 @@ public class Livraria implements Serializable {
 		this.carrinhos = carrinhos;
 	}
 
-	// criar método estático para retornar a instância da classe
+	// criar mï¿½todo estï¿½tico para retornar a instï¿½ncia da classe
 
 	public int getIdLivraria() {
 		return idLivraria;
@@ -149,7 +149,7 @@ public class Livraria implements Serializable {
 		this.carrinhos.remove(c);
 	}
 
-//verifica se o carrinho existe, se não existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
+//verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
 
 		for (Carrinho c : this.carrinhos) {
@@ -279,13 +279,13 @@ public class Livraria implements Serializable {
 		return passwordAlterada;
 	}
 	// DISPOR LIVROS NA LISTA POR ARRAYLISTS
-	// criar uma nova arraylist de livros consoante vários atributos
+	// criar uma nova arraylist de livros consoante vï¿½rios atributos
 	// util para dispor na lista
 
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
-		String livro = "";
+		
 //		for(int i=0; i<livros.size();i++)
 //		{
 //			livro = ""+livros.get(i).getIdLivro();
@@ -296,7 +296,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-			livro = "";
+			
 		}
 
 		return listaLivros;
@@ -305,7 +305,7 @@ public class Livraria implements Serializable {
 //listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
 
-		ArrayList<String> listaT = new ArrayList();
+		ArrayList<String> listaT = new ArrayList<String>();
 		String t = "";
 		for (Livro l : this.livros) {
 			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
@@ -324,7 +324,7 @@ public class Livraria implements Serializable {
 	// listar livros em array por autor
 	public String[] listaAutor(String autor) {
 
-		ArrayList<String> listaA = new ArrayList();
+		ArrayList<String> listaA = new ArrayList<String>();
 		String a = "";
 		for (Livro l : this.livros) {
 			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
@@ -343,7 +343,7 @@ public class Livraria implements Serializable {
 	// POR ID
 	public String[] listaLivroId(String id) {
 
-		ArrayList<String> listaId = new ArrayList();
+		ArrayList<String> listaId = new ArrayList<String>();
 		for (Livro l : this.livros) {
 			if (Integer.toString(l.getIdLivro()).equals(id)) {
 				listaId.add(l.toString());
@@ -356,7 +356,7 @@ public class Livraria implements Serializable {
 
 	}
 
-	// método para adicionar um array a uma JList consoante determinado modelo
+	// mï¿½todo para adicionar um array a uma JList consoante determinado modelo
 
 	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
 
@@ -413,7 +413,11 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> c730ada290ace033526265d669e7d84b2e96da8a
 	protected int obterIdFunc(String s) {
 
 		int id = 0;
@@ -432,7 +436,7 @@ public class Livraria implements Serializable {
 	// devolve os funcionario cujo come contem a string nome
 	public String[] listaFunPorNome(String nome) {
 
-		ArrayList<String> listaN = new ArrayList();
+		ArrayList<String> listaN = new ArrayList<String>();
 		String n = "";
 		for (Utilizador u : this.utilizadores) {
 			if (u instanceof Funcionario) {
@@ -452,10 +456,10 @@ public class Livraria implements Serializable {
 		return listaTitulo;
 	}
 
-	// devolve o funcionario cujo id é igual ao int id
+	// devolve o funcionario cujo id ï¿½ igual ao int id
 	protected String[] listaFuncPorId(String id) {
 
-		ArrayList<String> listaId = new ArrayList();
+		ArrayList<String> listaId = new ArrayList<String>();
 
 		for (Utilizador u : this.utilizadores) {
 			if ((u instanceof Funcionario) && (Integer.toString(u.getId()).contains(id))) {
@@ -478,7 +482,11 @@ public class Livraria implements Serializable {
 		}
 		return func;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> c730ada290ace033526265d669e7d84b2e96da8a
 	protected void removeFuncionario(String seleccao) {
 		for (Utilizador u : this.utilizadores) {
 			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
@@ -490,7 +498,7 @@ public class Livraria implements Serializable {
 
 	public String[] listaFunPorUsername(String username) {
 
-		ArrayList<String> listaU = new ArrayList();
+		ArrayList<String> listaU = new ArrayList<String>();
 		for (Utilizador u : this.utilizadores) {
 			if (u instanceof Funcionario) {
 				if (u.getUsername().toLowerCase().contains(username.toLowerCase())) {
@@ -508,7 +516,7 @@ public class Livraria implements Serializable {
 
 	protected String[] listaFuncPorContacto(String contacto) {
 
-		ArrayList<String> listaC = new ArrayList();
+		ArrayList<String> listaC = new ArrayList<String>();
 		for (Utilizador u : this.utilizadores) {
 			if ((u instanceof Funcionario) && (u.getContato().contains(contacto))) {
 				listaC.add(u.toString());
@@ -553,7 +561,7 @@ public class Livraria implements Serializable {
 		return totalStr;
 	}
 
-//devolve a quantidade de determinado livro em um carrinho através do id do livro e do nif
+//devolve a quantidade de determinado livro em um carrinho atravï¿½s do id do livro e do nif
 	protected String quantidadeCarrinho(int idLivro, String nif) {
 
 		int quantidadeInt = 0;
@@ -585,5 +593,24 @@ public class Livraria implements Serializable {
 			return false;
 		}
 	}
+	
+	// listar livros em array por data
+		public String[] listaData(int data) {
+
+			ArrayList<String> listaD = new ArrayList<String>();
+			String a = "";
+			for (Livro l : this.livros) {
+				if (l.getAno()==(data)) {
+					a = l.toString();
+					listaD.add(a);
+
+				}
+				a = "";
+			}
+			String[] listaData = new String[listaD.size()];
+			listaData= listaD.toArray(listaData);
+
+			return listaData;
+		}
 
 }

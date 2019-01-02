@@ -54,6 +54,7 @@ import java.awt.FlowLayout;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 
 public class AppFuncionario implements Serializable {
 
@@ -258,19 +259,23 @@ public class AppFuncionario implements Serializable {
 		jpFuncLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
+		// criar um defaul model para guardar e fazer atualizaçoes da lista 
 		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
-		JList<String>  listaLivros = new JList<String> ();
+		//Guardar na lista o array/copia da lista de livros
+		JList<String>  listaLivros = new JList<String> (dmFunListaLivros);
+		listaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
 		listaLivros.setBounds(22, 111, 190, 395);
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
 		
+				// se a lista estiver seleccionada, copia para as caixas de texto 
 				if (!listaLivros.isSelectionEmpty()) {
 
-					String livros = (String)listaLivros.getSelectedValue();
-					int idLivroSeleccionado = gl.viewComics.obterIdLivro(livros);
-					Livro l =  gl.viewComics.livroId(idLivroSeleccionado);
+					String livroSeleccionadoSTR = listaLivros.getSelectedValue();
+					int idLivroSeleccionado = gl.viewComics.obterIdLivro(livroSeleccionadoSTR);
+					Livro l = gl.viewComics.livroId(idLivroSeleccionado);
 
 					txtTituloLivro.setText(l.getTitulo());
 					txtAutorLivro.setText(l.getAutor());
@@ -349,6 +354,26 @@ public class AppFuncionario implements Serializable {
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
+
+					String titulo = txtAtributoPesquisaLivro.getText();
+					dmFunListaLivros.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), dmFunListaLivros);
+
+				}if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+
+					String autor = txtAtributoPesquisaLivro.getText();
+					dmFunListaLivros.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), dmFunListaLivros);
+
+				}if (comboBoxAtributoLivro.getSelectedItem().equals("Data")) {
+
+					int data = Integer.parseInt(txtAtributoPesquisaLivro.getText());
+					dmFunListaLivros.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaData(data), dmFunListaLivros);
+
+				}
 				
 				
 			}
