@@ -587,12 +587,12 @@ public class Livraria implements Serializable {
 	}
 	
 	// listar livros em array por data
-		public String[] listaData(int data) {
+		public String[] listaData(String data) {
 
 			ArrayList<String> listaD = new ArrayList<String>();
 			String a = "";
 			for (Livro l : this.livros) {
-				if (l.getAno()==(data)) {
+				if (Integer.toString(l.getAno()).equals(data)) {
 					a = l.toString();
 					listaD.add(a);
 
