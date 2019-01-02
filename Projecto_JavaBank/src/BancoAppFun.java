@@ -426,23 +426,7 @@ public class BancoAppFun implements Serializable {
 		panelCartao.add(tbcodcartao);
 		
 		JButton btCartao = new JButton("Criar cartao");
-		btCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				int n =0;
-				
-				do
-				{
-					n = (int) (Math.random()*1000);
-					
-				} while(n<100 || n>1000);
-				
-				tbcodcartao.setText(""+n);
-				
-				Cartao c = new Cartao(1,tbnomecartao.getText(),dtcartao.getDate(),Integer.parseInt(tbcodcartao.getText()));
-				
-			}
-		});
+		
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
 
@@ -1363,6 +1347,8 @@ public class BancoAppFun implements Serializable {
 						rdbtnContaCorrente.setSelected(true);
 						panelCartao.setVisible(true);
 						
+						
+						
 						if(((ContaCorrente) c).getCartao()== null)
 						{
 							btPedirCartao.setVisible(true);
@@ -1373,6 +1359,14 @@ public class BancoAppFun implements Serializable {
 							btPedirCartao.setVisible(false);
 							panelCartao.setVisible(true);
 							btCartao.setVisible(false);
+							
+							tbnomecartao.setEditable(false);
+							dtcartao.setEnabled(false);
+							tbcodcartao.setEditable(false);
+							tbnomecartao.setText(((ContaCorrente) c).getCartao().getNomeTitular());
+							dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());;
+							tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao()+"");
+							
 						}
 						
 					}
@@ -1500,9 +1494,36 @@ public class BancoAppFun implements Serializable {
 		btPedirCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelCartao.setVisible(true);
+				tbnomecartao.setEditable(true);
+				dtcartao.setEnabled(true);
+				tbcodcartao.setEditable(true);
+				
 			}
 		});
 		
+		btCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				Conta conta =  gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+				
+				int n =0;
+				
+				do
+				{
+					n = (int) (Math.random()*1000);
+					
+				} while(n<100 || n>1000);
+				
+				tbcodcartao.setText(""+n);
+				
+				Cartao cartao = new Cartao(1,tbnomecartao.getText(),dtcartao.getDate(),Integer.parseInt(tbcodcartao.getText()));
+		
+				((ContaCorrente) conta).setCartao(cartao);
+				
+				
+			}
+		});
 		
 		
 		
