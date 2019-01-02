@@ -310,7 +310,8 @@ public class AppAdmin implements Serializable {
 				String autor = txtAutorLivros.getText();
 				String stock = txtStockLivros.getText();
 				String descricao = txtDescricaoLivros.getText();
-				String ano = txtAnoLivros.getText()
+				String ano = txtAnoLivros.getText();
+				
 
 				txtPrecoLivros.setEditable(false);
 				txtTituloLivros.setEditable(false);
