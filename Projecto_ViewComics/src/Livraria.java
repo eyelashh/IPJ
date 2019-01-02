@@ -235,6 +235,7 @@ public class Livraria implements Serializable {
 		listalivro = listaC.toArray(listalivro);
 
 		return listalivro;
+		
 	}
 	
 	// listar nifs

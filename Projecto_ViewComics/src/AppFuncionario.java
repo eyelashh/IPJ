@@ -90,6 +90,7 @@ public class AppFuncionario implements Serializable {
 
 	private static GestaoLivraria gl;
 	private static Funcionario func;
+	private JTextField textField_12;
 
 	/**
 	 * Launch the application.
@@ -503,11 +504,12 @@ public class AppFuncionario implements Serializable {
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
-
+					
 					String nifselect = listNifsClientes.getSelectedValue();
 					
-//					Carrinho c = gl.viewComics.carrinhoExiste(nifselect);
+					String[] c = gl.viewComics.listaCarrinho(nifselect);
 					
+					textField_12.setText(c.toString());
 //					txtTituloLivro.setText(l.getTitulo());
 //					txtAutorLivro.setText(l.getAutor());
 //					txtDataLivro.setText(Integer.toString(l.getAno()));
@@ -519,6 +521,11 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		jpFuncCarrinhos.add(listNifsClientes);
+		
+		textField_12 = new JTextField();
+		textField_12.setBounds(276, 460, 446, 52);
+		jpFuncCarrinhos.add(textField_12);
+		textField_12.setColumns(10);
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
