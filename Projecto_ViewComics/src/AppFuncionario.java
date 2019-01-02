@@ -25,7 +25,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Button;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.JTextPane;
@@ -52,7 +55,7 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JTextArea;
 
-public class AppFuncionario implements Serializable{
+public class AppFuncionario implements Serializable {
 
 	private JFrame frame;
 	private JTextField textField_2;
@@ -81,9 +84,9 @@ public class AppFuncionario implements Serializable{
 	private JTextField textField_11;
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
-	
+
 	private static GestaoLivraria gl;
-	private static Utilizador func;
+	private static Funcionario func;
 
 	/**
 	 * Launch the application.
@@ -91,7 +94,7 @@ public class AppFuncionario implements Serializable{
 	// EventQueue.invokeLater(new Runnable() {
 	public void run() {
 		try {
-			AppFuncionario window = new AppFuncionario(func,gl);
+			AppFuncionario window = new AppFuncionario(func, gl);
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,10 +105,11 @@ public class AppFuncionario implements Serializable{
 	/**
 	 * Create the application.
 	 */
-	public AppFuncionario(Utilizador func,GestaoLivraria gl) {
+	public AppFuncionario(Funcionario f, GestaoLivraria livraria) {
+		func = f;
+		gl = livraria;
 		initialize();
-		AppFuncionario.func=func;
-		AppFuncionario.gl=gl;
+
 	}
 
 	/**
@@ -123,12 +127,12 @@ public class AppFuncionario implements Serializable{
 		frame.getContentPane().add(Paineltotal);
 		Paineltotal.setLayout(null);
 
-		JPanel panelcabecalho = new JPanel() ;
+		JPanel panelcabecalho = new JPanel();
 		panelcabecalho.setBackground(new Color(255, 215, 0));
 		panelcabecalho.setLayout(null);
 		panelcabecalho.setBounds(0, 0, 1262, 176);
 		Paineltotal.add(panelcabecalho);
-		
+
 //		{
 //			@Override
 //			protected void paintComponent(Graphics g) {
@@ -149,8 +153,6 @@ public class AppFuncionario implements Serializable{
 //			}
 //		};
 
-	
-
 		JLabel label_6 = new JLabel() {
 			protected void paintComponent(Graphics g) {
 			}
@@ -166,19 +168,25 @@ public class AppFuncionario implements Serializable{
 		label_7.setBounds(101, 5, 730, 125);
 		panelcabecalho.add(label_7);
 
-		JLabel lblBemVindonome = new JLabel("Bem Vindo funcionário");
+		JLabel lblBemVindonome = new JLabel("Bem Vindo funcionrio");
 		lblBemVindonome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBemVindonome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
-		lblBemVindonome.setBounds(892, 13, 335, 27);
+		lblBemVindonome.setBounds(843, 15, 245, 27);
 		panelcabecalho.add(lblBemVindonome);
 
 		JButton btnLogOut = new JButton("LogOut");
-
 		btnLogOut.setBackground(SystemColor.controlHighlight);
 		btnLogOut.setBounds(1138, 54, 89, 23);
 		panelcabecalho.add(btnLogOut);
 
-		JPanel panelMenu = new JPanel() ;
+		// label nome do funcionario
+		JLabel lblFunNome = new JLabel("<html>" + func.getNome() + "<html>");
+		lblFunNome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFunNome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblFunNome.setBounds(1066, 15, 160, 27);
+		panelcabecalho.add(lblFunNome);
+
+		JPanel panelMenu = new JPanel();
 //		{
 //			@Override
 //			protected void paintComponent(Graphics g) {
@@ -202,58 +210,325 @@ public class AppFuncionario implements Serializable{
 		panelMenu.setBounds(0, 176, 241, 545);
 		Paineltotal.add(panelMenu);
 
-		JButton btnLivros = new JButton("Livros");
-
-		btnLivros.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
-		btnLivros.setBackground(SystemColor.controlHighlight);
-		btnLivros.setBounds(25, 13, 176, 55);
-		panelMenu.add(btnLivros);
-
-		JButton btnCarrinhos = new JButton("Carrinhos");
-
-		btnCarrinhos.setForeground(Color.BLACK);
-		btnCarrinhos.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 25));
-		btnCarrinhos.setBackground(SystemColor.controlHighlight);
-		btnCarrinhos.setBounds(25, 81, 176, 60);
-		panelMenu.add(btnCarrinhos);
-
-		JButton btnGestao = new JButton("Gestao Conta");
-
-		btnGestao.setForeground(Color.BLACK);
-		btnGestao.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 25));
-		btnGestao.setBackground(SystemColor.controlHighlight);
-		btnGestao.setBounds(25, 152, 176, 60);
-		panelMenu.add(btnGestao);
-
-		JPanel panelPrincipal = new JPanel() {
-			@Override
-			// o paint component vai pintar literalmente o componente
-			protected void paintComponent(Graphics g) {
-
-				super.paintComponent(g);
-				Image img;
-				try {
-
-					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou
-					// do
-					// ficheiro
-
-					// img = ImageIO.read(new URL(
-					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-					img = ImageIO
-							.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/camerica.jpg "));
-					g.drawImage(img, 0, 0, null);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		};
+		JPanel panelPrincipal = new JPanel();
+		// {
+//			@Override
+		// o paint component vai pintar literalmente o componente
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// importar imagem para o background do panel, podemos faz-lo da internet ou
+//					// do
+//					// ficheiro
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO
+//							.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/camerica.jpg "));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
 		panelPrincipal.setBackground(new Color(255, 250, 205));
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+
+		// encaminhar para os respectivos paineis ao clicar nos botoes
+		JPanel jpFuncLivros = new JPanel();
+		jpFuncLivros.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncLivros);
+		jpFuncLivros.setLayout(null);
+		jpFuncLivros.setVisible(false);
+
+		String [] itens2 = new String [] {"TÃ­tulo", "Autor","Ano"};
+		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
+		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+		jpFuncLivros.add(comboBoxAtributoLivro);
+
+		txtAtributoPesquisaLivro = new JTextField();
+		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+		jpFuncLivros.add(txtAtributoPesquisaLivro);
+		txtAtributoPesquisaLivro.setColumns(10);
+
+		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
+		JList<String>  listaLivros = new JList<String> ();
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
+		listaLivros.setBounds(22, 111, 190, 395);
+		listaLivros.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+		
+				if (!listaLivros.isSelectionEmpty()) {
+
+					String livros = (String)listaLivros.getSelectedValue();
+					int idLivroSeleccionado = gl.viewComics.obterIdLivro(livros);
+					Livro l =  gl.viewComics.livroId(idLivroSeleccionado);
+
+					txtTituloLivro.setText(l.getTitulo());
+					txtAutorLivro.setText(l.getAutor());
+					txtDataLivro.setText(Integer.toString(l.getAno()));
+					txtDescricaoLivro.setText(l.getDescricao());
+					txtPrecoLivro.setText(Double.toString(l.getPreco()));
+					txtStockLivro.setText(Integer.toString(l.getStock()));
+					
+					
+
+				}
+			}
+		});
+		jpFuncLivros.add(listaLivros);
+
+		JLabel lblNewLabel = new JLabel("Nome:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(263, 120, 48, 16);
+		jpFuncLivros.add(lblNewLabel);
+
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAutor.setBounds(263, 170, 48, 16);
+		jpFuncLivros.add(lblAutor);
+
+		JLabel lblDescrio = new JLabel("Data:");
+		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDescrio.setBounds(271, 219, 40, 16);
+		jpFuncLivros.add(lblDescrio);
+
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblStock.setBounds(263, 455, 48, 16);
+		jpFuncLivros.add(lblStock);
+
+		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
+		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo_1.setBounds(263, 404, 48, 16);
+		jpFuncLivros.add(lblPreo_1);
+
+		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
+		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo.setBounds(224, 266, 87, 16);
+		jpFuncLivros.add(lblPreo);
+
+		txtTituloLivro = new JTextField();
+		txtTituloLivro.setColumns(10);
+		txtTituloLivro.setBounds(333, 114, 345, 30);
+		jpFuncLivros.add(txtTituloLivro);
+
+		txtAutorLivro = new JTextField();
+		txtAutorLivro.setColumns(10);
+		txtAutorLivro.setBounds(333, 164, 345, 30);
+		jpFuncLivros.add(txtAutorLivro);
+
+		txtDataLivro = new JTextField();
+		txtDataLivro.setColumns(10);
+		txtDataLivro.setBounds(333, 213, 345, 30);
+		jpFuncLivros.add(txtDataLivro);
+
+		txtDescricaoLivro = new JTextField();
+		txtDescricaoLivro.setColumns(10);
+		txtDescricaoLivro.setBounds(333, 260, 345, 117);
+		jpFuncLivros.add(txtDescricaoLivro);
+
+		txtPrecoLivro = new JTextField();
+		txtPrecoLivro.setColumns(10);
+		txtPrecoLivro.setBounds(333, 402, 345, 30);
+		jpFuncLivros.add(txtPrecoLivro);
+
+		txtStockLivro = new JTextField();
+		txtStockLivro.setColumns(10);
+		txtStockLivro.setBounds(333, 453, 345, 30);
+		jpFuncLivros.add(txtStockLivro);
+
+		JButton btnPesquisarLivro = new JButton("Pesquisar");
+		btnPesquisarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
+		btnPesquisarLivro.setBounds(224, 16, 97, 25);
+		jpFuncLivros.add(btnPesquisarLivro);
+
+		JButton btnLimparLivro = new JButton("Limpar");
+		btnLimparLivro.setBackground(SystemColor.controlHighlight);
+		btnLimparLivro.setBounds(224, 60, 97, 25);
+		jpFuncLivros.add(btnLimparLivro);
+
+		JPanel jpPagamento = new JPanel();
+		jpPagamento.setBounds(0, 0, 219, 336);
+		panelPrincipal.add(jpPagamento);
+		jpPagamento.setLayout(null);
+		jpPagamento.setVisible(false);
+
+		JPanel jpDinheiro = new JPanel();
+		jpDinheiro.setBounds(10, 190, 199, 171);
+		jpPagamento.add(jpDinheiro);
+		jpDinheiro.setLayout(null);
+		jpDinheiro.setVisible(false);
+		
+
+		// lista dos itens na comboBox
+		String[] itens = new String[] { "Escolha o mÃ©todo de pagamento", "Dinheiro", "Multibanco" };
+		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+		comboBoxTipoPagamento.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				// check whether there is any selection
+				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+					jpDinheiro.setVisible(true);
+				}
+			}
+		});
+		jpPagamento.add(comboBoxTipoPagamento);
+
+		textField_8 = new JTextField();
+		textField_8.setBounds(20, 94, 172, 22);
+		jpPagamento.add(textField_8);
+		textField_8.setColumns(10);
+
+		JLabel lblNif_1 = new JLabel("NIF");
+		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNif_1.setBounds(22, 69, 46, 14);
+		jpPagamento.add(lblNif_1);
+
+		JLabel lblNewLabel_1 = new JLabel("A pagar :");
+		lblNewLabel_1.setBounds(10, 11, 76, 23);
+		jpDinheiro.add(lblNewLabel_1);
+
+		JLabel lblRecebido = new JLabel("Recebido : ");
+		lblRecebido.setBounds(10, 45, 76, 23);
+		jpDinheiro.add(lblRecebido);
+
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(10, 79, 76, 23);
+		jpDinheiro.add(lblTroco);
+
+		textField_9 = new JTextField();
+		textField_9.setBounds(72, 12, 86, 20);
+		jpDinheiro.add(textField_9);
+		textField_9.setColumns(10);
+
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(72, 45, 86, 20);
+		jpDinheiro.add(textField_10);
+
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(72, 80, 86, 20);
+		jpDinheiro.add(textField_11);
+
+		JButton btnConcluirPagamento = new JButton("Concluir");
+		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
+		btnConcluirPagamento.setBounds(33, 114, 125, 30);
+		btnConcluirPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		jpDinheiro.add(btnConcluirPagamento);
+
+
+		JPanel jpFuncConta = new JPanel();
+		jpFuncConta.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncConta);
+		jpFuncConta.setLayout(null);
+		jpFuncConta.setVisible(false);
+
+		JLabel label = new JLabel("Alterar UserName:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label.setAlignmentX(0.5f);
+		label.setBounds(105, 48, 203, 31);
+		jpFuncConta.add(label);
+
+		JLabel label_1 = new JLabel("UserName:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(67, 92, 113, 24);
+		jpFuncConta.add(label_1);
+
+		txtUsername = new JTextField();
+		txtUsername.setEditable(false);
+		txtUsername.setBounds(67, 129, 279, 31);
+		jpFuncConta.add(txtUsername);
+
+		JLabel label_2 = new JLabel("Password:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(67, 173, 113, 24);
+		jpFuncConta.add(label_2);
+
+		JLabel label_3 = new JLabel("Novo UserName:");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_3.setBounds(67, 254, 171, 24);
+		jpFuncConta.add(label_3);
+
+		txtNovoUsername = new JTextField();
+		txtNovoUsername.setBounds(67, 284, 279, 31);
+		jpFuncConta.add(txtNovoUsername);
+
+		JButton btnConfirmarUsername = new JButton("Confirmar");
+		btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
+		btnConfirmarUsername.setBounds(67, 359, 97, 25);
+		jpFuncConta.add(btnConfirmarUsername);
+
+		JButton btnCancelarUsername = new JButton("Cancelar");
+		btnCancelarUsername.setBackground(SystemColor.controlHighlight);
+		btnCancelarUsername.setBounds(249, 359, 97, 25);
+		jpFuncConta.add(btnCancelarUsername);
+
+		JLabel label_4 = new JLabel("Alterar PassWord:");
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label_4.setAlignmentX(0.5f);
+		label_4.setBounds(520, 50, 203, 31);
+		jpFuncConta.add(label_4);
+
+		JLabel label_5 = new JLabel("Password:");
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_5.setBounds(520, 92, 113, 24);
+		jpFuncConta.add(label_5);
+
+		passwordAntiga = new JPasswordField();
+		passwordAntiga.setBounds(520, 129, 279, 31);
+		jpFuncConta.add(passwordAntiga);
+
+		JLabel label_9 = new JLabel("Nova Password:");
+		label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_9.setBounds(520, 173, 113, 24);
+		jpFuncConta.add(label_9);
+
+		JLabel label_10 = new JLabel("Confirmar Password:");
+		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_10.setBounds(520, 254, 171, 24);
+		jpFuncConta.add(label_10);
+
+		passwordNovaConfirm = new JPasswordField();
+		passwordNovaConfirm.setBounds(520, 284, 279, 31);
+		jpFuncConta.add(passwordNovaConfirm);
+
+		JButton btnConfirmarPasse = new JButton("Confirmar");
+		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
+		btnConfirmarPasse.setBounds(520, 359, 97, 25);
+		jpFuncConta.add(btnConfirmarPasse);
+
+		JButton btnCancelarPasse = new JButton("Cancelar");
+		btnCancelarPasse.setBackground(SystemColor.controlHighlight);
+		btnCancelarPasse.setBounds(676, 359, 97, 25);
+		jpFuncConta.add(btnCancelarPasse);
+
+		passwordNova = new JPasswordField();
+		passwordNova.setBounds(520, 210, 235, 31);
+		jpFuncConta.add(passwordNova);
+
+		passwordAlterarUser = new JPasswordField();
+		passwordAlterarUser.setBounds(67, 202, 140, 31);
+		jpFuncConta.add(passwordAlterarUser);
 
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
@@ -464,7 +739,6 @@ public class AppFuncionario implements Serializable{
 		jpFuncCarrinhos.add(lblNif);
 
 		JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
-
 		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
 		btnPesquisarCarrinhos.setBounds(56, 90, 130, 30);
 		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
@@ -502,219 +776,20 @@ public class AppFuncionario implements Serializable{
 		txtCarrinho.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(txtCarrinho);
 
-		// CARRINHOS
+		// logOut
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-		// Botao que pesquisa por um carrinho
-		// criar um novo carrinho e adiciona-lo ao arrayList de carrinhos da livraria
-//		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				// converter para int
-//				int nif = Integer.parseInt(txtNifCarrinho.getText());
-//				Carrinho c = l.pesquisarCarrinho(nif);
-//				txtCarrinho.setText(c.toString());
-//
-//			}
-//		});
+				AppCliente clt = new AppCliente();
+				clt.run();
+				frame.setVisible(false);
+			}
+		});
 
-		JPanel jpFuncConta = new JPanel();
-		jpFuncConta.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncConta);
-		jpFuncConta.setLayout(null);
-		jpFuncConta.setVisible(false);
-
-		JLabel label = new JLabel("Alterar UserName:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		label.setAlignmentX(0.5f);
-		label.setBounds(105, 48, 203, 31);
-		jpFuncConta.add(label);
-
-		JLabel label_1 = new JLabel("UserName:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(67, 92, 113, 24);
-		jpFuncConta.add(label_1);
-
-		txtUsername = new JTextField();
-
-		txtUsername.setEditable(false);
-		txtUsername.setBounds(67, 129, 279, 31);
-		jpFuncConta.add(txtUsername);
-
-		JLabel label_2 = new JLabel("Password:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(67, 173, 113, 24);
-		jpFuncConta.add(label_2);
-
-		JLabel label_3 = new JLabel("Novo UserName:");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_3.setBounds(67, 254, 171, 24);
-		jpFuncConta.add(label_3);
-
-		txtNovoUsername = new JTextField();
-		txtNovoUsername.setBounds(67, 284, 279, 31);
-		jpFuncConta.add(txtNovoUsername);
-
-		JButton btnConfirmarUsername = new JButton("Confirmar");
-
-		btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
-		btnConfirmarUsername.setBounds(67, 359, 97, 25);
-		jpFuncConta.add(btnConfirmarUsername);
-
-		JButton btnCancelarUsername = new JButton("Cancelar");
-		btnCancelarUsername.setBackground(SystemColor.controlHighlight);
-		btnCancelarUsername.setBounds(249, 359, 97, 25);
-		jpFuncConta.add(btnCancelarUsername);
-
-		JLabel label_4 = new JLabel("Alterar PassWord:");
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		label_4.setAlignmentX(0.5f);
-		label_4.setBounds(520, 50, 203, 31);
-		jpFuncConta.add(label_4);
-
-		JLabel label_5 = new JLabel("Password:");
-		label_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_5.setBounds(520, 92, 113, 24);
-		jpFuncConta.add(label_5);
-
-		passwordAntiga = new JPasswordField();
-		passwordAntiga.setBounds(520, 129, 279, 31);
-		jpFuncConta.add(passwordAntiga);
-
-		JLabel label_9 = new JLabel("Nova Password:");
-		label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_9.setBounds(520, 173, 113, 24);
-		jpFuncConta.add(label_9);
-
-		JLabel label_10 = new JLabel("Confirmar Password:");
-		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_10.setBounds(520, 254, 171, 24);
-		jpFuncConta.add(label_10);
-
-		passwordNovaConfirm = new JPasswordField();
-		passwordNovaConfirm.setBounds(520, 284, 279, 31);
-		jpFuncConta.add(passwordNovaConfirm);
-
-		JButton btnConfirmarPasse = new JButton("Confirmar");
-
-		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
-		btnConfirmarPasse.setBounds(520, 359, 97, 25);
-		jpFuncConta.add(btnConfirmarPasse);
-
-		JButton btnCancelarPasse = new JButton("Cancelar");
-		btnCancelarPasse.setBackground(SystemColor.controlHighlight);
-		btnCancelarPasse.setBounds(676, 359, 97, 25);
-		jpFuncConta.add(btnCancelarPasse);
-
-		JPanel jpFuncLivros = new JPanel();
-		jpFuncLivros.setLayout(null);
-		jpFuncLivros.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncLivros);
-		jpFuncLivros.setVisible(false);
-
-		JComboBox comboBoxAtributoLivro = new JComboBox();
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpFuncLivros.add(comboBoxAtributoLivro);
-
-		txtAtributoPesquisaLivro = new JTextField();
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpFuncLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
-
-		JList listaLivros = new JList();
-		listaLivros.setBounds(22, 111, 190, 395);
-		jpFuncLivros.add(listaLivros);
-
-		JLabel lblNewLabel = new JLabel("Nome:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(263, 120, 48, 16);
-		jpFuncLivros.add(lblNewLabel);
-
-		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblAutor.setBounds(263, 170, 48, 16);
-		jpFuncLivros.add(lblAutor);
-
-		JLabel lblDescrio = new JLabel("Data:");
-		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDescrio.setBounds(271, 219, 40, 16);
-		jpFuncLivros.add(lblDescrio);
-
-		JLabel lblStock = new JLabel("Stock:");
-		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblStock.setBounds(263, 455, 48, 16);
-		jpFuncLivros.add(lblStock);
-
-		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
-		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo_1.setBounds(263, 404, 48, 16);
-		jpFuncLivros.add(lblPreo_1);
-
-		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo.setBounds(224, 266, 87, 16);
-		jpFuncLivros.add(lblPreo);
-
-		txtTituloLivro = new JTextField();
-		txtTituloLivro.setColumns(10);
-		txtTituloLivro.setBounds(333, 114, 345, 30);
-		jpFuncLivros.add(txtTituloLivro);
-
-		txtAutorLivro = new JTextField();
-		txtAutorLivro.setColumns(10);
-		txtAutorLivro.setBounds(333, 164, 345, 30);
-		jpFuncLivros.add(txtAutorLivro);
-
-		txtDataLivro = new JTextField();
-		txtDataLivro.setColumns(10);
-		txtDataLivro.setBounds(333, 213, 345, 30);
-		jpFuncLivros.add(txtDataLivro);
-
-		txtDescricaoLivro = new JTextField();
-		txtDescricaoLivro.setColumns(10);
-		txtDescricaoLivro.setBounds(333, 260, 345, 117);
-		jpFuncLivros.add(txtDescricaoLivro);
-
-		txtPrecoLivro = new JTextField();
-		txtPrecoLivro.setColumns(10);
-		txtPrecoLivro.setBounds(333, 402, 345, 30);
-		jpFuncLivros.add(txtPrecoLivro);
-
-		txtStockLivro = new JTextField();
-		txtStockLivro.setColumns(10);
-		txtStockLivro.setBounds(333, 453, 345, 30);
-		jpFuncLivros.add(txtStockLivro);
-
-		JButton btnPesquisarLivro = new JButton("Pesquisar");
-		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
-		btnPesquisarLivro.setBounds(224, 16, 97, 25);
-		jpFuncLivros.add(btnPesquisarLivro);
-
-		JButton btnLimparLivro = new JButton("Limpar");
-		btnLimparLivro.setBackground(SystemColor.controlHighlight);
-		btnLimparLivro.setBounds(224, 60, 97, 25);
-		jpFuncLivros.add(btnLimparLivro);
-
-		JPanel jpPagamento = new JPanel();
-		jpPagamento.setBounds(0, 0, 219, 336);
-		panelPrincipal.add(jpPagamento);
-		jpPagamento.setLayout(null);
-		jpPagamento.setVisible(false);
-
-		JComboBox comboBoxTipoPagamento = new JComboBox();
-		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
-		jpPagamento.add(comboBoxTipoPagamento);
-
-		textField_8 = new JTextField();
-		textField_8.setBounds(20, 94, 172, 22);
-		jpPagamento.add(textField_8);
-		textField_8.setColumns(10);
-
-		JLabel lblNif_1 = new JLabel("NIF");
-		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNif_1.setBounds(22, 69, 46, 14);
-		jpPagamento.add(lblNif_1);
-
-		// encaminhar para os respectivos paineis ao clicar nos botoes
-
+		JButton btnLivros = new JButton("Livros");
+		btnLivros.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
+		btnLivros.setBackground(SystemColor.controlHighlight);
+		btnLivros.setBounds(25, 13, 176, 55);
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpFuncCarrinhos.setVisible(false);
@@ -723,6 +798,13 @@ public class AppFuncionario implements Serializable{
 				jpPagamento.setVisible(false);
 			}
 		});
+		panelMenu.add(btnLivros);
+
+		JButton btnCarrinhos = new JButton("Carrinhos");
+		btnCarrinhos.setForeground(Color.BLACK);
+		btnCarrinhos.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 25));
+		btnCarrinhos.setBackground(SystemColor.controlHighlight);
+		btnCarrinhos.setBounds(25, 81, 176, 60);
 		btnCarrinhos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jpFuncCarrinhos.setVisible(true);
@@ -731,6 +813,13 @@ public class AppFuncionario implements Serializable{
 				jpPagamento.setVisible(false);
 			}
 		});
+		panelMenu.add(btnCarrinhos);
+
+		JButton btnGestao = new JButton("Gestao Conta");
+		btnGestao.setForeground(Color.BLACK);
+		btnGestao.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 25));
+		btnGestao.setBackground(SystemColor.controlHighlight);
+		btnGestao.setBounds(25, 152, 176, 60);
 		btnGestao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				jpFuncCarrinhos.setVisible(false);
@@ -739,93 +828,15 @@ public class AppFuncionario implements Serializable{
 				jpPagamento.setVisible(false);
 			}
 		});
-
-		// selecï¿½ao do metodo de pagamento e aparecimento da respectiva janela
-
-		comboBoxTipoPagamento.addItem("(escolha o mï¿½todo de pagamento)");
-		comboBoxTipoPagamento.addItem("Dinheiro");
-		comboBoxTipoPagamento.addItem("Multibanco");
-
-		JPanel jpDinheiro = new JPanel();
-		jpDinheiro.setBounds(10, 190, 199, 171);
-		jpPagamento.add(jpDinheiro);
-		jpDinheiro.setLayout(null);
-		jpDinheiro.setVisible(false);
-
-		JLabel lblNewLabel_1 = new JLabel("A pagar :");
-		lblNewLabel_1.setBounds(10, 11, 76, 23);
-		jpDinheiro.add(lblNewLabel_1);
-
-		JLabel lblRecebido = new JLabel("Recebido : ");
-		lblRecebido.setBounds(10, 45, 76, 23);
-		jpDinheiro.add(lblRecebido);
-
-		JLabel lblTroco = new JLabel("Troco :");
-		lblTroco.setBounds(10, 79, 76, 23);
-		jpDinheiro.add(lblTroco);
-
-		textField_9 = new JTextField();
-		textField_9.setBounds(72, 12, 86, 20);
-		jpDinheiro.add(textField_9);
-		textField_9.setColumns(10);
-
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(72, 45, 86, 20);
-		jpDinheiro.add(textField_10);
-
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(72, 80, 86, 20);
-		jpDinheiro.add(textField_11);
-
-		passwordNova = new JPasswordField();
-		passwordNova.setBounds(520, 210, 235, 31);
-		jpFuncConta.add(passwordNova);
-
-		passwordAlterarUser = new JPasswordField();
-		passwordAlterarUser.setBounds(67, 202, 140, 31);
-		jpFuncConta.add(passwordAlterarUser);
-
-		JButton btnConcluirPagamento = new JButton("Concluir");
-		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
-		btnConcluirPagamento.setBounds(33, 114, 125, 30);
-		jpDinheiro.add(btnConcluirPagamento);
-		btnConcluirPagamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
-		comboBoxTipoPagamento.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				// check whether there is any selection
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-					jpDinheiro.setVisible(true);
-				}
-			}
-		});
-
-		// logOut
-
-		btnLogOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				AppCliente clt = new AppCliente();
-				clt.run();
-				frame.setVisible(false);
-			}
-		});
+		panelMenu.add(btnGestao);
 
 		// mudar a cor de um botao ao passar o cursor do rato
 
 		// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
 		// deixar a cor fixa ao clicar(mouse Clicked)
-		// retirar a cor do anterior ao clicar em outro botï¿½o(mouse Clicked)
+		// retirar a cor do anterior ao clicar em outro boto(mouse Clicked)
 
 		// Livros
-
 		btnLivros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -883,66 +894,6 @@ public class AppFuncionario implements Serializable{
 			}
 
 		});
-
-		// instancia uma sessao ao entrar como funcionario que é adicionada à lista de
-		// sessoes da livraria
-		//Livraria l = new Livraria();
-//		Funcionario f = new Funcionario(1, "Bruno", 93, "bruno", "b");
-//		Sessao s = new Sessao(f.getId(), LocalDate.now(), 10, f);
-//		l.addSessao(s);
-//		l.addUtilizador(f);
-//
-//		// GESTAO CONTA PESSOAL
-//
-//		// ALTERACAO DO USERNAME
-//
-//		// Colocar o username do funcionario automaticamente na caixa de texto de
-//		// username antigo antes de mudar
-//
-//		String username = f.getUsername();
-//		txtUsername.setText(username);
-//		String passwordUser = new String(passwordNova.getPassword());
-//
-//		// ao clicar no botao de confirmacao para alteracao do username verificar se
-//		// o username e a password coincidem (método verificarPassword na classe
-//		// livraria)
-//
-//		String novoUsername = txtNovoUsername.getText();
-//
-//		btnConfirmarUsername.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//
-//				boolean verificacaoPassword = l.verificarPassword(username, passwordUser);
-//				boolean alteracaoUserConcluida = l.alterarUsername(f.getId(), novoUsername);
-//
-//				if ((verificacaoPassword))// &&(alteracaoUserConcluida))
-//				{
-//					JOptionPane.showConfirmDialog(null, "O seu username foi alterado com sucesso");
-//					txtUsername.setText(txtNovoUsername.getText());
-//				} else {
-//					JOptionPane.showConfirmDialog(null, "Username e/ou password incorrectos");
-//				}
-//			}
-//		});
-//		// String novaPassword
-//		String novaPasswordConfirm = new String(passwordNovaConfirm.getPassword());
-//		String novaPassword = new String(passwordNova.getPassword());
-//		String passwordAnt = new String(passwordAntiga.getPassword());
-//
-//		btnConfirmarPasse.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				boolean verificacao = l.verificarPassword(novoUsername, passwordAnt);
-//				boolean alteracaoPasseConcluida = l.alterarPassword(f.getId(), novaPassword);
-//				if ((verificacao) && (novaPassword.equals(novaPasswordConfirm))) {
-//					JOptionPane.showConfirmDialog(null, "A sua password foi alterada com sucesso");
-//
-//				}
-//				if (verificacao = false) {
-//					JOptionPane.showConfirmDialog(null, "Dados incorrectos");
-//				}
-//
-//			}
-//		});
 
 	}
 }
