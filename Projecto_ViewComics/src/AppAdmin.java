@@ -48,12 +48,9 @@ public class AppAdmin implements Serializable {
 	private JTextField txtDescricaoLivros;
 	private JTextField txtPrecoLivros;
 	private JTextField txtStockLivros;
-	private JTextField txtUsername;
-	private JTextField txtPassword;
-	private JTextField txtNovoUsername;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JPasswordField passwordField_2;
+	private JTextField txtUsernameALTERARUSER;
+	private JTextField txtNovoUsernameALTERAUSER;
+	private JPasswordField txtPasswordALTERAPASS;
 	private JTextField txtAtributoSTOCK;
 	private JTextField txtTituloSTOCK;
 	private JTextField txtAutorSTOCK;
@@ -74,6 +71,9 @@ public class AppAdmin implements Serializable {
 	private JTextField txtStockSTOCK;
 	private JTextField txtAlterarStock;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPasswordField txtPasswordALTERAUSER;
+	private JPasswordField txtNovaPassALTERAPASS;
+	private JPasswordField txtConfirmaPassALTERAPASS;
 
 	/**
 	 * Launch the application.
@@ -214,42 +214,41 @@ public class AppAdmin implements Serializable {
 		label_1.setBounds(67, 92, 113, 24);
 		jpAdmConta.add(label_1);
 
-		txtUsername = new JTextField(usernameLogado);
-		txtUsername.setBounds(67, 129, 279, 31);
-		jpAdmConta.add(txtUsername);
+		txtUsernameALTERARUSER = new JTextField(usernameLogado);
+		txtUsernameALTERARUSER.setBounds(67, 129, 279, 31);
+		jpAdmConta.add(txtUsernameALTERARUSER);
 
 		JLabel label_2 = new JLabel("Password:");
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_2.setBounds(67, 173, 113, 24);
 		jpAdmConta.add(label_2);
 
-		txtPassword = new JTextField();
-		txtPassword.setBounds(67, 210, 279, 31);
-		jpAdmConta.add(txtPassword);
-
 		JLabel label_3 = new JLabel("Novo UserName:");
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_3.setBounds(67, 254, 171, 24);
 		jpAdmConta.add(label_3);
 
-		txtNovoUsername = new JTextField();
-		txtNovoUsername.setBounds(67, 284, 279, 31);
-		jpAdmConta.add(txtNovoUsername);
+		txtNovoUsernameALTERAUSER = new JTextField();
+		txtNovoUsernameALTERAUSER.setBounds(67, 284, 279, 31);
+		jpAdmConta.add(txtNovoUsernameALTERAUSER);
 
-		JButton btnConfirmarUsername = new JButton("Confirmar");
-		btnConfirmarUsername.addActionListener(new ActionListener() {
+		JButton btnConfirmarALTERAUSER = new JButton("Confirmar");
+		btnConfirmarALTERAUSER.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String username=txtUsernameALTERARUSER.getText();
+				char[] pass=txtPasswordALTERAUSER.
+				
 				
 			}
 		});
-		btnConfirmarUsername.setBackground(SystemColor.controlHighlight);
-		btnConfirmarUsername.setBounds(67, 359, 97, 25);
-		jpAdmConta.add(btnConfirmarUsername);
+		btnConfirmarALTERAUSER.setBackground(SystemColor.controlHighlight);
+		btnConfirmarALTERAUSER.setBounds(67, 359, 97, 25);
+		jpAdmConta.add(btnConfirmarALTERAUSER);
 
-		JButton btnCancelarUsername = new JButton("Cancelar");
-		btnCancelarUsername.setBackground(SystemColor.controlHighlight);
-		btnCancelarUsername.setBounds(249, 359, 97, 25);
-		jpAdmConta.add(btnCancelarUsername);
+		JButton btnCancelarALTERAUSER = new JButton("Cancelar");
+		btnCancelarALTERAUSER.setBackground(SystemColor.controlHighlight);
+		btnCancelarALTERAUSER.setBounds(249, 359, 97, 25);
+		jpAdmConta.add(btnCancelarALTERAUSER);
 
 		JLabel lblAlterarPassword = new JLabel("Alterar Password:");
 		lblAlterarPassword.setFont(new Font("Tahoma", Font.PLAIN, 25));
@@ -262,37 +261,41 @@ public class AppAdmin implements Serializable {
 		label_5.setBounds(432, 90, 113, 24);
 		jpAdmConta.add(label_5);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(432, 127, 279, 31);
-		jpAdmConta.add(passwordField);
+		txtPasswordALTERAPASS = new JPasswordField();
+		txtPasswordALTERAPASS.setBounds(432, 127, 279, 31);
+		jpAdmConta.add(txtPasswordALTERAPASS);
 
 		JLabel label_9 = new JLabel("Nova Password:");
 		label_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_9.setBounds(432, 171, 113, 24);
 		jpAdmConta.add(label_9);
 
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(432, 208, 279, 31);
-		jpAdmConta.add(passwordField_1);
-
 		JLabel label_10 = new JLabel("Confirmar Password:");
 		label_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		label_10.setBounds(432, 252, 171, 24);
 		jpAdmConta.add(label_10);
 
-		passwordField_2 = new JPasswordField();
-		passwordField_2.setBounds(432, 282, 279, 31);
-		jpAdmConta.add(passwordField_2);
+		JButton btnConfirmarALTERAPASS = new JButton("Confirmar");
+		btnConfirmarALTERAPASS.setBackground(SystemColor.controlHighlight);
+		btnConfirmarALTERAPASS.setBounds(432, 357, 97, 25);
+		jpAdmConta.add(btnConfirmarALTERAPASS);
 
-		JButton btnConfirmarPasse = new JButton("Confirmar");
-		btnConfirmarPasse.setBackground(SystemColor.controlHighlight);
-		btnConfirmarPasse.setBounds(432, 357, 97, 25);
-		jpAdmConta.add(btnConfirmarPasse);
-
-		JButton btnCancelarPasse = new JButton("Cancelar");
-		btnCancelarPasse.setBackground(SystemColor.controlHighlight);
-		btnCancelarPasse.setBounds(588, 357, 97, 25);
-		jpAdmConta.add(btnCancelarPasse);
+		JButton btnCancelarALTERAPASS = new JButton("Cancelar");
+		btnCancelarALTERAPASS.setBackground(SystemColor.controlHighlight);
+		btnCancelarALTERAPASS.setBounds(588, 357, 97, 25);
+		jpAdmConta.add(btnCancelarALTERAPASS);
+		
+		txtPasswordALTERAUSER = new JPasswordField();
+		txtPasswordALTERAUSER.setBounds(67, 213, 279, 30);
+		jpAdmConta.add(txtPasswordALTERAUSER);
+		
+		txtNovaPassALTERAPASS = new JPasswordField();
+		txtNovaPassALTERAPASS.setBounds(432, 206, 279, 31);
+		jpAdmConta.add(txtNovaPassALTERAPASS);
+		
+		txtConfirmaPassALTERAPASS = new JPasswordField();
+		txtConfirmaPassALTERAPASS.setBounds(432, 285, 279, 29);
+		jpAdmConta.add(txtConfirmaPassALTERAPASS);
 
 		JPanel jpAdmStock = new JPanel();
 		jpAdmStock.setBounds(0, 0, 763, 545);
