@@ -66,6 +66,8 @@ public class Carrinho implements Serializable {
 	public void setConteudo(HashMap<Integer, Integer> conteudo) {
 		this.conteudo = conteudo;
 	}
+	
+	
 
 	@Override
 	public String toString() {
