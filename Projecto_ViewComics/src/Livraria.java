@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class Livraria implements Serializable {
 	// cenas
@@ -124,6 +125,16 @@ public class Livraria implements Serializable {
 		this.livros.remove(l);
 	}
 
+	public void alterarStockLivro(String seleccao, int quantidadeTotal) {
+
+		for (Livro l : this.livros) {
+			if (l.toString().equals(seleccao)) {
+				l.setStock(quantidadeTotal);
+				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo() + " foi alterado com sucesso. Existem agora "+quantidadeTotal+" exemplares.");
+			}
+		}
+	}
+
 	// adiciona utilizadores
 	public void addUtilizador(Utilizador u) {
 		this.utilizadores.add(u);
@@ -201,6 +212,53 @@ public class Livraria implements Serializable {
 		return preco;
 
 	}
+
+	// listar carrinho
+	public String[] listaCarrinho(String nif) {
+
+		ArrayList<String> listaC = new ArrayList<String>();
+		String a = "";
+		
+		for(Carrinho c : this.carrinhos) {
+			
+			if(c.getNif().equals(nif)) {
+				
+				// importar o conteudo do carrinho para um hashMap chamado hm
+				HashMap<Integer, Integer> hm = c.getConteudo();
+				
+				a = hm.toString();
+				listaC.add(a);
+			}
+		}
+		
+		String[] listalivro = new String[listaC.size()];
+		listalivro = listaC.toArray(listalivro);
+
+		return listalivro;
+	}
+	
+	// listar nifs
+		public String[] arrayNif(ArrayList<Carrinho> car) {
+
+			String[] listaNifs = new String[this.carrinhos.size()];
+
+//			for(int i=0; i<livros.size();i++)
+//			{
+//				livro = ""+livros.get(i).getIdLivro();
+//				listaLivros[i]= livro;
+//				livro="";
+//			}
+			int i = 0;
+			for (Carrinho c : carrinhos) {
+				listaNifs[i] = c.getNif();
+				i++;
+
+			}
+
+			return listaNifs;
+		}
+	
+	
 
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
@@ -285,7 +343,7 @@ public class Livraria implements Serializable {
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
-		
+
 //		for(int i=0; i<livros.size();i++)
 //		{
 //			livro = ""+livros.get(i).getIdLivro();
@@ -296,7 +354,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-			
+
 		}
 
 		return listaLivros;
@@ -535,11 +593,18 @@ public class Livraria implements Serializable {
 
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
 	protected String adicionarQuantidade(String actual, String adicionar) {
-		int actualInt = Integer.parseInt(actual);
-		int adicionarInt = Integer.parseInt(adicionar);
+	String totalStr=actual;
+		if ((actual != null) && (adicionar != null)) {
+			int actualInt = Integer.valueOf(actual);
+			int adicionarInt = Integer.parseInt(adicionar);
 
-		int totalInt = actualInt + adicionarInt;
-		String totalStr = Integer.toString(totalInt);
+			int totalInt = actualInt + adicionarInt;
+			totalStr = Integer.toString(totalInt);
+			
+		}
+		else {
+			totalStr =actual;
+		}
 		return totalStr;
 	}
 
@@ -585,23 +650,23 @@ public class Livraria implements Serializable {
 			return false;
 		}
 	}
-	
+
 	// listar livros em array por data
-		public String[] listaData(String ano) {
+	public String[] listaData(String ano) {
 
-			ArrayList<String> listaD = new ArrayList<String>();
-			String a = "";
-			for (Livro l : this.livros) {
-				if (Integer.toString(l.getAno()).equals(ano)) {
-					a = l.toString();
-					listaD.add(a);
+		ArrayList<String> listaD = new ArrayList<String>();
+		String a = "";
+		for (Livro l : this.livros) {
+			if (Integer.toString(l.getAno()).equals(ano)) {
+				a = l.toString();
+				listaD.add(a);
 
-				}
 			}
-			String[] listaData = new String[listaD.size()];
-			listaData= listaD.toArray(listaData);
-
-			return listaData;
 		}
+		String[] listaData = new String[listaD.size()];
+		listaData = listaD.toArray(listaData);
+
+		return listaData;
+	}
 
 }
