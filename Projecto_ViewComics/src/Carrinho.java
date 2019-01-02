@@ -102,31 +102,47 @@ public class Carrinho implements Serializable {
 		return quantidade;
 
 	}
-
-	// listar hashmap para string
+//
+//	// listar hashmap para string
+//	public String[] listaCarrinho2() {
+//
+//		ArrayList<String> listaC = new ArrayList<String>();
+//		String a = "";
+//
+//
+//		// Criar um iterador para a key do hashmap para o poder percorrer
+//		// num foreach
+//		Set<Map.Entry<Integer, Integer>> set = this.conteudo.entrySet();
+//
+//		// percorrer o hm no foreach de modo a somar todos os pre�os
+//		for (Map.Entry<Integer, Integer> me : set) {
+//
+//			a = me.getKey() + " " + me.getValue();
+//			listaC.add(a);
+//
+//		}
+//		
+//		String[] listalivro = new String[listaC.size()];
+//		listalivro = listaC.toArray(listalivro);
+//
+//		return listalivro;
+//
+//	}
+	
 	public String[] listaCarrinho2() {
-
+	
 		ArrayList<String> listaC = new ArrayList<String>();
-		String a = "";
-
-
-		// Criar um iterador para a key do hashmap para o poder percorrer
-		// num foreach
-		Set<Map.Entry<Integer, Integer>> set = this.conteudo.entrySet();
-
-		// percorrer o hm no foreach de modo a somar todos os pre�os
-		for (Map.Entry<Integer, Integer> me : set) {
-
-			a = me.getKey() + " " + me.getValue();
-			listaC.add(a);
-
-		}
-		
-		String[] listalivro = new String[listaC.size()];
-		listalivro = listaC.toArray(listalivro);
-
-		return listalivro;
-
-	}
+	    
+	       
+	for(Map.Entry k : conteudo.entrySet())
+	        {
+	            listaC.add((String) k.getKey()) ;      
+			           
+		   }
+	     String arr[]=new String[conteudo.size()];   
+	     arr = listaC.toArray( arr);
+	     
+	     return arr;
+	  }
 
 }

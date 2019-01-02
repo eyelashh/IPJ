@@ -494,9 +494,11 @@ public class AppFuncionario implements Serializable {
 		label_27.setBounds(486, 385, 135, 14);
 		jpFuncCarrinhos.add(label_27);
 
-		DefaultListModel<String> dmFunListaNifs = new DefaultListModel<String>();
-		gl.viewComics.addArrayLista(gl.viewComics.arrayNif(gl.viewComics.getCarrinhos()), dmFunListaNifs);
-		JList<String> listNifsClientes = new JList<String>(dmFunListaNifs);
+		
+	
+		DefaultListModel<String> listNif = new DefaultListModel<String>();
+		JList<String> listNifsClientes = new JList<String>(listNif);
+		gl.viewComics.addArrayLista(gl.viewComics.listaNifs(), listNif);
 		listNifsClientes.setBounds(25, 144, 200, 320);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
@@ -505,17 +507,7 @@ public class AppFuncionario implements Serializable {
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
 					
-					//String nifselect = listNifsClientes.getSelectedValue();
 					
-					//String[] c = gl.viewComics.listaCarrinho(nifselect);
-					
-					//textField_12.setText(c.toString());
-//					txtTituloLivro.setText(l.getTitulo());
-//					txtAutorLivro.setText(l.getAutor());
-//					txtDataLivro.setText(Integer.toString(l.getAno()));
-//					txtDescricaoLivro.setText(l.getDescricao());
-//					txtPrecoLivro.setText(Double.toString(l.getPreco()));
-//					txtStockLivro.setText(Integer.toString(l.getStock()));
 
 				}
 			}

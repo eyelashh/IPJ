@@ -252,6 +252,8 @@ public class AppCliente implements Serializable {
 		TextField txtAtributoLivros = new TextField();
 		txtAtributoLivros.setBounds(65, 96, 200, 22);
 		JPLivros.add(txtAtributoLivros);
+		
+		
 		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 		JList<String> listaLivros = new JList<String>(modeloLista);

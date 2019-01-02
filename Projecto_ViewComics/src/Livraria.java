@@ -215,43 +215,30 @@ public class Livraria implements Serializable {
 	}
 
 	// listar carrinho
-	public String[] listaCarrinho(String nif) {
+//	public String[] listaCarrinho(String nif) {
+//
+//		ArrayList<String> listaC = new ArrayList<String>();
+//		String a = "";
+//
+//		for (Carrinho c : this.carrinhos) {
+//
+//			if (c.getNif().equals(nif)) {
+//
+//				String[] hm = c.listaCarrinho2();
+//
+//				a = hm.toString();
+//				listaC.add(a);
+//			}
+//		}
+//
+//		String[] listalivro = new String[listaC.size()];
+//		listalivro = listaC.toArray(listalivro);
+//
+//		return listalivro;
+//
+//	}
 
-		ArrayList<String> listaC = new ArrayList<String>();
-		String a = "";
 
-		for (Carrinho c : this.carrinhos) {
-
-			if (c.getNif().equals(nif)) {
-
-				String[] hm = c.listaCarrinho2();
-
-				a = hm.toString();
-				listaC.add(a);
-			}
-		}
-
-		String[] listalivro = new String[listaC.size()];
-		listalivro = listaC.toArray(listalivro);
-
-		return listalivro;
-
-	}
-
-//	// listar nifs	
-	protected String[] arrayNif(ArrayList<Carrinho> carrinho) {
-
-		String[] listaNifs = new String[carrinho.size()];
-		String s = "";
-		for (int i = 0; i < carrinho.size(); i++) {
-			s = "" + carrinho.get(i).getNif();
-			listaNifs[i] = s;
-			s = "";
-
-		}
-
-		return listaNifs;
-	}
 
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
@@ -362,6 +349,8 @@ public class Livraria implements Serializable {
 
 		return listaLivros;
 	}
+	
+	
 
 //listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
@@ -669,6 +658,19 @@ public class Livraria implements Serializable {
 		listaData = listaD.toArray(listaData);
 
 		return listaData;
+	}
+
+	protected String[] listaNifs() {
+		
+		String[] nifs = new String[carrinhos.size()];
+		String s = "";
+		for (int i = 0; i < carrinhos.size(); i++) {
+			s = "" + carrinhos.get(i).getNif();
+			nifs[i] = s;
+			s = "";
+
+		}
+		return nifs;
 	}
 
 }
