@@ -26,6 +26,7 @@ public class Conta implements Serializable{
 		this.valorMaxLevantamento = valorMaxLevantamento;
 		this.valorMaxDia = valorMaxDia;
 		operacoes = new ArrayList <Operacao>();
+		this.clientes = clientes;
 		
 	}
 

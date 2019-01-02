@@ -331,6 +331,27 @@ public class Banco implements Serializable {
 				contas.remove(i);
 			}
 		}
-
 	}
+	// cria lista de clientes que recebe o ArrayList de Strings e cria no arraylist de clientes;
+	protected void crialistaclientescontas(Conta conta,ArrayList<String> liststr, ArrayList<Cliente> listclt)
+	{
+		String str = "";
+		Cliente c = null;
+		
+		for(int i=0; i<liststr.size(); i++)
+		{
+			str = liststr.get(i);
+			str = str.substring(0, str.indexOf("*"));
+			c = (Cliente)selectUtilizador(Integer.parseInt(str), this.utilizadores);
+			c.getContas().add(conta);
+			listclt.add(c);	
+		}
+		
+		//selectUtilizador
+		
+		
+		
+		
+	}
+	
 }
