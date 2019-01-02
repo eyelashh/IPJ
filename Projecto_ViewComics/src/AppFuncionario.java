@@ -369,9 +369,9 @@ public class AppFuncionario implements Serializable {
 
 				}if (comboBoxAtributoLivro.getSelectedItem().equals("Data")) {
 
-					String data = txtAtributoPesquisaLivro.getText();
+					int data = Integer.parseInt(txtAtributoPesquisaLivro.getText());
 					dmFunListaLivros.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(data), dmFunListaLivros);
+					gl.viewComics.addArrayLista(gl.viewComics.listaData(data), dmFunListaLivros);
 
 				}
 				

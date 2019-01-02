@@ -411,6 +411,7 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
+	
 	protected int obterIdFunc(String s) {
 
 		int id=0;
@@ -474,6 +475,7 @@ public class Livraria implements Serializable {
 		}
 		return func;
 	}
+	
 	protected void removeFuncionario(String seleccao) {
 		for (Utilizador u:this.utilizadores) {
 			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
@@ -580,5 +582,24 @@ public class Livraria implements Serializable {
 			return false;
 		}
 	}
+	
+	// listar livros em array por data
+		public String[] listaData(int data) {
+
+			ArrayList<String> listaD = new ArrayList<String>();
+			String a = "";
+			for (Livro l : this.livros) {
+				if (l.getAno()==(data)) {
+					a = l.toString();
+					listaD.add(a);
+
+				}
+				a = "";
+			}
+			String[] listaData = new String[listaD.size()];
+			listaData= listaD.toArray(listaData);
+
+			return listaData;
+		}
 
 }
