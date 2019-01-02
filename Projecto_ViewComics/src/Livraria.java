@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 
 public class Livraria implements Serializable {
-	//cenas
+	// cenas
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
@@ -151,7 +151,7 @@ public class Livraria implements Serializable {
 
 //verifica se o carrinho existe, se não existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
-	
+
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
 				return true;
@@ -217,21 +217,21 @@ public class Livraria implements Serializable {
 		return dadosCorrectos;
 
 	}
-	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, int ano, String descricao) {
-		
-		for(Livro l:this.livros) {
+
+	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, String ano,
+			String descricao) {
+
+		for (Livro l : this.livros) {
 			if (l.toString().equals(selecao)) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
 				l.setPreco(Double.parseDouble(preco));
 				l.setStock(Integer.parseInt(stock));
-				l.setAno(ano);
+				l.setAno(Integer.parseInt(ano));
 				l.setDescricao(descricao);
 			}
 		}
-		
-		
-		
+
 	}
 
 	public Utilizador loggado(String username, String password) {
@@ -370,9 +370,11 @@ public class Livraria implements Serializable {
 	protected int obterIdLivro(String s) {
 
 		int id = 0;
-		for (Livro l : this.livros) {
-			if (s.equals(l.toString())) {
-				id = l.getIdLivro();
+		if (s != null) {
+			for (Livro l : this.livros) {
+				if (s.equals(l.toString())) {
+					id = l.getIdLivro();
+				}
 			}
 		}
 		return id;
@@ -411,11 +413,12 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
+
 	protected int obterIdFunc(String s) {
 
-		int id=0;
+		int id = 0;
 		for (Utilizador u : this.utilizadores) {
-			if ((s.equals(u.toString()))&&(u instanceof Funcionario)) {
+			if ((s.equals(u.toString())) && (u instanceof Funcionario)) {
 				id = u.getId();
 			}
 		}
@@ -465,22 +468,24 @@ public class Livraria implements Serializable {
 		return listaPorId;
 
 	}
+
 	protected Utilizador devolveFunc(String seleccao) {
-		Utilizador func=null;
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
-				func=u;
+		Utilizador func = null;
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
+				func = u;
 			}
 		}
 		return func;
 	}
+
 	protected void removeFuncionario(String seleccao) {
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
 				this.utilizadores.remove(u);
 			}
 		}
-		
+
 	}
 
 	public String[] listaFunPorUsername(String username) {
@@ -515,10 +520,11 @@ public class Livraria implements Serializable {
 
 	}
 
-	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username, String password ) {
-		
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(selecaoLista))&&(u instanceof Funcionario)){
+	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username,
+			String password) {
+
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(selecaoLista)) && (u instanceof Funcionario)) {
 				u.setNome(nome);
 				u.setUsername(username);
 				u.setPassword(password);
@@ -572,11 +578,10 @@ public class Livraria implements Serializable {
 	}
 
 	protected boolean verificaNif(String nif) {
-		
-		if(nif.matches("([0-9]{9})")) {
+
+		if (nif.matches("([0-9]{9})")) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
