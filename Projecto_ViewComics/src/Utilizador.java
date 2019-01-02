@@ -7,7 +7,7 @@ public class Utilizador implements  Serializable {
 	private int id;
 	private static AtomicInteger aiUtil=new AtomicInteger(0);
 	private String nome;
-	private int contato;
+	private String contato;
 	private String username;
 	private String password;
 	
@@ -17,7 +17,7 @@ public class Utilizador implements  Serializable {
 		this.id = aiUtil.incrementAndGet();
 	}
 
-	public Utilizador(String nome, int contato, String username, String password) {
+	public Utilizador(String nome, String contato, String username, String password) {
 		super();
 		this.id = aiUtil.incrementAndGet();
 		this.nome = nome;
@@ -40,11 +40,11 @@ public class Utilizador implements  Serializable {
 		this.nome = nome;
 	}
 
-	public int getContato() {
+	public String getContato() {
 		return contato;
 	}
 
-	public void setContato(int contato) {
+	public void setContato(String contato) {
 		this.contato = contato;
 	}
 

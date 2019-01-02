@@ -13,13 +13,14 @@ public class Livro implements  Serializable {
 	private int ano;
 	private static AtomicInteger ai=new AtomicInteger(0);
 
-	public Livro(String titulo, String autor, double preco, int stock) {
+	public Livro(String titulo, String autor, double preco, int stock, int ano) {
 		super();
 		this.idLivro = ai.incrementAndGet();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.preco = preco;
 		this.stock = stock;
+		this.ano =ano;
  
 	}
 
