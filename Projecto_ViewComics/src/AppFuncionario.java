@@ -249,7 +249,7 @@ public class AppFuncionario implements Serializable {
 		jpFuncLivros.setLayout(null);
 		jpFuncLivros.setVisible(false);
 
-		String [] itens2 = new String [] {"Título", "Autor","Ano"};
+		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
 		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
 		jpFuncLivros.add(comboBoxAtributoLivro);
@@ -259,18 +259,18 @@ public class AppFuncionario implements Serializable {
 		jpFuncLivros.add(txtAtributoPesquisaLivro);
 		txtAtributoPesquisaLivro.setColumns(10);
 
-		// criar um defaul model para guardar e fazer atualizaçoes da lista 
+		// criar um defaul model para guardar e fazer atualizaçoes da lista
 		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
-		//Guardar na lista o array/copia da lista de livros
-		JList<String>  listaLivros = new JList<String> (dmFunListaLivros);
+		// Guardar na lista o array/copia da lista de livros
+		JList<String> listaLivros = new JList<String>(dmFunListaLivros);
 		listaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
 		listaLivros.setBounds(22, 111, 190, 395);
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
-		
-				// se a lista estiver seleccionada, copia para as caixas de texto 
+
+				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listaLivros.isSelectionEmpty()) {
 
 					String livroSeleccionadoSTR = listaLivros.getSelectedValue();
@@ -283,8 +283,6 @@ public class AppFuncionario implements Serializable {
 					txtDescricaoLivro.setText(l.getDescricao());
 					txtPrecoLivro.setText(Double.toString(l.getPreco()));
 					txtStockLivro.setText(Integer.toString(l.getStock()));
-					
-					
 
 				}
 			}
@@ -354,28 +352,29 @@ public class AppFuncionario implements Serializable {
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if (comboBoxAtributoLivro.getSelectedItem().equals("Título")) {
 
 					String titulo = txtAtributoPesquisaLivro.getText();
 					dmFunListaLivros.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), dmFunListaLivros);
 
-				}if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
 
 					String autor = txtAtributoPesquisaLivro.getText();
 					dmFunListaLivros.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), dmFunListaLivros);
 
-				}if (comboBoxAtributoLivro.getSelectedItem().equals("Data")) {
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Ano")) {
 
-					int data = Integer.parseInt(txtAtributoPesquisaLivro.getText());
+					String data = txtAtributoPesquisaLivro.getText();
 					dmFunListaLivros.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.listaData(data), dmFunListaLivros);
 
 				}
-				
-				
+
 			}
 		});
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
@@ -383,6 +382,12 @@ public class AppFuncionario implements Serializable {
 		jpFuncLivros.add(btnPesquisarLivro);
 
 		JButton btnLimparLivro = new JButton("Limpar");
+		btnLimparLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpFuncLivros.add(btnLimparLivro);
@@ -398,7 +403,6 @@ public class AppFuncionario implements Serializable {
 		jpPagamento.add(jpDinheiro);
 		jpDinheiro.setLayout(null);
 		jpDinheiro.setVisible(false);
-		
 
 		// lista dos itens na comboBox
 		String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
@@ -460,7 +464,6 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		jpDinheiro.add(btnConcluirPagamento);
-
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
