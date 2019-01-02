@@ -1,11 +1,12 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Cartao implements Serializable{
 
 	private int nCartao;
 	private String nomeTitular;
-	private LocalDate dataValidade;
+	private Date dataValidade;
 	private int codvalidacao;
 	
 	
@@ -14,7 +15,7 @@ public class Cartao implements Serializable{
 	}
  
 
-	public Cartao(int nCartao, String nomeTitular, LocalDate dataValidade, int codvalidacao) {
+	public Cartao(int nCartao, String nomeTitular, Date dataValidade, int codvalidacao) {
 		super();
 		this.nCartao = nCartao;
 		this.nomeTitular = nomeTitular;
@@ -43,12 +44,12 @@ public class Cartao implements Serializable{
 	}
 
 
-	public LocalDate getDataValidade() {
+	public Date getDataValidade() {
 		return dataValidade;
 	}
 
 
-	public void setDataValidade(LocalDate dataValidade) {
+	public void setDataValidade(Date dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 

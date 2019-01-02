@@ -429,20 +429,18 @@ public class BancoAppFun implements Serializable {
 		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int n = (int) (Math.random()*1000);
+				int n =0;
 				
-				if(n<100)
+				do
 				{
-				n = 100*n;
-				}
-				if(n>1000)
-				{
-					n = n/100;
-				}
+					n = (int) (Math.random()*1000);
+					
+				} while(n<100 || n>1000);
 				
 				tbcodcartao.setText(""+n);
 				
-				//Cartao c = new Cartao(1,)
+				Cartao c = new Cartao(1,tbnomecartao.getText(),dtcartao.getDate(),Integer.parseInt(tbcodcartao.getText()));
+				
 			}
 		});
 		btCartao.setBounds(108, 103, 112, 25);
