@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -87,7 +88,8 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbllimitemes;
 	private JList lContas;
 	private JDateChooser dateChooser_2;
-	private JTextField textField;
+	private JTextField tbnomecartao;
+	private JTextField tbcodcartao;
 
 	/**
 	 * Launch the application.
@@ -247,7 +249,7 @@ public class BancoAppFun implements Serializable {
 		DefaultListModel<String> dmcc = new DefaultListModel<String>();
 		JList<String> lClientes = new JList<String>(dmcc);
 		//lClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		lClientes.setBounds(758, 44, 240, 526);
+		lClientes.setBounds(768, 44, 262, 337);
 		jpanelContas.add(lClientes);
 		gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
 
@@ -278,7 +280,7 @@ public class BancoAppFun implements Serializable {
 		JButton btContasConfirmar = new JButton("Confirmar");
 
 		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasConfirmar.setBounds(470, 472, 120, 38);
+		btContasConfirmar.setBounds(448, 472, 120, 38);
 		jpanelContas.add(btContasConfirmar);
 
 		JButton btContasNovo = new JButton("Novo");
@@ -295,7 +297,7 @@ public class BancoAppFun implements Serializable {
 
 		JLabel lblClientes_1 = new JLabel("Clientes");
 		lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblClientes_1.setBounds(758, 19, 164, 24);
+		lblClientes_1.setBounds(768, 17, 164, 24);
 		jpanelContas.add(lblClientes_1);
 
 		dateChooser_2 = new JDateChooser();
@@ -380,31 +382,71 @@ public class BancoAppFun implements Serializable {
 		bgconta.add(rdbtnContaPoupanca);
 		bgconta.add(rdbtnContaCorrente);
 		
-		textField = new JTextField();
-		textField.setBounds(356, 0, 642, 22);
-		jpanelContas.add(textField);
-		textField.setColumns(10);
+		JButton btPedirCartao = new JButton("Pedir Cartao");
+		btPedirCartao.setVisible(false);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btPedirCartao.setBounds(588, 472, 120, 38);
+		jpanelContas.add(btPedirCartao);
+		
+		JPanel panelCartao = new JPanel();
+		panelCartao.setVisible(false);
+		panelCartao.setBounds(768, 394, 262, 169);
+		jpanelContas.add(panelCartao);
+		panelCartao.setLayout(null);
+		
+		JLabel VALIDADE = new JLabel("Validade");
+		VALIDADE.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		VALIDADE.setBounds(12, 40, 72, 16);
+		panelCartao.add(VALIDADE);
+		
+		JDateChooser dtcartao = new JDateChooser();
+		dtcartao.setBounds(72, 40, 190, 22);
+		panelCartao.add(dtcartao);
+		
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNome.setBounds(12, 13, 72, 16);
+		panelCartao.add(lblNome);
+		
+		tbnomecartao = new JTextField();
+		tbnomecartao.setBounds(72, 11, 190, 22);
+		panelCartao.add(tbnomecartao);
+		tbnomecartao.setColumns(10);
+		
+		JLabel lblCod = new JLabel("COD:");
+		lblCod.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCod.setBounds(12, 71, 59, 16);
+		panelCartao.add(lblCod);
+		
+		tbcodcartao = new JTextField();
+		tbcodcartao.setEditable(false);
+		tbcodcartao.setColumns(10);
+		tbcodcartao.setBounds(72, 69, 190, 22);
+		panelCartao.add(tbcodcartao);
+		
+		JButton btCartao = new JButton("Criar cartao");
+		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-			ArrayList<String> s = (ArrayList<String>) Arrays.asList((String[])lClientes.getSelectedValuesList().toArray());
-			ArrayList<String> s2 = new ArrayList<String>();
-			String x;
-			for(int i=0; i<s.size(); i++)
-			{
-				x= s.get(i);
-				x= x.substring(0, x.indexOf("*"));
-				s2.add(x);
-			}
-			
-			textField.setText(s2.toString());
+				int n = (int) (Math.random()*1000);
 				
+				if(n<100)
+				{
+				n = 100*n;
+				}
+				if(n>1000)
+				{
+					n = n/100;
+				}
+				
+				tbcodcartao.setText(""+n);
+				
+				//Cartao c = new Cartao(1,)
 			}
 		});
-		btnNewButton_1.setBounds(450, 25, 97, 25);
-		jpanelContas.add(btnNewButton_1);
+		btCartao.setBounds(108, 103, 112, 25);
+		panelCartao.add(btCartao);
 
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
@@ -1187,14 +1229,18 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 
 					ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-					Cartao cartao = new Cartao();
+			// cartao nulo inicialmente;
+			// é necessario o cliente ir ao seu acesso e pedir o cartao.
 
 					if (rdbtnContaCorrente.isSelected()) {
 						Conta c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), cliente,
 								Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()), cartao);
+								Double.parseDouble(tbContaslimitelevdia.getText()), null);
 						gb.javabank.getContas().add(c);
+						
+						
+						
 					} else {
 
 						Conta c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
@@ -1258,6 +1304,8 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dateChooser_2.setEnabled(true);
 				tbllimitemes.setText(null);
+				panelCartao.setVisible(false);
+				btPedirCartao.setVisible(false);
 
 			}
 		});
@@ -1291,7 +1339,7 @@ public class BancoAppFun implements Serializable {
 
 			public void valueChanged(ListSelectionEvent e) {
 				if (!lContas.isSelectionEmpty()) {
-
+					
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
@@ -1309,9 +1357,26 @@ public class BancoAppFun implements Serializable {
 						tblJuros.setText(juros + "");
 						Double limite = ((ContaPoupanca) c).getLimiteMensalDebito();
 						tbllimitemes.setText("" + limite);
+						panelCartao.setVisible(false);
+						btPedirCartao.setVisible(false);
+						
 					} else {
 						rdbtnContaPoupanca.setSelected(false);
 						rdbtnContaCorrente.setSelected(true);
+						panelCartao.setVisible(true);
+						
+						if(((ContaCorrente) c).getCartao()== null)
+						{
+							btPedirCartao.setVisible(true);
+							panelCartao.setVisible(false);
+						}
+						else
+						{
+							btPedirCartao.setVisible(false);
+							panelCartao.setVisible(true);
+							btCartao.setVisible(false);
+						}
+						
 					}
 
 				}
@@ -1431,6 +1496,19 @@ public class BancoAppFun implements Serializable {
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
+		
+		// Pedir cartao
+		
+		btPedirCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelCartao.setVisible(true);
+			}
+		});
+		
+		
+		
+		
+		
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
