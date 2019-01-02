@@ -217,6 +217,21 @@ public class Livraria implements Serializable {
 		return dadosCorrectos;
 
 	}
+	public void alterarLivro(String selecao, String titulo, String autor, double preco, int stock, int ano) {
+		
+		for(Livro l:this.livros) {
+			if (l.toString().equals(selecao)) {
+				l.setTitulo(titulo);
+				l.setAutor(autor);
+				l.setPreco(preco);
+				l.setStock(stock);
+				l.setAno(ano);
+			}
+		}
+		
+		
+		
+	}
 
 	public Utilizador loggado(String username, String password) {
 
