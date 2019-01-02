@@ -341,11 +341,10 @@ public class AppAdmin implements Serializable {
 		JButton btnAlterarStock = new JButton("Alterar stock");
 		btnAlterarStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (rbRemoverAoStock.isSelected()) {
-
-				}
-				// else if (rdbtnAdicionarAoStock.is)
+				txtAlterarStock.setEditable(true);
+			
 			}
+				
 		});
 		btnAlterarStock.setBounds(531, 440, 136, 30);
 		jpAdmStock.add(btnAlterarStock);
@@ -357,6 +356,15 @@ public class AppAdmin implements Serializable {
 		txtAlterarStock.setColumns(10);
 		
 		JButton btnConfirmarAlteracaoSTOCK = new JButton("Confirmar altera\u00E7\u00E3o");
+		btnConfirmarAlteracaoSTOCK.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selecao=listaLivrosSTOCK.getSelectedValue();
+				
+				if (rbAdicionarStock.isSelected()) {
+					
+				}
+			}
+		});
 		btnConfirmarAlteracaoSTOCK.setBounds(531, 476, 136, 30);
 		jpAdmStock.add(btnConfirmarAlteracaoSTOCK);
 		JPanel jpAdmLivros = new JPanel();
