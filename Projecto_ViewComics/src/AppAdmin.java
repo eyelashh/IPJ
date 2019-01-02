@@ -237,7 +237,8 @@ public class AppAdmin implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				String username=txtUsernameALTERARUSER.getText();
 				char[] pass=txtPasswordALTERAUSER.getPassword();
-				String novo
+				String novoUsername=txtNovoUsernameALTERAUSER.getText();
+				
 				
 				
 			}
