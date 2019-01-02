@@ -367,6 +367,7 @@ public class AppAdmin implements Serializable {
 					
 					String quantidadeNova=gl.viewComics.adicionarQuantidade(quantidadeActual, quantidadeAlterar);
 					int quantidadeNovaINT=Integer.valueOf(quantidadeNova);
+					gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
 					
 				}
 				else if (rbRemoverAoStock.isSelected()) {
