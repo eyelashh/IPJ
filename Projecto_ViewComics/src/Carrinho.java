@@ -73,15 +73,7 @@ public class Carrinho implements Serializable {
 				+ conteudo + "]";
 	}
 
-<<<<<<< HEAD
-	
-	
-	// verifica se o livro em especifico já existe no carrinho, se sim, altera a sua quantidade
-	// se não cria um novo par key-object (id, quantidade)
-=======
-	// verifica se o livro em especifico jï¿½ existe no carrinho, se sim, altera a sua quantidade
-	// se nï¿½o cria um novo par key-object (id, quantidade)
->>>>>>> c8c1cf8acf2077c31a6f79bd13d53ca45f7fc702
+
 	public void updateCarrinho(int idLivro, int quantidade) {
 
 		if (this.conteudo.containsKey(idLivro)) {
@@ -108,9 +100,5 @@ public class Carrinho implements Serializable {
 
 	}
 	
-<<<<<<< HEAD
-=======
-	
 
->>>>>>> c8c1cf8acf2077c31a6f79bd13d53ca45f7fc702
 }
