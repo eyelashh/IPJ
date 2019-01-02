@@ -311,8 +311,8 @@ public class AppAdmin implements Serializable {
 				String stock = txtStockLivros.getText();
 				String descricao = txtDescricaoLivros.getText();
 				String ano = txtAnoLivros.getText();
-				
-
+				String preco =txtPrecoLivros.getText();
+				gl.viewComics.alterarLivro(livroSeleccionado, titulo, autor, preco, stock, ano);
 				txtPrecoLivros.setEditable(false);
 				txtTituloLivros.setEditable(false);
 				txtAutorLivros.setEditable(false);

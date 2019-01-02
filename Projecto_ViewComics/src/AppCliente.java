@@ -258,9 +258,9 @@ public class AppCliente implements Serializable {
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String livroSeleccionadoSTR = listaLivros.getSelectedValue();
-				int idLivroSeleccionado = gl.viewComics.obterId(livroSeleccionadoSTR);
+				int idLivroSeleccionado = gl.viewComics.obterIdLivro(livroSeleccionadoSTR);
 				Livro l = gl.viewComics.livroId(idLivroSeleccionado);
-				txtIdLivros.setText(Integer.toString(gl.viewComics.obterId(livroSeleccionadoSTR)));
+				txtIdLivros.setText(Integer.toString(gl.viewComics.obterIdLivro(livroSeleccionadoSTR)));
 				txtTituloLivros.setText(l.getTitulo());
 				txtAutorLivros.setText(l.getAutor());
 				txtDataLivros.setText(Integer.toString(l.getAno()));
@@ -332,7 +332,7 @@ public class AppCliente implements Serializable {
 		btnAddCarrinhoFinalCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String livroSeleccionado = listaLivros.getSelectedValue();
-				int idLivroSelec = gl.viewComics.obterId(livroSeleccionado);
+				int idLivroSelec = gl.viewComics.obterIdLivro(livroSeleccionado);
 
 				String nif = txtNifCarrinhoLIVROS.getText();
 				

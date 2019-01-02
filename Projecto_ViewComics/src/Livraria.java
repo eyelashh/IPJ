@@ -217,15 +217,16 @@ public class Livraria implements Serializable {
 		return dadosCorrectos;
 
 	}
-	public void alterarLivro(String selecao, String titulo, String autor, double preco, int stock, int ano) {
+	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, int ano, String descricao) {
 		
 		for(Livro l:this.livros) {
 			if (l.toString().equals(selecao)) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
-				l.setPreco(preco);
-				l.setStock(stock);
+				l.setPreco(Double.parseDouble(preco));
+				l.setStock(Integer.parseInt(stock));
 				l.setAno(ano);
+				l.setDescricao(descricao);
 			}
 		}
 		
@@ -281,7 +282,6 @@ public class Livraria implements Serializable {
 	// criar uma nova arraylist de livros consoante vários atributos
 	// util para dispor na lista
 
-	// POR TITULO
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
@@ -367,7 +367,7 @@ public class Livraria implements Serializable {
 
 	// extrair o id de uma string da lista
 
-	protected int obterIdLibvro(String s) {
+	protected int obterIdLivro(String s) {
 
 		int id = 0;
 		for (Livro l : this.livros) {
