@@ -413,11 +413,7 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> c730ada290ace033526265d669e7d84b2e96da8a
 	protected int obterIdFunc(String s) {
 
 		int id = 0;
@@ -482,11 +478,7 @@ public class Livraria implements Serializable {
 		}
 		return func;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> c730ada290ace033526265d669e7d84b2e96da8a
 	protected void removeFuncionario(String seleccao) {
 		for (Utilizador u : this.utilizadores) {
 			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
