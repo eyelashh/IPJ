@@ -307,7 +307,7 @@ public class Livraria implements Serializable {
 	}
 
 	public void alterarUsername(String username, char[] pass, String novoUsername) {
-
+//lalala
 		String passSTR = String.valueOf(pass);
 		boolean usernameAlterado = false;
 		for (Utilizador u : this.utilizadores) {
