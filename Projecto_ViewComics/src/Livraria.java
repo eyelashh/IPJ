@@ -352,7 +352,7 @@ public class Livraria implements Serializable {
 
 	// extrair o id de uma string da lista
 
-	protected int obterId(String s) {
+	protected int obterIdLibvro(String s) {
 
 		int id = 0;
 		for (Livro l : this.livros) {
@@ -396,6 +396,20 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
+	protected int obterIdFunc(String s) {
+
+		int id=0;
+		for (Utilizador u : this.utilizadores) {
+			if ((s.equals(u.toString()))&&(u instanceof Funcionario)) {
+				id = u.getId();
+			}
+		}
+		return id;
+
+//String subStringId = new String(s.substring(0, s.indexOf(" ")));
+//int idint=Integer.parseInt(subStringId);
+//return idint;
+	}
 
 	// devolve os funcionario cujo come contem a string nome
 	public String[] listaFunPorNome(String nome) {
@@ -436,6 +450,23 @@ public class Livraria implements Serializable {
 		return listaPorId;
 
 	}
+	protected Utilizador devolveFunc(String seleccao) {
+		Utilizador func=null;
+		for (Utilizador u:this.utilizadores) {
+			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
+				func=u;
+			}
+		}
+		return func;
+	}
+	protected void removeFuncionario(String seleccao) {
+		for (Utilizador u:this.utilizadores) {
+			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
+				this.utilizadores.remove(u);
+			}
+		}
+		
+	}
 
 	public String[] listaFunPorUsername(String username) {
 
@@ -459,7 +490,7 @@ public class Livraria implements Serializable {
 
 		ArrayList<String> listaC = new ArrayList();
 		for (Utilizador u : this.utilizadores) {
-			if ((u instanceof Funcionario) && (Integer.toString(u.getContato()).contains(contacto))) {
+			if ((u instanceof Funcionario) && (u.getContato().contains(contacto))) {
 				listaC.add(u.toString());
 			}
 		}
@@ -469,15 +500,16 @@ public class Livraria implements Serializable {
 
 	}
 
-	protected Utilizador obterFuncionarioComId(String selecaoLista) {
-		int idFunc = this.obterId(selecaoLista);
-		Utilizador util = null;
-		for (Utilizador u : this.utilizadores) {
-			if ((u.getId() == idFunc) && (u instanceof Funcionario)) {
-				util = u;
+	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username, String password ) {
+		
+		for (Utilizador u:this.utilizadores) {
+			if ((u.toString().equals(selecaoLista))&&(u instanceof Funcionario)){
+				u.setNome(nome);
+				u.setUsername(username);
+				u.setPassword(password);
+				u.setContato(contacto);
 			}
 		}
-		return util;
 	}
 
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
