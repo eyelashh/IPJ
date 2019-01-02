@@ -107,6 +107,8 @@ public class AppAdmin implements Serializable {
 						gl.getViewComics().getLivros());
 			}
 		});
+		DefaultListModel<String> modeloListaLivros = new DefaultListModel<String>();
+		
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -187,6 +189,322 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+		
+				JPanel jpAdmStock = new JPanel();
+				jpAdmStock.setBounds(0, 0, 763, 545);
+				panelPrincipal.add(jpAdmStock);
+				jpAdmStock.setLayout(null);
+				jpAdmStock.setVisible(false);
+				
+						JComboBox comboBoxAtributos = new JComboBox();
+						comboBoxAtributos.setBounds(12, 13, 200, 30);
+						jpAdmStock.add(comboBoxAtributos);
+						
+								JButton button_9 = new JButton("Pesquisar");
+								button_9.setBounds(224, 16, 97, 25);
+								jpAdmStock.add(button_9);
+								
+										txtNomeAtributo = new JTextField();
+										txtNomeAtributo.setColumns(10);
+										txtNomeAtributo.setBounds(12, 57, 200, 30);
+										jpAdmStock.add(txtNomeAtributo);
+										
+												JButton button_10 = new JButton("Limpar");
+												button_10.setBounds(224, 60, 97, 25);
+												jpAdmStock.add(button_10);
+												
+														JLabel lblTtulo = new JLabel("T\u00EDtulo :");
+														lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
+														lblTtulo.setBounds(251, 115, 70, 24);
+														jpAdmStock.add(lblTtulo);
+														
+																txtTitulo = new JTextField();
+																txtTitulo.setColumns(10);
+																txtTitulo.setBounds(333, 114, 345, 30);
+																jpAdmStock.add(txtTitulo);
+																
+																		txtAutor = new JTextField();
+																		txtAutor.setColumns(10);
+																		txtAutor.setBounds(333, 164, 345, 30);
+																		jpAdmStock.add(txtAutor);
+																		
+																				txtData = new JTextField();
+																				txtData.setColumns(10);
+																				txtData.setBounds(333, 213, 345, 30);
+																				jpAdmStock.add(txtData);
+																				
+																						JLabel label_12 = new JLabel("Data:");
+																						label_12.setFont(new Font("Tahoma", Font.BOLD, 15));
+																						label_12.setBounds(271, 219, 40, 16);
+																						jpAdmStock.add(label_12);
+																						
+																								JLabel label_13 = new JLabel("Autor:");
+																								label_13.setFont(new Font("Tahoma", Font.BOLD, 15));
+																								label_13.setBounds(263, 170, 48, 16);
+																								jpAdmStock.add(label_13);
+																								
+																										JLabel label_14 = new JLabel("Descri\u00E7\u00E3o:");
+																										label_14.setFont(new Font("Tahoma", Font.BOLD, 15));
+																										label_14.setBounds(224, 266, 87, 16);
+																										jpAdmStock.add(label_14);
+																										
+																												txtDescricao = new JTextField();
+																												txtDescricao.setColumns(10);
+																												txtDescricao.setBounds(333, 260, 345, 117);
+																												jpAdmStock.add(txtDescricao);
+																												
+																														JLabel label_15 = new JLabel("Pre\u00E7o:");
+																														label_15.setFont(new Font("Tahoma", Font.BOLD, 15));
+																														label_15.setBounds(263, 396, 48, 16);
+																														jpAdmStock.add(label_15);
+																														
+																																txtPreco = new JTextField();
+																																txtPreco.setColumns(10);
+																																txtPreco.setBounds(333, 390, 345, 30);
+																																jpAdmStock.add(txtPreco);
+																																
+																																		JLabel label_16 = new JLabel("Stock:");
+																																		label_16.setFont(new Font("Tahoma", Font.BOLD, 15));
+																																		label_16.setBounds(263, 430, 48, 16);
+																																		jpAdmStock.add(label_16);
+																																		
+																																				JList listaLivrosStock = new JList();
+																																				listaLivrosStock.setBounds(12, 120, 200, 363);
+																																				jpAdmStock.add(listaLivrosStock);
+																																				
+																																						JButton btnRemoveStock = new JButton("-");
+																																						btnRemoveStock.setBounds(437, 427, 48, 25);
+																																						jpAdmStock.add(btnRemoveStock);
+																																						
+																																								JButton btnAddStock = new JButton("+");
+																																								btnAddStock.setBounds(556, 427, 48, 25);
+																																								jpAdmStock.add(btnAddStock);
+																																								
+																																										textField_18 = new JTextField();
+																																										textField_18.setColumns(10);
+																																										textField_18.setBounds(497, 424, 48, 30);
+																																										jpAdmStock.add(textField_18);
+																																										
+																																												JButton btnConfirmar = new JButton("OK");
+																																												btnConfirmar.setBounds(333, 481, 97, 25);
+																																												jpAdmStock.add(btnConfirmar);
+																																												
+																																														JButton btnCancelar = new JButton("Cancelar");
+																																														btnCancelar.setBounds(581, 481, 97, 25);
+																																														jpAdmStock.add(btnCancelar);
+		JPanel jpAdmLivros = new JPanel();
+		jpAdmLivros.setLayout(null);
+		jpAdmLivros.setBounds(0, 0, 763, 545);
+		panelPrincipal.add(jpAdmLivros);
+		jpAdmLivros.setVisible(false);
+
+		JComboBox comboBoxAtributoLivro = new JComboBox();
+		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+		jpAdmLivros.add(comboBoxAtributoLivro);
+
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(263, 145, 48, 16);
+		jpAdmLivros.add(lblNewLabel);
+
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAutor.setBounds(263, 195, 48, 16);
+		jpAdmLivros.add(lblAutor);
+
+		JLabel lblDescrio = new JLabel("Ano:");
+		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblDescrio.setBounds(271, 244, 40, 16);
+		jpAdmLivros.add(lblDescrio);
+
+		JLabel lblStock = new JLabel("Stock:");
+		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblStock.setBounds(263, 484, 48, 16);
+		jpAdmLivros.add(lblStock);
+
+		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
+		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo_1.setBounds(263, 433, 48, 16);
+		jpAdmLivros.add(lblPreo_1);
+
+		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
+		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPreo.setBounds(224, 286, 87, 16);
+		jpAdmLivros.add(lblPreo);
+
+		txtTituloLivros = new JTextField();
+		txtTituloLivros.setEditable(false);
+		txtTituloLivros.setColumns(10);
+		txtTituloLivros.setBounds(341, 140, 345, 30);
+		jpAdmLivros.add(txtTituloLivros);
+
+		txtAutorLivros = new JTextField();
+		txtAutorLivros.setEditable(false);
+		txtAutorLivros.setColumns(10);
+		txtAutorLivros.setBounds(341, 190, 345, 30);
+		jpAdmLivros.add(txtAutorLivros);
+
+		txtAnoLivros = new JTextField();
+		txtAnoLivros.setEditable(false);
+		txtAnoLivros.setColumns(10);
+		txtAnoLivros.setBounds(341, 239, 86, 30);
+		jpAdmLivros.add(txtAnoLivros);
+
+		txtDescricaoLivros = new JTextField();
+		txtDescricaoLivros.setEditable(false);
+		txtDescricaoLivros.setColumns(10);
+		txtDescricaoLivros.setBounds(341, 286, 345, 117);
+		jpAdmLivros.add(txtDescricaoLivros);
+
+		txtPrecoLivros = new JTextField();
+		txtPrecoLivros.setEditable(false);
+		txtPrecoLivros.setColumns(10);
+		txtPrecoLivros.setBounds(341, 428, 86, 30);
+		jpAdmLivros.add(txtPrecoLivros);
+
+		txtStockLivros = new JTextField();
+		txtStockLivros.setEditable(false);
+		txtStockLivros.setColumns(10);
+		txtStockLivros.setBounds(341, 479, 86, 30);
+		jpAdmLivros.add(txtStockLivros);
+
+		JButton btnPesquisarLivro = new JButton("Pesquisar");
+
+		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
+		btnPesquisarLivro.setBounds(224, 16, 97, 25);
+		jpAdmLivros.add(btnPesquisarLivro);
+
+		JButton btnLimparLivro = new JButton("Limpar");
+
+		btnLimparLivro.setBackground(SystemColor.controlHighlight);
+		btnLimparLivro.setBounds(224, 60, 97, 25);
+		jpAdmLivros.add(btnLimparLivro);
+
+		txtAtributoLivro = new JTextField();
+		txtAtributoLivro.setBounds(12, 62, 200, 23);
+		jpAdmLivros.add(txtAtributoLivro);
+		txtAtributoLivro.setColumns(10);
+		
+		JList<String> listaLivros = new JList<String>(modeloListaLivros);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		listaLivros.setBounds(22, 118, 190, 427);
+		jpAdmLivros.add(listaLivros);
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox com
+		// os atributos de pesquisa
+		comboBoxAtributoLivro.addItem("Titulo");
+		comboBoxAtributoLivro.addItem("Autor");
+		comboBoxAtributoLivro.addItem("Id");
+		JButton btnAlterarLivro = new JButton("Alterar dados");
+		btnAlterarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtTituloLivros.setEditable(true);
+				txtAutorLivros.setEditable(true);
+				txtStockLivros.setEditable(true);
+				txtAnoLivros.setEditable(true);
+				txtDescricaoLivros.setEditable(true);
+				txtPrecoLivros.setEditable(true);
+			}
+		});
+		btnAlterarLivro.setBounds(380, 37, 125, 43);
+		jpAdmLivros.add(btnAlterarLivro);
+		JButton btnConfirmarAlteracoesLIVROS = new JButton("Confirmar altera\u00E7\u00F5es");
+		btnConfirmarAlteracoesLIVROS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String livroSeleccionado = listaLivros.getSelectedValue();
+				String titulo = txtTituloLivros.getText();
+				String autor = txtAutorLivros.getText();
+				String stock = txtStockLivros.getText();
+				String descricao = txtDescricaoLivros.getText();
+				String ano = txtAnoLivros.getText();
+				String preco = txtPrecoLivros.getText();
+				gl.viewComics.alterarLivro(livroSeleccionado, titulo,autor,preco,stock,ano,descricao);
+				txtPrecoLivros.setEditable(false);
+				txtTituloLivros.setEditable(false);
+				txtAutorLivros.setEditable(false);
+				txtStockLivros.setEditable(false);
+				txtDescricaoLivros.setEditable(false);
+				txtAnoLivros.setEditable(false);
+				modeloListaLivros.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+
+			}
+
+		});
+		btnConfirmarAlteracoesLIVROS.setBounds(479, 446, 143, 38);
+		jpAdmLivros.add(btnConfirmarAlteracoesLIVROS);
+
+		JButton btnNewButton_1 = new JButton("Criar novo livro");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtAnoLivros.setText("");
+				txtStockLivros.setText("");
+				txtDescricao.setText("");
+				txtIdLivros.setText("");
+				txtPrecoLivros.setText("");
+
+			}
+		});
+		btnNewButton_1.setBounds(517, 37, 133, 42);
+		jpAdmLivros.add(btnNewButton_1);
+
+		JLabel lblId = new JLabel("Id:");
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblId.setBounds(263, 107, 31, 16);
+		jpAdmLivros.add(lblId);
+
+		txtIdLivros = new JTextField();
+		txtIdLivros.setEditable(false);
+		txtIdLivros.setColumns(10);
+		txtIdLivros.setBounds(341, 99, 73, 30);
+		jpAdmLivros.add(txtIdLivros);
+		// pesquisar livros consoante os atributos
+		btnPesquisarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
+					modeloListaLivros.removeAllElements();
+					String titulo = txtAtributoLivro.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloListaLivros);
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
+					modeloListaLivros.removeAllElements();
+					String autor = txtAtributoLivro.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), modeloListaLivros);
+				}
+				if (comboBoxAtributoLivro.getSelectedItem().equals("Id")) {
+					modeloListaLivros.removeAllElements();
+					String id = txtAtributoLivro.getText();
+					gl.viewComics.addArrayLista(gl.viewComics.listaLivroId(id), modeloListaLivros);
+				}
+
+			}
+		});
+		// características do livro seleccionado na JList
+		listaLivros.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String livroSelecionado = listaLivros.getSelectedValue();
+				int id = gl.viewComics.obterIdLivro(livroSelecionado);
+				Livro l = gl.viewComics.livroId(id);
+				txtIdLivros.setText(Integer.toString(id));
+				txtTituloLivros.setText(l.getTitulo());
+				txtAutorLivros.setText(l.getAutor());
+				txtStockLivros.setText(Integer.toString(l.getStock()));
+				txtPrecoLivros.setText(""+l.getPreco());
+				txtDescricaoLivros.setText(l.getDescricao());
+				txtAnoLivros.setText("" + l.getAno());
+			}
+		});
+		// botão limpar
+		btnLimparLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtAtributoLivro.setText("");
+				modeloListaLivros.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+
+			}
+		});
 
 		jpAdmFuncionarios = new JPanel();
 		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
@@ -421,326 +739,12 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		JPanel jpAdmLivros = new JPanel();
-		jpAdmLivros.setLayout(null);
-		jpAdmLivros.setBounds(0, 0, 763, 545);
-		panelPrincipal.add(jpAdmLivros);
-		jpAdmLivros.setVisible(false);
-
-		JComboBox comboBoxAtributoLivro = new JComboBox();
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpAdmLivros.add(comboBoxAtributoLivro);
-
-		JLabel lblNewLabel = new JLabel("T\u00EDtulo:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(263, 145, 48, 16);
-		jpAdmLivros.add(lblNewLabel);
-
-		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblAutor.setBounds(263, 195, 48, 16);
-		jpAdmLivros.add(lblAutor);
-
-		JLabel lblDescrio = new JLabel("Ano:");
-		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDescrio.setBounds(271, 244, 40, 16);
-		jpAdmLivros.add(lblDescrio);
-
-		JLabel lblStock = new JLabel("Stock:");
-		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblStock.setBounds(263, 484, 48, 16);
-		jpAdmLivros.add(lblStock);
-
-		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
-		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo_1.setBounds(263, 433, 48, 16);
-		jpAdmLivros.add(lblPreo_1);
-
-		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo.setBounds(224, 286, 87, 16);
-		jpAdmLivros.add(lblPreo);
-
-		txtTituloLivros = new JTextField();
-		txtTituloLivros.setEditable(false);
-		txtTituloLivros.setColumns(10);
-		txtTituloLivros.setBounds(341, 140, 345, 30);
-		jpAdmLivros.add(txtTituloLivros);
-
-		txtAutorLivros = new JTextField();
-		txtAutorLivros.setEditable(false);
-		txtAutorLivros.setColumns(10);
-		txtAutorLivros.setBounds(341, 190, 345, 30);
-		jpAdmLivros.add(txtAutorLivros);
-
-		txtAnoLivros = new JTextField();
-		txtAnoLivros.setEditable(false);
-		txtAnoLivros.setColumns(10);
-		txtAnoLivros.setBounds(341, 239, 86, 30);
-		jpAdmLivros.add(txtAnoLivros);
-
-		txtDescricaoLivros = new JTextField();
-		txtDescricaoLivros.setEditable(false);
-		txtDescricaoLivros.setColumns(10);
-		txtDescricaoLivros.setBounds(341, 286, 345, 117);
-		jpAdmLivros.add(txtDescricaoLivros);
-
-		txtPrecoLivros = new JTextField();
-		txtPrecoLivros.setEditable(false);
-		txtPrecoLivros.setColumns(10);
-		txtPrecoLivros.setBounds(341, 428, 86, 30);
-		jpAdmLivros.add(txtPrecoLivros);
-
-		txtStockLivros = new JTextField();
-		txtStockLivros.setEditable(false);
-		txtStockLivros.setColumns(10);
-		txtStockLivros.setBounds(341, 479, 86, 30);
-		jpAdmLivros.add(txtStockLivros);
-
-		JButton btnPesquisarLivro = new JButton("Pesquisar");
-
-		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
-		btnPesquisarLivro.setBounds(224, 16, 97, 25);
-		jpAdmLivros.add(btnPesquisarLivro);
-
-		JButton btnLimparLivro = new JButton("Limpar");
-
-		btnLimparLivro.setBackground(SystemColor.controlHighlight);
-		btnLimparLivro.setBounds(224, 60, 97, 25);
-		jpAdmLivros.add(btnLimparLivro);
-
-		txtAtributoLivro = new JTextField();
-		txtAtributoLivro.setBounds(12, 62, 200, 23);
-		jpAdmLivros.add(txtAtributoLivro);
-		txtAtributoLivro.setColumns(10);
-		DefaultListModel<String> modeloListaLivros = new DefaultListModel<String>();// LISTAR LIVROS NA JLIST
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-		JList<String> listaLivros = new JList<String>(modeloListaLivros);
-		listaLivros.setBounds(22, 118, 190, 427);
-		jpAdmLivros.add(listaLivros);
-		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox com
-		// os atributos de pesquisa
-		comboBoxAtributoLivro.addItem("Titulo");
-		comboBoxAtributoLivro.addItem("Autor");
-		comboBoxAtributoLivro.addItem("Id");
-		JButton btnAlterarLivro = new JButton("Alterar dados");
-		btnAlterarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtTituloLivros.setEditable(true);
-				txtAutorLivros.setEditable(true);
-				txtStockLivros.setEditable(true);
-				txtAnoLivros.setEditable(true);
-				txtDescricaoLivros.setEditable(true);
-				txtPrecoLivros.setEditable(true);
-			}
-		});
-		btnAlterarLivro.setBounds(380, 37, 125, 43);
-		jpAdmLivros.add(btnAlterarLivro);
-		JButton btnConfirmarAlteracoesLIVROS = new JButton("Confirmar altera\u00E7\u00F5es");
-		btnConfirmarAlteracoesLIVROS.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String livroSeleccionado = listaLivros.getSelectedValue();
-				String titulo = txtTituloLivros.getText();
-				String autor = txtAutorLivros.getText();
-				String stock = txtStockLivros.getText();
-				String descricao = txtDescricaoLivros.getText();
-				String ano = txtAnoLivros.getText();
-				String preco = txtPrecoLivros.getText();
-				gl.viewComics.alterarLivro(livroSeleccionado, titulo, autor, preco, stock, Integer.parseInt(ano),
-						descricao);
-				txtPrecoLivros.setEditable(false);
-				txtTituloLivros.setEditable(false);
-				txtAutorLivros.setEditable(false);
-				txtStockLivros.setEditable(false);
-				txtDescricaoLivros.setEditable(false);
-			}
-
-		});
-		btnConfirmarAlteracoesLIVROS.setBounds(479, 446, 143, 38);
-		jpAdmLivros.add(btnConfirmarAlteracoesLIVROS);
-
-		JButton btnNewButton_1 = new JButton("Criar novo livro");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtTituloLivros.setText("");
-				txtAutorLivros.setText("");
-				txtAnoLivros.setText("");
-				txtStockLivros.setText("");
-				txtDescricao.setText("");
-				txtIdLivros.setText("");
-				txtPrecoLivros.setText("");
-
-			}
-		});
-		btnNewButton_1.setBounds(517, 37, 133, 42);
-		jpAdmLivros.add(btnNewButton_1);
-
-		JLabel lblId = new JLabel("Id:");
-		lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblId.setBounds(263, 107, 31, 16);
-		jpAdmLivros.add(lblId);
-
-		txtIdLivros = new JTextField();
-		txtIdLivros.setEditable(false);
-		txtIdLivros.setColumns(10);
-		txtIdLivros.setBounds(341, 99, 73, 30);
-		jpAdmLivros.add(txtIdLivros);
-		// pesquisar livros consoante os atributos
-		btnPesquisarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Titulo")) {
-					modeloListaLivros.removeAllElements();
-					String titulo = txtAtributoLivro.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), modeloListaLivros);
-				}
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
-					modeloListaLivros.removeAllElements();
-					String autor = txtAtributoLivro.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), modeloListaLivros);
-				}
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Id")) {
-					modeloListaLivros.removeAllElements();
-					String id = txtAtributoLivro.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaLivroId(id), modeloListaLivros);
-				}
-
-			}
-		});
-		// características do livro seleccionado na JList
-		listaLivros.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				String livroSelecionado = listaLivros.getSelectedValue();
-				int id = gl.viewComics.obterIdLivro(livroSelecionado);
-				Livro l = gl.viewComics.livroId(id);
-				txtIdLivros.setText(Integer.toString(id));
-				txtTituloLivros.setText(l.getTitulo());
-				txtAutorLivros.setText(l.getAutor());
-				txtStockLivros.setText(Integer.toString(l.getStock()));
-				txtPrecoLivros.setText(Double.toString(l.getPreco()) + "€");
-				txtDescricaoLivros.setText(l.getDescricao());
-				txtAnoLivros.setText("" + l.getPreco());
-			}
-		});
-		// botão limpar
-		btnLimparLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtAtributoLivro.setText("");
-				modeloListaLivros.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-
-			}
-		});
 
 		JPanel jpAdmEstatisticas = new JPanel();
 		jpAdmEstatisticas.setBounds(0, 0, 763, 545);
 		panelPrincipal.add(jpAdmEstatisticas);
 		jpAdmEstatisticas.setLayout(null);
 		jpAdmEstatisticas.setVisible(false);
-		
-
-		JPanel jpAdmStock = new JPanel();
-		jpAdmStock.setBounds(0, 0, 763, 545);
-		panelPrincipal.add(jpAdmStock);
-		jpAdmStock.setLayout(null);
-		jpAdmStock.setVisible(false);
-
-		JComboBox comboBoxAtributos = new JComboBox();
-		comboBoxAtributos.setBounds(12, 13, 200, 30);
-		jpAdmStock.add(comboBoxAtributos);
-
-		JButton button_9 = new JButton("Pesquisar");
-		button_9.setBounds(224, 16, 97, 25);
-		jpAdmStock.add(button_9);
-
-		txtNomeAtributo = new JTextField();
-		txtNomeAtributo.setColumns(10);
-		txtNomeAtributo.setBounds(12, 57, 200, 30);
-		jpAdmStock.add(txtNomeAtributo);
-
-		JButton button_10 = new JButton("Limpar");
-		button_10.setBounds(224, 60, 97, 25);
-		jpAdmStock.add(button_10);
-
-		JLabel lblTtulo = new JLabel("T\u00EDtulo :");
-		lblTtulo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblTtulo.setBounds(251, 115, 70, 24);
-		jpAdmStock.add(lblTtulo);
-
-		txtTitulo = new JTextField();
-		txtTitulo.setColumns(10);
-		txtTitulo.setBounds(333, 114, 345, 30);
-		jpAdmStock.add(txtTitulo);
-
-		txtAutor = new JTextField();
-		txtAutor.setColumns(10);
-		txtAutor.setBounds(333, 164, 345, 30);
-		jpAdmStock.add(txtAutor);
-
-		txtData = new JTextField();
-		txtData.setColumns(10);
-		txtData.setBounds(333, 213, 345, 30);
-		jpAdmStock.add(txtData);
-
-		JLabel label_12 = new JLabel("Data:");
-		label_12.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_12.setBounds(271, 219, 40, 16);
-		jpAdmStock.add(label_12);
-
-		JLabel label_13 = new JLabel("Autor:");
-		label_13.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_13.setBounds(263, 170, 48, 16);
-		jpAdmStock.add(label_13);
-
-		JLabel label_14 = new JLabel("Descri\u00E7\u00E3o:");
-		label_14.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_14.setBounds(224, 266, 87, 16);
-		jpAdmStock.add(label_14);
-
-		txtDescricao = new JTextField();
-		txtDescricao.setColumns(10);
-		txtDescricao.setBounds(333, 260, 345, 117);
-		jpAdmStock.add(txtDescricao);
-
-		JLabel label_15 = new JLabel("Pre\u00E7o:");
-		label_15.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_15.setBounds(263, 396, 48, 16);
-		jpAdmStock.add(label_15);
-
-		txtPreco = new JTextField();
-		txtPreco.setColumns(10);
-		txtPreco.setBounds(333, 390, 345, 30);
-		jpAdmStock.add(txtPreco);
-
-		JLabel label_16 = new JLabel("Stock:");
-		label_16.setFont(new Font("Tahoma", Font.BOLD, 15));
-		label_16.setBounds(263, 430, 48, 16);
-		jpAdmStock.add(label_16);
-
-		JList listaLivrosStock = new JList();
-		listaLivrosStock.setBounds(12, 120, 200, 363);
-		jpAdmStock.add(listaLivrosStock);
-
-		JButton btnRemoveStock = new JButton("-");
-		btnRemoveStock.setBounds(437, 427, 48, 25);
-		jpAdmStock.add(btnRemoveStock);
-
-		JButton btnAddStock = new JButton("+");
-		btnAddStock.setBounds(556, 427, 48, 25);
-		jpAdmStock.add(btnAddStock);
-
-		textField_18 = new JTextField();
-		textField_18.setColumns(10);
-		textField_18.setBounds(497, 424, 48, 30);
-		jpAdmStock.add(textField_18);
-
-		JButton btnConfirmar = new JButton("OK");
-		btnConfirmar.setBounds(333, 481, 97, 25);
-		jpAdmStock.add(btnConfirmar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(581, 481, 97, 25);
-		jpAdmStock.add(btnCancelar);
 
 		JPanel jpAdmConta = new JPanel();
 		jpAdmConta.setBackground(SystemColor.menu);

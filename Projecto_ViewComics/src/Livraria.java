@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 
 public class Livraria implements Serializable {
-	//cenas
+	// cenas
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
@@ -15,7 +15,7 @@ public class Livraria implements Serializable {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
-	// criar um atributo privado estático que é da própria classe
+	// criar um atributo privado estï¿½tico que ï¿½ da prï¿½pria classe
 
 	public Livraria() {
 		super();
@@ -39,7 +39,7 @@ public class Livraria implements Serializable {
 		this.carrinhos = carrinhos;
 	}
 
-	// criar método estático para retornar a instância da classe
+	// criar mï¿½todo estï¿½tico para retornar a instï¿½ncia da classe
 
 	public int getIdLivraria() {
 		return idLivraria;
@@ -149,9 +149,9 @@ public class Livraria implements Serializable {
 		this.carrinhos.remove(c);
 	}
 
-//verifica se o carrinho existe, se não existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
+//verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
-	
+
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
 				return true;
@@ -217,21 +217,21 @@ public class Livraria implements Serializable {
 		return dadosCorrectos;
 
 	}
-	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, int ano, String descricao) {
-		
-		for(Livro l:this.livros) {
+
+	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, String ano,
+			String descricao) {
+
+		for (Livro l : this.livros) {
 			if (l.toString().equals(selecao)) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
 				l.setPreco(Double.parseDouble(preco));
 				l.setStock(Integer.parseInt(stock));
-				l.setAno(ano);
+				l.setAno(Integer.parseInt(ano));
 				l.setDescricao(descricao);
 			}
 		}
-		
-		
-		
+
 	}
 
 	public Utilizador loggado(String username, String password) {
@@ -279,13 +279,13 @@ public class Livraria implements Serializable {
 		return passwordAlterada;
 	}
 	// DISPOR LIVROS NA LISTA POR ARRAYLISTS
-	// criar uma nova arraylist de livros consoante vários atributos
+	// criar uma nova arraylist de livros consoante vï¿½rios atributos
 	// util para dispor na lista
 
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
-		String livro = "";
+		
 //		for(int i=0; i<livros.size();i++)
 //		{
 //			livro = ""+livros.get(i).getIdLivro();
@@ -296,7 +296,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-			livro = "";
+			
 		}
 
 		return listaLivros;
@@ -305,7 +305,7 @@ public class Livraria implements Serializable {
 //listar livros em array por titulo 
 	public String[] listaTitulo(String titulo) {
 
-		ArrayList<String> listaT = new ArrayList();
+		ArrayList<String> listaT = new ArrayList<String>();
 		String t = "";
 		for (Livro l : this.livros) {
 			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
@@ -324,7 +324,7 @@ public class Livraria implements Serializable {
 	// listar livros em array por autor
 	public String[] listaAutor(String autor) {
 
-		ArrayList<String> listaA = new ArrayList();
+		ArrayList<String> listaA = new ArrayList<String>();
 		String a = "";
 		for (Livro l : this.livros) {
 			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
@@ -343,7 +343,7 @@ public class Livraria implements Serializable {
 	// POR ID
 	public String[] listaLivroId(String id) {
 
-		ArrayList<String> listaId = new ArrayList();
+		ArrayList<String> listaId = new ArrayList<String>();
 		for (Livro l : this.livros) {
 			if (Integer.toString(l.getIdLivro()).equals(id)) {
 				listaId.add(l.toString());
@@ -356,7 +356,7 @@ public class Livraria implements Serializable {
 
 	}
 
-	// método para adicionar um array a uma JList consoante determinado modelo
+	// mï¿½todo para adicionar um array a uma JList consoante determinado modelo
 
 	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
 
@@ -370,9 +370,11 @@ public class Livraria implements Serializable {
 	protected int obterIdLivro(String s) {
 
 		int id = 0;
-		for (Livro l : this.livros) {
-			if (s.equals(l.toString())) {
-				id = l.getIdLivro();
+		if (s != null) {
+			for (Livro l : this.livros) {
+				if (s.equals(l.toString())) {
+					id = l.getIdLivro();
+				}
 			}
 		}
 		return id;
@@ -411,11 +413,12 @@ public class Livraria implements Serializable {
 		return funcArray;
 
 	}
+
 	protected int obterIdFunc(String s) {
 
-		int id=0;
+		int id = 0;
 		for (Utilizador u : this.utilizadores) {
-			if ((s.equals(u.toString()))&&(u instanceof Funcionario)) {
+			if ((s.equals(u.toString())) && (u instanceof Funcionario)) {
 				id = u.getId();
 			}
 		}
@@ -429,7 +432,7 @@ public class Livraria implements Serializable {
 	// devolve os funcionario cujo come contem a string nome
 	public String[] listaFunPorNome(String nome) {
 
-		ArrayList<String> listaN = new ArrayList();
+		ArrayList<String> listaN = new ArrayList<String>();
 		String n = "";
 		for (Utilizador u : this.utilizadores) {
 			if (u instanceof Funcionario) {
@@ -449,10 +452,10 @@ public class Livraria implements Serializable {
 		return listaTitulo;
 	}
 
-	// devolve o funcionario cujo id é igual ao int id
+	// devolve o funcionario cujo id ï¿½ igual ao int id
 	protected String[] listaFuncPorId(String id) {
 
-		ArrayList<String> listaId = new ArrayList();
+		ArrayList<String> listaId = new ArrayList<String>();
 
 		for (Utilizador u : this.utilizadores) {
 			if ((u instanceof Funcionario) && (Integer.toString(u.getId()).contains(id))) {
@@ -465,27 +468,29 @@ public class Livraria implements Serializable {
 		return listaPorId;
 
 	}
+
 	protected Utilizador devolveFunc(String seleccao) {
-		Utilizador func=null;
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
-				func=u;
+		Utilizador func = null;
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
+				func = u;
 			}
 		}
 		return func;
 	}
+
 	protected void removeFuncionario(String seleccao) {
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(seleccao))&&(u instanceof Funcionario)) {
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
 				this.utilizadores.remove(u);
 			}
 		}
-		
+
 	}
 
 	public String[] listaFunPorUsername(String username) {
 
-		ArrayList<String> listaU = new ArrayList();
+		ArrayList<String> listaU = new ArrayList<String>();
 		for (Utilizador u : this.utilizadores) {
 			if (u instanceof Funcionario) {
 				if (u.getUsername().toLowerCase().contains(username.toLowerCase())) {
@@ -503,7 +508,7 @@ public class Livraria implements Serializable {
 
 	protected String[] listaFuncPorContacto(String contacto) {
 
-		ArrayList<String> listaC = new ArrayList();
+		ArrayList<String> listaC = new ArrayList<String>();
 		for (Utilizador u : this.utilizadores) {
 			if ((u instanceof Funcionario) && (u.getContato().contains(contacto))) {
 				listaC.add(u.toString());
@@ -515,10 +520,11 @@ public class Livraria implements Serializable {
 
 	}
 
-	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username, String password ) {
-		
-		for (Utilizador u:this.utilizadores) {
-			if ((u.toString().equals(selecaoLista))&&(u instanceof Funcionario)){
+	protected void alterarFuncionario(String selecaoLista, String nome, String contacto, String username,
+			String password) {
+
+		for (Utilizador u : this.utilizadores) {
+			if ((u.toString().equals(selecaoLista)) && (u instanceof Funcionario)) {
 				u.setNome(nome);
 				u.setUsername(username);
 				u.setPassword(password);
@@ -547,7 +553,7 @@ public class Livraria implements Serializable {
 		return totalStr;
 	}
 
-//devolve a quantidade de determinado livro em um carrinho através do id do livro e do nif
+//devolve a quantidade de determinado livro em um carrinho atravï¿½s do id do livro e do nif
 	protected String quantidadeCarrinho(int idLivro, String nif) {
 
 		int quantidadeInt = 0;
@@ -572,13 +578,30 @@ public class Livraria implements Serializable {
 	}
 
 	protected boolean verificaNif(String nif) {
-		
-		if(nif.matches("([0-9]{9})")) {
+
+		if (nif.matches("([0-9]{9})")) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
+	
+	// listar livros em array por data
+		public String[] listaData(String ano) {
+
+			ArrayList<String> listaD = new ArrayList<String>();
+			String a = "";
+			for (Livro l : this.livros) {
+				if (Integer.toString(l.getAno()).equals(ano)) {
+					a = l.toString();
+					listaD.add(a);
+
+				}
+			}
+			String[] listaData = new String[listaD.size()];
+			listaData= listaD.toArray(listaData);
+
+			return listaData;
+		}
 
 }
