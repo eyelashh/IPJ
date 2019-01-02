@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -72,8 +73,8 @@ public class Carrinho implements Serializable {
 				+ conteudo + "]";
 	}
 
-	// verifica se o livro em especifico já existe no carrinho, se sim, altera a sua quantidade
-	// se não cria um novo par key-object (id, quantidade)
+	// verifica se o livro em especifico jï¿½ existe no carrinho, se sim, altera a sua quantidade
+	// se nï¿½o cria um novo par key-object (id, quantidade)
 	public void updateCarrinho(int idLivro, int quantidade) {
 
 		if (this.conteudo.containsKey(idLivro)) {
@@ -99,4 +100,7 @@ public class Carrinho implements Serializable {
 		return quantidade;
 
 	}
+	
+	
+
 }

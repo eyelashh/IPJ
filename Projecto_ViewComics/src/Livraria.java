@@ -202,6 +202,32 @@ public class Livraria implements Serializable {
 
 	}
 
+	// listar carrinho
+	public String[] listaCarrinho(String nif) {
+
+		ArrayList<String> listaC = new ArrayList<String>();
+		String a = "";
+		
+		for(Carrinho c : this.carrinhos) {
+			
+			if(c.getNif().equals(nif)) {
+				
+				// importar o conteudo do carrinho para um hashMap chamado hm
+				HashMap<Integer, Integer> hm = c.getConteudo();
+				
+				a = hm.toString();
+				listaC.add(a);
+			}
+		}
+		
+		String[] listalivro = new String[listaC.size()];
+		listalivro = listaC.toArray(listalivro);
+
+		return listalivro;
+	}
+	
+	
+
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
 
@@ -285,7 +311,7 @@ public class Livraria implements Serializable {
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
-		
+
 //		for(int i=0; i<livros.size();i++)
 //		{
 //			livro = ""+livros.get(i).getIdLivro();
@@ -296,7 +322,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-			
+
 		}
 
 		return listaLivros;
@@ -585,23 +611,23 @@ public class Livraria implements Serializable {
 			return false;
 		}
 	}
-	
+
 	// listar livros em array por data
-		public String[] listaData(String ano) {
+	public String[] listaData(String ano) {
 
-			ArrayList<String> listaD = new ArrayList<String>();
-			String a = "";
-			for (Livro l : this.livros) {
-				if (Integer.toString(l.getAno()).equals(ano)) {
-					a = l.toString();
-					listaD.add(a);
+		ArrayList<String> listaD = new ArrayList<String>();
+		String a = "";
+		for (Livro l : this.livros) {
+			if (Integer.toString(l.getAno()).equals(ano)) {
+				a = l.toString();
+				listaD.add(a);
 
-				}
 			}
-			String[] listaData = new String[listaD.size()];
-			listaData= listaD.toArray(listaData);
-
-			return listaData;
 		}
+		String[] listaData = new String[listaD.size()];
+		listaData = listaD.toArray(listaData);
+
+		return listaData;
+	}
 
 }
