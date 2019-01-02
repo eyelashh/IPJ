@@ -213,6 +213,32 @@ public class Livraria implements Serializable {
 
 	}
 
+	// listar carrinho
+	public String[] listaCarrinho(String nif) {
+
+		ArrayList<String> listaC = new ArrayList<String>();
+		String a = "";
+		
+		for(Carrinho c : this.carrinhos) {
+			
+			if(c.getNif().equals(nif)) {
+				
+				// importar o conteudo do carrinho para um hashMap chamado hm
+				HashMap<Integer, Integer> hm = c.getConteudo();
+				
+				a = hm.toString();
+				listaC.add(a);
+			}
+		}
+		
+		String[] listalivro = new String[listaC.size()];
+		listalivro = listaC.toArray(listalivro);
+
+		return listalivro;
+	}
+	
+	
+
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
 
