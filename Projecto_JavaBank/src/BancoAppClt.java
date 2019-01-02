@@ -117,11 +117,16 @@ public class BancoAppClt implements Serializable{
 				try {
 					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
 					
-					Login logout = new Login();
+/*					Login logout = new Login();
 					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					logout.setLocationRelativeTo(frame);
 					logout.setVisible(true);
+					frame.setVisible(false);*/
+					
+					
+					Login logout = new Login();
 					frame.setVisible(false);
+					logout.run();
 					
 
 				} catch (Exception ex) {
