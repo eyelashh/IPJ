@@ -137,14 +137,6 @@ public class BancoAppFun implements Serializable {
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
 
-		// Painel de cabeÃ§alho imagem
-		// imagem_1 = new JLabel(new
-		// ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-coï¿½pia
-		// (1).jpg"));
-		// imagem_1.setBounds(0, 0, 1238, 100);
-		// JpanelCabecalho.add(imagem_1);
-		// imagem_1.setVisible(true);
-
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogOut = new JButton("Logout");
 		btnLogOut.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -248,7 +240,7 @@ public class BancoAppFun implements Serializable {
 
 		DefaultListModel<String> dmcc = new DefaultListModel<String>();
 		JList<String> lClientes = new JList<String>(dmcc);
-		//lClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// lClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lClientes.setBounds(768, 44, 262, 337);
 		jpanelContas.add(lClientes);
 		gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
@@ -381,52 +373,52 @@ public class BancoAppFun implements Serializable {
 		ButtonGroup bgconta = new ButtonGroup();
 		bgconta.add(rdbtnContaPoupanca);
 		bgconta.add(rdbtnContaCorrente);
-		
+
 		JButton btPedirCartao = new JButton("Pedir Cartao");
 		btPedirCartao.setVisible(false);
-		
+
 		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btPedirCartao.setBounds(588, 472, 120, 38);
 		jpanelContas.add(btPedirCartao);
-		
+
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
 		panelCartao.setBounds(768, 394, 262, 169);
 		jpanelContas.add(panelCartao);
 		panelCartao.setLayout(null);
-		
+
 		JLabel VALIDADE = new JLabel("Validade");
 		VALIDADE.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		VALIDADE.setBounds(12, 40, 72, 16);
 		panelCartao.add(VALIDADE);
-		
+
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 40, 190, 22);
 		panelCartao.add(dtcartao);
-		
+
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNome.setBounds(12, 13, 72, 16);
 		panelCartao.add(lblNome);
-		
+
 		tbnomecartao = new JTextField();
 		tbnomecartao.setBounds(72, 11, 190, 22);
 		panelCartao.add(tbnomecartao);
 		tbnomecartao.setColumns(10);
-		
+
 		JLabel lblCod = new JLabel("COD:");
 		lblCod.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCod.setBounds(12, 71, 59, 16);
 		panelCartao.add(lblCod);
-		
+
 		tbcodcartao = new JTextField();
 		tbcodcartao.setEditable(false);
 		tbcodcartao.setColumns(10);
 		tbcodcartao.setBounds(72, 69, 190, 22);
 		panelCartao.add(tbcodcartao);
-		
+
 		JButton btCartao = new JButton("Criar cartao");
-		
+
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
 
@@ -1211,8 +1203,8 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 
 					ArrayList<Cliente> cliente = new ArrayList<Cliente>();
-			// cartao nulo inicialmente;
-			// é necessario o cliente ir ao seu acesso e pedir o cartao.
+					// cartao nulo inicialmente;
+					// é necessario o cliente ir ao seu acesso e pedir o cartao.
 
 					if (rdbtnContaCorrente.isSelected()) {
 						Conta c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
@@ -1220,9 +1212,7 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), null);
 						gb.javabank.getContas().add(c);
-						
-						
-						
+
 					} else {
 
 						Conta c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
@@ -1321,7 +1311,7 @@ public class BancoAppFun implements Serializable {
 
 			public void valueChanged(ListSelectionEvent e) {
 				if (!lContas.isSelectionEmpty()) {
-					
+
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
@@ -1341,34 +1331,30 @@ public class BancoAppFun implements Serializable {
 						tbllimitemes.setText("" + limite);
 						panelCartao.setVisible(false);
 						btPedirCartao.setVisible(false);
-						
+
 					} else {
 						rdbtnContaPoupanca.setSelected(false);
 						rdbtnContaCorrente.setSelected(true);
 						panelCartao.setVisible(true);
-						
-						
-						
-						if(((ContaCorrente) c).getCartao()== null)
-						{
+
+						if (((ContaCorrente) c).getCartao() == null) {
 							btPedirCartao.setVisible(true);
 							panelCartao.setVisible(false);
-						}
-						else
-						{
+						} else {
 							btPedirCartao.setVisible(false);
 							panelCartao.setVisible(true);
 							btCartao.setVisible(false);
-							
+
 							tbnomecartao.setEditable(false);
 							dtcartao.setEnabled(false);
 							tbcodcartao.setEditable(false);
 							tbnomecartao.setText(((ContaCorrente) c).getCartao().getNomeTitular());
-							dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());;
-							tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao()+"");
-							
+							dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());
+							;
+							tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao() + "");
+
 						}
-						
+
 					}
 
 				}
@@ -1395,6 +1381,10 @@ public class BancoAppFun implements Serializable {
 					tbllimitemes.setText(null);
 					dmconta.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+					tbnomecartao.setText(null);
+					dtcartao.setDate(null);
+					tbcodcartao.setText(null);
+					panelCartao.setVisible(false);
 					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
 
 				}
@@ -1488,46 +1478,35 @@ public class BancoAppFun implements Serializable {
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
-		
 		// Pedir cartao
-		
+
 		btPedirCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelCartao.setVisible(true);
 				tbnomecartao.setEditable(true);
 				dtcartao.setEnabled(true);
-				tbcodcartao.setEditable(true);
-				
+
 			}
 		});
-		
+
 		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String s = (String) cbOperacoesConta.getSelectedItem();
-				Conta conta =  gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-				
-				int n =0;
-				
-				do
-				{
-					n = (int) (Math.random()*1000);
-					
-				} while(n<100 || n>1000);
-				
-				tbcodcartao.setText(""+n);
-				
-				Cartao cartao = new Cartao(1,tbnomecartao.getText(),dtcartao.getDate(),Integer.parseInt(tbcodcartao.getText()));
-		
+				Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+				int n = 0;
+				do {
+					n = (int) (Math.random() * 1000);
+
+				} while (n < 100 || n > 1000);
+				tbcodcartao.setText("" + n);
+				Cartao cartao = new Cartao(1, tbnomecartao.getText(), dtcartao.getDate(),
+						Integer.parseInt(tbcodcartao.getText()));
 				((ContaCorrente) conta).setCartao(cartao);
-				
-				
+
 			}
 		});
-		
-		
-		
-		
+
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
