@@ -450,6 +450,7 @@ public class AppFuncionario implements Serializable {
 																																																																																						label_25.setBounds(200, 11, 122, 32);
 																																																																																						panelConteudoCarrinho.add(label_25);
 																																																																																						
+																																																																																						
 																																																																																								txtNifCarrinho = new JTextField();
 																																																																																								txtNifCarrinho.setBounds(25, 49, 200, 30);
 																																																																																								txtNifCarrinho.setColumns(10);
