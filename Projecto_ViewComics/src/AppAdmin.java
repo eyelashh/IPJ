@@ -312,7 +312,7 @@ public class AppAdmin implements Serializable {
 				String descricao = txtDescricaoLivros.getText();
 				String ano = txtAnoLivros.getText();
 				String preco =txtPrecoLivros.getText();
-				gl.viewComics.alterarLivro(livroSeleccionado, titulo, autor, preco, stock, ano);
+				gl.viewComics.alterarLivro(livroSeleccionado, titulo, autor, preco, stock, Integer.parseInt(ano), descricao);
 				txtPrecoLivros.setEditable(false);
 				txtTituloLivros.setEditable(false);
 				txtAutorLivros.setEditable(false);
@@ -387,8 +387,7 @@ public class AppAdmin implements Serializable {
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivro.setText("");
-				DefaultListModel limparLivros = (DefaultListModel) listaLivros.getModel();
-				limparLivros.removeAllElements();
+				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
 			}
@@ -522,7 +521,7 @@ public class AppAdmin implements Serializable {
 		btnConfirmarNovoFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String novoFuncNome = txtNomeFunc.getText();
-				int novoFuncContacto = Integer.parseInt(txtContactoFunc.getText());
+				String novoFuncContacto = txtContactoFunc.getText();
 				String novoFuncUsername = txtUsernameFunc.getText();
 				String novoFuncPass = txtPassFunc.getText();
 				Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
