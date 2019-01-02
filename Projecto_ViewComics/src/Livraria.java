@@ -130,7 +130,7 @@ public class Livraria implements Serializable {
 		for (Livro l : this.livros) {
 			if (l.toString().equals(seleccao)) {
 				l.setStock(quantidadeTotal);
-				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo() + " foi alterado com sucesso.");
+				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo() + " foi alterado com sucesso. Existem agora "+quantidadeTotal+" exemplares.");
 			}
 		}
 	}

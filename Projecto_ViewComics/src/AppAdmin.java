@@ -362,17 +362,18 @@ public class AppAdmin implements Serializable {
 				String seleccao=listaLivrosSTOCK.getSelectedValue();
 				String quantidadeActual=txtStockSTOCK.getText();
 				String quantidadeAlterar=txtAlterarStock.getText();
+				int quantidadeNovaINT=0;
 				
 				if (rbAdicionarStock.isSelected()) {
 					
 					String quantidadeNova=gl.viewComics.adicionarQuantidade(quantidadeActual, quantidadeAlterar);
-					int quantidadeNovaINT=Integer.valueOf(quantidadeNova);
+					quantidadeNovaINT=Integer.valueOf(quantidadeNova);
 					gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
 					
 				}
 				else if (rbRemoverAoStock.isSelected()) {
 					String quantidadeNova=gl.viewComics.removerQuantidade(quantidadeActual, quantidadeAlterar);
-					int quantidadeNovaINT=Integer.valueOf(quantidadeNova);
+					quantidadeNovaINT=Integer.valueOf(quantidadeNova);
 					if (Integer.parseInt(quantidadeNova)>=0) {
 						gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
 					}
@@ -380,7 +381,9 @@ public class AppAdmin implements Serializable {
 						JOptionPane.showMessageDialog(null,"A quantidade total não poderá ser inferior a zero. Confirme os dados inseridos");
 					}
 				}
+				
 				txtAlterarStock.setEditable(false);
+				txtStockSTOCK.setText(Integer.toString(quantidadeNovaINT));
 			}
 		});
 		btnConfirmarAlteracaoSTOCK.setBounds(531, 476, 136, 30);
