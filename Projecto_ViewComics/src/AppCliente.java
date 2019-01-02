@@ -244,7 +244,7 @@ public class AppCliente implements Serializable {
 		Choice choiceAtributoLivroCliente = new Choice();
 		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
-		choiceAtributoLivroCliente.add("(por que critério pretende pesquisar o livro)");
+		choiceAtributoLivroCliente.add("(por que critï¿½rio pretende pesquisar o livro)");
 		choiceAtributoLivroCliente.add("Titulo");
 		choiceAtributoLivroCliente.add("Autor");
 		choiceAtributoLivroCliente.add("Id");
@@ -266,7 +266,7 @@ public class AppCliente implements Serializable {
 				txtDataLivros.setText(Integer.toString(l.getAno()));
 				txtDescricaoLivros.setText(l.getDescricao());
 				txtStockLivros.setText(Integer.toString(l.getStock()));
-				txtPrecoLivros.setText(l.getPreco() + " €");
+				txtPrecoLivros.setText(l.getPreco() + " ï¿½");
 				String nif = txtNifCarrinhoLIVROS.getText();
 				String quantidadeActual = gl.viewComics.quantidadeCarrinho(idLivroSeleccionado, nif);
 				txtQuantidadeActualLivros.setText(quantidadeActual);
@@ -325,7 +325,7 @@ public class AppCliente implements Serializable {
 		alterarQuantidadeCarrinhoLIVROS.add(rbRemoverQuantidadeLIVROS);
 		rbRemoverQuantidadeLIVROS.setBounds(862, 147, 109, 23);
 		JPLivros.add(rbRemoverQuantidadeLIVROS);
-		// actualiza o carrinho do nif inserido e com as alterações pedidas dependendo
+		// actualiza o carrinho do nif inserido e com as alteraï¿½ï¿½es pedidas dependendo
 		// do radiobutton escolhido para acrescentar ou remover uma
 		// certa quantidade de um item
 		JButton btnAddCarrinhoFinalCliente = new JButton("Alterar carrinho");
@@ -366,7 +366,7 @@ public class AppCliente implements Serializable {
 						}
 					}
 						else {
-							JOptionPane.showMessageDialog(null, "O nif introduzido não consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
+							JOptionPane.showMessageDialog(null, "O nif introduzido nï¿½o consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
 						}
 //				modeloLista.removeAllElements();
 //				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
@@ -778,7 +778,7 @@ public class AppCliente implements Serializable {
 				if (v) {
 					Utilizador utilizadorLogado = gl.getViewComics().loggado(user, pass);
 					if (utilizadorLogado instanceof Funcionario) {
-						AppFuncionario fun = new AppFuncionario(utilizadorLogado, gl);
+						AppFuncionario fun = new AppFuncionario((Funcionario)utilizadorLogado, gl);
 						fun.run();
 						frame.dispose();
 					} else if (utilizadorLogado instanceof Administrador) {
