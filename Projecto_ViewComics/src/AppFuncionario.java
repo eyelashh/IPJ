@@ -495,7 +495,7 @@ public class AppFuncionario implements Serializable {
 
 		DefaultListModel<String> dmFunListaNifs = new DefaultListModel<String>();
 		JList<String> listNifsClientes = new JList<String>(dmFunListaNifs);
-		gl.viewComics.addArrayLista(gl.viewComics.listaCarrinho(gl.viewComics.getCarrinhos().toString()), dmFunListaNifs);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayNif(gl.viewComics.getCarrinhos()), dmFunListaNifs);
 		listNifsClientes.setBounds(25, 144, 200, 320);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 

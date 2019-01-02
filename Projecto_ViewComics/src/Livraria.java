@@ -237,6 +237,27 @@ public class Livraria implements Serializable {
 		return listalivro;
 	}
 	
+	// listar nifs
+		public String[] arrayNif(ArrayList<Carrinho> car) {
+
+			String[] listaNifs = new String[this.carrinhos.size()];
+
+//			for(int i=0; i<livros.size();i++)
+//			{
+//				livro = ""+livros.get(i).getIdLivro();
+//				listaLivros[i]= livro;
+//				livro="";
+//			}
+			int i = 0;
+			for (Carrinho c : carrinhos) {
+				listaNifs[i] = c.getNif();
+				i++;
+
+			}
+
+			return listaNifs;
+		}
+	
 	
 
 	// metodo para verificar se o username e a password coincidem
