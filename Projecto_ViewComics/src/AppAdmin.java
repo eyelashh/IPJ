@@ -57,7 +57,6 @@ public class AppAdmin implements Serializable {
 	private JTextField txtData;
 	private JTextField txtDescricao;
 	private JTextField txtPreco;
-	private JTextField textField_18;
 	private JTextField txtAtributoFunc;
 	private JTextField txtIdFunc;
 	private JTextField txtNomeFunc;
@@ -271,19 +270,6 @@ public class AppAdmin implements Serializable {
 																																				JList listaLivrosStock = new JList();
 																																				listaLivrosStock.setBounds(12, 120, 200, 363);
 																																				jpAdmStock.add(listaLivrosStock);
-																																				
-																																						JButton btnRemoveStock = new JButton("-");
-																																						btnRemoveStock.setBounds(437, 427, 48, 25);
-																																						jpAdmStock.add(btnRemoveStock);
-																																						
-																																								JButton btnAddStock = new JButton("+");
-																																								btnAddStock.setBounds(556, 427, 48, 25);
-																																								jpAdmStock.add(btnAddStock);
-																																								
-																																										textField_18 = new JTextField();
-																																										textField_18.setColumns(10);
-																																										textField_18.setBounds(497, 424, 48, 30);
-																																										jpAdmStock.add(textField_18);
 																																										
 																																												JButton btnConfirmar = new JButton("OK");
 																																												btnConfirmar.setBounds(333, 481, 97, 25);
