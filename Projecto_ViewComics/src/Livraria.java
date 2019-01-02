@@ -223,8 +223,9 @@ public class Livraria implements Serializable {
 			
 			if(c.getNif().equals(nif)) {
 				
-				// importar o conteudo do carrinho para um hashMap chamado hm
-				HashMap<Integer, Integer> hm = c.getConteudo();
+		
+				
+			String[] hm = c.listaCarrinho2();
 				
 				a = hm.toString();
 				listaC.add(a);
@@ -238,27 +239,21 @@ public class Livraria implements Serializable {
 		
 	}
 	
-	// listar nifs
-		public String[] arrayNif(ArrayList<Carrinho> car) {
+//	// listar nifs	
+	protected String[] arrayNif(ArrayList<Carrinho> carrinho) {
+		
+		String[] listaNifs = new String[carrinho.size()];
+		String s = "";
+		for (int i = 0; i < carrinho.size(); i++) {
+			s = "" + carrinho.get(i).getNif();
+			listaNifs[i] = s;
+			s = "";
 
-			String[] listaNifs = new String[this.carrinhos.size()];
-
-//			for(int i=0; i<livros.size();i++)
-//			{
-//				livro = ""+livros.get(i).getIdLivro();
-//				listaLivros[i]= livro;
-//				livro="";
-//			}
-			int i = 0;
-			for (Carrinho c : carrinhos) {
-				listaNifs[i] = c.getNif();
-				i++;
-
-			}
-
-			return listaNifs;
 		}
-	
+		return listaNifs;
+	}
+
+
 	
 
 	// metodo para verificar se o username e a password coincidem

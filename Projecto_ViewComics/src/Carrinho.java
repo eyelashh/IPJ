@@ -2,6 +2,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -66,15 +68,12 @@ public class Carrinho implements Serializable {
 	public void setConteudo(HashMap<Integer, Integer> conteudo) {
 		this.conteudo = conteudo;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Carrinho [nif=" + nif + ", montante=" + montante + ", finalizado=" + finalizado + ", conteudo="
 				+ conteudo + "]";
 	}
-
 
 	public void updateCarrinho(int idLivro, int quantidade) {
 
@@ -83,26 +82,51 @@ public class Carrinho implements Serializable {
 			JOptionPane.showMessageDialog(null, "A quantidade do livro no carrinho foi alterada com sucesso");
 		} else {
 			this.conteudo.put(idLivro, quantidade);
-			JOptionPane.showMessageDialog(null, "O livro escolhido e a respectiva quantidade foram adicionados ao carrinho");	
+			JOptionPane.showMessageDialog(null,
+					"O livro escolhido e a respectiva quantidade foram adicionados ao carrinho");
 		}
 
 	}
+
 	public int quantidadeLivro(int idLivro) {
-		
-		int quantidade=0;
-		
+
+		int quantidade = 0;
+
 		if (this.conteudo.containsKey(idLivro)) {
-			quantidade=this.conteudo.get(idLivro);
-			
+			quantidade = this.conteudo.get(idLivro);
+
 		} else {
-			quantidade =0;
-				
+			quantidade = 0;
+
 		}
 		return quantidade;
 
 	}
-	
-	
-	
+
+	// listar hashmap para string
+	public String[] listaCarrinho2() {
+
+		ArrayList<String> listaC = new ArrayList<String>();
+		String a = "";
+
+
+		// Criar um iterador para a key do hashmap para o poder percorrer
+		// num foreach
+		Set<Map.Entry<Integer, Integer>> set = this.conteudo.entrySet();
+
+		// percorrer o hm no foreach de modo a somar todos os pre�os
+		for (Map.Entry<Integer, Integer> me : set) {
+
+			a = me.getKey() + " " + me.getValue();
+			listaC.add(a);
+
+		}
+		
+		String[] listalivro = new String[listaC.size()];
+		listalivro = listaC.toArray(listalivro);
+
+		return listalivro;
+
+	}
 
 }
