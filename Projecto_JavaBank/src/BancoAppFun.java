@@ -59,6 +59,10 @@ import javax.swing.JInternalFrame;
 
 public class BancoAppFun implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JTextField tbCltNome;
 	private JTextField tbCltMorada;
@@ -87,7 +91,7 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbContaslimitelevdia;
 	private JTextField tblJuros;
 	private JTextField tbllimitemes;
-	private JList lContas;
+	private JList<String> lContas;
 	private JDateChooser dateChooser_2;
 	private JTextField tbnomecartao;
 	private JTextField tbcodcartao;
