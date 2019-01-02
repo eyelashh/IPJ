@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.JTextPane;
 import javax.swing.AbstractListModel;
@@ -358,11 +359,27 @@ public class AppAdmin implements Serializable {
 		JButton btnConfirmarAlteracaoSTOCK = new JButton("Confirmar altera\u00E7\u00E3o");
 		btnConfirmarAlteracaoSTOCK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String selecao=listaLivrosSTOCK.getSelectedValue();
+				String seleccao=listaLivrosSTOCK.getSelectedValue();
+				String quantidadeActual=txtStockSTOCK.getText();
+				String quantidadeAlterar=txtAlterarStock.getText();
 				
 				if (rbAdicionarStock.isSelected()) {
 					
+					String quantidadeNova=gl.viewComics.adicionarQuantidade(quantidadeActual, quantidadeAlterar);
+					int quantidadeNovaINT=Integer.valueOf(quantidadeNova);
+					
 				}
+				else if (rbRemoverAoStock.isSelected()) {
+					String quantidadeNova=gl.viewComics.removerQuantidade(quantidadeActual, quantidadeAlterar);
+					int quantidadeNovaINT=Integer.valueOf(quantidadeNova);
+					if (Integer.parseInt(quantidadeNova)>=0) {
+						gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"A quantidade total não poderá ser inferior a zero. Confirme os dados inseridos");
+					}
+				}
+				txtAlterarStock.setEditable(false);
 			}
 		});
 		btnConfirmarAlteracaoSTOCK.setBounds(531, 476, 136, 30);

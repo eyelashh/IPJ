@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class Livraria implements Serializable {
 	// cenas
@@ -122,6 +123,16 @@ public class Livraria implements Serializable {
 	// remove um livro
 	public void removeLivros(Livro l) {
 		this.livros.remove(l);
+	}
+
+	public void alterarStockLivro(String seleccao, int quantidadeTotal) {
+
+		for (Livro l : this.livros) {
+			if (l.toString().equals(seleccao)) {
+				l.setStock(quantidadeTotal);
+				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo() + " foi alterado com sucesso.");
+			}
+		}
 	}
 
 	// adiciona utilizadores
@@ -285,7 +296,7 @@ public class Livraria implements Serializable {
 	public String[] arrayLivros(ArrayList<Livro> livros) {
 
 		String[] listaLivros = new String[this.livros.size()];
-		
+
 //		for(int i=0; i<livros.size();i++)
 //		{
 //			livro = ""+livros.get(i).getIdLivro();
@@ -296,7 +307,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-			
+
 		}
 
 		return listaLivros;
@@ -535,11 +546,18 @@ public class Livraria implements Serializable {
 
 //recebe duas strings, soma, e devolve o total em string (CARRINHOS)
 	protected String adicionarQuantidade(String actual, String adicionar) {
-		int actualInt = Integer.parseInt(actual);
-		int adicionarInt = Integer.parseInt(adicionar);
+	String totalStr=actual;
+		if ((actual != null) && (adicionar != null)) {
+			int actualInt = Integer.valueOf(actual);
+			int adicionarInt = Integer.parseInt(adicionar);
 
-		int totalInt = actualInt + adicionarInt;
-		String totalStr = Integer.toString(totalInt);
+			int totalInt = actualInt + adicionarInt;
+			totalStr = Integer.toString(totalInt);
+			
+		}
+		else {
+			totalStr =actual;
+		}
 		return totalStr;
 	}
 
@@ -585,23 +603,23 @@ public class Livraria implements Serializable {
 			return false;
 		}
 	}
-	
+
 	// listar livros em array por data
-		public String[] listaData(String ano) {
+	public String[] listaData(String ano) {
 
-			ArrayList<String> listaD = new ArrayList<String>();
-			String a = "";
-			for (Livro l : this.livros) {
-				if (Integer.toString(l.getAno()).equals(ano)) {
-					a = l.toString();
-					listaD.add(a);
+		ArrayList<String> listaD = new ArrayList<String>();
+		String a = "";
+		for (Livro l : this.livros) {
+			if (Integer.toString(l.getAno()).equals(ano)) {
+				a = l.toString();
+				listaD.add(a);
 
-				}
 			}
-			String[] listaData = new String[listaD.size()];
-			listaData= listaD.toArray(listaData);
-
-			return listaData;
 		}
+		String[] listaData = new String[listaD.size()];
+		listaData = listaD.toArray(listaData);
+
+		return listaData;
+	}
 
 }
