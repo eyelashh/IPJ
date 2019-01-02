@@ -153,11 +153,17 @@ public class BancoAppFun implements Serializable {
 
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
 
-				Login logout = new Login();
+/*				Login logout = new Login();
 				logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				logout.setLocationRelativeTo(frame);
 				logout.setVisible(true);
+				frame.setVisible(false);*/
+				
+				Login logout = new Login();
 				frame.setVisible(false);
+				logout.run();
+				
+				
 			}
 		});
 		btnLogOut.setBounds(1070, 30, 143, 42);
@@ -552,6 +558,7 @@ public class BancoAppFun implements Serializable {
 				tbllimitemes.setText(null);
 				panelCartao.setVisible(false);
 				btPedirCartao.setVisible(false);
+				//lClientes.clea
 
 			}
 		});
@@ -1455,7 +1462,8 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(true);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
-
+				lContas.clearSelection();
+				lClientes.clearSelection();
 				dmcc.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
 
