@@ -23,7 +23,6 @@
     <fullyQualifiedTypeName name="AppAdmin"/>
     <fullyQualifiedTypeName name="AppFuncionario"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultListSelectionModel"/>
     <fullyQualifiedTypeName name="javax.swing.ListSelectionModel"/>
@@ -34,4 +33,5 @@
     <fullyQualifiedTypeName name="javax.swing.DefaultListModel"/>
     <fullyQualifiedTypeName name="javax.swing.JList"/>
     <fullyQualifiedTypeName name="javax.swing.ButtonGroup"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

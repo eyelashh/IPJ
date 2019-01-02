@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 
 public class Livraria implements Serializable {
-
+	//cenas
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
