@@ -373,7 +373,7 @@ public class AppAdmin implements Serializable {
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String livroSelecionado = listaLivros.getSelectedValue();
-				int id = gl.viewComics.obterId(livroSelecionado);
+				int id = gl.viewComics.obterIdLivro(livroSelecionado);
 				Livro l = gl.viewComics.livroId(id);
 				txtIdLivros.setText(Integer.toString(id));
 				txtTituloLivros.setText(l.getTitulo());
