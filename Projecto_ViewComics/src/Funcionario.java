@@ -9,7 +9,7 @@ public class Funcionario extends Utilizador implements  Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario( String nome, int contato, String username, String password) {
+	public Funcionario( String nome, String contato, String username, String password) {
 		super(nome, contato, username, password);
 		// TODO Auto-generated constructor stub
 

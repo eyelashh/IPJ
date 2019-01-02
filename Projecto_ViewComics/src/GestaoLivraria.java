@@ -49,13 +49,13 @@ public class GestaoLivraria implements Serializable{
 		// CASO 1--> � criado 1 admin e 1 funcionario
 		if(!this.fileUtilizadores.exists())
 		{
-			Utilizador adm = new Administrador("Admin_nome",96666666,"admin","admin"); 
-			Utilizador fun = new Funcionario("Func_nome",93333333,"func","func");
+			Utilizador adm = new Administrador("Admin_nome","96666666","admin","admin"); 
+			Utilizador fun = new Funcionario("Func_nome","9333333","func","func");
 			viewComics.addUtilizador(adm);
 			viewComics.addUtilizador(fun);
-			viewComics.addUtilizador(new Funcionario("Bruno",9378888,"b","b"));
-			viewComics.addUtilizador(new Funcionario("Joana",9378888,"j","j"));
-			viewComics.addUtilizador(new Funcionario("Tamara",975555,"t","t"));
+			viewComics.addUtilizador(new Funcionario("Bruno","9378888","b","b"));
+			viewComics.addUtilizador(new Funcionario("Joana","9378888","j","j"));
+			viewComics.addUtilizador(new Funcionario("Tamara","975555","t","t"));
 			
 			// De seguida � efectuada a cria�ao do ficheiro:
 			try
