@@ -347,11 +347,38 @@ public class Banco implements Serializable {
 			listclt.add(c);	
 		}
 		
-		//selectUtilizador
-		
-		
-		
-		
 	}
+	
+	//devolve array para a os clientes aparecerem selecionados
+	
+			protected int[] mostratitularesconta(DefaultListModel<String> dmcc,Conta c)
+			{
+				
+				int id = 0;
+				ArrayList<Integer> listid = new ArrayList<Integer>();
+				
+				for(int i=0; i<dmcc.getSize();i++)
+				{
+					id = Integer.parseInt(dmcc.get(i).substring(0, dmcc.get(i).indexOf("*")));
+					
+					
+					for(int y=0; y<c.getClientes().size();y++)
+					{
+						if(c.getClientes().get(y).getIdUtilizador()==id)
+						{
+							listid.add(i);
+						}
+					}
+				}
+				
+				int[] select = new int [listid.size()];
+				for(int i=0; i<listid.size();i++)
+				{
+					select[i]= listid.get(i);
+				}
+				
+				return select;
+				
+			}
 	
 }

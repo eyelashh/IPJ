@@ -153,11 +153,6 @@ public class BancoAppFun implements Serializable {
 
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
 
-/*				Login logout = new Login();
-				logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				logout.setLocationRelativeTo(frame);
-				logout.setVisible(true);
-				frame.setVisible(false);*/
 				
 				Login logout = new Login();
 				frame.setVisible(false);
@@ -519,6 +514,7 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 					}
+					
 
 					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
 
@@ -638,30 +634,8 @@ public class BancoAppFun implements Serializable {
 					}
 
 					/// seleciona os clientes que estao como titulares á conta:
-					
-					int id = 0;
-					ArrayList<Integer> listid = new ArrayList<Integer>();
-					for(int i=0; i<dmcc.getSize();i++)
-					{
-						id = Integer.parseInt(dmcc.get(i).substring(0, dmcc.get(i).indexOf("*")));
-						
-						for(int y=0; y<c.getClientes().size();y++)
-						{
-							if(c.getClientes().get(y).getIdUtilizador()==id)
-							{
-								listid.add(i);
-							}
-						}
-					}
-					
-					int[] select = new int [listid.size()];
-					for(int i=0; i<listid.size();i++)
-					{
-						select[i]= listid.get(i);
-					}
-					lClientes.setSelectedIndices(select);
+					lClientes.setSelectedIndices(gb.javabank.mostratitularesconta(dmcc,c));
 
-					
 				}
 			}
 		});
@@ -1345,7 +1319,7 @@ public class BancoAppFun implements Serializable {
 				String s = (String) cbOperacoesConta.getSelectedItem();
 				Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-				// alterar conta (faz deposito):
+				// faz deposito:
 
 				double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
 				c.setSaldo(saldo);
