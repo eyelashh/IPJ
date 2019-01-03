@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -87,6 +88,7 @@ public class AppFuncionario implements Serializable {
 	private static GestaoLivraria gl;
 	private static Funcionario func;
 	private JTextField textField_12;
+	private JTextField txtPrecoCarrinho;
 
 	/**
 	 * Launch the application.
@@ -245,14 +247,6 @@ public class AppFuncionario implements Serializable {
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
 
-		JLabel lblPrecoTotalCarrinho = new JLabel("New label");
-		lblPrecoTotalCarrinho.setBounds(486, 360, 135, 14);
-		jpFuncCarrinhos.add(lblPrecoTotalCarrinho);
-
-		JLabel label_27 = new JLabel("New label");
-		label_27.setBounds(486, 385, 135, 14);
-		jpFuncCarrinhos.add(label_27);
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(scrollPane);
@@ -266,9 +260,12 @@ public class AppFuncionario implements Serializable {
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
-					Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
-					Double precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
-					lblPrecoTotalCarrinho.setText(Double.toString(precoCarrinho));
+//					ArrayList <Carrinho>cars=gl.viewComics.getCarrinhos();
+//					Carrinho c3=cars.get(3);
+					Carrinho c3=gl.viewComics.pesquisarCarrinho(nifSeleccionado);
+					//Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
+					Double precoCarrinho = gl.viewComics.precoTotalCarrinho(c3);
+					txtPrecoCarrinho.setText(Double.toString(precoCarrinho));
 
 				}
 			}
@@ -308,8 +305,8 @@ public class AppFuncionario implements Serializable {
 
 				if (listNifsClientes.getSelectedValue().equals(nif)) {
 
-					Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
-					gl.viewComics.removeCarrinho(c);
+//					Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
+//					gl.viewComics.removeCarrinho(c);
 				} else if (!listNifsClientes.isSelectionEmpty() || !listNifsClientes.getSelectedValue().equals(nif)) {
 					JOptionPane.showMessageDialog(null, "Tem de seleccionar o nif na tabela ou o nif está incorrecto");
 				}
@@ -412,6 +409,12 @@ public class AppFuncionario implements Serializable {
 		bttLimparFun.setBackground(SystemColor.controlHighlight);
 		bttLimparFun.setBounds(136, 91, 100, 30);
 		jpFuncCarrinhos.add(bttLimparFun);
+		
+		txtPrecoCarrinho = new JTextField();
+		txtPrecoCarrinho.setEditable(false);
+		txtPrecoCarrinho.setBounds(476, 357, 292, 20);
+		jpFuncCarrinhos.add(txtPrecoCarrinho);
+		txtPrecoCarrinho.setColumns(10);
 		// {
 //			@Override
 		// o paint component vai pintar literalmente o componente
@@ -653,39 +656,39 @@ public class AppFuncionario implements Serializable {
 
 				String nif = textFieldNifPagamento.getText();
 
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+//				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
 
-					if (gl.viewComics.verificaNif(nif)) {
-						// Se o nif estiver correcto, selecciona o Carrinho
-						Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
-
-						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
-						// para colocar na textField
-						double p = gl.viewComics.precoTotalCarrinho(c);
-						String p1 = Double.toString(p);
-						textFieldTotalPag.setText(p1);
-
-						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
-						// pra double
-						String recebido = textFieldRecePaga.getText();
-						double recebido1 = Double.parseDouble(recebido);
-
-						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
-						// para string para colocar na testField
-						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
-						String trocoCarrinho1 = Double.toString(trocoCarrinho);
-						textFieldTrocoPag.setText(trocoCarrinho1);
-
-						JOptionPane.showMessageDialog(null,
-								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
-					}
-					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
-					}
-
-				}
+//					if (gl.viewComics.verificaNif(nif)) {
+//						//Se o nif estiver correcto, selecciona o Carrinho
+//						//Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
+//
+//						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
+//						// para colocar na textField
+//						double p = gl.viewComics.precoTotalCarrinho(c);
+//						String p1 = Double.toString(p);
+//						textFieldTotalPag.setText(p1);
+//
+//						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
+//						// pra double
+//						String recebido = textFieldRecePaga.getText();
+//						double recebido1 = Double.parseDouble(recebido);
+//
+//						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
+//						// para string para colocar na testField
+//						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
+////						String trocoCarrinho1 = Double.toString(trocoCarrinho);
+////						textFieldTrocoPag.setText(trocoCarrinho1);
+//
+//						JOptionPane.showMessageDialog(null,
+//								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
+//					}
+//					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+//
+//					} else {
+//						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
+//					}
+//
+//				}
 
 			}
 		});
