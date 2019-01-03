@@ -367,7 +367,7 @@ public class AppFuncionario implements Serializable {
 		bttLimparFun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				listaLivros.clearSelection();
+				listNifsClientes.clearSelection();
 				listNif.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
 
