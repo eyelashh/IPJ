@@ -263,7 +263,7 @@ public class Livraria implements Serializable {
 			if (!c.getConteudo().isEmpty()) {
 				if (c.getConteudo().containsKey(l.getIdLivro())) {
 					int id = l.getIdLivro();
-					precoTotal += precoLivro(id);
+					precoTotal += precoLivro(id)*(c.getConteudo().get(id));
 				}
 			} else
 				precoTotal = 0;
@@ -780,17 +780,28 @@ public class Livraria implements Serializable {
 
 		return listaTitulo;
 	}
-
-	// select carrinho com o nif associado
-	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
-		Carrinho c = new Carrinho();
-
-		for (int i = 0; i < car.size(); i++) {
-			if (car.get(i).getNif() == nif) {
-				c = car.get(i);
+	
+	public Carrinho pesquisarCarrinho(String nif) {
+		
+		Carrinho carrinhoNif=new Carrinho();
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif().equals(nif)) {
+				carrinhoNif=c;
 			}
 		}
-		return c;
+		return carrinhoNif;
 	}
+
+	// select carrinho com o nif associado
+//	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
+//		Carrinho c = new Carrinho();
+//
+//		for (int i = 0; i < car.size(); i++) {
+//			if (car.get(i).getNif() == nif) {
+//				c = car.get(i);
+//			}
+//		}
+//		return c;
+//	}
 
 }
