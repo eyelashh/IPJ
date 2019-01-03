@@ -294,7 +294,7 @@ public class AppAdmin implements Serializable {
 		JList<String> listaLivros = new JList<String>(modeloListaLivros);
 		listaLivros.setBounds(12, 118, 200, 367);
 		jpAdmLivros.add(listaLivros);
-		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox com
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes ï¿½ combobox com
 		// os atributos de pesquisa
 		comboBoxAtributoLivro.addItem("Titulo");
 		comboBoxAtributoLivro.addItem("Autor");
@@ -368,6 +368,19 @@ public class AppAdmin implements Serializable {
 		JButton btnRemoverLivro = new JButton("Remover livro da loja");
 		btnRemoverLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if(!listaLivros.isSelectionEmpty()) {
+					
+					String s = listaLivros.getSelectedValue();
+					int id=gl.viewComics.obterIdLivro(s);
+					gl.viewComics.removeLivro(id);
+					
+//					modeloListaLivros.removeAllElements();
+//					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+					JOptionPane.showMessageDialog(null, "Livro eliminado com sucesso!");
+					
+				}
+				
 			}
 		});
 		btnRemoverLivro.setBounds(579, 51, 107, 43);
@@ -394,7 +407,7 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		// características do livro seleccionado na JList
+		// caracterï¿½sticas do livro seleccionado na JList
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String livroSelecionado = listaLivros.getSelectedValue();
@@ -409,7 +422,7 @@ public class AppAdmin implements Serializable {
 				txtAnoLivros.setText("" + l.getAno());
 			}
 		});
-		// botão limpar
+		// botï¿½o limpar
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivro.setText("");
@@ -682,7 +695,7 @@ public class AppAdmin implements Serializable {
 		JComboBox comboBoxAtributosSTOCK = new JComboBox();
 		comboBoxAtributosSTOCK.setBounds(12, 13, 200, 30);
 		jpAdmStock.add(comboBoxAtributosSTOCK);
-		comboBoxAtributosSTOCK.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox
+		comboBoxAtributosSTOCK.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes ï¿½ combobox
 		// com
 		// os atributos de pesquisa
 		comboBoxAtributosSTOCK.addItem("Titulo");
@@ -840,7 +853,7 @@ public class AppAdmin implements Serializable {
 						gl.viewComics.alterarStockLivro(seleccao, quantidadeNovaINT);
 					} else {
 						JOptionPane.showMessageDialog(null,
-								"A quantidade total não poderá ser inferior a zero. Confirme os dados inseridos");
+								"A quantidade total nï¿½o poderï¿½ ser inferior a zero. Confirme os dados inseridos");
 					}
 				}
 
@@ -1186,7 +1199,7 @@ public class AppAdmin implements Serializable {
 
 		});
 
-		// adicionar um funcionario à lista
+		// adicionar um funcionario ï¿½ lista
 
 	}
 }
