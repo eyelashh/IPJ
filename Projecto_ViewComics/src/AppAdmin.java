@@ -373,7 +373,7 @@ public class AppAdmin implements Serializable {
 
 					String s = listaLivros.getSelectedValue();
 					int id = gl.viewComics.obterIdLivro(s);
-					gl.viewComics.removeLivro(id);
+					gl.viewComics.removeLivro(id, gl.viewComics.getLivros());
 
 					modeloListaLivros.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
