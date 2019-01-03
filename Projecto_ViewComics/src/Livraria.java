@@ -191,14 +191,15 @@ public class Livraria implements Serializable {
 		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 
 	}
+
 	public void removeLivro(int idLivro) {
-		
-		for(Livro l:this.livros) {
-			if (l.getIdLivro()==idLivro) {
+
+		for (Livro l : this.livros) {
+			if (l.getIdLivro() == idLivro) {
 				this.livros.remove(l);
 			}
 		}
-		
+
 	}
 
 	// remove funcionario
@@ -252,25 +253,20 @@ public class Livraria implements Serializable {
 	// quantidade
 	public double precoTotalCarrinho(Carrinho c) {
 
-		double preco = 0;
+		double precoTotal = 0;
+		// dentro do ciclo
 
-		// importar o conteudo do carrinho para um hashMap chamado hm
-		HashMap<Integer, Integer> hm = c.getConteudo();
-
-		// Criar um iterador para a key do hashmap para o poder percorrer
-		// num foreach
-		Set<Map.Entry<Integer, Integer>> set = hm.entrySet();
-
-		// percorrer o hm no foreach de modo a somar todos os pre�os
-		for (Map.Entry<Integer, Integer> me : set) {
-			for (Livro l : this.livros) {
-				if (l.getIdLivro() == me.getKey()) {
-					preco += l.getPreco() * me.getValue();
+		for (Livro l : this.livros) {
+			if (!c.getConteudo().isEmpty()) {
+				if (c.getConteudo().containsKey(l.getIdLivro())) {
+					int id = l.getIdLivro();
+					precoTotal += precoLivro(id);
 				}
-			}
-		}
+			} else
+				precoTotal = 0;
 
-		return preco;
+		}
+		return precoTotal;
 
 	}
 
@@ -620,21 +616,22 @@ public class Livraria implements Serializable {
 //		}
 //
 //	}
-public void removerUtil (int id, ArrayList <Utilizador>utilizador) {
-	
-	for(int i=0;i<utilizador.size();i++) {
-		if (utilizador.get(i).getId()==id){
-			utilizador.remove(i);
+	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
+
+		for (int i = 0; i < utilizador.size(); i++) {
+			if (utilizador.get(i).getId() == id) {
+				utilizador.remove(i);
+			}
 		}
-	}
-	
+
 //PORQUE � QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
 //	for(Utilizador u:utilizador) {
 //		if (u.getId()==id) {
 //			utilizador.remove(u);
 //		}
 //	}
-}
+	}
+
 	// lista de funcionario por user
 	public String[] listaFunPorUsername(String username) {
 

@@ -219,38 +219,8 @@ public class AppFuncionario implements Serializable {
 		Paineltotal.add(panelMenu);
 
 		JPanel panelPrincipal = new JPanel();
-		// {
-//			@Override
-		// o paint component vai pintar literalmente o componente
-//			protected void paintComponent(Graphics g) {
-//
-//				super.paintComponent(g);
-//				Image img;
-//				try {
-//
-//					// importar imagem para o background do panel, podemos faz-lo da internet ou
-//					// do
-//					// ficheiro
-//
-//					// img = ImageIO.read(new URL(
-//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-//					img = ImageIO
-//							.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/camerica.jpg "));
-//					g.drawImage(img, 0, 0, null);
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//			}
-//		};
-		panelPrincipal.setBackground(new Color(255, 250, 205));
-		panelPrincipal.setBounds(240, 176, 1022, 545);
-		Paineltotal.add(panelPrincipal);
-		panelPrincipal.setLayout(null);
 
 		JPanel jpFuncCarrinhos = new JPanel();
-		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
 		jpFuncCarrinhos.setLayout(null);
@@ -286,7 +256,8 @@ public class AppFuncionario implements Serializable {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(scrollPane);
-		JList<String> listNifsClientes = new JList<String>(listNif);
+		DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
+		JList<String> listNifsClientes = new JList<String>(modeloListaNif);
 		scrollPane.setViewportView(listNifsClientes);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
@@ -297,7 +268,7 @@ public class AppFuncionario implements Serializable {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
 					Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
 					Double precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
-				lblPrecoTotalCarrinho.setText(Double.toString(precoCarrinho));
+					lblPrecoTotalCarrinho.setText(Double.toString(precoCarrinho));
 
 				}
 			}
@@ -315,8 +286,8 @@ public class AppFuncionario implements Serializable {
 				String nif = txtNifCarrinho.getText();
 
 				if (gl.viewComics.verificaNif(nif)) {
-					listNif.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), listNif);
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), modeloListaNif);
 				} else {
 					JOptionPane.showMessageDialog(null, "Nif não existe!!!");
 
@@ -347,6 +318,71 @@ public class AppFuncionario implements Serializable {
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(438, 418, 100, 30);
 		jpFuncCarrinhos.add(btnCancelar);
+		JPanel jpFuncConta = new JPanel();
+		jpFuncConta.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncConta);
+		jpFuncConta.setLayout(null);
+		jpFuncConta.setVisible(false);
+
+		JLabel label = new JLabel("Alterar UserName:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label.setAlignmentX(0.5f);
+		label.setBounds(105, 48, 203, 31);
+		jpFuncConta.add(label);
+
+		JLabel label_1 = new JLabel("UserName:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(67, 92, 113, 24);
+		jpFuncConta.add(label_1);
+
+		txtUsername = new JTextField(func.getUsername());
+		txtUsername.setEditable(false);
+		txtUsername.setBounds(67, 129, 279, 31);
+		jpFuncConta.add(txtUsername);
+
+		JLabel label_2 = new JLabel("Password:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(67, 173, 113, 24);
+		jpFuncConta.add(label_2);
+
+		JLabel label_3 = new JLabel("Novo UserName:");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_3.setBounds(67, 254, 171, 24);
+		jpFuncConta.add(label_3);
+
+		txtNovoUsername = new JTextField();
+		txtNovoUsername.setBounds(67, 284, 279, 31);
+		jpFuncConta.add(txtNovoUsername);
+
+		passwordAlterarUser = new JPasswordField();
+		passwordAlterarUser.setBounds(67, 202, 140, 31);
+		jpFuncConta.add(passwordAlterarUser);
+		panelPrincipal.setBackground(new Color(255, 250, 205));
+		panelPrincipal.setBounds(240, 176, 1022, 545);
+		Paineltotal.add(panelPrincipal);
+		panelPrincipal.setLayout(null);
+		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
+
+		JPanel jpFuncLivros = new JPanel();
+		jpFuncLivros.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncLivros);
+		jpFuncLivros.setLayout(null);
+		jpFuncLivros.setVisible(false);
+		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
+		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
+		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+		jpFuncLivros.add(comboBoxAtributoLivro);
+
+		txtAtributoPesquisaLivro = new JTextField();
+		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+		jpFuncLivros.add(txtAtributoPesquisaLivro);
+		txtAtributoPesquisaLivro.setColumns(10);
+
+		JPanel jpPagamento = new JPanel();
+		jpPagamento.setBounds(0, 0, 219, 336);
+		panelPrincipal.add(jpPagamento);
+		jpPagamento.setLayout(null);
+		jpPagamento.setVisible(false);
 
 		// botao de pagamento, abre a janela pagamento
 		JButton btnPagamento = new JButton("Pagamento");
@@ -368,29 +404,40 @@ public class AppFuncionario implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				listNifsClientes.clearSelection();
-				listNif.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
+				modeloListaNif.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
 
 			}
 		});
 		bttLimparFun.setBackground(SystemColor.controlHighlight);
 		bttLimparFun.setBounds(136, 91, 100, 30);
 		jpFuncCarrinhos.add(bttLimparFun);
+		// {
+//			@Override
+		// o paint component vai pintar literalmente o componente
+//			protected void paintComponent(Graphics g) {
+//
+//				super.paintComponent(g);
+//				Image img;
+//				try {
+//
+//					// importar imagem para o background do panel, podemos faz-lo da internet ou
+//					// do
+//					// ficheiro
+//
+//					// img = ImageIO.read(new URL(
+//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//					img = ImageIO
+//							.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/camerica.jpg "));
+//					g.drawImage(img, 0, 0, null);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//		};
 
-		// encaminhar para os respectivos paineis ao clicar nos botoes
-		JPanel jpFuncLivros = new JPanel();
-		jpFuncLivros.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncLivros);
-		jpFuncLivros.setLayout(null);
-		jpFuncLivros.setVisible(false);
-		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpFuncLivros.add(comboBoxAtributoLivro);
-
-		txtAtributoPesquisaLivro = new JTextField();
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpFuncLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
 		// Guardar na lista o array/copia da lista de livros
 		JList<String> listaLivros = new JList<String>(dmFunListaLivros);
 		listaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -536,12 +583,6 @@ public class AppFuncionario implements Serializable {
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpFuncLivros.add(btnLimparLivro);
 
-		JPanel jpPagamento = new JPanel();
-		jpPagamento.setBounds(0, 0, 219, 336);
-		panelPrincipal.add(jpPagamento);
-		jpPagamento.setLayout(null);
-		jpPagamento.setVisible(false);
-
 		JPanel jpDinheiro = new JPanel();
 		jpDinheiro.setBounds(10, 190, 199, 171);
 		jpPagamento.add(jpDinheiro);
@@ -652,47 +693,7 @@ public class AppFuncionario implements Serializable {
 
 		// Lista do nifs dos carrinhos
 
-		gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
-
-		JPanel jpFuncConta = new JPanel();
-		jpFuncConta.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncConta);
-		jpFuncConta.setLayout(null);
-		jpFuncConta.setVisible(false);
-
-		JLabel label = new JLabel("Alterar UserName:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		label.setAlignmentX(0.5f);
-		label.setBounds(105, 48, 203, 31);
-		jpFuncConta.add(label);
-
-		JLabel label_1 = new JLabel("UserName:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(67, 92, 113, 24);
-		jpFuncConta.add(label_1);
-
-		txtUsername = new JTextField(func.getUsername());
-		txtUsername.setEditable(false);
-		txtUsername.setBounds(67, 129, 279, 31);
-		jpFuncConta.add(txtUsername);
-
-		JLabel label_2 = new JLabel("Password:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(67, 173, 113, 24);
-		jpFuncConta.add(label_2);
-
-		JLabel label_3 = new JLabel("Novo UserName:");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_3.setBounds(67, 254, 171, 24);
-		jpFuncConta.add(label_3);
-
-		txtNovoUsername = new JTextField();
-		txtNovoUsername.setBounds(67, 284, 279, 31);
-		jpFuncConta.add(txtNovoUsername);
-
-		passwordAlterarUser = new JPasswordField();
-		passwordAlterarUser.setBounds(67, 202, 140, 31);
-		jpFuncConta.add(passwordAlterarUser);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
 
 		// botao confirmar da username
 		JButton btnConfirmarUsername = new JButton("Confirmar");
@@ -782,11 +783,8 @@ public class AppFuncionario implements Serializable {
 		passwordNova.setBounds(520, 210, 235, 31);
 		jpFuncConta.add(passwordNova);
 
-		// combobox da pesquisa do livro
-		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
-
 		// criar um defaul model para guardar e fazer atualizaçoes da lista
-	
+
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
 
 		// logOut
