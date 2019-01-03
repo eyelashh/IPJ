@@ -175,11 +175,36 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (funcionarioAlterado) {
+			JOptionPane.showMessageDialog(null, "Funcionário alterado com sucesso");
 
 		} else {
-			JOptionPane.showMessageDialog(null, "Funcionário alterado com sucesso");
+			JOptionPane.showMessageDialog(null, "Não foi possivel alterar o funcionario");
 		}
 
+	}
+	public void adicionarFuncionario(String nome, String contacto, String username, String password) {
+		
+		this.utilizadores.add(new Funcionario(nome, contacto,username,password));
+		
+	}
+public void removerFuncionario(String idSTR) {
+		
+	int id = Integer.parseInt(idSTR);
+	boolean funcionarioRemovido = false;
+	for (Utilizador u : this.utilizadores) {
+		if ((u.getId() == id) && (u instanceof Funcionario)) {
+			this.utilizadores.remove(u);
+			funcionarioRemovido = true;
+		}
+	}
+	if (funcionarioRemovido) {
+		JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso");
+
+	} else {
+		JOptionPane.showMessageDialog(null, "Não foi possivel remover o funcionario");
+	}
+
+		
 	}
 
 //verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
@@ -306,7 +331,7 @@ public class Livraria implements Serializable {
 	}
 
 	public void alterarUsername(String username, char[] pass, String novoUsername) {
-//lalala
+
 		String passSTR = String.valueOf(pass);
 		boolean usernameAlterado = false;
 		for (Utilizador u : this.utilizadores) {
