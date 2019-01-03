@@ -250,6 +250,7 @@ public class AppFuncionario implements Serializable {
 		panelPrincipal.setLayout(null);
 
 		JPanel jpFuncCarrinhos = new JPanel();
+		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
 		jpFuncCarrinhos.setLayout(null);
@@ -274,9 +275,9 @@ public class AppFuncionario implements Serializable {
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
 
-		JLabel label_26 = new JLabel("New label");
-		label_26.setBounds(486, 360, 135, 14);
-		jpFuncCarrinhos.add(label_26);
+		JLabel lblPrecoTotalCarrinho = new JLabel("New label");
+		lblPrecoTotalCarrinho.setBounds(486, 360, 135, 14);
+		jpFuncCarrinhos.add(lblPrecoTotalCarrinho);
 
 		JLabel label_27 = new JLabel("New label");
 		label_27.setBounds(486, 385, 135, 14);
@@ -292,12 +293,13 @@ public class AppFuncionario implements Serializable {
 			public void valueChanged(ListSelectionEvent e) {
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
-				String nifSeleccionado = listNifsClientes.getSelectedValue();
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String nifSeleccionado = listNifsClientes.getSelectedValue();
+					Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
+					Double precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
+				lblPrecoTotalCarrinho.setText(Double.toString(precoCarrinho));
 
-//				Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
-//				double p = gl.viewComics.precoTotalCarrinho(c);
-//				String p1 = Double.toString(p);
-//				textField_12.setText(p1);
+				}
 			}
 		});
 
@@ -649,7 +651,7 @@ public class AppFuncionario implements Serializable {
 		jpDinheiro.add(btnConcluirPagamento);
 
 		// Lista do nifs dos carrinhos
-		
+
 		gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
 
 		JPanel jpFuncConta = new JPanel();
@@ -784,7 +786,7 @@ public class AppFuncionario implements Serializable {
 		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
 
 		// criar um defaul model para guardar e fazer atualizaçoes da lista
-		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
+	
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
 
 		// logOut
