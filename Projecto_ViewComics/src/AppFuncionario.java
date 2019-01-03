@@ -515,6 +515,7 @@ public class AppFuncionario implements Serializable {
 					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), listNif);
 				} else {
 					JOptionPane.showMessageDialog(null, "Nif não existe!!!");
+					
 				}
 
 			}

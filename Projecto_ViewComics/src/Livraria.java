@@ -742,6 +742,7 @@ public class Livraria implements Serializable {
 				if (c.getNif().equals(nif)) {
 					t = c.toString();
 					listaT.add(t);
+					
 
 				}
 				t = "";
