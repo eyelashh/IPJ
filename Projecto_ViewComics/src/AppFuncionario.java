@@ -450,7 +450,7 @@ public class AppFuncionario implements Serializable {
 		label_25.setFont(new Font("Tahoma", Font.BOLD, 15));
 		label_25.setBounds(200, 11, 122, 32);
 		panelConteudoCarrinho.add(label_25);
-		
+
 		txtNifCarrinho = new JTextField();
 		txtNifCarrinho.setBounds(25, 49, 200, 30);
 		txtNifCarrinho.setColumns(10);
@@ -494,8 +494,7 @@ public class AppFuncionario implements Serializable {
 		label_27.setBounds(486, 385, 135, 14);
 		jpFuncCarrinhos.add(label_27);
 
-		
-	
+		//Lista do nifs dos carrinhos
 		DefaultListModel<String> listNif = new DefaultListModel<String>();
 		JList<String> listNifsClientes = new JList<String>(listNif);
 		gl.viewComics.addArrayLista(gl.viewComics.listaNifs(), listNif);
@@ -506,21 +505,19 @@ public class AppFuncionario implements Serializable {
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				String nifSeleccionado = listNifsClientes.getSelectedValue();
-				
-				Carrinho c  = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
+
+				Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
 				double p = gl.viewComics.precoTotalCarrinho(c);
 				String p1 = Double.toString(p);
 				textField_12.setText(p1);
 			}
 		});
 		jpFuncCarrinhos.add(listNifsClientes);
-		
+
 		textField_12 = new JTextField();
 		textField_12.setBounds(276, 460, 446, 52);
 		jpFuncCarrinhos.add(textField_12);
 		textField_12.setColumns(10);
-		
-		
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
@@ -562,6 +559,7 @@ public class AppFuncionario implements Serializable {
 		passwordAlterarUser.setBounds(67, 202, 140, 31);
 		jpFuncConta.add(passwordAlterarUser);
 
+		// botao confirmar da username
 		JButton btnConfirmarUsername = new JButton("Confirmar");
 		btnConfirmarUsername.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -616,6 +614,7 @@ public class AppFuncionario implements Serializable {
 		passwordNovaConfirm.setBounds(520, 284, 279, 31);
 		jpFuncConta.add(passwordNovaConfirm);
 
+		// botao de confirmar da pass
 		JButton btnConfirmarPasse = new JButton("Confirmar");
 		btnConfirmarPasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -655,6 +654,7 @@ public class AppFuncionario implements Serializable {
 		jpFuncLivros.setLayout(null);
 		jpFuncLivros.setVisible(false);
 
+		// combobox da pesquisa do livro
 		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
 		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
 		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
@@ -755,6 +755,7 @@ public class AppFuncionario implements Serializable {
 		txtStockLivro.setBounds(333, 453, 345, 30);
 		jpFuncLivros.add(txtStockLivro);
 
+		// botao para pesquisar o livro
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -787,6 +788,7 @@ public class AppFuncionario implements Serializable {
 		btnPesquisarLivro.setBounds(224, 16, 97, 25);
 		jpFuncLivros.add(btnPesquisarLivro);
 
+		//botao limpar secçao do livro
 		JButton btnLimparLivro = new JButton("Limpar");
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -869,6 +871,7 @@ public class AppFuncionario implements Serializable {
 		textField_11.setBounds(72, 80, 86, 20);
 		jpDinheiro.add(textField_11);
 
+		// botao concluir pagamento
 		JButton btnConcluirPagamento = new JButton("Concluir");
 		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
 		btnConcluirPagamento.setBounds(33, 114, 125, 30);
@@ -890,7 +893,8 @@ public class AppFuncionario implements Serializable {
 				frame.setVisible(false);
 			}
 		});
-
+		
+		// botoes do menu
 		JButton btnLivros = new JButton("Livros");
 		btnLivros.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 31));
 		btnLivros.setBackground(SystemColor.controlHighlight);
