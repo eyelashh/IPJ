@@ -368,23 +368,34 @@ public class AppAdmin implements Serializable {
 		JButton btnRemoverLivro = new JButton("Remover livro da loja");
 		btnRemoverLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				if(!listaLivros.isSelectionEmpty()) {
-					
+
+				if (!listaLivros.isSelectionEmpty()) {
+
 					String s = listaLivros.getSelectedValue();
-					int id=gl.viewComics.obterIdLivro(s);
+					int id = gl.viewComics.obterIdLivro(s);
 					gl.viewComics.removeLivro(id);
-					
-//					modeloListaLivros.removeAllElements();
-//					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+
+					modeloListaLivros.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
+							modeloListaLivros);
 					JOptionPane.showMessageDialog(null, "Livro eliminado com sucesso!");
-					
+
 				}
-				
+
+				listaLivros.clearSelection();
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setEnabled(true);
+				txtAnoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtStockLivros.setText("");
+
 			}
 		});
 		btnRemoverLivro.setBounds(579, 51, 107, 43);
 		jpAdmLivros.add(btnRemoverLivro);
+
 		// pesquisar livros consoante os atributos
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

@@ -193,9 +193,9 @@ public class Livraria implements Serializable {
 	}
 	public void removeLivro(int idLivro) {
 		
-		for(Livro l:this.livros) {
-			if (l.getIdLivro()==idLivro) {
-				this.livros.remove(l);
+		for (int i = 0; i < livros.size(); i++) {
+			if (livros.get(i).getIdLivro() == idLivro) {
+				livros.remove(i);
 			}
 		}
 		
