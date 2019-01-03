@@ -191,6 +191,17 @@ public class Livraria implements Serializable {
 		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 
 	}
+	public void removeLivro(String idLivro) {
+		
+		int idINT=Integer.valueOf(idLivro);
+		
+		for(Livro l:this.livros) {
+			if (l.getIdLivro()==idINT) {
+				this.livros.remove(l);
+			}
+		}
+		
+	}
 
 	// remove funcionario
 //	public void removerFuncionario(String idSTR) {
