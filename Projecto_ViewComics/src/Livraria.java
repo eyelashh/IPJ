@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -161,6 +162,7 @@ public class Livraria implements Serializable {
 		this.carrinhos.remove(c);
 	}
 
+	// alterar funcionario
 	public void alterarFuncionario(String idSTR, String nome, String contacto, String username, String password) {
 
 		int id = Integer.parseInt(idSTR);
@@ -182,29 +184,32 @@ public class Livraria implements Serializable {
 		}
 
 	}
+
+	// adiciona funcionario
 	public void adicionarFuncionario(String nome, String contacto, String username, String password) {
-		
-		this.utilizadores.add(new Funcionario(nome, contacto,username,password));
-		
+
+		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
+
 	}
-public void removerFuncionario(String idSTR) {
-		
-	int id = Integer.parseInt(idSTR);
-	boolean funcionarioRemovido = false;
-	for (Utilizador u : this.utilizadores) {
-		if ((u.getId() == id) && (u instanceof Funcionario)) {
-			this.utilizadores.remove(u);
-			funcionarioRemovido = true;
+
+	// remove funcionario
+	public void removerFuncionario(String idSTR) {
+
+		int id = Integer.parseInt(idSTR);
+		boolean funcionarioRemovido = false;
+		for (Utilizador u : this.utilizadores) {
+			if ((u.getId() == id) && (u instanceof Funcionario)) {
+				this.utilizadores.remove(u);
+				funcionarioRemovido = true;
+			}
 		}
-	}
-	if (funcionarioRemovido) {
-		JOptionPane.showMessageDialog(null, "Funcion�rio removido com sucesso");
+		if (funcionarioRemovido) {
+			JOptionPane.showMessageDialog(null, "Funcion�rio removido com sucesso");
 
-	} else {
-		JOptionPane.showMessageDialog(null, "N�o foi possivel remover o funcionario");
-	}
+		} else {
+			JOptionPane.showMessageDialog(null, "N�o foi possivel remover o funcionario");
+		}
 
-		
 	}
 
 //verifica se o carrinho existe, se n�o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
@@ -259,21 +264,35 @@ public void removerFuncionario(String idSTR) {
 		return preco;
 
 	}
+	
+	// troco carrinho
+	protected double trocoCarrinho(double recebido, double total) {
+		
+		double troco=0;
+		
+		
+		troco =  recebido - total  ;
+		
+		return troco;
+		
+	}
 
-	// listar carrinho
-	public String[] listaCarrinho(String nif) {
+	// listar hashMap(livro e qtd) tendo em conta o nif do cliente
+	public String[] listaHashMap(String nif) {
 
 		ArrayList<String> listaC = new ArrayList<String>();
-		String a = "";
 
 		for (Carrinho c : this.carrinhos) {
 
-			if (c.getNif().equals(nif)) {
+			// Loop over String keys.
+			for (Entry<Integer, Integer> pair : c.getConteudo().entrySet()) {
 
-				String[] hm = c.listaCarrinho2();
+				if (c.getNif().equals(nif)) {
 
-				a = hm.toString();
-				listaC.add(a);
+					String a = pair.getKey().toString() + "::" + pair.getValue().toString();
+					listaC.add(a);
+
+				}
 			}
 		}
 
@@ -300,6 +319,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// aletrar um livro
 	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, String ano,
 			String descricao) {
 
@@ -316,6 +336,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// verifica o utilizador loggado
 	public Utilizador loggado(String username, String password) {
 
 		Utilizador u_log = new Utilizador();
@@ -330,6 +351,7 @@ public void removerFuncionario(String idSTR) {
 		return u_log;
 	}
 
+	// alterar username
 	public void alterarUsername(String username, char[] pass, String novoUsername) {
 
 		String passSTR = String.valueOf(pass);
@@ -349,6 +371,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// alterar password
 	public void alterarPassword(String username, char[] pass, char[] novaPass, char[] novaPassConfirm) {
 
 		String passSTR = String.valueOf(pass);
@@ -436,7 +459,7 @@ public void removerFuncionario(String idSTR) {
 		return listaAutor;
 	}
 
-	// POR ID
+	// lista de libros por id
 	public String[] listaLivroId(String id) {
 
 		ArrayList<String> listaId = new ArrayList<String>();
@@ -462,7 +485,6 @@ public void removerFuncionario(String idSTR) {
 	}
 
 	// extrair o id de uma string da lista
-
 	protected int obterIdLivro(String s) {
 
 		int id = 0;
@@ -475,9 +497,6 @@ public void removerFuncionario(String idSTR) {
 		}
 		return id;
 
-//String subStringId = new String(s.substring(0, s.indexOf(" ")));
-//int idint=Integer.parseInt(subStringId);
-//return idint;
 	}
 
 	// pesquisar o livro com determinado id
@@ -510,6 +529,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// id do funcionario
 	protected int obterIdFunc(String s) {
 
 		int id = 0;
@@ -565,6 +585,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// retornar um funcionario
 	protected Utilizador devolveFunc(String seleccao) {
 		Utilizador func = null;
 		for (Utilizador u : this.utilizadores) {
@@ -575,6 +596,7 @@ public void removerFuncionario(String idSTR) {
 		return func;
 	}
 
+	// remove funcionario
 	protected void removeFuncionario(String seleccao) {
 		for (Utilizador u : this.utilizadores) {
 			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
@@ -584,6 +606,7 @@ public void removerFuncionario(String idSTR) {
 
 	}
 
+	// lista de funcionario por user
 	public String[] listaFunPorUsername(String username) {
 
 		ArrayList<String> listaU = new ArrayList<String>();
@@ -602,6 +625,7 @@ public void removerFuncionario(String idSTR) {
 		return listaUsername;
 	}
 
+	// lista de funcionario pelo conacto
 	protected String[] listaFuncPorContacto(String contacto) {
 
 		ArrayList<String> listaC = new ArrayList<String>();
@@ -658,6 +682,7 @@ public void removerFuncionario(String idSTR) {
 		return quantidadeStr;
 	}
 
+	// adicionar e remover livros, faz um update
 	protected void updateConteudoCarrinho(String nif, int idLivro, int quantidade) {
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
@@ -666,6 +691,7 @@ public void removerFuncionario(String idSTR) {
 		}
 	}
 
+	// metodo para verificar se o nif esta correcto
 	protected boolean verificaNif(String nif) {
 
 		if (nif.matches("([0-9]{9})")) {
@@ -693,6 +719,7 @@ public void removerFuncionario(String idSTR) {
 		return listaData;
 	}
 
+	// lista dos nifs dos carrinhos/clientes
 	protected String[] listaNifs() {
 
 		String[] nifs = new String[carrinhos.size()];
@@ -704,6 +731,18 @@ public void removerFuncionario(String idSTR) {
 
 		}
 		return nifs;
+	}
+
+	// select carrinho com o nif associado
+	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
+		Carrinho c = new Carrinho();
+
+		for (int i = 0; i < car.size(); i++) {
+			if (car.get(i).getNif() == nif) {
+				c = car.get(i);
+			}
+		}
+		return c;
 	}
 
 }

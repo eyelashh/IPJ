@@ -491,6 +491,7 @@ public class AppCliente implements Serializable {
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblId.setBounds(462, 138, 29, 16);
 		JPLivros.add(lblId);
+		
 		// verifica e insere a quantidade que existe de um item em um carrinho
 		JButton btnVerificarCarrinhoLIVROS = new JButton("Criar carrinho");
 		btnVerificarCarrinhoLIVROS.addActionListener(new ActionListener() {

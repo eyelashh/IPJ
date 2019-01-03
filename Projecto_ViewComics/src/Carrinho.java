@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
@@ -130,19 +131,19 @@ public class Carrinho implements Serializable {
 //	}
 	
 	public String[] listaCarrinho2() {
-	
+
 		ArrayList<String> listaC = new ArrayList<String>();
-	    
-	       
-	for(Map.Entry k : conteudo.entrySet())
-	        {
-	            listaC.add((String) k.getKey()) ;      
-			           
-		   }
-	     String arr[]=new String[conteudo.size()];   
-	     arr = listaC.toArray( arr);
-	     
-	     return arr;
+		
+        // Loop over String keys.
+		for (Entry<Integer, Integer> pair : this.conteudo.entrySet()) {
+            
+			String c = pair.getKey() + "::" + pair.getValue();
+			listaC.add(c);
+		}
+		String[] listaCar = new String[listaC.size()];
+		listaCar= listaC.toArray(listaCar);
+		
+	     return listaCar;
 	  }
 
 }
