@@ -191,6 +191,7 @@ public class Livraria implements Serializable {
 		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 
 	}
+	
 	public void removeLivro(int idLivro) {
 		
 		for (int i = 0; i < livros.size(); i++) {
