@@ -368,13 +368,16 @@ public class AppAdmin implements Serializable {
 		JButton btnRemoverLivro = new JButton("Remover livro da loja");
 		btnRemoverLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
 				if (!listaLivros.isSelectionEmpty()) {
 
+					// ver o id selecionado
 					String s = listaLivros.getSelectedValue();
-					int id = gl.viewComics.obterIdLivro(s);
-					gl.viewComics.removeLivro(id);
+					s = s.substring(0, s.indexOf(" "));
 
+					gl.viewComics.removeLivro(Integer.parseInt(s), gl.viewComics.getLivros());
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					modeloListaLivros.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
 							modeloListaLivros);
@@ -392,6 +395,7 @@ public class AppAdmin implements Serializable {
 				txtStockLivros.setText("");
 
 			}
+				
 		});
 		btnRemoverLivro.setBounds(579, 51, 107, 43);
 		jpAdmLivros.add(btnRemoverLivro);
