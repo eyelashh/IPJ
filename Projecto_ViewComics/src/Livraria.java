@@ -191,12 +191,21 @@ public class Livraria implements Serializable {
 		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 
 	}
+<<<<<<< HEAD
 
 	public void removeLivro(int idLivro) {
 
 		for (Livro l : this.livros) {
 			if (l.getIdLivro() == idLivro) {
 				this.livros.remove(l);
+=======
+	
+	public void removeLivro(int idLivro) {
+		
+		for (int i = 0; i < livros.size(); i++) {
+			if (livros.get(i).getIdLivro() == idLivro) {
+				livros.remove(i);
+>>>>>>> 9937b5f7dd168d1371d8f2ec88552702aba06df1
 			}
 		}
 
