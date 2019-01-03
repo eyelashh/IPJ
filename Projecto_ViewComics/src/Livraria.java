@@ -193,24 +193,24 @@ public class Livraria implements Serializable {
 	}
 
 	// remove funcionario
-	public void removerFuncionario(String idSTR) {
-
-		int id = Integer.parseInt(idSTR);
-		boolean funcionarioRemovido = false;
-		for (Utilizador u : this.utilizadores) {
-			if (u.getId() == id) {
-				this.utilizadores.remove(u);
-				funcionarioRemovido = true;
-			}
-		}
-		if (funcionarioRemovido) {
-			JOptionPane.showMessageDialog(null, "Funcionï¿½rio removido com sucesso");
-
-		} else {
-			JOptionPane.showMessageDialog(null, "Nï¿½o foi possivel remover o funcionario");
-		}
-
-	}
+//	public void removerFuncionario(String idSTR) {
+//
+//		int id = Integer.parseInt(idSTR);
+//		boolean funcionarioRemovido = false;
+//		for (Utilizador u : this.utilizadores) {
+//			if (u.getId() == id) {
+//				this.utilizadores.remove(u);
+//				funcionarioRemovido = true;
+//			}
+//		}
+//		if (funcionarioRemovido) {
+//			JOptionPane.showMessageDialog(null, "Funcionï¿½rio removido com sucesso");
+//
+//		} else {
+//			JOptionPane.showMessageDialog(null, "Nï¿½o foi possivel remover o funcionario");
+//		}
+//
+//	}
 
 //verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
@@ -458,7 +458,7 @@ public class Livraria implements Serializable {
 		return listaAutor;
 	}
 
-	// lista de libros por id
+	// lista de livros por id
 	public String[] listaLivroId(String id) {
 
 		ArrayList<String> listaId = new ArrayList<String>();
@@ -600,18 +600,32 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-	// remove funcionario
-	protected void removeFuncionario(String seleccao) {
-		if (seleccao != null) {
-			for (Utilizador u : this.utilizadores) {
-				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-					this.utilizadores.remove(u);
-				}
-			}
+// remove funcionario
+//	protected void removeFuncionario(String seleccao) {
+//		if (seleccao != null) {
+//			for (Utilizador u : this.utilizadores) {
+//				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
+//					this.utilizadores.remove(u);
+//				}
+//			}
+//		}
+//
+//	}
+public void removerUtil (int id, ArrayList <Utilizador>utilizador) {
+	
+	for(int i=0;i<utilizador.size();i++) {
+		if (utilizador.get(i).getId()==id){
+			utilizador.remove(i);
 		}
-
 	}
-
+	
+//PORQUE É QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
+//	for(Utilizador u:utilizador) {
+//		if (u.getId()==id) {
+//			utilizador.remove(u);
+//		}
+//	}
+}
 	// lista de funcionario por user
 	public String[] listaFunPorUsername(String username) {
 
