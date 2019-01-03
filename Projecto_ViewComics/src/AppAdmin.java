@@ -292,7 +292,7 @@ public class AppAdmin implements Serializable {
 																																						txtAtributoLivro.setColumns(10);
 																																						
 																																								JList<String> listaLivros = new JList<String>(modeloListaLivros);
-																																								listaLivros.setBounds(22, 118, 190, 427);
+																																								listaLivros.setBounds(12, 118, 200, 367);
 																																								jpAdmLivros.add(listaLivros);
 																																								comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes à combobox com
 																																								// os atributos de pesquisa
@@ -338,8 +338,8 @@ public class AppAdmin implements Serializable {
 																																								btnConfirmarAlteracoesLIVROS.setBounds(479, 446, 143, 38);
 																																								jpAdmLivros.add(btnConfirmarAlteracoesLIVROS);
 																																								
-																																										JButton btnNewButton_1 = new JButton("Criar novo livro");
-																																										btnNewButton_1.addActionListener(new ActionListener() {
+																																										JButton btnCriarLivro = new JButton("Criar novo livro");
+																																										btnCriarLivro.addActionListener(new ActionListener() {
 																																											public void actionPerformed(ActionEvent arg0) {
 																																												txtTituloLivros.setText("");
 																																												txtAutorLivros.setText("");
@@ -351,8 +351,8 @@ public class AppAdmin implements Serializable {
 
 																																											}
 																																										});
-																																										btnNewButton_1.setBounds(476, 51, 133, 42);
-																																										jpAdmLivros.add(btnNewButton_1);
+																																										btnCriarLivro.setBounds(456, 51, 113, 42);
+																																										jpAdmLivros.add(btnCriarLivro);
 																																										
 																																												JLabel lblId = new JLabel("Id:");
 																																												lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
