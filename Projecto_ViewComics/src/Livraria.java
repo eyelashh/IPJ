@@ -198,7 +198,7 @@ public class Livraria implements Serializable {
 		int id = Integer.parseInt(idSTR);
 		boolean funcionarioRemovido = false;
 		for (Utilizador u : this.utilizadores) {
-			if ((u.getId() == id) && (u instanceof Funcionario)) {
+			if (u.getId() == id) {
 				this.utilizadores.remove(u);
 				funcionarioRemovido = true;
 			}
@@ -264,17 +264,16 @@ public class Livraria implements Serializable {
 		return preco;
 
 	}
-	
+
 	// troco carrinho
 	protected double trocoCarrinho(double recebido, double total) {
-		
-		double troco=0;
-		
-		
-		troco =  recebido - total  ;
-		
+
+		double troco = 0;
+
+		troco = recebido - total;
+
 		return troco;
-		
+
 	}
 
 	// listar hashMap(livro e qtd) tendo em conta o nif do cliente
@@ -587,20 +586,27 @@ public class Livraria implements Serializable {
 
 	// retornar um funcionario
 	protected Utilizador devolveFunc(String seleccao) {
-		Utilizador func = null;
-		for (Utilizador u : this.utilizadores) {
-			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-				func = u;
+
+		Utilizador func = new Utilizador();
+		if (seleccao != null) {
+
+			for (Utilizador u : this.utilizadores) {
+				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
+					func = u;
+				}
 			}
+
 		}
 		return func;
 	}
 
 	// remove funcionario
 	protected void removeFuncionario(String seleccao) {
-		for (Utilizador u : this.utilizadores) {
-			if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-				this.utilizadores.remove(u);
+		if (seleccao != null) {
+			for (Utilizador u : this.utilizadores) {
+				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
+					this.utilizadores.remove(u);
+				}
 			}
 		}
 
@@ -732,27 +738,25 @@ public class Livraria implements Serializable {
 		}
 		return nifs;
 	}
-	
-	//listar livros em array por titulo 
-		public String[] listaNifs(String nif) {
 
-			ArrayList<String> listaT = new ArrayList<String>();
-			String t = "";
-			for (Carrinho c : this.carrinhos) {
-				if (c.getNif().equals(nif)) {
-					t = c.toString();
-					listaT.add(t);
-					
+	// listar livros em array por titulo
+	public String[] listaNifs(String nif) {
 
-				}
-				t = "";
+		ArrayList<String> listaT = new ArrayList<String>();
+		String t = "";
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif().equals(nif)) {
+				t = c.toString();
+				listaT.add(t);
+
 			}
-			String[] listaTitulo = new String[listaT.size()];
-			listaTitulo = listaT.toArray(listaTitulo);
-
-			return listaTitulo;
+			t = "";
 		}
+		String[] listaTitulo = new String[listaT.size()];
+		listaTitulo = listaT.toArray(listaTitulo);
 
+		return listaTitulo;
+	}
 
 	// select carrinho com o nif associado
 	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {

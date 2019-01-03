@@ -366,7 +366,8 @@ public class AppAdmin implements Serializable {
 		btnEliminarFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selecaoLista = listaFuncionarios.getSelectedValue();
-				gl.viewComics.removeFuncionario(selecaoLista);
+				String idSTR = Integer.toString(gl.viewComics.obterIdFunc(selecaoLista));
+				gl.viewComics.removerFuncionario(idSTR);		
 
 			}
 		});
@@ -615,7 +616,7 @@ public class AppAdmin implements Serializable {
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 		
 		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
+	
 
 		JPanel jpAdmConta = new JPanel();
 		jpAdmConta.setBackground(SystemColor.menu);
