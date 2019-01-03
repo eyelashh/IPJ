@@ -175,10 +175,10 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (funcionarioAlterado) {
-			JOptionPane.showMessageDialog(null, "Funcionário alterado com sucesso");
+			JOptionPane.showMessageDialog(null, "Funcionï¿½rio alterado com sucesso");
 
 		} else {
-			JOptionPane.showMessageDialog(null, "Não foi possivel alterar o funcionario");
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possivel alterar o funcionario");
 		}
 
 	}
@@ -198,10 +198,10 @@ public void removerFuncionario(String idSTR) {
 		}
 	}
 	if (funcionarioRemovido) {
-		JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso");
+		JOptionPane.showMessageDialog(null, "Funcionï¿½rio removido com sucesso");
 
 	} else {
-		JOptionPane.showMessageDialog(null, "Não foi possivel remover o funcionario");
+		JOptionPane.showMessageDialog(null, "Nï¿½o foi possivel remover o funcionario");
 	}
 
 		
@@ -261,28 +261,28 @@ public void removerFuncionario(String idSTR) {
 	}
 
 	// listar carrinho
-//	public String[] listaCarrinho(String nif) {
-//
-//		ArrayList<String> listaC = new ArrayList<String>();
-//		String a = "";
-//
-//		for (Carrinho c : this.carrinhos) {
-//
-//			if (c.getNif().equals(nif)) {
-//
-//				String[] hm = c.listaCarrinho2();
-//
-//				a = hm.toString();
-//				listaC.add(a);
-//			}
-//		}
-//
-//		String[] listalivro = new String[listaC.size()];
-//		listalivro = listaC.toArray(listalivro);
-//
-//		return listalivro;
-//
-//	}
+	public String[] listaCarrinho(String nif) {
+
+		ArrayList<String> listaC = new ArrayList<String>();
+		String a = "";
+
+		for (Carrinho c : this.carrinhos) {
+
+			if (c.getNif().equals(nif)) {
+
+				String[] hm = c.listaCarrinho2();
+
+				a = hm.toString();
+				listaC.add(a);
+			}
+		}
+
+		String[] listalivro = new String[listaC.size()];
+		listalivro = listaC.toArray(listalivro);
+
+		return listalivro;
+
+	}
 
 	// metodo para verificar se o username e a password coincidem
 	public boolean verificarPassword(String username, String password) {
@@ -344,7 +344,7 @@ public void removerFuncionario(String idSTR) {
 			JOptionPane.showMessageDialog(null, "Alteracao efectuada com sucesso!Novo username: " + novoUsername);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Não foi possível efectuar a alteração de username, confira os dados inseridos");
+					"Nï¿½o foi possï¿½vel efectuar a alteraï¿½ï¿½o de username, confira os dados inseridos");
 		}
 
 	}
@@ -366,10 +366,10 @@ public void removerFuncionario(String idSTR) {
 			}
 		}
 		if (passAlterada) {
-			JOptionPane.showMessageDialog(null, "Alteracao efectuada com sucesso!A sua pass é agora " + novaPassSTR);
+			JOptionPane.showMessageDialog(null, "Alteracao efectuada com sucesso!A sua pass ï¿½ agora " + novaPassSTR);
 		} else {
 			JOptionPane.showMessageDialog(null,
-					"Não foi possível efectuar a alteração de password, confira os dados inseridos");
+					"Nï¿½o foi possï¿½vel efectuar a alteraï¿½ï¿½o de password, confira os dados inseridos");
 		}
 
 	}

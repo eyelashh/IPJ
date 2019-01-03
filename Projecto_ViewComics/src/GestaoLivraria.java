@@ -97,9 +97,13 @@ public class GestaoLivraria implements Serializable{
 		if(!this.fileCarrinhos.exists())
 		{
 			Carrinho c1=new Carrinho("236925792");
+			Carrinho c2=new Carrinho("239898215");
+			Carrinho c3=new Carrinho("236276351");
 			
 		//	c1.updateCarrinho(1, 2);
 			viewComics.addCarrinho(c1);
+			viewComics.addCarrinho(c2);
+			viewComics.addCarrinho(c3);
 		
 			try
 			{
