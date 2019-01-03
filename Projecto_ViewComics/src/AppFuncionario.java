@@ -57,6 +57,7 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTable;
 
 public class AppFuncionario implements Serializable {
 
@@ -256,7 +257,6 @@ public class AppFuncionario implements Serializable {
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
-		jpFuncCarrinhos.setVisible(false);
 		jpFuncCarrinhos.setLayout(null);
 
 		JPanel panelConteudoCarrinho = new JPanel();
@@ -450,7 +450,7 @@ public class AppFuncionario implements Serializable {
 		label_25.setFont(new Font("Tahoma", Font.BOLD, 15));
 		label_25.setBounds(200, 11, 122, 32);
 		panelConteudoCarrinho.add(label_25);
-
+		
 		txtNifCarrinho = new JTextField();
 		txtNifCarrinho.setBounds(25, 49, 200, 30);
 		txtNifCarrinho.setColumns(10);
@@ -505,11 +505,12 @@ public class AppFuncionario implements Serializable {
 			public void valueChanged(ListSelectionEvent e) {
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
-				if (!listNifsClientes.isSelectionEmpty()) {
-					
-					
-
-				}
+				String nifSeleccionado = listNifsClientes.getSelectedValue();
+				
+				Carrinho c  = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
+				double p = gl.viewComics.precoTotalCarrinho(c);
+				String p1 = Double.toString(p);
+				textField_12.setText(p1);
 			}
 		});
 		jpFuncCarrinhos.add(listNifsClientes);
@@ -518,6 +519,8 @@ public class AppFuncionario implements Serializable {
 		textField_12.setBounds(276, 460, 446, 52);
 		jpFuncCarrinhos.add(textField_12);
 		textField_12.setColumns(10);
+		
+		
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
