@@ -254,6 +254,120 @@ public class AppFuncionario implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+		
+				JPanel jpPagamento = new JPanel();
+				jpPagamento.setBounds(0, 0, 219, 336);
+				panelPrincipal.add(jpPagamento);
+				jpPagamento.setLayout(null);
+				jpPagamento.setVisible(false);
+				
+						JPanel jpDinheiro = new JPanel();
+						jpDinheiro.setBounds(10, 190, 199, 171);
+						jpPagamento.add(jpDinheiro);
+						jpDinheiro.setLayout(null);
+						jpDinheiro.setVisible(false);
+
+						// Combobox com os itens para pagamento
+						// lista dos itens na comboBox
+						String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
+
+						JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+						comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+						comboBoxTipoPagamento.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent ae) {
+								// check whether there is any selection
+								if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+									jpDinheiro.setVisible(true);
+
+								}
+							}
+						});
+						jpPagamento.add(comboBoxTipoPagamento);
+						
+								textFieldNifPagamento = new JTextField();
+								textFieldNifPagamento.setBounds(20, 94, 172, 22);
+								jpPagamento.add(textFieldNifPagamento);
+								textFieldNifPagamento.setColumns(10);
+								
+										JLabel lblNif_1 = new JLabel("NIF");
+										lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+										lblNif_1.setBounds(22, 69, 46, 14);
+										jpPagamento.add(lblNif_1);
+										
+												JLabel lblNewLabel_1 = new JLabel("A pagar :");
+												lblNewLabel_1.setBounds(10, 11, 76, 23);
+												jpDinheiro.add(lblNewLabel_1);
+												
+														JLabel lblRecebido = new JLabel("Recebido : ");
+														lblRecebido.setBounds(10, 45, 76, 23);
+														jpDinheiro.add(lblRecebido);
+														
+																JLabel lblTroco = new JLabel("Troco :");
+																lblTroco.setBounds(10, 79, 76, 23);
+																jpDinheiro.add(lblTroco);
+																
+																		textFieldTotalPag = new JTextField();
+																		textFieldTotalPag.setBounds(72, 12, 86, 20);
+																		jpDinheiro.add(textFieldTotalPag);
+																		textFieldTotalPag.setColumns(10);
+																		
+																				textFieldRecePaga = new JTextField();
+																				textFieldRecePaga.setColumns(10);
+																				textFieldRecePaga.setBounds(72, 45, 86, 20);
+																				jpDinheiro.add(textFieldRecePaga);
+																				
+																						textFieldTrocoPag = new JTextField();
+																						textFieldTrocoPag.setColumns(10);
+																						textFieldTrocoPag.setBounds(72, 80, 86, 20);
+																						jpDinheiro.add(textFieldTrocoPag);
+																						
+																								// botao concluir pagamento
+																								JButton btnConcluirPagamento = new JButton("Concluir");
+																								btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
+																								btnConcluirPagamento.setBounds(33, 114, 125, 30);
+																								btnConcluirPagamento.addActionListener(new ActionListener() {
+																									public void actionPerformed(ActionEvent arg0) {
+
+																										String nif = textFieldNifPagamento.getText();
+
+																										if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+
+																											if (gl.viewComics.verificaNif(nif)) {
+																												// Se o nif estiver correcto, selecciona o Carrinho
+																												Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
+
+																												// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
+																												// para colocar na textField
+																												double p = gl.viewComics.precoTotalCarrinho(c);
+																												String p1 = Double.toString(p);
+																												textFieldTotalPag.setText(p1);
+
+																												// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
+																												// pra double
+																												String recebido = textFieldRecePaga.getText();
+																												double recebido1 = Double.parseDouble(recebido);
+
+																												// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
+																												// para string para colocar na testField
+																												double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
+																												String trocoCarrinho1 = Double.toString(trocoCarrinho);
+																												textFieldTrocoPag.setText(trocoCarrinho1);
+
+																												JOptionPane.showMessageDialog(null,
+																														"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
+																											}
+																											if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+
+																											} else {
+																												JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
+																											}
+
+																										}
+
+																									}
+																								});
+																								jpDinheiro.add(btnConcluirPagamento);
 
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
@@ -547,119 +661,6 @@ public class AppFuncionario implements Serializable {
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		btnCancelar.setBounds(438, 418, 100, 30);
 		jpFuncCarrinhos.add(btnCancelar);
-
-		JPanel jpPagamento = new JPanel();
-		jpPagamento.setBounds(0, 0, 219, 336);
-		panelPrincipal.add(jpPagamento);
-		jpPagamento.setLayout(null);
-		jpPagamento.setVisible(false);
-
-		JPanel jpDinheiro = new JPanel();
-		jpDinheiro.setBounds(10, 190, 199, 171);
-		jpPagamento.add(jpDinheiro);
-		jpDinheiro.setLayout(null);
-		jpDinheiro.setVisible(false);
-
-		// Combobox com os itens para pagamento
-		// lista dos itens na comboBox
-		String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
-		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
-		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
-		comboBoxTipoPagamento.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				// check whether there is any selection
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-					jpDinheiro.setVisible(true);
-
-				}
-			}
-		});
-		jpPagamento.add(comboBoxTipoPagamento);
-
-		textFieldNifPagamento = new JTextField();
-		textFieldNifPagamento.setBounds(20, 94, 172, 22);
-		jpPagamento.add(textFieldNifPagamento);
-		textFieldNifPagamento.setColumns(10);
-
-		JLabel lblNif_1 = new JLabel("NIF");
-		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNif_1.setBounds(22, 69, 46, 14);
-		jpPagamento.add(lblNif_1);
-
-		JLabel lblNewLabel_1 = new JLabel("A pagar :");
-		lblNewLabel_1.setBounds(10, 11, 76, 23);
-		jpDinheiro.add(lblNewLabel_1);
-
-		JLabel lblRecebido = new JLabel("Recebido : ");
-		lblRecebido.setBounds(10, 45, 76, 23);
-		jpDinheiro.add(lblRecebido);
-
-		JLabel lblTroco = new JLabel("Troco :");
-		lblTroco.setBounds(10, 79, 76, 23);
-		jpDinheiro.add(lblTroco);
-
-		textFieldTotalPag = new JTextField();
-		textFieldTotalPag.setBounds(72, 12, 86, 20);
-		jpDinheiro.add(textFieldTotalPag);
-		textFieldTotalPag.setColumns(10);
-
-		textFieldRecePaga = new JTextField();
-		textFieldRecePaga.setColumns(10);
-		textFieldRecePaga.setBounds(72, 45, 86, 20);
-		jpDinheiro.add(textFieldRecePaga);
-
-		textFieldTrocoPag = new JTextField();
-		textFieldTrocoPag.setColumns(10);
-		textFieldTrocoPag.setBounds(72, 80, 86, 20);
-		jpDinheiro.add(textFieldTrocoPag);
-
-		// botao concluir pagamento
-		JButton btnConcluirPagamento = new JButton("Concluir");
-		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
-		btnConcluirPagamento.setBounds(33, 114, 125, 30);
-		btnConcluirPagamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				String nif = textFieldNifPagamento.getText();
-
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-
-					if (gl.viewComics.verificaNif(nif)) {
-						// Se o nif estiver correcto, selecciona o Carrinho
-						Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
-
-						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
-						// para colocar na textField
-						double p = gl.viewComics.precoTotalCarrinho(c);
-						String p1 = Double.toString(p);
-						textFieldTotalPag.setText(p1);
-
-						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
-						// pra double
-						String recebido = textFieldRecePaga.getText();
-						double recebido1 = Double.parseDouble(recebido);
-
-						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
-						// para string para colocar na testField
-						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
-						String trocoCarrinho1 = Double.toString(trocoCarrinho);
-						textFieldTrocoPag.setText(trocoCarrinho1);
-
-						JOptionPane.showMessageDialog(null,
-								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
-					}
-					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
-					}
-
-				}
-
-			}
-		});
-		jpDinheiro.add(btnConcluirPagamento);
 
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
