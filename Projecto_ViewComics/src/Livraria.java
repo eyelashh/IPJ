@@ -264,6 +264,18 @@ public class Livraria implements Serializable {
 		return preco;
 
 	}
+	
+	// troco carrinho
+	protected double trocoCarrinho(double recebido, double total) {
+		
+		double troco=0;
+		
+		
+		troco =  recebido - total  ;
+		
+		return troco;
+		
+	}
 
 	// listar hashMap(livro e qtd) tendo em conta o nif do cliente
 	public String[] listaHashMap(String nif) {
