@@ -332,19 +332,28 @@ public class AppFuncionario implements Serializable {
 				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
 
 					if (gl.viewComics.verificaNif(nif)) {
-						//
+						// Se o nif estiver correcto, selecciona o Carrinho
 						Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
+
+						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
+						// para colocar na textField
 						double p = gl.viewComics.precoTotalCarrinho(c);
 						String p1 = Double.toString(p);
 						textFieldTotalPag.setText(p1);
 
+						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
+						// pra double
 						String recebido = textFieldRecePaga.getText();
 						double recebido1 = Double.parseDouble(recebido);
+
+						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
+						// para string para colocar na testField
 						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
 						String trocoCarrinho1 = Double.toString(trocoCarrinho);
-						
 						textFieldTrocoPag.setText(trocoCarrinho1);
 
+						JOptionPane.showMessageDialog(null,
+								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
 					}
 
 				}
