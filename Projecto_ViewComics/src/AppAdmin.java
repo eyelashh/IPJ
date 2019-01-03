@@ -368,7 +368,6 @@ public class AppAdmin implements Serializable {
 		JButton btnRemoverLivro = new JButton("Remover livro da loja");
 		btnRemoverLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
 				
 
 					String s = listaLivros.getSelectedValue();
