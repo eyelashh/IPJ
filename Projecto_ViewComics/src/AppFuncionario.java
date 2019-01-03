@@ -357,6 +357,8 @@ public class AppFuncionario implements Serializable {
 					}
 					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
 
+					} else {
+						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
 					}
 
 				}
