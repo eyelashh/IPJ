@@ -500,7 +500,7 @@ public class AppCliente implements Serializable {
 				if (gl.viewComics.verificaNif(nif)) {
 					Carrinho c = new Carrinho(nif);
 					gl.viewComics.addCarrinho(c);
-					JOptionPane.showMessageDialog(null,"O carrinho com o nif"+nif+"foi criado com sucesso. Boas compras!");
+					JOptionPane.showMessageDialog(null,"O carrinho com o nif"+nif+"foi criado com sucesso. O carrinho encontra-se vazio, pode seleccionar os livros! Boas compras!");
 				} else {
 					JOptionPane.showMessageDialog(null, "O nif deve conter 9 digitos. Verifique se o introduziu correctamente.");
 				}

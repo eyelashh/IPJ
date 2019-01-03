@@ -58,6 +58,7 @@ import java.awt.event.InputMethodEvent;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class AppFuncionario implements Serializable {
 
@@ -482,8 +483,12 @@ public class AppFuncionario implements Serializable {
 		// Lista do nifs dos carrinhos
 		DefaultListModel<String> listNif = new DefaultListModel<String>();
 		gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 144, 200, 320);
+		jpFuncCarrinhos.add(scrollPane);
 		JList<String> listNifsClientes = new JList<String>(listNif);
-		listNifsClientes.setBounds(25, 144, 200, 320);
+		scrollPane.setViewportView(listNifsClientes);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
@@ -497,7 +502,6 @@ public class AppFuncionario implements Serializable {
 //				textField_12.setText(p1);
 			}
 		});
-		jpFuncCarrinhos.add(listNifsClientes);
 
 		textField_12 = new JTextField();
 		textField_12.setBounds(276, 460, 446, 52);
@@ -515,7 +519,7 @@ public class AppFuncionario implements Serializable {
 					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), listNif);
 				} else {
 					JOptionPane.showMessageDialog(null, "Nif não existe!!!");
-					
+
 				}
 
 			}
@@ -972,15 +976,15 @@ public class AppFuncionario implements Serializable {
 		btnPagamento.setBackground(SystemColor.controlHighlight);
 		btnPagamento.setBounds(303, 418, 100, 30);
 		jpFuncCarrinhos.add(btnPagamento);
-		
+
 		JButton bttLimparFun = new JButton("Limpar");
 		bttLimparFun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				modeloListaFUNCIONARIOS.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-						modeloListaFUNCIONARIOS);
-				
+
+				listaLivros.clearSelection();
+				listNif.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), listNif);
+
 			}
 		});
 		bttLimparFun.setBackground(SystemColor.controlHighlight);
