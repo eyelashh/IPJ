@@ -369,7 +369,7 @@ public class AppAdmin implements Serializable {
 		btnRemoverLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (!listaLivros.isSelectionEmpty()) {
+				
 
 					String s = listaLivros.getSelectedValue();
 					int id = gl.viewComics.obterIdLivro(s);
@@ -380,7 +380,7 @@ public class AppAdmin implements Serializable {
 							modeloListaLivros);
 					JOptionPane.showMessageDialog(null, "Livro eliminado com sucesso!");
 
-				}
+				
 
 				listaLivros.clearSelection();
 				txtIdLivros.setText("");
