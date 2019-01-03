@@ -521,7 +521,7 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
-		btnPesquisarCarrinhos.setBounds(56, 90, 130, 30);
+		btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
 		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
 
 		JButton btnCancelar = new JButton("Eliminar");
@@ -972,6 +972,20 @@ public class AppFuncionario implements Serializable {
 		btnPagamento.setBackground(SystemColor.controlHighlight);
 		btnPagamento.setBounds(303, 418, 100, 30);
 		jpFuncCarrinhos.add(btnPagamento);
+		
+		JButton bttLimparFun = new JButton("Limpar");
+		bttLimparFun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				modeloListaFUNCIONARIOS.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
+						modeloListaFUNCIONARIOS);
+				
+			}
+		});
+		bttLimparFun.setBackground(SystemColor.controlHighlight);
+		bttLimparFun.setBounds(136, 91, 100, 30);
+		jpFuncCarrinhos.add(bttLimparFun);
 
 		// botoes do menu
 		JButton btnLivros = new JButton("Livros");

@@ -619,7 +619,7 @@ public void removerUtil (int id, ArrayList <Utilizador>utilizador) {
 		}
 	}
 	
-//PORQUE É QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
+//PORQUE ï¿½ QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
 //	for(Utilizador u:utilizador) {
 //		if (u.getId()==id) {
 //			utilizador.remove(u);
