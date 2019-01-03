@@ -355,6 +355,9 @@ public class AppFuncionario implements Serializable {
 						JOptionPane.showMessageDialog(null,
 								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
 					}
+					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+
+					}
 
 				}
 
