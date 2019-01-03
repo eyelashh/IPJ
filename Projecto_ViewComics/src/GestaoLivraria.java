@@ -55,7 +55,7 @@ public class GestaoLivraria implements Serializable{
 			viewComics.addUtilizador(fun);
 			viewComics.addUtilizador(new Funcionario("Bruno","9378888","b","b"));
 			viewComics.addUtilizador(new Funcionario("Joana","9378888","j","j"));
-			viewComics.addUtilizador(new Funcionario("Tamara","975555","t","t"));
+			viewComics.addUtilizador(new Funcionario("Tamara","9378888","tt","tt"));
 			
 			// De seguida � efectuada a cria�ao do ficheiro:
 			try
