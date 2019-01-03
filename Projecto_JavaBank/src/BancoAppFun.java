@@ -47,6 +47,7 @@ import com.toedter.calendar.JDateChooser;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -56,6 +57,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.JInternalFrame;
+import javax.swing.JTable;
 
 public class BancoAppFun implements Serializable {
 
@@ -95,6 +97,7 @@ public class BancoAppFun implements Serializable {
 	private JDateChooser dateChooser_2;
 	private JTextField tbnomecartao;
 	private JTextField tbcodcartao;
+	private JTable tableClts;
 
 	/**
 	 * Launch the application.
@@ -243,7 +246,7 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.setLayout(null);
 
 		JComboBox cbContaspesqconta = new JComboBox();
-		cbContaspesqconta.setBounds(26, 12, 219, 38);
+		cbContaspesqconta.setBounds(26, 12, 238, 38);
 		jpanelContas.add(cbContaspesqconta);
 
 		JTextField tbContaspesqconta = new JTextField();
@@ -252,13 +255,6 @@ public class BancoAppFun implements Serializable {
 		lContas = new JList<String>(dmconta);
 		lContas.setBounds(24, 99, 240, 471);
 		jpanelContas.add(lContas);
-		
-		
-		@SuppressWarnings("rawtypes")
-		JList lClientes = new JList(dmcc);
-		lClientes.setValueIsAdjusting(true);
-		lClientes.setBounds(768, 44, 262, 337);
-		jpanelContas.add(lClientes);
 
 		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
 		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -337,13 +333,9 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(tbContaslimitelevdia);
 
 		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
+		
 		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btnPesquisar.setBounds(257, 11, 99, 38);
+		btnPesquisar.setBounds(280, 11, 99, 38);
 		jpanelContas.add(btnPesquisar);
 
 		JLabel lblTipo = new JLabel("Tipo:");
@@ -439,6 +431,44 @@ public class BancoAppFun implements Serializable {
 
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
+		
+		
+		// Modelo da tabela:
+		DefaultTableModel model = new DefaultTableModel(null,  new String [] {
+		         "Check" , "ID", "Nome" }) { 
+			private static final long serialVersionUID = 1L;
+			@SuppressWarnings("rawtypes")
+			public Class getColumnClass(int c) {
+		        switch (c) {
+		        case 0:
+		          return Boolean.class;
+		        case 1: 
+		        	return Integer.class;
+		        default:
+		          return String.class;
+		        }
+		      }
+			 public boolean isCellEditable( int rowIndex, int mColIndex) {
+				 if(mColIndex==0)
+				 {
+					 return true;
+				 }
+				 else
+				 {
+					 return false;
+				 }
+		       } 
+		    };
+		    
+		    // Preencher tabela apartir do tablemodel:
+		 gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
+		  
+		    
+		      
+		
+		tableClts = new JTable(model);
+		tableClts.setBounds(768, 47, 262, 334);
+		jpanelContas.add(tableClts);
 
 		// metedos depainel de contas:
 
@@ -473,7 +503,6 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 
 					ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-					ArrayList<String> lista = (ArrayList<String>) lClientes.getSelectedValuesList();
 
 					// cartao nulo inicialmente;
 
@@ -483,7 +512,6 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), null);
 						gb.javabank.getContas().add(c);
-						gb.javabank.crialistaclientescontas(c, lista, clientes);
 
 					} else {
 
@@ -493,7 +521,6 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 						gb.javabank.getContas().add(c);
-						gb.javabank.crialistaclientescontas(c, lista, clientes);
 
 					}
 
@@ -634,7 +661,7 @@ public class BancoAppFun implements Serializable {
 					}
 
 					/// seleciona os clientes que estao como titulares á conta:
-					lClientes.setSelectedIndices(gb.javabank.mostratitularesconta(dmcc,c));
+
 
 				}
 			}
@@ -1437,9 +1464,9 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
 				lContas.clearSelection();
-				lClientes.clearSelection();
 				dmcc.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
 
 			}
 		});
@@ -1656,5 +1683,7 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
+		
+		
 	}
 }

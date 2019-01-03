@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 public class Banco implements Serializable {
 	private int idBanco;
@@ -332,53 +333,30 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	// cria lista de clientes que recebe o ArrayList de Strings e cria no arraylist de clientes;
-	protected void crialistaclientescontas(Conta conta,ArrayList<String> liststr, ArrayList<Cliente> listclt)
+	
+	// preenche tabela clientes na conta:
+	protected void preenchetabelaclientes(DefaultTableModel model, ArrayList<Utilizador> clientes)
 	{
-		String str = "";
-		Cliente c = null;
-		
-		for(int i=0; i<liststr.size(); i++)
+		int id =0;
+		String nome;
+		for(int i=0; i<clientes.size();i++)
 		{
-			str = liststr.get(i);
-			str = str.substring(0, str.indexOf("*"));
-			c = (Cliente)selectUtilizador(Integer.parseInt(str), this.utilizadores);
-			c.getContas().add(conta);
-			listclt.add(c);	
+			if(clientes.get(i) instanceof Cliente)
+			{
+				id = clientes.get(i).getIdUtilizador();
+				nome = clientes.get(i).getNome();
+				model.addRow(new Object[] { false,id,nome});
+			}
 		}
-		
 	}
 	
-	//devolve array para a os clientes aparecerem selecionados
+	// remove todas as linhas da tabela:
 	
-			protected int[] mostratitularesconta(DefaultListModel<String> dmcc,Conta c)
-			{
-				
-				int id = 0;
-				ArrayList<Integer> listid = new ArrayList<Integer>();
-				
-				for(int i=0; i<dmcc.getSize();i++)
-				{
-					id = Integer.parseInt(dmcc.get(i).substring(0, dmcc.get(i).indexOf("*")));
-					
-					
-					for(int y=0; y<c.getClientes().size();y++)
-					{
-						if(c.getClientes().get(y).getIdUtilizador()==id)
-						{
-							listid.add(i);
-						}
-					}
-				}
-				
-				int[] select = new int [listid.size()];
-				for(int i=0; i<listid.size();i++)
-				{
-					select[i]= listid.get(i);
-				}
-				
-				return select;
-				
-			}
+	protected void limpatabela(DefaultTableModel model)
+	{
+		for (int i = model.getRowCount() - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}
+	}
 	
 }
