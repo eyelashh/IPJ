@@ -720,7 +720,7 @@ public class Livraria implements Serializable {
 	}
 
 	// lista dos nifs dos carrinhos/clientes
-	protected String[] listaNifs() {
+	protected String[] arrayNifs() {
 
 		String[] nifs = new String[carrinhos.size()];
 		String s = "";
@@ -732,6 +732,26 @@ public class Livraria implements Serializable {
 		}
 		return nifs;
 	}
+	
+	//listar livros em array por titulo 
+		public String[] listaNifs(String nif) {
+
+			ArrayList<String> listaT = new ArrayList<String>();
+			String t = "";
+			for (Carrinho c : this.carrinhos) {
+				if (c.getNif().equals(nif)) {
+					t = c.toString();
+					listaT.add(t);
+
+				}
+				t = "";
+			}
+			String[] listaTitulo = new String[listaT.size()];
+			listaTitulo = listaT.toArray(listaTitulo);
+
+			return listaTitulo;
+		}
+
 
 	// select carrinho com o nif associado
 	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
