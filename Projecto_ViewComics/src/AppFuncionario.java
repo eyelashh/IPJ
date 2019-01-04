@@ -60,6 +60,7 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class AppFuncionario implements Serializable {
 
@@ -89,6 +90,8 @@ public class AppFuncionario implements Serializable {
 	private static Funcionario func;
 	private JTextField textField_12;
 	private JTextField txtPrecoCarrinho;
+	private JTextField txtQuantidadeLivrosCarrinho;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -262,11 +265,12 @@ public class AppFuncionario implements Serializable {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
 //					ArrayList <Carrinho>cars=gl.viewComics.getCarrinhos();
 //					Carrinho c3=cars.get(3);
-					Carrinho c3=gl.viewComics.pesquisarCarrinho(nifSeleccionado);
+					Carrinho c=gl.viewComics.pesquisarCarrinho(nifSeleccionado);
 					//Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
-					Double precoCarrinho = gl.viewComics.precoTotalCarrinho(c3);
-					txtPrecoCarrinho.setText(Double.toString(precoCarrinho));
-
+					String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
+					txtPrecoCarrinho.setText(precoCarrinho);
+					String quantidadeItemsCarrinho=gl.viewComics.totalLivrosCarrinho(c);
+					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
 				}
 			}
 		});
@@ -277,6 +281,7 @@ public class AppFuncionario implements Serializable {
 		textField_12.setColumns(10);
 
 		JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
+		btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
 		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -293,10 +298,10 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
-		btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
 		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
 
 		JButton btnCancelar = new JButton("Eliminar");
+		btnCancelar.setBounds(438, 418, 100, 30);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -313,7 +318,6 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		btnCancelar.setBackground(SystemColor.controlHighlight);
-		btnCancelar.setBounds(438, 418, 100, 30);
 		jpFuncCarrinhos.add(btnCancelar);
 		JPanel jpFuncConta = new JPanel();
 		jpFuncConta.setBounds(0, 0, 825, 545);
@@ -383,6 +387,7 @@ public class AppFuncionario implements Serializable {
 
 		// botao de pagamento, abre a janela pagamento
 		JButton btnPagamento = new JButton("Pagamento");
+		btnPagamento.setBounds(303, 418, 100, 30);
 		btnPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpFuncCarrinhos.setVisible(false);
@@ -393,10 +398,10 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		btnPagamento.setBackground(SystemColor.controlHighlight);
-		btnPagamento.setBounds(303, 418, 100, 30);
 		jpFuncCarrinhos.add(btnPagamento);
 
 		JButton bttLimparFun = new JButton("Limpar");
+		bttLimparFun.setBounds(136, 91, 100, 30);
 		bttLimparFun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -407,14 +412,70 @@ public class AppFuncionario implements Serializable {
 			}
 		});
 		bttLimparFun.setBackground(SystemColor.controlHighlight);
-		bttLimparFun.setBounds(136, 91, 100, 30);
 		jpFuncCarrinhos.add(bttLimparFun);
 		
 		txtPrecoCarrinho = new JTextField();
+		txtPrecoCarrinho.setBounds(438, 357, 51, 20);
+		txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtPrecoCarrinho.setEditable(false);
-		txtPrecoCarrinho.setBounds(476, 357, 292, 20);
 		jpFuncCarrinhos.add(txtPrecoCarrinho);
 		txtPrecoCarrinho.setColumns(10);
+		
+		txtQuantidadeLivrosCarrinho = new JTextField();
+		txtQuantidadeLivrosCarrinho.setBounds(452, 382, 61, 20);
+		txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtQuantidadeLivrosCarrinho.setEditable(false);
+		jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
+		txtQuantidadeLivrosCarrinho.setColumns(10);
+		
+		JLabel label_8 = new JLabel("\u20AC");
+		label_8.setBounds(493, 359, 163, 14);
+		label_8.setHorizontalAlignment(SwingConstants.LEFT);
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
+		jpFuncCarrinhos.add(label_8);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(303, 91, 404, 178);
+		jpFuncCarrinhos.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"Id do livro", "Titulo ", "Autor", "Preco unitario", "Quantidade"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, String.class, String.class, Object.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, true, true, true, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(3).setPreferredWidth(102);
+		
+		JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
+		lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblConteudoDetalhadoDo.setBounds(303, 59, 404, 20);
+		jpFuncCarrinhos.add(lblConteudoDetalhadoDo);
 		// {
 //			@Override
 		// o paint component vai pintar literalmente o componente

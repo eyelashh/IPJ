@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class Livraria implements Serializable {
-	// cenas
+	
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
@@ -252,24 +253,42 @@ public class Livraria implements Serializable {
 
 	// calcula o montante respectivo a um carrinho consoante os livros e a sua
 	// quantidade
-	public double precoTotalCarrinho(Carrinho c) {
+	public String precoTotalCarrinho(Carrinho c) {
 
-		double precoTotal = 0;
-		// dentro do ciclo
+		double precoTotalDOUBLE = 0;
+
 
 		for (Livro l : this.livros) {
 			if (!c.getConteudo().isEmpty()) {
 				if (c.getConteudo().containsKey(l.getIdLivro())) {
 					int id = l.getIdLivro();
-					precoTotal += precoLivro(id)*(c.getConteudo().get(id));
+					precoTotalDOUBLE += precoLivro(id)*(c.getConteudo().get(id));
 				}
 			} else
-				precoTotal = 0;
+				precoTotalDOUBLE = 0;
 
 		}
-		return precoTotal;
+		DecimalFormat df = new DecimalFormat("#.##"); 
+		String precoTotalSTR=df.format(precoTotalDOUBLE);
+		
+		return precoTotalSTR;
 
 	}
+	public String totalLivrosCarrinho(Carrinho c) {
+		
+		int quantidadeTotalItemsINT=0;
+
+		if (!c.getConteudo().isEmpty()) {
+			HashMap<Integer,Integer> hm=c.getConteudo();
+			ArrayList<Integer> quantidade=new ArrayList<Integer>(hm.values());
+			for (int q:quantidade) {
+				quantidadeTotalItemsINT+=q;
+			}
+		}
+		String quantidadeTotalItemsSTR=Integer.toString(quantidadeTotalItemsINT);
+		return quantidadeTotalItemsSTR;
+	}
+	
 
 	// troco carrinho
 	protected double trocoCarrinho(double recebido, double total) {
@@ -340,6 +359,24 @@ public class Livraria implements Serializable {
 		}
 
 	}
+
+	public void criarLivro(String idSTR, String titulo, String autor, String preco, String stock, String ano,
+			String descricao) {
+
+		int idINT=Integer.parseInt(idSTR);
+		for (Livro l : this.livros) {
+			if (l.getIdLivro()==idINT) {
+				l.setTitulo(titulo);
+				l.setAutor(autor);
+				l.setPreco(Double.parseDouble(preco));
+				l.setStock(Integer.parseInt(stock));
+				l.setAno(Integer.parseInt(ano));
+				l.setDescricao(descricao);
+			}
+		}
+
+	}
+	
 
 	// verifica o utilizador loggado
 	public Utilizador loggado(String username, String password) {
@@ -606,17 +643,7 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-// remove funcionario
-//	protected void removeFuncionario(String seleccao) {
-//		if (seleccao != null) {
-//			for (Utilizador u : this.utilizadores) {
-//				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-//					this.utilizadores.remove(u);
-//				}
-//			}
-//		}
-//
-//	}
+
 	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
 
 		for (int i = 0; i < utilizador.size(); i++) {
@@ -631,6 +658,17 @@ public class Livraria implements Serializable {
 //			utilizador.remove(u);
 //		}
 //	}
+	}
+	public void removerLivro(String idSTR, ArrayList<Livro> livros) {
+		
+		int idINT=Integer.parseInt(idSTR);
+		
+
+		for (int i = 0; i < livros.size(); i++) {
+			if (livros.get(i).getIdLivro() == idINT) {
+				livros.remove(i);
+			}
+		}
 	}
 
 	// lista de funcionario por user

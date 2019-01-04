@@ -8,7 +8,7 @@ public class ContaCorrente extends Conta implements Serializable{
 	private Cartao cartao;
 
 	public ContaCorrente(int idConta, Date dataCriacao, double saldo,
-			ArrayList<Cliente> clientes, double valorMaxLevantamento, double valorMaxDia, Cartao cartao) {
+			ArrayList<Utilizador> clientes, double valorMaxLevantamento, double valorMaxDia, Cartao cartao) {
 		super(idConta, dataCriacao, saldo, clientes, valorMaxLevantamento, valorMaxDia);
 		this.cartao = cartao;
 	}

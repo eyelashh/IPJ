@@ -36,6 +36,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 
 public class AppAdmin implements Serializable {
 
@@ -45,7 +49,6 @@ public class AppAdmin implements Serializable {
 	private JTextField txtTituloLivros;
 	private JTextField txtAutorLivros;
 	private JTextField txtAnoLivros;
-	private JTextField txtDescricaoLivros;
 	private JTextField txtPrecoLivros;
 	private JTextField txtStockLivros;
 	private JTextField txtUsernameALTERARUSER;
@@ -70,10 +73,11 @@ public class AppAdmin implements Serializable {
 	private JTextField txtIdLivros;
 	private JTextField txtStockSTOCK;
 	private JTextField txtAlterarStock;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup rbGroupSTOCK = new ButtonGroup();
 	private JPasswordField txtPasswordALTERAUSER;
 	private JPasswordField txtNovaPassALTERAPASS;
 	private JPasswordField txtConfirmaPassALTERAPASS;
+	private final ButtonGroup rbGroupLIVROS = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -195,8 +199,6 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
-
-		jpAdmFuncionarios = new JPanel();
 		DefaultListModel<String> modeloListaFUNCIONARIOS = new DefaultListModel<String>();
 		JPanel jpAdmLivros = new JPanel();
 		jpAdmLivros.setLayout(null);
@@ -256,12 +258,6 @@ public class AppAdmin implements Serializable {
 		txtAnoLivros.setBounds(341, 239, 86, 30);
 		jpAdmLivros.add(txtAnoLivros);
 
-		txtDescricaoLivros = new JTextField();
-		txtDescricaoLivros.setEditable(false);
-		txtDescricaoLivros.setColumns(10);
-		txtDescricaoLivros.setBounds(341, 286, 345, 117);
-		jpAdmLivros.add(txtDescricaoLivros);
-
 		txtPrecoLivros = new JTextField();
 		txtPrecoLivros.setEditable(false);
 		txtPrecoLivros.setColumns(10);
@@ -273,9 +269,14 @@ public class AppAdmin implements Serializable {
 		txtStockLivros.setColumns(10);
 		txtStockLivros.setBounds(341, 479, 86, 30);
 		jpAdmLivros.add(txtStockLivros);
+		
+		JTextArea txtDescricaoLivros = new JTextArea();
+		txtDescricaoLivros.setEditable(false);
+		txtDescricaoLivros.setBounds(341, 284, 345, 133);
+		jpAdmLivros.add(txtDescricaoLivros);
+		
 
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
-
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
 		btnPesquisarLivro.setBounds(224, 16, 97, 25);
 		jpAdmLivros.add(btnPesquisarLivro);
@@ -285,74 +286,123 @@ public class AppAdmin implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpAdmLivros.add(btnLimparLivro);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 118, 200, 367);
+		jpAdmLivros.add(scrollPane_1);
 
 		txtAtributoLivro = new JTextField();
 		txtAtributoLivro.setBounds(12, 62, 200, 23);
 		jpAdmLivros.add(txtAtributoLivro);
 		txtAtributoLivro.setColumns(10);
-
-		JList<String> listaLivros = new JList<String>(modeloListaLivros);
-		listaLivros.setBounds(12, 118, 200, 367);
-		jpAdmLivros.add(listaLivros);
-		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes � combobox com
-		// os atributos de pesquisa
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+		
+		
+		
+				JList<String> listaLivros = new JList<String>(modeloListaLivros);
+				scrollPane_1.setViewportView(listaLivros);
+				// caracter�sticas do livro seleccionado na JList
+				listaLivros.addListSelectionListener(new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent arg0) {
+						if (!listaLivros.isSelectionEmpty()) {
+							String livroSelecionado = listaLivros.getSelectedValue();
+							int id = gl.viewComics.obterIdLivro(livroSelecionado);
+							Livro l = gl.viewComics.livroId(id);
+							txtIdLivros.setText(Integer.toString(id));
+							txtTituloLivros.setText(l.getTitulo());
+							txtAutorLivros.setText(l.getAutor());
+							txtStockLivros.setText(Integer.toString(l.getStock()));
+							txtPrecoLivros.setText("" + l.getPreco());
+							txtDescricaoLivros.setText(l.getDescricao());
+							txtAnoLivros.setText("" + l.getAno());
+						}
+					}
+				});
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); 
 		comboBoxAtributoLivro.addItem("Titulo");
 		comboBoxAtributoLivro.addItem("Autor");
 		comboBoxAtributoLivro.addItem("Id");
-		JButton btnAlterarLivro = new JButton("Alterar dados");
-		btnAlterarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtTituloLivros.setEditable(true);
-				txtAutorLivros.setEditable(true);
-				txtStockLivros.setEditable(true);
-				txtAnoLivros.setEditable(true);
-				txtDescricaoLivros.setEditable(true);
-				txtPrecoLivros.setEditable(true);
-			}
-		});
-		btnAlterarLivro.setBounds(341, 51, 105, 43);
-		jpAdmLivros.add(btnAlterarLivro);
-		JButton btnConfirmarAlteracoesLIVROS = new JButton("Confirmar altera\u00E7\u00F5es");
+		
+		
+		
+		
+		JRadioButton rbAlterarLivro = new JRadioButton("Alterar os dados do livro seleccionado");
+		rbGroupLIVROS.add(rbAlterarLivro);
+		rbAlterarLivro.setBounds(341, 42, 245, 23);
+		jpAdmLivros.add(rbAlterarLivro);
+		
+		JRadioButton rbCriarLivro = new JRadioButton("Criar novo livro");
+		rbGroupLIVROS.add(rbCriarLivro);
+		rbCriarLivro.setBounds(341, 16, 187, 23);
+		jpAdmLivros.add(rbCriarLivro);
+		
+		JRadioButton rbRemoverLivro = new JRadioButton("Remover o livro seleccionado da loja");
+		rbGroupLIVROS.add(rbRemoverLivro);
+		rbRemoverLivro.setBounds(341, 68, 245, 23);
+		jpAdmLivros.add(rbRemoverLivro);
+
+		JButton btnConfirmarAlteracoesLIVROS = new JButton("Confirmar");
 		btnConfirmarAlteracoesLIVROS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String livroSeleccionado = listaLivros.getSelectedValue();
+				
 				String titulo = txtTituloLivros.getText();
 				String autor = txtAutorLivros.getText();
 				String stock = txtStockLivros.getText();
 				String descricao = txtDescricaoLivros.getText();
 				String ano = txtAnoLivros.getText();
 				String preco = txtPrecoLivros.getText();
-				gl.viewComics.alterarLivro(livroSeleccionado, titulo, autor, preco, stock, ano, descricao);
-				txtPrecoLivros.setEditable(false);
+				
+				if(rbAlterarLivro.isSelected()) {
+					if(!listaLivros.isSelectionEmpty()) {
+					String seleccao=listaLivros.getSelectedValue();
+					gl.viewComics.alterarLivro(seleccao, titulo, autor, preco, stock, ano, descricao);
+				}
+					else {
+						JOptionPane.showMessageDialog(null, "Seleccione um livro da lista por favor");
+					}
+				}
+				else if (rbCriarLivro.isSelected()) {
+					
+					Livro l=new Livro(titulo, autor, Double.parseDouble(preco),Integer.parseInt(stock) , Integer.parseInt(ano), descricao);
+					gl.viewComics.addLivro(l);
+				}
+					
+				else if (rbRemoverLivro.isSelected()) {
+					if(!listaLivros.isSelectionEmpty()) {
+						String seleccao=listaLivros.getSelectedValue();
+						String id=txtIdLivros.getText();
+						gl.viewComics.removerLivro(id,gl.viewComics.getLivros());
+					}
+						else {
+							JOptionPane.showMessageDialog(null, "Seleccione um livro da lista por favor");
+						}
+					
+					
+				}
+				txtAtributoLivro.setText("");
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtStockLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtAnoLivros.setText("");
 				txtTituloLivros.setEditable(false);
 				txtAutorLivros.setEditable(false);
 				txtStockLivros.setEditable(false);
 				txtDescricaoLivros.setEditable(false);
 				txtAnoLivros.setEditable(false);
+				txtPrecoLivros.setEditable(false);
+				
 				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-
+				modeloListaLivros.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
+						modeloListaLivros);
 			}
 
 		});
 		btnConfirmarAlteracoesLIVROS.setBounds(479, 446, 143, 38);
 		jpAdmLivros.add(btnConfirmarAlteracoesLIVROS);
-
-		JButton btnCriarLivro = new JButton("Criar novo livro");
-		btnCriarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtTituloLivros.setText("");
-				txtAutorLivros.setText("");
-				txtAnoLivros.setText("");
-				txtStockLivros.setText("");
-				txtDescricaoSTOCK.setText("");
-				txtIdLivros.setText("");
-				txtPrecoLivros.setText("");
-
-			}
-		});
-		btnCriarLivro.setBounds(456, 51, 113, 42);
-		jpAdmLivros.add(btnCriarLivro);
 
 		JLabel lblId = new JLabel("Id:");
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -364,42 +414,40 @@ public class AppAdmin implements Serializable {
 		txtIdLivros.setColumns(10);
 		txtIdLivros.setBounds(341, 99, 73, 30);
 		jpAdmLivros.add(txtIdLivros);
-
-		JButton btnRemoverLivro = new JButton("Remover livro da loja");
-		btnRemoverLivro.addActionListener(new ActionListener() {
+		
+		JButton btnNewButton = new JButton("Permitir alteracoes");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				if (!listaLivros.isSelectionEmpty()) {
-
-					// ver o id selecionado
-					String s = listaLivros.getSelectedValue();
-					s = s.substring(0, s.indexOf(" "));
-
-					gl.viewComics.removeLivro(Integer.parseInt(s), gl.viewComics.getLivros());
-
-					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-					modeloListaLivros.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
-							modeloListaLivros);
-					JOptionPane.showMessageDialog(null, "Livro eliminado com sucesso!");
-
-				}
-
-				listaLivros.clearSelection();
-				txtIdLivros.setText("");
-				txtTituloLivros.setText("");
-				txtAutorLivros.setEnabled(true);
-				txtAnoLivros.setText("");
-				txtDescricaoLivros.setText("");
-				txtPrecoLivros.setText("");
-				txtStockLivros.setText("");
-
+				txtTituloLivros.setEditable(true);
+				txtAutorLivros.setEditable(true);
+				txtStockLivros.setEditable(true);
+				txtDescricaoLivros.setEditable(true);
+				txtAnoLivros.setEditable(true);
+				txtPrecoLivros.setEditable(true);
 			}
-				
 		});
-		btnRemoverLivro.setBounds(579, 51, 107, 43);
-		jpAdmLivros.add(btnRemoverLivro);
-
+		btnNewButton.setBounds(598, 7, 158, 42);
+		jpAdmLivros.add(btnNewButton);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtTituloLivros.setEditable(false);
+				txtAutorLivros.setEditable(false);
+				txtStockLivros.setEditable(false);
+				txtDescricaoLivros.setEditable(false);
+				txtAnoLivros.setEditable(false);
+				txtPrecoLivros.setEditable(false);
+			}
+			
+		});
+		btnCancelar.setBounds(598, 60, 158, 38);
+		jpAdmLivros.add(btnCancelar);
+		
+		
+		
+		
+		
 		// pesquisar livros consoante os atributos
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -422,30 +470,25 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		// caracter�sticas do livro seleccionado na JList
-		listaLivros.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				String livroSelecionado = listaLivros.getSelectedValue();
-				int id = gl.viewComics.obterIdLivro(livroSelecionado);
-				Livro l = gl.viewComics.livroId(id);
-				txtIdLivros.setText(Integer.toString(id));
-				txtTituloLivros.setText(l.getTitulo());
-				txtAutorLivros.setText(l.getAutor());
-				txtStockLivros.setText(Integer.toString(l.getStock()));
-				txtPrecoLivros.setText("" + l.getPreco());
-				txtDescricaoLivros.setText(l.getDescricao());
-				txtAnoLivros.setText("" + l.getAno());
-			}
-		});
 		// bot�o limpar
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivro.setText("");
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtStockLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtAnoLivros.setText("");
+				
 				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
 			}
 		});
+
+		jpAdmFuncionarios = new JPanel();
 		jpAdmFuncionarios.setBounds(0, 0, 763, 545);
 		panelPrincipal.add(jpAdmFuncionarios);
 		jpAdmFuncionarios.setLayout(null);
@@ -576,12 +619,15 @@ public class AppAdmin implements Serializable {
 				String novoFuncUsername = txtUsernameFunc.getText();
 				String novoFuncPass = txtPassFunc.getText();
 				Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
-				txtIdFunc.setText(Integer.toString(f.getId()));
+//				txtIdFunc.setText(Integer.toString(f.getId()));
 				gl.viewComics.addUtilizador(f);
 				modeloListaFUNCIONARIOS.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
 						modeloListaFUNCIONARIOS);
-
+				txtNomeFunc.setEditable(false);
+				txtContactoFunc.setEditable(false);
+				txtUsernameFunc.setEditable(false);
+				txtPassFunc.setEditable(false);
 			}
 		});
 		btnConfirmarNovoFunc.setBounds(25, 47, 89, 23);
@@ -821,12 +867,12 @@ public class AppAdmin implements Serializable {
 
 		JRadioButton rbAdicionarStock = new JRadioButton("Adicionar ao stock");
 		rbAdicionarStock.setBounds(488, 386, 125, 23);
-		buttonGroup.add(rbAdicionarStock);
+		rbGroupSTOCK.add(rbAdicionarStock);
 		jpAdmStock.add(rbAdicionarStock);
 
 		JRadioButton rbRemoverAoStock = new JRadioButton("Remover ao stock");
 		rbRemoverAoStock.setBounds(488, 410, 116, 23);
-		buttonGroup.add(rbRemoverAoStock);
+		rbGroupSTOCK.add(rbRemoverAoStock);
 		jpAdmStock.add(rbRemoverAoStock);
 
 		JButton btnAlterarStock = new JButton("Alterar stock");
@@ -877,7 +923,7 @@ public class AppAdmin implements Serializable {
 			}
 		});
 		jpAdmStock.add(btnConfirmarAlteracaoSTOCK);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+//		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
 		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
 
