@@ -61,6 +61,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AppFuncionario implements Serializable {
 
@@ -78,7 +80,7 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtNovoUsername;
 	private JPasswordField passwordAntiga;
 	private JPasswordField passwordNovaConfirm;
-	private JTextField txtNifCarrinho;
+	private JTextField txtNifCARRINHO;
 	private JTextField textFieldNifPagamento;
 	private JTextField textFieldTotalPag;
 	private JTextField textFieldRecePaga;
@@ -198,8 +200,6 @@ public class AppFuncionario implements Serializable {
 		lblFunNome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
 		lblFunNome.setBounds(1066, 15, 160, 27);
 		panelcabecalho.add(lblFunNome);
-		
-		
 
 		JPanel panelMenu = new JPanel();
 //		{
@@ -231,11 +231,20 @@ public class AppFuncionario implements Serializable {
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
 		jpFuncCarrinhos.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(303, 91, 404, 178);
+		jpFuncCarrinhos.add(scrollPane_1);
 
-		txtNifCarrinho = new JTextField();
-		txtNifCarrinho.setBounds(25, 49, 200, 30);
-		txtNifCarrinho.setColumns(10);
-		jpFuncCarrinhos.add(txtNifCarrinho);
+		String[] colunas = { "IdLivro", "Titulo", "Autor", "Preco", "Quantidade" };
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+		table = new JTable(modeloTabela);
+		scrollPane_1.setViewportView(table);
+
+		txtNifCARRINHO = new JTextField();
+		txtNifCARRINHO.setBounds(25, 49, 200, 30);
+		txtNifCARRINHO.setColumns(10);
+		jpFuncCarrinhos.add(txtNifCARRINHO);
 
 		JLabel lblNif = new JLabel("NIF");
 		lblNif.setBounds(27, 24, 46, 14);
@@ -251,15 +260,8 @@ public class AppFuncionario implements Serializable {
 		lblQuantidadeDeLivros.setBounds(303, 384, 163, 14);
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
+
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(303, 91, 404, 178);
-		jpFuncCarrinhos.add(scrollPane_1);
-		
-		String [] colunas = {"IdLivro", "Titulo", "Autor", "Preco", "Quantidade"};
-		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-		table = new JTable(modeloTabela);
-		scrollPane_1.setViewportView(table);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 144, 200, 320);
@@ -270,27 +272,26 @@ public class AppFuncionario implements Serializable {
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
-				
+
 				modeloTabela.setRowCount(0);
-				
+
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
 //					ArrayList <Carrinho>cars=gl.viewComics.getCarrinhos();
 //					Carrinho c3=cars.get(3);
-					Carrinho c=gl.viewComics.pesquisarCarrinho(nifSeleccionado);
-					//Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado, gl.viewComics.getCarrinhos());
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSeleccionado);
+					// Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado,
+					// gl.viewComics.getCarrinhos());
 					String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
 					txtPrecoCarrinho.setText(precoCarrinho);
-					String quantidadeItemsCarrinho=gl.viewComics.totalLivrosCarrinho(c);
+					String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(c);
 					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
-					
+
 					gl.viewComics.carrinhoTabela(c, modeloTabela);
 				}
 			}
 		});
-		
-		
 
 		textField_12 = new JTextField();
 		textField_12.setBounds(276, 460, 446, 52);
@@ -302,7 +303,7 @@ public class AppFuncionario implements Serializable {
 		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String nif = txtNifCarrinho.getText();
+				String nif = txtNifCARRINHO.getText();
 
 				if (gl.viewComics.verificaNif(nif)) {
 					modeloListaNif.removeAllElements();
@@ -322,14 +323,13 @@ public class AppFuncionario implements Serializable {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
-
 				if (!listNifsClientes.isSelectionEmpty()) {
 					String nif = listNifsClientes.getSelectedValue();
-					Carrinho c=gl.viewComics.pesquisarCarrinho(nif);
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
 					gl.viewComics.removeCarrinho(c);
-				} else if (listNifsClientes.isSelectionEmpty())  {
-					JOptionPane.showMessageDialog(null, "Seleccione o nif da lista que corresponde ao carrinho que quer eliminar");
+				} else if (listNifsClientes.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"Seleccione o nif da lista que corresponde ao carrinho que quer eliminar");
 				}
 			}
 		});
@@ -429,31 +429,27 @@ public class AppFuncionario implements Serializable {
 		});
 		bttLimparFun.setBackground(SystemColor.controlHighlight);
 		jpFuncCarrinhos.add(bttLimparFun);
-		
+
 		txtPrecoCarrinho = new JTextField();
 		txtPrecoCarrinho.setBounds(438, 357, 51, 20);
 		txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtPrecoCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtPrecoCarrinho);
 		txtPrecoCarrinho.setColumns(10);
-		
+
 		txtQuantidadeLivrosCarrinho = new JTextField();
 		txtQuantidadeLivrosCarrinho.setBounds(452, 382, 61, 20);
 		txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtQuantidadeLivrosCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
 		txtQuantidadeLivrosCarrinho.setColumns(10);
-		
+
 		JLabel label_8 = new JLabel("\u20AC");
 		label_8.setBounds(493, 359, 163, 14);
 		label_8.setHorizontalAlignment(SwingConstants.LEFT);
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(label_8);
-		
-	
-		
-		
-		
+
 		JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
 		lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblConteudoDetalhadoDo.setBounds(303, 59, 404, 20);
