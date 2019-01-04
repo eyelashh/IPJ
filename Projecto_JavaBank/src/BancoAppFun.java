@@ -353,10 +353,6 @@ public class BancoAppFun implements Serializable {
 		lblContas.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblContas.setBounds(780, 48, 56, 30);
 		jpanelClientes.add(lblContas);
-
-		JScrollBar scrollBar_3 = new JScrollBar();
-		scrollBar_3.setBounds(1005, 92, 15, 441);
-		jpanelClientes.add(scrollBar_3);
 		
 		DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
 		JList<String> lbCltConta = new JList<String>(dlmcontacliente);
@@ -532,9 +528,6 @@ public class BancoAppFun implements Serializable {
 					tbCltPass.setText(c.getPassword());
 					tbCltNum.setText("" + c.getNumidentificacao());
 					dateChooser_3.setDate(c.getDataDeNascimento());
-
-					dlmcontacliente.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(c.getContas()), dlmcontacliente);
 
 					if (c.getTipoIndentificacao().equals("C.C.")) {
 						rbCltcc.setSelected(true);
@@ -786,7 +779,7 @@ public class BancoAppFun implements Serializable {
 
 				if (lContas.isSelectionEmpty()) {
 					// CRIA NOVA CONTA
-					ArrayList<Utilizador> clientes = new ArrayList<Utilizador>();
+					ArrayList<Integer> clientes = new ArrayList<Integer>();
 
 					// cartao nulo inicialmente;
 					Conta c;
@@ -795,7 +788,7 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), null);
-						gb.javabank.getContas().add(c);
+						
 
 					} else {
 
@@ -1703,15 +1696,6 @@ public class BancoAppFun implements Serializable {
 		btCltPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String s = (String) lbClt.getSelectedValue();
-				s = s.substring(0, s.indexOf("*"));
-				Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
-						gb.javabank.getUtlizadores());
-				
-				Conta conta = gb.javabank.SelectConta(Integer.parseInt(lbCltConta.getSelectedValue()),c.getContas());
-				
-				tbCltPesq.setText(((ContaCorrente)conta).getCartao().getCodvalidacao()+"");
-
 			}
 		});
 		
