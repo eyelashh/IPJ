@@ -6,21 +6,21 @@ import java.util.Date;
 
 public class Cliente extends Utilizador implements Serializable {
 
-	private ArrayList<Conta> contas;
+	private ArrayList<Integer> contas;
 
 	public Cliente(int idUtilizador, String nome, String sobrenome,Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto,
 				username, password);
-		this.contas = new ArrayList<Conta>();
+		this.contas = new ArrayList<Integer>();
 	}
  
-	public ArrayList<Conta> getContas() {
+	public ArrayList<Integer> getContas() {
 		return contas;
 	}
 
-	public void setContas(ArrayList<Conta> contas) {
+	public void setContas(ArrayList<Integer> contas) {
 		this.contas = contas;
 	}
 

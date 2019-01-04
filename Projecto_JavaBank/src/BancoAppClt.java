@@ -234,7 +234,7 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(dateChooser_1);
 
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
-		gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+		//gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
 		JList<String> listContasCliente = new JList<String>(dmListaContas);
 		listContasCliente.setBounds(94, 96, 379, 158);
 		JPCltCM.add(listContasCliente);
@@ -255,8 +255,8 @@ public class BancoAppClt implements Serializable {
 						dateChooser_1.setDate(c.getDataCriacao());
 						textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
-						Cartao c1 = obterCartao(Integer.parseInt(numeroConta), clt.getContas());
-						textFieldCltCartao.setText(Integer.toString(c1.getnCartao()));
+						//Cartao c1 = obterCartao(Integer.parseInt(numeroConta), clt.getContas());
+						//textFieldCltCartao.setText(Integer.toString(c1.getnCartao()));
 
 					}
 
@@ -279,7 +279,7 @@ public class BancoAppClt implements Serializable {
 		
 		DefaultListModel<String> dmListaMoviment =  new DefaultListModel<String>();
 		String numConta = listContasCliente.getSelectedValue();
-		gb.javabank.addelementoslist(arrayOperacoes(Integer.parseInt(numConta), clt.getContas()),dmListaMoviment);
+		//gb.javabank.addelementoslist(arrayOperacoes(Integer.parseInt(numConta), clt.getContas()),dmListaMoviment);
 		
 		JList listCltListaMovimentos = new JList();
 		listCltListaMovimentos.setBounds(599, 143, 379, 354);
@@ -741,10 +741,10 @@ public class BancoAppClt implements Serializable {
 				// seleciona as contas:
 				if (comboBoxCltConta.getSelectedIndex() == 0) {
 					dmListaContas.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+					//gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
 				} else {
 					dmListaContas.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt.getContas()), dmListaContas);
+					//gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt.getContas()), dmListaContas);
 				}
 
 			}
