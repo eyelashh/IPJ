@@ -274,6 +274,8 @@ public class AppFuncionario implements Serializable {
 				}
 			}
 		});
+		
+		
 
 		textField_12 = new JTextField();
 		textField_12.setBounds(276, 460, 446, 52);

@@ -204,26 +204,6 @@ public class Livraria implements Serializable {
 
 	}
 
-	// remove funcionario
-//	public void removerFuncionario(String idSTR) {
-//
-//		int id = Integer.parseInt(idSTR);
-//		boolean funcionarioRemovido = false;
-//		for (Utilizador u : this.utilizadores) {
-//			if (u.getId() == id) {
-//				this.utilizadores.remove(u);
-//				funcionarioRemovido = true;
-//			}
-//		}
-//		if (funcionarioRemovido) {
-//			JOptionPane.showMessageDialog(null, "Funcion�rio removido com sucesso");
-//
-//		} else {
-//			JOptionPane.showMessageDialog(null, "N�o foi possivel remover o funcionario");
-//		}
-//
-//	}
-
 //verifica se o carrinho existe, se n�o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
 	public boolean carrinhoExiste(String nif) {
 
@@ -439,8 +419,8 @@ public class Livraria implements Serializable {
 
 	}
 
-	// DISPOR LIVROS NA LISTA POR ARRAYLISTS
-	// criar uma nova arraylist de livros consoante v�rios atributos
+	// DISPOR LIVROS NA LISTA POR ARRAY
+	// criar uma nova array de livros consoante v�rios atributos
 	// util para dispor na lista
 
 	public String[] arrayLivros(ArrayList<Livro> livros) {
@@ -828,16 +808,5 @@ public class Livraria implements Serializable {
 		return carrinhoNif;
 	}
 
-	// select carrinho com o nif associado
-//	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
-//		Carrinho c = new Carrinho();
-//
-//		for (int i = 0; i < car.size(); i++) {
-//			if (car.get(i).getNif() == nif) {
-//				c = car.get(i);
-//			}
-//		}
-//		return c;
-//	}
 
 }
