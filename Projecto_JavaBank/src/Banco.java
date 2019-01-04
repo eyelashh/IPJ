@@ -203,6 +203,21 @@ public class Banco implements Serializable {
 		}
 		return u;
 	}
+	// extrair o id de uma string 
+		protected int obterId(String s) {
+
+			int id = 0;
+			if (s != null) {
+				for (Utilizador l : this.utilizadores) {
+					if (s.equals(l.toString())) {
+						id = l.getIdUtilizador();
+					}
+				}
+			}
+			return id;
+
+		}
+
 
 //seleciona a conta
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
@@ -220,8 +235,10 @@ public class Banco implements Serializable {
 
 	protected String[] listacontasUtilizadorID(int id, ArrayList<Conta> cont, ArrayList<Utilizador> util) {
 
+		
 		String[] numcontas = new String[cont.size()];
 		String s = "";
+		
 		for (int i = 0; i < cont.size(); i++) {
 			for (int j = 0; j < util.size(); j++) {
 				if (cont.get(i).getClientes().get(j).getIdUtilizador() == id) {
@@ -231,6 +248,7 @@ public class Banco implements Serializable {
 				}
 			}
 		}
+		
 		return numcontas;
 	}
 
@@ -389,12 +407,11 @@ public class Banco implements Serializable {
 	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
 		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i) instanceof Cliente) {
-				
+
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					
-					if(((Cliente) clientes.get(i)).getContas().get(x).getIdConta()==c.getIdConta())
-					{
-						((Cliente)clientes.get(i)).getContas().remove(c);
+
+					if (((Cliente) clientes.get(i)).getContas().get(x).getIdConta() == c.getIdConta()) {
+						((Cliente) clientes.get(i)).getContas().remove(c);
 					}
 				}
 			}
