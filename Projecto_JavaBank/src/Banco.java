@@ -365,8 +365,42 @@ public class Banco implements Serializable {
 	
 	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes)
 	{
-		
-		
+		Utilizador u = null;
+		for(int i=0; i<model.getRowCount();i++)
+		{
+			if(((Boolean)model.getValueAt(i, 0))==true)
+			{
+				u = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
+				if(u instanceof Cliente)
+				{
+					((Cliente) u).getContas().add(c);
+					
+					c.getClientes().add(u);
+				}
+			}
+		}
+	}
+	
+	//faz "Check" true aos clientes que sao titulares da conta selecionada:
+	protected void mostratitulares(Conta c, DefaultTableModel model, ArrayList<Utilizador> clientes)
+	{
+		Utilizador u; 
+		for(int i=0; i<model.getRowCount();i++)
+		{	
+			u = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
+			for(int x=0; x<c.getClientes().size();x++)
+			{
+				if(c.getClientes().get(x).getIdUtilizador()== u.getIdUtilizador())
+				{
+					model.setValueAt((Boolean)true, i, 0);
+				}
+			}
+			
+				
+
+			
+			
+		}
 	}
 	
 	

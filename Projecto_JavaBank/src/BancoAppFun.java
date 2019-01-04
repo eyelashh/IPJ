@@ -333,6 +333,11 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(tbContaslimitelevdia);
 
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		
 		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btnPesquisar.setBounds(280, 11, 99, 38);
@@ -502,6 +507,7 @@ public class BancoAppFun implements Serializable {
 
 				if (lContas.isSelectionEmpty()) {
 
+					
 					ArrayList<Utilizador> clientes = new ArrayList<Utilizador>();
 
 					// cartao nulo inicialmente;
@@ -524,10 +530,7 @@ public class BancoAppFun implements Serializable {
 					}
 					
 					// Atribuir titulares das contas:
-					gb.javabank.atruibuititular(model, c, clientes);
-
-					
-					
+					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 				} else {
@@ -546,7 +549,6 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 					}
 					
-
 					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
 
 				}
@@ -570,7 +572,9 @@ public class BancoAppFun implements Serializable {
 		// limpar campos:
 		btContaslimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
+				
 				lContas.clearSelection();
 				tbContasnum.setText(null);
 				dateChooser_2.setDate(null);
@@ -616,10 +620,13 @@ public class BancoAppFun implements Serializable {
 		});
 		// selecionar conta e preencher so campos correctos:
 		lContas.addListSelectionListener(new ListSelectionListener() {
-
 			public void valueChanged(ListSelectionEvent e) {
-				if (!lContas.isSelectionEmpty()) {
 
+				if (!lContas.isSelectionEmpty()) {
+					
+					gb.javabank.limpatabela(model);
+					gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
+					
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
@@ -663,9 +670,12 @@ public class BancoAppFun implements Serializable {
 						}
 
 					}
-
+					
+					gb.javabank.limpatabela(model);
+					gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
 					/// seleciona os clientes que estao como titulares á conta:
-
+					gb.javabank.mostratitulares(c,model, gb.javabank.getUtlizadores());
+					
 
 				}
 			}
@@ -1471,7 +1481,6 @@ public class BancoAppFun implements Serializable {
 				dmcc.removeAllElements();
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
-
 			}
 		});
 		btFunConta.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
