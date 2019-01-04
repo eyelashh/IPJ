@@ -346,12 +346,12 @@ public class Banco implements Serializable {
 				id = clientes.get(i).getIdUtilizador();
 				nome = clientes.get(i).getNome();
 				model.addRow(new Object[] { false,id,nome});
+				
 			}
 		}
 	}
 	
 	// remove todas as linhas da tabela:
-	
 	protected void limpatabela(DefaultTableModel model)
 	{
 		for (int i = model.getRowCount() - 1; i >= 0; i--) {
