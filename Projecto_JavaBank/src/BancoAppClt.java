@@ -1,4 +1,4 @@
- 
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +32,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class BancoAppClt implements Serializable{
+public class BancoAppClt implements Serializable {
 
 	private JFrame frame;
 	private JTextField textFieldCltNumero;
@@ -50,7 +52,7 @@ public class BancoAppClt implements Serializable{
 	private JTextField textField_11;
 	private static Cliente clt;
 	private static GestaoBanco gb;
-    
+
 	/**
 	 * Launch the application.
 	 */
@@ -60,7 +62,7 @@ public class BancoAppClt implements Serializable{
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Nao foi possivel abrir o cliente");
 		}
 	}
@@ -72,12 +74,13 @@ public class BancoAppClt implements Serializable{
 		clt = c;
 		gb = g;
 		initialize();
-		
+
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 
 		// Incia a criaçao de todos os componentes
@@ -101,13 +104,6 @@ public class BancoAppClt implements Serializable{
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
 
-		// Painel de cabeçalho imagem
-		// imagem_1 = new JLabel(new
-		// ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-co�pia
-		// (1).jpg"));
-		// imagem_1.setBounds(0, 0, 1238, 100);
-		// JpanelCabecalho.add(imagem_1);
-		// imagem_1.setVisible(true);
 
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogout = new JButton("Logout");
@@ -116,12 +112,6 @@ public class BancoAppClt implements Serializable{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
-					
-/*					Login logout = new Login();
-					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					logout.setLocationRelativeTo(frame);
-					logout.setVisible(true);
-					frame.setVisible(false);*/
 					
 					
 					Login logout = new Login();
@@ -195,62 +185,78 @@ public class BancoAppClt implements Serializable{
 		JPCltCM.setVisible(true);
 
 		// box onde escolhemos qual conta o cliente quer ver
-		JComboBox comboBoxCltConta = new JComboBox();
-		comboBoxCltConta.setBounds(121, 67, 287, 39);
+		String [] contas = new String[] {"Conta a ordem", "Conta Poupança"};
+		JComboBox comboBoxCltConta = new JComboBox(contas);
+		comboBoxCltConta.setBounds(106, 45, 182, 39);
 		JPCltCM.add(comboBoxCltConta);
 
 		JLabel textFieldCltNumero1 = new JLabel("Número:");
 		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltNumero1.setBounds(121, 148, 94, 16);
+		textFieldCltNumero1.setBounds(128, 277, 94, 16);
 		JPCltCM.add(textFieldCltNumero1);
 
 		textFieldCltNumero = new JTextField();
-		textFieldCltNumero.setBounds(121, 177, 322, 30);
+		textFieldCltNumero.setBounds(141, 305, 322, 30);
 		JPCltCM.add(textFieldCltNumero);
 
 		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
 		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltData1.setBounds(121, 219, 270, 16);
+		textFieldCltData1.setBounds(128, 338, 270, 16);
 		JPCltCM.add(textFieldCltData1);
 
 		JLabel lblSaldo = new JLabel("Saldo:");
 		lblSaldo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblSaldo.setBounds(121, 293, 270, 16);
+		lblSaldo.setBounds(128, 404, 270, 16);
 		JPCltCM.add(lblSaldo);
 
 		textFieldCltSaldo = new JTextField();
-		textFieldCltSaldo.setBounds(121, 322, 185, 30);
+		textFieldCltSaldo.setBounds(138, 432, 185, 30);
 		JPCltCM.add(textFieldCltSaldo);
 
 		JButton btnCltLimpar = new JButton("Limpar");
 		
 		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCltLimpar.setBounds(209, 404, 120, 38);
+		btnCltLimpar.setBounds(221, 481, 120, 38);
 		JPCltCM.add(btnCltLimpar);
 
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(889, 149, 20, 355);
-		JPCltCM.add(scrollBar);
-
 		JList listCltListaMovimentos = new JList();
-		listCltListaMovimentos.setBounds(527, 150, 379, 354);
+		listCltListaMovimentos.setBounds(599, 143, 379, 354);
 		JPCltCM.add(listCltListaMovimentos);
 
 		JLabel textCltCartao = new JLabel("Cartão:");
 		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textCltCartao.setBounds(527, 67, 270, 16);
+		textCltCartao.setBounds(599, 74, 270, 16);
 		JPCltCM.add(textCltCartao);
 
 		textFieldCltCartao = new JTextField();
-		textFieldCltCartao.setBounds(527, 94, 344, 30);
+		textFieldCltCartao.setBounds(599, 101, 344, 30);
 		JPCltCM.add(textFieldCltCartao);
 
 		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(131, 247, 217, 31);
+		dateChooser_1.setBounds(138, 366, 217, 31);
 		JPCltCM.add(dateChooser_1);
-		JPCltTransf.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltTransf);
-		JPCltTransf.setLayout(null);
+		
+		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
+		gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+		JList<String> list = new JList<String>(dmListaContas);
+		list.setBounds(94, 96, 379, 158);
+		JPCltCM.add(list);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(comboBoxCltConta.getSelectedItem().equals("Conta a ordem")) {
+					
+					
+				}
+				
+			}
+		});
+		btnPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnPesquisar.setBounds(330, 45, 120, 38);
+		JPCltCM.add(btnPesquisar);
+		
 
 		// Box pesquisa da conta do cliente
 		JComboBox comboBoxCLTPesquisa = new JComboBox();
@@ -706,6 +712,25 @@ public class BancoAppClt implements Serializable{
 			}
 		});
 
+		comboBoxCltConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = clt.getIdUtilizador(); 
+				// seleciona as contas:
+				if(comboBoxCltConta.getSelectedIndex()==0)
+				{
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+				}
+				else
+				{
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt.getContas()), dmListaContas);
+				}
+				
+				
+				
+			}
+		});
+		
 	}
-
 }
