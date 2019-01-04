@@ -161,7 +161,7 @@ public class Banco implements Serializable {
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
-	
+
 	protected String[] listaFunc(ArrayList<Utilizador> fun) {
 		ArrayList<String> func = new ArrayList<String>();
 		String f = "";
@@ -334,78 +334,55 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	
+
 	// preenche tabela clientes na conta:
-	protected void preenchetabelaclientes(DefaultTableModel model, ArrayList<Utilizador> clientes)
-	{
-		int id =0;
+	protected void preenchetabelaclientes(DefaultTableModel model, ArrayList<Utilizador> clientes) {
+		int id = 0;
 		String nome;
-		for(int i=0; i<clientes.size();i++)
-		{
-			if(clientes.get(i) instanceof Cliente)
-			{
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
 				id = clientes.get(i).getIdUtilizador();
 				nome = clientes.get(i).getNome();
-				model.addRow(new Object[] { false,id,nome});
-				
+				model.addRow(new Object[] { false, id, nome });
+
 			}
 		}
 	}
-	
+
 	// remove todas as linhas da tabela:
-	protected void limpatabela(DefaultTableModel model)
-	{
+	protected void limpatabela(DefaultTableModel model) {
 		for (int i = model.getRowCount() - 1; i >= 0; i--) {
 			model.removeRow(i);
 		}
 	}
-	
-	
+
 	// atribuir cliente a conta e conta ao cliente;
-	
-	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes)
-	{
+	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador u = null;
-		for(int i=0; i<model.getRowCount();i++)
-		{
-			if(((Boolean)model.getValueAt(i, 0))==true)
-			{
+		for (int i = 0; i < model.getRowCount(); i++) {
+			if (((Boolean) model.getValueAt(i, 0)) == true) {
 				u = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
-				if(u instanceof Cliente)
-				{
+				if (u instanceof Cliente) {
 					((Cliente) u).getContas().add(c);
-					
 					c.getClientes().add(u);
 				}
 			}
 		}
 	}
-	
-	//faz "Check" true aos clientes que sao titulares da conta selecionada:
-	protected void mostratitulares(Conta c, DefaultTableModel model)
-	{
-		Utilizador u; 
-		for(int i=0; i<model.getRowCount();i++)
-		{	
+
+	// faz "Check" true aos clientes que sao titulares da conta selecionada:
+	protected void mostratitulares(Conta c, DefaultTableModel model) {
+		Utilizador u;
+		for (int i = 0; i < model.getRowCount(); i++) {
 			u = this.selectUtilizador((int) model.getValueAt(i, 1), c.getClientes());
-			for(int x=0; x<c.getClientes().size();x++)
-			{
-				if(u instanceof Cliente)
-				{
-				if(c.getClientes().get(x).equals(((Cliente)u)))
-				{
-					model.setValueAt((Boolean)true, i, 0);
-				}
+			for (int x = 0; x < c.getClientes().size(); x++) {
+				if (u instanceof Cliente) {
+					if (c.getClientes().get(x).equals(((Cliente) u))) {
+						model.setValueAt((Boolean) true, i, 0);
+					}
 				}
 			}
-			
-				
-
-			
-			
 		}
 	}
-	
-	
-	
+
 }
