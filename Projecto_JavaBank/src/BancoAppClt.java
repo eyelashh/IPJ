@@ -80,6 +80,7 @@ public class BancoAppClt implements Serializable {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 
 		// Incia a criaçao de todos os componentes
@@ -186,10 +187,6 @@ public class BancoAppClt implements Serializable {
 		// box onde escolhemos qual conta o cliente quer ver
 		String [] contas = new String[] {"Conta a ordem", "Conta Poupança"};
 		JComboBox comboBoxCltConta = new JComboBox(contas);
-		comboBoxCltConta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		comboBoxCltConta.setBounds(106, 45, 182, 39);
 		JPCltCM.add(comboBoxCltConta);
 
@@ -240,10 +237,8 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(dateChooser_1);
 		
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
-//		int id = gb.javabank.obterId(clt.getUsername());
-//		
-//		gb.javabank.addelementoslist(gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()), dmListaContas);
-		JList list = new JList(dmListaContas);
+		gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+		JList<String> list = new JList<String>(dmListaContas);
 		list.setBounds(94, 96, 379, 158);
 		JPCltCM.add(list);
 		
@@ -252,6 +247,7 @@ public class BancoAppClt implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(comboBoxCltConta.getSelectedItem().equals("Conta a ordem")) {
+					
 					
 				}
 				
@@ -716,5 +712,25 @@ public class BancoAppClt implements Serializable {
 			}
 		});
 
+		comboBoxCltConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = clt.getIdUtilizador(); 
+				// seleciona as contas:
+				if(comboBoxCltConta.getSelectedIndex()==0)
+				{
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+				}
+				else
+				{
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt.getContas()), dmListaContas);
+				}
+				
+				
+				
+			}
+		});
+		
 	}
 }

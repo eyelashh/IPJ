@@ -154,11 +154,51 @@ public class Banco implements Serializable {
 			s = "" + cont.get(i).getIdConta();
 			numcontas[i] = s;
 			s = "";
-
 		}
 		return numcontas;
 	}
 
+	// lista as contas a ordem
+	protected String[] listacontasordem(ArrayList<Conta> cont)
+	{
+		ArrayList<String> listordem = new ArrayList<String>();
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+			if(cont.get(i) instanceof ContaCorrente)
+			{
+			s = "" + cont.get(i).getIdConta();
+			listordem.add(s);
+			}
+		}
+		String []numcontas = new String[listordem.size()];
+		numcontas = listordem.toArray(numcontas);
+		
+		return numcontas;
+	}
+	
+	
+	//// lista as contas poupança
+	
+	protected String[] listacontaspoupanca(ArrayList<Conta> cont)
+	{
+		ArrayList<String> listapoupancia = new ArrayList<String>();
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+			if(cont.get(i) instanceof ContaPoupanca)
+			{
+			s = "" + cont.get(i).getIdConta();
+			listapoupancia.add(s);
+			}
+		}
+		
+		String []numcontas = new String[listapoupancia.size()];
+		numcontas = listapoupancia.toArray(numcontas);
+		return numcontas;
+	}
+	
+	
+	
+	
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
 
