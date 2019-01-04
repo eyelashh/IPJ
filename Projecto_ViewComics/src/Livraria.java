@@ -808,5 +808,15 @@ public class Livraria implements Serializable {
 		return carrinhoNif;
 	}
 
+public ArrayListCarrinhoTabela(Carrinho c) {
+	
+	HashMap<Integer,Integer>hm=c.getConteudo();
+	for (Livro l:this.livros) {
+		
+	}
+			
+			
+	
 
+}
 }
