@@ -385,4 +385,20 @@ public class Banco implements Serializable {
 		}
 	}
 
+	// Elimina todas as contas nos clientes:
+	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
+				
+				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
+					
+					if(((Cliente) clientes.get(i)).getContas().get(x).getIdConta()==c.getIdConta())
+					{
+						((Cliente)clientes.get(i)).getContas().remove(c);
+					}
+				}
+			}
+		}
+	}
+
 }
