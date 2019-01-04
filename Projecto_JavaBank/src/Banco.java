@@ -159,46 +159,38 @@ public class Banco implements Serializable {
 	}
 
 	// lista as contas a ordem
-	protected String[] listacontasordem(ArrayList<Conta> cont)
-	{
+	protected String[] listacontasordem(ArrayList<Conta> cont) {
 		ArrayList<String> listordem = new ArrayList<String>();
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			if(cont.get(i) instanceof ContaCorrente)
-			{
-			s = "" + cont.get(i).getIdConta();
-			listordem.add(s);
+			if (cont.get(i) instanceof ContaCorrente) {
+				s = "" + cont.get(i).getIdConta();
+				listordem.add(s);
 			}
 		}
-		String []numcontas = new String[listordem.size()];
+		String[] numcontas = new String[listordem.size()];
 		numcontas = listordem.toArray(numcontas);
-		
+
 		return numcontas;
 	}
-	
-	
+
 	//// lista as contas poupança
-	
-	protected String[] listacontaspoupanca(ArrayList<Conta> cont)
-	{
+
+	protected String[] listacontaspoupanca(ArrayList<Conta> cont) {
 		ArrayList<String> listapoupancia = new ArrayList<String>();
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			if(cont.get(i) instanceof ContaPoupanca)
-			{
-			s = "" + cont.get(i).getIdConta();
-			listapoupancia.add(s);
+			if (cont.get(i) instanceof ContaPoupanca) {
+				s = "" + cont.get(i).getIdConta();
+				listapoupancia.add(s);
 			}
 		}
-		
-		String []numcontas = new String[listapoupancia.size()];
+
+		String[] numcontas = new String[listapoupancia.size()];
 		numcontas = listapoupancia.toArray(numcontas);
 		return numcontas;
 	}
-	
-	
-	
-	
+
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
 
@@ -446,15 +438,16 @@ public class Banco implements Serializable {
 	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
 		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i) instanceof Cliente) {
-
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-
-					if (((Cliente) clientes.get(i)).getContas().get(x).getIdConta() == c.getIdConta()) {
-						((Cliente) clientes.get(i)).getContas().remove(c);
+					if(c.getIdConta()==((Cliente) clientes.get(i)).getContas().get(x).getIdConta())
+					{
+						((Cliente) clientes.get(i)).getContas().remove(x);
 					}
 				}
 			}
+
 		}
+
 	}
 
 }

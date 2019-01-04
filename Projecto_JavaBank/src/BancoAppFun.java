@@ -529,15 +529,18 @@ public class BancoAppFun implements Serializable {
 
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
-
+					gb.javabank.eliminacontaemcliente(c,gb.javabank.getUtlizadores());
 					if (c instanceof ContaCorrente) {
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						
 					} else {
 
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 					}
 
 					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
@@ -676,10 +679,8 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!lContas.isSelectionEmpty()) {
+					gb.javabank.eliminacontaemcliente(gb.javabank.SelectConta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas()),gb.javabank.getUtlizadores());
 					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
-					gb.javabank.eliminacontaemcliente(
-							gb.javabank.SelectConta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas()),
-							gb.javabank.getUtlizadores());
 					lContas.clearSelection();
 					tbContasnum.setText(null);
 					dateChooser_2.setDate(null);
@@ -698,6 +699,12 @@ public class BancoAppFun implements Serializable {
 					dtcartao.setDate(null);
 					tbcodcartao.setText(null);
 					panelCartao.setVisible(false);
+					
+					
+					// eliminar contas dentro de arraylist de clientes
+					
+					
+					
 					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
 
 				}
