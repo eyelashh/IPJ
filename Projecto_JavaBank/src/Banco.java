@@ -213,7 +213,7 @@ public class Banco implements Serializable {
 	}
 
 	// metedo que retorna um utilizador qualquer recebendo o seu id;
-	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
+		protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
 		Utilizador u = new Utilizador();
 
 		for (int i = 0; i < list.size(); i++) {
@@ -225,7 +225,8 @@ public class Banco implements Serializable {
 	}
 
 	// metedo que retorna um utilizador qualquer recebendo o seu nome;
-	protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
+		// serve para a pesquisa:
+		protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
 		Utilizador u = new Utilizador();
 
 		for (int i = 0; i < list.size(); i++) {
@@ -263,44 +264,7 @@ public class Banco implements Serializable {
 		return c;
 	}
 
-	// isto lista o numero de contas num array unico de um utilizador de um id:
 
-	/*protected String[] listacontasUtilizadorID(int id, ArrayList<Conta> cont, ArrayList<Utilizador> util) {
-
-		String[] numcontas = new String[cont.size()];
-		String s = "";
-
-		for (int i = 0; i < cont.size(); i++) {
-			for (int j = 0; j < util.size(); j++) {
-				if (cont.get(i).getClientes().get(j).getIdUtilizador() == id) {
-					s = "" + cont.get(i).getIdConta();
-					numcontas[i] = s;
-					s = "";
-				}
-			}
-		}
-
-		return numcontas;
-	}*/
-
-	// isto lista o numero de contas num array unico de um utilizador de um nome:
-
-	//protected String[] listacontasUtilizadorNome(String nome, ArrayList<Conta> cont, ArrayList<Utilizador> util) {
-
-		/*String[] numcontas = new String[cont.size()];
-		String s = "";
-		for (int i = 0; i < cont.size(); i++) {
-			for (int j = 0; j < util.size(); j++) {
-				if (cont.get(i).getClientes().get(j).getNome() == nome) {
-					s = "" + cont.get(i).getIdConta();
-					numcontas[i] = s;
-					s = "";
-				}
-			}
-		}
-		return numcontas;
-*/
-	//}
 
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
@@ -407,47 +371,68 @@ public class Banco implements Serializable {
 
 	// atribuir cliente a conta e conta ao cliente;
 	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
-		/*Utilizador u = null;
-		for (int i = 0; i < model.getRowCount(); i++) {
-			if (((Boolean) model.getValueAt(i, 0)) == true) {
-				u = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
-				if (u instanceof Cliente) {
-					((Cliente) u).getContas().add(c);
-					c.getClientes().add(u);
-				}
+		Utilizador clt;
+		for(int i=0; i<model.getRowCount();i++)
+		{
+			if((Boolean)model.getValueAt(i, 0)==true)
+			{
+			clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
+			if(clt instanceof Cliente)
+			{
+				c.getClientes().add(clt.getIdUtilizador());
+				((Cliente) clt).getContas().add(c.getIdConta());
 			}
-		}*/
+			}
+		}
+		
 	}
+	
+	
 
 	// faz "Check" true aos clientes que sao titulares da conta selecionada:
 	protected void mostratitulares(Conta c, DefaultTableModel model) {
-	/*	Utilizador u;
-		for (int i = 0; i < model.getRowCount(); i++) {
-			u = this.selectUtilizador((int) model.getValueAt(i, 1), c.getClientes());
-			for (int x = 0; x < c.getClientes().size(); x++) {
-				if (u instanceof Cliente) {
-					if (c.getClientes().get(x).equals(((Cliente) u))) {
-						model.setValueAt((Boolean) true, i, 0);
+			
+			int idclt=0; 
+			int idtabela=0;
+			for(int x=0; x<c.getClientes().size();x++)
+			{
+				idclt=c.getClientes().get(x);
+				for(int i=0; i<model.getRowCount();i++)
+				{
+					idtabela = (int) model.getValueAt(i, 1);
+					if(idtabela==idclt)
+					{
+						model.setValueAt(true, i, 0);
 					}
 				}
 			}
-		}*/
+
 	}
+	
+	
 
 	// Elimina todas as contas nos clientes:
 	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
-/*		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i) instanceof Cliente) {
-				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					if(c.getIdConta()==((Cliente) clientes.get(i)).getContas().get(x).getIdConta())
-					{
-						((Cliente) clientes.get(i)).getContas().remove(x);
-					}
+	
+	}
+
+	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
+		
+		ArrayList<String> listprov = new ArrayList<String>();
+		for(int i=0; i<contas.size();i++)
+		{
+			for(int x=0; x<c.getContas().size();x++)
+			{
+				if(contas.get(i).getIdConta()==c.getContas().get(x))
+				{
+					listprov.add(c.getContas().get(x)+"");
 				}
 			}
-
-		}*/
-
+		}
+		
+		String[] lista= new String[listprov.size()];
+		lista = listprov.toArray(lista);	
+		return lista;
 	}
 
 }
