@@ -1,4 +1,4 @@
- 
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +31,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class BancoAppClt implements Serializable{
+public class BancoAppClt implements Serializable {
 
 	private JFrame frame;
 	private JTextField textFieldCltNumero;
@@ -50,7 +51,7 @@ public class BancoAppClt implements Serializable{
 	private JTextField textField_11;
 	private static Cliente clt;
 	private static GestaoBanco gb;
-    
+
 	/**
 	 * Launch the application.
 	 */
@@ -60,7 +61,7 @@ public class BancoAppClt implements Serializable{
 			window.frame.setVisible(true);
 
 		} catch (Exception e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			System.out.println("Nao foi possivel abrir o cliente");
 		}
 	}
@@ -72,7 +73,7 @@ public class BancoAppClt implements Serializable{
 		clt = c;
 		gb = g;
 		initialize();
-		
+
 	}
 
 	/**
@@ -195,7 +196,12 @@ public class BancoAppClt implements Serializable{
 		JPCltCM.setVisible(true);
 
 		// box onde escolhemos qual conta o cliente quer ver
-		JComboBox comboBoxCltConta = new JComboBox();
+		String [] contas = new String[] {"Conta a ordem", "Conta Poupança"};
+		JComboBox comboBoxCltConta = new JComboBox(contas);
+		comboBoxCltConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		comboBoxCltConta.setBounds(121, 67, 287, 39);
 		JPCltCM.add(comboBoxCltConta);
 
