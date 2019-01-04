@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -100,6 +102,8 @@ public class Carrinho implements Serializable {
 			quantidade = 0;
 
 		}
+		
+		
 		return quantidade;
 
 	}
