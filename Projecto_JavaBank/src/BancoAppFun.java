@@ -502,12 +502,12 @@ public class BancoAppFun implements Serializable {
 
 				if (lContas.isSelectionEmpty()) {
 
-					ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+					ArrayList<Utilizador> clientes = new ArrayList<Utilizador>();
 
 					// cartao nulo inicialmente;
-
+					Conta c;
 					if (rdbtnContaCorrente.isSelected()) {
-						Conta c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+						 c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), null);
@@ -515,15 +515,19 @@ public class BancoAppFun implements Serializable {
 
 					} else {
 
-						Conta c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+						 c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 						gb.javabank.getContas().add(c);
-
 					}
+					
+					// Atribuir titulares das contas:
+					gb.javabank.atruibuititular(model, c, clientes);
 
+					
+					
 					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 				} else {

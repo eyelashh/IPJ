@@ -161,6 +161,7 @@ public class Banco implements Serializable {
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
+	
 	protected String[] listaFunc(ArrayList<Utilizador> fun) {
 		ArrayList<String> func = new ArrayList<String>();
 		String f = "";
@@ -358,5 +359,16 @@ public class Banco implements Serializable {
 			model.removeRow(i);
 		}
 	}
+	
+	
+	// atribuir cliente a conta e conta ao cliente;
+	
+	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes)
+	{
+		
+		
+	}
+	
+	
 	
 }
