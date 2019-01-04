@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
@@ -35,8 +37,8 @@ import java.awt.event.WindowEvent;
 public class BancoAppClt implements Serializable {
 
 	private JFrame frame;
-	private JTextField textFieldCltNumero;
-	private JTextField textFieldCltSaldo;
+	private JTextField textFieldCltNumeroConta;
+	private JTextField textFieldCltSaldoConta;
 	private JTextField textFieldCltCartao;
 	private JTextField tbCltTransfSaldo;
 	private JTextField tbCltTransfMontante;
@@ -89,7 +91,7 @@ public class BancoAppClt implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -104,20 +106,17 @@ public class BancoAppClt implements Serializable {
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
 
-
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
-					
-					
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+
 					Login logout = new Login();
 					frame.setVisible(false);
 					logout.run();
-					
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -150,7 +149,7 @@ public class BancoAppClt implements Serializable {
 		lUtilizador.setFont(new Font("Helvetica", Font.PLAIN, 45));
 		lUtilizador.setBounds(585, 41, 308, 52);
 		JpanelCabecalho.add(lUtilizador);
-	
+
 		// separador no cabeçalho
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -185,7 +184,7 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.setVisible(true);
 
 		// box onde escolhemos qual conta o cliente quer ver
-		String [] contas = new String[] {"Conta a ordem", "Conta Poupança"};
+		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
 		JComboBox comboBoxCltConta = new JComboBox(contas);
 		comboBoxCltConta.setBounds(106, 45, 182, 39);
 		JPCltCM.add(comboBoxCltConta);
@@ -195,9 +194,9 @@ public class BancoAppClt implements Serializable {
 		textFieldCltNumero1.setBounds(128, 277, 94, 16);
 		JPCltCM.add(textFieldCltNumero1);
 
-		textFieldCltNumero = new JTextField();
-		textFieldCltNumero.setBounds(141, 305, 322, 30);
-		JPCltCM.add(textFieldCltNumero);
+		textFieldCltNumeroConta = new JTextField();
+		textFieldCltNumeroConta.setBounds(141, 305, 322, 30);
+		JPCltCM.add(textFieldCltNumeroConta);
 
 		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
 		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -209,19 +208,17 @@ public class BancoAppClt implements Serializable {
 		lblSaldo.setBounds(128, 404, 270, 16);
 		JPCltCM.add(lblSaldo);
 
-		textFieldCltSaldo = new JTextField();
-		textFieldCltSaldo.setBounds(138, 432, 185, 30);
-		JPCltCM.add(textFieldCltSaldo);
+		textFieldCltSaldoConta = new JTextField();
+		textFieldCltSaldoConta.setBounds(138, 432, 185, 30);
+		JPCltCM.add(textFieldCltSaldoConta);
 
 		JButton btnCltLimpar = new JButton("Limpar");
-		
+
 		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnCltLimpar.setBounds(221, 481, 120, 38);
 		JPCltCM.add(btnCltLimpar);
 
-		JList listCltListaMovimentos = new JList();
-		listCltListaMovimentos.setBounds(599, 143, 379, 354);
-		JPCltCM.add(listCltListaMovimentos);
+		
 
 		JLabel textCltCartao = new JLabel("Cartão:");
 		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -235,34 +232,60 @@ public class BancoAppClt implements Serializable {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(138, 366, 217, 31);
 		JPCltCM.add(dateChooser_1);
-		
+
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
 		gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
-		JList<String> list = new JList<String>(dmListaContas);
-		list.setBounds(94, 96, 379, 158);
-		JPCltCM.add(list);
-		
+		JList<String> listContasCliente = new JList<String>(dmListaContas);
+		listContasCliente.setBounds(94, 96, 379, 158);
+		JPCltCM.add(listContasCliente);
+
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(comboBoxCltConta.getSelectedItem().equals("Conta a ordem")) {
-					
-					
+
+				if (comboBoxCltConta.getSelectedItem().equals("Conta a ordem")) {
+
+					if (!listContasCliente.isSelectionEmpty()) {
+
+						String numeroConta = listContasCliente.getSelectedValue();
+
+						Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
+
+						textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
+						dateChooser_1.setDate(c.getDataCriacao());
+						textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
+
+						Cartao c1 = obterCartao(Integer.parseInt(numeroConta), clt.getContas());
+						textFieldCltCartao.setText(Integer.toString(c1.getnCartao()));
+
+					}
+
 				}
-				
+				if (comboBoxCltConta.getSelectedItem().equals("Conta Corrente")) {
+
+				}
+
 			}
 		});
 		btnPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnPesquisar.setBounds(330, 45, 120, 38);
 		JPCltCM.add(btnPesquisar);
-		
 
 		// Box pesquisa da conta do cliente
 		JComboBox comboBoxCLTPesquisa = new JComboBox();
 		comboBoxCLTPesquisa.setBounds(211, 67, 249, 39);
 		JPCltTransf.add(comboBoxCLTPesquisa);
 
+		
+		DefaultListModel<String> dmListaMoviment =  new DefaultListModel<String>();
+		String numConta = listContasCliente.getSelectedValue();
+		gb.javabank.addelementoslist(arrayOperacoes(Integer.parseInt(numConta), clt.getContas()),dmListaMoviment);
+		
+		JList listCltListaMovimentos = new JList();
+		listCltListaMovimentos.setBounds(599, 143, 379, 354);
+		JPCltCM.add(listCltListaMovimentos);
+		
+		
 		JLabel labelClt = new JLabel("Saldo:");
 		labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		labelClt.setBounds(550, 67, 66, 16);
@@ -700,12 +723,12 @@ public class BancoAppClt implements Serializable {
 				tbCltTransfMontante.setText("");
 			}
 		});
-		
+
 		btnCltLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textFieldCltNumero.setText("");
+				textFieldCltNumeroConta.setText("");
 				dateChooser_1.setToolTipText("");
-				textFieldCltSaldo.setText("");
+				textFieldCltSaldoConta.setText("");
 				textFieldCltCartao.setText("");
 				listCltListaMovimentos.clearSelection();
 				comboBoxCltConta.getSelectedIndex();
@@ -714,23 +737,57 @@ public class BancoAppClt implements Serializable {
 
 		comboBoxCltConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id = clt.getIdUtilizador(); 
+				int id = clt.getIdUtilizador();
 				// seleciona as contas:
-				if(comboBoxCltConta.getSelectedIndex()==0)
-				{
+				if (comboBoxCltConta.getSelectedIndex() == 0) {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
-				}
-				else
-				{
+				} else {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt.getContas()), dmListaContas);
 				}
-				
-				
-				
+
 			}
 		});
-		
+
 	}
+
+	private static Cartao obterCartao(int nConta, ArrayList<Conta> contas) {
+
+		Cartao card = new Cartao();
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
+				ContaCorrente c = (ContaCorrente) contas.get(i);
+				if (c.getCartao() != null) {
+					card = c.getCartao();
+				} else {
+					JOptionPane.showMessageDialog(null, "Não tem cartao");
+				}
+
+			}
+		}
+		return card;
+	}
+	
+
+	private static String[] arrayOperacoes(int nConta, ArrayList<Conta> contas) {
+
+		ArrayList<String> operacoes = new ArrayList<String>();
+		String o = "";
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
+				o = contas.get(i).getOperacoes().toString();
+				operacoes.add(o);
+			}
+			o = null;
+		}
+
+		String[] op = new String[operacoes.size() + 1];
+		op = operacoes.toArray(op);
+
+		return op;
+	}
+
 }
