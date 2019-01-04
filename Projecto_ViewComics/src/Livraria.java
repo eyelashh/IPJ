@@ -8,9 +8,11 @@ import java.util.Map.Entry;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Livraria implements Serializable {
-	
+
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
@@ -193,7 +195,6 @@ public class Livraria implements Serializable {
 
 	}
 
-
 	public void removeLivro(int idLivro, ArrayList<Livro> livros) {
 
 		for (int i = 0; i < livros.size(); i++) {
@@ -237,38 +238,37 @@ public class Livraria implements Serializable {
 
 		double precoTotalDOUBLE = 0;
 
-
 		for (Livro l : this.livros) {
 			if (!c.getConteudo().isEmpty()) {
 				if (c.getConteudo().containsKey(l.getIdLivro())) {
 					int id = l.getIdLivro();
-					precoTotalDOUBLE += precoLivro(id)*(c.getConteudo().get(id));
+					precoTotalDOUBLE += precoLivro(id) * (c.getConteudo().get(id));
 				}
 			} else
 				precoTotalDOUBLE = 0;
 
 		}
-		DecimalFormat df = new DecimalFormat("#.##"); 
-		String precoTotalSTR=df.format(precoTotalDOUBLE);
-		
+		DecimalFormat df = new DecimalFormat("#.##");
+		String precoTotalSTR = df.format(precoTotalDOUBLE);
+
 		return precoTotalSTR;
 
 	}
+
 	public String totalLivrosCarrinho(Carrinho c) {
-		
-		int quantidadeTotalItemsINT=0;
+
+		int quantidadeTotalItemsINT = 0;
 
 		if (!c.getConteudo().isEmpty()) {
-			HashMap<Integer,Integer> hm=c.getConteudo();
-			ArrayList<Integer> quantidade=new ArrayList<Integer>(hm.values());
-			for (int q:quantidade) {
-				quantidadeTotalItemsINT+=q;
+			HashMap<Integer, Integer> hm = c.getConteudo();
+			ArrayList<Integer> quantidade = new ArrayList<Integer>(hm.values());
+			for (int q : quantidade) {
+				quantidadeTotalItemsINT += q;
 			}
 		}
-		String quantidadeTotalItemsSTR=Integer.toString(quantidadeTotalItemsINT);
+		String quantidadeTotalItemsSTR = Integer.toString(quantidadeTotalItemsINT);
 		return quantidadeTotalItemsSTR;
 	}
-	
 
 	// troco carrinho
 	protected double trocoCarrinho(double recebido, double total) {
@@ -343,9 +343,9 @@ public class Livraria implements Serializable {
 	public void criarLivro(String idSTR, String titulo, String autor, String preco, String stock, String ano,
 			String descricao) {
 
-		int idINT=Integer.parseInt(idSTR);
+		int idINT = Integer.parseInt(idSTR);
 		for (Livro l : this.livros) {
-			if (l.getIdLivro()==idINT) {
+			if (l.getIdLivro() == idINT) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
 				l.setPreco(Double.parseDouble(preco));
@@ -356,7 +356,6 @@ public class Livraria implements Serializable {
 		}
 
 	}
-	
 
 	// verifica o utilizador loggado
 	public Utilizador loggado(String username, String password) {
@@ -623,7 +622,6 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-
 	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
 
 		for (int i = 0; i < utilizador.size(); i++) {
@@ -639,10 +637,10 @@ public class Livraria implements Serializable {
 //		}
 //	}
 	}
+
 	public void removerLivro(String idSTR, ArrayList<Livro> livros) {
-		
-		int idINT=Integer.parseInt(idSTR);
-		
+
+		int idINT = Integer.parseInt(idSTR);
 
 		for (int i = 0; i < livros.size(); i++) {
 			if (livros.get(i).getIdLivro() == idINT) {
@@ -796,27 +794,41 @@ public class Livraria implements Serializable {
 
 		return listaTitulo;
 	}
-	
+
 	public Carrinho pesquisarCarrinho(String nif) {
-		
-		Carrinho carrinhoNif=new Carrinho();
+
+		Carrinho carrinhoNif = new Carrinho();
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
-				carrinhoNif=c;
+				carrinhoNif = c;
 			}
 		}
 		return carrinhoNif;
 	}
 
-public ArrayListCarrinhoTabela(Carrinho c) {
+public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 	
+	Carrinho c=car;
+	ArrayList <Livro> livrosNoCarrinho =new ArrayList<Livro>();
 	HashMap<Integer,Integer>hm=c.getConteudo();
 	for (Livro l:this.livros) {
-		
+		if (!c.getConteudo().isEmpty()) {
+			if (c.getConteudo().containsKey(l.getIdLivro())) {
+				livrosNoCarrinho.add(l);
+				
+			}
+		}	
 	}
-			
-			
-	
-
+	for (Livro l:livrosNoCarrinho) {
+		int id=l.getIdLivro();
+		String titulo=l.getTitulo();
+		String autor =l.getAutor();
+		double preco=l.getPreco();
+		int quantidade=hm.get(id);
+		
+		Object[] data ={id,titulo,autor,preco,quantidade};	
+		dtm.addRow(data);
+	}
+		
 }
 }

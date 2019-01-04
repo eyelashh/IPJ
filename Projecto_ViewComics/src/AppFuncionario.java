@@ -198,6 +198,8 @@ public class AppFuncionario implements Serializable {
 		lblFunNome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
 		lblFunNome.setBounds(1066, 15, 160, 27);
 		panelcabecalho.add(lblFunNome);
+		
+		
 
 		JPanel panelMenu = new JPanel();
 //		{
@@ -249,6 +251,15 @@ public class AppFuncionario implements Serializable {
 		lblQuantidadeDeLivros.setBounds(303, 384, 163, 14);
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(303, 91, 404, 178);
+		jpFuncCarrinhos.add(scrollPane_1);
+		
+		String [] colunas = {"IdLivro", "Titulo", "Autor", "Preco", "Quantidade"};
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+		table = new JTable(modeloTabela);
+		scrollPane_1.setViewportView(table);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 144, 200, 320);
@@ -259,7 +270,9 @@ public class AppFuncionario implements Serializable {
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
-
+				
+				modeloTabela.setRowCount(0);
+				
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
@@ -271,6 +284,8 @@ public class AppFuncionario implements Serializable {
 					txtPrecoCarrinho.setText(precoCarrinho);
 					String quantidadeItemsCarrinho=gl.viewComics.totalLivrosCarrinho(c);
 					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
+					
+					gl.viewComics.carrinhoTabela(c, modeloTabela);
 				}
 			}
 		});
@@ -307,15 +322,14 @@ public class AppFuncionario implements Serializable {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// Eliminar o carrinho
-				String nif = txtNifCarrinho.getText();
 
-				if (listNifsClientes.getSelectedValue().equals(nif)) {
 
-//					Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
-//					gl.viewComics.removeCarrinho(c);
-				} else if (!listNifsClientes.isSelectionEmpty() || !listNifsClientes.getSelectedValue().equals(nif)) {
-					JOptionPane.showMessageDialog(null, "Tem de seleccionar o nif na tabela ou o nif está incorrecto");
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String nif = listNifsClientes.getSelectedValue();
+					Carrinho c=gl.viewComics.pesquisarCarrinho(nif);
+					gl.viewComics.removeCarrinho(c);
+				} else if (listNifsClientes.isSelectionEmpty())  {
+					JOptionPane.showMessageDialog(null, "Seleccione o nif da lista que corresponde ao carrinho que quer eliminar");
 				}
 			}
 		});
@@ -436,43 +450,9 @@ public class AppFuncionario implements Serializable {
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(label_8);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(303, 91, 404, 178);
-		jpFuncCarrinhos.add(scrollPane_1);
+	
 		
-		table = new JTable();
-		scrollPane_1.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Id do livro", "Titulo ", "Autor", "Preco unitario", "Quantidade"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, Object.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.getColumnModel().getColumn(3).setPreferredWidth(102);
+		
 		
 		JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
 		lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
