@@ -291,14 +291,16 @@ public class AppAdmin implements Serializable {
 		txtAtributoLivro.setColumns(10);
 
 		JList<String> listaLivros = new JList<String>(modeloListaLivros);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 		listaLivros.setBounds(12, 118, 200, 367);
 		jpAdmLivros.add(listaLivros);
-		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); // adicionar opcoes � combobox
-		// com
-		// os atributos de pesquisa
+		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); 
 		comboBoxAtributoLivro.addItem("Titulo");
 		comboBoxAtributoLivro.addItem("Autor");
 		comboBoxAtributoLivro.addItem("Id");
+		
+		
+		
 		
 		JRadioButton rbAlterarLivro = new JRadioButton("Alterar os dados do livro seleccionado");
 		rbGroupLIVROS.add(rbAlterarLivro);
@@ -327,12 +329,6 @@ public class AppAdmin implements Serializable {
 				String preco = txtPrecoLivros.getText();
 				
 				if(rbAlterarLivro.isSelected()) {
-					txtPrecoLivros.setEditable(true);
-					txtTituloLivros.setEditable(true);
-					txtAutorLivros.setEditable(true);
-					txtStockLivros.setEditable(true);
-					txtDescricaoLivros.setEditable(true);
-					txtAnoLivros.setEditable(true);
 					if(!listaLivros.isSelectionEmpty()) {
 					String seleccao=listaLivros.getSelectedValue();
 					gl.viewComics.alterarLivro(seleccao, titulo, autor, preco, stock, ano, descricao);
@@ -342,12 +338,7 @@ public class AppAdmin implements Serializable {
 					}
 				}
 				else if (rbCriarLivro.isSelected()) {
-					txtPrecoLivros.setEditable(true);
-					txtTituloLivros.setEditable(true);
-					txtAutorLivros.setEditable(true);
-					txtStockLivros.setEditable(true);
-					txtDescricaoLivros.setEditable(true);
-					txtAnoLivros.setEditable(true);
+					
 					Livro l=new Livro(titulo, autor, Double.parseDouble(preco),Integer.parseInt(stock) , Integer.parseInt(ano), descricao);
 					gl.viewComics.addLivro(l);
 				}
@@ -356,7 +347,7 @@ public class AppAdmin implements Serializable {
 					if(!listaLivros.isSelectionEmpty()) {
 						String seleccao=listaLivros.getSelectedValue();
 						String id=txtIdLivros.getText();
-						gl.viewComics.removerLivro(id);
+						gl.viewComics.removerLivro(id,gl.viewComics.getLivros());
 					}
 						else {
 							JOptionPane.showMessageDialog(null, "Seleccione um livro da lista por favor");
@@ -869,7 +860,7 @@ public class AppAdmin implements Serializable {
 			}
 		});
 		jpAdmStock.add(btnConfirmarAlteracaoSTOCK);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+//		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
 		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
 

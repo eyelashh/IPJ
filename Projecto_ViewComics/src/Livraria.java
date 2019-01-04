@@ -643,17 +643,7 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-// remove funcionario
-//	protected void removeFuncionario(String seleccao) {
-//		if (seleccao != null) {
-//			for (Utilizador u : this.utilizadores) {
-//				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-//					this.utilizadores.remove(u);
-//				}
-//			}
-//		}
-//
-//	}
+
 	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
 
 		for (int i = 0; i < utilizador.size(); i++) {
@@ -669,15 +659,16 @@ public class Livraria implements Serializable {
 //		}
 //	}
 	}
-	public void removerLivro(String id) {
-		int idINT =Integer.parseInt(id);
-		for(Livro l:this.livros) {
-			if(l.getIdLivro()==idINT) {
-				this.livros.remove(l);
-			}
-			
-		}
+	public void removerLivro(String idSTR, ArrayList<Livro> livros) {
 		
+		int idINT=Integer.parseInt(idSTR);
+		
+
+		for (int i = 0; i < livros.size(); i++) {
+			if (livros.get(i).getIdLivro() == idINT) {
+				livros.remove(i);
+			}
+		}
 	}
 
 	// lista de funcionario por user
