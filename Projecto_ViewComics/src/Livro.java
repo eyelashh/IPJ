@@ -12,8 +12,15 @@ public class Livro implements  Serializable {
 	private String descricao;
 	private int ano;
 	private static AtomicInteger ai=new AtomicInteger(0);
+	
+	public Livro() {
+		super();
+		this.idLivro = ai.incrementAndGet();
+		
+ 
+	}
 
-	public Livro(String titulo, String autor, double preco, int stock, int ano) {
+	public Livro(String titulo, String autor, double preco, int stock, int ano,String descricao) {
 		super();
 		this.idLivro = ai.incrementAndGet();
 		this.titulo = titulo;
@@ -21,6 +28,7 @@ public class Livro implements  Serializable {
 		this.preco = preco;
 		this.stock = stock;
 		this.ano =ano;
+		this.descricao=descricao;
  
 	}
 

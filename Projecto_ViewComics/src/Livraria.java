@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class Livraria implements Serializable {
-	// cenas
+	
 	private int idLivraria;
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
@@ -191,16 +192,16 @@ public class Livraria implements Serializable {
 		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 
 	}
-	public void removeLivro(String idLivro) {
-		
-		int idINT=Integer.valueOf(idLivro);
-		
-		for(Livro l:this.livros) {
-			if (l.getIdLivro()==idINT) {
-				this.livros.remove(l);
+
+
+	public void removeLivro(int idLivro, ArrayList<Livro> livros) {
+
+		for (int i = 0; i < livros.size(); i++) {
+			if (livros.get(i).getIdLivro() == idLivro) {
+				livros.remove(i);
 			}
 		}
-		
+
 	}
 
 	// remove funcionario
@@ -252,29 +253,42 @@ public class Livraria implements Serializable {
 
 	// calcula o montante respectivo a um carrinho consoante os livros e a sua
 	// quantidade
-	public double precoTotalCarrinho(Carrinho c) {
+	public String precoTotalCarrinho(Carrinho c) {
 
-		double preco = 0;
+		double precoTotalDOUBLE = 0;
 
-		// importar o conteudo do carrinho para um hashMap chamado hm
-		HashMap<Integer, Integer> hm = c.getConteudo();
 
-		// Criar um iterador para a key do hashmap para o poder percorrer
-		// num foreach
-		Set<Map.Entry<Integer, Integer>> set = hm.entrySet();
-
-		// percorrer o hm no foreach de modo a somar todos os pre�os
-		for (Map.Entry<Integer, Integer> me : set) {
-			for (Livro l : this.livros) {
-				if (l.getIdLivro() == me.getKey()) {
-					preco += l.getPreco() * me.getValue();
+		for (Livro l : this.livros) {
+			if (!c.getConteudo().isEmpty()) {
+				if (c.getConteudo().containsKey(l.getIdLivro())) {
+					int id = l.getIdLivro();
+					precoTotalDOUBLE += precoLivro(id)*(c.getConteudo().get(id));
 				}
-			}
-		}
+			} else
+				precoTotalDOUBLE = 0;
 
-		return preco;
+		}
+		DecimalFormat df = new DecimalFormat("#.##"); 
+		String precoTotalSTR=df.format(precoTotalDOUBLE);
+		
+		return precoTotalSTR;
 
 	}
+	public String totalLivrosCarrinho(Carrinho c) {
+		
+		int quantidadeTotalItemsINT=0;
+
+		if (!c.getConteudo().isEmpty()) {
+			HashMap<Integer,Integer> hm=c.getConteudo();
+			ArrayList<Integer> quantidade=new ArrayList<Integer>(hm.values());
+			for (int q:quantidade) {
+				quantidadeTotalItemsINT+=q;
+			}
+		}
+		String quantidadeTotalItemsSTR=Integer.toString(quantidadeTotalItemsINT);
+		return quantidadeTotalItemsSTR;
+	}
+	
 
 	// troco carrinho
 	protected double trocoCarrinho(double recebido, double total) {
@@ -345,6 +359,24 @@ public class Livraria implements Serializable {
 		}
 
 	}
+
+	public void criarLivro(String idSTR, String titulo, String autor, String preco, String stock, String ano,
+			String descricao) {
+
+		int idINT=Integer.parseInt(idSTR);
+		for (Livro l : this.livros) {
+			if (l.getIdLivro()==idINT) {
+				l.setTitulo(titulo);
+				l.setAutor(autor);
+				l.setPreco(Double.parseDouble(preco));
+				l.setStock(Integer.parseInt(stock));
+				l.setAno(Integer.parseInt(ano));
+				l.setDescricao(descricao);
+			}
+		}
+
+	}
+	
 
 	// verifica o utilizador loggado
 	public Utilizador loggado(String username, String password) {
@@ -622,21 +654,32 @@ public class Livraria implements Serializable {
 //		}
 //
 //	}
-public void removerUtil (int id, ArrayList <Utilizador>utilizador) {
-	
-	for(int i=0;i<utilizador.size();i++) {
-		if (utilizador.get(i).getId()==id){
-			utilizador.remove(i);
+	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
+
+		for (int i = 0; i < utilizador.size(); i++) {
+			if (utilizador.get(i).getId() == id) {
+				utilizador.remove(i);
+			}
 		}
-	}
-	
+
 //PORQUE � QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
 //	for(Utilizador u:utilizador) {
 //		if (u.getId()==id) {
 //			utilizador.remove(u);
 //		}
 //	}
-}
+	}
+	public void removerLivro(String id) {
+		int idINT =Integer.parseInt(id);
+		for(Livro l:this.livros) {
+			if(l.getIdLivro()==idINT) {
+				this.livros.remove(l);
+			}
+			
+		}
+		
+	}
+
 	// lista de funcionario por user
 	public String[] listaFunPorUsername(String username) {
 
@@ -782,17 +825,28 @@ public void removerUtil (int id, ArrayList <Utilizador>utilizador) {
 
 		return listaTitulo;
 	}
-
-	// select carrinho com o nif associado
-	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
-		Carrinho c = new Carrinho();
-
-		for (int i = 0; i < car.size(); i++) {
-			if (car.get(i).getNif() == nif) {
-				c = car.get(i);
+	
+	public Carrinho pesquisarCarrinho(String nif) {
+		
+		Carrinho carrinhoNif=new Carrinho();
+		for (Carrinho c : this.carrinhos) {
+			if (c.getNif().equals(nif)) {
+				carrinhoNif=c;
 			}
 		}
-		return c;
+		return carrinhoNif;
 	}
+
+	// select carrinho com o nif associado
+//	protected Carrinho selctCarrinho(String nif, ArrayList<Carrinho> car) {
+//		Carrinho c = new Carrinho();
+//
+//		for (int i = 0; i < car.size(); i++) {
+//			if (car.get(i).getNif() == nif) {
+//				c = car.get(i);
+//			}
+//		}
+//		return c;
+//	}
 
 }
