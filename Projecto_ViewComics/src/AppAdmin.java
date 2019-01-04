@@ -36,6 +36,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 
 public class AppAdmin implements Serializable {
 
@@ -45,7 +49,6 @@ public class AppAdmin implements Serializable {
 	private JTextField txtTituloLivros;
 	private JTextField txtAutorLivros;
 	private JTextField txtAnoLivros;
-	private JTextField txtDescricaoLivros;
 	private JTextField txtPrecoLivros;
 	private JTextField txtStockLivros;
 	private JTextField txtUsernameALTERARUSER;
@@ -255,12 +258,6 @@ public class AppAdmin implements Serializable {
 		txtAnoLivros.setBounds(341, 239, 86, 30);
 		jpAdmLivros.add(txtAnoLivros);
 
-		txtDescricaoLivros = new JTextField();
-		txtDescricaoLivros.setEditable(false);
-		txtDescricaoLivros.setColumns(10);
-		txtDescricaoLivros.setBounds(341, 286, 345, 117);
-		jpAdmLivros.add(txtDescricaoLivros);
-
 		txtPrecoLivros = new JTextField();
 		txtPrecoLivros.setEditable(false);
 		txtPrecoLivros.setColumns(10);
@@ -272,9 +269,14 @@ public class AppAdmin implements Serializable {
 		txtStockLivros.setColumns(10);
 		txtStockLivros.setBounds(341, 479, 86, 30);
 		jpAdmLivros.add(txtStockLivros);
+		
+		JTextArea txtDescricaoLivros = new JTextArea();
+		txtDescricaoLivros.setEditable(false);
+		txtDescricaoLivros.setBounds(341, 284, 345, 133);
+		jpAdmLivros.add(txtDescricaoLivros);
+		
 
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
-
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
 		btnPesquisarLivro.setBounds(224, 16, 97, 25);
 		jpAdmLivros.add(btnPesquisarLivro);
@@ -284,16 +286,37 @@ public class AppAdmin implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpAdmLivros.add(btnLimparLivro);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 118, 200, 367);
+		jpAdmLivros.add(scrollPane_1);
 
 		txtAtributoLivro = new JTextField();
 		txtAtributoLivro.setBounds(12, 62, 200, 23);
 		jpAdmLivros.add(txtAtributoLivro);
 		txtAtributoLivro.setColumns(10);
-
-		JList<String> listaLivros = new JList<String>(modeloListaLivros);
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-		listaLivros.setBounds(12, 118, 200, 367);
-		jpAdmLivros.add(listaLivros);
+		
+		
+		
+				JList<String> listaLivros = new JList<String>(modeloListaLivros);
+				scrollPane_1.setViewportView(listaLivros);
+				// caracter�sticas do livro seleccionado na JList
+				listaLivros.addListSelectionListener(new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent arg0) {
+						if (!listaLivros.isSelectionEmpty()) {
+							String livroSelecionado = listaLivros.getSelectedValue();
+							int id = gl.viewComics.obterIdLivro(livroSelecionado);
+							Livro l = gl.viewComics.livroId(id);
+							txtIdLivros.setText(Integer.toString(id));
+							txtTituloLivros.setText(l.getTitulo());
+							txtAutorLivros.setText(l.getAutor());
+							txtStockLivros.setText(Integer.toString(l.getStock()));
+							txtPrecoLivros.setText("" + l.getPreco());
+							txtDescricaoLivros.setText(l.getDescricao());
+							txtAnoLivros.setText("" + l.getAno());
+						}
+					}
+				});
 		comboBoxAtributoLivro.addItem("por que atributo pretende pesquisar o livro"); 
 		comboBoxAtributoLivro.addItem("Titulo");
 		comboBoxAtributoLivro.addItem("Autor");
@@ -304,17 +327,17 @@ public class AppAdmin implements Serializable {
 		
 		JRadioButton rbAlterarLivro = new JRadioButton("Alterar os dados do livro seleccionado");
 		rbGroupLIVROS.add(rbAlterarLivro);
-		rbAlterarLivro.setBounds(441, 52, 245, 23);
+		rbAlterarLivro.setBounds(341, 42, 245, 23);
 		jpAdmLivros.add(rbAlterarLivro);
 		
 		JRadioButton rbCriarLivro = new JRadioButton("Criar novo livro");
 		rbGroupLIVROS.add(rbCriarLivro);
-		rbCriarLivro.setBounds(441, 26, 187, 23);
+		rbCriarLivro.setBounds(341, 16, 187, 23);
 		jpAdmLivros.add(rbCriarLivro);
 		
 		JRadioButton rbRemoverLivro = new JRadioButton("Remover o livro seleccionado da loja");
 		rbGroupLIVROS.add(rbRemoverLivro);
-		rbRemoverLivro.setBounds(441, 78, 245, 23);
+		rbRemoverLivro.setBounds(341, 68, 245, 23);
 		jpAdmLivros.add(rbRemoverLivro);
 
 		JButton btnConfirmarAlteracoesLIVROS = new JButton("Confirmar");
@@ -355,6 +378,23 @@ public class AppAdmin implements Serializable {
 					
 					
 				}
+				txtAtributoLivro.setText("");
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtStockLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtAnoLivros.setText("");
+				txtTituloLivros.setEditable(false);
+				txtAutorLivros.setEditable(false);
+				txtStockLivros.setEditable(false);
+				txtDescricaoLivros.setEditable(false);
+				txtAnoLivros.setEditable(false);
+				txtPrecoLivros.setEditable(false);
+				
+				modeloListaLivros.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()),
 						modeloListaLivros);
@@ -374,6 +414,38 @@ public class AppAdmin implements Serializable {
 		txtIdLivros.setColumns(10);
 		txtIdLivros.setBounds(341, 99, 73, 30);
 		jpAdmLivros.add(txtIdLivros);
+		
+		JButton btnNewButton = new JButton("Permitir alteracoes");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtTituloLivros.setEditable(true);
+				txtAutorLivros.setEditable(true);
+				txtStockLivros.setEditable(true);
+				txtDescricaoLivros.setEditable(true);
+				txtAnoLivros.setEditable(true);
+				txtPrecoLivros.setEditable(true);
+			}
+		});
+		btnNewButton.setBounds(598, 7, 158, 42);
+		jpAdmLivros.add(btnNewButton);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtTituloLivros.setEditable(false);
+				txtAutorLivros.setEditable(false);
+				txtStockLivros.setEditable(false);
+				txtDescricaoLivros.setEditable(false);
+				txtAnoLivros.setEditable(false);
+				txtPrecoLivros.setEditable(false);
+			}
+			
+		});
+		btnCancelar.setBounds(598, 60, 158, 38);
+		jpAdmLivros.add(btnCancelar);
+		
+		
+		
 		
 		
 		// pesquisar livros consoante os atributos
@@ -398,27 +470,18 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		// caracter�sticas do livro seleccionado na JList
-		listaLivros.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!listaLivros.isSelectionEmpty()) {
-					String livroSelecionado = listaLivros.getSelectedValue();
-					int id = gl.viewComics.obterIdLivro(livroSelecionado);
-					Livro l = gl.viewComics.livroId(id);
-					txtIdLivros.setText(Integer.toString(id));
-					txtTituloLivros.setText(l.getTitulo());
-					txtAutorLivros.setText(l.getAutor());
-					txtStockLivros.setText(Integer.toString(l.getStock()));
-					txtPrecoLivros.setText("" + l.getPreco());
-					txtDescricaoLivros.setText(l.getDescricao());
-					txtAnoLivros.setText("" + l.getAno());
-				}
-			}
-		});
 		// bot�o limpar
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivro.setText("");
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtStockLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtAnoLivros.setText("");
+				
 				modeloListaLivros.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
