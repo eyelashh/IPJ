@@ -253,7 +253,8 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(dateChooser_1);
 		
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
-		int id = gb.javabank.obterId(clt.getNome());
+		int id = gb.javabank.obterId(clt.getUsername());
+		
 		gb.javabank.addelementoslist(gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()), dmListaContas);
 		JList list = new JList();
 		list.setBounds(94, 96, 379, 158);
