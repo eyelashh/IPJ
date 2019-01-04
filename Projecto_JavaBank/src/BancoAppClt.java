@@ -103,13 +103,6 @@ public class BancoAppClt implements Serializable {
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
 
-		// Painel de cabeçalho imagem
-		// imagem_1 = new JLabel(new
-		// ImageIcon("/Users/tamarabarros/Desktop/projectoJava/Layout-Banco/mLncE-co�pia
-		// (1).jpg"));
-		// imagem_1.setBounds(0, 0, 1238, 100);
-		// JpanelCabecalho.add(imagem_1);
-		// imagem_1.setVisible(true);
 
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogout = new JButton("Logout");
@@ -118,12 +111,6 @@ public class BancoAppClt implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					gb.atualizaficheiro(gb.javabank.getUtlizadores(),gb.javabank.getContas());
-					
-/*					Login logout = new Login();
-					logout.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					logout.setLocationRelativeTo(frame);
-					logout.setVisible(true);
-					frame.setVisible(false);*/
 					
 					
 					Login logout = new Login();
