@@ -174,7 +174,7 @@ public class Banco implements Serializable {
 		return numcontas;
 	}
 
-	//// lista as contas poupança
+	//// lista as contas poupanï¿½a
 
 	protected String[] listacontaspoupanca(ArrayList<Conta> cont) {
 		ArrayList<String> listapoupancia = new ArrayList<String>();
