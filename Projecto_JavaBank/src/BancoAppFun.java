@@ -674,7 +674,7 @@ public class BancoAppFun implements Serializable {
 					gb.javabank.limpatabela(model);
 					gb.javabank.preenchetabelaclientes(model,gb.javabank.getUtlizadores());
 					/// seleciona os clientes que estao como titulares á conta:
-					gb.javabank.mostratitulares(c,model, gb.javabank.getUtlizadores());
+					gb.javabank.mostratitulares(c,model);
 					
 
 				}

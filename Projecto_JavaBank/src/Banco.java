@@ -382,17 +382,20 @@ public class Banco implements Serializable {
 	}
 	
 	//faz "Check" true aos clientes que sao titulares da conta selecionada:
-	protected void mostratitulares(Conta c, DefaultTableModel model, ArrayList<Utilizador> clientes)
+	protected void mostratitulares(Conta c, DefaultTableModel model)
 	{
 		Utilizador u; 
 		for(int i=0; i<model.getRowCount();i++)
 		{	
-			u = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
+			u = this.selectUtilizador((int) model.getValueAt(i, 1), c.getClientes());
 			for(int x=0; x<c.getClientes().size();x++)
 			{
-				if(c.getClientes().get(x).getIdUtilizador()== u.getIdUtilizador())
+				if(u instanceof Cliente)
+				{
+				if(c.getClientes().get(x).equals(((Cliente)u)))
 				{
 					model.setValueAt((Boolean)true, i, 0);
+				}
 				}
 			}
 			
