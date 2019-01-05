@@ -482,21 +482,21 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
-	protected Cartao obterCartao(int nConta, ArrayList<Conta> contas, ArrayList<Cartao>cartoes) {
+	protected Cartao obterCartao(int nConta) {
+
 		Cartao card = new Cartao();
-		for (int i = 0; i < contas.size(); i++) {
-			for(int j=0; j < cartoes.size(); j++) {
-			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
-				ContaCorrente c = (ContaCorrente) contas.get(i);
-				if(c.getIdConta()== cartoes.get(j).getIdconta()) {
 
-					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+		for (int j = 0; j < cartoes.size(); j++) {
 
-				} else {
-					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
-				}
+			if (cartoes.get(j).getIdconta() == nConta) {
+				card = cartoes.get(j);
+
+				JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 			}
-			}
+
 		}
 		return card;
 	}
