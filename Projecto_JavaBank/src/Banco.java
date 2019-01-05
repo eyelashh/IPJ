@@ -21,6 +21,7 @@ public class Banco implements Serializable {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.contas = new ArrayList<Conta>();
+		this.cartoes = new ArrayList<Cartao>();
 	}
 
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
@@ -36,8 +37,6 @@ public class Banco implements Serializable {
 
 	}
 
-	
-
 	public ArrayList<Cartao> getCartoes() {
 		return cartoes;
 	}
@@ -49,8 +48,6 @@ public class Banco implements Serializable {
 	public int getIdBanco() {
 		return idBanco;
 	}
-	
-	
 
 	public void setIdBanco(int idBanco) {
 		this.idBanco = idBanco;
@@ -468,24 +465,20 @@ public class Banco implements Serializable {
 		// remover id de contas dentro dos clientes:
 
 		Cliente clt;
-		for(int i=0; i<clientes.size();i++)
-		{
-			if(clientes.get(i) instanceof Cliente)
-			{
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
 
-				for(int x=0; x<((Cliente) clientes.get(i)).getContas().size(); x++)
-				{
-					if(((Cliente) clientes.get(i)).getContas().get(x)==c.getIdConta())
-					{
+				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
+					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
 						((Cliente) clientes.get(i)).getContas().remove(x);
 						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
 						c.getClientes().remove(id);
 					}
 				}
-			
+
 			}
 		}
-		
+
 	}
 
 	// retorna o cartao
@@ -494,45 +487,57 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
 				ContaCorrente c = (ContaCorrente) contas.get(i);
-			/*	if (c.getCartao() != null) {
-					card = c.getCartao();
-					
-				}  else {
+
+				if (Integer.toString(c.getCartao()) != null) {
+					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+
+				} else {
 					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 				}
-*/
+
 			}
 		}
 		return card;
 	}
-	
-	// verifica se o carrinho existe, se n�o existir cria um novo carrinho com o nif
-		// introduzido e adiciona-o ao array
-		public void cartaoExiste(int idConta, ArrayList<Conta> contas, Cartao card) {
 
-			for (int i = 0; i < contas.size(); i++) {
-				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == idConta)) {
-					ContaCorrente c = (ContaCorrente) contas.get(i);
-					/*if (c.getCartao() != null) {
+	// verifica se o cartao existe, se n�o existir cria um novo cartao
+	public void cartaoExiste(int idConta, ArrayList<Conta> contas, Cartao card) {
+
+		for (int j = 0; j < this.contas.size(); j++) {
+
+			if ((contas.get(j) instanceof ContaCorrente) && (contas.get(j).getIdConta() == idConta)) {
+				ContaCorrente c = (ContaCorrente) contas.get(j);
+
+				if (c.getCartao() >= 0) {
 
 					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
-					}else {
-						c.setCartao(card);
-						
-						JOptionPane.showMessageDialog(null, "Foi adicionado um cartão à sua conta!!");
-					}*/
 
+				} else {
+					cartoes.add(card);
+
+					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 				}
 
+//				if (cartoes.get(i) != null) {
+//					if ((contas.get(j).getIdConta() == cartoes.get(i).getIdconta())
+//							&& contas.get(j).getIdConta() == idConta) {
+//
+//						JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+//					}
+//				} else {
+//
+//					cartoes.add(card);
+//
+//					JOptionPane.showMessageDialog(null, "Foi adicionado um cartão à sua conta!!");
+//
+//				}
 			}
-			
 		}
-	
 
-
+	}
 
 	// lista das operacoes
-	protected  String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
+	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
 
 		ArrayList<String> operacoes = new ArrayList<String>();
 		String o = "";
@@ -550,7 +555,5 @@ public class Banco implements Serializable {
 
 		return op;
 	}
-	
 
-	
 }
