@@ -266,6 +266,304 @@ public class BancoAppFun implements Serializable {
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
+		
+				// Painel principal da opera√ßoes
+				JPanel jpanelOperacoes = new JPanel();
+				jpanelOperacoes.setBounds(0, 0, 1042, 576);
+				JpanelPrincipal.add(jpanelOperacoes);
+				jpanelOperacoes.setVisible(false);
+				jpanelOperacoes.setLayout(null);
+				
+						JComboBox cbOperacoespesqClt = new JComboBox();
+						cbOperacoespesqClt.setBounds(188, 49, 249, 39);
+						jpanelOperacoes.add(cbOperacoespesqClt);
+						
+								JTextField tbOperacoespesqClt = new JTextField();
+								tbOperacoespesqClt.setBounds(188, 92, 250, 31);
+								jpanelOperacoes.add(tbOperacoespesqClt);
+								
+										JButton btnNewButton = new JButton("Pesquisar");
+										btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+										btnNewButton.setBounds(258, 131, 116, 38);
+										jpanelOperacoes.add(btnNewButton);
+										JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
+										cbOperacoesConta.addItemListener(new ItemListener() {
+											public void itemStateChanged(ItemEvent e) {
+												String s = (String) cbOperacoesConta.getSelectedItem();
+												if (s != null) {
+													Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+													tbContasaldoc.setText("" + c.getSaldo());
+												}
+
+											}
+										});
+										cbOperacoesConta.setBounds(578, 72, 249, 39);
+										jpanelOperacoes.add(cbOperacoesConta);
+										
+												JLabel lblNewLabel_3 = new JLabel("Saldo :");
+												lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+												lblNewLabel_3.setBounds(568, 107, 162, 23);
+												jpanelOperacoes.add(lblNewLabel_3);
+												
+														tbContasaldoc = new JTextField();
+														tbContasaldoc.setEditable(false);
+														tbContasaldoc.setBounds(578, 133, 169, 31);
+														jpanelOperacoes.add(tbContasaldoc);
+														
+																JLabel lblConta = new JLabel("Conta:");
+																lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																lblConta.setBounds(568, 49, 64, 23);
+																jpanelOperacoes.add(lblConta);
+																
+																		JButton cbOperacoDep = new JButton("Dep√≥sito");
+																		cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																		cbOperacoDep.setBounds(243, 207, 176, 38);
+																		jpanelOperacoes.add(cbOperacoDep);
+																		
+																				JButton btnLevantamento = new JButton("Levantamento");
+																				btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																				btnLevantamento.setBounds(432, 207, 176, 38);
+																				jpanelOperacoes.add(btnLevantamento);
+																				
+																						JButton btnTransferncia = new JButton("Transfer\u00EAncia");
+																						btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																						btnTransferncia.setBounds(620, 207, 176, 38);
+																						jpanelOperacoes.add(btnTransferncia);
+																						
+																								JPanel JpanelOpLevantamento = new JPanel();
+																								JpanelOpLevantamento.setVisible(false);
+																								
+																										JPanel JpanelOpDeposito = new JPanel();
+																										JpanelOpDeposito.setVisible(false);
+																										
+																												JPanel JpanelOpTransferencia = new JPanel();
+																												JpanelOpTransferencia.setVisible(false);
+																												JpanelOpTransferencia.setLayout(null);
+																												JpanelOpTransferencia.setBounds(263, 247, 516, 313);
+																												jpanelOperacoes.add(JpanelOpTransferencia);
+																												
+																														tbTransMontante = new JTextField();
+																														tbTransMontante.setBounds(168, 59, 162, 30);
+																														JpanelOpTransferencia.add(tbTransMontante);
+																														
+																																JLabel lblContaDestino = new JLabel("Conta destino:");
+																																lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																lblContaDestino.setBounds(158, 101, 137, 23);
+																																JpanelOpTransferencia.add(lblContaDestino);
+																																
+																																		JLabel label_5 = new JLabel("Montante:");
+																																		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																		label_5.setBounds(158, 34, 97, 23);
+																																		JpanelOpTransferencia.add(label_5);
+																																		
+																																				tbTransContaDestino = new JTextField();
+																																				tbTransContaDestino.setBounds(168, 126, 162, 30);
+																																				JpanelOpTransferencia.add(tbTransContaDestino);
+																																				
+																																						JButton btTransConfirmar = new JButton("Confirmar");
+																																						btTransConfirmar.setBounds(146, 317, 97, 30);
+																																						JpanelOpTransferencia.add(btTransConfirmar);
+																																						
+																																								JButton btTransCancelar = new JButton("Cancelar");
+																																								btTransCancelar.setBounds(275, 317, 97, 30);
+																																								JpanelOpTransferencia.add(btTransCancelar);
+																																								
+																																										JLabel lblDataDaOperao = new JLabel("Data da Opera√ß√£o:");
+																																										lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										lblDataDaOperao.setBounds(158, 168, 189, 23);
+																																										JpanelOpTransferencia.add(lblDataDaOperao);
+																																										
+																																												JButton btnConfirmar = new JButton("Confirmar");
+																																												
+																																														btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																														btnConfirmar.setBounds(118, 253, 116, 38);
+																																														JpanelOpTransferencia.add(btnConfirmar);
+																																														
+																																																JButton btnCancelar = new JButton("Cancelar");
+																																																btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																btnCancelar.setBounds(256, 253, 116, 38);
+																																																JpanelOpTransferencia.add(btnCancelar);
+																																																
+																																																		JDateChooser dateChooser_1 = new JDateChooser();
+																																																		dateChooser_1.setBounds(168, 198, 162, 31);
+																																																		JpanelOpTransferencia.add(dateChooser_1);
+																																																		
+																																																				JpanelOpDeposito.setBounds(263, 247, 516, 313);
+																																																				jpanelOperacoes.add(JpanelOpDeposito);
+																																																				JpanelOpDeposito.setLayout(null);
+																																																				
+																																																						tbDepMontante = new JTextField();
+																																																						tbDepMontante.setBounds(174, 83, 162, 31);
+																																																						JpanelOpDeposito.add(tbDepMontante);
+																																																						
+																																																								JLabel lblData = new JLabel("Data:");
+																																																								lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																								lblData.setBounds(164, 131, 50, 23);
+																																																								JpanelOpDeposito.add(lblData);
+																																																								
+																																																										JLabel lblMontantem = new JLabel("Montante Dep√≥sito:");
+																																																										lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																										lblMontantem.setBounds(164, 55, 229, 23);
+																																																										JpanelOpDeposito.add(lblMontantem);
+																																																										
+																																																												JButton btDepConfirmar = new JButton("Confirmar");
+																																																												btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																												btDepConfirmar.setBounds(192, 225, 120, 38);
+																																																												JpanelOpDeposito.add(btDepConfirmar);
+																																																												
+																																																														JDateChooser dtchdeposito = new JDateChooser();
+																																																														dtchdeposito.setBounds(174, 166, 162, 31);
+																																																														JpanelOpDeposito.add(dtchdeposito);
+																																																														
+																																																																JDateChooser dateChooser4 = new JDateChooser();
+																																																																dateChooser4.setBounds(174, 166, 162, 31);
+																																																																JpanelOpLevantamento.add(dateChooser4);
+																																																																JpanelOpLevantamento.setBounds(263, 247, 516, 313);
+																																																																jpanelOperacoes.add(JpanelOpLevantamento);
+																																																																JpanelOpLevantamento.setLayout(null);
+																																																																
+																																																																		tbLevMontante = new JTextField();
+																																																																		tbLevMontante.setBounds(174, 83, 162, 31);
+																																																																		JpanelOpLevantamento.add(tbLevMontante);
+																																																																		
+																																																																				JLabel label = new JLabel("Data:");
+																																																																				label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																																				label.setBounds(164, 131, 50, 23);
+																																																																				JpanelOpLevantamento.add(label);
+																																																																				
+																																																																						JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+																																																																						lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																																																						lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+																																																																						JpanelOpLevantamento.add(lblMontanteLevantamento);
+																																																																						
+																																																																								JButton btLevConfirmar = new JButton("Confirmar");
+																																																																								btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																																								btLevConfirmar.setBounds(129, 223, 120, 38);
+																																																																								JpanelOpLevantamento.add(btLevConfirmar);
+																																																																								
+																																																																										JButton btLevCancelar = new JButton("Cancelar");
+																																																																										btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+																																																																										btLevCancelar.setBounds(273, 224, 120, 38);
+																																																																										JpanelOpLevantamento.add(btLevCancelar);
+																																																																										
+																																																																												//// acaba a construÔøΩao dos botoes e comeÔøΩa todos os metedos:
+																																																																										
+																																																																												// Dentro do painel gestao:
+																																																																												// coloca o painel depositos visivel:
+																																																																												cbOperacoDep.addActionListener(new ActionListener() {
+																																																																													public void actionPerformed(ActionEvent e) {
+																																																																										
+																																																																														// paineis:
+																																																																														JpanelOpDeposito.setVisible(true);
+																																																																														JpanelOpLevantamento.setVisible(false);
+																																																																														JpanelOpTransferencia.setVisible(false);
+																																																																										
+																																																																													}
+																																																																												});
+																																																																												
+																																																																														// coloca o painel depositos visivel:
+																																																																														btnLevantamento.addActionListener(new ActionListener() {
+																																																																															public void actionPerformed(ActionEvent e) {
+																																																																																JpanelOpDeposito.setVisible(false);
+																																																																																JpanelOpLevantamento.setVisible(true);
+																																																																																JpanelOpTransferencia.setVisible(false);
+																																																																															}
+																																																																														});
+																																																																														
+																																																																																// coloca o painel depositos visivel:
+																																																																																btnTransferncia.addActionListener(new ActionListener() {
+																																																																																	public void actionPerformed(ActionEvent e) {
+																																																																																		JpanelOpDeposito.setVisible(false);
+																																																																																		JpanelOpLevantamento.setVisible(false);
+																																																																																		JpanelOpTransferencia.setVisible(true);
+																																																																																	}
+																																																																																});
+																																																																																
+																																																																																		// efectuar deposito:
+																																																																																		btDepConfirmar.addActionListener(new ActionListener() {
+																																																																																			public void actionPerformed(ActionEvent e) {
+																																																																																				// Seleciona conta:
+																																																																																				String s = (String) cbOperacoesConta.getSelectedItem();
+																																																																																				Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+																																																																																
+																																																																																				// faz deposito:
+																																																																																
+																																																																																				double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
+																																																																																				c.setSaldo(saldo);
+																																																																																
+																																																																																				// cria operaÔøΩao:
+																																																																																				int idop = 1;
+																																																																																				if (c.getOperacoes().size() != 0) {
+																																																																																					idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
+																																																																																				}
+																																																																																				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
+																																																																																
+																																																																																				Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
+																																																																																						Double.parseDouble(tbContasaldoc.getText()), descricao);
+																																																																																				c.getOperacoes().add(op);
+																																																																																				tbContasaldoc.setText(c.getSaldo() + "");
+																																																																																				JOptionPane.showMessageDialog(null, "Deposito efectuado!");
+																																																																																
+																																																																																			}
+																																																																																		});
+																																																																																		
+																																																																																				// efectuar transferencia
+																																																																																				btnConfirmar.addActionListener(new ActionListener() {
+																																																																																					public void actionPerformed(ActionEvent e) {
+																																																																																						double valortransf = Double.parseDouble(tbTransMontante.getText());
+																																																																																						String s = (String) cbOperacoesConta.getSelectedItem();
+																																																																																						Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+																																																																																						Conta cdestino;
+																																																																																						try {
+																																																																																							cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
+																																																																																									gb.javabank.getContas());
+																																																																																		
+																																																																																							if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
+																																																																																								// gerado ids:
+																																																																																								int idoporigem = 1;
+																																																																																								if (corigem.getOperacoes().size() != 0) {
+																																																																																									idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1).getIdOperacao()
+																																																																																											+ 1;
+																																																																																								}
+																																																																																								int iddestino = 1;
+																																																																																								if (cdestino.getOperacoes().size() != 0) {
+																																																																																									iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1).getIdOperacao()
+																																																																																											+ 1;
+																																																																																								}
+																																																																																		
+																																																																																								cdestino.setSaldo(cdestino.getSaldo() + valortransf);
+																																																																																								corigem.setSaldo(corigem.getSaldo() - valortransf);
+																																																																																		
+																																																																																								// faz transferencia;
+																																																																																								String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
+																																																																																										+ cdestino.getIdConta() + " valor: " + valortransf;
+																																																																																								String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
+																																																																																										+ corigem.getIdConta() + " valor: " + valortransf;
+																																																																																								Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
+																																																																																										descorigem,cdestino, null);
+																																																																																								Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
+																																																																																										descdestino, corigem, null);
+																																																																																		
+																																																																																								corigem.getOperacoes().add(oporigem);
+																																																																																								cdestino.getOperacoes().add(opdestino);
+																																																																																		
+																																																																																								JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+																																																																																		
+																																																																																							} else {
+																																																																																								if (corigem.getSaldo() < valortransf) {
+																																																																																									JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+																																																																																								}
+																																																																																								if (corigem.equals(cdestino)) {
+																																																																																									JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+																																																																																								}
+																																																																																							}
+																																																																																		
+																																																																																						} catch (Exception ex) {
+																																																																																							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+																																																																																						}
+																																																																																		
+																																																																																					}
+																																																																																				});
 
 		// botao eliminar
 
@@ -594,7 +892,7 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
-		// prepara campos para criaÁao de nova conta ou atualiza a lista selecionada:
+		// prepara campos para criaÔøΩao de nova conta ou atualiza a lista selecionada:
 		btContasNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gb.javabank.limpatabela(model);
@@ -674,7 +972,7 @@ public class BancoAppFun implements Serializable {
 					}
 					gb.javabank.limpatabela(model);
 					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-					/// seleciona os clientes que estao como titulares · conta:
+					/// seleciona os clientes que estao como titulares ÔøΩ conta:
 					gb.javabank.mostratitulares(c, model);
 
 				}
@@ -936,7 +1234,7 @@ public class BancoAppFun implements Serializable {
 							tbCltPass.getText());
 					gb.javabank.getUtlizadores().add(clt);
 
-					// faz atualizaÁao da lista (elimina e de seguida preenche tudo)
+					// faz atualizaÔøΩao da lista (elimina e de seguida preenche tudo)
 					dmclt.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
 					JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
@@ -1051,7 +1349,7 @@ public class BancoAppFun implements Serializable {
 					tbGestaoUsername.setText(null);
 					tbGestaopassuser.setText(null);
 					tbGestaoNovoUser.setText(null);
-					JOptionPane.showMessageDialog(null, "AlteraÁ„o de Nome efectuado com sucesso");
+					JOptionPane.showMessageDialog(null, "AlteraÔøΩÔøΩo de Nome efectuado com sucesso");
 					lUtilizador.setText(func.getNome());
 				} else {
 					JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
@@ -1108,7 +1406,7 @@ public class BancoAppFun implements Serializable {
 								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
 
 					func.setPassword(new String(tbGestaoNovapass.getPassword()));
-					JOptionPane.showMessageDialog(null, "AlteraÁ„o efectuada com sucesso!");
+					JOptionPane.showMessageDialog(null, "AlteraÔøΩÔøΩo efectuada com sucesso!");
 					tbGestaoPass.setText(null);
 					tbGestaoNovapass.setText(null);
 					tbGestaoConfirmPass.setText(null);
@@ -1140,304 +1438,6 @@ public class BancoAppFun implements Serializable {
 		separator_1.setAlignmentX(0.0f);
 		separator_1.setBounds(483, 68, 29, 433);
 		jpanelGestao.add(separator_1);
-
-		// Painel principal da opera√ßoes
-		JPanel jpanelOperacoes = new JPanel();
-		jpanelOperacoes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelOperacoes);
-		jpanelOperacoes.setVisible(false);
-		jpanelOperacoes.setLayout(null);
-
-		JComboBox cbOperacoespesqClt = new JComboBox();
-		cbOperacoespesqClt.setBounds(188, 49, 249, 39);
-		jpanelOperacoes.add(cbOperacoespesqClt);
-
-		JTextField tbOperacoespesqClt = new JTextField();
-		tbOperacoespesqClt.setBounds(188, 92, 250, 31);
-		jpanelOperacoes.add(tbOperacoespesqClt);
-
-		JButton btnNewButton = new JButton("Pesquisar");
-		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnNewButton.setBounds(258, 131, 116, 38);
-		jpanelOperacoes.add(btnNewButton);
-		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
-		cbOperacoesConta.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				if (s != null) {
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-					tbContasaldoc.setText("" + c.getSaldo());
-				}
-
-			}
-		});
-		cbOperacoesConta.setBounds(578, 72, 249, 39);
-		jpanelOperacoes.add(cbOperacoesConta);
-
-		JLabel lblNewLabel_3 = new JLabel("Saldo :");
-		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_3.setBounds(568, 107, 162, 23);
-		jpanelOperacoes.add(lblNewLabel_3);
-
-		tbContasaldoc = new JTextField();
-		tbContasaldoc.setEditable(false);
-		tbContasaldoc.setBounds(578, 133, 169, 31);
-		jpanelOperacoes.add(tbContasaldoc);
-
-		JLabel lblConta = new JLabel("Conta:");
-		lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblConta.setBounds(568, 49, 64, 23);
-		jpanelOperacoes.add(lblConta);
-
-		JButton cbOperacoDep = new JButton("Dep√≥sito");
-		cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		cbOperacoDep.setBounds(243, 207, 176, 38);
-		jpanelOperacoes.add(cbOperacoDep);
-
-		JButton btnLevantamento = new JButton("Levantamento");
-		btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnLevantamento.setBounds(432, 207, 176, 38);
-		jpanelOperacoes.add(btnLevantamento);
-
-		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
-		btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnTransferncia.setBounds(620, 207, 176, 38);
-		jpanelOperacoes.add(btnTransferncia);
-
-		JPanel JpanelOpLevantamento = new JPanel();
-		JpanelOpLevantamento.setVisible(false);
-
-		JPanel JpanelOpDeposito = new JPanel();
-		JpanelOpDeposito.setVisible(false);
-
-		JPanel JpanelOpTransferencia = new JPanel();
-		JpanelOpTransferencia.setVisible(false);
-		JpanelOpTransferencia.setLayout(null);
-		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpTransferencia);
-
-		tbTransMontante = new JTextField();
-		tbTransMontante.setBounds(168, 59, 162, 30);
-		JpanelOpTransferencia.add(tbTransMontante);
-
-		JLabel lblContaDestino = new JLabel("Conta destino:");
-		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContaDestino.setBounds(158, 101, 137, 23);
-		JpanelOpTransferencia.add(lblContaDestino);
-
-		JLabel label_5 = new JLabel("Montante:");
-		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_5.setBounds(158, 34, 97, 23);
-		JpanelOpTransferencia.add(label_5);
-
-		tbTransContaDestino = new JTextField();
-		tbTransContaDestino.setBounds(168, 126, 162, 30);
-		JpanelOpTransferencia.add(tbTransContaDestino);
-
-		JButton btTransConfirmar = new JButton("Confirmar");
-		btTransConfirmar.setBounds(146, 317, 97, 30);
-		JpanelOpTransferencia.add(btTransConfirmar);
-
-		JButton btTransCancelar = new JButton("Cancelar");
-		btTransCancelar.setBounds(275, 317, 97, 30);
-		JpanelOpTransferencia.add(btTransCancelar);
-
-		JLabel lblDataDaOperao = new JLabel("Data da Opera√ß√£o:");
-		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDaOperao.setBounds(158, 168, 189, 23);
-		JpanelOpTransferencia.add(lblDataDaOperao);
-
-		JButton btnConfirmar = new JButton("Confirmar");
-
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.setBounds(118, 253, 116, 38);
-		JpanelOpTransferencia.add(btnConfirmar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCancelar.setBounds(256, 253, 116, 38);
-		JpanelOpTransferencia.add(btnCancelar);
-
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(168, 198, 162, 31);
-		JpanelOpTransferencia.add(dateChooser_1);
-
-		JpanelOpDeposito.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpDeposito);
-		JpanelOpDeposito.setLayout(null);
-
-		tbDepMontante = new JTextField();
-		tbDepMontante.setBounds(174, 83, 162, 31);
-		JpanelOpDeposito.add(tbDepMontante);
-
-		JLabel lblData = new JLabel("Data:");
-		lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblData.setBounds(164, 131, 50, 23);
-		JpanelOpDeposito.add(lblData);
-
-		JLabel lblMontantem = new JLabel("Montante Dep√≥sito:");
-		lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontantem.setBounds(164, 55, 229, 23);
-		JpanelOpDeposito.add(lblMontantem);
-
-		JButton btDepConfirmar = new JButton("Confirmar");
-		btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btDepConfirmar.setBounds(192, 225, 120, 38);
-		JpanelOpDeposito.add(btDepConfirmar);
-
-		JDateChooser dtchdeposito = new JDateChooser();
-		dtchdeposito.setBounds(174, 166, 162, 31);
-		JpanelOpDeposito.add(dtchdeposito);
-
-		JDateChooser dateChooser4 = new JDateChooser();
-		dateChooser4.setBounds(174, 166, 162, 31);
-		JpanelOpLevantamento.add(dateChooser4);
-		JpanelOpLevantamento.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpLevantamento);
-		JpanelOpLevantamento.setLayout(null);
-
-		tbLevMontante = new JTextField();
-		tbLevMontante.setBounds(174, 83, 162, 31);
-		JpanelOpLevantamento.add(tbLevMontante);
-
-		JLabel label = new JLabel("Data:");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label.setBounds(164, 131, 50, 23);
-		JpanelOpLevantamento.add(label);
-
-		JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-		lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-		JpanelOpLevantamento.add(lblMontanteLevantamento);
-
-		JButton btLevConfirmar = new JButton("Confirmar");
-		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btLevConfirmar.setBounds(129, 223, 120, 38);
-		JpanelOpLevantamento.add(btLevConfirmar);
-
-		JButton btLevCancelar = new JButton("Cancelar");
-		btLevCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btLevCancelar.setBounds(273, 224, 120, 38);
-		JpanelOpLevantamento.add(btLevCancelar);
-
-		//// acaba a construÔøΩao dos botoes e comeÔøΩa todos os metedos:
-
-		// Dentro do painel gestao:
-		// coloca o painel depositos visivel:
-		cbOperacoDep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// paineis:
-				JpanelOpDeposito.setVisible(true);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(false);
-
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnLevantamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(true);
-				JpanelOpTransferencia.setVisible(false);
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnTransferncia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(true);
-			}
-		});
-
-		// efectuar deposito:
-		btDepConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Seleciona conta:
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-
-				// faz deposito:
-
-				double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
-				c.setSaldo(saldo);
-
-				// cria operaÁao:
-				int idop = 1;
-				if (c.getOperacoes().size() != 0) {
-					idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
-				}
-				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
-
-				Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
-						Double.parseDouble(tbContasaldoc.getText()), descricao);
-				c.getOperacoes().add(op);
-				tbContasaldoc.setText(c.getSaldo() + "");
-				JOptionPane.showMessageDialog(null, "Deposito efectuado!");
-
-			}
-		});
-
-		// efectuar transferencia
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				double valortransf = Double.parseDouble(tbTransMontante.getText());
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-				Conta cdestino;
-				try {
-					cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
-							gb.javabank.getContas());
-
-					if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
-						// gerado ids:
-						int idoporigem = 1;
-						if (corigem.getOperacoes().size() != 0) {
-							idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
-						}
-						int iddestino = 1;
-						if (cdestino.getOperacoes().size() != 0) {
-							iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
-						}
-
-						cdestino.setSaldo(cdestino.getSaldo() + valortransf);
-						corigem.setSaldo(corigem.getSaldo() - valortransf);
-
-						// faz transferencia;
-						String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
-								+ cdestino.getIdConta() + " valor: " + valortransf;
-						String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
-								+ corigem.getIdConta() + " valor: " + valortransf;
-						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
-								cdestino, descorigem);
-						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
-								corigem, descdestino);
-
-						corigem.getOperacoes().add(oporigem);
-						cdestino.getOperacoes().add(opdestino);
-
-						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
-
-					} else {
-						if (corigem.getSaldo() < valortransf) {
-							JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
-						}
-						if (corigem.equals(cdestino)) {
-							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-						}
-					}
-
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-				}
-
-			}
-		});
 
 		// Botao Menu Cliente
 		JButton btFunCliente = new JButton("Clientes");
