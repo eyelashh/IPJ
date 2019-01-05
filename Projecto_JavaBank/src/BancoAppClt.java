@@ -416,7 +416,7 @@ public class BancoAppClt implements Serializable {
 					Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
 							Integer.parseInt(textFieldCOD.getText()), Integer.parseInt(s));
 
-					gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(), cartao);
+					gb.javabank.cartaoExiste(Integer.parseInt(s), cartao);
 
 				} else {
 
