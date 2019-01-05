@@ -656,13 +656,20 @@ public class BancoAppFun implements Serializable {
 
 						if (((ContaCorrente) c).getCartao() == 0) {
 							btPedirCartao.setVisible(true);
+							
+							
 						} else {
 							
-							
+							btCartao.setVisible(false);
 							panelCartao.setVisible(true);
 							dtcartao.setEnabled(false);
 							tbnomecartao.setEditable(false);
 							tbcodcartao.setEditable(false);
+							
+							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),((ContaCorrente) c).getCartao());
+							dtcartao.setDate(card.getDataValidade());
+							tbnomecartao.setText(card.getNomeTitular());
+							tbcodcartao.setText(card.getCodvalidacao()+"");
 							
 							
 						}
@@ -718,6 +725,8 @@ public class BancoAppFun implements Serializable {
 				panelCartao.setVisible(true);
 				tbnomecartao.setEditable(true);
 				dtcartao.setEnabled(true);
+				btCartao.setVisible(true);
+				
 
 			}
 		});
@@ -760,19 +769,27 @@ public class BancoAppFun implements Serializable {
 						}
 					}
 				} while (existe);
-
+				
 				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 						gb.javabank.getContas());
-				Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
-				gb.javabank.getCartoes().add(cartao);
-				((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-				tbcodcartao.setText(id+"");
+				if(dtcartao.getDate()!=null && tbnomecartao.getText()!=" ")
+				{
+					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
+					gb.javabank.getCartoes().add(cartao);
+					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+					tbcodcartao.setText(id+"");
+					
+					dtcartao.setEnabled(false);
+					tbnomecartao.setEditable(false);
+					tbcodcartao.setEditable(false);
+					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				}
 				
-				dtcartao.setEnabled(false);
-				tbnomecartao.setEditable(false);
-				tbcodcartao.setEditable(false);
 				
-				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				
+				
+				
+				
 				
 			}
 		});
@@ -1715,5 +1732,4 @@ public class BancoAppFun implements Serializable {
 		});
 
 	}
-
 }
