@@ -204,181 +204,181 @@ public class BancoAppClt implements Serializable {
 		// Painel principal gestao
 		JPanel JPCltGestao = new JPanel();
 		JPCltGestao.setVisible(false);
-		
-				// Painel principal transferencia
-				JPanel JPCltTransferencia = new JPanel();
-				JPCltTransferencia.setBounds(0, 0, 1065, 585);
-				JpanelPrincipal.add(JPCltTransferencia);
-				JPCltTransferencia.setLayout(null);
-				JPCltTransferencia.setVisible(false);
-				
-						JLabel label_7 = new JLabel("Saldo :");
-						label_7.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-						label_7.setBounds(599, 88, 162, 23);
-						JPCltTransferencia.add(label_7);
-						JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
-						coBoxPesquisaContas.addActionListener(new ActionListener() {
 
-							public void actionPerformed(ActionEvent e) {
-								// seleciona as contas:
+		// Painel principal transferencia
+		JPanel JPCltTransferencia = new JPanel();
+		JPCltTransferencia.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(JPCltTransferencia);
+		JPCltTransferencia.setLayout(null);
+		JPCltTransferencia.setVisible(false);
 
-								if (coBoxPesquisaContas.getSelectedIndex() == 0) {
+		JLabel label_7 = new JLabel("Saldo :");
+		label_7.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_7.setBounds(599, 88, 162, 23);
+		JPCltTransferencia.add(label_7);
+		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
+		coBoxPesquisaContas.addActionListener(new ActionListener() {
 
-									String s = (String) coBoxPesquisaContas.getSelectedItem();
-									Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+			public void actionPerformed(ActionEvent e) {
+				// seleciona as contas:
 
-									txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
+				if (coBoxPesquisaContas.getSelectedIndex() == 0) {
 
-								} else {
+					String s = (String) coBoxPesquisaContas.getSelectedItem();
+					Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-									String s = (String) coBoxPesquisaContas.getSelectedItem();
-									Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+					txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
 
-									txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
+				} else {
 
-								}
+					String s = (String) coBoxPesquisaContas.getSelectedItem();
+					Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
+					txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
+
+				}
+
+			}
+		});
+		coBoxPesquisaContas.setBounds(300, 117, 235, 27);
+		JPCltTransferencia.add(coBoxPesquisaContas);
+
+		JLabel label_6 = new JLabel("Conta:");
+		label_6.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_6.setBounds(290, 88, 64, 23);
+		JPCltTransferencia.add(label_6);
+
+		txtSaldoConta = new JTextField();
+		txtSaldoConta.setEditable(false);
+		txtSaldoConta.setEditable(false);
+		txtSaldoConta.setBounds(609, 114, 169, 31);
+		JPCltTransferencia.add(txtSaldoConta);
+
+		JLabel label_8 = new JLabel("Montante:");
+		label_8.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_8.setBounds(483, 174, 97, 23);
+		JPCltTransferencia.add(label_8);
+
+		textMontTransf = new JTextField();
+		textMontTransf.setBounds(493, 199, 162, 30);
+		JPCltTransferencia.add(textMontTransf);
+
+		JLabel label_9 = new JLabel("Conta destino:");
+		label_9.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_9.setBounds(483, 241, 137, 23);
+		JPCltTransferencia.add(label_9);
+
+		textContaDestino = new JTextField();
+		textContaDestino.setBounds(493, 266, 162, 30);
+		JPCltTransferencia.add(textContaDestino);
+
+		JLabel label_10 = new JLabel("Data da Operação:");
+		label_10.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_10.setBounds(483, 308, 189, 23);
+		JPCltTransferencia.add(label_10);
+
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setEnabled(false);
+		dateChooser.setDate(Date.valueOf(LocalDate.now()));
+		dateChooser.setBounds(493, 338, 162, 31);
+		JPCltTransferencia.add(dateChooser);
+
+		// botao cancelar ou limpar
+		JButton button_5 = new JButton("Cancelar");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textMontTransf.setText("");
+				textContaDestino.setText("");
+				dateChooser.setDate(Date.valueOf(LocalDate.now()));
+				;
+
+			}
+		});
+		button_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_5.setBounds(581, 393, 116, 38);
+		JPCltTransferencia.add(button_5);
+
+		// confirma a tranferencia feita
+		JButton button_1 = new JButton("Confirmar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if ((coBoxPesquisaContas.getSelectedIndex() == 0) && (textMontTransf.getText().isEmpty())
+						&& (textContaDestino.getText().isEmpty())) {
+
+					JOptionPane.showMessageDialog(null, "Falta preencher os campos obrigatórios!");
+
+				} else {
+					double valortransf = Double.parseDouble(textMontTransf.getText());
+
+					String s = (String) coBoxPesquisaContas.getSelectedItem();
+
+					Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					Conta cdestino;
+
+					try {
+
+						String numContaDestino = textContaDestino.getText();
+						cdestino = gb.javabank.SelectConta(Integer.parseInt(numContaDestino), gb.javabank.getContas());
+
+						if ((corigem.getSaldo() >= valortransf) && (!corigem.equals(cdestino))) {
+
+							// gerado ids:
+							int idoperacaoorigem = 1;
+							if (corigem.getOperacoes().size() != 0) {
+								idoperacaoorigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
 							}
-						});
-						coBoxPesquisaContas.setBounds(300, 117, 235, 27);
-						JPCltTransferencia.add(coBoxPesquisaContas);
-						
-								JLabel label_6 = new JLabel("Conta:");
-								label_6.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-								label_6.setBounds(290, 88, 64, 23);
-								JPCltTransferencia.add(label_6);
-								
-										txtSaldoConta = new JTextField();
-										txtSaldoConta.setEditable(false);
-										txtSaldoConta.setEditable(false);
-										txtSaldoConta.setBounds(609, 114, 169, 31);
-										JPCltTransferencia.add(txtSaldoConta);
-										
-												JLabel label_8 = new JLabel("Montante:");
-												label_8.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-												label_8.setBounds(483, 174, 97, 23);
-												JPCltTransferencia.add(label_8);
-												
-														textMontTransf = new JTextField();
-														textMontTransf.setBounds(493, 199, 162, 30);
-														JPCltTransferencia.add(textMontTransf);
-														
-																JLabel label_9 = new JLabel("Conta destino:");
-																label_9.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																label_9.setBounds(483, 241, 137, 23);
-																JPCltTransferencia.add(label_9);
-																
-																		textContaDestino = new JTextField();
-																		textContaDestino.setBounds(493, 266, 162, 30);
-																		JPCltTransferencia.add(textContaDestino);
-																		
-																				JLabel label_10 = new JLabel("Data da Operação:");
-																				label_10.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-																				label_10.setBounds(483, 308, 189, 23);
-																				JPCltTransferencia.add(label_10);
-																				
-																						JDateChooser dateChooser = new JDateChooser();
-																						dateChooser.setEnabled(false);
-																						dateChooser.setDate(Date.valueOf(LocalDate.now()));
-																						dateChooser.setBounds(493, 338, 162, 31);
-																						JPCltTransferencia.add(dateChooser);
-																						
-																								// botao cancelar ou limpar
-																								JButton button_5 = new JButton("Cancelar");
-																								button_5.addActionListener(new ActionListener() {
-																									public void actionPerformed(ActionEvent e) {
-																										textMontTransf.setText("");
-																										textContaDestino.setText("");
-																										dateChooser.setDate(Date.valueOf(LocalDate.now()));
-																										;
+							int idoperacaodestino = 1;
+							if (cdestino.getOperacoes().size() != 0) {
+								idoperacaodestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
+							}
+							// faz transferencia;
+							cdestino.setSaldo(cdestino.getSaldo() + valortransf);
+							corigem.setSaldo(corigem.getSaldo() - valortransf);
 
-																									}
-																								});
-																								button_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																								button_5.setBounds(581, 393, 116, 38);
-																								JPCltTransferencia.add(button_5);
-																								
-																										// confirma a tranferencia feita
-																										JButton button_1 = new JButton("Confirmar");
-																										button_1.addActionListener(new ActionListener() {
-																											public void actionPerformed(ActionEvent e) {
+							String descricaoCorigem = dateChooser.getDate() + " - Transferencia efectuada para conta "
+									+ cdestino.getIdConta() + " valor: " + valortransf;
+							String descricaoCdestino = dateChooser.getDate() + " - Transferencia recebida da conta "
+									+ corigem.getIdConta() + " valor: " + valortransf;
 
-																												if ((coBoxPesquisaContas.getSelectedIndex() == 0) && (textMontTransf.getText().isEmpty())
-																														&& (textContaDestino.getText().isEmpty())) {
+							// adicionar ao array das operacoes
+							Operacao oporigem = new Transferencia(idoperacaoorigem, null, dateChooser.getDate(),
+									valortransf, descricaoCorigem, cdestino, clt);
+							Operacao opdestino = new Transferencia(idoperacaodestino, null, dateChooser.getDate(),
+									valortransf, descricaoCdestino, corigem, clt);
 
-																													JOptionPane.showMessageDialog(null, "Falta preencher os campos obrigatórios!");
+							corigem.getOperacoes().add(oporigem);
+							cdestino.getOperacoes().add(opdestino);
 
-																												} else {
-																													double valortransf = Double.parseDouble(textMontTransf.getText());
+							txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
+							dmlistaOpe.removeAllElements();
+							gb.javabank.addelementoslist(
+									gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);
+							JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
 
-																													String s = (String) coBoxPesquisaContas.getSelectedItem();
+						} else {
+							if (corigem.getSaldo() < valortransf) {
+								JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+							}
+							if (corigem.equals(cdestino)) {
+								JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+							}
+						}
 
-																													Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+					}
 
-																													Conta cdestino;
+				}
 
-																													try {
-
-																														String numContaDestino = textContaDestino.getText();
-																														cdestino = gb.javabank.SelectConta(Integer.parseInt(numContaDestino), gb.javabank.getContas());
-
-																														if ((corigem.getSaldo() >= valortransf) && (!corigem.equals(cdestino))) {
-
-																															// gerado ids:
-																															int idoperacaoorigem = 1;
-																															if (corigem.getOperacoes().size() != 0) {
-																																idoperacaoorigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1)
-																																		.getIdOperacao() + 1;
-																															}
-																															int idoperacaodestino = 1;
-																															if (cdestino.getOperacoes().size() != 0) {
-																																idoperacaodestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1)
-																																		.getIdOperacao() + 1;
-																															}
-																															// faz transferencia;
-																															cdestino.setSaldo(cdestino.getSaldo() + valortransf);
-																															corigem.setSaldo(corigem.getSaldo() - valortransf);
-
-																															String descricaoCorigem = dateChooser.getDate() + " - Transferencia efectuada para conta "
-																																	+ cdestino.getIdConta() + " valor: " + valortransf;
-																															String descricaoCdestino = dateChooser.getDate() + " - Transferencia recebida da conta "
-																																	+ corigem.getIdConta() + " valor: " + valortransf;
-
-																															// adicionar ao array das operacoes
-																															Operacao oporigem = new Transferencia(idoperacaoorigem, null, dateChooser.getDate(),
-																																	valortransf, descricaoCorigem, cdestino, clt);
-																															Operacao opdestino = new Transferencia(idoperacaodestino, null, dateChooser.getDate(),
-																																	valortransf, descricaoCdestino, corigem, clt);
-
-																															corigem.getOperacoes().add(oporigem);
-																															cdestino.getOperacoes().add(opdestino);
-
-																															txtSaldoConta.setText(Double.toString(corigem.getSaldo()));
-																															dmlistaOpe.removeAllElements();
-																															gb.javabank.addelementoslist(
-																																	gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);
-																															JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
-
-																														} else {
-																															if (corigem.getSaldo() < valortransf) {
-																																JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
-																															}
-																															if (corigem.equals(cdestino)) {
-																																JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-																															}
-																														}
-
-																													} catch (Exception ex) {
-																														JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-																													}
-
-																												}
-
-																											}
-																										});
-																										button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-																										button_1.setBounds(443, 393, 116, 38);
-																										JPCltTransferencia.add(button_1);
+			}
+		});
+		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_1.setBounds(443, 393, 116, 38);
+		JPCltTransferencia.add(button_1);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
@@ -387,25 +387,10 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.setLayout(null);
 		JPCltCM.setVisible(true);
 
-/*<<<<<<< HEAD
-		JLabel label_7 = new JLabel("Saldo :");
-		label_7.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_7.setBounds(377, 71, 162, 23);
-		JPCltTransferencia.add(label_7);
-		
-		// modelo de combobox no panel Transferencia que contem as contas do cliente e
-				// ao seleccionar coloca o saldo dessa conta
-				DefaultComboBoxModel<String> pesquisaContas = new DefaultComboBoxModel<>(
-						gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
-		
-		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
-		coBoxPesquisaContas.addActionListener(new ActionListener() {
-=======
 		JLabel textFieldCltNumero1 = new JLabel("Número:");
 		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		textFieldCltNumero1.setBounds(128, 277, 94, 16);
 		JPCltCM.add(textFieldCltNumero1);
->>>>>>> 195734c96dc4b755d4b9041a94703ca60ee94913*/
 
 		textFieldCltNumeroConta = new JTextField();
 		textFieldCltNumeroConta.setEditable(false);
@@ -588,10 +573,13 @@ public class BancoAppClt implements Serializable {
 					} while (n < 100 || n > 1000);
 					textFieldCOD.setText("" + n);
 
-					/*Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
-							Integer.parseInt(textFieldCOD.getText()), Integer.parseInt(s));*/
+					/*
+					 * Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(),
+					 * dateChooserCartao.getDate(), Integer.parseInt(textFieldCOD.getText()),
+					 * Integer.parseInt(s));
+					 */
 
-					//gb.javabank.cartaoExiste(Integer.parseInt(s), cartao);
+					// gb.javabank.cartaoExiste(Integer.parseInt(s), cartao);
 
 				} else {
 
