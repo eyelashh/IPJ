@@ -468,14 +468,18 @@ public class Banco implements Serializable {
 				ContaCorrente c = (ContaCorrente) contas.get(i);
 				if (c.getCartao() != null) {
 					card = c.getCartao();
-				} else {
-					JOptionPane.showMessageDialog(null, "Não tem cartao");
+					
+				}  else {
+					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 				}
 
 			}
 		}
 		return card;
 	}
+	
+
+
 
 	// lista das operacoes
 	protected  String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {

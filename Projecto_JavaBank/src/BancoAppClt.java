@@ -52,9 +52,8 @@ public class BancoAppClt implements Serializable {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
+	private JTextField textFieldNomeCartao;
+	private JTextField textFieldCOD;
 	private static Cliente clt;
 	private static GestaoBanco gb;
 	private JTextField textFieldNumCartao;
@@ -106,7 +105,7 @@ public class BancoAppClt implements Serializable {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 
-	
+		// modelo que lista as contas no panel contas movimentos
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
 		gb.javabank.addelementoslist(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()), dmListaContas);
 
@@ -172,6 +171,10 @@ public class BancoAppClt implements Serializable {
 		separator.setBounds(983, 19, 29, 94);
 		JpanelCabecalho.add(separator);
 
+		// modelo para a lista das operacoes
+		DefaultListModel<String> dmlistaOpe = new DefaultListModel<String>();
+		gb.javabank.addelementoslist(gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);
+		
 		// Painel do menu que tem os botoes
 		JPanel JpanelMenu = new JPanel();
 		JpanelMenu.setBackground(Color.WHITE);
@@ -181,14 +184,9 @@ public class BancoAppClt implements Serializable {
 
 		// Painel principal
 		JPanel JpanelPrincipal = new JPanel();
-		// JpanelPrincipal.setBackground(Color.WHITE);
 		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
-
-		// Painel principal transferencia
-		JPanel JPCltTransf = new JPanel();
-		JPCltTransf.setVisible(false);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
@@ -238,6 +236,7 @@ public class BancoAppClt implements Serializable {
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(138, 366, 217, 31);
 		JPCltCM.add(dateChooser_1);
+
 		JList<String> listContasCliente = new JList<String>(dmListaContas);
 		// selecionar conta e preencher so campos correctos:
 		listContasCliente.addListSelectionListener(new ListSelectionListener() {
@@ -262,6 +261,8 @@ public class BancoAppClt implements Serializable {
 		});
 		listContasCliente.setBounds(94, 96, 379, 158);
 		JPCltCM.add(listContasCliente);
+
+		// combobox com uma string de lista e ao escolher uma faz um update a lista
 		JComboBox comboBoxCltConta = new JComboBox(contas);
 		comboBoxCltConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -281,11 +282,6 @@ public class BancoAppClt implements Serializable {
 		});
 		comboBoxCltConta.setBounds(106, 45, 182, 39);
 		JPCltCM.add(comboBoxCltConta);
-		
-		
-		DefaultListModel<String> dmlistaOpe = new DefaultListModel<String>();
-		gb.javabank.addelementoslist(gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);;
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(599, 143, 379, 354);
 		JPCltCM.add(scrollPane);
@@ -296,17 +292,132 @@ public class BancoAppClt implements Serializable {
 		textFieldNumCartao.setBounds(810, 102, 168, 30);
 		JPCltCM.add(textFieldNumCartao);
 
+		// botao limpar/cancelar
 		btnCltLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				listContasCliente.clearSelection();
 				textFieldCltNumeroConta.setText("");
-				dateChooser_1.setToolTipText("");
+				dateChooser_1.setDate(null);;
 				textFieldCltSaldoConta.setText("");
 				textFieldCltCartao.setText("");
-				listCltListaMovimentos.clearSelection();
 				comboBoxCltConta.getSelectedIndex();
+				textFieldNumCartao.setText("");
 			}
 		});
 
+		// Painel principal cartao
+		JPanel JPCltCartao = new JPanel();
+		JPCltCartao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltCartao);
+		JPCltCartao.setLayout(null);
+		JPCltCartao.setVisible(false);
+
+		// modelo para combobox pesquisaContasJPCartao
+		DefaultComboBoxModel<String> pesquisaContasCartao = new DefaultComboBoxModel<>(
+				gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
+		JComboBox comboBoxContasCartao = new JComboBox(pesquisaContasCartao);
+		comboBoxContasCartao.setBounds(622, 93, 249, 39);
+		JPCltCartao.add(comboBoxContasCartao);
+
+		JLabel lblNomeAGravar = new JLabel("Nome:");
+		lblNomeAGravar.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNomeAGravar.setBounds(622, 144, 229, 23);
+		JPCltCartao.add(lblNomeAGravar);
+
+		textFieldNomeCartao = new JTextField();
+		textFieldNomeCartao.setBounds(632, 176, 229, 31);
+		JPCltCartao.add(textFieldNomeCartao);
+
+		JLabel lblCdigoDigitos = new JLabel("COD:");
+		lblCdigoDigitos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblCdigoDigitos.setBounds(622, 294, 172, 23);
+		JPCltCartao.add(lblCdigoDigitos);
+
+		textFieldCOD = new JTextField();
+		textFieldCOD.setBounds(634, 318, 227, 30);
+		JPCltCartao.add(textFieldCOD);
+
+		JDateChooser dateChooserCartao = new JDateChooser();
+		dateChooserCartao.setBounds(632, 251, 219, 31);
+		JPCltCartao.add(dateChooserCartao);
+
+		JButton btnPedirCarto = new JButton("Pedir Cartão");
+		btnPedirCarto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (comboBoxContasCartao.getSelectedIndex() == 0) {
+
+					// falta verificar se o cartao ja existe nesta conta senao cria um novo
+					String s = (String) comboBoxContasCartao.getSelectedItem();
+
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					int id = ((ContaCorrente) conta).getCartao().getnCartao() + 1;
+
+					if (id == 0) {
+						id++;
+					}
+
+					int n = 0;
+					do {
+						n = (int) (Math.random() * 1000);
+
+					} while (n < 100 || n > 1000);
+
+					textFieldCOD.setText("" + n);
+
+					Cartao cartao = new Cartao(id, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
+							Integer.parseInt(textFieldCOD.getText()));
+					((ContaCorrente) conta).setCartao(cartao);
+					JOptionPane.showMessageDialog(null, "Cartão adicionado!!");
+
+				}
+			}
+		});
+		btnPedirCarto.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnPedirCarto.setBounds(622, 379, 120, 38);
+		JPCltCartao.add(btnPedirCarto);
+
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.setBounds(766, 380, 120, 38);
+		JPCltCartao.add(btnLimpar);
+
+		JLabel lblCartoVerde = new JLabel("Cartão Verde");
+		lblCartoVerde.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblCartoVerde.setBounds(116, 341, 151, 16);
+		JPCltCartao.add(lblCartoVerde);
+
+		JLabel lblValidadeAnos = new JLabel("Validade: 5 anos");
+		lblValidadeAnos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblValidadeAnos.setBounds(116, 371, 151, 16);
+		JPCltCartao.add(lblValidadeAnos);
+
+		JLabel lblRedeVisaE = new JLabel("Rede: Visa e Multibanco");
+		lblRedeVisaE.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblRedeVisaE.setBounds(116, 402, 264, 16);
+		JPCltCartao.add(lblRedeVisaE);
+
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(
+				new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/cartao34.jpg"));
+		lblNewLabel_1.setBounds(99, 93, 335, 207);
+		JPCltCartao.add(lblNewLabel_1);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setAlignmentX(0.0f);
+		separator_2.setBounds(509, 69, 29, 433);
+		JPCltCartao.add(separator_2);
+
+		JLabel label_11 = new JLabel("Validade");
+		label_11.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_11.setBounds(622, 223, 72, 16);
+		JPCltCartao.add(label_11);
+
+		// Painel principal transferencia
 		JPanel JPCltTransferencia = new JPanel();
 		JPCltTransferencia.setBounds(0, 0, 1065, 592);
 		JpanelPrincipal.add(JPCltTransferencia);
@@ -318,6 +429,8 @@ public class BancoAppClt implements Serializable {
 		label_7.setBounds(601, 78, 162, 23);
 		JPCltTransferencia.add(label_7);
 
+		// modelo de combobox no panel Transferencia que contem as contas do cliente e
+		// ao seleccionar coloca o saldo dessa conta
 		DefaultComboBoxModel<String> pesquisaContas = new DefaultComboBoxModel<>(
 				gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
 		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
@@ -383,6 +496,7 @@ public class BancoAppClt implements Serializable {
 		dateChooser.setBounds(445, 366, 162, 31);
 		JPCltTransferencia.add(dateChooser);
 
+		// confirma a tranferencia feita
 		JButton button_1 = new JButton("Confirmar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -453,12 +567,14 @@ public class BancoAppClt implements Serializable {
 		button_1.setBounds(395, 421, 116, 38);
 		JPCltTransferencia.add(button_1);
 
+		// botao cancelar ou limpar
 		JButton button_5 = new JButton("Cancelar");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textMontTransf.setText("");
 				textContaDestino.setText("");
-				dateChooser.cleanup();
+				dateChooser.setDate(null);
+				;
 
 			}
 		});
@@ -466,134 +582,7 @@ public class BancoAppClt implements Serializable {
 		button_5.setBounds(533, 421, 116, 38);
 		JPCltTransferencia.add(button_5);
 
-		// Box pesquisa da conta do cliente
-		JComboBox comboBoxCLTPesquisa = new JComboBox();
-		comboBoxCLTPesquisa.setBounds(211, 67, 249, 39);
-		JPCltTransf.add(comboBoxCLTPesquisa);
-
-		
-
-		JLabel labelClt = new JLabel("Saldo:");
-		labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		labelClt.setBounds(550, 67, 66, 16);
-		JPCltTransf.add(labelClt);
-
-		tbCltTransfSaldo = new JTextField();
-		tbCltTransfSaldo.setBounds(560, 95, 185, 30);
-		JPCltTransf.add(tbCltTransfSaldo);
-
-		tbCltTransfMontante = new JTextField();
-		tbCltTransfMontante.setBounds(367, 204, 185, 30);
-		JPCltTransf.add(tbCltTransfMontante);
-
-		JLabel lblMontante = new JLabel("Montante:");
-		lblMontante.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontante.setBounds(357, 176, 131, 16);
-		JPCltTransf.add(lblMontante);
-
-		tbCltTransfDestino = new JTextField();
-		tbCltTransfDestino.setBounds(367, 285, 287, 30);
-		JPCltTransf.add(tbCltTransfDestino);
-
-		JLabel lblContaDestino = new JLabel("Conta Destino:");
-		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContaDestino.setBounds(357, 257, 147, 16);
-		JPCltTransf.add(lblContaDestino);
-
-		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
-		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDaOperao.setBounds(357, 327, 190, 30);
-		JPCltTransf.add(lblDataDaOperao);
-
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.setBounds(337, 435, 120, 38);
-		JPCltTransf.add(btnConfirmar);
-
-		JButton btnAppCltLimpar = new JButton("Limpar");
-
-		btnAppCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAppCltLimpar.setBounds(509, 435, 120, 38);
-		JPCltTransf.add(btnAppCltLimpar);
-
-		JDateChooser dtCltTransfData = new JDateChooser();
-		dtCltTransfData.setBounds(367, 369, 217, 31);
-		JPCltTransf.add(dtCltTransfData);
-
-		// Painel principal cartao
-		JPanel JPCltCartao = new JPanel();
-		JPCltCartao.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltCartao);
-		JPCltCartao.setLayout(null);
-		JPCltCartao.setVisible(false);
-
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(581, 135, 249, 39);
-		JPCltCartao.add(comboBox);
-
-		textField_9 = new JTextField();
-		textField_9.setBounds(581, 178, 250, 31);
-		JPCltCartao.add(textField_9);
-
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(581, 69, 249, 39);
-		JPCltCartao.add(comboBox_1);
-
-		JLabel lblNomeAGravar = new JLabel("Nome a gravar:");
-		lblNomeAGravar.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNomeAGravar.setBounds(591, 251, 229, 23);
-		JPCltCartao.add(lblNomeAGravar);
-
-		textField_10 = new JTextField();
-		textField_10.setBounds(601, 279, 229, 31);
-		JPCltCartao.add(textField_10);
-
-		JLabel lblCdigoDigitos = new JLabel("Código 3 digitos:");
-		lblCdigoDigitos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblCdigoDigitos.setBounds(591, 327, 172, 23);
-		JPCltCartao.add(lblCdigoDigitos);
-
-		textField_11 = new JTextField();
-		textField_11.setBounds(603, 351, 227, 30);
-		JPCltCartao.add(textField_11);
-
-		JButton btnPedirCarto = new JButton("Pedir Cartão");
-		btnPedirCarto.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnPedirCarto.setBounds(583, 416, 120, 38);
-		JPCltCartao.add(btnPedirCarto);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnLimpar.setBounds(727, 417, 120, 38);
-		JPCltCartao.add(btnLimpar);
-
-		JLabel lblCartoVerde = new JLabel("Cartão Verde");
-		lblCartoVerde.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblCartoVerde.setBounds(116, 341, 151, 16);
-		JPCltCartao.add(lblCartoVerde);
-
-		JLabel lblValidadeAnos = new JLabel("Validade: 5 anos");
-		lblValidadeAnos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblValidadeAnos.setBounds(116, 371, 151, 16);
-		JPCltCartao.add(lblValidadeAnos);
-
-		JLabel lblRedeVisaE = new JLabel("Rede: Visa e Multibanco");
-		lblRedeVisaE.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblRedeVisaE.setBounds(116, 402, 264, 16);
-		JPCltCartao.add(lblRedeVisaE);
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(
-				new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/cartao34.jpg"));
-		lblNewLabel_1.setBounds(99, 93, 335, 207);
-		JPCltCartao.add(lblNewLabel_1);
-
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setForeground(Color.BLACK);
-		separator_2.setAlignmentX(0.0f);
-		separator_2.setBounds(509, 69, 29, 433);
-		JPCltCartao.add(separator_2);
+	
 
 		// Painel principal gestao
 		JPanel JPCltGestao = new JPanel();
@@ -900,18 +889,6 @@ public class BancoAppClt implements Serializable {
 				btCltGestao.setBackground(new Color(65, 106, 105));
 			}
 		});
-		// Acaba aqui os componentes e as açoes do rato para o layout!!!
-
-		// Começa aqui todos os metedos:
-		btnAppCltLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbCltTransfSaldo.setText("");
-				tbCltTransfDestino.setText("");
-				tbCltTransfMontante.setText("");
-			}
-		});
 
 	}
-
-
 }
