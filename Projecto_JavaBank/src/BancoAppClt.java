@@ -234,7 +234,7 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(dateChooser_1);
 
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
-		//gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt.getContas()), dmListaContas);
+		gb.javabank.addelementoslist(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()), dmListaContas);
 		JList<String> listContasCliente = new JList<String>(dmListaContas);
 		listContasCliente.setBounds(94, 96, 379, 158);
 		JPCltCM.add(listContasCliente);
@@ -245,12 +245,14 @@ public class BancoAppClt implements Serializable {
 
 				if (comboBoxCltConta.getSelectedItem().equals("Conta a ordem")) {
 
+					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt, gb.javabank.getContas()), dmListaContas);
+					
 					if (!listContasCliente.isSelectionEmpty()) {
 
 						String numeroConta = listContasCliente.getSelectedValue();
 
 						Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
-
+						
 						textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
 						dateChooser_1.setDate(c.getDataCriacao());
 						textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
@@ -262,7 +264,23 @@ public class BancoAppClt implements Serializable {
 
 				}
 				if (comboBoxCltConta.getSelectedItem().equals("Conta Corrente")) {
+					
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()), dmListaContas);
+					
+					if (!listContasCliente.isSelectionEmpty()) {
 
+						String numeroConta = listContasCliente.getSelectedValue();
+
+						Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
+						
+						textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
+						dateChooser_1.setDate(c.getDataCriacao());
+						textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
+
+						//Cartao c1 = obterCartao(Integer.parseInt(numeroConta), clt.getContas());
+						//textFieldCltCartao.setText(Integer.toString(c1.getnCartao()));
+
+					}
 				}
 
 			}
@@ -790,4 +808,5 @@ public class BancoAppClt implements Serializable {
 		return op;
 	}
 
+	
 }
