@@ -454,8 +454,28 @@ public class Banco implements Serializable {
 	}
 
 	// Elimina todas as contas nos clientes:
-	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
+	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
+		// remover id de contas dentro dos clientes:
 
+		Cliente clt;
+		for(int i=0; i<clientes.size();i++)
+		{
+			if(clientes.get(i) instanceof Cliente)
+			{
+
+				for(int x=0; x<((Cliente) clientes.get(i)).getContas().size(); x++)
+				{
+					if(((Cliente) clientes.get(i)).getContas().get(x)==c.getIdConta())
+					{
+						((Cliente) clientes.get(i)).getContas().remove(x);
+						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
+						c.getClientes().remove(id);
+					}
+				}
+			
+			}
+		}
+		
 	}
 
 	// retorna o cartao
@@ -500,4 +520,9 @@ public class Banco implements Serializable {
 
 		return op;
 	}
+	
+	// remover id de contas dentro dos clientes:
+	
+
+	
 }
