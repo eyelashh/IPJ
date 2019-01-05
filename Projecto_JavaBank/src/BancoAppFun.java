@@ -522,9 +522,9 @@ public class BancoAppFun implements Serializable {
 					}
 
 					// Atribuir titulares das contas:
+					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 					dmconta.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 				} else {
