@@ -508,7 +508,7 @@ public class BancoAppFun implements Serializable {
 						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()), null);
+								Double.parseDouble(tbContaslimitelevdia.getText()), 0);
 						gb.javabank.getContas().add(c);
 
 					} else {

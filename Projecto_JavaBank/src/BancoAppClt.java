@@ -485,36 +485,13 @@ public class BancoAppClt implements Serializable {
 
 					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-<<<<<<< HEAD
-					//int id = ((ContaCorrente) conta).getCartao().getnCartao();
 
-					//if (id == 1) {
-						//id++;
-					//}
 
-=======
->>>>>>> 18fe445d270d427feae23a73a9c1a91d8c6ff6e7
-					int n = 0;
-					do {
-						n = (int) (Math.random() * 1000);
-
-					} while (n < 100 || n > 1000);
-
-					textFieldCOD.setText("" + n);
-
-<<<<<<< HEAD
 					/*Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
 							Integer.parseInt(textFieldCOD.getText()));*/
 					
 					//gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(),cartao);
-					
-=======
-					Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
-							Integer.parseInt(textFieldCOD.getText()));
-
-					gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(), cartao);
->>>>>>> 18fe445d270d427feae23a73a9c1a91d8c6ff6e7
-
+				
 				}
 			}
 		});
