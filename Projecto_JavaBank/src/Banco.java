@@ -545,5 +545,20 @@ public class Banco implements Serializable {
 
 		return op;
 	}
+	
+	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id)
+	{
+		Cartao card=null;
+		for(int i=0; i<cartoes.size(); i++)
+		{
+			if(cartoes.get(i).getCodvalidacao()==id)
+			{
+				card = cartoes.get(i);
+			}
+		}
+		
+		return card;
+		
+	}
 
 }
