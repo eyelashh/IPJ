@@ -259,6 +259,7 @@ public class BancoAppClt implements Serializable {
 
 						//Cartao c1 = obterCartao(Integer.parseInt(numeroConta), clt.getContas());
 						//textFieldCltCartao.setText(Integer.toString(c1.getnCartao()));
+						
 
 					}
 
