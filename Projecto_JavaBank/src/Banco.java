@@ -481,47 +481,47 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
-	protected Cartao obterCartao(int nConta) {
+	protected Cartao obterCartao(int idConta) {
 
 		Cartao card = new Cartao();
 
 		if (cartoes.size() != 0) {
+
 			for (int j = 0; j < cartoes.size(); j++) {
 
-				if (cartoes.get(j).getIdconta() == nConta) {
-
-					card = cartoes.get(j);
+				if (cartoes.get(j).getIdconta() == idConta) {
 
 					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
-
-				} else {
-					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 				}
 			}
+		} else {
+
+			JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 		}
+
 		return card;
 
 	}
 
 	// introduzido e adiciona-o ao array
 	// verifica se o cartao existe, se n�o existir cria um novo cartao
+
 	public void cartaoExiste(int idConta, Cartao card) {
 
-		for (int j = 0; j < cartoes.size(); j++) {
+		if (cartoes.size() != 0) {
+			for (int j = 0; j < cartoes.size(); j++) {
 
-			if (cartoes.get(j).getIdconta() == idConta) {
+				if (cartoes.get(j).getIdconta() == idConta) {
 
-				card = cartoes.get(j);
-
-				JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
-
-			} else {
-
-				cartoes.add(card);
-
-				JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
+					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+				}
 			}
 
+		} else {
+
+			cartoes.add(card);
+
+			JOptionPane.showMessageDialog(null, "Cartão criado com sucesso!");
 		}
 
 	}
