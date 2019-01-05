@@ -207,14 +207,14 @@ public class BancoAppClt implements Serializable {
 
 		// Painel principal transferencia
 		JPanel JPCltTransferencia = new JPanel();
-		JPCltTransferencia.setBounds(0, 0, 1065, 585);
+		JPCltTransferencia.setBounds(0, 0, 716, 439);
 		JpanelPrincipal.add(JPCltTransferencia);
 		JPCltTransferencia.setLayout(null);
 		JPCltTransferencia.setVisible(false);
 
 		JLabel label_7 = new JLabel("Saldo :");
 		label_7.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_7.setBounds(599, 88, 162, 23);
+		label_7.setBounds(420, 59, 162, 23);
 		JPCltTransferencia.add(label_7);
 		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
 		coBoxPesquisaContas.addActionListener(new ActionListener() {
@@ -240,47 +240,47 @@ public class BancoAppClt implements Serializable {
 
 			}
 		});
-		coBoxPesquisaContas.setBounds(300, 117, 235, 27);
+		coBoxPesquisaContas.setBounds(121, 88, 235, 27);
 		JPCltTransferencia.add(coBoxPesquisaContas);
 
 		JLabel label_6 = new JLabel("Conta:");
 		label_6.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_6.setBounds(290, 88, 64, 23);
+		label_6.setBounds(111, 59, 64, 23);
 		JPCltTransferencia.add(label_6);
 
 		txtSaldoConta = new JTextField();
 		txtSaldoConta.setEditable(false);
 		txtSaldoConta.setEditable(false);
-		txtSaldoConta.setBounds(609, 114, 169, 31);
+		txtSaldoConta.setBounds(430, 85, 169, 31);
 		JPCltTransferencia.add(txtSaldoConta);
 
 		JLabel label_8 = new JLabel("Montante:");
 		label_8.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_8.setBounds(483, 174, 97, 23);
+		label_8.setBounds(304, 145, 97, 23);
 		JPCltTransferencia.add(label_8);
 
 		textMontTransf = new JTextField();
-		textMontTransf.setBounds(493, 199, 162, 30);
+		textMontTransf.setBounds(314, 170, 162, 30);
 		JPCltTransferencia.add(textMontTransf);
 
 		JLabel label_9 = new JLabel("Conta destino:");
 		label_9.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_9.setBounds(483, 241, 137, 23);
+		label_9.setBounds(304, 212, 137, 23);
 		JPCltTransferencia.add(label_9);
 
 		textContaDestino = new JTextField();
-		textContaDestino.setBounds(493, 266, 162, 30);
+		textContaDestino.setBounds(314, 237, 162, 30);
 		JPCltTransferencia.add(textContaDestino);
 
 		JLabel label_10 = new JLabel("Data da Operação:");
 		label_10.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_10.setBounds(483, 308, 189, 23);
+		label_10.setBounds(304, 279, 189, 23);
 		JPCltTransferencia.add(label_10);
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setEnabled(false);
 		dateChooser.setDate(Date.valueOf(LocalDate.now()));
-		dateChooser.setBounds(493, 338, 162, 31);
+		dateChooser.setBounds(314, 309, 162, 31);
 		JPCltTransferencia.add(dateChooser);
 
 		// botao cancelar ou limpar
@@ -295,7 +295,7 @@ public class BancoAppClt implements Serializable {
 			}
 		});
 		button_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_5.setBounds(581, 393, 116, 38);
+		button_5.setBounds(402, 364, 116, 38);
 		JPCltTransferencia.add(button_5);
 
 		// confirma a tranferencia feita
@@ -377,7 +377,7 @@ public class BancoAppClt implements Serializable {
 			}
 		});
 		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_1.setBounds(443, 393, 116, 38);
+		button_1.setBounds(264, 364, 116, 38);
 		JPCltTransferencia.add(button_1);
 
 		// Painel principal cliente
@@ -450,7 +450,7 @@ public class BancoAppClt implements Serializable {
 
 					Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(numeroConta));
 					textFieldCltCartao.setText(c1.getNomeTitular());
-
+					textFieldNumCartao.setText(Integer.toString(c1.getnCartao()));
 					// cartao:
 
 				}
