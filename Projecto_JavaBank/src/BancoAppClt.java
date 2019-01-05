@@ -174,7 +174,7 @@ public class BancoAppClt implements Serializable {
 		// modelo para a lista das operacoes
 		DefaultListModel<String> dmlistaOpe = new DefaultListModel<String>();
 		gb.javabank.addelementoslist(gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);
-		
+
 		// Painel do menu que tem os botoes
 		JPanel JpanelMenu = new JPanel();
 		JpanelMenu.setBackground(Color.WHITE);
@@ -295,10 +295,11 @@ public class BancoAppClt implements Serializable {
 		// botao limpar/cancelar
 		btnCltLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				listContasCliente.clearSelection();
 				textFieldCltNumeroConta.setText("");
-				dateChooser_1.setDate(null);;
+				dateChooser_1.setDate(null);
+				;
 				textFieldCltSaldoConta.setText("");
 				textFieldCltCartao.setText("");
 				comboBoxCltConta.getSelectedIndex();
@@ -347,9 +348,9 @@ public class BancoAppClt implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				if (comboBoxContasCartao.getSelectedIndex() == 0) {
-
 					// falta verificar se o cartao ja existe nesta conta senao cria um novo
 					String s = (String) comboBoxContasCartao.getSelectedItem();
+					//Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(s), gb.javabank.getContas());
 
 					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
@@ -369,7 +370,7 @@ public class BancoAppClt implements Serializable {
 
 					Cartao cartao = new Cartao(id, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
 							Integer.parseInt(textFieldCOD.getText()));
-					((ContaCorrente) conta).setCartao(cartao);
+					gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(),cartao);
 					JOptionPane.showMessageDialog(null, "Cartão adicionado!!");
 
 				}
@@ -435,6 +436,7 @@ public class BancoAppClt implements Serializable {
 				gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
 		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
 		coBoxPesquisaContas.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				// seleciona as contas:
 
@@ -581,8 +583,6 @@ public class BancoAppClt implements Serializable {
 		button_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		button_5.setBounds(533, 421, 116, 38);
 		JPCltTransferencia.add(button_5);
-
-	
 
 		// Painel principal gestao
 		JPanel JPCltGestao = new JPanel();
@@ -891,4 +891,5 @@ public class BancoAppClt implements Serializable {
 		});
 
 	}
+
 }
