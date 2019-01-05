@@ -46,12 +46,12 @@ public class BancoAppClt implements Serializable {
 	private JTextField tbCltTransfSaldo;
 	private JTextField tbCltTransfMontante;
 	private JTextField tbCltTransfDestino;
-	private JTextField textField_3;
+	private JTextField textCltPassAntiga1;
 	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField txtCltPassConfirma;
+	private JTextField txtCltNewUser;
+	private JTextField txtCltPassAntiga;
+	private JTextField textCltUser;
 	private JTextField textFieldNomeCartao;
 	private JTextField textFieldCOD;
 	private static Cliente clt;
@@ -187,6 +187,136 @@ public class BancoAppClt implements Serializable {
 		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
+
+		// Painel principal gestao
+		JPanel JPCltGestao = new JPanel();
+		JPCltGestao.setVisible(false);
+		JPCltGestao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltGestao);
+		JPCltGestao.setLayout(null);
+
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setAlignmentX(0.0f);
+		separator_1.setBounds(483, 68, 29, 433);
+		JPCltGestao.add(separator_1);
+
+		JLabel label = new JLabel("Password :");
+		label.setVerifyInputWhenFocusTarget(false);
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label.setBounds(570, 95, 131, 41);
+		JPCltGestao.add(label);
+
+		textCltPassAntiga1 = new JTextField();
+		textCltPassAntiga1.setColumns(10);
+		textCltPassAntiga1.setBounds(570, 148, 271, 33);
+		JPCltGestao.add(textCltPassAntiga1);
+
+		JLabel label_1 = new JLabel("Nova Password :");
+		label_1.setVerifyInputWhenFocusTarget(false);
+		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label_1.setBounds(570, 192, 168, 41);
+		JPCltGestao.add(label_1);
+
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(570, 244, 271, 33);
+		JPCltGestao.add(textField_4);
+
+		JLabel label_2 = new JLabel("Confirmar Password :");
+		label_2.setVerifyInputWhenFocusTarget(false);
+		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label_2.setBounds(570, 289, 271, 41);
+		JPCltGestao.add(label_2);
+
+		txtCltPassConfirma = new JTextField();
+		txtCltPassConfirma.setColumns(10);
+		txtCltPassConfirma.setBounds(570, 341, 271, 33);
+		JPCltGestao.add(txtCltPassConfirma);
+
+		JButton button = new JButton("Confirmar");
+//		button.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+				
+//				if (clt.getPassword().equals(textCltPassAntiga1.getText())
+//						&& textFieldAdminGestConf.getText().equals(textFieldAdminGestNovaPass.getText())) {
+//
+//					adm.setPassword(textFieldAdminGestNovaPass.getText());
+//
+//					textFieldAdminGestPass1.setText(null);
+//					textFieldAdminGestConf.setText(null);
+//					textFieldAdminGestNovaPass.setText(null);
+//					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
+//
+//				}
+//			}
+//		});
+		
+		button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button.setBounds(570, 429, 131, 41);
+		JPCltGestao.add(button);
+
+		JButton button_2 = new JButton("Cancelar");
+		button_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_2.setBounds(720, 429, 131, 41);
+		JPCltGestao.add(button_2);
+
+		JButton button_3 = new JButton("Cancelar");
+		button_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_3.setBounds(285, 429, 131, 41);
+		JPCltGestao.add(button_3);
+
+		JButton button_4 = new JButton("Confirmar");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (clt.getPassword().equals(txtCltPassAntiga.getText())) {
+
+					clt.setUsername(txtCltNewUser.getText());
+					txtCltPassAntiga.setText(null);
+					txtCltNewUser.setText(null);
+					textCltUser.setText(clt.getUsername());
+					JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
+				}
+			}
+		});
+		
+		button_4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_4.setBounds(135, 429, 131, 41);
+		JPCltGestao.add(button_4);
+
+		txtCltNewUser = new JTextField();
+		txtCltNewUser.setColumns(10);
+		txtCltNewUser.setBounds(135, 341, 271, 33);
+		JPCltGestao.add(txtCltNewUser);
+
+		JLabel label_3 = new JLabel("Nova Username :");
+		label_3.setVerifyInputWhenFocusTarget(false);
+		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label_3.setBounds(135, 289, 191, 41);
+		JPCltGestao.add(label_3);
+
+		txtCltPassAntiga = new JTextField();
+		txtCltPassAntiga.setColumns(10);
+		txtCltPassAntiga.setBounds(135, 244, 271, 33);
+		JPCltGestao.add(txtCltPassAntiga);
+
+		JLabel label_4 = new JLabel("Password :");
+		label_4.setVerifyInputWhenFocusTarget(false);
+		label_4.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label_4.setBounds(135, 192, 131, 41);
+		JPCltGestao.add(label_4);
+
+		textCltUser = new JTextField(clt.getUsername());
+		textCltUser.setBounds(135, 148, 271, 33);
+		JPCltGestao.add(textCltUser);
+
+		JLabel label_5 = new JLabel("Username :");
+		label_5.setVerifyInputWhenFocusTarget(false);
+		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		label_5.setBounds(135, 95, 131, 41);
+		JPCltGestao.add(label_5);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
@@ -578,105 +708,6 @@ public class BancoAppClt implements Serializable {
 		button_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		button_5.setBounds(533, 421, 116, 38);
 		JPCltTransferencia.add(button_5);
-
-		// Painel principal gestao
-		JPanel JPCltGestao = new JPanel();
-		JPCltGestao.setVisible(false);
-		JPCltGestao.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltGestao);
-		JPCltGestao.setLayout(null);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setAlignmentX(0.0f);
-		separator_1.setBounds(483, 68, 29, 433);
-		JPCltGestao.add(separator_1);
-
-		JLabel label = new JLabel("Password :");
-		label.setVerifyInputWhenFocusTarget(false);
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label.setBounds(570, 95, 131, 41);
-		JPCltGestao.add(label);
-
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(570, 148, 271, 33);
-		JPCltGestao.add(textField_3);
-
-		JLabel label_1 = new JLabel("Nova Password :");
-		label_1.setVerifyInputWhenFocusTarget(false);
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_1.setBounds(570, 192, 168, 41);
-		JPCltGestao.add(label_1);
-
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(570, 244, 271, 33);
-		JPCltGestao.add(textField_4);
-
-		JLabel label_2 = new JLabel("Confirmar Password :");
-		label_2.setVerifyInputWhenFocusTarget(false);
-		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_2.setBounds(570, 289, 271, 41);
-		JPCltGestao.add(label_2);
-
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(570, 341, 271, 33);
-		JPCltGestao.add(textField_5);
-
-		JButton button = new JButton("Confirmar");
-		button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button.setBounds(570, 429, 131, 41);
-		JPCltGestao.add(button);
-
-		JButton button_2 = new JButton("Cancelar");
-		button_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_2.setBounds(720, 429, 131, 41);
-		JPCltGestao.add(button_2);
-
-		JButton button_3 = new JButton("Cancelar");
-		button_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_3.setBounds(285, 429, 131, 41);
-		JPCltGestao.add(button_3);
-
-		JButton button_4 = new JButton("Confirmar");
-		button_4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_4.setBounds(135, 429, 131, 41);
-		JPCltGestao.add(button_4);
-
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(135, 341, 271, 33);
-		JPCltGestao.add(textField_6);
-
-		JLabel label_3 = new JLabel("Nova Username :");
-		label_3.setVerifyInputWhenFocusTarget(false);
-		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_3.setBounds(135, 289, 191, 41);
-		JPCltGestao.add(label_3);
-
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(135, 244, 271, 33);
-		JPCltGestao.add(textField_7);
-
-		JLabel label_4 = new JLabel("Password :");
-		label_4.setVerifyInputWhenFocusTarget(false);
-		label_4.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_4.setBounds(135, 192, 131, 41);
-		JPCltGestao.add(label_4);
-
-		textField_8 = new JTextField();
-		textField_8.setBounds(135, 148, 271, 33);
-		JPCltGestao.add(textField_8);
-
-		JLabel label_5 = new JLabel("Username :");
-		label_5.setVerifyInputWhenFocusTarget(false);
-		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_5.setBounds(135, 95, 131, 41);
-		JPCltGestao.add(label_5);
 
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
