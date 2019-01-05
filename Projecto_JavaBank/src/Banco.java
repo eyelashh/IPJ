@@ -486,13 +486,13 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
 				ContaCorrente c = (ContaCorrente) contas.get(i);
-				if (c.getCartao() != null) {
+			/*	if (c.getCartao() != null) {
 					card = c.getCartao();
 					
 				}  else {
 					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 				}
-
+*/
 			}
 		}
 		return card;
@@ -505,14 +505,14 @@ public class Banco implements Serializable {
 			for (int i = 0; i < contas.size(); i++) {
 				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == idConta)) {
 					ContaCorrente c = (ContaCorrente) contas.get(i);
-					if (c.getCartao() != null) {
+					/*if (c.getCartao() != null) {
 
 					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
 					}else {
 						c.setCartao(card);
 						
 						JOptionPane.showMessageDialog(null, "Foi adicionado um cartão à sua conta!!");
-					}
+					}*/
 
 				}
 
