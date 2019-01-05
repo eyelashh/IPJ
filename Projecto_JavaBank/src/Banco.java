@@ -502,14 +502,8 @@ public class Banco implements Serializable {
 		return card;
 
 	}
-<<<<<<< HEAD
-	
-	// verifica se o cartao existe, se n�o existir cria um novo carrinho com o nif
-		// introduzido e adiciona-o ao array
-		public void cartaoExiste(int idConta, ArrayList<Conta> contas, Cartao card) {
-=======
->>>>>>> 195734c96dc4b755d4b9041a94703ca60ee94913
 
+		// introduzido e adiciona-o ao array
 	// verifica se o cartao existe, se n�o existir cria um novo cartao
 	public void cartaoExiste(int idConta, Cartao card) {
 
