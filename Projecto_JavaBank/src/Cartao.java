@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Cartao implements Serializable{
 
+	private int nCartao;
 	private String nomeTitular;
 	private Date dataValidade;
 	private int codvalidacao;
@@ -17,6 +18,7 @@ public class Cartao implements Serializable{
 
 	public Cartao(String nomeTitular, Date dataValidade, int codvalidacao, int idconta) {
 		super();
+		this.nCartao = nCartao;
 		this.nomeTitular = nomeTitular;
 		this.dataValidade = dataValidade;
 		this.codvalidacao = codvalidacao;
@@ -26,6 +28,16 @@ public class Cartao implements Serializable{
 
 	
 	
+
+
+	public int getnCartao() {
+		return nCartao;
+	}
+
+
+	public void setnCartao(int nCartao) {
+		this.nCartao = nCartao;
+	}
 
 
 	public int getIdconta() {
