@@ -16,7 +16,6 @@ public class Banco implements Serializable {
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Cartao> cartoes;
 
-
 	public Banco() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
@@ -486,24 +485,25 @@ public class Banco implements Serializable {
 
 		Cartao card = new Cartao();
 
-		for (int j = 0; j < cartoes.size(); j++) {
+		if (cartoes.size() != 0) {
+			for (int j = 0; j < cartoes.size(); j++) {
 
-			if (cartoes.get(j).getIdconta() == nConta) {
+				if (cartoes.get(j).getIdconta() == nConta) {
 
-				card = cartoes.get(j);
+					card = cartoes.get(j);
 
-				JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
 
-			} else {
-				JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
+				} else {
+					JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
+				}
 			}
-
 		}
 		return card;
 
 	}
 
-		// introduzido e adiciona-o ao array
+	// introduzido e adiciona-o ao array
 	// verifica se o cartao existe, se n�o existir cria um novo cartao
 	public void cartaoExiste(int idConta, Cartao card) {
 
@@ -545,20 +545,17 @@ public class Banco implements Serializable {
 
 		return op;
 	}
-	
-	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id)
-	{
-		Cartao card=null;
-		for(int i=0; i<cartoes.size(); i++)
-		{
-			if(cartoes.get(i).getCodvalidacao()==id)
-			{
+
+	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id) {
+		Cartao card = null;
+		for (int i = 0; i < cartoes.size(); i++) {
+			if (cartoes.get(i).getCodvalidacao() == id) {
 				card = cartoes.get(i);
 			}
 		}
-		
+
 		return card;
-		
+
 	}
 
 }

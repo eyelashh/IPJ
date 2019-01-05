@@ -559,28 +559,18 @@ public class BancoAppClt implements Serializable {
 				if (comboBoxContasCartao.getSelectedIndex() == 0) {
 
 					// falta verificar se o cartao ja existe nesta conta senao cria um novo
+					
 					String s = (String) comboBoxContasCartao.getSelectedItem();
-					// Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(s),
-					// gb.javabank.getContas());
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-					// Conta conta = gb.javabank.SelectConta(Integer.parseInt(s),
-					// gb.javabank.getContas());
-
-					int n = 0;
+					int id = 0;
 					do {
-						n = (int) (Math.random() * 1000);
+						id = (int) (Math.random() * 1000);
 
-					} while (n < 100 || n > 1000);
-					textFieldCOD.setText("" + n);
+					} while (id < 100 || id > 1000);
+					textFieldCOD.setText("" + id);
 
-					/*
-					 * Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(),
-					 * dateChooserCartao.getDate(), Integer.parseInt(textFieldCOD.getText()),
-					 * Integer.parseInt(s));
-					 */
-
-					// gb.javabank.cartaoExiste(Integer.parseInt(s), cartao);
-
+					
 				} else {
 
 				}
