@@ -114,12 +114,13 @@ public class GestaoBanco implements Serializable {
 				this.fileCartao.createNewFile();
 				this.oS = new ObjectOutputStream(new FileOutputStream(this.fileCartao));
 				oS.writeObject(javabank.getCartoes());
+				oS.close();
 			} catch (IOException e) {
 
 			}
 		} else
 			try {
-				{
+				
 					this.iS = new ObjectInputStream(new FileInputStream(this.fileCartao));
 					try {
 						this.javabank.setCartoes((ArrayList<Cartao>) iS.readObject());
@@ -127,7 +128,7 @@ public class GestaoBanco implements Serializable {
 					} catch (ClassNotFoundException y) {
 
 					}
-				}
+				
 			} catch (IOException e) {
 
 			}

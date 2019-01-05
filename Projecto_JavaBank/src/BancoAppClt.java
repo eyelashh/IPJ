@@ -273,7 +273,7 @@ public class BancoAppClt implements Serializable {
 					dateChooser_1.setDate(c.getDataCriacao());
 					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
-					Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(numeroConta), gb.javabank.getContas());
+					Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(numeroConta), gb.javabank.getContas(), gb.javabank.getCartoes());
 					textFieldCltCartao.setText(c1.getNomeTitular());
 
 					// cartao:
