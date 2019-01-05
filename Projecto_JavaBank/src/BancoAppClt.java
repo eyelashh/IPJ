@@ -59,8 +59,8 @@ public class BancoAppClt implements Serializable {
 	private static GestaoBanco gb;
 	private JTextField textFieldNumCartao;
 	private JTextField txtSaldoConta;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textMontTransf;
+	private JTextField textContaDestino;
 
 	/**
 	 * Launch the application.
@@ -237,18 +237,18 @@ public class BancoAppClt implements Serializable {
 		label_8.setBounds(435, 202, 97, 23);
 		JPCltTransferencia.add(label_8);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(445, 227, 162, 30);
-		JPCltTransferencia.add(textField_1);
+		textMontTransf = new JTextField();
+		textMontTransf.setBounds(445, 227, 162, 30);
+		JPCltTransferencia.add(textMontTransf);
 
 		JLabel label_9 = new JLabel("Conta destino:");
 		label_9.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		label_9.setBounds(435, 269, 137, 23);
 		JPCltTransferencia.add(label_9);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(445, 294, 162, 30);
-		JPCltTransferencia.add(textField_2);
+		textContaDestino = new JTextField();
+		textContaDestino.setBounds(445, 294, 162, 30);
+		JPCltTransferencia.add(textContaDestino);
 
 		JLabel label_10 = new JLabel("Data da Operação:");
 		label_10.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -260,6 +260,70 @@ public class BancoAppClt implements Serializable {
 		JPCltTransferencia.add(dateChooser);
 
 		JButton button_1 = new JButton("Confirmar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				double valortransf = Double.parseDouble(textMontTransf.getText());
+
+				String s = (String) coBoxPesquisaContas.getSelectedItem();
+
+				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+				Conta cdestino;
+
+				try {
+
+					String numContaDestino = textContaDestino.getText();
+					cdestino = gb.javabank.SelectConta(Integer.parseInt(numContaDestino), gb.javabank.getContas());
+
+					if ((corigem.getSaldo() >= valortransf) && (!corigem.equals(cdestino))) {
+
+						// gerado ids:
+						int idoperacaoorigem = 1;
+						if (corigem.getOperacoes().size() != 0) {
+							idoperacaoorigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1)
+									.getIdOperacao() + 1;
+						}
+						int idoperacaodestino = 1;
+						if (cdestino.getOperacoes().size() != 0) {
+							idoperacaodestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1)
+									.getIdOperacao() + 1;
+						}
+						// faz transferencia;
+						cdestino.setSaldo(cdestino.getSaldo() + valortransf);
+						corigem.setSaldo(corigem.getSaldo() - valortransf);
+
+						String descricaoCorigem = dateChooser.getDate() + " - Transferencia efectuada para conta "
+								+ cdestino.getIdConta() + " valor: " + valortransf;
+						String descricaoCdestino = dateChooser.getDate() + " - Transferencia recebida da conta "
+								+ corigem.getIdConta() + " valor: " + valortransf;
+
+						// adicionar ao array das operacoes
+						Operacao oporigem = new Transferencia(idoperacaoorigem, null, dateChooser.getDate(),
+								valortransf, descricaoCorigem, cdestino, clt);
+						Operacao opdestino = new Transferencia(idoperacaodestino, null, dateChooser.getDate(),
+								valortransf, descricaoCdestino, corigem, clt);
+
+						corigem.getOperacoes().add(oporigem);
+						cdestino.getOperacoes().add(opdestino);
+
+						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+
+					} else {
+						if (corigem.getSaldo() < valortransf) {
+							JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+						}
+						if (corigem.equals(cdestino)) {
+							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+						}
+					}
+
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+				}
+
+			}
+		});
 		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		button_1.setBounds(395, 421, 116, 38);
 		JPCltTransferencia.add(button_1);
