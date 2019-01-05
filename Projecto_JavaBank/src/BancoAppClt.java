@@ -285,9 +285,12 @@ public class BancoAppClt implements Serializable {
 		
 		DefaultListModel<String> dmlistaOpe = new DefaultListModel<String>();
 		gb.javabank.addelementoslist(gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);;
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(599, 143, 379, 354);
+		JPCltCM.add(scrollPane);
 		JList listCltListaMovimentos = new JList(dmlistaOpe);
-		listCltListaMovimentos.setBounds(599, 143, 379, 354);
-		JPCltCM.add(listCltListaMovimentos);
+		scrollPane.setViewportView(listCltListaMovimentos);
 
 		textFieldNumCartao = new JTextField();
 		textFieldNumCartao.setBounds(810, 102, 168, 30);
