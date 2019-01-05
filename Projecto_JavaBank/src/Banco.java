@@ -505,7 +505,7 @@ public class Banco implements Serializable {
 			for (int i = 0; i < contas.size(); i++) {
 				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == idConta)) {
 					ContaCorrente c = (ContaCorrente) contas.get(i);
-					if (c.getCartao().equals(card)) {
+					if (c.getCartao() != null) {
 
 					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
 					}else {
