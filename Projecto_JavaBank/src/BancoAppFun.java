@@ -380,6 +380,10 @@ public class BancoAppFun implements Serializable {
 																																														JpanelOpTransferencia.add(btnConfirmar);
 																																														
 																																																JButton btnCancelar = new JButton("Cancelar");
+																																																btnCancelar.addActionListener(new ActionListener() {
+																																																	public void actionPerformed(ActionEvent e) {
+																																																	}
+																																																});
 																																																btnCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 																																																btnCancelar.setBounds(256, 253, 116, 38);
 																																																JpanelOpTransferencia.add(btnCancelar);

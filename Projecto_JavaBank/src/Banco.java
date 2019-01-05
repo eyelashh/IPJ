@@ -477,4 +477,23 @@ public class Banco implements Serializable {
 		return card;
 	}
 
+	//lista das operacoes
+	private static String[] arrayOperacoes(int nConta, ArrayList<Conta> contas) {
+
+		ArrayList<String> operacoes = new ArrayList<String>();
+		String o = "";
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
+				o = contas.get(i).getOperacoes().toString();
+				operacoes.add(o);
+			}
+			o = null;
+		}
+
+		String[] op = new String[operacoes.size() + 1];
+		op = operacoes.toArray(op);
+
+		return op;
+	}
 }
