@@ -188,7 +188,8 @@ public class BancoAppClt implements Serializable {
 		JpanelPrincipal.add(JPCltTransferencia);
 		JPCltTransferencia.setLayout(null);
 		
-		DefaultComboBoxModel<String> pesquisaContaCliente = new DefaultComboBoxModel<>(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
+		DefaultComboBoxModel<String> pesquisaContaCliente = new DefaultComboBoxModel<>();
+		gb.javabank.listacontadecliente(clt, gb.javabank.getContas());
 		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContaCliente);
 		coBoxPesquisaContas.setBounds(302, 107, 235, 27);
 		JPCltTransferencia.add(coBoxPesquisaContas);
