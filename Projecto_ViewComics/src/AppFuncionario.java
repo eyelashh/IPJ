@@ -233,10 +233,10 @@ public class AppFuncionario implements Serializable {
 		jpFuncCarrinhos.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(303, 91, 404, 178);
+		scrollPane_1.setBounds(303, 91, 500, 178);
 		jpFuncCarrinhos.add(scrollPane_1);
 
-		String[] colunas = { "IdLivro", "Titulo", "Autor", "Preco", "Quantidade" };
+		String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade","Preco total" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
 		scrollPane_1.setViewportView(table);
@@ -252,12 +252,12 @@ public class AppFuncionario implements Serializable {
 		jpFuncCarrinhos.add(lblNif);
 
 		JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
-		lblPreoDoCarrinho.setBounds(303, 359, 163, 14);
+		lblPreoDoCarrinho.setBounds(303, 290, 163, 14);
 		lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblPreoDoCarrinho);
 
 		JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
-		lblQuantidadeDeLivros.setBounds(303, 384, 163, 14);
+		lblQuantidadeDeLivros.setBounds(303, 317, 163, 14);
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
 
@@ -277,12 +277,8 @@ public class AppFuncionario implements Serializable {
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
-					String nifSeleccionado = listNifsClientes.getSelectedValue();
-//					ArrayList <Carrinho>cars=gl.viewComics.getCarrinhos();
-//					Carrinho c3=cars.get(3);
+					String nifSeleccionado = listNifsClientes.getSelectedValue();			
 					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSeleccionado);
-					// Carrinho c = gl.viewComics.selctCarrinho(nifSeleccionado,
-					// gl.viewComics.getCarrinhos());
 					String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
 					txtPrecoCarrinho.setText(precoCarrinho);
 					String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(c);
@@ -431,21 +427,21 @@ public class AppFuncionario implements Serializable {
 		jpFuncCarrinhos.add(bttLimparFun);
 
 		txtPrecoCarrinho = new JTextField();
-		txtPrecoCarrinho.setBounds(438, 357, 51, 20);
+		txtPrecoCarrinho.setBounds(438, 290, 51, 20);
 		txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtPrecoCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtPrecoCarrinho);
 		txtPrecoCarrinho.setColumns(10);
 
 		txtQuantidadeLivrosCarrinho = new JTextField();
-		txtQuantidadeLivrosCarrinho.setBounds(452, 382, 61, 20);
+		txtQuantidadeLivrosCarrinho.setBounds(452, 315, 61, 20);
 		txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtQuantidadeLivrosCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
 		txtQuantidadeLivrosCarrinho.setColumns(10);
 
 		JLabel label_8 = new JLabel("\u20AC");
-		label_8.setBounds(493, 359, 163, 14);
+		label_8.setBounds(493, 292, 31, 14);
 		label_8.setHorizontalAlignment(SwingConstants.LEFT);
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(label_8);

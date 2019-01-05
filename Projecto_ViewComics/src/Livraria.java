@@ -825,10 +825,42 @@ public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 		String autor =l.getAutor();
 		double preco=l.getPreco();
 		int quantidade=hm.get(id);
+		double precoTotal=hm.get(id)*preco;
 		
-		Object[] data ={id,titulo,autor,preco,quantidade};	
+		Object[] data ={id,titulo,autor,preco,quantidade,precoTotal};	
 		dtm.addRow(data);
 	}
 		
+}
+public void finalizarCarrinho(Carrinho car) {
+	ArrayList <Carrinho> carrinhos =this.carrinhos;
+	
+	for (Carrinho c:carrinhos) {
+		if ((c==car) && (c.getConteudo()!=null)){
+			c.setFinalizado(true);
+			car=c;
+		}
+	}
+	if (car.isFinalizado()) {
+		JOptionPane.showMessageDialog(null, "O carrinho foi dado como finalizado. Dirija-se ao funcionario para proceder ao seu pagamento");
+	}
+	else if (!car.isFinalizado()){
+		
+		JOptionPane.showMessageDialog(null, "Não foi possível finalizar o carrinho porque não consta na base de dados ou porque ainda se encontra vazio. Confirme o nif introduzido e/ou o conteudo do respectivo carrinho.");
+	}
+	
+	
+}
+public ArrayList carrinhosFinalizado(Carrinho car) {
+	ArrayList <Carrinho> carrinhos =this.carrinhos;
+	ArrayList <Carrinho> carrinhosFinalizados=new ArrayList<Carrinho>();
+	for(Carrinho c:carrinhos) {
+		if (c.isFinalizado()) {
+			Carrinho cF=c;
+			carrinhosFinalizados.add(cF);
+		}
+		
+	}
+	return carrinhosFinalizados;
 }
 }
