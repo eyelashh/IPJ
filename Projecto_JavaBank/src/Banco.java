@@ -498,6 +498,28 @@ public class Banco implements Serializable {
 		return card;
 	}
 	
+	// verifica se o carrinho existe, se n�o existir cria um novo carrinho com o nif
+		// introduzido e adiciona-o ao array
+		public void cartaoExiste(int idConta, ArrayList<Conta> contas, Cartao card) {
+
+			for (int i = 0; i < contas.size(); i++) {
+				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == idConta)) {
+					ContaCorrente c = (ContaCorrente) contas.get(i);
+					if (c.getCartao() != null) {
+
+					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+					}else {
+						c.setCartao(card);
+						
+						JOptionPane.showMessageDialog(null, "Foi adicionado um cartão à sua conta!!");
+					}
+
+				}
+
+			}
+			
+		}
+	
 
 
 
