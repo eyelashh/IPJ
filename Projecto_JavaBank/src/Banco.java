@@ -14,6 +14,7 @@ public class Banco implements Serializable {
 	private String morada;
 	private ArrayList<Conta> contas;
 	private ArrayList<Utilizador> utilizadores;
+	private ArrayList<Cartao> cartoes;
 	// private static Banco banco = new Banco();
 
 	public Banco() {
@@ -31,16 +32,25 @@ public class Banco implements Serializable {
 		this.morada = morada;
 		this.contas = new ArrayList<Conta>();
 		this.utilizadores = new ArrayList<Utilizador>();
+		this.cartoes = new ArrayList<Cartao>();
 
 	}
 
-	// public static Banco getInstance() {
-	// return banco;
-	// }
+	
+
+	public ArrayList<Cartao> getCartoes() {
+		return cartoes;
+	}
+
+	public void setCartoes(ArrayList<Cartao> cartoes) {
+		this.cartoes = cartoes;
+	}
 
 	public int getIdBanco() {
 		return idBanco;
 	}
+	
+	
 
 	public void setIdBanco(int idBanco) {
 		this.idBanco = idBanco;
@@ -480,9 +490,7 @@ public class Banco implements Serializable {
 
 	// retorna o cartao
 	protected Cartao obterCartao(int nConta, ArrayList<Conta> contas) {
-
 		Cartao card = new Cartao();
-
 		for (int i = 0; i < contas.size(); i++) {
 			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
 				ContaCorrente c = (ContaCorrente) contas.get(i);
@@ -542,8 +550,6 @@ public class Banco implements Serializable {
 
 		return op;
 	}
-	
-	// remover id de contas dentro dos clientes:
 	
 
 	

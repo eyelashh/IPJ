@@ -130,7 +130,7 @@ public class BancoAppFun implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -154,7 +154,7 @@ public class BancoAppFun implements Serializable {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 
 				Login logout = new Login();
 				frame.setVisible(false);

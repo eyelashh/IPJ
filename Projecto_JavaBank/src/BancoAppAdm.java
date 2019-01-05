@@ -95,7 +95,7 @@ public class BancoAppAdm implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 			}
 		});
 
@@ -127,7 +127,7 @@ public class BancoAppAdm implements Serializable {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 
 				Login logout = new Login();
 				frame.setVisible(false);
