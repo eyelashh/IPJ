@@ -28,7 +28,6 @@ public class Operacao implements Serializable{
 
 
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
@@ -73,6 +72,15 @@ public class Operacao implements Serializable{
 
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Operacao [idOperacao=" + idOperacao + ", responsavel=" + responsavel + ", dataOperacao=" + dataOperacao
+				+ ", valor=" + valor + ", descricao=" + descricao + "]";
 	}
 	
 	

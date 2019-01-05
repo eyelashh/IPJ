@@ -180,7 +180,7 @@ public class Banco implements Serializable {
 	protected String[] listacontasordem(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
-		
+
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
 				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
@@ -193,24 +193,24 @@ public class Banco implements Serializable {
 		lista = listprov.toArray(lista);
 		return lista;
 	}
-	
-	//lista a conta de um determinado cliente
-		protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
-			ArrayList<String> listprov = new ArrayList<String>();
-			
-			for (int i = 0; i < contas.size(); i++) {
-				for (int j = 0; j < c.getContas().size(); j++) {
-					if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
-						listprov.add(c.getContas().get(j) + "");
-					}
+	// lista a conta de um determinado cliente
+	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
+
+		ArrayList<String> listprov = new ArrayList<String>();
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < c.getContas().size(); j++) {
+				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
+					listprov.add(c.getContas().get(j) + "");
 				}
 			}
-
-			String[] lista = new String[listprov.size()];
-			lista = listprov.toArray(lista);
-			return lista;
 		}
+
+		String[] lista = new String[listprov.size()];
+		lista = listprov.toArray(lista);
+		return lista;
+	}
 
 //	// lista as contas a ordem
 //	protected String listacontasordem(ArrayList<Integer> idClientes, ArrayList<Conta> cont) {
@@ -457,9 +457,9 @@ public class Banco implements Serializable {
 	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
 
 	}
-	
+
 	// retorna o cartao
-	protected  Cartao obterCartao(int nConta, ArrayList<Conta> contas) {
+	protected Cartao obterCartao(int nConta, ArrayList<Conta> contas) {
 
 		Cartao card = new Cartao();
 
@@ -477,14 +477,14 @@ public class Banco implements Serializable {
 		return card;
 	}
 
-	//lista das operacoes
-	private static String[] arrayOperacoes(int nConta, ArrayList<Conta> contas) {
+	// lista das operacoes
+	protected  String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
 
 		ArrayList<String> operacoes = new ArrayList<String>();
 		String o = "";
 
 		for (int i = 0; i < contas.size(); i++) {
-			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
+			if ((contas.get(i) instanceof ContaCorrente) && (idConta.contains(contas.get(i).getIdConta()))) {
 				o = contas.get(i).getOperacoes().toString();
 				operacoes.add(o);
 			}

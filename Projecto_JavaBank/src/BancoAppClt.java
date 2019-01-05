@@ -106,6 +106,7 @@ public class BancoAppClt implements Serializable {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 
+	
 		DefaultListModel<String> dmListaContas = new DefaultListModel<String>();
 		gb.javabank.addelementoslist(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()), dmListaContas);
 
@@ -283,8 +284,8 @@ public class BancoAppClt implements Serializable {
 		
 		
 		DefaultListModel<String> dmlistaOpe = new DefaultListModel<String>();
-		gb.javabank
-		JList listCltListaMovimentos = new JList();
+		gb.javabank.addelementoslist(gb.javabank.arrayOperacoes(clt.getContas(), gb.javabank.getContas()), dmlistaOpe);;
+		JList listCltListaMovimentos = new JList(dmlistaOpe);
 		listCltListaMovimentos.setBounds(599, 143, 379, 354);
 		JPCltCM.add(listCltListaMovimentos);
 
@@ -467,7 +468,7 @@ public class BancoAppClt implements Serializable {
 		comboBoxCLTPesquisa.setBounds(211, 67, 249, 39);
 		JPCltTransf.add(comboBoxCLTPesquisa);
 
-		DefaultListModel<String> dmListaMoviment = new DefaultListModel<String>();
+		
 
 		JLabel labelClt = new JLabel("Saldo:");
 		labelClt.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
