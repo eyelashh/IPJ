@@ -654,7 +654,7 @@ public class BancoAppFun implements Serializable {
 						rdbtnContaCorrente.setSelected(true);
 						panelCartao.setVisible(true);
 
-						if (((ContaCorrente) c).getCartao() == null) {
+					/*//	if (((ContaCorrente) c).getCartao() == null) {
 							btPedirCartao.setVisible(true);
 							panelCartao.setVisible(false);
 						} else {
@@ -665,12 +665,12 @@ public class BancoAppFun implements Serializable {
 							tbnomecartao.setEditable(false);
 							dtcartao.setEnabled(false);
 							tbcodcartao.setEditable(false);
-							tbnomecartao.setText(((ContaCorrente) c).getCartao().getNomeTitular());
-							dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());
-							tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao() + "");
+						//	tbnomecartao.setText(((ContaCorrente) c).getCartao().getNomeTitular());
+						//	dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());
+						//  tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao() + "");
 
-						}
-
+						//}
+*/
 					}
 					gb.javabank.limpatabela(model);
 					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
@@ -757,9 +757,6 @@ public class BancoAppFun implements Serializable {
 
 				} while (n < 100 || n > 1000);
 				tbcodcartao.setText("" + n);
-				Cartao cartao = new Cartao(1, tbnomecartao.getText(), dtcartao.getDate(),
-						Integer.parseInt(tbcodcartao.getText()));
-				((ContaCorrente) conta).setCartao(cartao);
 
 			}
 		});

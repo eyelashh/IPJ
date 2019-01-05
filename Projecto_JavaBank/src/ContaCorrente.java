@@ -5,20 +5,21 @@ import java.util.Date;
 
 public class ContaCorrente extends Conta implements Serializable{
 
-	private Cartao cartao;
+	private int codcartao;
 
 	public ContaCorrente(int idConta, Date dataCriacao, double saldo,
-			ArrayList<Integer> clientes, double valorMaxLevantamento, double valorMaxDia, Cartao cartao) {
+			ArrayList<Integer> clientes, double valorMaxLevantamento, double valorMaxDia, int codcartao) {
 		super(idConta, dataCriacao, saldo, clientes, valorMaxLevantamento, valorMaxDia);
-		this.cartao = cartao;
+		
+		this.codcartao = codcartao;
 	}
 
-	public Cartao getCartao() {
-		return cartao;
+	public int getCartao() {
+		return codcartao;
 	}
  
-	public void setCartao(Cartao cartao) {
-		this.cartao = cartao;
+	public void setCartao(int codcartao) {
+		this.codcartao = codcartao;
 	}
 	
 	

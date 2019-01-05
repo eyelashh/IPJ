@@ -254,7 +254,7 @@ public class BancoAppClt implements Serializable {
 
 					Cartao c1 = gb.javabank.obterCartao(Integer.parseInt(numeroConta), gb.javabank.getContas());
 					textFieldCltCartao.setText(c1.getNomeTitular());
-					textFieldNumCartao.setText(Integer.toString(c1.getnCartao()));
+					// cartao:
 
 				}
 			}
@@ -354,11 +354,11 @@ public class BancoAppClt implements Serializable {
 
 					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-					int id = ((ContaCorrente) conta).getCartao().getnCartao();
+					//int id = ((ContaCorrente) conta).getCartao().getnCartao();
 
-					if (id == 1) {
-						id++;
-					}
+					//if (id == 1) {
+						//id++;
+					//}
 
 					int n = 0;
 					do {
@@ -368,10 +368,10 @@ public class BancoAppClt implements Serializable {
 
 					textFieldCOD.setText("" + n);
 
-					Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
-							Integer.parseInt(textFieldCOD.getText()));
+					/*Cartao cartao = new Cartao(1, textFieldNomeCartao.getText(), dateChooserCartao.getDate(),
+							Integer.parseInt(textFieldCOD.getText()));*/
 					
-					gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(),cartao);
+					//gb.javabank.cartaoExiste(Integer.parseInt(s), gb.javabank.getContas(),cartao);
 					
 
 				}
