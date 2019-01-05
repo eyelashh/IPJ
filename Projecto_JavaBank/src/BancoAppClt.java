@@ -100,7 +100,7 @@ public class BancoAppClt implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -128,7 +128,7 @@ public class BancoAppClt implements Serializable {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas());
+					gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
 
 					Login logout = new Login();
 					frame.setVisible(false);
