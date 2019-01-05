@@ -15,7 +15,7 @@ public class Cartao implements Serializable{
 	}
  
 
-	public Cartao(int nCartao, String nomeTitular, Date dataValidade, int codvalidacao, int idconta) {
+	public Cartao(String nomeTitular, Date dataValidade, int codvalidacao, int idconta) {
 		super();
 		this.nomeTitular = nomeTitular;
 		this.dataValidade = dataValidade;

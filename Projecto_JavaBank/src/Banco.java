@@ -15,12 +15,13 @@ public class Banco implements Serializable {
 	private ArrayList<Conta> contas;
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Cartao> cartoes;
-	// private static Banco banco = new Banco();
+
 
 	public Banco() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.contas = new ArrayList<Conta>();
+		this.cartoes = new ArrayList<Cartao>();
 	}
 
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
@@ -506,7 +507,7 @@ public class Banco implements Serializable {
 		return card;
 	}
 	
-	// verifica se o carrinho existe, se n�o existir cria um novo carrinho com o nif
+	// verifica se o cartao existe, se n�o existir cria um novo carrinho com o nif
 		// introduzido e adiciona-o ao array
 		public void cartaoExiste(int idConta, ArrayList<Conta> contas, Cartao card) {
 

@@ -130,7 +130,7 @@ public class BancoAppFun implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -154,7 +154,7 @@ public class BancoAppFun implements Serializable {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 
 				Login logout = new Login();
 				frame.setVisible(false);
@@ -532,11 +532,12 @@ public class BancoAppFun implements Serializable {
 
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
+							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
 					if (c instanceof ContaCorrente) {
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
-						
+
 						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 
 					} else {
@@ -652,25 +653,20 @@ public class BancoAppFun implements Serializable {
 					} else {
 						rdbtnContaPoupanca.setSelected(false);
 						rdbtnContaCorrente.setSelected(true);
-						panelCartao.setVisible(true);
 
-					/*//	if (((ContaCorrente) c).getCartao() == null) {
+						if (((ContaCorrente) c).getCartao() == 0) {
 							btPedirCartao.setVisible(true);
-							panelCartao.setVisible(false);
 						} else {
-							btPedirCartao.setVisible(false);
+							
+							
 							panelCartao.setVisible(true);
-							btCartao.setVisible(false);
-
-							tbnomecartao.setEditable(false);
 							dtcartao.setEnabled(false);
+							tbnomecartao.setEditable(false);
 							tbcodcartao.setEditable(false);
-						//	tbnomecartao.setText(((ContaCorrente) c).getCartao().getNomeTitular());
-						//	dtcartao.setDate(((ContaCorrente) c).getCartao().getDataValidade());
-						//  tbcodcartao.setText(((ContaCorrente) c).getCartao().getCodvalidacao() + "");
+							
+							
+						}
 
-						//}
-*/
 					}
 					gb.javabank.limpatabela(model);
 					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
@@ -686,10 +682,11 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!lContas.isSelectionEmpty()) {
-					
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
+							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
 					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
-					
+
 					lContas.clearSelection();
 					tbContasnum.setText(null);
 					dateChooser_2.setDate(null);
@@ -708,8 +705,6 @@ public class BancoAppFun implements Serializable {
 					dtcartao.setDate(null);
 					tbcodcartao.setText(null);
 					panelCartao.setVisible(false);
-
-					
 
 					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
 
@@ -749,15 +744,36 @@ public class BancoAppFun implements Serializable {
 
 		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-				int n = 0;
+				int id = 0;
+				boolean existe = false;
 				do {
-					n = (int) (Math.random() * 1000);
 
-				} while (n < 100 || n > 1000);
-				tbcodcartao.setText("" + n);
+					do {
+						id = (int) (Math.random() * 1000);
+					} while (id > 999 || id < 99);
 
+					if (gb.javabank.getCartoes().size() != 0) {
+						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
+							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
+								existe = true;
+							}
+						}
+					}
+				} while (existe);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
+				gb.javabank.getCartoes().add(cartao);
+				((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+				tbcodcartao.setText(id+"");
+				
+				dtcartao.setEnabled(false);
+				tbnomecartao.setEditable(false);
+				tbcodcartao.setEditable(false);
+				
+				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				
 			}
 		});
 

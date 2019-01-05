@@ -206,6 +206,12 @@ public class BancoAppClt implements Serializable {
 		label_7.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		label_7.setBounds(377, 71, 162, 23);
 		JPCltTransferencia.add(label_7);
+		
+		// modelo de combobox no panel Transferencia que contem as contas do cliente e
+				// ao seleccionar coloca o saldo dessa conta
+				DefaultComboBoxModel<String> pesquisaContas = new DefaultComboBoxModel<>(
+						gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
+		
 		JComboBox coBoxPesquisaContas = new JComboBox(pesquisaContas);
 		coBoxPesquisaContas.addActionListener(new ActionListener() {
 
@@ -750,10 +756,7 @@ public class BancoAppClt implements Serializable {
 		passwordFieldConfPass.setBounds(580, 342, 271, 33);
 		JPCltGestao.add(passwordFieldConfPass);
 
-		// modelo de combobox no panel Transferencia que contem as contas do cliente e
-		// ao seleccionar coloca o saldo dessa conta
-		DefaultComboBoxModel<String> pesquisaContas = new DefaultComboBoxModel<>(
-				gb.javabank.listacontadecliente(clt, gb.javabank.getContas()));
+		
 
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
