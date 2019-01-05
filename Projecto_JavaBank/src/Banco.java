@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Banco implements Serializable {
@@ -455,6 +456,25 @@ public class Banco implements Serializable {
 	// Elimina todas as contas nos clientes:
 	protected void eliminacontaemcliente(Conta c, ArrayList<Utilizador> clientes) {
 
+	}
+	
+	// retorna o cartao
+	protected  Cartao obterCartao(int nConta, ArrayList<Conta> contas) {
+
+		Cartao card = new Cartao();
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == nConta)) {
+				ContaCorrente c = (ContaCorrente) contas.get(i);
+				if (c.getCartao() != null) {
+					card = c.getCartao();
+				} else {
+					JOptionPane.showMessageDialog(null, "Não tem cartao");
+				}
+
+			}
+		}
+		return card;
 	}
 
 }
