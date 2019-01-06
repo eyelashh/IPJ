@@ -481,7 +481,7 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
-	protected Cartao obterCartao(ArrayList<Cartao> cartoes,int id) {
+	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
 
 		Cartao card = new Cartao();
 
@@ -491,39 +491,29 @@ public class Banco implements Serializable {
 				if (cartoes.get(j).getCodvalidacao() == id) {
 
 					card = cartoes.get(j);
+
 				}
 			}
+
 		}
 
 		return card;
 
 	}
 
-	// verifica se o cartao existe, se n�o existir cria um novo cartao
+	// cria um cartão
 
-	public void verificaCartao(int idConta, Cartao card, Conta c) {
+	public void criaCartao(int idConta, Cartao card, Conta c) {
+		int i = 0;
 
-		if (cartoes.size() != 0) {
-	
-			for (int j = 0; j < cartoes.size(); j++) {
-				for (int i = 0; i < contas.size(); i++) {
-					if ((contas.get(i) instanceof ContaCorrente)
-							&& (cartoes.get(j).getIdconta() == idConta)) {
+		for (i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente)) {
 
-						JOptionPane.showMessageDialog(null, "A sua conta já tem um cartão associado!!");
-					}
+				this.cartoes.add(card);
+				((ContaCorrente) c).setCartao(card.getCodvalidacao());
 
-				}
 			}
-
-		} else {
-
-			cartoes.add(card);
-			((ContaCorrente) c).setCartao(card.getCodvalidacao());
-
-			JOptionPane.showMessageDialog(null, "Cartão criado com sucesso!");
 		}
-
 	}
 
 	// lista das operacoes
@@ -678,22 +668,18 @@ public class Banco implements Serializable {
 
 		return clientesID;
 	}
-	
-	// metedo que confirma se a conta existe (usado nas opera�oes)
-	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id)
-	{
-		boolean existe= false;
-		
-		for(int i=0; i<dcbm.getSize();i++)
-		{
-			if(dcbm.getElementAt(i).equals(id+""))
-			{
-				existe=true;
+
+	// metedo que confirma se a conta existe (usado nas opera�oes)
+	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id) {
+		boolean existe = false;
+
+		for (int i = 0; i < dcbm.getSize(); i++) {
+			if (dcbm.getElementAt(i).equals(id + "")) {
+				existe = true;
 			}
 		}
-		
+
 		return existe;
 	}
-	
 
 }

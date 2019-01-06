@@ -248,25 +248,79 @@ public class BancoAppClt implements Serializable {
 
 				if (comboBoxContasCartao.getSelectedIndex() == 0) {
 
-					// falta verificar se o cartao ja existe nesta conta senao cria um novo
+					String s = (String) comboBoxContasCartao.getSelectedItem();
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					// gera o codigo de 3 digitos
+					int id = 0;
+					do {
+						id = (int) (Math.random() * 1000);
+					} while (id > 999 || id < 99);
+					textFieldCOD.setText("" + id);
+
+					// verifica se a conta já tem cartao
+					if (((ContaCorrente) conta).getCartao() != 0) {
+
+						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
+
+						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+					}
+
+					// adiciona um cartao á conta
+					if (((ContaCorrente) conta).getCartao() == 0) {
+
+						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
+								conta.getIdConta());
+
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
+						textFieldNomeCartao.setEditable(false);
+						dateChooserCartao.setEnabled(false);
+						textFieldCOD.setEditable(false);
+						JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+
+					}
+					textFieldNomeCartao.setText("");
+					dateChooserCartao.setDate(null);
+					textFieldCOD.setText("");
+
+				} else {
 
 					String s = (String) comboBoxContasCartao.getSelectedItem();
 					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
+					// gera o codigo de 3 digitos
 					int id = 0;
 					do {
 						id = (int) (Math.random() * 1000);
-
-					} while (id < 100 || id > 1000);
+					} while (id > 999 || id < 99);
 					textFieldCOD.setText("" + id);
 
-					Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
-							conta.getIdConta());
+					// verifica se a conta já tem cartao
+					if (((ContaCorrente) conta).getCartao() != 0) {
 
-					gb.javabank.verificaCartao(Integer.parseInt(s), card, conta);
+						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
 
-				} else {
+						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+					}
 
+					// adiciona um cartao á conta
+					if (((ContaCorrente) conta).getCartao() == 0) {
+
+						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
+								conta.getIdConta());
+
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
+
+						textFieldNomeCartao.setEditable(false);
+						dateChooserCartao.setEnabled(false);
+						textFieldCOD.setEditable(false);
+						JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+
+					}
+
+					textFieldNomeCartao.setText("");
+					dateChooserCartao.setDate(null);
+					textFieldCOD.setText("");
 				}
 			}
 		});
@@ -566,7 +620,8 @@ public class BancoAppClt implements Serializable {
 					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
 					// cartao:
-					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente)c).getCartao());
+					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 
