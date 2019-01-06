@@ -24,11 +24,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -63,6 +65,7 @@ public class BancoAppClt implements Serializable {
 	private JPasswordField passwordFieldAntiga1;
 	private JPasswordField passwordFieldNovaPass;
 	private JPasswordField passwordFieldConfPass;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -120,6 +123,8 @@ public class BancoAppClt implements Serializable {
 
 		// box onde escolhemos qual conta o cliente quer ver
 		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
+
+		
 
 		// Painel de cabeçalho
 		JPanel JpanelCabecalho = new JPanel();
@@ -214,6 +219,16 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.setLayout(null);
 		JPCltCM.setVisible(true);
 
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(599, 143, 379, 354);
+		JPCltCM.add(scrollPane);
+		
+		//Modelo para tabela
+		String[] colunas = { "Id Operação", "Responsável", "Autor", "Preco unitario", "Quantidade", "Preco total" };
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+		table = new JTable(modeloTabela);
+		scrollPane.setViewportView(table);
+
 		JLabel textFieldCltNumero1 = new JLabel("Número:");
 		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		textFieldCltNumero1.setBounds(128, 277, 94, 16);
@@ -265,6 +280,8 @@ public class BancoAppClt implements Serializable {
 		listContasCliente.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 
+				modeloTabela.setRowCount(0);
+
 				if (!listContasCliente.isSelectionEmpty()) {
 
 					String numeroConta = listContasCliente.getSelectedValue();
@@ -307,9 +324,7 @@ public class BancoAppClt implements Serializable {
 		});
 		comboBoxCltConta.setBounds(94, 51, 196, 39);
 		JPCltCM.add(comboBoxCltConta);
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(599, 143, 379, 354);
-		JPCltCM.add(scrollPane);
+
 		JList listCltListaMovimentos = new JList(dmlistaOpe);
 		// selecionar conta e preencher so campos correctos:
 		listCltListaMovimentos.addListSelectionListener(new ListSelectionListener() {
