@@ -222,7 +222,7 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(scrollPane);
 
 		// Modelo para tabela
-		String[] colunas = {"Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
 		scrollPane.setViewportView(table);
@@ -272,42 +272,43 @@ public class BancoAppClt implements Serializable {
 		dateChooser_1.setEnabled(false);
 		dateChooser_1.setBounds(129, 358, 185, 31);
 		JPCltCM.add(dateChooser_1);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(94, 96, 252, 158);
 		JPCltCM.add(scrollPane_1);
-		
-				JList<String> listContasCliente = new JList<String>(dmListaContas);
-				scrollPane_1.setViewportView(listContasCliente);
-				// selecionar conta e preencher so campos correctos:
-				listContasCliente.addListSelectionListener(new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent e) {
 
-						modeloTabela.setRowCount(0);
+		JList<String> listContasCliente = new JList<String>(dmListaContas);
+		scrollPane_1.setViewportView(listContasCliente);
+		// selecionar conta e preencher so campos correctos:
+		listContasCliente.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
 
-						if (!listContasCliente.isSelectionEmpty()) {
+				modeloTabela.setRowCount(0);
 
-							String numeroConta = listContasCliente.getSelectedValue();
+				if (!listContasCliente.isSelectionEmpty()) {
 
-							Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
+					String numeroConta = listContasCliente.getSelectedValue();
 
-							textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
-							dateChooser_1.setDate(c.getDataCriacao());
-							textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
 
-							// cartao:
+					textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
+					dateChooser_1.setDate(c.getDataCriacao());
+					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
-							Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+					// cartao:
 
-							textFieldCltCartao.setText(card.getNomeTitular());
-							textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
+					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
 
-							gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, clt.getContas());
-							gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, clt.getContas());
+					textFieldCltCartao.setText(card.getNomeTitular());
+					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 
-						}
-					}
-				});
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, clt.getContas());
+
+				}
+			}
+		});
 
 		// combobox com uma string de lista e ao escolher uma faz um update a lista
 		JComboBox comboBoxCltConta = new JComboBox(contas);

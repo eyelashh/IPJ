@@ -565,7 +565,8 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),true);
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
+								true);
 						gb.javabank.getContas().add(c);
 					}
 
@@ -623,7 +624,7 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-				
+
 				lContas.clearSelection();
 				tbContasnum.setText(null);
 				dateChooser_2.setDate(null);
@@ -676,7 +677,7 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-				
+
 				if (!lContas.isSelectionEmpty()) {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
