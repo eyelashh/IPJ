@@ -570,15 +570,6 @@ public class Banco implements Serializable {
 				idsContaPoupanca.add(idSTR);
 			}
 		}
-
-//		for (int i = 0; i < contas.size(); i++) {
-//			if (contas.get(i) instanceof ContaPoupanca) {
-//				id = "" + contas.get(i).getIdConta();
-//				idsContaPoupanca.add(id);
-//			}
-//			idsContaPoupanca = null;
-//		}
-
 		String[] contasP = new String[idsContaPoupanca.size()+1];
 		contasP = idsContaPoupanca.toArray(contasP);
 
