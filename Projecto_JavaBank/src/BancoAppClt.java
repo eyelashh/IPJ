@@ -301,10 +301,12 @@ public class BancoAppClt implements Serializable {
 
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
+					
+					Conta conta = gb.javabank.selectContaCliente(clt.getContas(), gb.javabank.getContas());
 
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, clt.getContas());
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, clt.getContas());
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, conta);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, conta);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, conta);
 
 				}
 			}

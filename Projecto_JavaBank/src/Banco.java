@@ -327,6 +327,18 @@ public class Banco implements Serializable {
 		return c;
 	}
 
+	// seleciona e retorna a conta de um cliente
+	protected Conta selectContaCliente(ArrayList<Integer> idCliente, ArrayList<Conta> contas) {
+		Conta c = new Conta();
+
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getClientes() == idCliente) {
+				c = contas.get(i);
+			}
+		}
+		return c;
+	}
+
 	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
 	// lista:
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
@@ -424,13 +436,13 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaçoes no cliente:
-	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, ArrayList<Integer> idConta) {
+	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((idConta.contains(contas.get(i).getIdConta()))
+				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
@@ -452,13 +464,13 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaçoes no cliente:
-	protected void preenchetabelaOperacoesDeposito(DefaultTableModel model, ArrayList<Integer> idConta) {
+	protected void preenchetabelaOperacoesDeposito(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((idConta.contains(contas.get(i).getIdConta()))
+				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
 
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
@@ -478,13 +490,13 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaçoes no cliente:
-	protected void preenchetabelaOperacoesLevantamento(DefaultTableModel model, ArrayList<Integer> idConta) {
+	protected void preenchetabelaOperacoesLevantamento(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((idConta.contains(contas.get(i).getIdConta()))
+				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
