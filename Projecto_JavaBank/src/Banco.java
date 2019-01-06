@@ -481,45 +481,45 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
-	protected Cartao obterCartao(int idConta) {
+	protected Cartao obterCartao(ArrayList<Cartao> cartoes,int id) {
 
 		Cartao card = new Cartao();
 
 		if (cartoes.size() != 0) {
 
 			for (int j = 0; j < cartoes.size(); j++) {
+				if (cartoes.get(j).getCodvalidacao() == id) {
 
-				if (cartoes.get(j).getIdconta() == idConta) {
-
-					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
+					card = cartoes.get(j);
 				}
 			}
-		} else {
-
-			JOptionPane.showMessageDialog(null, "A sua conta não tem cartão!");
 		}
 
 		return card;
 
 	}
 
-	// introduzido e adiciona-o ao array
 	// verifica se o cartao existe, se n�o existir cria um novo cartao
 
-	public void cartaoExiste(int idConta, Cartao card) {
+	public void verificaCartao(int idConta, Cartao card, Conta c) {
 
 		if (cartoes.size() != 0) {
+	
 			for (int j = 0; j < cartoes.size(); j++) {
+				for (int i = 0; i < contas.size(); i++) {
+					if ((contas.get(i) instanceof ContaCorrente)
+							&& (cartoes.get(j).getIdconta() == idConta)) {
 
-				if (cartoes.get(j).getIdconta() == idConta) {
+						JOptionPane.showMessageDialog(null, "A sua conta já tem um cartão associado!!");
+					}
 
-					JOptionPane.showMessageDialog(null, "A sua conta tem um cartão associado!!");
 				}
 			}
 
 		} else {
 
 			cartoes.add(card);
+			((ContaCorrente) c).setCartao(card.getCodvalidacao());
 
 			JOptionPane.showMessageDialog(null, "Cartão criado com sucesso!");
 		}
@@ -558,7 +558,7 @@ public class Banco implements Serializable {
 
 	}
 
-	// retorna o array das contas poupan�a
+	// retorna o array das contas poupan�a
 	protected String[] listaContasPoupanca() {
 		ArrayList<Conta> contas = this.contas;
 		String id = "";
@@ -648,7 +648,7 @@ public class Banco implements Serializable {
 		for (Utilizador c : util) {
 			String nome = c.getNome();
 			if ((nome.toLowerCase().contains(nomeCliente.toLowerCase())) && (c instanceof Cliente)) {
-				cliente =""+ c.getIdUtilizador()+"*"+c.getNome()+" "+c.getSobrenome();
+				cliente = "" + c.getIdUtilizador() + "*" + c.getNome() + " " + c.getSobrenome();
 				utilNome.add(cliente);
 			}
 		}
@@ -658,8 +658,12 @@ public class Banco implements Serializable {
 
 		return clientesNome;
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+>>>>>>> 11513c7259ac689e7d58f0c63020288f10df6439
 	protected String[] listaClientesID(String idCliente) {
 
 		ArrayList<Utilizador> util = this.utilizadores;
@@ -669,7 +673,7 @@ public class Banco implements Serializable {
 		for (Utilizador u : util) {
 			String idSTR = Integer.toString(u.getIdUtilizador());
 			if ((idSTR.contains(idCliente)) && (u instanceof Cliente)) {
-				cliente =""+ u.getIdUtilizador()+"*"+u.getNome()+" "+u.getSobrenome();
+				cliente = "" + u.getIdUtilizador() + "*" + u.getNome() + " " + u.getSobrenome();
 				utilId.add(cliente);
 			}
 		}
