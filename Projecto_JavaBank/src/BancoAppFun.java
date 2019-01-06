@@ -394,31 +394,30 @@ public class BancoAppFun implements Serializable {
 								levantamentos.add((Levantamento) c.getOperacoes().get(i));
 							}
 						}
-						// validar se o valor do dia é superior ao permitido:
-						double vlevantado =0;
-						for(int x=0; x<levantamentos.size(); x++)
-						{
+						// validar se o valor do dia ï¿½ superior ao permitido:
+						double vlevantado = 0;
+						for (int x = 0; x < levantamentos.size(); x++) {
 							vlevantado = vlevantado + levantamentos.get(x).getValor();
 						}
-						
-						if(vlevantado<c.getValorMaxDia())
-						{
+
+						if (vlevantado < c.getValorMaxDia()) {
 							int idop = 1;
 							if (c.getOperacoes().size() != 0) {
 								idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
 							}
-							
+
 							// faz levantamento:
-							String desc = dateChooser4.getDate() +" - Levantamento no valor de "+Double.parseDouble(tbLevMontante.getText());
-							Operacao op = new Levantamento(idop,func,dateChooser4.getDate(),Double.parseDouble(tbLevMontante.getText()),desc);
-							c.setSaldo(c.getSaldo()-Double.parseDouble(tbLevMontante.getText()));
+							String desc = dateChooser4.getDate() + " - Levantamento no valor de "
+									+ Double.parseDouble(tbLevMontante.getText());
+							Operacao op = new Levantamento(idop, func, dateChooser4.getDate(),
+									Double.parseDouble(tbLevMontante.getText()), desc);
+							c.setSaldo(c.getSaldo() - Double.parseDouble(tbLevMontante.getText()));
 							c.getOperacoes().add(op);
-							tbContasaldoc.setText(""+c.getSaldo());
+							tbContasaldoc.setText("" + c.getSaldo());
 							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso");
-						}
-						else
-						{
-							JOptionPane.showMessageDialog(null, "Hoje só pode levantar mais "+Math.abs(vlevantado-c.getValorMaxDia()));
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Hoje sï¿½ pode levantar mais " + Math.abs(vlevantado - c.getValorMaxDia()));
 						}
 
 					} else {
@@ -427,13 +426,15 @@ public class BancoAppFun implements Serializable {
 						if (c.getOperacoes().size() != 0) {
 							idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
 						}
-						
+
 						// faz levantamento:
-						String desc = dateChooser4.getDate() +" - Levantamento no valor de "+Double.parseDouble(tbLevMontante.getText());
-						Operacao op = new Levantamento(idop,func,dateChooser4.getDate(),Double.parseDouble(tbLevMontante.getText()),desc);
-						c.setSaldo(c.getSaldo()-Double.parseDouble(tbLevMontante.getText()));
+						String desc = dateChooser4.getDate() + " - Levantamento no valor de "
+								+ Double.parseDouble(tbLevMontante.getText());
+						Operacao op = new Levantamento(idop, func, dateChooser4.getDate(),
+								Double.parseDouble(tbLevMontante.getText()), desc);
+						c.setSaldo(c.getSaldo() - Double.parseDouble(tbLevMontante.getText()));
 						c.getOperacoes().add(op);
-						tbContasaldoc.setText(""+c.getSaldo());
+						tbContasaldoc.setText("" + c.getSaldo());
 						JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso");
 
 					}
@@ -441,7 +442,7 @@ public class BancoAppFun implements Serializable {
 				} else {
 					if (c.getValorMaxLevantamento() < Double.parseDouble(tbLevMontante.getText())) {
 						JOptionPane.showMessageDialog(null,
-								"Valor a levantar superior ao permitido por operaçao! Valor max:"
+								"Valor a levantar superior ao permitido por operaï¿½ao! Valor max:"
 										+ c.getValorMaxLevantamento());
 					}
 					if (Double.parseDouble(tbLevMontante.getText()) > c.getSaldo()) {
@@ -449,7 +450,6 @@ public class BancoAppFun implements Serializable {
 					}
 				}
 
-				
 			}
 		});
 		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
