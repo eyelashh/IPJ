@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transferencia extends Operacao implements Serializable {
@@ -6,7 +7,7 @@ public class Transferencia extends Operacao implements Serializable {
 	private Conta contatransf;
 	private Cliente clt;
 
-	public Transferencia(int idOperacao, Funcionario responsavel, Date dataOperacao, double valor, String descricao,
+	public Transferencia(int idOperacao, Funcionario responsavel, LocalDate dataOperacao, double valor, String descricao,
 			Conta contatransf, Cliente clt) {
 		super(idOperacao, responsavel, dataOperacao, valor, descricao);
 		this.contatransf = contatransf;
