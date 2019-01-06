@@ -658,6 +658,8 @@ public class Banco implements Serializable {
 
 		return clientesNome;
 	}
+	
+	
 	protected String[] listaClientesID(String idCliente) {
 
 		ArrayList<Utilizador> util = this.utilizadores;
@@ -677,5 +679,22 @@ public class Banco implements Serializable {
 
 		return clientesID;
 	}
+	
+	// metedo que confirma se a conta existe (usado nas operaçoes)
+	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id)
+	{
+		boolean existe= false;
+		
+		for(int i=0; i<dcbm.getSize();i++)
+		{
+			if(dcbm.getElementAt(i).equals(id+""))
+			{
+				existe=true;
+			}
+		}
+		
+		return existe;
+	}
+	
 
 }
