@@ -224,7 +224,7 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.add(scrollPane);
 		
 		//Modelo para tabela
-		String[] colunas = { "Id Operação", "Responsável", "Autor", "Preco unitario", "Quantidade", "Preco total" };
+		String[] colunas = { "IdOperação", "Responsável", "Data", "Valor", "ContaDestino", "Cliente"};
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
 		scrollPane.setViewportView(table);
@@ -297,6 +297,8 @@ public class BancoAppClt implements Serializable {
 
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
+					
+					gb.javabank.preenchetabelaOperacoes(modeloTabela, clt.getContas());;
 
 				}
 			}
@@ -324,15 +326,6 @@ public class BancoAppClt implements Serializable {
 		});
 		comboBoxCltConta.setBounds(94, 51, 196, 39);
 		JPCltCM.add(comboBoxCltConta);
-
-		JList listCltListaMovimentos = new JList(dmlistaOpe);
-		// selecionar conta e preencher so campos correctos:
-		listCltListaMovimentos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-
-			}
-		});
-		scrollPane.setViewportView(listCltListaMovimentos);
 
 		textFieldNumCartao = new JTextField();
 		textFieldNumCartao.setEditable(false);

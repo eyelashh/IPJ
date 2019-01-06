@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -420,6 +421,56 @@ public class Banco implements Serializable {
 		}
 	}
 
+	// preenche tabela operaçoes no cliente:
+	protected void preenchetabelaOperacoes(DefaultTableModel model, ArrayList<Integer> idConta) {
+
+		
+		for (int i = 0; i < contas.size(); i++) {
+			
+			
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((idConta.contains(contas.get(i).getIdConta())
+						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia)) {
+
+					int id = ((Transferencia) contas.get(i).getOperacoes().get(j)).getIdOperacao();
+					String resp = ((Transferencia) contas.get(i).getOperacoes().get(j)).getResponsavel().getNome();
+					Date data = ((Transferencia) contas.get(i).getOperacoes().get(j)).getDataOperacao();
+					Double valor = ((Transferencia) contas.get(i).getOperacoes().get(j)).getValor();
+					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
+							.getIdConta();
+					//String cliente = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt().getNome();
+
+					Object[] texto = { id, resp, data, valor, contadestino };
+					model.addRow(texto);
+
+				
+			}
+		}
+		}
+
+	}
+
+	// lista das operacoes
+	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
+
+		ArrayList<String> operacoes = new ArrayList<String>();
+		String o = "";
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente) && (idConta.contains(contas.get(i).getIdConta()))) {
+				o = contas.get(i).getOperacoes().toString();
+				operacoes.add(o);
+			}
+			o = null;
+		}
+
+		String[] op = new String[operacoes.size() + 1];
+		op = operacoes.toArray(op);
+
+		return op;
+	}
+
 	// remove todas as linhas da tabela:
 	protected void limpatabela(DefaultTableModel model) {
 		for (int i = model.getRowCount() - 1; i >= 0; i--) {
@@ -514,26 +565,6 @@ public class Banco implements Serializable {
 
 			}
 		}
-	}
-
-	// lista das operacoes
-	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
-
-		ArrayList<String> operacoes = new ArrayList<String>();
-		String o = "";
-
-		for (int i = 0; i < contas.size(); i++) {
-			if ((contas.get(i) instanceof ContaCorrente) && (idConta.contains(contas.get(i).getIdConta()))) {
-				o = contas.get(i).getOperacoes().toString();
-				operacoes.add(o);
-			}
-			o = null;
-		}
-
-		String[] op = new String[operacoes.size() + 1];
-		op = operacoes.toArray(op);
-
-		return op;
 	}
 
 	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id) {
