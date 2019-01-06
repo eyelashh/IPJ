@@ -131,7 +131,6 @@ public class BancoAppAdm implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
-
 				Login logout = new Login();
 				frame.setVisible(false);
 				logout.run();
