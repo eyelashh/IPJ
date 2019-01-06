@@ -511,9 +511,9 @@ public class Banco implements Serializable {
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-<<<<<<< HEAD
+
 					((Cliente) clt).getContas().add(c.getIdConta());
-=======
+
 					if(c instanceof ContaCorrente)
 					{
 						((Cliente) clt).getContas().add(c.getIdConta());	
@@ -526,12 +526,12 @@ public class Banco implements Serializable {
 						}
 						else
 						{
-							JOptionPane.showMessageDialog(null, "O/A cliente "+model.getValueAt(i, 1)+" ja tem uma conta poupança neste banco!");
+							JOptionPane.showMessageDialog(null, "O/A cliente "+model.getValueAt(i, 1)+" ja tem uma conta poupanï¿½a neste banco!");
 							model.setValueAt(false, i, 0);
 						}
 					}
 					
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 				}
 			}
 		}
