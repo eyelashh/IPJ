@@ -601,10 +601,10 @@ public class BancoAppFun implements Serializable {
 								+ cdestino.getIdConta() + " valor: " + valortransf;
 						String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
 								+ corigem.getIdConta() + " valor: " + valortransf;
-						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
-								descorigem, cdestino, null);
-						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
-								descdestino, corigem, null);
+						Operacao oporigem = new Operacao(idoporigem, func, dateChooser_1.getDate(), valortransf,
+								descorigem);
+						Operacao opdestino = new Operacao(iddestino, func, dateChooser_1.getDate(), valortransf,
+								descdestino);
 
 						corigem.getOperacoes().add(oporigem);
 						cdestino.getOperacoes().add(opdestino);
