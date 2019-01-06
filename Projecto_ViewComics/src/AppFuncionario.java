@@ -406,6 +406,12 @@ public class AppFuncionario implements Serializable {
 				jpFuncLivros.setVisible(false);
 				jpFuncConta.setVisible(false);
 				jpPagamento.setVisible(true);
+				
+				int nif = Integer.parseInt(listNifsClientes.getSelectedValue()); 
+				double preco = Double.parseDouble(txtPrecoCarrinho.getText());
+				
+				
+				
 
 			}
 		});
