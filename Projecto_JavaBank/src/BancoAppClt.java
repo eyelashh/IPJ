@@ -298,10 +298,8 @@ public class BancoAppClt implements Serializable {
 					// verifica se a conta já tem cartao
 					if (((ContaCorrente) conta).getCartao() != 0) {
 
-						
 						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
 
-						
 						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
 					}
 
@@ -319,7 +317,7 @@ public class BancoAppClt implements Serializable {
 						JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 
 					}
-					
+
 					textFieldNomeCartao.setText("");
 					dateChooserCartao.setDate(null);
 					textFieldCOD.setText("");

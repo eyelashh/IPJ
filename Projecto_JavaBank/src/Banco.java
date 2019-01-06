@@ -648,12 +648,7 @@ public class Banco implements Serializable {
 
 		return clientesNome;
 	}
-<<<<<<< HEAD
-	
-	
-=======
 
->>>>>>> 11513c7259ac689e7d58f0c63020288f10df6439
 	protected String[] listaClientesID(String idCliente) {
 
 		ArrayList<Utilizador> util = this.utilizadores;
@@ -673,22 +668,18 @@ public class Banco implements Serializable {
 
 		return clientesID;
 	}
-	
+
 	// metedo que confirma se a conta existe (usado nas opera�oes)
-	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id)
-	{
-		boolean existe= false;
-		
-		for(int i=0; i<dcbm.getSize();i++)
-		{
-			if(dcbm.getElementAt(i).equals(id+""))
-			{
-				existe=true;
+	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id) {
+		boolean existe = false;
+
+		for (int i = 0; i < dcbm.getSize(); i++) {
+			if (dcbm.getElementAt(i).equals(id + "")) {
+				existe = true;
 			}
 		}
-		
+
 		return existe;
 	}
-	
 
 }
