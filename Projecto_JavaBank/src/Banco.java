@@ -433,7 +433,7 @@ public class Banco implements Serializable {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
-					String data =  contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					int data =  contas.get(i).getOperacoes().get(j).getDataOperacao().getDayOfMonth();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();

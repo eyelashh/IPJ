@@ -1,17 +1,16 @@
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Operacao implements Serializable{
 	
 	private int idOperacao;
 	private Funcionario responsavel;
-	private LocalDate dataOperacao;
+	private Date dataOperacao;
 	private double valor;
 	private String descricao;
 	
 	
-	public Operacao(int idOperacao, Funcionario responsavel, LocalDate dataOperacao, double valor,String descricao) {
+	public Operacao(int idOperacao, Funcionario responsavel, Date dataOperacao, double valor,String descricao) {
 		super();
 		this.idOperacao = idOperacao;
 		this.responsavel = responsavel;
@@ -56,12 +55,12 @@ public class Operacao implements Serializable{
 	}
 
 
-	public LocalDate getDataOperacao() {
+	public Date getDataOperacao() {
 		return dataOperacao;
 	}
 
 
-	public void setDataOperacao(LocalDate dataOperacao) {
+	public void setDataOperacao(Date dataOperacao) {
 		this.dataOperacao = dataOperacao;
 	}
  
