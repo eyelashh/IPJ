@@ -676,7 +676,7 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
+				
 				if (!lContas.isSelectionEmpty()) {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());

@@ -156,9 +156,12 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
+			if(cont.get(i).isAberta())
+			{
 			s = "" + cont.get(i).getIdConta();
 			numcontas[i] = s;
 			s = "";
+			}
 		}
 		return numcontas;
 	}
@@ -462,7 +465,6 @@ public class Banco implements Serializable {
 
 		String[] op = new String[operacoes.size() + 1];
 		op = operacoes.toArray(op);
-
 		return op;
 	}
 
@@ -494,6 +496,7 @@ public class Banco implements Serializable {
 						else
 						{
 							JOptionPane.showMessageDialog(null, "O/A cliente "+model.getValueAt(i, 1)+" ja tem uma conta poupança neste banco!");
+							model.setValueAt(false, i, 0);
 						}
 					}
 					
