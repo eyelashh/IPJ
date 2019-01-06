@@ -24,11 +24,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -63,6 +65,7 @@ public class BancoAppClt implements Serializable {
 	private JPasswordField passwordFieldAntiga1;
 	private JPasswordField passwordFieldNovaPass;
 	private JPasswordField passwordFieldConfPass;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -101,6 +104,8 @@ public class BancoAppClt implements Serializable {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
+
+				// teste
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
@@ -118,6 +123,8 @@ public class BancoAppClt implements Serializable {
 
 		// box onde escolhemos qual conta o cliente quer ver
 		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
+
+		
 
 		// Painel de cabeçalho
 		JPanel JpanelCabecalho = new JPanel();
@@ -205,6 +212,147 @@ public class BancoAppClt implements Serializable {
 		JPanel JPCltGestao = new JPanel();
 		JPCltGestao.setVisible(false);
 
+		// Painel principal cliente
+		JPanel JPCltCM = new JPanel();
+		JPCltCM.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltCM);
+		JPCltCM.setLayout(null);
+		JPCltCM.setVisible(true);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(599, 143, 379, 354);
+		JPCltCM.add(scrollPane);
+		
+		//Modelo para tabela
+		String[] colunas = { "IdOperação", "Responsável", "Data", "Valor", "ContaDestino", "Cliente"};
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+		table = new JTable(modeloTabela);
+		scrollPane.setViewportView(table);
+
+		JLabel textFieldCltNumero1 = new JLabel("Número:");
+		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textFieldCltNumero1.setBounds(128, 277, 94, 16);
+		JPCltCM.add(textFieldCltNumero1);
+
+		textFieldCltNumeroConta = new JTextField();
+		textFieldCltNumeroConta.setEditable(false);
+		textFieldCltNumeroConta.setBounds(141, 305, 217, 30);
+		JPCltCM.add(textFieldCltNumeroConta);
+
+		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
+		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textFieldCltData1.setBounds(128, 338, 270, 16);
+		JPCltCM.add(textFieldCltData1);
+
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblSaldo.setBounds(128, 404, 270, 16);
+		JPCltCM.add(lblSaldo);
+
+		textFieldCltSaldoConta = new JTextField();
+		textFieldCltSaldoConta.setEditable(false);
+		textFieldCltSaldoConta.setBounds(138, 432, 185, 30);
+		JPCltCM.add(textFieldCltSaldoConta);
+
+		JButton btnCltLimpar = new JButton("Limpar");
+
+		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnCltLimpar.setBounds(221, 481, 120, 38);
+		JPCltCM.add(btnCltLimpar);
+
+		JLabel textCltCartao = new JLabel("Cartão:");
+		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		textCltCartao.setBounds(599, 74, 270, 16);
+		JPCltCM.add(textCltCartao);
+
+		textFieldCltCartao = new JTextField();
+		textFieldCltCartao.setEditable(false);
+		textFieldCltCartao.setBounds(599, 101, 174, 30);
+		JPCltCM.add(textFieldCltCartao);
+
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setEnabled(false);
+		dateChooser_1.setBounds(138, 366, 217, 31);
+		JPCltCM.add(dateChooser_1);
+
+		JList<String> listContasCliente = new JList<String>(dmListaContas);
+		// selecionar conta e preencher so campos correctos:
+		listContasCliente.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+
+				modeloTabela.setRowCount(0);
+
+				if (!listContasCliente.isSelectionEmpty()) {
+
+					String numeroConta = listContasCliente.getSelectedValue();
+
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
+
+					textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
+					dateChooser_1.setDate(c.getDataCriacao());
+					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
+
+					// cartao:
+					
+					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+
+					textFieldCltCartao.setText(card.getNomeTitular());
+					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
+					
+					gb.javabank.preenchetabelaOperacoes(modeloTabela, clt.getContas());
+					
+
+				}
+			}
+		});
+		listContasCliente.setBounds(94, 96, 379, 158);
+		JPCltCM.add(listContasCliente);
+
+		// combobox com uma string de lista e ao escolher uma faz um update a lista
+		JComboBox comboBoxCltConta = new JComboBox(contas);
+		comboBoxCltConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// seleciona as contas:
+
+				if (comboBoxCltConta.getSelectedIndex() == 0) {
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt, gb.javabank.getContas()),
+							dmListaContas);
+				} else {
+					dmListaContas.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
+							dmListaContas);
+				}
+
+			}
+		});
+		comboBoxCltConta.setBounds(94, 51, 196, 39);
+		JPCltCM.add(comboBoxCltConta);
+
+		textFieldNumCartao = new JTextField();
+		textFieldNumCartao.setEditable(false);
+		textFieldNumCartao.setBounds(810, 102, 168, 30);
+		JPCltCM.add(textFieldNumCartao);
+
+		// botao limpar
+		btnCltLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				listContasCliente.clearSelection();
+				textFieldCltNumeroConta.setText("");
+				dateChooser_1.setDate(null);
+				textFieldCltSaldoConta.setText("");
+				textFieldCltCartao.setText("");
+				comboBoxCltConta.getSelectedIndex();
+				textFieldNumCartao.setText("");
+
+				dmListaContas.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()),
+						dmListaContas);
+
+			}
+		});
+
 		// Painel principal cartao
 		JPanel JPCltCartao = new JPanel();
 		JPCltCartao.setBounds(16, 16, 1032, 563);
@@ -248,25 +396,79 @@ public class BancoAppClt implements Serializable {
 
 				if (comboBoxContasCartao.getSelectedIndex() == 0) {
 
-					// falta verificar se o cartao ja existe nesta conta senao cria um novo
+					String s = (String) comboBoxContasCartao.getSelectedItem();
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					// gera o codigo de 3 digitos
+					int id = 0;
+					do {
+						id = (int) (Math.random() * 1000);
+					} while (id > 999 || id < 99);
+					textFieldCOD.setText("" + id);
+
+					// verifica se a conta já tem cartao
+					if (((ContaCorrente) conta).getCartao() != 0) {
+
+						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
+
+						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+					}
+
+					// adiciona um cartao á conta
+					if (((ContaCorrente) conta).getCartao() == 0) {
+
+						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
+								conta.getIdConta());
+
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
+						textFieldNomeCartao.setEditable(false);
+						dateChooserCartao.setEnabled(false);
+						textFieldCOD.setEditable(false);
+						JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+
+					}
+					textFieldNomeCartao.setText("");
+					dateChooserCartao.setDate(null);
+					textFieldCOD.setText("");
+
+				} else {
 
 					String s = (String) comboBoxContasCartao.getSelectedItem();
 					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
+					// gera o codigo de 3 digitos
 					int id = 0;
 					do {
 						id = (int) (Math.random() * 1000);
-
-					} while (id < 100 || id > 1000);
+					} while (id > 999 || id < 99);
 					textFieldCOD.setText("" + id);
 
-					Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
-							conta.getIdConta());
+					// verifica se a conta já tem cartao
+					if (((ContaCorrente) conta).getCartao() != 0) {
 
-					gb.javabank.verificaCartao(Integer.parseInt(s), card, conta);
+						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
 
-				} else {
+						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+					}
 
+					// adiciona um cartao á conta
+					if (((ContaCorrente) conta).getCartao() == 0) {
+
+						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
+								conta.getIdConta());
+
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
+
+						textFieldNomeCartao.setEditable(false);
+						dateChooserCartao.setEnabled(false);
+						textFieldCOD.setEditable(false);
+						JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+
+					}
+
+					textFieldNomeCartao.setText("");
+					dateChooserCartao.setDate(null);
+					textFieldCOD.setText("");
 				}
 			}
 		});
@@ -496,141 +698,6 @@ public class BancoAppClt implements Serializable {
 		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		button_1.setBounds(264, 364, 116, 38);
 		JPCltTransferencia.add(button_1);
-
-		// Painel principal cliente
-		JPanel JPCltCM = new JPanel();
-		JPCltCM.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltCM);
-		JPCltCM.setLayout(null);
-		JPCltCM.setVisible(true);
-
-		JLabel textFieldCltNumero1 = new JLabel("Número:");
-		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltNumero1.setBounds(128, 277, 94, 16);
-		JPCltCM.add(textFieldCltNumero1);
-
-		textFieldCltNumeroConta = new JTextField();
-		textFieldCltNumeroConta.setEditable(false);
-		textFieldCltNumeroConta.setBounds(141, 305, 217, 30);
-		JPCltCM.add(textFieldCltNumeroConta);
-
-		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
-		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltData1.setBounds(128, 338, 270, 16);
-		JPCltCM.add(textFieldCltData1);
-
-		JLabel lblSaldo = new JLabel("Saldo:");
-		lblSaldo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblSaldo.setBounds(128, 404, 270, 16);
-		JPCltCM.add(lblSaldo);
-
-		textFieldCltSaldoConta = new JTextField();
-		textFieldCltSaldoConta.setEditable(false);
-		textFieldCltSaldoConta.setBounds(138, 432, 185, 30);
-		JPCltCM.add(textFieldCltSaldoConta);
-
-		JButton btnCltLimpar = new JButton("Limpar");
-
-		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCltLimpar.setBounds(221, 481, 120, 38);
-		JPCltCM.add(btnCltLimpar);
-
-		JLabel textCltCartao = new JLabel("Cartão:");
-		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textCltCartao.setBounds(599, 74, 270, 16);
-		JPCltCM.add(textCltCartao);
-
-		textFieldCltCartao = new JTextField();
-		textFieldCltCartao.setEditable(false);
-		textFieldCltCartao.setBounds(599, 101, 174, 30);
-		JPCltCM.add(textFieldCltCartao);
-
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setEnabled(false);
-		dateChooser_1.setBounds(138, 366, 217, 31);
-		JPCltCM.add(dateChooser_1);
-
-		JList<String> listContasCliente = new JList<String>(dmListaContas);
-		// selecionar conta e preencher so campos correctos:
-		listContasCliente.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-
-				if (!listContasCliente.isSelectionEmpty()) {
-
-					String numeroConta = listContasCliente.getSelectedValue();
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(numeroConta), gb.javabank.getContas());
-
-					textFieldCltNumeroConta.setText(Integer.toString(c.getIdConta()));
-					dateChooser_1.setDate(c.getDataCriacao());
-					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
-
-					// cartao:
-					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente)c).getCartao());
-					textFieldCltCartao.setText(card.getNomeTitular());
-					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
-
-				}
-			}
-		});
-		listContasCliente.setBounds(94, 96, 379, 158);
-		JPCltCM.add(listContasCliente);
-
-		// combobox com uma string de lista e ao escolher uma faz um update a lista
-		JComboBox comboBoxCltConta = new JComboBox(contas);
-		comboBoxCltConta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// seleciona as contas:
-
-				if (comboBoxCltConta.getSelectedIndex() == 0) {
-					dmListaContas.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt, gb.javabank.getContas()),
-							dmListaContas);
-				} else {
-					dmListaContas.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
-							dmListaContas);
-				}
-
-			}
-		});
-		comboBoxCltConta.setBounds(94, 51, 196, 39);
-		JPCltCM.add(comboBoxCltConta);
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(599, 143, 379, 354);
-		JPCltCM.add(scrollPane);
-		JList listCltListaMovimentos = new JList(dmlistaOpe);
-		// selecionar conta e preencher so campos correctos:
-		listCltListaMovimentos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-
-			}
-		});
-		scrollPane.setViewportView(listCltListaMovimentos);
-
-		textFieldNumCartao = new JTextField();
-		textFieldNumCartao.setEditable(false);
-		textFieldNumCartao.setBounds(810, 102, 168, 30);
-		JPCltCM.add(textFieldNumCartao);
-
-		// botao limpar
-		btnCltLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				listContasCliente.clearSelection();
-				textFieldCltNumeroConta.setText("");
-				dateChooser_1.setDate(null);
-				textFieldCltSaldoConta.setText("");
-				textFieldCltCartao.setText("");
-				comboBoxCltConta.getSelectedIndex();
-				textFieldNumCartao.setText("");
-
-				dmListaContas.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(clt, gb.javabank.getContas()),
-						dmListaContas);
-
-			}
-		});
 		JPCltGestao.setBounds(16, 16, 1032, 563);
 		JpanelPrincipal.add(JPCltGestao);
 		JPCltGestao.setLayout(null);
