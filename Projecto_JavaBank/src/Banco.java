@@ -563,14 +563,14 @@ public class Banco implements Serializable {
 		ArrayList<Conta> contas = this.contas;
 		String id = "";
 		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
-		
-		for (Conta c:contas) {
-			String idSTR =Integer.toString(c.getIdConta());
+
+		for (Conta c : contas) {
+			String idSTR = Integer.toString(c.getIdConta());
 			if (c instanceof ContaPoupanca) {
 				idsContaPoupanca.add(idSTR);
 			}
 		}
-		String[] contasP = new String[idsContaPoupanca.size()+1];
+		String[] contasP = new String[idsContaPoupanca.size() + 1];
 		contasP = idsContaPoupanca.toArray(contasP);
 
 		return contasP;
@@ -582,8 +582,8 @@ public class Banco implements Serializable {
 		ArrayList<Conta> contas = this.contas;
 		ArrayList<String> idsContasCorrente = new ArrayList<String>();
 
-		for (Conta c:contas) {
-			String idSTR =Integer.toString(c.getIdConta());
+		for (Conta c : contas) {
+			String idSTR = Integer.toString(c.getIdConta());
 			if (c instanceof ContaCorrente) {
 				idsContasCorrente.add(idSTR);
 			}
@@ -593,51 +593,89 @@ public class Banco implements Serializable {
 
 		return contasCorrente;
 	}
+
 //retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {
 
 		ArrayList<Utilizador> utilizadores = this.utilizadores;
-		ArrayList<Integer> idcontasClienteINT = new ArrayList <Integer>();
-		ArrayList <String> idContasClienteSTR = new ArrayList<String>();
+		ArrayList<Integer> idcontasClienteINT = new ArrayList<Integer>();
+		ArrayList<String> idContasClienteSTR = new ArrayList<String>();
 
-		Cliente c=null;
-		for (Utilizador u:utilizadores) {
-			String idSTR=Integer.toString(u.getIdUtilizador());
-			if ((idSTR.contains(idCliente))&&(u instanceof Cliente)) {
-				c=(Cliente) u;
-				idcontasClienteINT =c.getContas();
+		Cliente c = null;
+		for (Utilizador u : utilizadores) {
+			String idSTR = Integer.toString(u.getIdUtilizador());
+			if ((idSTR.contains(idCliente)) && (u instanceof Cliente)) {
+				c = (Cliente) u;
+				idcontasClienteINT = c.getContas();
 			}
 		}
-		for (int id:idcontasClienteINT) {
-			String idSTR=Integer.toString(id);
+		for (int id : idcontasClienteINT) {
+			String idSTR = Integer.toString(id);
 			idContasClienteSTR.add(idSTR);
 		}
 		String[] contasCliente = new String[idContasClienteSTR.size()];
 		contasCliente = idContasClienteSTR.toArray(contasCliente);
 
 		return contasCliente;
-		
 
 	}
-	//retorna a conta atraves do seu numero
+
+	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumConta(String numConta) {
 
 		ArrayList<Conta> contas = this.contas;
-		ArrayList<String> contaNum=new ArrayList<String>();
+		ArrayList<String> contaNum = new ArrayList<String>();
 
-		for (Conta c: contas) {
+		for (Conta c : contas) {
 			String numContaSTR = Integer.toString(c.getIdConta());
 			if (numContaSTR.contains(numConta)) {
-				contaNum.add(numContaSTR);	
+				contaNum.add(numContaSTR);
 			}
 		}
-				
-				
-				
+
 		String[] contaId = new String[contaNum.size()];
 		contaId = contaNum.toArray(contaId);
 
 		return contaId;
+	}
+
+	protected String[] listaClientesNome(String nomeCliente) {
+
+		ArrayList<Utilizador> util = this.utilizadores;
+		ArrayList<String> utilNome = new ArrayList<String>();
+		String cliente = "";
+
+		for (Utilizador c : util) {
+			String nome = c.getNome();
+			if ((nome.toLowerCase().contains(nomeCliente.toLowerCase())) && (c instanceof Cliente)) {
+				cliente =""+ c.getIdUtilizador()+"*"+c.getNome()+" "+c.getSobrenome();
+				utilNome.add(cliente);
+			}
+		}
+
+		String[] clientesNome = new String[utilNome.size()];
+		clientesNome = utilNome.toArray(clientesNome);
+
+		return clientesNome;
+	}
+	protected String[] listaClientesID(String idCliente) {
+
+		ArrayList<Utilizador> util = this.utilizadores;
+		ArrayList<String> utilId = new ArrayList<String>();
+		String cliente = "";
+
+		for (Utilizador u : util) {
+			String idSTR = Integer.toString(u.getIdUtilizador());
+			if ((idSTR.contains(idCliente)) && (u instanceof Cliente)) {
+				cliente =""+ u.getIdUtilizador()+"*"+u.getNome()+" "+u.getSobrenome();
+				utilId.add(cliente);
+			}
+		}
+
+		String[] clientesID = new String[utilId.size()];
+		clientesID = utilId.toArray(clientesID);
+
+		return clientesID;
 	}
 
 }
