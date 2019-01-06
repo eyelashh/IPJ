@@ -101,6 +101,9 @@ public class BancoAppClt implements Serializable {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
+				
+				
+				// teste
 			}
 		});
 		frame.setBounds(100, 100, 1280, 768);
