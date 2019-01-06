@@ -840,7 +840,7 @@ public class Livraria implements Serializable {
 		ArrayList<String> listaT = new ArrayList<String>();
 		String t = "";
 		for (Carrinho c : this.carrinhos) {
-			if (c.getNif().equals(nif)) {
+			if (c.getNif().contains(nif)) {
 				t = c.toString();
 				listaT.add(t);
 
@@ -911,18 +911,44 @@ public class Livraria implements Serializable {
 
 	}
 
-	public ArrayList carrinhosFinalizado(Carrinho car) {
+	public String [] carrinhosFinalizados() {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
-		ArrayList<Carrinho> carrinhosFinalizados = new ArrayList<Carrinho>();
+		ArrayList<String> nifCarrinhosFinalizados = new ArrayList<String>();
+		String nifFinalizado="";
+		
 		for (Carrinho c : carrinhos) {
 			if (c.isFinalizado()) {
-				Carrinho cF = c;
-				carrinhosFinalizados.add(cF);
+				nifFinalizado=c.getNif();
+				nifCarrinhosFinalizados.add(nifFinalizado);
 			}
 
 		}
-		return carrinhosFinalizados;
+		String [] finalizados =new String [(nifCarrinhosFinalizados.size())];
+		finalizados = nifCarrinhosFinalizados.toArray(finalizados);
+
+		return finalizados;
+		
 	}
+	
+	public String [] carrinhosNAOFinalizados() {
+		ArrayList<Carrinho> carrinhos = this.carrinhos;
+		ArrayList<String> nifCarrinhosNAOFinalizados = new ArrayList<String>();
+		String nifNAOFinalizado="";
+		
+		for (Carrinho c : carrinhos) {
+			if (!c.isFinalizado()) {
+				nifNAOFinalizado=c.getNif();
+				nifCarrinhosNAOFinalizados.add(nifNAOFinalizado);
+			}
+
+		}
+		String [] naoFinalizados =new String [(nifCarrinhosNAOFinalizados.size())];
+		naoFinalizados = nifCarrinhosNAOFinalizados.toArray(naoFinalizados);
+
+		return naoFinalizados;
+		
+	}
+	
 
 // limpa tabela:
 
