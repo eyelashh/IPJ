@@ -66,6 +66,7 @@ public class AppCliente implements Serializable {
 	private JTable table;
 	private JTextField txtPrecoTotalCARRINHO;
 	private JTextField txtTotalLivrosCARRINHO;
+	private JPanel JPCarrinho;
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -207,7 +208,8 @@ public class AppCliente implements Serializable {
 
 		// painel para o carrinho
 
-		JPanel JPCarrinho = new JPanel();
+		JPCarrinho = new JPanel();
+		JPCarrinho.setVisible(false);
 		JPCarrinho.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
@@ -228,6 +230,7 @@ public class AppCliente implements Serializable {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (gl.viewComics.carrinhoExiste(nif)) {
 						Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+						gl.viewComics.limpatabela(modeloTabela);
 						gl.viewComics.carrinhoTabela(c, modeloTabela);
 						String precoTotal=gl.viewComics.precoTotalCarrinho(c);
 						String totalLivros=gl.viewComics.totalLivrosCarrinho(c);
@@ -280,9 +283,6 @@ public class AppCliente implements Serializable {
 		lblItems.setBounds(413, 395, 40, 25);
 		JPCarrinho.add(lblItems);
 
-		// O painel nao inicia visivel
-		JPCarrinho.setVisible(false);
-
 		// JPanel JPLivros = new JPanel() {
 		// @Override
 		// // o paint component vai pintar literalmente o componente
@@ -313,7 +313,6 @@ public class AppCliente implements Serializable {
 		JPLivros.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPLivros);
 		JPLivros.setLayout(null);
-		JPLivros.setVisible(false);
 
 		Choice choiceAtributoLivroCliente = new Choice();
 		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
@@ -516,7 +515,7 @@ public class AppCliente implements Serializable {
 		txtTituloLivros.setBounds(513, 177, 345, 30);
 		JPLivros.add(txtTituloLivros);
 
-		txtNifCarrinhoLIVROS = new JTextField("---------");
+		txtNifCarrinhoLIVROS = new JTextField("");
 		txtNifCarrinhoLIVROS.setBounds(513, 34, 175, 29);
 		JPLivros.add(txtNifCarrinhoLIVROS);
 		txtNifCarrinhoLIVROS.setColumns(10);
@@ -611,6 +610,21 @@ public class AppCliente implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				JPLivros.setVisible(false);
 				JPCarrinho.setVisible(true);
+				if(!txtNifCarrinhoLIVROS.getText().equals(""))
+				{
+					txtNifCARRINHO.setText(txtNifCarrinhoLIVROS.getText());
+					
+					if (gl.viewComics.carrinhoExiste(txtNifCARRINHO.getText())) {
+						Carrinho c = gl.viewComics.pesquisarCarrinho(txtNifCARRINHO.getText());
+						gl.viewComics.limpatabela(modeloTabela);
+						gl.viewComics.carrinhoTabela(c, modeloTabela);
+						String precoTotal=gl.viewComics.precoTotalCarrinho(c);
+						String totalLivros=gl.viewComics.totalLivrosCarrinho(c);
+						txtPrecoTotalCARRINHO.setText(precoTotal);
+						txtTotalLivrosCARRINHO.setText(totalLivros);
+					}
+					
+				}
 
 			}
 		});

@@ -668,7 +668,7 @@ public class Livraria implements Serializable {
 		return listaUsername;
 	}
 
-	// lista de funcionario pelo conacto
+	// lista de funcionario pelo contacto
 	protected String[] listaFuncPorContacto(String contacto) {
 
 		ArrayList<String> listaC = new ArrayList<String>();
@@ -863,4 +863,14 @@ public ArrayList carrinhosFinalizado(Carrinho car) {
 	}
 	return carrinhosFinalizados;
 }
+
+// limpa tabela:
+
+protected void limpatabela(DefaultTableModel model) {
+	for (int i = model.getRowCount() - 1; i >= 0; i--) {
+		model.removeRow(i);
+	}
+}
+
+
 }
