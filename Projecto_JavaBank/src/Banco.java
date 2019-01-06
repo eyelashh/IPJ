@@ -416,6 +416,8 @@ public class Banco implements Serializable {
 				id = clientes.get(i).getIdUtilizador();
 				nome = clientes.get(i).getNome();
 				model.addRow(new Object[] { false, id, nome });
+				
+				
 
 			}
 		}
