@@ -426,19 +426,17 @@ public class Banco implements Serializable {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((idConta.contains(contas.get(i).getIdConta()))
-						&& (contas.get(i).getOperacoes().get(j) instanceof Transferencia)) {
+				if ((idConta.contains(contas.get(i).getIdConta()))) {
 
-					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
-					String data =  contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
 
-					Object[] texto = { id, desc, resp, data, valor, contadestino, clt };
+					Object[] texto = { desc, resp, data, valor, contadestino, clt };
 					model.addRow(texto);
 
 				}
