@@ -428,21 +428,26 @@ public class Banco implements Serializable {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((idConta.contains(contas.get(i).getIdConta())
-						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia)) {
+				if ((idConta.contains(contas.get(i).getIdConta()))&& (contas.get(i).getOperacoes().get(j) instanceof Transferencia)) {
+					
+					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
+					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().getNome();
+					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Double valor = contas.get(i).getOperacoes().get(j).getValor();
+					Conta contadestino = ((Transferencia)contas.get(i).getOperacoes().get(j)).getcontatransf();
 
-					int id = ((Transferencia) contas.get(i).getOperacoes().get(j)).getIdOperacao();
-					String resp = ((Transferencia) contas.get(i).getOperacoes().get(j)).getResponsavel().getNome();
-					Date data = ((Transferencia) contas.get(i).getOperacoes().get(j)).getDataOperacao();
-					Double valor = ((Transferencia) contas.get(i).getOperacoes().get(j)).getValor();
-					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
-							.getIdConta();
+//					int id = ((Transferencia) contas.get(i).getOperacoes().get(j)).getIdOperacao();
+//					String resp = ((Transferencia) contas.get(i).getOperacoes().get(j)).getResponsavel().getNome();
+//					Date data = ((Transferencia) contas.get(i).getOperacoes().get(j)).getDataOperacao();
+//					Double valor = ((Transferencia) contas.get(i).getOperacoes().get(j)).getValor();
+//					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
+//							.getIdConta();
 					// String cliente = ((Transferencia)
 					// contas.get(i).getOperacoes().get(j)).getClt().getNome();
 
 					Object[] texto = { id, resp, data, valor, contadestino };
 					model.addRow(texto);
-
+				
 				}
 			}
 		}
