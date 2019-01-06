@@ -537,18 +537,21 @@ public class Livraria implements Serializable {
 	// retorna o array de funcionarios
 	protected String[] arrayFunc(ArrayList<Utilizador> util) {
 
-		ArrayList<String> func = new ArrayList<String>();
+		ArrayList<String> utilizadores = new ArrayList();
+		ArrayList<Utilizador>utils=util;
 
-		for (Utilizador u : this.utilizadores) {
-			if (u instanceof Funcionario) {
-				func.add(u.toString());
+		for (Utilizador u : util) {
+				utilizadores.add(u.toString());
 			}
+		
+		String[] utilArray = utilizadores.toArray(new String[utilizadores.size()]);
+		return utilArray;
+		
 		}
 
-		String[] funcArray = func.toArray(new String[func.size()]);
-		return funcArray;
+		
 
-	}
+	
 
 	// id do funcionario
 	protected int obterIdFunc(String s) {
