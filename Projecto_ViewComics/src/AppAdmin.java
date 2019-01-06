@@ -198,7 +198,7 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
-		DefaultListModel<String> modeloListaFUNCIONARIOS = new DefaultListModel<String>();
+		DefaultListModel<String> modeloListaUTILIZADORES = new DefaultListModel<String>();
 
 		jpAdmGestaoUtil = new JPanel();
 		jpAdmGestaoUtil.setBounds(0, 0, 763, 545);
@@ -287,15 +287,15 @@ public class AppAdmin implements Serializable {
 				txtContactoFunc.setEditable(false);
 				txtPassFunc.setEditable(false);
 				txtUsernameFunc.setEditable(false);
-				modeloListaFUNCIONARIOS.removeAllElements();
+				modeloListaUTILIZADORES.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-						modeloListaFUNCIONARIOS);
+						modeloListaUTILIZADORES);
 
 			}
 		});
 		btnCancelarFunc.setBackground(SystemColor.controlHighlight);
 		jpAdmGestaoUtil.add(btnCancelarFunc);
-		JList<String> listaFuncionarios = new JList<String>(modeloListaFUNCIONARIOS);
+		JList<String> listaFuncionarios = new JList<String>(modeloListaUTILIZADORES);
 		listaFuncionarios.setBounds(32, 123, 200, 337);
 
 		listaFuncionarios.addListSelectionListener(new ListSelectionListener() {
@@ -351,16 +351,16 @@ public class AppAdmin implements Serializable {
 		});
 		btnLimparCamposFUNCIONARIO.setBounds(525, 116, 215, 23);
 		jpAdmGestaoUtil.add(btnLimparCamposFUNCIONARIO);
-		
+
 		JRadioButton rbAdicionarAdministrador = new JRadioButton("Adicionar um administrador na loja");
 		rbGroupUtilizadores.add(rbAdicionarAdministrador);
 		rbAdicionarAdministrador.setBounds(525, 7, 215, 23);
 		jpAdmGestaoUtil.add(rbAdicionarAdministrador);
 		btnLimparPesquisaFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				modeloListaFUNCIONARIOS.removeAllElements();
+				modeloListaUTILIZADORES.removeAllElements();
 				gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-						modeloListaFUNCIONARIOS);
+						modeloListaUTILIZADORES);
 
 			}
 		});
@@ -368,26 +368,48 @@ public class AppAdmin implements Serializable {
 		JButton btnConfirmarFUNCIONARIOS2 = new JButton("Confirmar");
 		btnConfirmarFUNCIONARIOS2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!listaFuncionarios.isSelectionEmpty()) {
-					if (rbAdicionarFUNCIONARIOS.isSelected()) {
-						String novoFuncNome = txtNomeFunc.getText();
-						String novoFuncContacto = txtContactoFunc.getText();
-						String novoFuncUsername = txtUsernameFunc.getText();
-						String novoFuncPass = txtPassFunc.getText();
-						Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
-						int idINT = f.getId();
-						txtIdFunc.setText(Integer.toString(idINT));
-						gl.viewComics.addUtilizador(f);
-						modeloListaFUNCIONARIOS.removeAllElements();
-						gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-								modeloListaFUNCIONARIOS);
-						txtNomeFunc.setEditable(false);
-						txtContactoFunc.setEditable(false);
-						txtUsernameFunc.setEditable(false);
-						txtPassFunc.setEditable(false);
-						txtIdFunc.setText("");
 
-					} else if (rbAlterarFUNCIONARIO.isSelected()) {
+				if (rbAdicionarFUNCIONARIOS.isSelected()) {
+					String novoFuncNome = txtNomeFunc.getText();
+					String novoFuncContacto = txtContactoFunc.getText();
+					String novoFuncUsername = txtUsernameFunc.getText();
+					String novoFuncPass = txtPassFunc.getText();
+					Funcionario f = new Funcionario(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
+					int idINT = f.getId();
+					txtIdFunc.setText(Integer.toString(idINT));
+					gl.viewComics.addUtilizador(f);
+					modeloListaUTILIZADORES.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
+							modeloListaUTILIZADORES);
+					txtNomeFunc.setEditable(false);
+					txtContactoFunc.setEditable(false);
+					txtUsernameFunc.setEditable(false);
+					txtPassFunc.setEditable(false);
+					txtIdFunc.setText("");
+
+				} else if (rbAdicionarAdministrador.isSelected()) {
+					String novoFuncNome = txtNomeFunc.getText();
+					String novoFuncContacto = txtContactoFunc.getText();
+					String novoFuncUsername = txtUsernameFunc.getText();
+					String novoFuncPass = txtPassFunc.getText();
+					Administrador a = new Administrador(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
+					int idINT = a.getId();
+					txtIdFunc.setText(Integer.toString(idINT));
+					gl.viewComics.addUtilizador(a);
+					modeloListaUTILIZADORES.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
+							modeloListaUTILIZADORES);
+					txtNomeFunc.setEditable(false);
+					txtContactoFunc.setEditable(false);
+					txtUsernameFunc.setEditable(false);
+					txtPassFunc.setEditable(false);
+					txtIdFunc.setText("");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione a opcao desejada");
+				}
+				if (!listaFuncionarios.isSelectionEmpty()) {
+					if (rbAlterarFUNCIONARIO.isSelected()) {
 						String novoNome = txtNomeFunc.getText();
 						String novoUsername = txtUsernameFunc.getText();
 						String novaPass = txtPassFunc.getText();
@@ -399,43 +421,23 @@ public class AppAdmin implements Serializable {
 						txtUsernameFunc.setEditable(false);
 						txtPassFunc.setEditable(false);
 
-						modeloListaFUNCIONARIOS.removeAllElements();
+						modeloListaUTILIZADORES.removeAllElements();
 						gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-								modeloListaFUNCIONARIOS);
+								modeloListaUTILIZADORES);
 						txtIdFunc.setText("");
 
 					} else if (rbRemoverFuncionario.isSelected()) {
 						String selecaoLista = listaFuncionarios.getSelectedValue();
 						int id = gl.viewComics.obterIdFunc(selecaoLista);
 						gl.viewComics.removerUtil(id, gl.viewComics.getUtilizadores());
-						modeloListaFUNCIONARIOS.removeAllElements();
+						modeloListaUTILIZADORES.removeAllElements();
 						gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-								modeloListaFUNCIONARIOS);
+								modeloListaUTILIZADORES);
 						txtIdFunc.setText("");
+					} else {
+						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista");
+					}
 
-					}
-					else if (rbAdicionarAdministrador.isSelected()) {String novoFuncNome = txtNomeFunc.getText();
-					String novoFuncContacto = txtContactoFunc.getText();
-					String novoFuncUsername = txtUsernameFunc.getText();
-					String novoFuncPass = txtPassFunc.getText();
-					Administrador a = new Administrador(novoFuncNome, novoFuncContacto, novoFuncUsername, novoFuncPass);
-					int idINT = a.getId();
-					txtIdFunc.setText(Integer.toString(idINT));
-					gl.viewComics.addUtilizador(a);
-					modeloListaFUNCIONARIOS.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-							modeloListaFUNCIONARIOS);
-					txtNomeFunc.setEditable(false);
-					txtContactoFunc.setEditable(false);
-					txtUsernameFunc.setEditable(false);
-					txtPassFunc.setEditable(false);
-					txtIdFunc.setText("");
-						
-						
-					}
-							else {
-						JOptionPane.showMessageDialog(null, "Por favor seleccione a opcao desejada");
-					}
 				}
 
 			}
@@ -443,32 +445,30 @@ public class AppAdmin implements Serializable {
 		btnConfirmarFUNCIONARIOS2.setBounds(447, 326, 89, 23);
 		jpAdmGestaoUtil.add(btnConfirmarFUNCIONARIOS2);
 
-		
-
 		// pesquisar funcionarios por atributos
 		btnPesquisaFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (comboBoxAtributoFunc.getSelectedItem().equals("Nome")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
+					modeloListaUTILIZADORES.removeAllElements();
 					String nome = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorNome(nome), modeloListaFUNCIONARIOS);
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorNome(nome), modeloListaUTILIZADORES);
 				}
 				if (comboBoxAtributoFunc.getSelectedItem().equals("Id")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
+					modeloListaUTILIZADORES.removeAllElements();
 					String id = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorId(id), modeloListaFUNCIONARIOS);
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorId(id), modeloListaUTILIZADORES);
 
 				}
 				if (comboBoxAtributoFunc.getSelectedItem().equals("Username")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
+					modeloListaUTILIZADORES.removeAllElements();
 					String username = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorUsername(username), modeloListaFUNCIONARIOS);
+					gl.viewComics.addArrayLista(gl.viewComics.listaFunPorUsername(username), modeloListaUTILIZADORES);
 				}
 				if (comboBoxAtributoFunc.getSelectedItem().equals("Contacto")) {
-					modeloListaFUNCIONARIOS.removeAllElements();
+					modeloListaUTILIZADORES.removeAllElements();
 					String contacto = txtAtributoFunc.getText();
-					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorContacto(contacto), modeloListaFUNCIONARIOS);
+					gl.viewComics.addArrayLista(gl.viewComics.listaFuncPorContacto(contacto), modeloListaUTILIZADORES);
 				}
 
 			}
@@ -1168,7 +1168,7 @@ public class AppAdmin implements Serializable {
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 //		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
-		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaFUNCIONARIOS);
+		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaUTILIZADORES);
 
 		JPanel jpAdmEstatisticas = new JPanel();
 		jpAdmEstatisticas.setBounds(0, 0, 763, 545);

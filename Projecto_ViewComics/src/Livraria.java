@@ -129,6 +129,16 @@ public class Livraria implements Serializable {
 		this.livros.remove(l);
 	}
 
+	public String devolveStock(int idLivro) {
+		ArrayList<Livro> livros = this.livros;
+		int stockINT = 0;
+		for (Livro l : livros) {
+			stockINT = l.getStock();
+		}
+		String stockSTR=Integer.toString(stockINT);
+		return stockSTR;
+	}
+
 	public void alterarStockLivro(String seleccao, int quantidadeTotal) {
 
 		for (Livro l : this.livros) {
@@ -538,20 +548,16 @@ public class Livraria implements Serializable {
 	protected String[] arrayFunc(ArrayList<Utilizador> util) {
 
 		ArrayList<String> utilizadores = new ArrayList();
-		ArrayList<Utilizador>utils=util;
+		ArrayList<Utilizador> utils = util;
 
 		for (Utilizador u : util) {
-				utilizadores.add(u.toString());
-			}
-		
-		String[] utilArray = utilizadores.toArray(new String[utilizadores.size()]);
-		return utilArray;
-		
+			utilizadores.add(u.toString());
 		}
 
-		
+		String[] utilArray = utilizadores.toArray(new String[utilizadores.size()]);
+		return utilArray;
 
-	
+	}
 
 	// id do funcionario
 	protected int obterIdFunc(String s) {
@@ -712,6 +718,55 @@ public class Livraria implements Serializable {
 		return totalStr;
 	}
 
+//adiciona um valor ao stock do livro 
+
+	protected boolean adicionaStock(String adicionaSTR, int idLivro, String nif) {
+
+		boolean adiciona = false;
+		Carrinho c = pesquisarCarrinho(nif);
+		int adicionaINT = Integer.parseInt(adicionaSTR);
+
+		for (Livro l : this.livros) {
+			int stockACTUAL = l.getStock();
+			int stockNOVO = stockACTUAL;
+			if (l.getIdLivro() == idLivro) {
+				int quantidadeNoCarrinho = c.getConteudo().get(idLivro);
+				if (quantidadeNoCarrinho <= adicionaINT) {
+					stockNOVO = stockACTUAL + quantidadeNoCarrinho;
+					l.setStock(stockNOVO);
+//				}
+
+				} else {
+					stockNOVO = stockACTUAL + adicionaINT;
+					l.setStock(stockNOVO);
+				}
+				adiciona = true;
+
+			}
+		}
+		return adiciona;
+
+	}
+
+//altera o stock de um carrinho de acordo com a quantidade removida do carrinho de do id do livro
+
+	protected boolean subtraiStock(String subtraiSTR, int idLivro) {
+
+		boolean subtrai = false;
+
+		int subtraiINT = Integer.parseInt(subtraiSTR);
+		for (Livro l : this.livros) {
+			int stockACTUAL = l.getStock();
+			int stockNOVO = stockACTUAL;
+			if ((l.getIdLivro() == idLivro) && (subtraiINT < stockACTUAL)) {
+				stockNOVO = stockACTUAL - subtraiINT;
+				l.setStock(stockNOVO);
+				subtrai = true;
+			}
+		}
+		return subtrai;
+	}
+
 //devolve a quantidade de determinado livro em um carrinho atravï¿½s do id do livro e do nif
 	protected String quantidadeCarrinho(int idLivro, String nif) {
 
@@ -809,71 +864,72 @@ public class Livraria implements Serializable {
 		return carrinhoNif;
 	}
 
-public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
-	
-	Carrinho c=car;
-	ArrayList <Livro> livrosNoCarrinho =new ArrayList<Livro>();
-	HashMap<Integer,Integer>hm=c.getConteudo();
-	for (Livro l:this.livros) {
-		if (!c.getConteudo().isEmpty()) {
-			if (c.getConteudo().containsKey(l.getIdLivro())) {
-				livrosNoCarrinho.add(l);
-				
+	public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
+
+		Carrinho c = car;
+		ArrayList<Livro> livrosNoCarrinho = new ArrayList<Livro>();
+		HashMap<Integer, Integer> hm = c.getConteudo();
+		for (Livro l : this.livros) {
+			if (!c.getConteudo().isEmpty()) {
+				if (c.getConteudo().containsKey(l.getIdLivro())) {
+					livrosNoCarrinho.add(l);
+
+				}
 			}
-		}	
-	}
-	for (Livro l:livrosNoCarrinho) {
-		int id=l.getIdLivro();
-		String titulo=l.getTitulo();
-		String autor =l.getAutor();
-		double preco=l.getPreco();
-		int quantidade=hm.get(id);
-		double precoTotal=hm.get(id)*preco;
-		
-		Object[] data ={id,titulo,autor,preco,quantidade,precoTotal};	
-		dtm.addRow(data);
-	}
-		
-}
-public void finalizarCarrinho(Carrinho car) {
-	ArrayList <Carrinho> carrinhos =this.carrinhos;
-	
-	for (Carrinho c:carrinhos) {
-		if ((c==car) && (c.getConteudo()!=null)){
-			c.setFinalizado(true);
-			car=c;
 		}
-	}
-	if (car.isFinalizado()) {
-		JOptionPane.showMessageDialog(null, "O carrinho foi dado como finalizado. Dirija-se ao funcionario para proceder ao seu pagamento");
-	}
-	else if (!car.isFinalizado()){
-		
-		JOptionPane.showMessageDialog(null, "Não foi possível finalizar o carrinho porque não consta na base de dados ou porque ainda se encontra vazio. Confirme o nif introduzido e/ou o conteudo do respectivo carrinho.");
-	}
-	
-	
-}
-public ArrayList carrinhosFinalizado(Carrinho car) {
-	ArrayList <Carrinho> carrinhos =this.carrinhos;
-	ArrayList <Carrinho> carrinhosFinalizados=new ArrayList<Carrinho>();
-	for(Carrinho c:carrinhos) {
-		if (c.isFinalizado()) {
-			Carrinho cF=c;
-			carrinhosFinalizados.add(cF);
+		for (Livro l : livrosNoCarrinho) {
+			int id = l.getIdLivro();
+			String titulo = l.getTitulo();
+			String autor = l.getAutor();
+			double preco = l.getPreco();
+			int quantidade = hm.get(id);
+			double precoTotal = hm.get(id) * preco;
+
+			Object[] data = { id, titulo, autor, preco, quantidade, precoTotal };
+			dtm.addRow(data);
 		}
-		
+
 	}
-	return carrinhosFinalizados;
-}
+
+	public void finalizarCarrinho(Carrinho car) {
+		ArrayList<Carrinho> carrinhos = this.carrinhos;
+
+		for (Carrinho c : carrinhos) {
+			if ((c == car) && (c.getConteudo() != null)) {
+				c.setFinalizado(true);
+				car = c;
+			}
+		}
+		if (car.isFinalizado()) {
+			JOptionPane.showMessageDialog(null,
+					"O carrinho foi dado como finalizado. Dirija-se ao funcionario para proceder ao seu pagamento");
+		} else if (!car.isFinalizado()) {
+
+			JOptionPane.showMessageDialog(null,
+					"Não foi possível finalizar o carrinho porque não consta na base de dados ou porque ainda se encontra vazio. Confirme o nif introduzido e/ou o conteudo do respectivo carrinho.");
+		}
+
+	}
+
+	public ArrayList carrinhosFinalizado(Carrinho car) {
+		ArrayList<Carrinho> carrinhos = this.carrinhos;
+		ArrayList<Carrinho> carrinhosFinalizados = new ArrayList<Carrinho>();
+		for (Carrinho c : carrinhos) {
+			if (c.isFinalizado()) {
+				Carrinho cF = c;
+				carrinhosFinalizados.add(cF);
+			}
+
+		}
+		return carrinhosFinalizados;
+	}
 
 // limpa tabela:
 
-protected void limpatabela(DefaultTableModel model) {
-	for (int i = model.getRowCount() - 1; i >= 0; i--) {
-		model.removeRow(i);
+	protected void limpatabela(DefaultTableModel model) {
+		for (int i = model.getRowCount() - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}
 	}
-}
-
 
 }

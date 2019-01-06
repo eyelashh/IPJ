@@ -67,6 +67,9 @@ public class AppCliente implements Serializable {
 	private JTextField txtPrecoTotalCARRINHO;
 	private JTextField txtTotalLivrosCARRINHO;
 	private JPanel JPCarrinho;
+	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
+
+	DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -186,10 +189,6 @@ public class AppCliente implements Serializable {
 				Image img;
 				try {
 
-					// importar imagem para o background do panel, podemos fazï¿½-lo da internet ou
-					// do
-					// ficheiro
-
 					// img = ImageIO.read(new URL(
 					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
 					img = ImageIO.read(
@@ -210,78 +209,6 @@ public class AppCliente implements Serializable {
 
 		JPCarrinho = new JPanel();
 		JPCarrinho.setVisible(false);
-		JPCarrinho.setBounds(0, 0, 1008, 544);
-		JPanelPrincipal.add(JPCarrinho);
-		JPCarrinho.setLayout(null);
-		table = new JTable();
-		String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 129, 462, 221);
-		JPCarrinho.add(scrollPane);
-		table = new JTable(modeloTabela);
-
-		txtNifCARRINHO = new JTextField();
-		txtNifCARRINHO.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				String nif = txtNifCARRINHO.getText();
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (gl.viewComics.carrinhoExiste(nif)) {
-						Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-						gl.viewComics.limpatabela(modeloTabela);
-						gl.viewComics.carrinhoTabela(c, modeloTabela);
-						String precoTotal=gl.viewComics.precoTotalCarrinho(c);
-						String totalLivros=gl.viewComics.totalLivrosCarrinho(c);
-						txtPrecoTotalCARRINHO.setText(precoTotal);
-						txtTotalLivrosCARRINHO.setText(totalLivros);
-					} else {
-						JOptionPane.showMessageDialog(null,
-								"O nif que indicou não corresponde a um carrinho em loja. Confirme se já criou o seu carrinho");
-					}
-				}
-			}
-		});
-		txtNifCARRINHO.setBounds(32, 79, 198, 25);
-		JPCarrinho.add(txtNifCARRINHO);
-		txtNifCARRINHO.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("Nif :");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel.setBounds(32, 37, 57, 31);
-		JPCarrinho.add(lblNewLabel);
-
-		scrollPane.setViewportView(table);
-
-		JButton btnNewButton = new JButton("<HTML>Pretendo dar o meu carrinnho como finalizado<HTML>");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String nif=txtNifCARRINHO.getText();
-				Carrinho c=gl.viewComics.pesquisarCarrinho(nif);
-				gl.viewComics.finalizarCarrinho(c);
-			}
-		});
-		btnNewButton.setBounds(115, 361, 139, 59);
-		JPCarrinho.add(btnNewButton);
-		
-		txtPrecoTotalCARRINHO = new JTextField();
-		txtPrecoTotalCARRINHO.setBounds(317, 361, 86, 25);
-		JPCarrinho.add(txtPrecoTotalCARRINHO);
-		txtPrecoTotalCARRINHO.setColumns(10);
-		
-		txtTotalLivrosCARRINHO = new JTextField();
-		txtTotalLivrosCARRINHO.setColumns(10);
-		txtTotalLivrosCARRINHO.setBounds(317, 397, 84, 25);
-		JPCarrinho.add(txtTotalLivrosCARRINHO);
-		
-		JLabel lblNewLabel_1 = new JLabel("\u20AC");
-		lblNewLabel_1.setBounds(413, 361, 40, 25);
-		JPCarrinho.add(lblNewLabel_1);
-		
-		JLabel lblItems = new JLabel("items");
-		lblItems.setBounds(413, 395, 40, 25);
-		JPCarrinho.add(lblItems);
 
 		// JPanel JPLivros = new JPanel() {
 		// @Override
@@ -291,8 +218,7 @@ public class AppCliente implements Serializable {
 		// super.paintComponent(g);
 		// Image img;
 		// try {
-		//
-		// // importar imagem para o background do panel, podemos fazï¿½-lo da internet
+
 		// ou
 		// // do
 		// // ficheiro
@@ -317,7 +243,7 @@ public class AppCliente implements Serializable {
 		Choice choiceAtributoLivroCliente = new Choice();
 		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
-		choiceAtributoLivroCliente.add("(por que critï¿½rio pretende pesquisar o livro)");
+		choiceAtributoLivroCliente.add("(por que criterio pretende pesquisar o livro)");
 		choiceAtributoLivroCliente.add("Titulo");
 		choiceAtributoLivroCliente.add("Autor");
 		choiceAtributoLivroCliente.add("Id");
@@ -325,7 +251,6 @@ public class AppCliente implements Serializable {
 		TextField txtAtributoLivros = new TextField();
 		txtAtributoLivros.setBounds(65, 96, 200, 22);
 		JPLivros.add(txtAtributoLivros);
-		DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 		JList<String> listaLivros = new JList<String>(modeloLista);
 		listaLivros.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
@@ -393,7 +318,7 @@ public class AppCliente implements Serializable {
 		alterarQuantidadeCarrinhoLIVROS.add(rbRemoverQuantidadeLIVROS);
 		rbRemoverQuantidadeLIVROS.setBounds(862, 147, 109, 23);
 		JPLivros.add(rbRemoverQuantidadeLIVROS);
-		// actualiza o carrinho do nif inserido e com as alteraï¿½ï¿½es pedidas
+		// actualiza o carrinho do nif inserido
 		// dependendo
 		// do radiobutton escolhido para acrescentar ou remover uma
 		// certa quantidade de um item
@@ -436,7 +361,7 @@ public class AppCliente implements Serializable {
 						}
 					} else {
 						JOptionPane.showMessageDialog(null,
-								"O nif introduzido nï¿½o consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
+								"O nif introduzido nao consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
 					}
 //				modeloLista.removeAllElements();
 //				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
@@ -566,7 +491,7 @@ public class AppCliente implements Serializable {
 				if (gl.viewComics.verificaNif(nif)) {
 					if (gl.viewComics.carrinhoExiste(nif)) {
 						JOptionPane.showMessageDialog(null,
-								"O nif que seleccionou já corresponde a um carrinho em loja, para continuar compra basta alterar o seu carrinho");
+								"O nif que seleccionou ja corresponde a um carrinho em loja, para continuar compra basta alterar o seu carrinho");
 
 					} else {
 						Carrinho c = new Carrinho(nif);
@@ -589,14 +514,85 @@ public class AppCliente implements Serializable {
 		btnVerificarCarrinhoLIVROS.setBackground(SystemColor.controlHighlight);
 		btnVerificarCarrinhoLIVROS.setBounds(746, 31, 183, 42);
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
+		JPCarrinho.setBounds(0, 0, 1008, 544);
+		JPanelPrincipal.add(JPCarrinho);
+		JPCarrinho.setLayout(null);
+		table = new JTable();
+		String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 
-		DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(32, 129, 462, 221);
+		JPCarrinho.add(scrollPane);
+		table = new JTable(modeloTabela);
+
+		txtNifCARRINHO = new JTextField();
+		txtNifCARRINHO.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				String nif = txtNifCARRINHO.getText();
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (gl.viewComics.carrinhoExiste(nif)) {
+						Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+						gl.viewComics.limpatabela(modeloTabela);
+						gl.viewComics.carrinhoTabela(c, modeloTabela);
+						String precoTotal = gl.viewComics.precoTotalCarrinho(c);
+						String totalLivros = gl.viewComics.totalLivrosCarrinho(c);
+						txtPrecoTotalCARRINHO.setText(precoTotal);
+						txtTotalLivrosCARRINHO.setText(totalLivros);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"O nif que indicou nao corresponde a um carrinho em loja. Confirme criou o seu carrinho");
+					}
+				}
+			}
+		});
+		txtNifCARRINHO.setBounds(32, 79, 198, 25);
+		JPCarrinho.add(txtNifCARRINHO);
+		txtNifCARRINHO.setColumns(10);
+
+		JLabel lblNewLabel = new JLabel("Nif :");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblNewLabel.setBounds(32, 37, 57, 31);
+		JPCarrinho.add(lblNewLabel);
+
+		scrollPane.setViewportView(table);
+
+		JButton btnNewButton = new JButton("<HTML>Pretendo dar o meu carrinnho como finalizado<HTML>");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nif = txtNifCARRINHO.getText();
+				Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+				gl.viewComics.finalizarCarrinho(c);
+			}
+		});
+		btnNewButton.setBounds(115, 361, 139, 59);
+		JPCarrinho.add(btnNewButton);
+
+		txtPrecoTotalCARRINHO = new JTextField();
+		txtPrecoTotalCARRINHO.setBounds(317, 361, 86, 25);
+		JPCarrinho.add(txtPrecoTotalCARRINHO);
+		txtPrecoTotalCARRINHO.setColumns(10);
+
+		txtTotalLivrosCARRINHO = new JTextField();
+		txtTotalLivrosCARRINHO.setColumns(10);
+		txtTotalLivrosCARRINHO.setBounds(317, 397, 84, 25);
+		JPCarrinho.add(txtTotalLivrosCARRINHO);
+
+		JLabel lblNewLabel_1 = new JLabel("\u20AC");
+		lblNewLabel_1.setBounds(413, 361, 40, 25);
+		JPCarrinho.add(lblNewLabel_1);
+
+		JLabel lblItems = new JLabel("items");
+		lblItems.setBounds(413, 395, 40, 25);
+		JPCarrinho.add(lblItems);
+		
 
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 
 		ButtonGroup alterarCarrinho = new ButtonGroup();
 
-		// tornar os respectivos paineis visï¿½veis ao clicar
+		// tornar os respectivos paineis visiveis ao clicar
 
 		btnLivros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -610,20 +606,19 @@ public class AppCliente implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				JPLivros.setVisible(false);
 				JPCarrinho.setVisible(true);
-				if(!txtNifCarrinhoLIVROS.getText().equals(""))
-				{
+				if (!txtNifCarrinhoLIVROS.getText().equals("")) {
 					txtNifCARRINHO.setText(txtNifCarrinhoLIVROS.getText());
-					
+
 					if (gl.viewComics.carrinhoExiste(txtNifCARRINHO.getText())) {
 						Carrinho c = gl.viewComics.pesquisarCarrinho(txtNifCARRINHO.getText());
 						gl.viewComics.limpatabela(modeloTabela);
 						gl.viewComics.carrinhoTabela(c, modeloTabela);
-						String precoTotal=gl.viewComics.precoTotalCarrinho(c);
-						String totalLivros=gl.viewComics.totalLivrosCarrinho(c);
+						String precoTotal = gl.viewComics.precoTotalCarrinho(c);
+						String totalLivros = gl.viewComics.totalLivrosCarrinho(c);
 						txtPrecoTotalCARRINHO.setText(precoTotal);
 						txtTotalLivrosCARRINHO.setText(totalLivros);
 					}
-					
+
 				}
 
 			}
@@ -655,14 +650,6 @@ public class AppCliente implements Serializable {
 			}
 
 		});
-
-		// fazer logIn premindo Enter
-
-		// mudar a cor de um botao ao passar o cursor do rato
-
-		// mudar a cor dos botoes ao passar o rato (mouseEntered & mouseClicked)
-		// deixar a cor fixa ao clicar(mouse Clicked)
-		// retirar a cor do anterior ao clicar em outro botï¿½o(mouse Clicked)
 
 		// Livros
 
