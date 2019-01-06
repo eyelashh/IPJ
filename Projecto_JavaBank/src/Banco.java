@@ -159,9 +159,11 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			s = "" + cont.get(i).getIdConta();
-			numcontas[i] = s;
-			s = "";
+			if (cont.get(i).isAberta()) {
+				s = "" + cont.get(i).getIdConta();
+				numcontas[i] = s;
+				s = "";
+			}
 		}
 		return numcontas;
 	}
@@ -422,25 +424,76 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaçoes no cliente:
-	protected void preenchetabelaOperacoes(DefaultTableModel model, ArrayList<Integer> idConta) {
+	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, ArrayList<Integer> idConta) {
 
 		for (int i = 0; i < contas.size(); i++) {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
 				if ((idConta.contains(contas.get(i).getIdConta()))
-						&& (contas.get(i).getOperacoes().get(j) instanceof Transferencia)) {
+						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
-					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
-					String data =  contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
 
-					Object[] texto = { id, desc, resp, data, valor, contadestino, clt };
+					Object[] texto = { desc, resp, data, valor, contadestino, clt };
+					model.addRow(texto);
+
+				}
+
+			}
+		}
+
+	}
+
+	// preenche tabela operaçoes no cliente:
+	protected void preenchetabelaOperacoesDeposito(DefaultTableModel model, ArrayList<Integer> idConta) {
+
+		for (int i = 0; i < contas.size(); i++) {
+
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((idConta.contains(contas.get(i).getIdConta()))
+						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
+
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Double valor = contas.get(i).getOperacoes().get(j).getValor();
+
+					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
+
+					Object[] texto = { desc, resp, data, valor, null, null };
+					model.addRow(texto);
+
+				}
+
+			}
+		}
+
+	}
+
+	// preenche tabela operaçoes no cliente:
+	protected void preenchetabelaOperacoesLevantamento(DefaultTableModel model, ArrayList<Integer> idConta) {
+
+		for (int i = 0; i < contas.size(); i++) {
+
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((idConta.contains(contas.get(i).getIdConta()))
+						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
+
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Double valor = contas.get(i).getOperacoes().get(j).getValor();
+
+					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
+
+					Object[] texto = { desc, resp, data, valor, null, null };
 					model.addRow(texto);
 
 				}
@@ -466,7 +519,6 @@ public class Banco implements Serializable {
 
 		String[] op = new String[operacoes.size() + 1];
 		op = operacoes.toArray(op);
-
 		return op;
 	}
 
@@ -485,7 +537,21 @@ public class Banco implements Serializable {
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
+
 					((Cliente) clt).getContas().add(c.getIdConta());
+
+					if (c instanceof ContaCorrente) {
+						((Cliente) clt).getContas().add(c.getIdConta());
+					} else {
+						if (((Cliente) clt).getContapoupanca() == 0) {
+							((Cliente) clt).setContapoupanca(c.getIdConta());
+						} else {
+							JOptionPane.showMessageDialog(null, "O/A cliente " + model.getValueAt(i, 1)
+									+ " ja tem uma conta poupan�a neste banco!");
+							model.setValueAt(false, i, 0);
+						}
+					}
+
 				}
 			}
 		}

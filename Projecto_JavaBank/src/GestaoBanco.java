@@ -44,7 +44,7 @@ public class GestaoBanco implements Serializable {
 			Utilizador fun = new Funcionario(-2, "Funcionario", "Master", Date.valueOf(LocalDate.now()), "CC", 0, "DEI",
 					910000000, "funcionario", "funcionario", -2);
 			Utilizador clt = new Cliente(-3, "Cliente", "Master", Date.valueOf(LocalDate.now()), "CC", 0, "DEI",
-					910000000, "cliente", "cliente");
+					910000000, "cliente", "cliente",0);
 
 			javabank.addUtilizador(clt);
 			javabank.addUtilizador(fun);

@@ -218,62 +218,67 @@ public class BancoAppClt implements Serializable {
 		JPCltCM.setVisible(true);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(599, 143, 379, 354);
+		scrollPane.setBounds(480, 143, 498, 354);
 		JPCltCM.add(scrollPane);
 
 		// Modelo para tabela
-		String[] colunas = { "IdOperação", "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
 		scrollPane.setViewportView(table);
 
 		JLabel textFieldCltNumero1 = new JLabel("Número:");
 		textFieldCltNumero1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltNumero1.setBounds(128, 277, 94, 16);
+		textFieldCltNumero1.setBounds(119, 269, 94, 16);
 		JPCltCM.add(textFieldCltNumero1);
 
 		textFieldCltNumeroConta = new JTextField();
 		textFieldCltNumeroConta.setEditable(false);
-		textFieldCltNumeroConta.setBounds(141, 305, 217, 30);
+		textFieldCltNumeroConta.setBounds(132, 297, 185, 30);
 		JPCltCM.add(textFieldCltNumeroConta);
 
 		JLabel textFieldCltData1 = new JLabel("Data de Criação:");
 		textFieldCltData1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textFieldCltData1.setBounds(128, 338, 270, 16);
+		textFieldCltData1.setBounds(119, 330, 270, 16);
 		JPCltCM.add(textFieldCltData1);
 
 		JLabel lblSaldo = new JLabel("Saldo:");
 		lblSaldo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblSaldo.setBounds(128, 404, 270, 16);
+		lblSaldo.setBounds(119, 396, 270, 16);
 		JPCltCM.add(lblSaldo);
 
 		textFieldCltSaldoConta = new JTextField();
 		textFieldCltSaldoConta.setEditable(false);
-		textFieldCltSaldoConta.setBounds(138, 432, 185, 30);
+		textFieldCltSaldoConta.setBounds(129, 424, 185, 30);
 		JPCltCM.add(textFieldCltSaldoConta);
 
 		JButton btnCltLimpar = new JButton("Limpar");
 
 		btnCltLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCltLimpar.setBounds(221, 481, 120, 38);
+		btnCltLimpar.setBounds(169, 476, 120, 38);
 		JPCltCM.add(btnCltLimpar);
 
 		JLabel textCltCartao = new JLabel("Cartão:");
 		textCltCartao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		textCltCartao.setBounds(599, 74, 270, 16);
+		textCltCartao.setBounds(480, 73, 270, 16);
 		JPCltCM.add(textCltCartao);
 
 		textFieldCltCartao = new JTextField();
 		textFieldCltCartao.setEditable(false);
-		textFieldCltCartao.setBounds(599, 101, 174, 30);
+		textFieldCltCartao.setBounds(480, 100, 174, 30);
 		JPCltCM.add(textFieldCltCartao);
 
 		JDateChooser dateChooser_1 = new JDateChooser();
 		dateChooser_1.setEnabled(false);
-		dateChooser_1.setBounds(138, 366, 217, 31);
+		dateChooser_1.setBounds(129, 358, 185, 31);
 		JPCltCM.add(dateChooser_1);
 
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(94, 96, 252, 158);
+		JPCltCM.add(scrollPane_1);
+
 		JList<String> listContasCliente = new JList<String>(dmListaContas);
+		scrollPane_1.setViewportView(listContasCliente);
 		// selecionar conta e preencher so campos correctos:
 		listContasCliente.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
@@ -297,13 +302,13 @@ public class BancoAppClt implements Serializable {
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 
-					gb.javabank.preenchetabelaOperacoes(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, clt.getContas());
 
 				}
 			}
 		});
-		listContasCliente.setBounds(94, 96, 379, 158);
-		JPCltCM.add(listContasCliente);
 
 		// combobox com uma string de lista e ao escolher uma faz um update a lista
 		JComboBox comboBoxCltConta = new JComboBox(contas);
@@ -328,7 +333,7 @@ public class BancoAppClt implements Serializable {
 
 		textFieldNumCartao = new JTextField();
 		textFieldNumCartao.setEditable(false);
-		textFieldNumCartao.setBounds(810, 102, 168, 30);
+		textFieldNumCartao.setBounds(691, 101, 168, 30);
 		JPCltCM.add(textFieldNumCartao);
 
 		// botao limpar

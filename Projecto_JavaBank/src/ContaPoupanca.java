@@ -8,8 +8,8 @@ public class ContaPoupanca extends Conta implements Serializable {
 	private double limiteMensalDebito;
 
 	public ContaPoupanca(int idConta, Date dataCriacao, double saldo, ArrayList<Integer> clientes,
-			double valorMaxLevantamento, double valorMaxDia, double taxaJuros, double limiteMensalDebito) {
-		super(idConta, dataCriacao, saldo, clientes, valorMaxLevantamento, valorMaxDia);
+			double valorMaxLevantamento, double valorMaxDia, double taxaJuros, double limiteMensalDebito,boolean aberta) {
+		super(idConta, dataCriacao, saldo, clientes, valorMaxLevantamento, valorMaxDia, aberta);
 
 		this.taxaJuros = taxaJuros;
 		this.limiteMensalDebito = limiteMensalDebito;
