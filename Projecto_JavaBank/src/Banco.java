@@ -520,6 +520,7 @@ public class Banco implements Serializable {
 		} else {
 
 			cartoes.add(card);
+			
 
 			JOptionPane.showMessageDialog(null, "Cartão criado com sucesso!");
 		}
