@@ -558,4 +558,105 @@ public class Banco implements Serializable {
 
 	}
 
+	// retorna o array das contas poupança
+	protected String[] listaContasPoupanca() {
+		ArrayList<Conta> contas = this.contas;
+		String id = "";
+		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
+
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i) instanceof ContaPoupanca) {
+				id = "" + contas.get(i).getIdConta();
+				idsContaPoupanca.add(id);
+			}
+			idsContaPoupanca = null;
+		}
+
+		String[] contasP = new String[idsContaPoupanca.size()];
+		contasP = idsContaPoupanca.toArray(contasP);
+
+		return contasP;
+	}
+
+	// retorna o array das contas corrente
+	protected String[] listaContasCorrente() {
+
+		ArrayList<Conta> contas = this.contas;
+		ArrayList<String> idsContasCorrente = new ArrayList<String>();
+
+		for (Conta c:contas) {
+			String idSTR =Integer.toString(c.getIdConta());
+			if (c instanceof ContaCorrente) {
+				idsContasCorrente.add(idSTR);
+			}
+		}
+		String[] contasCorrente = new String[idsContasCorrente.size()];
+		contasCorrente = idsContasCorrente.toArray(contasCorrente);
+
+		return contasCorrente;
+	}
+//	ArrayList<Conta> contas = this.contas;
+//	String id = "";
+//	ArrayList<String> idsContasCorrente = new ArrayList<String>();
+//
+//	for (int i = 0; i < contas.size(); i++) {
+//		if (contas.get(i) instanceof ContaCorrente) {
+//			id = "" + contas.get(i).getIdConta();
+//			idsContasCorrente.add(id);
+//		}
+//		idsContasCorrente = null;
+//	}
+//
+//	String[] contasCorrente = new String[idsContasCorrente.size()];
+//	contasCorrente = idsContasCorrente.toArray(contasCorrente);
+//
+//	return contasCorrente;
+//}
+
+
+	protected String[] listaContasIdCliente(String idCliente) {
+
+		ArrayList<Utilizador> utilizadores = this.utilizadores;
+		ArrayList<Integer> idcontasClienteINT = new ArrayList <Integer>();
+		ArrayList <String> idContasClienteSTR = new ArrayList<String>();
+
+		Cliente c=null;
+		for (Utilizador u:utilizadores) {
+			String idSTR=Integer.toString(u.getIdUtilizador());
+			if ((idSTR.contains(idCliente))&&(u instanceof Cliente)) {
+				c=(Cliente) u;
+				idcontasClienteINT =c.getContas();
+			}
+		}
+		for (int id:idcontasClienteINT) {
+			String idSTR=Integer.toString(id);
+			idContasClienteSTR.add(idSTR);
+		}
+		String[] contasCliente = new String[idContasClienteSTR.size()];
+		contasCliente = idContasClienteSTR.toArray(contasCliente);
+
+		return contasCliente;
+		
+
+	}
+	protected String[] listaContasNumConta(String numConta) {
+
+		ArrayList<Conta> contas = this.contas;
+		ArrayList<String> contaNum=new ArrayList<String>();
+
+		for (Conta c: contas) {
+			String numContaSTR = Integer.toString(c.getIdConta());
+			if (numContaSTR.contains(numConta)) {
+				contaNum.add(numContaSTR);	
+			}
+		}
+				
+				
+				
+		String[] contaId = new String[contaNum.size()];
+		contaId = contaNum.toArray(contaId);
+
+		return contaId;
+	}
+
 }
