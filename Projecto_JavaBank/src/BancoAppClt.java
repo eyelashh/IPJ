@@ -272,7 +272,7 @@ public class BancoAppClt implements Serializable {
 						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
 								conta.getIdConta());
 
-						gb.javabank.verificaCartao(Integer.parseInt(s), card, conta);
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
 						textFieldNomeCartao.setEditable(false);
 						dateChooserCartao.setEnabled(false);
 						textFieldCOD.setEditable(false);
@@ -311,7 +311,7 @@ public class BancoAppClt implements Serializable {
 						Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
 								conta.getIdConta());
 
-						gb.javabank.verificaCartao(Integer.parseInt(s), card, conta);
+						gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
 
 						textFieldNomeCartao.setEditable(false);
 						dateChooserCartao.setEnabled(false);

@@ -501,9 +501,9 @@ public class Banco implements Serializable {
 
 	}
 
-	// verifica se o cartao existe, se nï¿½o existir cria um novo cartao
+	// cria um cartÃ£o
 
-	public void verificaCartao(int idConta, Cartao card, Conta c) {
+	public void criaCartao(int idConta, Cartao card, Conta c) {
 		int i = 0;
 
 		for (i = 0; i < contas.size(); i++) {
@@ -674,7 +674,7 @@ public class Banco implements Serializable {
 		return clientesID;
 	}
 	
-	// metedo que confirma se a conta existe (usado nas operaçoes)
+	// metedo que confirma se a conta existe (usado nas operaï¿½oes)
 	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id)
 	{
 		boolean existe= false;
