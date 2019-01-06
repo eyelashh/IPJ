@@ -93,9 +93,6 @@ public class Banco implements Serializable {
 		this.utilizadores = utlizadores;
 	}
 
-	public void run() {
-		System.out.println("Run!!!");
-	}
 
 	// adiciona utilizadores
 	public void addUtilizador(Utilizador u) {
@@ -402,7 +399,8 @@ public class Banco implements Serializable {
 	protected void eliminaconta(int id, ArrayList<Conta> contas) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
-				contas.remove(i);
+				//contas.remove(i);
+				contas.get(i).setAberta(false);
 			}
 		}
 	}
@@ -485,7 +483,22 @@ public class Banco implements Serializable {
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-					((Cliente) clt).getContas().add(c.getIdConta());
+					if(c instanceof ContaCorrente)
+					{
+						((Cliente) clt).getContas().add(c.getIdConta());	
+					}
+					else
+					{
+						if(((Cliente) clt).getContapoupanca()==0)
+						{
+						((Cliente) clt).setContapoupanca(c.getIdConta());
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "O/A cliente "+model.getValueAt(i, 1)+" ja tem uma conta poupança neste banco!");
+						}
+					}
+					
 				}
 			}
 		}
@@ -513,16 +526,22 @@ public class Banco implements Serializable {
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
 
-		Cliente clt;
+
 		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i) instanceof Cliente) {
-
+				if(c instanceof ContaPoupanca && ((Cliente)clientes.get(i)).getContapoupanca()==c.getIdConta())
+				{
+					((Cliente)clientes.get(i)).setContapoupanca(0);
+				}
+				else
+				{
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
 					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
 						((Cliente) clientes.get(i)).getContas().remove(x);
 						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
 						c.getClientes().remove(id);
 					}
+				}
 				}
 
 			}
@@ -539,9 +558,7 @@ public class Banco implements Serializable {
 
 			for (int j = 0; j < cartoes.size(); j++) {
 				if (cartoes.get(j).getCodvalidacao() == id) {
-
 					card = cartoes.get(j);
-
 				}
 			}
 
@@ -552,7 +569,6 @@ public class Banco implements Serializable {
 	}
 
 	// cria um cartÃ£o
-
 	public void criaCartao(int idConta, Cartao card, Conta c) {
 		int i = 0;
 

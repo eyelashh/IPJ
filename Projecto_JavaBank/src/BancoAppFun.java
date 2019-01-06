@@ -268,6 +268,550 @@ public class BancoAppFun implements Serializable {
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
+
+		JTextField tbContaspesqconta = new JTextField();
+		tbContaspesqconta.setBounds(26, 63, 238, 31);
+		jpanelContas.add(tbContaspesqconta);
+		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
+		rdbtnContaCorrente.setSelected(true);
+
+		rdbtnContaCorrente.setBounds(447, 65, 132, 25);
+		jpanelContas.add(rdbtnContaCorrente);
+
+		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
+
+		rdbtnContaPoupanca.setBounds(583, 65, 144, 25);
+		jpanelContas.add(rdbtnContaPoupanca);
+
+		// botao eliminar
+
+		jpanelContas.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelContas);
+		jpanelContas.setLayout(null);
+
+		lContas = new JList<String>(dmconta);
+		lContas.setBounds(24, 99, 240, 471);
+		jpanelContas.add(lContas);
+
+		JComboBox<String> cbContaspesqconta = new JComboBox<String>();
+		cbContaspesqconta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if ((cbContaspesqconta.getSelectedItem().equals("Conta poupanca"))
+						|| (cbContaspesqconta.getSelectedItem().equals("Conta corrente"))) {
+					tbContaspesqconta.setText("");
+					tbContaspesqconta.setEditable(false);
+
+				} else if ((cbContaspesqconta.getSelectedItem().equals("Numero de conta"))) {
+					tbContaspesqconta.setText("");
+					tbContaspesqconta.setEditable(true);
+				}
+			}
+		});
+		cbContaspesqconta.setBounds(26, 12, 238, 38);
+		jpanelContas.add(cbContaspesqconta);
+		cbContaspesqconta.addItem("Numero de conta");
+		cbContaspesqconta.addItem("Contas corrente");
+		cbContaspesqconta.addItem("Contas poupanca");
+
+		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
+		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNewLabel_2.setBounds(323, 118, 113, 24);
+		jpanelContas.add(lblNewLabel_2);
+
+		JLabel lblDataDeCriacao = new JLabel("Data da Cria\u00E7\u00E3o");
+		lblDataDeCriacao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDeCriacao.setBounds(304, 168, 132, 24);
+		jpanelContas.add(lblDataDeCriacao);
+
+		JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
+		lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblLimiteDeLevantamento.setBounds(485, 212, 183, 24);
+		jpanelContas.add(lblLimiteDeLevantamento);
+
+		tbContasnum = new JTextField();
+		tbContasnum.setEditable(false);
+		tbContasnum.setBounds(448, 117, 279, 31);
+		jpanelContas.add(tbContasnum);
+
+		tbContaslimitelevop = new JTextField();
+		tbContaslimitelevop.setBounds(448, 249, 279, 31);
+		jpanelContas.add(tbContaslimitelevop);
+
+		JButton btContasConfirmar = new JButton("Confirmar");
+
+		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasConfirmar.setBounds(448, 472, 120, 38);
+		jpanelContas.add(btContasConfirmar);
+
+		JButton btContasNovo = new JButton("Novo");
+
+		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasNovo.setBounds(352, 523, 120, 38);
+		jpanelContas.add(btContasNovo);
+
+		JButton btContasEliminar = new JButton("Eliminar");
+
+		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btContasEliminar.setBounds(484, 523, 120, 38);
+		jpanelContas.add(btContasEliminar);
+
+		JLabel lblClientes_1 = new JLabel("Clientes");
+		lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblClientes_1.setBounds(768, 17, 164, 24);
+		jpanelContas.add(lblClientes_1);
+
+		dateChooser_2 = new JDateChooser();
+		dateChooser_2.setBounds(448, 168, 279, 31);
+		jpanelContas.add(dateChooser_2);
+
+		tbContasSaldo = new JTextField();
+		tbContasSaldo.setEditable(false);
+		tbContasSaldo.setBounds(448, 337, 279, 31);
+		jpanelContas.add(tbContasSaldo);
+
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblSaldo.setBounds(366, 338, 57, 24);
+		jpanelContas.add(lblSaldo);
+
+		JButton btContaslimpar = new JButton("Limpar");
+
+		btContaslimpar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btContaslimpar.setBounds(626, 523, 120, 38);
+		jpanelContas.add(btContaslimpar);
+
+		JLabel lblLimiteDeLevantamento_1 = new JLabel("Por dia:");
+		lblLimiteDeLevantamento_1.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblLimiteDeLevantamento_1.setBounds(356, 294, 67, 24);
+		jpanelContas.add(lblLimiteDeLevantamento_1);
+
+		tbContaslimitelevdia = new JTextField();
+		tbContaslimitelevdia.setBounds(448, 293, 279, 31);
+		jpanelContas.add(tbContaslimitelevdia);
+
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dmconta.removeAllElements();
+				if (cbContaspesqconta.getSelectedItem().equals("Numero de conta")) {
+					String numConta = tbContaspesqconta.getText();
+					String[] contasNumConta = gb.javabank.listaContasNumConta(numConta);
+					gb.javabank.addelementoslist(contasNumConta, dmconta);
+
+				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
+					ArrayList<Conta> contasCorrente = gb.javabank.getContas();
+					String[] contasCorrent = gb.javabank.listaContasCorrente();
+					gb.javabank.addelementoslist(contasCorrent, dmconta);
+
+				} else if (cbContaspesqconta.getSelectedItem().equals("Contas poupanca")) {
+					String[] contasPoup = gb.javabank.listaContasPoupanca();
+					gb.javabank.addelementoslist(contasPoup, dmconta);
+				} else if (cbContaspesqconta.getSelectedItem().equals("Titular")) {
+					String id = tbContaspesqconta.getText();
+					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
+					gb.javabank.addelementoslist(contasCliente, dmconta);
+
+				}
+			}
+		});
+		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btnPesquisar.setBounds(280, 11, 143, 38);
+		jpanelContas.add(btnPesquisar);
+
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblTipo.setBounds(379, 63, 44, 24);
+		jpanelContas.add(lblTipo);
+
+		JLabel lblDia = new JLabel("Por Opera\u00E7ao:");
+		lblDia.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblDia.setBounds(304, 250, 119, 24);
+		jpanelContas.add(lblDia);
+
+		tblJuros = new JTextField();
+		tblJuros.setVisible(false);
+		tblJuros.setBounds(448, 381, 279, 31);
+		jpanelContas.add(tblJuros);
+
+		JLabel lblJuros = new JLabel("Juros (%):");
+		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblJuros.setBounds(352, 382, 83, 24);
+		jpanelContas.add(lblJuros);
+		lblJuros.setVisible(false);
+
+		tbllimitemes = new JTextField();
+		tbllimitemes.setVisible(false);
+		tbllimitemes.setBounds(450, 425, 277, 31);
+		jpanelContas.add(tbllimitemes);
+		tbllimitemes.setColumns(10);
+
+		JLabel lbllimitemes = new JLabel("Limite Mes:");
+		lbllimitemes.setVisible(false);
+		lbllimitemes.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lbllimitemes.setBounds(346, 426, 90, 24);
+		jpanelContas.add(lbllimitemes);
+		bgconta.add(rdbtnContaPoupanca);
+		bgconta.add(rdbtnContaCorrente);
+
+		JButton btPedirCartao = new JButton("Pedir Cartao");
+		btPedirCartao.setVisible(false);
+
+		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
+		btPedirCartao.setBounds(588, 472, 120, 38);
+		jpanelContas.add(btPedirCartao);
+
+		JPanel panelCartao = new JPanel();
+		panelCartao.setVisible(false);
+		panelCartao.setBounds(768, 394, 262, 169);
+		jpanelContas.add(panelCartao);
+		panelCartao.setLayout(null);
+
+		JLabel VALIDADE = new JLabel("Validade");
+		VALIDADE.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		VALIDADE.setBounds(12, 40, 72, 16);
+		panelCartao.add(VALIDADE);
+
+		JDateChooser dtcartao = new JDateChooser();
+		dtcartao.setBounds(72, 40, 190, 22);
+		panelCartao.add(dtcartao);
+
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNome.setBounds(12, 13, 72, 16);
+		panelCartao.add(lblNome);
+
+		tbnomecartao = new JTextField();
+		tbnomecartao.setBounds(72, 11, 190, 22);
+		panelCartao.add(tbnomecartao);
+		tbnomecartao.setColumns(10);
+
+		JLabel lblCod = new JLabel("COD:");
+		lblCod.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblCod.setBounds(12, 71, 59, 16);
+		panelCartao.add(lblCod);
+
+		tbcodcartao = new JTextField();
+		tbcodcartao.setEditable(false);
+		tbcodcartao.setColumns(10);
+		tbcodcartao.setBounds(72, 69, 190, 22);
+		panelCartao.add(tbcodcartao);
+
+		JButton btCartao = new JButton("Criar cartao");
+
+		btCartao.setBounds(108, 103, 112, 25);
+		panelCartao.add(btCartao);
+
+		tableClts = new JTable(model);
+		tableClts.setBounds(768, 47, 262, 334);
+		jpanelContas.add(tableClts);
+
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+
+			}
+
+		});
+		btnLimpar.setBounds(440, 12, 99, 38);
+		jpanelContas.add(btnLimpar);
+
+		// metedos depainel de contas:
+
+		// muda a conta corrente e conta ordem
+		rdbtnContaCorrente.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (rdbtnContaCorrente.isSelected()) {
+					lblJuros.setVisible(false);
+					tblJuros.setVisible(false);
+					lbllimitemes.setVisible(false);
+					tbllimitemes.setVisible(false);
+
+				}
+
+			}
+		});
+
+		rdbtnContaPoupanca.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (rdbtnContaPoupanca.isSelected()) {
+					lblJuros.setVisible(true);
+					tblJuros.setVisible(true);
+					lbllimitemes.setVisible(true);
+					tbllimitemes.setVisible(true);
+				}
+			}
+		});
+		// adicionar nova conta ou atualizar:
+		btContasConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (lContas.isSelectionEmpty()) {
+					// CRIA NOVA CONTA
+					ArrayList<Integer> clientes = new ArrayList<Integer>();
+					// cartao nulo inicialmente;
+					Conta c;
+					if (rdbtnContaCorrente.isSelected()) {
+						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+								Double.parseDouble(tbContasSaldo.getText()), clientes,
+								Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()), 0, true);
+						gb.javabank.getContas().add(c);
+
+					} else {
+
+						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+								Double.parseDouble(tbContasSaldo.getText()), clientes,
+								Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()),
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),true);
+						gb.javabank.getContas().add(c);
+					}
+
+					// Atribuir titulares das contas:
+					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+					dmconta.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+
+				} else {
+					// atualizar:
+
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+							gb.javabank.getContas());
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
+							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+					if (c instanceof ContaCorrente) {
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
+
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+
+					} else {
+
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()),
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+					}
+
+					gb.javabank.limpatabela(model);
+					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
+
+				}
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContasnum.setText(null);
+				tbContaslimitelevdia.setText(null);
+				tblJuros.setText(null);
+				tbllimitemes.setText(null);
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+
+			}
+		});
+
+		// limpar campos:
+		btContaslimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+				
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				panelCartao.setVisible(false);
+				btPedirCartao.setVisible(false);
+				// lClientes.clea
+
+			}
+		});
+
+		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
+		btContasNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+
+				int numconta;
+				if (gb.javabank.getContas().size() == 0) {
+					numconta = 1;
+				} else {
+					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size() - 1).getIdConta() + 1;
+
+				}
+				lContas.clearSelection();
+				tbContasnum.setText("" + numconta);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(true);
+				dateChooser_2.setEnabled(true);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				tbllimitemes.setText(null);
+			}
+		});
+		// selecionar conta e preencher so campos correctos:
+		lContas.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+
+				if (!lContas.isSelectionEmpty()) {
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+							gb.javabank.getContas());
+					tbContasnum.setText("" + c.getIdConta());
+					dateChooser_2.setDate(c.getDataCriacao());
+					dateChooser_2.setEnabled(false);
+					tbContaslimitelevop.setText("" + c.getValorMaxLevantamento());
+					tbContasSaldo.setText("" + c.getSaldo());
+					tbContasSaldo.setEditable(false);
+					tbContaslimitelevdia.setText(c.getValorMaxDia() + "");
+
+					if (c instanceof ContaPoupanca) {
+						rdbtnContaPoupanca.setSelected(true);
+						rdbtnContaCorrente.setSelected(false);
+						Double juros = ((ContaPoupanca) c).getTaxaJuros();
+						tblJuros.setText(juros + "");
+						Double limite = ((ContaPoupanca) c).getLimiteMensalDebito();
+						tbllimitemes.setText("" + limite);
+						panelCartao.setVisible(false);
+						btPedirCartao.setVisible(false);
+
+					} else {
+						rdbtnContaPoupanca.setSelected(false);
+						rdbtnContaCorrente.setSelected(true);
+
+						if (((ContaCorrente) c).getCartao() == 0) {
+							btPedirCartao.setVisible(true);
+
+						} else {
+
+							btCartao.setVisible(false);
+							panelCartao.setVisible(true);
+							dtcartao.setEnabled(false);
+							tbnomecartao.setEditable(false);
+							tbcodcartao.setEditable(false);
+
+							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+									((ContaCorrente) c).getCartao());
+							dtcartao.setDate(card.getDataValidade());
+							tbnomecartao.setText(card.getNomeTitular());
+							tbcodcartao.setText(card.getCodvalidacao() + "");
+
+						}
+
+					}
+					gb.javabank.limpatabela(model);
+					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+					/// seleciona os clientes que estao como titulares � conta:
+					gb.javabank.mostratitulares(c, model);
+
+				}
+			}
+		});
+
+		// elimina contas:
+		btContasEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (!lContas.isSelectionEmpty()) {
+
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
+							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
+
+					lContas.clearSelection();
+					tbContasnum.setText(null);
+					dateChooser_2.setDate(null);
+					tbContaslimitelevop.setText(null);
+					tbContasSaldo.setText(null);
+					tbContasSaldo.setEditable(false);
+					tbContaslimitelevdia.setText(null);
+					rdbtnContaCorrente.setSelected(true);
+					rdbtnContaPoupanca.setSelected(false);
+					tblJuros.setText(null);
+					dateChooser_2.setEnabled(true);
+					tbllimitemes.setText(null);
+					dmconta.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+					tbnomecartao.setText(null);
+					dtcartao.setDate(null);
+					tbcodcartao.setText(null);
+					panelCartao.setVisible(false);
+
+					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+
+				}
+
+			}
+		});
+
+		btPedirCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelCartao.setVisible(true);
+				tbnomecartao.setEditable(true);
+				dtcartao.setEnabled(true);
+				btCartao.setVisible(true);
+
+			}
+		});
+
+		btCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = 0;
+				boolean existe = false;
+				do {
+
+					do {
+						id = (int) (Math.random() * 1000);
+					} while (id > 999 || id < 99);
+
+					if (gb.javabank.getCartoes().size() != 0) {
+						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
+							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
+								existe = true;
+							}
+						}
+					}
+				} while (existe);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				if (dtcartao.getDate() != null && tbnomecartao.getText() != " ") {
+					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
+					gb.javabank.getCartoes().add(cartao);
+					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+					tbcodcartao.setText(id + "");
+
+					dtcartao.setEnabled(false);
+					tbnomecartao.setEditable(false);
+					tbcodcartao.setEditable(false);
+					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				}
+
+			}
+		});
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
@@ -602,7 +1146,7 @@ public class BancoAppFun implements Serializable {
 						String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
 								+ corigem.getIdConta() + " valor: " + valortransf;
 						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
-								descorigem, cdestino, null );
+								descorigem, cdestino, null);
 						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
 								descdestino, corigem, null);
 
@@ -774,20 +1318,6 @@ public class BancoAppFun implements Serializable {
 		lblMorada.setBounds(345, 272, 66, 30);
 		jpanelClientes.add(lblMorada);
 
-		JTextField tbContaspesqconta = new JTextField();
-		tbContaspesqconta.setBounds(26, 63, 238, 31);
-		jpanelContas.add(tbContaspesqconta);
-		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
-		rdbtnContaCorrente.setSelected(true);
-
-		rdbtnContaCorrente.setBounds(447, 65, 132, 25);
-		jpanelContas.add(rdbtnContaCorrente);
-
-		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
-
-		rdbtnContaPoupanca.setBounds(583, 65, 144, 25);
-		jpanelContas.add(rdbtnContaPoupanca);
-
 		JButton btnLimparClt = new JButton("Limpar pesquisa");
 		btnLimparClt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -853,7 +1383,7 @@ public class BancoAppFun implements Serializable {
 					Utilizador clt = new Cliente(id, tbCltNome.getText(), tbCltApelido.getText(),
 							dateChooser_3.getDate(), opselect, Integer.parseInt(tbCltNum.getText()),
 							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
-							tbCltPass.getText());
+							tbCltPass.getText(), 0);
 					gb.javabank.getUtlizadores().add(clt);
 
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
@@ -979,536 +1509,6 @@ public class BancoAppFun implements Serializable {
 
 					// String[] contasCliente = gb.javabank.listaContasIdCliente(id);
 					// gb.javabank.addelementoslist(contasCliente,dmconta );
-				}
-
-			}
-		});
-
-		// botao eliminar
-
-		jpanelContas.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelContas);
-		jpanelContas.setLayout(null);
-
-		lContas = new JList<String>(dmconta);
-		lContas.setBounds(24, 99, 240, 471);
-		jpanelContas.add(lContas);
-
-		JComboBox<String> cbContaspesqconta = new JComboBox<String>();
-		cbContaspesqconta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if ((cbContaspesqconta.getSelectedItem().equals("Conta poupanca"))
-						|| (cbContaspesqconta.getSelectedItem().equals("Conta corrente"))) {
-					tbContaspesqconta.setText("");
-					tbContaspesqconta.setEditable(false);
-
-				} else if ((cbContaspesqconta.getSelectedItem().equals("Numero de conta"))) {
-					tbContaspesqconta.setText("");
-					tbContaspesqconta.setEditable(true);
-				}
-			}
-		});
-		cbContaspesqconta.setBounds(26, 12, 238, 38);
-		jpanelContas.add(cbContaspesqconta);
-		cbContaspesqconta.addItem("Numero de conta");
-		cbContaspesqconta.addItem("Contas corrente");
-		cbContaspesqconta.addItem("Contas poupanca");
-
-		JLabel lblNewLabel_2 = new JLabel("N\u00BA de Conta:");
-		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_2.setBounds(323, 118, 113, 24);
-		jpanelContas.add(lblNewLabel_2);
-
-		JLabel lblDataDeCriacao = new JLabel("Data da Cria\u00E7\u00E3o");
-		lblDataDeCriacao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDeCriacao.setBounds(304, 168, 132, 24);
-		jpanelContas.add(lblDataDeCriacao);
-
-		JLabel lblLimiteDeLevantamento = new JLabel("Limite de Levantamento:");
-		lblLimiteDeLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblLimiteDeLevantamento.setBounds(485, 212, 183, 24);
-		jpanelContas.add(lblLimiteDeLevantamento);
-
-		tbContasnum = new JTextField();
-		tbContasnum.setEditable(false);
-		tbContasnum.setBounds(448, 117, 279, 31);
-		jpanelContas.add(tbContasnum);
-
-		tbContaslimitelevop = new JTextField();
-		tbContaslimitelevop.setBounds(448, 249, 279, 31);
-		jpanelContas.add(tbContaslimitelevop);
-
-		JButton btContasConfirmar = new JButton("Confirmar");
-
-		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasConfirmar.setBounds(448, 472, 120, 38);
-		jpanelContas.add(btContasConfirmar);
-
-		JButton btContasNovo = new JButton("Novo");
-
-		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasNovo.setBounds(352, 523, 120, 38);
-		jpanelContas.add(btContasNovo);
-
-		JButton btContasEliminar = new JButton("Eliminar");
-
-		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasEliminar.setBounds(484, 523, 120, 38);
-		jpanelContas.add(btContasEliminar);
-
-		JLabel lblClientes_1 = new JLabel("Clientes");
-		lblClientes_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblClientes_1.setBounds(768, 17, 164, 24);
-		jpanelContas.add(lblClientes_1);
-
-		dateChooser_2 = new JDateChooser();
-		dateChooser_2.setBounds(448, 168, 279, 31);
-		jpanelContas.add(dateChooser_2);
-
-		tbContasSaldo = new JTextField();
-		tbContasSaldo.setEditable(false);
-		tbContasSaldo.setBounds(448, 337, 279, 31);
-		jpanelContas.add(tbContasSaldo);
-
-		JLabel lblSaldo = new JLabel("Saldo:");
-		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblSaldo.setBounds(366, 338, 57, 24);
-		jpanelContas.add(lblSaldo);
-
-		JButton btContaslimpar = new JButton("Limpar");
-
-		btContaslimpar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btContaslimpar.setBounds(626, 523, 120, 38);
-		jpanelContas.add(btContaslimpar);
-
-		JLabel lblLimiteDeLevantamento_1 = new JLabel("Por dia:");
-		lblLimiteDeLevantamento_1.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblLimiteDeLevantamento_1.setBounds(356, 294, 67, 24);
-		jpanelContas.add(lblLimiteDeLevantamento_1);
-
-		tbContaslimitelevdia = new JTextField();
-		tbContaslimitelevdia.setBounds(448, 293, 279, 31);
-		jpanelContas.add(tbContaslimitelevdia);
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dmconta.removeAllElements();
-				if (cbContaspesqconta.getSelectedItem().equals("Numero de conta")) {
-					String numConta = tbContaspesqconta.getText();
-					String[] contasNumConta = gb.javabank.listaContasNumConta(numConta);
-					gb.javabank.addelementoslist(contasNumConta, dmconta);
-
-				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
-					ArrayList<Conta> contasCorrente = gb.javabank.getContas();
-					String[] contasCorrent = gb.javabank.listaContasCorrente();
-					gb.javabank.addelementoslist(contasCorrent, dmconta);
-
-				} else if (cbContaspesqconta.getSelectedItem().equals("Contas poupanca")) {
-					String[] contasPoup = gb.javabank.listaContasPoupanca();
-					gb.javabank.addelementoslist(contasPoup, dmconta);
-				} else if (cbContaspesqconta.getSelectedItem().equals("Titular")) {
-					String id = tbContaspesqconta.getText();
-					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-					gb.javabank.addelementoslist(contasCliente, dmconta);
-
-				}
-			}
-		});
-		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btnPesquisar.setBounds(280, 11, 143, 38);
-		jpanelContas.add(btnPesquisar);
-
-		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblTipo.setBounds(379, 63, 44, 24);
-		jpanelContas.add(lblTipo);
-
-		JLabel lblDia = new JLabel("Por Opera\u00E7ao:");
-		lblDia.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblDia.setBounds(304, 250, 119, 24);
-		jpanelContas.add(lblDia);
-
-		tblJuros = new JTextField();
-		tblJuros.setVisible(false);
-		tblJuros.setBounds(448, 381, 279, 31);
-		jpanelContas.add(tblJuros);
-
-		JLabel lblJuros = new JLabel("Juros (%):");
-		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblJuros.setBounds(352, 382, 83, 24);
-		jpanelContas.add(lblJuros);
-		lblJuros.setVisible(false);
-
-		tbllimitemes = new JTextField();
-		tbllimitemes.setVisible(false);
-		tbllimitemes.setBounds(450, 425, 277, 31);
-		jpanelContas.add(tbllimitemes);
-		tbllimitemes.setColumns(10);
-
-		JLabel lbllimitemes = new JLabel("Limite Mes:");
-		lbllimitemes.setVisible(false);
-		lbllimitemes.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lbllimitemes.setBounds(346, 426, 90, 24);
-		jpanelContas.add(lbllimitemes);
-		bgconta.add(rdbtnContaPoupanca);
-		bgconta.add(rdbtnContaCorrente);
-
-		JButton btPedirCartao = new JButton("Pedir Cartao");
-		btPedirCartao.setVisible(false);
-
-		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btPedirCartao.setBounds(588, 472, 120, 38);
-		jpanelContas.add(btPedirCartao);
-
-		JPanel panelCartao = new JPanel();
-		panelCartao.setVisible(false);
-		panelCartao.setBounds(768, 394, 262, 169);
-		jpanelContas.add(panelCartao);
-		panelCartao.setLayout(null);
-
-		JLabel VALIDADE = new JLabel("Validade");
-		VALIDADE.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		VALIDADE.setBounds(12, 40, 72, 16);
-		panelCartao.add(VALIDADE);
-
-		JDateChooser dtcartao = new JDateChooser();
-		dtcartao.setBounds(72, 40, 190, 22);
-		panelCartao.add(dtcartao);
-
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNome.setBounds(12, 13, 72, 16);
-		panelCartao.add(lblNome);
-
-		tbnomecartao = new JTextField();
-		tbnomecartao.setBounds(72, 11, 190, 22);
-		panelCartao.add(tbnomecartao);
-		tbnomecartao.setColumns(10);
-
-		JLabel lblCod = new JLabel("COD:");
-		lblCod.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblCod.setBounds(12, 71, 59, 16);
-		panelCartao.add(lblCod);
-
-		tbcodcartao = new JTextField();
-		tbcodcartao.setEditable(false);
-		tbcodcartao.setColumns(10);
-		tbcodcartao.setBounds(72, 69, 190, 22);
-		panelCartao.add(tbcodcartao);
-
-		JButton btCartao = new JButton("Criar cartao");
-
-		btCartao.setBounds(108, 103, 112, 25);
-		panelCartao.add(btCartao);
-
-		tableClts = new JTable(model);
-		tableClts.setBounds(768, 47, 262, 334);
-		jpanelContas.add(tableClts);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-
-			}
-
-		});
-		btnLimpar.setBounds(440, 12, 99, 38);
-		jpanelContas.add(btnLimpar);
-
-		// metedos depainel de contas:
-
-		// muda a conta corrente e conta ordem
-		rdbtnContaCorrente.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				if (rdbtnContaCorrente.isSelected()) {
-					lblJuros.setVisible(false);
-					tblJuros.setVisible(false);
-					lbllimitemes.setVisible(false);
-					tbllimitemes.setVisible(false);
-
-				}
-
-			}
-		});
-
-		rdbtnContaPoupanca.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				if (rdbtnContaPoupanca.isSelected()) {
-					lblJuros.setVisible(true);
-					tblJuros.setVisible(true);
-					lbllimitemes.setVisible(true);
-					tbllimitemes.setVisible(true);
-				}
-			}
-		});
-		// adicionar nova conta ou atualizar:
-		btContasConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (lContas.isSelectionEmpty()) {
-					// CRIA NOVA CONTA
-					ArrayList<Integer> clientes = new ArrayList<Integer>();
-					// cartao nulo inicialmente;
-					Conta c;
-					if (rdbtnContaCorrente.isSelected()) {
-						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-								Double.parseDouble(tbContasSaldo.getText()), clientes,
-								Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()), 0);
-						gb.javabank.getContas().add(c);
-
-					} else {
-
-						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-								Double.parseDouble(tbContasSaldo.getText()), clientes,
-								Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
-						gb.javabank.getContas().add(c);
-					}
-
-					// Atribuir titulares das contas:
-					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
-				} else {
-					// atualizar:
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-							gb.javabank.getContas());
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
-							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-					if (c instanceof ContaCorrente) {
-						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
-
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-
-					} else {
-
-						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-					}
-
-					gb.javabank.limpatabela(model);
-					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
-
-				}
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContasnum.setText(null);
-				tbContaslimitelevdia.setText(null);
-				tblJuros.setText(null);
-				tbllimitemes.setText(null);
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-
-			}
-		});
-
-		// limpar campos:
-		btContaslimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				dateChooser_2.setEnabled(true);
-				tbllimitemes.setText(null);
-				panelCartao.setVisible(false);
-				btPedirCartao.setVisible(false);
-				// lClientes.clea
-
-			}
-		});
-
-		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
-		btContasNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				int numconta;
-				if (gb.javabank.getContas().size() == 0) {
-					numconta = 1;
-				} else {
-					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size() - 1).getIdConta() + 1;
-
-				}
-				lContas.clearSelection();
-				tbContasnum.setText("" + numconta);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(true);
-				dateChooser_2.setEnabled(true);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				tbllimitemes.setText(null);
-			}
-		});
-		// selecionar conta e preencher so campos correctos:
-		lContas.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				if (!lContas.isSelectionEmpty()) {
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-							gb.javabank.getContas());
-					tbContasnum.setText("" + c.getIdConta());
-					dateChooser_2.setDate(c.getDataCriacao());
-					dateChooser_2.setEnabled(false);
-					tbContaslimitelevop.setText("" + c.getValorMaxLevantamento());
-					tbContasSaldo.setText("" + c.getSaldo());
-					tbContasSaldo.setEditable(false);
-					tbContaslimitelevdia.setText(c.getValorMaxDia() + "");
-
-					if (c instanceof ContaPoupanca) {
-						rdbtnContaPoupanca.setSelected(true);
-						rdbtnContaCorrente.setSelected(false);
-						Double juros = ((ContaPoupanca) c).getTaxaJuros();
-						tblJuros.setText(juros + "");
-						Double limite = ((ContaPoupanca) c).getLimiteMensalDebito();
-						tbllimitemes.setText("" + limite);
-						panelCartao.setVisible(false);
-						btPedirCartao.setVisible(false);
-
-					} else {
-						rdbtnContaPoupanca.setSelected(false);
-						rdbtnContaCorrente.setSelected(true);
-
-						if (((ContaCorrente) c).getCartao() == 0) {
-							btPedirCartao.setVisible(true);
-
-						} else {
-
-							btCartao.setVisible(false);
-							panelCartao.setVisible(true);
-							dtcartao.setEnabled(false);
-							tbnomecartao.setEditable(false);
-							tbcodcartao.setEditable(false);
-
-							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
-									((ContaCorrente) c).getCartao());
-							dtcartao.setDate(card.getDataValidade());
-							tbnomecartao.setText(card.getNomeTitular());
-							tbcodcartao.setText(card.getCodvalidacao() + "");
-
-						}
-
-					}
-					gb.javabank.limpatabela(model);
-					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-					/// seleciona os clientes que estao como titulares � conta:
-					gb.javabank.mostratitulares(c, model);
-
-				}
-			}
-		});
-
-		// elimina contas:
-		btContasEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (!lContas.isSelectionEmpty()) {
-
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
-							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
-
-					lContas.clearSelection();
-					tbContasnum.setText(null);
-					dateChooser_2.setDate(null);
-					tbContaslimitelevop.setText(null);
-					tbContasSaldo.setText(null);
-					tbContasSaldo.setEditable(false);
-					tbContaslimitelevdia.setText(null);
-					rdbtnContaCorrente.setSelected(true);
-					rdbtnContaPoupanca.setSelected(false);
-					tblJuros.setText(null);
-					dateChooser_2.setEnabled(true);
-					tbllimitemes.setText(null);
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-					tbnomecartao.setText(null);
-					dtcartao.setDate(null);
-					tbcodcartao.setText(null);
-					panelCartao.setVisible(false);
-
-					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
-
-				}
-
-			}
-		});
-
-		btPedirCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelCartao.setVisible(true);
-				tbnomecartao.setEditable(true);
-				dtcartao.setEnabled(true);
-				btCartao.setVisible(true);
-
-			}
-		});
-
-		btCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int id = 0;
-				boolean existe = false;
-				do {
-
-					do {
-						id = (int) (Math.random() * 1000);
-					} while (id > 999 || id < 99);
-
-					if (gb.javabank.getCartoes().size() != 0) {
-						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
-							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
-								existe = true;
-							}
-						}
-					}
-				} while (existe);
-
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if (dtcartao.getDate() != null && tbnomecartao.getText() != " ") {
-					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
-					gb.javabank.getCartoes().add(cartao);
-					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-					tbcodcartao.setText(id + "");
-
-					dtcartao.setEnabled(false);
-					tbnomecartao.setEditable(false);
-					tbcodcartao.setEditable(false);
-					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 				}
 
 			}

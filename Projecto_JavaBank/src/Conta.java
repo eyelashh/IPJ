@@ -11,6 +11,7 @@ public class Conta implements Serializable{
 	private ArrayList <Integer> clientes;
 	private double valorMaxLevantamento;
 	private double valorMaxDia;
+	private boolean aberta;
 	
 	public Conta() {
 		super();
@@ -18,7 +19,7 @@ public class Conta implements Serializable{
 	}
  
 	public Conta(int idConta, Date dataCriacao, double saldo,
-			ArrayList<Integer> clientes, double valorMaxLevantamento, double valorMaxDia) {
+			ArrayList<Integer> clientes, double valorMaxLevantamento, double valorMaxDia,boolean aberta) {
 		super();
 		this.idConta = idConta;
 		this.dataCriacao = dataCriacao;
@@ -27,10 +28,18 @@ public class Conta implements Serializable{
 		this.valorMaxDia = valorMaxDia;
 		operacoes = new ArrayList <Operacao>();
 		this.clientes = clientes;
+		this.aberta = aberta;
 		
 	}
 
 	
+	public boolean isAberta() {
+		return aberta;
+	}
+
+	public void setAberta(boolean aberta) {
+		this.aberta = aberta;
+	}
 
 	public int getIdConta() {
 		return idConta;
