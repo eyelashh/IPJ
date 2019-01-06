@@ -656,22 +656,21 @@ public class BancoAppFun implements Serializable {
 
 						if (((ContaCorrente) c).getCartao() == 0) {
 							btPedirCartao.setVisible(true);
-							
-							
+
 						} else {
-							
+
 							btCartao.setVisible(false);
 							panelCartao.setVisible(true);
 							dtcartao.setEnabled(false);
 							tbnomecartao.setEditable(false);
 							tbcodcartao.setEditable(false);
-							
-							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),((ContaCorrente) c).getCartao());
+
+							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+									((ContaCorrente) c).getCartao());
 							dtcartao.setDate(card.getDataValidade());
 							tbnomecartao.setText(card.getNomeTitular());
-							tbcodcartao.setText(card.getCodvalidacao()+"");
-							
-							
+							tbcodcartao.setText(card.getCodvalidacao() + "");
+
 						}
 
 					}
@@ -726,7 +725,42 @@ public class BancoAppFun implements Serializable {
 				tbnomecartao.setEditable(true);
 				dtcartao.setEnabled(true);
 				btCartao.setVisible(true);
-				
+
+			}
+		});
+
+		btCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = 0;
+				boolean existe = false;
+				do {
+
+					do {
+						id = (int) (Math.random() * 1000);
+					} while (id > 999 || id < 99);
+
+					if (gb.javabank.getCartoes().size() != 0) {
+						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
+							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
+								existe = true;
+							}
+						}
+					}
+				} while (existe);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				if (dtcartao.getDate() != null && tbnomecartao.getText() != " ") {
+					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
+					gb.javabank.getCartoes().add(cartao);
+					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+					tbcodcartao.setText(id + "");
+
+					dtcartao.setEnabled(false);
+					tbnomecartao.setEditable(false);
+					tbcodcartao.setEditable(false);
+					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				}
 
 			}
 		});
@@ -750,49 +784,6 @@ public class BancoAppFun implements Serializable {
 		});
 		cbOperacoesConta.setBounds(578, 72, 249, 39);
 		jpanelOperacoes.add(cbOperacoesConta);
-
-		btCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int id = 0;
-				boolean existe = false;
-				do {
-
-					do {
-						id = (int) (Math.random() * 1000);
-					} while (id > 999 || id < 99);
-
-					if (gb.javabank.getCartoes().size() != 0) {
-						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
-							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
-								existe = true;
-							}
-						}
-					}
-				} while (existe);
-				
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if(dtcartao.getDate()!=null && tbnomecartao.getText()!=" ")
-				{
-					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
-					gb.javabank.getCartoes().add(cartao);
-					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-					tbcodcartao.setText(id+"");
-					
-					dtcartao.setEnabled(false);
-					tbnomecartao.setEditable(false);
-					tbcodcartao.setEditable(false);
-					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
-				}
-				
-				
-				
-				
-				
-				
-				
-			}
-		});
 
 		JComboBox cbOperacoespesqClt = new JComboBox();
 		cbOperacoespesqClt.setBounds(188, 49, 249, 39);
