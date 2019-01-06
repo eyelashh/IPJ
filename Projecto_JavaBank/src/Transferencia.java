@@ -23,6 +23,13 @@ public class Transferencia extends Operacao implements Serializable {
 	public void setcontatransf(Conta contatransf) {
 		this.contatransf = contatransf;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Transferencia [contatransf=" + contatransf + ", clt=" + clt + "]";
+	}
 	
 	
 	
