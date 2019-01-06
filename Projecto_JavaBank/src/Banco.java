@@ -491,7 +491,7 @@ public class Banco implements Serializable {
 				if (cartoes.get(j).getCodvalidacao() == id) {
 
 					card = cartoes.get(j);
-					
+
 				}
 			}
 
@@ -506,28 +506,14 @@ public class Banco implements Serializable {
 	public void verificaCartao(int idConta, Cartao card, Conta c) {
 		int i = 0;
 
-		boolean existe = false;
-		do {
-
-			if (cartoes.size() != 0) {
-				for (int j = 0; j < cartoes.size(); j++) {
-					if ((cartoes.get(j).getIdconta() == idConta)) {
-						existe = true;
-					}
-				}
-			}
-		} while (existe);
-
 		for (i = 0; i < contas.size(); i++) {
 			if ((contas.get(i) instanceof ContaCorrente)) {
 
-				cartoes.add(card);
+				this.cartoes.add(card);
 				((ContaCorrente) c).setCartao(card.getCodvalidacao());
-				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso!!");
 
 			}
 		}
-
 	}
 
 	// lista das operacoes
