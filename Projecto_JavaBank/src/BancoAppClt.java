@@ -267,6 +267,22 @@ public class BancoAppClt implements Serializable {
 
 				} else {
 
+					String s = (String) comboBoxContasCartao.getSelectedItem();
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					int id = 0;
+					do {
+						id = (int) (Math.random() * 1000);
+
+					} while (id < 100 || id > 1000);
+					textFieldCOD.setText("" + id);
+
+					Cartao card = new Cartao(textFieldNomeCartao.getText(), dateChooserCartao.getDate(), id,
+							conta.getIdConta());
+
+					gb.javabank.verificaCartao(Integer.parseInt(s), card, conta);
+					
+
 				}
 			}
 		});
@@ -566,7 +582,8 @@ public class BancoAppClt implements Serializable {
 					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
 					// cartao:
-					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente)c).getCartao());
+					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+					
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 

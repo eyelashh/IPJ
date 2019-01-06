@@ -481,7 +481,7 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
-	protected Cartao obterCartao(ArrayList<Cartao> cartoes,int id) {
+	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
 
 		Cartao card = new Cartao();
 
@@ -491,8 +491,10 @@ public class Banco implements Serializable {
 				if (cartoes.get(j).getCodvalidacao() == id) {
 
 					card = cartoes.get(j);
+					
 				}
 			}
+
 		}
 
 		return card;
@@ -502,26 +504,28 @@ public class Banco implements Serializable {
 	// verifica se o cartao existe, se n�o existir cria um novo cartao
 
 	public void verificaCartao(int idConta, Cartao card, Conta c) {
+		int i = 0;
 
-		if (cartoes.size() != 0) {
-	
-			for (int j = 0; j < cartoes.size(); j++) {
-				for (int i = 0; i < contas.size(); i++) {
-					if ((contas.get(i) instanceof ContaCorrente)
-							&& (cartoes.get(j).getIdconta() == idConta)) {
+		boolean existe = false;
+		do {
 
-						JOptionPane.showMessageDialog(null, "A sua conta já tem um cartão associado!!");
+			if (cartoes.size() != 0) {
+				for (int j = 0; j < cartoes.size(); j++) {
+					if ((cartoes.get(j).getIdconta() == idConta)) {
+						existe = true;
 					}
-
 				}
 			}
+		} while (existe);
 
-		} else {
+		for (i = 0; i < contas.size(); i++) {
+			if ((contas.get(i) instanceof ContaCorrente)) {
 
-			cartoes.add(card);
-			((ContaCorrente) c).setCartao(card.getCodvalidacao());
+				cartoes.add(card);
+				((ContaCorrente) c).setCartao(card.getCodvalidacao());
+				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso!!");
 
-			JOptionPane.showMessageDialog(null, "Cartão criado com sucesso!");
+			}
 		}
 
 	}
