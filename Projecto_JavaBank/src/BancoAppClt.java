@@ -124,8 +124,6 @@ public class BancoAppClt implements Serializable {
 		// box onde escolhemos qual conta o cliente quer ver
 		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
 
-		
-
 		// Painel de cabeçalho
 		JPanel JpanelCabecalho = new JPanel();
 		JpanelCabecalho.setBackground(new Color(65, 106, 105));
@@ -222,9 +220,9 @@ public class BancoAppClt implements Serializable {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(599, 143, 379, 354);
 		JPCltCM.add(scrollPane);
-		
-		//Modelo para tabela
-		String[] colunas = { "IdOperação", "Responsável", "Data", "Valor", "ContaDestino", "Cliente"};
+
+		// Modelo para tabela
+		String[] colunas = { "IdOperação", "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
 		scrollPane.setViewportView(table);
@@ -293,14 +291,13 @@ public class BancoAppClt implements Serializable {
 					textFieldCltSaldoConta.setText(Double.toString(c.getSaldo()));
 
 					// cartao:
-					
+
 					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
 
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
-					
+
 					gb.javabank.preenchetabelaOperacoes(modeloTabela, clt.getContas());
-					
 
 				}
 			}
@@ -658,10 +655,8 @@ public class BancoAppClt implements Serializable {
 							cdestino.setSaldo(cdestino.getSaldo() + valortransf);
 							corigem.setSaldo(corigem.getSaldo() - valortransf);
 
-							String descricaoCorigem = dateChooser.getDate() + " - Transferencia efectuada para conta "
-									+ cdestino.getIdConta() + " valor: " + valortransf;
-							String descricaoCdestino = dateChooser.getDate() + " - Transferencia recebida da conta "
-									+ corigem.getIdConta() + " valor: " + valortransf;
+							String descricaoCorigem = "Transferencia";
+							String descricaoCdestino = "Transferencia";
 
 							// adicionar ao array das operacoes
 							Operacao oporigem = new Transferencia(idoperacaoorigem, null, dateChooser.getDate(),
