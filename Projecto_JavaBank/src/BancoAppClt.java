@@ -103,6 +103,7 @@ public class BancoAppClt implements Serializable {
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 				
 				
+				
 				// teste
 			}
 		});
