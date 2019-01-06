@@ -278,10 +278,8 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(cbContaspesqconta);
 		cbContaspesqconta.addItem("Numero de conta");
 		cbContaspesqconta.addItem("Titular");
-		cbContaspesqconta.addItem("Montante minimo");
-		cbContaspesqconta.addItem("Montante máximo");
-		cbContaspesqconta.addItem("Conta corrente");
-		cbContaspesqconta.addItem("Conta poupanca");
+		cbContaspesqconta.addItem("Contas corrente");
+		cbContaspesqconta.addItem("Contas poupanca");
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -375,10 +373,6 @@ public class BancoAppFun implements Serializable {
 					String[] contasNumConta = gb.javabank.listaContasNumConta(numConta);
 					gb.javabank.addelementoslist(contasNumConta,dmconta );
 					
-//					String id = tbContaspesqconta.getText();
-//					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-//					gb.javabank.addelementoslist(contasCliente,dmconta );
-					
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
 					ArrayList <Conta> contasCorrente=gb.javabank.getContas();
 					String[] contasCorrent = gb.javabank.listaContasCorrente();
@@ -387,6 +381,12 @@ public class BancoAppFun implements Serializable {
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas poupanca")) {
 					String[] contasPoup = gb.javabank.listaContasPoupanca();
 					gb.javabank.addelementoslist(contasPoup,dmconta );
+				}
+				else if (cbContaspesqconta.getSelectedItem().equals("Titular")) {
+					String id = tbContaspesqconta.getText();
+					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
+					gb.javabank.addelementoslist(contasCliente,dmconta );
+					
 				}
 			}
 		});
@@ -491,6 +491,18 @@ public class BancoAppFun implements Serializable {
 		tableClts = new JTable(model);
 		tableClts.setBounds(768, 47, 262, 334);
 		jpanelContas.add(tableClts);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+				
+			}
+			
+		});
+		btnLimpar.setBounds(395, 12, 99, 38);
+		jpanelContas.add(btnLimpar);
 
 		// metedos depainel de contas:
 

@@ -563,16 +563,23 @@ public class Banco implements Serializable {
 		ArrayList<Conta> contas = this.contas;
 		String id = "";
 		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
-
-		for (int i = 0; i < contas.size(); i++) {
-			if (contas.get(i) instanceof ContaPoupanca) {
-				id = "" + contas.get(i).getIdConta();
-				idsContaPoupanca.add(id);
+		
+		for (Conta c:contas) {
+			String idSTR =Integer.toString(c.getIdConta());
+			if (c instanceof ContaPoupanca) {
+				idsContaPoupanca.add(idSTR);
 			}
-			idsContaPoupanca = null;
 		}
 
-		String[] contasP = new String[idsContaPoupanca.size()];
+//		for (int i = 0; i < contas.size(); i++) {
+//			if (contas.get(i) instanceof ContaPoupanca) {
+//				id = "" + contas.get(i).getIdConta();
+//				idsContaPoupanca.add(id);
+//			}
+//			idsContaPoupanca = null;
+//		}
+
+		String[] contasP = new String[idsContaPoupanca.size()+1];
 		contasP = idsContaPoupanca.toArray(contasP);
 
 		return contasP;
@@ -595,25 +602,7 @@ public class Banco implements Serializable {
 
 		return contasCorrente;
 	}
-//	ArrayList<Conta> contas = this.contas;
-//	String id = "";
-//	ArrayList<String> idsContasCorrente = new ArrayList<String>();
-//
-//	for (int i = 0; i < contas.size(); i++) {
-//		if (contas.get(i) instanceof ContaCorrente) {
-//			id = "" + contas.get(i).getIdConta();
-//			idsContasCorrente.add(id);
-//		}
-//		idsContasCorrente = null;
-//	}
-//
-//	String[] contasCorrente = new String[idsContasCorrente.size()];
-//	contasCorrente = idsContasCorrente.toArray(contasCorrente);
-//
-//	return contasCorrente;
-//}
-
-
+//retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {
 
 		ArrayList<Utilizador> utilizadores = this.utilizadores;
@@ -639,6 +628,7 @@ public class Banco implements Serializable {
 		
 
 	}
+	//retorna a conta atraves do seu numero
 	protected String[] listaContasNumConta(String numConta) {
 
 		ArrayList<Conta> contas = this.contas;
