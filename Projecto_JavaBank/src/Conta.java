@@ -11,7 +11,7 @@ public class Conta implements Serializable{
 	private ArrayList <Integer> clientes;
 	private double valorMaxLevantamento;
 	private double valorMaxDia;
-	private boolean aberta;
+	private boolean aberta = true;
 	
 	public Conta() {
 		super();

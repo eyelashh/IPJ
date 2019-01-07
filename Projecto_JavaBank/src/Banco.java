@@ -231,6 +231,43 @@ public class Banco implements Serializable {
 		lista = listprov.toArray(lista);
 		return lista;
 	}
+	
+	// retorna o array das contas poupan�a
+		protected String[] listaContasPoupanca() {
+			
+			ArrayList<String> idsContaPoupanca = new ArrayList<String>();
+
+			for (int i = 0; i < this.contas.size(); i++) {
+				
+				if ((contas.get(i) instanceof ContaPoupanca)) {
+					String idSTR = Integer.toString(((ContaPoupanca)contas.get(i)).getIdConta());
+					idsContaPoupanca.add(idSTR);
+				}
+			}
+			String[] contasP = new String[idsContaPoupanca.size()];
+			contasP = idsContaPoupanca.toArray(contasP);
+
+			return contasP;
+		}
+		
+		// retorna o array das contas corrente
+		protected String[] listaContasCorrente() {
+
+		
+			ArrayList<String> idsContasCorrente = new ArrayList<String>();
+
+			for (int i = 0; i < this.contas.size(); i++) {
+				
+				if ((contas.get(i) instanceof ContaCorrente)) {
+					String idSTR = Integer.toString(((ContaCorrente)contas.get(i)).getIdConta());
+					idsContasCorrente.add(idSTR);
+				}
+			}
+			String[] contasCorrente = new String[idsContasCorrente.size()];
+			contasCorrente = idsContasCorrente.toArray(contasCorrente);
+
+			return contasCorrente;
+		}
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
@@ -734,41 +771,9 @@ public class Banco implements Serializable {
 
 	}
 
-	// retorna o array das contas poupan�a
-	protected String[] listaContasPoupanca() {
-		ArrayList<Conta> contas = this.contas;
-		String id = "";
-		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
+	
 
-		for (Conta c : contas) {
-			String idSTR = Integer.toString(c.getIdConta());
-			if (c instanceof ContaPoupanca) {
-				idsContaPoupanca.add(idSTR);
-			}
-		}
-		String[] contasP = new String[idsContaPoupanca.size() + 1];
-		contasP = idsContaPoupanca.toArray(contasP);
-
-		return contasP;
-	}
-
-	// retorna o array das contas corrente
-	protected String[] listaContasCorrente() {
-
-		ArrayList<Conta> contas = this.contas;
-		ArrayList<String> idsContasCorrente = new ArrayList<String>();
-
-		for (Conta c : contas) {
-			String idSTR = Integer.toString(c.getIdConta());
-			if (c instanceof ContaCorrente) {
-				idsContasCorrente.add(idSTR);
-			}
-		}
-		String[] contasCorrente = new String[idsContasCorrente.size()];
-		contasCorrente = idsContasCorrente.toArray(contasCorrente);
-
-		return contasCorrente;
-	}
+	
 
 //retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {
