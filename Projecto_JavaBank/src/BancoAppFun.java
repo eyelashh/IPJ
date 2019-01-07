@@ -245,7 +245,29 @@ public class BancoAppFun implements Serializable {
 
 		// Modelo da tabela clientes:
 		String[] colunas2 = { "Check", "ID", "Nome" };
-		DefaultTableModel model = new DefaultTableModel(colunas2, 0);
+		DefaultTableModel model = new DefaultTableModel(colunas2, 0) {
+			private static final long serialVersionUID = 1L;
+
+			@SuppressWarnings("rawtypes")
+			public Class getColumnClass(int c) {
+				switch (c) {
+				case 0:
+					return Boolean.class;
+				case 1:
+					return Integer.class;
+				default:
+					return String.class;
+				}
+			}
+
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				if (mColIndex == 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(768, 47, 262, 334);
