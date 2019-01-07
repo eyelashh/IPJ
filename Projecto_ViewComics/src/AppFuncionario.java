@@ -80,7 +80,6 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtNovoUsername;
 	private JPasswordField passwordAntiga;
 	private JPasswordField passwordNovaConfirm;
-	private JTextField txtNifCARRINHO;
 	private JTextField textFieldNifPagamento;
 	private JTextField textFieldTotalPag;
 	private JTextField textFieldRecePaga;
@@ -90,10 +89,24 @@ public class AppFuncionario implements Serializable {
 
 	private static GestaoLivraria gl;
 	private static Funcionario func;
-	private JTextField textField_12;
 	private JTextField txtPrecoCarrinho;
 	private JTextField txtQuantidadeLivrosCarrinho;
-	private JTable table;
+	private JTable tabelaCarrinhos;
+	String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
+	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0);
+	DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
+	JPanel jpPagamento = new JPanel();
+	JPanel jpFuncLivros = new JPanel();
+	JPanel jpFuncConta = new JPanel();
+	DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
+	String[] OpcoesPesquisaLIVRO = new String[] { "Título", "Autor", "Ano" };
+	String[] OpcoesPesquisaCARRINHO = new String[] { "NIF", "Finalizado", "Por finalizar" };
+	JComboBox cbPesquisaCARRINHO = new JComboBox(OpcoesPesquisaCARRINHO);
+	private JTextField txtNifPesquisaCARRINHO;
+	private JTextField txtEstadoCarrinho;
+	private JTextField txtNovaQuantidadeCARRINHO;
+	private JTextField txtLivroSeleccionadoCARRINHO;
+	private JTextField txtNifSeleccionado;
 
 	/**
 	 * Launch the application.
@@ -227,195 +240,91 @@ public class AppFuncionario implements Serializable {
 
 		JPanel panelPrincipal = new JPanel();
 
-		JPanel jpPagamento = new JPanel();
-		jpPagamento.setBounds(0, 0, 219, 336);
-		panelPrincipal.add(jpPagamento);
-		jpPagamento.setLayout(null);
-		jpPagamento.setVisible(false);
-
-		JPanel jpDinheiro = new JPanel();
-		jpDinheiro.setBounds(10, 190, 199, 171);
-		jpPagamento.add(jpDinheiro);
-		jpDinheiro.setLayout(null);
-		jpDinheiro.setVisible(false);
-		
-		
-		String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
-		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
-		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
-		comboBoxTipoPagamento.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				// check whether there is any selection
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-					jpDinheiro.setVisible(true);
-
-				}
-			}
-		});
-		jpPagamento.add(comboBoxTipoPagamento);
-
-		textFieldNifPagamento = new JTextField();
-		textFieldNifPagamento.setBounds(20, 94, 172, 22);
-		jpPagamento.add(textFieldNifPagamento);
-		textFieldNifPagamento.setColumns(10);
-
-		JLabel lblNif_1 = new JLabel("NIF");
-		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNif_1.setBounds(22, 69, 46, 14);
-		jpPagamento.add(lblNif_1);
-
-		JLabel lblNewLabel_1 = new JLabel("A pagar :");
-		lblNewLabel_1.setBounds(10, 11, 76, 23);
-		jpDinheiro.add(lblNewLabel_1);
-
-		JLabel lblRecebido = new JLabel("Recebido : ");
-		lblRecebido.setBounds(10, 45, 76, 23);
-		jpDinheiro.add(lblRecebido);
-
-		JLabel lblTroco = new JLabel("Troco :");
-		lblTroco.setBounds(10, 79, 76, 23);
-		jpDinheiro.add(lblTroco);
-
-		textFieldTotalPag = new JTextField();
-		textFieldTotalPag.setBounds(72, 12, 86, 20);
-		jpDinheiro.add(textFieldTotalPag);
-		textFieldTotalPag.setColumns(10);
-
-		textFieldRecePaga = new JTextField();
-		textFieldRecePaga.setColumns(10);
-		textFieldRecePaga.setBounds(72, 45, 86, 20);
-		jpDinheiro.add(textFieldRecePaga);
-
-		textFieldTrocoPag = new JTextField();
-		textFieldTrocoPag.setColumns(10);
-		textFieldTrocoPag.setBounds(72, 80, 86, 20);
-		jpDinheiro.add(textFieldTrocoPag);
-
-		// botao concluir pagamento
-		JButton btnConcluirPagamento = new JButton("Concluir");
-		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
-		btnConcluirPagamento.setBounds(33, 114, 125, 30);
-		btnConcluirPagamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				String nif = textFieldNifPagamento.getText();
-
-//				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-
-//					if (gl.viewComics.verificaNif(nif)) {
-//						//Se o nif estiver correcto, selecciona o Carrinho
-//						//Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
-//
-//						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
-//						// para colocar na textField
-//						double p = gl.viewComics.precoTotalCarrinho(c);
-//						String p1 = Double.toString(p);
-//						textFieldTotalPag.setText(p1);
-//
-//						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
-//						// pra double
-//						String recebido = textFieldRecePaga.getText();
-//						double recebido1 = Double.parseDouble(recebido);
-//
-//						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
-//						// para string para colocar na testField
-//						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
-////						String trocoCarrinho1 = Double.toString(trocoCarrinho);
-////						textFieldTrocoPag.setText(trocoCarrinho1);
-//
-//						JOptionPane.showMessageDialog(null,
-//								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
-//					}
-//					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
-//
-//					} else {
-//						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
-//					}
-//
-//				}
-
-			}
-		});
-		jpDinheiro.add(btnConcluirPagamento);
-
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
 		jpFuncCarrinhos.setLayout(null);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(303, 91, 500, 178);
+		scrollPane_1.setBounds(283, 140, 500, 178);
 		jpFuncCarrinhos.add(scrollPane_1);
-
-		String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-		table = new JTable(modeloTabela);
-		scrollPane_1.setViewportView(table);
-
-		txtNifCARRINHO = new JTextField();
-		txtNifCARRINHO.setBounds(25, 49, 200, 30);
-		txtNifCARRINHO.setColumns(10);
-		jpFuncCarrinhos.add(txtNifCARRINHO);
-
-		JLabel lblNif = new JLabel("NIF");
-		lblNif.setBounds(27, 24, 46, 14);
-		lblNif.setFont(new Font("Tahoma", Font.BOLD, 15));
-		jpFuncCarrinhos.add(lblNif);
+		tabelaCarrinhos = new JTable(modeloTabelaCarrinhos);
+		tabelaCarrinhos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				 int linha = tabelaCarrinhos.getSelectedRow();
+				 int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
+				 Livro l = gl.viewComics.livroId(idLivro);
+				 txtLivroSeleccionadoCARRINHO.setText(l.toString());
+		           
+			}
+		});
+		scrollPane_1.setViewportView(tabelaCarrinhos);
 
 		JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
-		lblPreoDoCarrinho.setBounds(303, 290, 163, 14);
+		lblPreoDoCarrinho.setBounds(283, 339, 163, 14);
 		lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblPreoDoCarrinho);
 
 		JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
-		lblQuantidadeDeLivros.setBounds(303, 317, 163, 14);
+		lblQuantidadeDeLivros.setBounds(283, 366, 163, 14);
 		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(scrollPane);
-		DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
 		JList<String> listNifsClientes = new JList<String>(modeloListaNif);
 		scrollPane.setViewportView(listNifsClientes);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
 
-				modeloTabela.setRowCount(0);
+				modeloTabelaCarrinhos.setRowCount(0);
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
 				if (!listNifsClientes.isSelectionEmpty()) {
 					String nifSeleccionado = listNifsClientes.getSelectedValue();
+					txtNifSeleccionado.setText(nifSeleccionado);
 					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSeleccionado);
+					String estado = "";
+					if (c.isFinalizado()) {
+						txtEstadoCarrinho.setText("Finalizado");
+						txtEstadoCarrinho.setBackground(Color.GREEN);
+					} else {
+						txtEstadoCarrinho.setText("Por finalizar");
+						txtEstadoCarrinho.setBackground(Color.RED);
+					}
+
 					String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
 					txtPrecoCarrinho.setText(precoCarrinho);
 					String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(c);
 					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
 
-					gl.viewComics.carrinhoTabela(c, modeloTabela);
+					gl.viewComics.carrinhoTabela(c, modeloTabelaCarrinhos);
 				}
 			}
 		});
-
-		textField_12 = new JTextField();
-		textField_12.setBounds(276, 460, 446, 52);
-		jpFuncCarrinhos.add(textField_12);
-		textField_12.setColumns(10);
 
 		JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
 		btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
 		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String nif = txtNifCARRINHO.getText();
+				String nif = txtNifPesquisaCARRINHO.getText();
 
-				if (gl.viewComics.verificaNif(nif)) {
+				if (cbPesquisaCARRINHO.getSelectedItem().equals("NIF")) {
 					modeloListaNif.removeAllElements();
 					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), modeloListaNif);
-				} else {
-					JOptionPane.showMessageDialog(null, "Nif não existe!!!");
+				}
+
+				else if (cbPesquisaCARRINHO.getSelectedItem().equals("Finalizado")) {
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.carrinhosFinalizados(), modeloListaNif);
+
+				} else if (cbPesquisaCARRINHO.getSelectedItem().equals("Por finalizar")) {
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.carrinhosNAOFinalizados(), modeloListaNif);
 
 				}
 
@@ -424,8 +333,8 @@ public class AppFuncionario implements Serializable {
 		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
 		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
 
-		JButton btnCancelar = new JButton("Eliminar");
-		btnCancelar.setBounds(438, 418, 100, 30);
+		JButton btnCancelar = new JButton("Eliminar carrinho");
+		btnCancelar.setBounds(562, 384, 172, 30);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -441,69 +350,10 @@ public class AppFuncionario implements Serializable {
 		});
 		btnCancelar.setBackground(SystemColor.controlHighlight);
 		jpFuncCarrinhos.add(btnCancelar);
-		JPanel jpFuncConta = new JPanel();
-		jpFuncConta.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncConta);
-		jpFuncConta.setLayout(null);
-		jpFuncConta.setVisible(false);
-
-		JLabel label = new JLabel("Alterar UserName:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		label.setAlignmentX(0.5f);
-		label.setBounds(105, 48, 203, 31);
-		jpFuncConta.add(label);
-
-		JLabel label_1 = new JLabel("UserName:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(67, 92, 113, 24);
-		jpFuncConta.add(label_1);
-
-		txtUsername = new JTextField(func.getUsername());
-		txtUsername.setEditable(false);
-		txtUsername.setBounds(67, 129, 279, 31);
-		jpFuncConta.add(txtUsername);
-
-		JLabel label_2 = new JLabel("Password:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(67, 173, 113, 24);
-		jpFuncConta.add(label_2);
-
-		JLabel label_3 = new JLabel("Novo UserName:");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_3.setBounds(67, 254, 171, 24);
-		jpFuncConta.add(label_3);
-
-		txtNovoUsername = new JTextField();
-		txtNovoUsername.setBounds(67, 284, 279, 31);
-		jpFuncConta.add(txtNovoUsername);
-
-		passwordAlterarUser = new JPasswordField();
-		passwordAlterarUser.setBounds(67, 202, 140, 31);
-		jpFuncConta.add(passwordAlterarUser);
-		panelPrincipal.setBackground(new Color(255, 250, 205));
-		panelPrincipal.setBounds(240, 176, 1022, 545);
-		Paineltotal.add(panelPrincipal);
-		panelPrincipal.setLayout(null);
-		DefaultListModel<String> dmFunListaLivros = new DefaultListModel<String>();
-
-		JPanel jpFuncLivros = new JPanel();
-		jpFuncLivros.setBounds(0, 0, 825, 545);
-		panelPrincipal.add(jpFuncLivros);
-		jpFuncLivros.setLayout(null);
-		jpFuncLivros.setVisible(false);
-		String[] itens2 = new String[] { "Título", "Autor", "Ano" };
-		JComboBox comboBoxAtributoLivro = new JComboBox(itens2);
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpFuncLivros.add(comboBoxAtributoLivro);
-
-		txtAtributoPesquisaLivro = new JTextField();
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpFuncLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
 
 		// botao de pagamento, abre a janela pagamento
-		JButton btnPagamento = new JButton("Pagamento");
-		btnPagamento.setBounds(303, 418, 100, 30);
+		JButton btnPagamento = new JButton("Realizar pagamento");
+		btnPagamento.setBounds(563, 332, 172, 30);
 		btnPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpFuncCarrinhos.setVisible(false);
@@ -535,54 +385,117 @@ public class AppFuncionario implements Serializable {
 		jpFuncCarrinhos.add(bttLimparFun);
 
 		txtPrecoCarrinho = new JTextField();
-		txtPrecoCarrinho.setBounds(438, 290, 51, 20);
+		txtPrecoCarrinho.setBounds(418, 339, 51, 20);
 		txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtPrecoCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtPrecoCarrinho);
 		txtPrecoCarrinho.setColumns(10);
 
 		txtQuantidadeLivrosCarrinho = new JTextField();
-		txtQuantidadeLivrosCarrinho.setBounds(452, 315, 61, 20);
+		txtQuantidadeLivrosCarrinho.setBounds(432, 364, 61, 20);
 		txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtQuantidadeLivrosCarrinho.setEditable(false);
 		jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
 		txtQuantidadeLivrosCarrinho.setColumns(10);
 
 		JLabel label_8 = new JLabel("\u20AC");
-		label_8.setBounds(493, 292, 31, 14);
+		label_8.setBounds(473, 341, 31, 14);
 		label_8.setHorizontalAlignment(SwingConstants.LEFT);
 		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
 		jpFuncCarrinhos.add(label_8);
 
 		JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
 		lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblConteudoDetalhadoDo.setBounds(303, 59, 404, 20);
+		lblConteudoDetalhadoDo.setBounds(283, 108, 275, 20);
 		jpFuncCarrinhos.add(lblConteudoDetalhadoDo);
-		// {
-//			@Override
-		// o paint component vai pintar literalmente o componente
-//			protected void paintComponent(Graphics g) {
-//
-//				super.paintComponent(g);
-//				Image img;
-//				try {
-//
-//					// importar imagem para o background do panel, podemos faz-lo da internet ou
-//					// do
-//					// ficheiro
-//
-//					// img = ImageIO.read(new URL(
-//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
-//					img = ImageIO
-//							.read(new File("/Users/Joana/Dropbox/IPJ_ProjectoFinal/Design/viewcomics/camerica.jpg "));
-//					g.drawImage(img, 0, 0, null);
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//			}
-//		};
+
+		JButton btnAlterarCARRINHO = new JButton("Alterar quantidades");
+		btnAlterarCARRINHO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				txtNovaQuantidadeCARRINHO.setEditable(true);
+				
+				
+			}
+		});
+		btnAlterarCARRINHO.setBounds(635, 27, 148, 30);
+		jpFuncCarrinhos.add(btnAlterarCARRINHO);
+
+		JButton btnConcluirAlteracaoCARRINHO = new JButton("Concluir");
+		btnConcluirAlteracaoCARRINHO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(!listNifsClientes.isSelectionEmpty()) {
+					String novaQuantidadeSTR=txtNovaQuantidadeCARRINHO.getText();
+					String nif =txtNifSeleccionado.getText();
+					int linha = tabelaCarrinhos.getSelectedRow();
+					int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
+					int novaQuantidadeINT=Integer.parseInt(novaQuantidadeSTR);
+					tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
+					gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Seleccione o nif do carrinho");
+				}
+				txtNovaQuantidadeCARRINHO.setText("");
+				txtNovaQuantidadeCARRINHO.setEditable(true);
+				
+			}
+		});
+		btnConcluirAlteracaoCARRINHO.setBounds(694, 106, 89, 23);
+		jpFuncCarrinhos.add(btnConcluirAlteracaoCARRINHO);
+
+		cbPesquisaCARRINHO.setBounds(25, 29, 211, 27);
+		jpFuncCarrinhos.add(cbPesquisaCARRINHO);
+
+		JLabel lblFiltrarPor = new JLabel("Filtrar por :");
+		lblFiltrarPor.setBounds(25, 11, 104, 14);
+		jpFuncCarrinhos.add(lblFiltrarPor);
+
+		txtNifPesquisaCARRINHO = new JTextField();
+		txtNifPesquisaCARRINHO.setBounds(25, 60, 155, 20);
+		jpFuncCarrinhos.add(txtNifPesquisaCARRINHO);
+		txtNifPesquisaCARRINHO.setColumns(10);
+
+		txtEstadoCarrinho = new JTextField();
+		txtEstadoCarrinho.setEditable(false);
+		txtEstadoCarrinho.setBounds(283, 60, 125, 30);
+		jpFuncCarrinhos.add(txtEstadoCarrinho);
+		txtEstadoCarrinho.setColumns(10);
+		
+		txtNovaQuantidadeCARRINHO = new JTextField();
+		txtNovaQuantidadeCARRINHO.setEditable(false);
+		txtNovaQuantidadeCARRINHO.setBounds(694, 68, 86, 27);
+		jpFuncCarrinhos.add(txtNovaQuantidadeCARRINHO);
+		txtNovaQuantidadeCARRINHO.setColumns(10);
+		
+		txtLivroSeleccionadoCARRINHO = new JTextField();
+		txtLivroSeleccionadoCARRINHO.setEditable(false);
+		txtLivroSeleccionadoCARRINHO.setBounds(434, 67, 253, 30);
+		jpFuncCarrinhos.add(txtLivroSeleccionadoCARRINHO);
+		txtLivroSeleccionadoCARRINHO.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Livro seleccionado :");
+		lblNewLabel_2.setBounds(434, 46, 148, 20);
+		jpFuncCarrinhos.add(lblNewLabel_2);
+		
+		txtNifSeleccionado = new JTextField();
+		txtNifSeleccionado.setEditable(false);
+		txtNifSeleccionado.setBounds(283, 22, 125, 30);
+		jpFuncCarrinhos.add(txtNifSeleccionado);
+		txtNifSeleccionado.setColumns(10);
+
+		jpFuncLivros.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncLivros);
+		jpFuncLivros.setLayout(null);
+		jpFuncLivros.setVisible(false);
+		JComboBox comboBoxAtributoLivro = new JComboBox(OpcoesPesquisaLIVRO);
+		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
+		jpFuncLivros.add(comboBoxAtributoLivro);
+
+		txtAtributoPesquisaLivro = new JTextField();
+		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
+		jpFuncLivros.add(txtAtributoPesquisaLivro);
+		txtAtributoPesquisaLivro.setColumns(10);
 
 		// Guardar na lista o array/copia da lista de livros
 		JList<String> listaLivros = new JList<String>(dmFunListaLivros);
@@ -728,10 +641,163 @@ public class AppFuncionario implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpFuncLivros.add(btnLimparLivro);
+		// cbPesquisaCARRINHO.add("Estado");
+
+		jpPagamento.setBounds(0, 0, 219, 336);
+		panelPrincipal.add(jpPagamento);
+		jpPagamento.setLayout(null);
+		jpPagamento.setVisible(false);
+
+		JPanel jpDinheiro = new JPanel();
+		jpDinheiro.setBounds(10, 190, 199, 171);
+		jpPagamento.add(jpDinheiro);
+		jpDinheiro.setLayout(null);
+		jpDinheiro.setVisible(false);
+
+		String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
+		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+		comboBoxTipoPagamento.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				// check whether there is any selection
+				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+					jpDinheiro.setVisible(true);
+
+				}
+			}
+		});
+		jpPagamento.add(comboBoxTipoPagamento);
+
+		textFieldNifPagamento = new JTextField();
+		textFieldNifPagamento.setBounds(20, 94, 172, 22);
+		jpPagamento.add(textFieldNifPagamento);
+		textFieldNifPagamento.setColumns(10);
+
+		JLabel lblNif_1 = new JLabel("NIF");
+		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNif_1.setBounds(22, 69, 46, 14);
+		jpPagamento.add(lblNif_1);
+
+		JLabel lblNewLabel_1 = new JLabel("A pagar :");
+		lblNewLabel_1.setBounds(10, 11, 76, 23);
+		jpDinheiro.add(lblNewLabel_1);
+
+		JLabel lblRecebido = new JLabel("Recebido : ");
+		lblRecebido.setBounds(10, 45, 76, 23);
+		jpDinheiro.add(lblRecebido);
+
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(10, 79, 76, 23);
+		jpDinheiro.add(lblTroco);
+
+		textFieldTotalPag = new JTextField();
+		textFieldTotalPag.setBounds(72, 12, 86, 20);
+		jpDinheiro.add(textFieldTotalPag);
+		textFieldTotalPag.setColumns(10);
+
+		textFieldRecePaga = new JTextField();
+		textFieldRecePaga.setColumns(10);
+		textFieldRecePaga.setBounds(72, 45, 86, 20);
+		jpDinheiro.add(textFieldRecePaga);
+
+		textFieldTrocoPag = new JTextField();
+		textFieldTrocoPag.setColumns(10);
+		textFieldTrocoPag.setBounds(72, 80, 86, 20);
+		jpDinheiro.add(textFieldTrocoPag);
+
+		// botao concluir pagamento
+		JButton btnConcluirPagamento = new JButton("Concluir");
+		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
+		btnConcluirPagamento.setBounds(33, 114, 125, 30);
+		btnConcluirPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String nif = textFieldNifPagamento.getText();
+
+//				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+
+//					if (gl.viewComics.verificaNif(nif)) {
+//						//Se o nif estiver correcto, selecciona o Carrinho
+//						//Carrinho c = gl.viewComics.selctCarrinho(nif, gl.viewComics.getCarrinhos());
+//
+//						// Aqui vai buscar o metodo do preco total do carrinho e transformo para string
+//						// para colocar na textField
+//						double p = gl.viewComics.precoTotalCarrinho(c);
+//						String p1 = Double.toString(p);
+//						textFieldTotalPag.setText(p1);
+//
+//						// Aqui recebo da texteField o dinheiro que foi dado ao funcionario e transformo
+//						// pra double
+//						String recebido = textFieldRecePaga.getText();
+//						double recebido1 = Double.parseDouble(recebido);
+//
+//						// Aqui vou buscar o metodo que faz o troco do total com o recebido e transformo
+//						// para string para colocar na testField
+//						double trocoCarrinho = gl.viewComics.trocoCarrinho(recebido1, p);
+////						String trocoCarrinho1 = Double.toString(trocoCarrinho);
+////						textFieldTrocoPag.setText(trocoCarrinho1);
+//
+//						JOptionPane.showMessageDialog(null,
+//								"O troco do cliente " + nif + " é " + trocoCarrinho1 + " obrigada!! Boas compras!!");
+//					}
+//					if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+//
+//					} else {
+//						JOptionPane.showMessageDialog(null, "Nif Incorreto!!!");
+//					}
+//
+//				}
+
+			}
+		});
+		jpDinheiro.add(btnConcluirPagamento);
+
+		jpFuncConta.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncConta);
+		jpFuncConta.setLayout(null);
+		jpFuncConta.setVisible(false);
+
+		JLabel label = new JLabel("Alterar UserName:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		label.setAlignmentX(0.5f);
+		label.setBounds(105, 48, 203, 31);
+		jpFuncConta.add(label);
+
+		JLabel label_1 = new JLabel("UserName:");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(67, 92, 113, 24);
+		jpFuncConta.add(label_1);
+
+		txtUsername = new JTextField(func.getUsername());
+		txtUsername.setEditable(false);
+		txtUsername.setBounds(67, 129, 279, 31);
+		jpFuncConta.add(txtUsername);
+
+		JLabel label_2 = new JLabel("Password:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(67, 173, 113, 24);
+		jpFuncConta.add(label_2);
+
+		JLabel label_3 = new JLabel("Novo UserName:");
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_3.setBounds(67, 254, 171, 24);
+		jpFuncConta.add(label_3);
+
+		txtNovoUsername = new JTextField();
+		txtNovoUsername.setBounds(67, 284, 279, 31);
+		jpFuncConta.add(txtNovoUsername);
+
+		passwordAlterarUser = new JPasswordField();
+		passwordAlterarUser.setBounds(67, 202, 140, 31);
+		jpFuncConta.add(passwordAlterarUser);
+		panelPrincipal.setBackground(new Color(255, 250, 205));
+		panelPrincipal.setBounds(240, 176, 1022, 545);
+		Paineltotal.add(panelPrincipal);
+		panelPrincipal.setLayout(null);
 
 		// Combobox com os itens para pagamento
 		// lista dos itens na comboBox
-		
 
 		// Lista do nifs dos carrinhos
 

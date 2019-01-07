@@ -74,8 +74,7 @@ public class Carrinho implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carrinho [nif=" + nif + ", montante=" + montante + ", finalizado=" + finalizado + ", conteudo="
-				+ conteudo + "]";
+		return nif;
 	}
 
 	public void updateCarrinho(int idLivro, int quantidade) {

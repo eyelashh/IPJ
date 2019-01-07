@@ -58,6 +58,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class BancoAppFun implements Serializable {
 
@@ -99,6 +100,7 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbcodcartao;
 	private JTable tableClts;
 	private DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -237,37 +239,42 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
 
-		// Modelo da tabela:
-		DefaultTableModel model = new DefaultTableModel(null, new String[] { "Check", "ID", "Nome" }) {
-			private static final long serialVersionUID = 1L;
+		// Painel da conta da parte funcionario
+		JPanel jpanelContas = new JPanel();
+		jpanelContas.setVisible(false);
 
-			@SuppressWarnings("rawtypes")
-			public Class getColumnClass(int c) {
-				switch (c) {
-				case 0:
-					return Boolean.class;
-				case 1:
-					return Integer.class;
-				default:
-					return String.class;
-				}
-			}
+		// Modelo da tabela clientes:
+		String[] colunas2 = { "Check", "ID", "Nome" };
+		DefaultTableModel model = new DefaultTableModel(colunas2, 0);
 
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				if (mColIndex == 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		};
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(768, 47, 262, 334);
+		
+
+		jpanelContas.add(scrollPane_1);
+
+		tableClts = new JTable(model);
+		
+		
+		scrollPane_1.setViewportView(tableClts);
 
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-		// Painel da conta da parte funcionario
-		JPanel jpanelContas = new JPanel();
-		jpanelContas.setVisible(false);
+		JPanel panelMovimentos = new JPanel();
+		panelMovimentos.setBounds(0, 0, 553, 400);
+		JpanelPrincipal.add(panelMovimentos);
+		panelMovimentos.setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 51, 418, 293);
+		panelMovimentos.add(scrollPane);
+
+		// Modelo para tabela movimentos
+		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+		table = new JTable(modeloTabela);
+		scrollPane.setViewportView(table);
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -275,12 +282,12 @@ public class BancoAppFun implements Serializable {
 		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
 		rdbtnContaCorrente.setSelected(true);
 
-		rdbtnContaCorrente.setBounds(447, 65, 132, 25);
+		rdbtnContaCorrente.setBounds(424, 81, 132, 25);
 		jpanelContas.add(rdbtnContaCorrente);
 
 		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
 
-		rdbtnContaPoupanca.setBounds(583, 65, 144, 25);
+		rdbtnContaPoupanca.setBounds(560, 81, 144, 25);
 		jpanelContas.add(rdbtnContaPoupanca);
 
 		// botao eliminar
@@ -290,7 +297,7 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.setLayout(null);
 
 		lContas = new JList<String>(dmconta);
-		lContas.setBounds(24, 99, 240, 471);
+		lContas.setBounds(24, 109, 240, 386);
 		jpanelContas.add(lContas);
 
 		JComboBox<String> cbContaspesqconta = new JComboBox<String>();
@@ -307,7 +314,7 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
-		cbContaspesqconta.setBounds(26, 12, 238, 38);
+		cbContaspesqconta.setBounds(26, 17, 238, 38);
 		jpanelContas.add(cbContaspesqconta);
 		cbContaspesqconta.addItem("Numero de conta");
 		cbContaspesqconta.addItem("Contas corrente");
@@ -340,19 +347,19 @@ public class BancoAppFun implements Serializable {
 		JButton btContasConfirmar = new JButton("Confirmar");
 
 		btContasConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasConfirmar.setBounds(448, 472, 120, 38);
+		btContasConfirmar.setBounds(356, 471, 120, 38);
 		jpanelContas.add(btContasConfirmar);
 
 		JButton btContasNovo = new JButton("Novo");
 
 		btContasNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasNovo.setBounds(352, 523, 120, 38);
+		btContasNovo.setBounds(488, 471, 120, 38);
 		jpanelContas.add(btContasNovo);
 
 		JButton btContasEliminar = new JButton("Eliminar");
 
 		btContasEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btContasEliminar.setBounds(484, 523, 120, 38);
+		btContasEliminar.setBounds(620, 471, 120, 38);
 		jpanelContas.add(btContasEliminar);
 
 		JLabel lblClientes_1 = new JLabel("Clientes");
@@ -373,12 +380,6 @@ public class BancoAppFun implements Serializable {
 		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblSaldo.setBounds(366, 338, 57, 24);
 		jpanelContas.add(lblSaldo);
-
-		JButton btContaslimpar = new JButton("Limpar");
-
-		btContaslimpar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btContaslimpar.setBounds(626, 523, 120, 38);
-		jpanelContas.add(btContaslimpar);
 
 		JLabel lblLimiteDeLevantamento_1 = new JLabel("Por dia:");
 		lblLimiteDeLevantamento_1.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -414,13 +415,13 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
-		btnPesquisar.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btnPesquisar.setBounds(280, 11, 143, 38);
+		btnPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnPesquisar.setBounds(280, 35, 99, 38);
 		jpanelContas.add(btnPesquisar);
 
 		JLabel lblTipo = new JLabel("Tipo:");
 		lblTipo.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblTipo.setBounds(379, 63, 44, 24);
+		lblTipo.setBounds(356, 79, 44, 24);
 		jpanelContas.add(lblTipo);
 
 		JLabel lblDia = new JLabel("Por Opera\u00E7ao:");
@@ -457,7 +458,7 @@ public class BancoAppFun implements Serializable {
 		btPedirCartao.setVisible(false);
 
 		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
-		btPedirCartao.setBounds(588, 472, 120, 38);
+		btPedirCartao.setBounds(548, 521, 120, 38);
 		jpanelContas.add(btPedirCartao);
 
 		JPanel panelCartao = new JPanel();
@@ -501,21 +502,27 @@ public class BancoAppFun implements Serializable {
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
 
-		tableClts = new JTable(model);
-		tableClts.setBounds(768, 47, 262, 334);
-		jpanelContas.add(tableClts);
+		JButton btnMovimentos = new JButton("Movimentos");
+		btnMovimentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelContas.setVisible(false);
+				panelMovimentos.setVisible(true);
 
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
 
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
 			}
-
 		});
-		btnLimpar.setBounds(440, 12, 99, 38);
-		jpanelContas.add(btnLimpar);
+		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnMovimentos.setBounds(416, 521, 120, 38);
+		btnMovimentos.setVisible(false);
+		jpanelContas.add(btnMovimentos);
 
 		// metedos depainel de contas:
 
@@ -565,7 +572,8 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),true);
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
+								true);
 						gb.javabank.getContas().add(c);
 					}
 
@@ -618,31 +626,6 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
-		// limpar campos:
-		btContaslimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-				
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				dateChooser_2.setEnabled(true);
-				tbllimitemes.setText(null);
-				panelCartao.setVisible(false);
-				btPedirCartao.setVisible(false);
-				// lClientes.clea
-
-			}
-		});
-
 		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
 		btContasNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -676,8 +659,11 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-				
+
 				if (!lContas.isSelectionEmpty()) {
+
+					btnMovimentos.setVisible(true);
+
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
@@ -855,6 +841,39 @@ public class BancoAppFun implements Serializable {
 		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnNewButton.setBounds(258, 131, 116, 38);
 		jpanelOperacoes.add(btnNewButton);
+
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				panelCartao.setVisible(false);
+				btPedirCartao.setVisible(false);
+				btnMovimentos.setVisible(false);
+				// lClientes.clea
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+
+			}
+
+		});
+
+		btnLimpar.setBounds(85, 507, 99, 38);
+		jpanelContas.add(btnLimpar);
 
 		JLabel lblNewLabel_3 = new JLabel("Saldo :");
 		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -1178,6 +1197,7 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelClientes);
 		jpanelClientes.setVisible(true);
+		panelMovimentos.setVisible(false);
 		jpanelClientes.setLayout(null);
 		jpanelClientes.setLayout(null);
 		JComboBox cbCltPesq = new JComboBox(itens);
@@ -1662,6 +1682,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
+				panelMovimentos.setVisible(false);
 			}
 		});
 
@@ -1683,6 +1704,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(true);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
+				panelMovimentos.setVisible(false);
 				lContas.clearSelection();
 				dmcc.removeAllElements();
 				gb.javabank.limpatabela(model);
@@ -1706,6 +1728,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(true);
+				panelMovimentos.setVisible(false);
 				dcbm.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
 
@@ -1729,6 +1752,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
+				panelMovimentos.setVisible(false);
 
 			}
 		});
