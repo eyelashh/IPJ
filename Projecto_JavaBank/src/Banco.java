@@ -463,7 +463,6 @@ public class Banco implements Serializable {
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
-					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
 
 					Object[] texto = { id, resp, data, valor, contadestino, clt };
 					model.addRow(texto);
@@ -475,18 +474,19 @@ public class Banco implements Serializable {
 
 	}
 
+	//vai buscar a descricao
 	protected String descricaoOpercacoes(int idOperacao) {
-		
+
 		String desc = "";
 
 		for (int i = 0; i < contas.size(); i++) {
 
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
-				
-				if(contas.get(i).getOperacoes().get(j).getIdOperacao() == idOperacao) {
-					
+
+				if (contas.get(i).getOperacoes().get(j).getIdOperacao() == idOperacao) {
+
 					desc = contas.get(i).getOperacoes().get(j).getDescricao();
-					
+
 				}
 			}
 
@@ -505,13 +505,12 @@ public class Banco implements Serializable {
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
 
-					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
+					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
 					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
-
-					Object[] texto = { desc, resp, data, valor, null, null };
+					Object[] texto = { id, resp, data, valor, null, null };
 					model.addRow(texto);
 
 				}
@@ -531,13 +530,12 @@ public class Banco implements Serializable {
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
-					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
+					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
 					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
-
-					Object[] texto = { desc, resp, data, valor, null, null };
+					Object[] texto = { id, resp, data, valor, null, null };
 					model.addRow(texto);
 
 				}

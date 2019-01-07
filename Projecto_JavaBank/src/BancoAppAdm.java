@@ -219,264 +219,10 @@ public class BancoAppAdm implements Serializable {
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
-
-		// Painel da gestao do administrador
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setBounds(0, 0, 1042, 576);
-		JPAdm.add(JPAdmGestao);
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setVisible(false);
-
-		// linha que separa na parte da gestao
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		separator_1.setBounds(705, 74, 29, 433);
-		JPAdmGestao.add(separator_1);
-
-		// texto : username
-		JLabel lblUsername_1 = new JLabel("Username :");
-		lblUsername_1.setVerifyInputWhenFocusTarget(false);
-		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblUsername_1.setBounds(450, 85, 206, 41);
-		JPAdmGestao.add(lblUsername_1);
-
-		// campo de texto na gestão da parte do administrador
-
-		lblAdminGestUsername = new JTextField(adm.getUsername());
-		lblAdminGestUsername.setBounds(450, 138, 206, 33);
-		JPAdmGestao.add(lblAdminGestUsername);
-
-		// texto : password
-		JLabel lblPassword_1 = new JLabel("Password :");
-		lblPassword_1.setVerifyInputWhenFocusTarget(false);
-		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_1.setBounds(450, 182, 206, 41);
-		JPAdmGestao.add(lblPassword_1);
-
-		// campo de texto na gestão da parte do administrador
-		textAdminGestPass = new JTextField();
-		textAdminGestPass.setColumns(10);
-		textAdminGestPass.setBounds(450, 234, 206, 33);
-		JPAdmGestao.add(textAdminGestPass);
-
-		// texto : novausername
-		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
-		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
-		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		textFieldAdminGestUsername.setBounds(450, 279, 206, 41);
-		JPAdmGestao.add(textFieldAdminGestUsername);
-
-		// campo de texto na gestão da parte do administrador
-		textFieldAdminGestNovaUser = new JTextField();
-		textFieldAdminGestNovaUser.setColumns(10);
-		textFieldAdminGestNovaUser.setBounds(450, 331, 206, 33);
-		JPAdmGestao.add(textFieldAdminGestNovaUser);
-
-		// botao de confimar - submete a nova username
-		JButton btnAdminGestConfirmar = new JButton("Confirmar");
-		btnAdminGestConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminGestConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (adm.getPassword().equals(textAdminGestPass.getText())) {
-
-					adm.setUsername(textFieldAdminGestNovaUser.getText());
-					textAdminGestPass.setText(null);
-					textFieldAdminGestNovaUser.setText(null);
-					lblAdminGestUsername.setText(adm.getUsername());
-					JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
-				}
-			}
-		});
-		btnAdminGestConfirmar.setBounds(412, 419, 131, 41);
-		JPAdmGestao.add(btnAdminGestConfirmar);
-
-		// botao de cancelar - limpar
-		JButton btnAdminGestCancelar = new JButton("Cancelar");
-		btnAdminGestCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				textAdminGestPass.setText(null);
-				textFieldAdminGestNovaUser.setText(null);
-
-			}
-		});
-		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminGestCancelar.setBounds(562, 419, 131, 41);
-		JPAdmGestao.add(btnAdminGestCancelar);
-
-		// campo de texto na gestão da parte do administrador
-		textFieldAdminGestPass1 = new JTextField();
-		textFieldAdminGestPass1.setColumns(10);
-		textFieldAdminGestPass1.setBounds(817, 138, 195, 33);
-		JPAdmGestao.add(textFieldAdminGestPass1);
-
-		// texto : password 2
-		JLabel lblPassword_2 = new JLabel("Password :");
-		lblPassword_2.setVerifyInputWhenFocusTarget(false);
-		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_2.setBounds(817, 85, 195, 41);
-		JPAdmGestao.add(lblPassword_2);
-
-		// texto : nova password
-		JLabel lblNovaPassword = new JLabel("Nova Password :");
-		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
-		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNovaPassword.setBounds(817, 182, 195, 41);
-		JPAdmGestao.add(lblNovaPassword);
-
-		// campo de texto na gestão da parte do administrador
-		textFieldAdminGestNovaPass = new JTextField();
-		textFieldAdminGestNovaPass.setColumns(10);
-		textFieldAdminGestNovaPass.setBounds(817, 234, 195, 33);
-		JPAdmGestao.add(textFieldAdminGestNovaPass);
-
-		// texto : confirmar password
-		JLabel lblConfirmarNovaPass = new JLabel("Confirmar Password :");
-		lblConfirmarNovaPass.setVerifyInputWhenFocusTarget(false);
-		lblConfirmarNovaPass.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblConfirmarNovaPass.setBounds(817, 279, 195, 41);
-		JPAdmGestao.add(lblConfirmarNovaPass);
-
-		// campo de texto na gestão da parte do administrador
-		textFieldAdminGestConf = new JTextField();
-		textFieldAdminGestConf.setColumns(10);
-		textFieldAdminGestConf.setBounds(817, 331, 195, 33);
-		JPAdmGestao.add(textFieldAdminGestConf);
-
-		// botao de confimar - submete a nova pass
-		JButton buttonAdminGestConf = new JButton("Confirmar");
-		buttonAdminGestConf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (adm.getPassword().equals(textFieldAdminGestPass1.getText())
-						&& textFieldAdminGestConf.getText().equals(textFieldAdminGestNovaPass.getText())) {
-
-					adm.setPassword(textFieldAdminGestNovaPass.getText());
-
-					textFieldAdminGestPass1.setText(null);
-					textFieldAdminGestConf.setText(null);
-					textFieldAdminGestNovaPass.setText(null);
-					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
-
-				}
-			}
-		});
-		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestConf.setBounds(761, 419, 131, 41);
-		JPAdmGestao.add(buttonAdminGestConf);
-
-		// botao de cancelar - limpar
-		JButton buttonAdminGestCan = new JButton("Cancelar");
-		buttonAdminGestCan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				textFieldAdminGestPass1.setText(null);
-				textFieldAdminGestConf.setText(null);
-				textFieldAdminGestNovaPass.setText(null);
-			}
-		});
-		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestCan.setBounds(911, 419, 131, 41);
-		JPAdmGestao.add(buttonAdminGestCan);
-
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setForeground(Color.BLACK);
-		separator_2.setAlignmentX(0.0f);
-		separator_2.setBounds(371, 74, 29, 433);
-		JPAdmGestao.add(separator_2);
-
-		JLabel label_3 = new JLabel("Nome:");
-		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_3.setBounds(12, 64, 57, 30);
-		JPAdmGestao.add(label_3);
-
-		tbadmnome = new JTextField();
-		tbadmnome.setEditable(false);
-		tbadmnome.setColumns(10);
-		tbadmnome.setBounds(22, 95, 217, 31);
-		JPAdmGestao.add(tbadmnome);
-
-		tbadmapelido = new JTextField();
-		tbadmapelido.setEditable(false);
-		tbadmapelido.setColumns(10);
-		tbadmapelido.setBounds(22, 166, 217, 31);
-		JPAdmGestao.add(tbadmapelido);
-
-		JLabel label_4 = new JLabel("Sobrenome:");
-		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_4.setBounds(12, 135, 120, 30);
-		JPAdmGestao.add(label_4);
-
-		JDateChooser dcadmdtnasc = new JDateChooser();
-		dcadmdtnasc.setEnabled(false);
-		dcadmdtnasc.setBounds(22, 230, 217, 31);
-		JPAdmGestao.add(dcadmdtnasc);
-
-		JLabel label_5 = new JLabel("Data de Nascimento:");
-		label_5.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_5.setBounds(12, 199, 177, 30);
-		JPAdmGestao.add(label_5);
-
-		JRadioButton rbadmcc = new JRadioButton("C.C.");
-		rbadmcc.setEnabled(false);
-		rbadmcc.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbadmcc.setBounds(22, 270, 66, 25);
-		JPAdmGestao.add(rbadmcc);
-
-		JRadioButton rbadmbi = new JRadioButton("B.I.");
-		rbadmbi.setEnabled(false);
-		rbadmbi.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbadmbi.setBounds(101, 270, 57, 25);
-		JPAdmGestao.add(rbadmbi);
-
-		JRadioButton rbadmpassporte = new JRadioButton("Passaporte");
-		rbadmpassporte.setEnabled(false);
-		rbadmpassporte.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbadmpassporte.setBounds(170, 270, 138, 25);
-		JPAdmGestao.add(rbadmpassporte);
-
-		tbadmnident = new JTextField();
-		tbadmnident.setEditable(false);
-		tbadmnident.setColumns(10);
-		tbadmnident.setBounds(14, 332, 225, 31);
-		JPAdmGestao.add(tbadmnident);
-
-		JLabel label_7 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
-		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_7.setBounds(4, 296, 227, 30);
-		JPAdmGestao.add(label_7);
-
-		JLabel label_8 = new JLabel("Contacto:");
-		label_8.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_8.setBounds(4, 365, 81, 31);
-		JPAdmGestao.add(label_8);
-
-		tbadmcontacto = new JTextField();
-		tbadmcontacto.setEditable(false);
-		tbadmcontacto.setColumns(10);
-		tbadmcontacto.setBounds(14, 396, 225, 31);
-		JPAdmGestao.add(tbadmcontacto);
-
-		JLabel label_9 = new JLabel("Morada: ");
-		label_9.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_9.setBounds(4, 428, 227, 30);
-		JPAdmGestao.add(label_9);
-
-		tbadmmorada = new JTextField();
-		tbadmmorada.setEditable(false);
-		tbadmmorada.setColumns(10);
-		tbadmmorada.setBounds(14, 461, 225, 31);
-		JPAdmGestao.add(tbadmmorada);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
-		// lista dos funcionarios
-		DefaultListModel<String> dmFun = new DefaultListModel<String>();
-		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+		
 		
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
@@ -582,6 +328,10 @@ public class BancoAppAdm implements Serializable {
 		textAdmFunPass.setBounds(722, 469, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
 
+		// lista dos funcionarios
+				DefaultListModel<String> dmFun = new DefaultListModel<String>();
+				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+		
 		// Data do funcionario
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
@@ -899,6 +649,261 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		JPAdmFuncionario.add(btAdmFunProc);
+
+		// Painel da gestao do administrador
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmGestao);
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setVisible(false);
+
+		// linha que separa na parte da gestao
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
+		separator_1.setBounds(705, 74, 29, 433);
+		JPAdmGestao.add(separator_1);
+
+		// texto : username
+		JLabel lblUsername_1 = new JLabel("Username :");
+		lblUsername_1.setVerifyInputWhenFocusTarget(false);
+		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblUsername_1.setBounds(450, 85, 206, 41);
+		JPAdmGestao.add(lblUsername_1);
+
+		// campo de texto na gestão da parte do administrador
+
+		lblAdminGestUsername = new JTextField(adm.getUsername());
+		lblAdminGestUsername.setBounds(450, 138, 206, 33);
+		JPAdmGestao.add(lblAdminGestUsername);
+
+		// texto : password
+		JLabel lblPassword_1 = new JLabel("Password :");
+		lblPassword_1.setVerifyInputWhenFocusTarget(false);
+		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_1.setBounds(450, 182, 206, 41);
+		JPAdmGestao.add(lblPassword_1);
+
+		// campo de texto na gestão da parte do administrador
+		textAdminGestPass = new JTextField();
+		textAdminGestPass.setColumns(10);
+		textAdminGestPass.setBounds(450, 234, 206, 33);
+		JPAdmGestao.add(textAdminGestPass);
+
+		// texto : novausername
+		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
+		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
+		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		textFieldAdminGestUsername.setBounds(450, 279, 206, 41);
+		JPAdmGestao.add(textFieldAdminGestUsername);
+
+		// campo de texto na gestão da parte do administrador
+		textFieldAdminGestNovaUser = new JTextField();
+		textFieldAdminGestNovaUser.setColumns(10);
+		textFieldAdminGestNovaUser.setBounds(450, 331, 206, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaUser);
+
+		// botao de confimar - submete a nova username
+		JButton btnAdminGestConfirmar = new JButton("Confirmar");
+		btnAdminGestConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (adm.getPassword().equals(textAdminGestPass.getText())) {
+
+					adm.setUsername(textFieldAdminGestNovaUser.getText());
+					textAdminGestPass.setText(null);
+					textFieldAdminGestNovaUser.setText(null);
+					lblAdminGestUsername.setText(adm.getUsername());
+					JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
+				}
+			}
+		});
+		btnAdminGestConfirmar.setBounds(412, 419, 131, 41);
+		JPAdmGestao.add(btnAdminGestConfirmar);
+
+		// botao de cancelar - limpar
+		JButton btnAdminGestCancelar = new JButton("Cancelar");
+		btnAdminGestCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				textAdminGestPass.setText(null);
+				textFieldAdminGestNovaUser.setText(null);
+
+			}
+		});
+		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminGestCancelar.setBounds(562, 419, 131, 41);
+		JPAdmGestao.add(btnAdminGestCancelar);
+
+		// campo de texto na gestão da parte do administrador
+		textFieldAdminGestPass1 = new JTextField();
+		textFieldAdminGestPass1.setColumns(10);
+		textFieldAdminGestPass1.setBounds(817, 138, 195, 33);
+		JPAdmGestao.add(textFieldAdminGestPass1);
+
+		// texto : password 2
+		JLabel lblPassword_2 = new JLabel("Password :");
+		lblPassword_2.setVerifyInputWhenFocusTarget(false);
+		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_2.setBounds(817, 85, 195, 41);
+		JPAdmGestao.add(lblPassword_2);
+
+		// texto : nova password
+		JLabel lblNovaPassword = new JLabel("Nova Password :");
+		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
+		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNovaPassword.setBounds(817, 182, 195, 41);
+		JPAdmGestao.add(lblNovaPassword);
+
+		// campo de texto na gestão da parte do administrador
+		textFieldAdminGestNovaPass = new JTextField();
+		textFieldAdminGestNovaPass.setColumns(10);
+		textFieldAdminGestNovaPass.setBounds(817, 234, 195, 33);
+		JPAdmGestao.add(textFieldAdminGestNovaPass);
+
+		// texto : confirmar password
+		JLabel lblConfirmarNovaPass = new JLabel("Confirmar Password :");
+		lblConfirmarNovaPass.setVerifyInputWhenFocusTarget(false);
+		lblConfirmarNovaPass.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblConfirmarNovaPass.setBounds(817, 279, 195, 41);
+		JPAdmGestao.add(lblConfirmarNovaPass);
+
+		// campo de texto na gestão da parte do administrador
+		textFieldAdminGestConf = new JTextField();
+		textFieldAdminGestConf.setColumns(10);
+		textFieldAdminGestConf.setBounds(817, 331, 195, 33);
+		JPAdmGestao.add(textFieldAdminGestConf);
+
+		// botao de confimar - submete a nova pass
+		JButton buttonAdminGestConf = new JButton("Confirmar");
+		buttonAdminGestConf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (adm.getPassword().equals(textFieldAdminGestPass1.getText())
+						&& textFieldAdminGestConf.getText().equals(textFieldAdminGestNovaPass.getText())) {
+
+					adm.setPassword(textFieldAdminGestNovaPass.getText());
+
+					textFieldAdminGestPass1.setText(null);
+					textFieldAdminGestConf.setText(null);
+					textFieldAdminGestNovaPass.setText(null);
+					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
+
+				}
+			}
+		});
+		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestConf.setBounds(761, 419, 131, 41);
+		JPAdmGestao.add(buttonAdminGestConf);
+
+		// botao de cancelar - limpar
+		JButton buttonAdminGestCan = new JButton("Cancelar");
+		buttonAdminGestCan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				textFieldAdminGestPass1.setText(null);
+				textFieldAdminGestConf.setText(null);
+				textFieldAdminGestNovaPass.setText(null);
+			}
+		});
+		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		buttonAdminGestCan.setBounds(911, 419, 131, 41);
+		JPAdmGestao.add(buttonAdminGestCan);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setAlignmentX(0.0f);
+		separator_2.setBounds(371, 74, 29, 433);
+		JPAdmGestao.add(separator_2);
+
+		JLabel label_3 = new JLabel("Nome:");
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_3.setBounds(12, 64, 57, 30);
+		JPAdmGestao.add(label_3);
+
+		tbadmnome = new JTextField();
+		tbadmnome.setEditable(false);
+		tbadmnome.setColumns(10);
+		tbadmnome.setBounds(22, 95, 217, 31);
+		JPAdmGestao.add(tbadmnome);
+
+		tbadmapelido = new JTextField();
+		tbadmapelido.setEditable(false);
+		tbadmapelido.setColumns(10);
+		tbadmapelido.setBounds(22, 166, 217, 31);
+		JPAdmGestao.add(tbadmapelido);
+
+		JLabel label_4 = new JLabel("Sobrenome:");
+		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_4.setBounds(12, 135, 120, 30);
+		JPAdmGestao.add(label_4);
+
+		JDateChooser dcadmdtnasc = new JDateChooser();
+		dcadmdtnasc.setEnabled(false);
+		dcadmdtnasc.setBounds(22, 230, 217, 31);
+		JPAdmGestao.add(dcadmdtnasc);
+
+		JLabel label_5 = new JLabel("Data de Nascimento:");
+		label_5.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_5.setBounds(12, 199, 177, 30);
+		JPAdmGestao.add(label_5);
+
+		JRadioButton rbadmcc = new JRadioButton("C.C.");
+		rbadmcc.setEnabled(false);
+		rbadmcc.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmcc.setBounds(22, 270, 66, 25);
+		JPAdmGestao.add(rbadmcc);
+
+		JRadioButton rbadmbi = new JRadioButton("B.I.");
+		rbadmbi.setEnabled(false);
+		rbadmbi.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmbi.setBounds(101, 270, 57, 25);
+		JPAdmGestao.add(rbadmbi);
+
+		JRadioButton rbadmpassporte = new JRadioButton("Passaporte");
+		rbadmpassporte.setEnabled(false);
+		rbadmpassporte.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmpassporte.setBounds(170, 270, 138, 25);
+		JPAdmGestao.add(rbadmpassporte);
+
+		tbadmnident = new JTextField();
+		tbadmnident.setEditable(false);
+		tbadmnident.setColumns(10);
+		tbadmnident.setBounds(14, 332, 225, 31);
+		JPAdmGestao.add(tbadmnident);
+
+		JLabel label_7 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_7.setBounds(4, 296, 227, 30);
+		JPAdmGestao.add(label_7);
+
+		JLabel label_8 = new JLabel("Contacto:");
+		label_8.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_8.setBounds(4, 365, 81, 31);
+		JPAdmGestao.add(label_8);
+
+		tbadmcontacto = new JTextField();
+		tbadmcontacto.setEditable(false);
+		tbadmcontacto.setColumns(10);
+		tbadmcontacto.setBounds(14, 396, 225, 31);
+		JPAdmGestao.add(tbadmcontacto);
+
+		JLabel label_9 = new JLabel("Morada: ");
+		label_9.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_9.setBounds(4, 428, 227, 30);
+		JPAdmGestao.add(label_9);
+
+		tbadmmorada = new JTextField();
+		tbadmmorada.setEditable(false);
+		tbadmmorada.setColumns(10);
+		tbadmmorada.setBounds(14, 461, 225, 31);
+		JPAdmGestao.add(tbadmmorada);
+		
+
+		
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
@@ -1257,9 +1262,6 @@ public class BancoAppAdm implements Serializable {
 		JPAdm.add(JPAdmEstatistica);
 
 		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
-		
-
-
 
 		// Botão da estatistica do menu
 		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
@@ -1323,13 +1325,13 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(false);
-				
-				//preenche dados do funcionario:
-				
+
+				// preenche dados do funcionario:
+
 				tbadmnome.setText(adm.getNome());
 				tbadmapelido.setText(adm.getSobrenome());
 				dcadmdtnasc.setDate(adm.getDataDeNascimento());
-				
+
 				if (adm.getTipoIndentificacao().equals("C.C.")) {
 					rbadmcc.setSelected(true);
 				}
@@ -1339,16 +1341,11 @@ public class BancoAppAdm implements Serializable {
 				if (adm.getTipoIndentificacao().equals("Passaporte")) {
 					rbadmpassporte.setSelected(true);
 				}
-				
 
-				tbadmnident.setText(adm.getNumidentificacao()+"");
-				tbadmcontacto.setText(adm.getContacto()+"");
+				tbadmnident.setText(adm.getNumidentificacao() + "");
+				tbadmcontacto.setText(adm.getContacto() + "");
 				tbadmmorada.setText(adm.getMorada());
-				
-				
-				
-				
-				
+
 			}
 		});
 		btAdmGestao.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
