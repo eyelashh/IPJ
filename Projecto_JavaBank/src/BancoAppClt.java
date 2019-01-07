@@ -39,6 +39,8 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JScrollPane;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -131,6 +133,8 @@ public class BancoAppClt implements Serializable {
 
 		// box onde escolhemos qual conta o cliente quer ver
 		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
+		
+		ButtonGroup bg = new ButtonGroup();
 
 		// Painel de cabeçalho
 		JPanel JpanelCabecalho = new JPanel();
@@ -401,26 +405,43 @@ public class BancoAppClt implements Serializable {
 		JPCltGestao.add(label_15);
 
 		JRadioButton radioButton = new JRadioButton("C.C.");
+		if (clt.getTipoIndentificacao().equals("C.C.")) {
+			bg.getSelection();
+		}
 		radioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		radioButton.setBounds(169, 178, 66, 25);
+		radioButton.setEnabled(false);
 		JPCltGestao.add(radioButton);
 
 		JRadioButton radioButton_1 = new JRadioButton("B.I.");
+		if (clt.getTipoIndentificacao().equals("B.I.")) {
+			bg.getSelection();
+		}
 		radioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		radioButton_1.setEnabled(false);
 		radioButton_1.setBounds(236, 177, 57, 25);
+		
 		JPCltGestao.add(radioButton_1);
 
 		JRadioButton radioButton_2 = new JRadioButton("Passaporte");
+		if (clt.getTipoIndentificacao().equals("Passaporte")) {
+			bg.getSelection();
+		}
 		radioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		radioButton_2.setBounds(293, 177, 138, 25);
+		radioButton_2.setEnabled(false);
 		JPCltGestao.add(radioButton_2);
+		bg.add(radioButton);
+		bg.add(radioButton_1);
+		bg.add(radioButton_2);
+		bg.getSelection();
 
 		JLabel label_16 = new JLabel("Número:");
 		label_16.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		label_16.setBounds(71, 210, 91, 30);
 		JPCltGestao.add(label_16);
 
-		textFieldNumIdentClt = new JTextField(clt.getNumidentificacao());
+		textFieldNumIdentClt = new JTextField(Integer.toString(clt.getNumidentificacao()));
 		textFieldNumIdentClt.setEditable(false);
 		textFieldNumIdentClt.setBounds(81, 242, 271, 31);
 		JPCltGestao.add(textFieldNumIdentClt);
@@ -440,7 +461,7 @@ public class BancoAppClt implements Serializable {
 		label_18.setBounds(71, 335, 81, 31);
 		JPCltGestao.add(label_18);
 
-		textFieldContactoClt = new JTextField(clt.getContacto());
+		textFieldContactoClt = new JTextField(Integer.toString(clt.getContacto()));
 		textFieldContactoClt.setEditable(false);
 		textFieldContactoClt.setBounds(81, 364, 271, 33);
 		JPCltGestao.add(textFieldContactoClt);
