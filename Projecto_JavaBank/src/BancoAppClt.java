@@ -126,7 +126,7 @@ public class BancoAppClt implements Serializable {
 		frame.getContentPane().setLayout(null);
 
 		// Modelo para tabela
-		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+		String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 
 		// modelo que lista as contas no panel contas movimentos
@@ -244,8 +244,10 @@ public class BancoAppClt implements Serializable {
 			public void mouseClicked(MouseEvent e) {
 
 				int linha = table.getSelectedRow();
+				int idDesc = (int) table.getModel().getValueAt(linha, 0);
+				String descricao = gb.javabank.descricaoOpercacoes(idDesc);
 
-				//textFieldCltDescr.setText(t);
+				textFieldCltDescr.setText(descricao);
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -942,8 +944,10 @@ public class BancoAppClt implements Serializable {
 							cdestino.setSaldo(cdestino.getSaldo() + valortransf);
 							corigem.setSaldo(corigem.getSaldo() - valortransf);
 
-							String descricaoCorigem = "Transferencia";
-							String descricaoCdestino = "Transferencia";
+							String descricaoCorigem = dateChooser.getDate() + " - Transferencia efectuada para conta "
+									+ cdestino.getIdConta() + " valor: " + valortransf;
+							String descricaoCdestino = dateChooser.getDate() + " - Transferencia recebida da conta "
+									+ corigem.getIdConta() + " valor: " + valortransf;
 
 							// adicionar ao array das operacoes
 							Operacao oporigem = new Transferencia(idoperacaoorigem, null, dateChooser.getDate(),

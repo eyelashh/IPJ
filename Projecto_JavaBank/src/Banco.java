@@ -167,18 +167,17 @@ public class Banco implements Serializable {
 		}
 		return numcontas;
 	}
-	
+
 	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-				s = "" + cont.get(i).getIdConta();
-				numcontas[i] = s;
-				s = "";
+			s = "" + cont.get(i).getIdConta();
+			numcontas[i] = s;
+			s = "";
 		}
 		return numcontas;
 	}
-	
 
 	// lista a conta de um determinado cliente
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
@@ -457,6 +456,7 @@ public class Banco implements Serializable {
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
+					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
 					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
@@ -465,13 +465,33 @@ public class Banco implements Serializable {
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 					String desc = contas.get(i).getOperacoes().get(j).getDescricao();
 
-					Object[] texto = { desc, resp, data, valor, contadestino, clt };
+					Object[] texto = { id, resp, data, valor, contadestino, clt };
 					model.addRow(texto);
 
 				}
 
 			}
 		}
+
+	}
+
+	protected String descricaoOpercacoes(int idOperacao) {
+		
+		String desc = "";
+
+		for (int i = 0; i < contas.size(); i++) {
+
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+				
+				if(contas.get(i).getOperacoes().get(j).getIdOperacao() == idOperacao) {
+					
+					desc = contas.get(i).getOperacoes().get(j).getDescricao();
+					
+				}
+			}
+
+		}
+		return desc;
 
 	}
 
