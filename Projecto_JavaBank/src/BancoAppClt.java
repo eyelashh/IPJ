@@ -302,9 +302,9 @@ public class BancoAppClt implements Serializable {
 					textFieldCltCartao.setText(card.getNomeTitular());
 					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, clt.getContas());
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, clt.getContas());
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, clt.getContas());
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
 
 				}
 			}
