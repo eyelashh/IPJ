@@ -88,41 +88,47 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbLevData;
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
-	private  Funcionario func;
-	private  GestaoBanco gb;
+	private Funcionario func;
+	private GestaoBanco gb;
 	private JTextField tbCltApelido;
 	private JTextField tbCltNum;
 	private JTextField tbContasSaldo;
 	private JTextField tbContaslimitelevdia;
 	private JTextField tblJuros;
 	private JTextField tbllimitemes;
-	private JList<String> lContas;
 	private JDateChooser dateChooser_2;
 	private JTextField tbnomecartao;
 	private JTextField tbcodcartao;
-	private JTable tableClts;
-	private DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
-	private JTable table;
 	private JTextField tbfunnome;
 	private JTextField tbfunapelido;
 	private JTextField tbfunident;
 	private JTextField tbfuncontacto;
 	private JTextField tbfunmorada;
 	private JTextField tbfunidfunc;
+	// Tabela clientes nas contas
+	private JTable tableClts;
+	// Tabela dos movimentos das operações
+	private JTable tableMovimentos;
+	// Tabela clientes no painel cliente
 	private JTable tableListaClts;
+	// Default Lista contas painel conta:
+	DefaultListModel<String> dmconta = new DefaultListModel<String>();
+	// grupo doa botoes CC BI Passport
+	ButtonGroup bg = new ButtonGroup();
+	// grupo doa botoes conta Corrente e Poupança
+	ButtonGroup bgconta = new ButtonGroup();
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
-	ButtonGroup bg = new ButtonGroup();
-	// lista de clientes no painel de clientes;
-	DefaultListModel<String> dmclt = new DefaultListModel<String>();
-	ButtonGroup bgconta = new ButtonGroup();
 	// Modelo para tabela movimentos
 	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-	DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
 
-	// Lista contas painel conta:
-	DefaultListModel<String> dmconta = new DefaultListModel<String>();
+	private DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
+
+	// lista de clientes no painel de clientes;
+	DefaultListModel<String> dmclt = new DefaultListModel<String>();
+	DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
 
 //	DefaultListModel<String> dmcc = new DefaultListModel<String>();
 //	gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
@@ -352,6 +358,28 @@ public class BancoAppFun implements Serializable {
 		JButton btCltNovo = new JButton("Novo");
 		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltNovo.setBounds(467, 22, 120, 38);
+		// a�ao do botao novo:
+		btCltNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// limpa tudo:
+
+				tableListaClts.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
 		jpanelClientes.add(btCltNovo);
 
 		JButton btCltEliminar = new JButton("Eliminar");
@@ -383,7 +411,6 @@ public class BancoAppFun implements Serializable {
 		lblMorada.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblMorada.setBounds(345, 272, 66, 30);
 		jpanelClientes.add(lblMorada);
-
 
 		btCltPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -475,13 +502,15 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				// quando o rato seleciona uma linha da tabela:
+
 				bg.clearSelection();
-				modeloTabelaCliente.setRowCount(0);
 
 				int linha = tableListaClts.getSelectedRow();
 				int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
 				Cliente c = (Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores());
 
+				// preenche as textfields
 				tbCltNome.setText(c.getNome());
 				tbCltApelido.setText(c.getSobrenome());
 				tbCltMorada.setText(c.getMorada());
@@ -502,7 +531,8 @@ public class BancoAppFun implements Serializable {
 				}
 
 				// mostra na lista as contas deste cliente
-				modeloTabelaCliente.setRowCount(0);
+				// modeloTabelaCliente.setRowCount(0);
+				dlmcontacliente.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
 						dlmcontacliente);
 			}
@@ -511,39 +541,18 @@ public class BancoAppFun implements Serializable {
 
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
-		
 
 		JButton btnLimparClt = new JButton("Limpar pesquisa");
 		btnLimparClt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dlmcontacliente.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), modeloTabelaCliente);
+				// gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),
+				// modeloTabelaCliente);
+				gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 			}
 		});
 		btnLimparClt.setBounds(97, 466, 133, 23);
 		jpanelClientes.add(btnLimparClt);
-
-		// a�ao do botao novo:
-		btCltNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// limpa tudo:
-
-				tableListaClts.clearSelection();
-				lbCltConta.clearSelection();
-				tbCltNome.setText("");
-				tbCltApelido.setText("");
-				tbCltMorada.setText(null);
-				tbCltContacto.setText(null);
-				bg.clearSelection();
-				tbCltUser.setText("");
-				tbCltPass.setText("");
-				tbCltNum.setText("");
-				dateChooser_3.setDate(null);
-				dlmcontacliente.removeAllElements();
-
-			}
-		});
 
 		// painel de clientes:
 
@@ -619,21 +628,11 @@ public class BancoAppFun implements Serializable {
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
-<<<<<<< HEAD
-=======
 
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(768, 47, 262, 334);
-
-		jpanelContas.add(scrollPane_1);
-		tableClts = new JTable(model);
-
-		scrollPane_1.setViewportView(tableClts);
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		separator_2.setForeground(Color.BLACK);
@@ -735,10 +734,6 @@ public class BancoAppFun implements Serializable {
 		lblIdFuncionario.setBounds(47, 496, 227, 30);
 		jpanelGestao.add(lblIdFuncionario);
 
-		// Painel da conta da parte funcionario
-		JPanel jpanelContas = new JPanel();
-		jpanelContas.setVisible(false);
-
 		// Tabela clientes nas contas
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(768, 47, 262, 334);
@@ -798,7 +793,8 @@ public class BancoAppFun implements Serializable {
 		JpanelPrincipal.add(jpanelContas);
 		jpanelContas.setLayout(null);
 
-		lContas = new JList<String>(dmconta);
+		// lista das contas no painel contas
+		JList<String> lContas = new JList<String>(dmconta);
 		gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 		lContas.setBounds(24, 109, 240, 386);
 		jpanelContas.add(lContas);
@@ -1505,12 +1501,14 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setBounds(47, 529, 225, 31);
 		jpanelGestao.add(tbfunidfunc);
 
+		// Tabela dos movimentos das operações
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(55, 51, 418, 293);
 		panelMovimentos.add(scrollPane);
-		table = new JTable(model);
-		scrollPane.setViewportView(table);
+		tableMovimentos = new JTable(model);
+		scrollPane.setViewportView(tableMovimentos);
 		panelMovimentos.setVisible(false);
+
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
