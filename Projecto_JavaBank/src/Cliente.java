@@ -33,6 +33,11 @@ public class Cliente extends Utilizador implements Serializable {
 	public void setContapoupanca(int contapoupanca) {
 		this.contapoupanca = contapoupanca;
 	}
+
+	@Override
+	public String toString() {
+		return "idUtilizador" + this.getNome();
+	}
 	
 	
 	
