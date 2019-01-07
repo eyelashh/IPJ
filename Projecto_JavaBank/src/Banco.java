@@ -462,7 +462,7 @@ public class Banco implements Serializable {
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
-					String clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt().toString();
+					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 
 					Object[] texto = { id, resp, data, valor, contadestino, clt };
 					model.addRow(texto);
@@ -474,7 +474,7 @@ public class Banco implements Serializable {
 
 	}
 
-	// vai buscar a descricao
+	//vai buscar a descricao
 	protected String descricaoOpercacoes(int idOperacao) {
 
 		String desc = "";

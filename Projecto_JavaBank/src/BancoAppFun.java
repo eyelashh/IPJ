@@ -428,96 +428,96 @@ public class BancoAppFun implements Serializable {
 		separator_2.setAlignmentX(0.0f);
 		separator_2.setBounds(390, 83, 13, 433);
 		jpanelGestao.add(separator_2);
-		
+
 		JLabel label_1 = new JLabel("Nome:");
 		label_1.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_1.setBounds(47, 55, 57, 30);
 		jpanelGestao.add(label_1);
-		
+
 		tbfunnome = new JTextField();
 		tbfunnome.setEditable(false);
 		tbfunnome.setColumns(10);
 		tbfunnome.setBounds(57, 86, 217, 31);
 		jpanelGestao.add(tbfunnome);
-		
+
 		JLabel label_2 = new JLabel("Sobrenome:");
 		label_2.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_2.setBounds(47, 126, 120, 30);
 		jpanelGestao.add(label_2);
-		
+
 		tbfunapelido = new JTextField();
 		tbfunapelido.setEditable(false);
 		tbfunapelido.setColumns(10);
 		tbfunapelido.setBounds(57, 157, 217, 31);
 		jpanelGestao.add(tbfunapelido);
-		
+
 		JLabel label_3 = new JLabel("Data de Nascimento:");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_3.setBounds(47, 190, 177, 30);
 		jpanelGestao.add(label_3);
-		
+
 		JDateChooser dtfunnasc = new JDateChooser();
 		dtfunnasc.setEnabled(false);
 		dtfunnasc.setBounds(57, 221, 217, 31);
 		jpanelGestao.add(dtfunnasc);
-		
+
 		JRadioButton rbfuncc = new JRadioButton("C.C.");
 		rbfuncc.setFont(new Font("Dialog", Font.PLAIN, 15));
 		rbfuncc.setEnabled(false);
 		rbfuncc.setBounds(57, 261, 66, 25);
 		jpanelGestao.add(rbfuncc);
-		
+
 		JRadioButton rbfunbi = new JRadioButton("B.I.");
 		rbfunbi.setFont(new Font("Dialog", Font.PLAIN, 15));
 		rbfunbi.setEnabled(false);
 		rbfunbi.setBounds(136, 261, 57, 25);
 		jpanelGestao.add(rbfunbi);
-		
+
 		JRadioButton rbfuncpass = new JRadioButton("Passaporte");
 		rbfuncpass.setFont(new Font("Dialog", Font.PLAIN, 15));
 		rbfuncpass.setEnabled(false);
 		rbfuncpass.setBounds(205, 261, 138, 25);
 		jpanelGestao.add(rbfuncpass);
-		
+
 		JLabel label_4 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
 		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_4.setBounds(39, 287, 227, 30);
 		jpanelGestao.add(label_4);
-		
+
 		tbfunident = new JTextField();
 		tbfunident.setEditable(false);
 		tbfunident.setColumns(10);
 		tbfunident.setBounds(49, 323, 225, 31);
 		jpanelGestao.add(tbfunident);
-		
+
 		JLabel label_6 = new JLabel("Contacto:");
 		label_6.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_6.setBounds(39, 356, 81, 31);
 		jpanelGestao.add(label_6);
-		
+
 		tbfuncontacto = new JTextField();
 		tbfuncontacto.setEditable(false);
 		tbfuncontacto.setColumns(10);
 		tbfuncontacto.setBounds(49, 387, 225, 31);
 		jpanelGestao.add(tbfuncontacto);
-		
+
 		JLabel label_7 = new JLabel("Morada: ");
 		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
 		label_7.setBounds(39, 419, 227, 30);
 		jpanelGestao.add(label_7);
-		
+
 		tbfunmorada = new JTextField();
 		tbfunmorada.setEditable(false);
 		tbfunmorada.setColumns(10);
 		tbfunmorada.setBounds(49, 452, 225, 31);
 		jpanelGestao.add(tbfunmorada);
-		
+
 		tbfunidfunc = new JTextField();
 		tbfunidfunc.setEditable(false);
 		tbfunidfunc.setColumns(10);
 		tbfunidfunc.setBounds(47, 529, 225, 31);
 		jpanelGestao.add(tbfunidfunc);
-		
+
 		JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
 		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblIdFuncionario.setBounds(47, 496, 227, 30);
@@ -1866,12 +1866,11 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
 				panelMovimentos.setVisible(false);
-				
+
 				tbfunnome.setText(func.getNome());
 				tbfunapelido.setText(func.getSobrenome());
 				dtfunnasc.setDate(func.getDataDeNascimento());
-				
-			
+
 				if (func.getTipoIndentificacao().equals("C.C.")) {
 					rbfuncc.setSelected(true);
 				}
@@ -1881,13 +1880,11 @@ public class BancoAppFun implements Serializable {
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
 				}
-				
-				
-				tbfunident.setText(func.getNumidentificacao()+"");
-				tbfuncontacto.setText(func.getContacto()+"");
+
+				tbfunident.setText(func.getNumidentificacao() + "");
+				tbfuncontacto.setText(func.getContacto() + "");
 				tbfunmorada.setText(func.getMorada());
-				tbfunidfunc.setText(func.getIdFuncionario()+"");
-				
+				tbfunidfunc.setText(func.getIdFuncionario() + "");
 
 			}
 		});
