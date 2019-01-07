@@ -241,10 +241,6 @@ public class BancoAppFun implements Serializable {
 
 		ButtonGroup bgconta = new ButtonGroup();
 
-		// Painel da conta da parte funcionario
-		JPanel jpanelContas = new JPanel();
-		jpanelContas.setVisible(false);
-
 		// Modelo da tabela clientes:
 		String[] colunas2 = { "Check", "ID", "Nome" };
 		DefaultTableModel model = new DefaultTableModel(colunas2, 0) {
@@ -271,15 +267,6 @@ public class BancoAppFun implements Serializable {
 			}
 		};
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(768, 47, 262, 334);
-
-		jpanelContas.add(scrollPane_1);
-
-		tableClts = new JTable(model);
-
-		scrollPane_1.setViewportView(tableClts);
-
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
@@ -291,237 +278,18 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
 
-		jpanelGestao.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelGestao);
-		jpanelGestao.setLayout(null);
+		// Painel da conta da parte funcionario
+		JPanel jpanelContas = new JPanel();
+		jpanelContas.setVisible(false);
 
-		JLabel lblUsername_1 = new JLabel("Username:");
-		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblUsername_1.setBounds(415, 81, 131, 41);
-		jpanelGestao.add(lblUsername_1);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(768, 47, 262, 334);
 
-		tbGestaoUsername = new JTextField();
-		tbGestaoUsername.setEditable(false);
-		tbGestaoUsername.setBounds(415, 134, 271, 33);
-		jpanelGestao.add(tbGestaoUsername);
+		jpanelContas.add(scrollPane_1);
 
-		JLabel lblPassword_1 = new JLabel("Password:");
-		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_1.setBounds(415, 178, 131, 41);
-		jpanelGestao.add(lblPassword_1);
+		tableClts = new JTable(model);
 
-		tbGestaopassuser = new JPasswordField();
-		tbGestaopassuser.setBounds(415, 230, 271, 33);
-		jpanelGestao.add(tbGestaopassuser);
-
-		JLabel lblNovaPassword = new JLabel("Novo UserName:");
-		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNovaPassword.setBounds(415, 275, 191, 41);
-		jpanelGestao.add(lblNovaPassword);
-
-		tbGestaoNovoUser = new JTextField();
-		tbGestaoNovoUser.setBounds(415, 327, 271, 33);
-		jpanelGestao.add(tbGestaoNovoUser);
-
-		JButton btGestaouserconfirmar = new JButton("Confirmar");
-		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaouserconfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
-					func.setUsername(tbGestaoNovoUser.getText());
-					tbGestaoUsername.setText(null);
-					tbGestaopassuser.setText(null);
-					tbGestaoNovoUser.setText(null);
-					JOptionPane.showMessageDialog(null, "Altera��o de Nome efectuado com sucesso");
-					lUtilizador.setText(func.getNome());
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
-				}
-			}
-		});
-		btGestaouserconfirmar.setBounds(415, 415, 131, 41);
-		jpanelGestao.add(btGestaouserconfirmar);
-
-		JButton btGestaouserCancelar = new JButton("Cancelar");
-		btGestaouserCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbGestaopassuser.setText(null);
-				tbGestaoNovoUser.setText(null);
-			}
-		});
-		btGestaouserCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaouserCancelar.setBounds(565, 415, 131, 41);
-		jpanelGestao.add(btGestaouserCancelar);
-
-		JLabel lblPassword_2 = new JLabel("Password:");
-		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_2.setBounds(749, 81, 131, 41);
-		jpanelGestao.add(lblPassword_2);
-
-		tbGestaoPass = new JPasswordField();
-		tbGestaoPass.setBounds(749, 134, 271, 33);
-		jpanelGestao.add(tbGestaoPass);
-
-		JLabel lblPassword_3 = new JLabel("Nova Password:");
-		lblPassword_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_3.setBounds(749, 178, 168, 41);
-		jpanelGestao.add(lblPassword_3);
-
-		tbGestaoNovapass = new JPasswordField();
-		tbGestaoNovapass.setBounds(749, 230, 271, 33);
-		jpanelGestao.add(tbGestaoNovapass);
-
-		JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
-		lblConfirmarPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblConfirmarPassword.setBounds(749, 275, 271, 41);
-		jpanelGestao.add(lblConfirmarPassword);
-
-		tbGestaoConfirmPass = new JPasswordField();
-		tbGestaoConfirmPass.setBounds(749, 327, 271, 33);
-		jpanelGestao.add(tbGestaoConfirmPass);
-
-		JButton btGestaopassConfirmar = new JButton("Confirmar");
-		btGestaopassConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
-						&& new String(tbGestaoNovapass.getPassword())
-								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
-
-					func.setPassword(new String(tbGestaoNovapass.getPassword()));
-					JOptionPane.showMessageDialog(null, "Altera��o efectuada com sucesso!");
-					tbGestaoPass.setText(null);
-					tbGestaoNovapass.setText(null);
-					tbGestaoConfirmPass.setText(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados errados! Confirme os dados introduzidos!");
-				}
-			}
-		});
-		btGestaopassConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaopassConfirmar.setBounds(749, 415, 131, 41);
-		jpanelGestao.add(btGestaopassConfirmar);
-
-		JButton btGestaopassCancelar = new JButton("Cancelar");
-		btGestaopassCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbGestaoPass.setText(null);
-				tbGestaoNovapass.setText(null);
-				tbGestaoConfirmPass.setText(null);
-			}
-		});
-		btGestaopassCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btGestaopassCancelar.setBounds(899, 415, 131, 41);
-		jpanelGestao.add(btGestaopassCancelar);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setAlignmentX(0.0f);
-		separator_1.setBounds(708, 83, 29, 433);
-		jpanelGestao.add(separator_1);
-
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setForeground(Color.BLACK);
-		separator_2.setAlignmentX(0.0f);
-		separator_2.setBounds(390, 83, 13, 433);
-		jpanelGestao.add(separator_2);
-		
-		JLabel label_1 = new JLabel("Nome:");
-		label_1.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_1.setBounds(47, 55, 57, 30);
-		jpanelGestao.add(label_1);
-		
-		tbfunnome = new JTextField();
-		tbfunnome.setEditable(false);
-		tbfunnome.setColumns(10);
-		tbfunnome.setBounds(57, 86, 217, 31);
-		jpanelGestao.add(tbfunnome);
-		
-		JLabel label_2 = new JLabel("Sobrenome:");
-		label_2.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_2.setBounds(47, 126, 120, 30);
-		jpanelGestao.add(label_2);
-		
-		tbfunapelido = new JTextField();
-		tbfunapelido.setEditable(false);
-		tbfunapelido.setColumns(10);
-		tbfunapelido.setBounds(57, 157, 217, 31);
-		jpanelGestao.add(tbfunapelido);
-		
-		JLabel label_3 = new JLabel("Data de Nascimento:");
-		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_3.setBounds(47, 190, 177, 30);
-		jpanelGestao.add(label_3);
-		
-		JDateChooser dtfunnasc = new JDateChooser();
-		dtfunnasc.setEnabled(false);
-		dtfunnasc.setBounds(57, 221, 217, 31);
-		jpanelGestao.add(dtfunnasc);
-		
-		JRadioButton rbfuncc = new JRadioButton("C.C.");
-		rbfuncc.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbfuncc.setEnabled(false);
-		rbfuncc.setBounds(57, 261, 66, 25);
-		jpanelGestao.add(rbfuncc);
-		
-		JRadioButton rbfunbi = new JRadioButton("B.I.");
-		rbfunbi.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbfunbi.setEnabled(false);
-		rbfunbi.setBounds(136, 261, 57, 25);
-		jpanelGestao.add(rbfunbi);
-		
-		JRadioButton rbfuncpass = new JRadioButton("Passaporte");
-		rbfuncpass.setFont(new Font("Dialog", Font.PLAIN, 15));
-		rbfuncpass.setEnabled(false);
-		rbfuncpass.setBounds(205, 261, 138, 25);
-		jpanelGestao.add(rbfuncpass);
-		
-		JLabel label_4 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
-		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_4.setBounds(39, 287, 227, 30);
-		jpanelGestao.add(label_4);
-		
-		tbfunident = new JTextField();
-		tbfunident.setEditable(false);
-		tbfunident.setColumns(10);
-		tbfunident.setBounds(49, 323, 225, 31);
-		jpanelGestao.add(tbfunident);
-		
-		JLabel label_6 = new JLabel("Contacto:");
-		label_6.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_6.setBounds(39, 356, 81, 31);
-		jpanelGestao.add(label_6);
-		
-		tbfuncontacto = new JTextField();
-		tbfuncontacto.setEditable(false);
-		tbfuncontacto.setColumns(10);
-		tbfuncontacto.setBounds(49, 387, 225, 31);
-		jpanelGestao.add(tbfuncontacto);
-		
-		JLabel label_7 = new JLabel("Morada: ");
-		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_7.setBounds(39, 419, 227, 30);
-		jpanelGestao.add(label_7);
-		
-		tbfunmorada = new JTextField();
-		tbfunmorada.setEditable(false);
-		tbfunmorada.setColumns(10);
-		tbfunmorada.setBounds(49, 452, 225, 31);
-		jpanelGestao.add(tbfunmorada);
-		
-		tbfunidfunc = new JTextField();
-		tbfunidfunc.setEditable(false);
-		tbfunidfunc.setColumns(10);
-		tbfunidfunc.setBounds(47, 529, 225, 31);
-		jpanelGestao.add(tbfunidfunc);
-		
-		JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
-		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblIdFuncionario.setBounds(47, 496, 227, 30);
-		jpanelGestao.add(lblIdFuncionario);
+		scrollPane_1.setViewportView(tableClts);
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -1032,6 +800,273 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gb.javabank.limpatabela(model);
+				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				panelCartao.setVisible(false);
+				btPedirCartao.setVisible(false);
+				btnMovimentos.setVisible(false);
+				// lClientes.clea
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
+
+			}
+
+		});
+
+		btnLimpar.setBounds(85, 507, 99, 38);
+		jpanelContas.add(btnLimpar);
+
+		
+
+		jpanelGestao.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelGestao);
+		jpanelGestao.setLayout(null);
+
+		JLabel lblUsername_1 = new JLabel("Username:");
+		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblUsername_1.setBounds(415, 81, 131, 41);
+		jpanelGestao.add(lblUsername_1);
+
+		tbGestaoUsername = new JTextField();
+		tbGestaoUsername.setEditable(false);
+		tbGestaoUsername.setBounds(415, 134, 271, 33);
+		jpanelGestao.add(tbGestaoUsername);
+
+		JLabel lblPassword_1 = new JLabel("Password:");
+		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_1.setBounds(415, 178, 131, 41);
+		jpanelGestao.add(lblPassword_1);
+
+		tbGestaopassuser = new JPasswordField();
+		tbGestaopassuser.setBounds(415, 230, 271, 33);
+		jpanelGestao.add(tbGestaopassuser);
+
+		JLabel lblNovaPassword = new JLabel("Novo UserName:");
+		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblNovaPassword.setBounds(415, 275, 191, 41);
+		jpanelGestao.add(lblNovaPassword);
+
+		tbGestaoNovoUser = new JTextField();
+		tbGestaoNovoUser.setBounds(415, 327, 271, 33);
+		jpanelGestao.add(tbGestaoNovoUser);
+
+		JButton btGestaouserconfirmar = new JButton("Confirmar");
+		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btGestaouserconfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
+					func.setUsername(tbGestaoNovoUser.getText());
+					tbGestaoUsername.setText(null);
+					tbGestaopassuser.setText(null);
+					tbGestaoNovoUser.setText(null);
+					JOptionPane.showMessageDialog(null, "Altera��o de Nome efectuado com sucesso");
+					lUtilizador.setText(func.getNome());
+				} else {
+					JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
+				}
+			}
+		});
+		btGestaouserconfirmar.setBounds(415, 415, 131, 41);
+		jpanelGestao.add(btGestaouserconfirmar);
+
+		JButton btGestaouserCancelar = new JButton("Cancelar");
+		btGestaouserCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tbGestaopassuser.setText(null);
+				tbGestaoNovoUser.setText(null);
+			}
+		});
+		btGestaouserCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btGestaouserCancelar.setBounds(565, 415, 131, 41);
+		jpanelGestao.add(btGestaouserCancelar);
+
+		JLabel lblPassword_2 = new JLabel("Password:");
+		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_2.setBounds(749, 81, 131, 41);
+		jpanelGestao.add(lblPassword_2);
+
+		tbGestaoPass = new JPasswordField();
+		tbGestaoPass.setBounds(749, 134, 271, 33);
+		jpanelGestao.add(tbGestaoPass);
+
+		JLabel lblPassword_3 = new JLabel("Nova Password:");
+		lblPassword_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblPassword_3.setBounds(749, 178, 168, 41);
+		jpanelGestao.add(lblPassword_3);
+
+		tbGestaoNovapass = new JPasswordField();
+		tbGestaoNovapass.setBounds(749, 230, 271, 33);
+		jpanelGestao.add(tbGestaoNovapass);
+
+		JLabel lblConfirmarPassword = new JLabel("Confirmar Password:");
+		lblConfirmarPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblConfirmarPassword.setBounds(749, 275, 271, 41);
+		jpanelGestao.add(lblConfirmarPassword);
+
+		tbGestaoConfirmPass = new JPasswordField();
+		tbGestaoConfirmPass.setBounds(749, 327, 271, 33);
+		jpanelGestao.add(tbGestaoConfirmPass);
+
+		JButton btGestaopassConfirmar = new JButton("Confirmar");
+		btGestaopassConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
+						&& new String(tbGestaoNovapass.getPassword())
+								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
+
+					func.setPassword(new String(tbGestaoNovapass.getPassword()));
+					JOptionPane.showMessageDialog(null, "Altera��o efectuada com sucesso!");
+					tbGestaoPass.setText(null);
+					tbGestaoNovapass.setText(null);
+					tbGestaoConfirmPass.setText(null);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Dados errados! Confirme os dados introduzidos!");
+				}
+			}
+		});
+		btGestaopassConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btGestaopassConfirmar.setBounds(749, 415, 131, 41);
+		jpanelGestao.add(btGestaopassConfirmar);
+
+		JButton btGestaopassCancelar = new JButton("Cancelar");
+		btGestaopassCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tbGestaoPass.setText(null);
+				tbGestaoNovapass.setText(null);
+				tbGestaoConfirmPass.setText(null);
+			}
+		});
+		btGestaopassCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btGestaopassCancelar.setBounds(899, 415, 131, 41);
+		jpanelGestao.add(btGestaopassCancelar);
+
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setAlignmentX(0.0f);
+		separator_1.setBounds(708, 83, 29, 433);
+		jpanelGestao.add(separator_1);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setAlignmentX(0.0f);
+		separator_2.setBounds(390, 83, 13, 433);
+		jpanelGestao.add(separator_2);
+
+		JLabel label_1 = new JLabel("Nome:");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_1.setBounds(47, 55, 57, 30);
+		jpanelGestao.add(label_1);
+
+		tbfunnome = new JTextField();
+		tbfunnome.setEditable(false);
+		tbfunnome.setColumns(10);
+		tbfunnome.setBounds(57, 86, 217, 31);
+		jpanelGestao.add(tbfunnome);
+
+		JLabel label_2 = new JLabel("Sobrenome:");
+		label_2.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_2.setBounds(47, 126, 120, 30);
+		jpanelGestao.add(label_2);
+
+		tbfunapelido = new JTextField();
+		tbfunapelido.setEditable(false);
+		tbfunapelido.setColumns(10);
+		tbfunapelido.setBounds(57, 157, 217, 31);
+		jpanelGestao.add(tbfunapelido);
+
+		JLabel label_3 = new JLabel("Data de Nascimento:");
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_3.setBounds(47, 190, 177, 30);
+		jpanelGestao.add(label_3);
+
+		JDateChooser dtfunnasc = new JDateChooser();
+		dtfunnasc.setEnabled(false);
+		dtfunnasc.setBounds(57, 221, 217, 31);
+		jpanelGestao.add(dtfunnasc);
+
+		JRadioButton rbfuncc = new JRadioButton("C.C.");
+		rbfuncc.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbfuncc.setEnabled(false);
+		rbfuncc.setBounds(57, 261, 66, 25);
+		jpanelGestao.add(rbfuncc);
+
+		JRadioButton rbfunbi = new JRadioButton("B.I.");
+		rbfunbi.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbfunbi.setEnabled(false);
+		rbfunbi.setBounds(136, 261, 57, 25);
+		jpanelGestao.add(rbfunbi);
+
+		JRadioButton rbfuncpass = new JRadioButton("Passaporte");
+		rbfuncpass.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbfuncpass.setEnabled(false);
+		rbfuncpass.setBounds(205, 261, 138, 25);
+		jpanelGestao.add(rbfuncpass);
+
+		JLabel label_4 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
+		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_4.setBounds(39, 287, 227, 30);
+		jpanelGestao.add(label_4);
+
+		tbfunident = new JTextField();
+		tbfunident.setEditable(false);
+		tbfunident.setColumns(10);
+		tbfunident.setBounds(49, 323, 225, 31);
+		jpanelGestao.add(tbfunident);
+
+		JLabel label_6 = new JLabel("Contacto:");
+		label_6.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_6.setBounds(39, 356, 81, 31);
+		jpanelGestao.add(label_6);
+
+		tbfuncontacto = new JTextField();
+		tbfuncontacto.setEditable(false);
+		tbfuncontacto.setColumns(10);
+		tbfuncontacto.setBounds(49, 387, 225, 31);
+		jpanelGestao.add(tbfuncontacto);
+
+		JLabel label_7 = new JLabel("Morada: ");
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_7.setBounds(39, 419, 227, 30);
+		jpanelGestao.add(label_7);
+
+		tbfunmorada = new JTextField();
+		tbfunmorada.setEditable(false);
+		tbfunmorada.setColumns(10);
+		tbfunmorada.setBounds(49, 452, 225, 31);
+		jpanelGestao.add(tbfunmorada);
+
+		tbfunidfunc = new JTextField();
+		tbfunidfunc.setEditable(false);
+		tbfunidfunc.setColumns(10);
+		tbfunidfunc.setBounds(47, 529, 225, 31);
+		jpanelGestao.add(tbfunidfunc);
+
+		JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
+		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblIdFuncionario.setBounds(47, 496, 227, 30);
+		jpanelGestao.add(lblIdFuncionario);
+
 		JPanel panelMovimentos = new JPanel();
 		panelMovimentos.setBounds(0, 0, 1065, 585);
 		JpanelPrincipal.add(panelMovimentos);
@@ -1086,39 +1121,6 @@ public class BancoAppFun implements Serializable {
 		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnNewButton.setBounds(258, 131, 116, 38);
 		jpanelOperacoes.add(btnNewButton);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				dateChooser_2.setEnabled(true);
-				tbllimitemes.setText(null);
-				panelCartao.setVisible(false);
-				btPedirCartao.setVisible(false);
-				btnMovimentos.setVisible(false);
-				// lClientes.clea
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-
-			}
-
-		});
-
-		btnLimpar.setBounds(85, 507, 99, 38);
-		jpanelContas.add(btnLimpar);
 
 		JLabel lblNewLabel_3 = new JLabel("Saldo :");
 		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -1684,6 +1686,7 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+		
 
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
 		lbClt.addListSelectionListener(new ListSelectionListener() {
@@ -1866,12 +1869,11 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
 				panelMovimentos.setVisible(false);
-				
+
 				tbfunnome.setText(func.getNome());
 				tbfunapelido.setText(func.getSobrenome());
 				dtfunnasc.setDate(func.getDataDeNascimento());
-				
-			
+
 				if (func.getTipoIndentificacao().equals("C.C.")) {
 					rbfuncc.setSelected(true);
 				}
@@ -1881,18 +1883,35 @@ public class BancoAppFun implements Serializable {
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
 				}
-				
-				
-				tbfunident.setText(func.getNumidentificacao()+"");
-				tbfuncontacto.setText(func.getContacto()+"");
+
+				tbfunident.setText(func.getNumidentificacao() + "");
+				tbfuncontacto.setText(func.getContacto() + "");
 				tbfunmorada.setText(func.getMorada());
-				tbfunidfunc.setText(func.getIdFuncionario()+"");
-				
+				tbfunidfunc.setText(func.getIdFuncionario() + "");
 
 			}
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
+		
+		btnMovimentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelContas.setVisible(false);
+				panelMovimentos.setVisible(true);
+
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
+
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
+			}
+		});
+		
+		
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
@@ -2006,23 +2025,6 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
-			}
-		});
-
-		btnMovimentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jpanelContas.setVisible(false);
-				panelMovimentos.setVisible(true);
-
-				if (!lContas.isSelectionEmpty()) {
-					String idConta = lContas.getSelectedValue();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
-
-					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-				}
 			}
 		});
 
