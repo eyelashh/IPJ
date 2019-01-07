@@ -61,8 +61,8 @@ public class BancoAppAdm implements Serializable {
 	private JTextField textAdmFunUser;
 	private JTextField textAdmFunPass;
 	private JTextField textAdmFunSobrenome;
-	private static Administrador adm;
-	private static GestaoBanco gb;
+	private  Administrador adm;
+	private  GestaoBanco gb;
 	private JTextField textAdmFunMorada;
 	private JTextField tbadmcontanumero;
 	private JTextField tbadmcontalimoperacao;
@@ -227,48 +227,48 @@ public class BancoAppAdm implements Serializable {
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		cbAdmFunPesq.setBounds(111, 29, 227, 34);
+		cbAdmFunPesq.setBounds(111, 13, 227, 34);
 		JPAdmFuncionario.add(cbAdmFunPesq);
 
 		// caixa de texto para escrever a procura do funcionario
 		JTextField tbAdmFunPesq = new JTextField();
-		tbAdmFunPesq.setBounds(111, 66, 227, 31);
+		tbAdmFunPesq.setBounds(111, 60, 227, 31);
 		JPAdmFuncionario.add(tbAdmFunPesq);
 
 		// texto : Nome
 		JLabel lblAdmFunNome = new JLabel("Nome:");
 		lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunNome.setBounds(453, 88, 57, 30);
+		lblAdmFunNome.setBounds(463, 59, 57, 30);
 		JPAdmFuncionario.add(lblAdmFunNome);
 
 		// texto : data de nascimento
 		JLabel lblAdmFunDataDeNascimento = new JLabel("Data de Nascimento:");
 		lblAdmFunDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunDataDeNascimento.setBounds(453, 148, 177, 30);
+		lblAdmFunDataDeNascimento.setBounds(463, 119, 177, 30);
 		JPAdmFuncionario.add(lblAdmFunDataDeNascimento);
 
 		// texto : documento
 		JLabel lblAdmFunDocumento = new JLabel("Documento:");
 		lblAdmFunDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunDocumento.setBounds(453, 209, 108, 30);
+		lblAdmFunDocumento.setBounds(463, 180, 108, 30);
 		JPAdmFuncionario.add(lblAdmFunDocumento);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
 		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunCC.setBounds(564, 212, 66, 25);
+		rbAdmFunCC.setBounds(574, 183, 66, 25);
 		JPAdmFuncionario.add(rbAdmFunCC);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
 		rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunBI.setBounds(643, 212, 57, 25);
+		rbAdmFunBI.setBounds(653, 183, 57, 25);
 		JPAdmFuncionario.add(rbAdmFunBI);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
 		rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunPass.setBounds(712, 212, 138, 25);
+		rbAdmFunPass.setBounds(722, 183, 138, 25);
 		JPAdmFuncionario.add(rbAdmFunPass);
 		bg.add(rbAdmFunCC);
 		bg.add(rbAdmFunBI);
@@ -277,55 +277,55 @@ public class BancoAppAdm implements Serializable {
 		// texto : numero do documento
 		JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
 		lblAdmFunNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunNumero.setBounds(453, 237, 227, 30);
+		lblAdmFunNumero.setBounds(463, 208, 227, 30);
 		JPAdmFuncionario.add(lblAdmFunNumero);
 
 		// texto : contato
 		JLabel lblAdmFunContacto = new JLabel("Contacto:");
 		lblAdmFunContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunContacto.setBounds(453, 303, 81, 31);
+		lblAdmFunContacto.setBounds(463, 274, 81, 31);
 		JPAdmFuncionario.add(lblAdmFunContacto);
 
 		// texto : username
 		JLabel lblAdmFunUsername = new JLabel("UserName:");
 		lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunUsername.setBounds(454, 441, 120, 30);
+		lblAdmFunUsername.setBounds(464, 412, 120, 30);
 		JPAdmFuncionario.add(lblAdmFunUsername);
 
 		// texto : username
 		JLabel lblAdmFunPassword = new JLabel("Password:");
 		lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunPassword.setBounds(712, 441, 153, 30);
+		lblAdmFunPassword.setBounds(722, 412, 153, 30);
 		JPAdmFuncionario.add(lblAdmFunPassword);
 
 		// Campos de texto - nome
 		textAdmFunNome = new JTextField();
 		textAdmFunNome.setColumns(10);
-		textAdmFunNome.setBounds(463, 119, 217, 31);
+		textAdmFunNome.setBounds(473, 90, 217, 31);
 		JPAdmFuncionario.add(textAdmFunNome);
 
 		// Campos de texto - numero
 		textAdmFunNumero = new JTextField();
 		textAdmFunNumero.setColumns(10);
-		textAdmFunNumero.setBounds(463, 270, 225, 31);
+		textAdmFunNumero.setBounds(473, 241, 225, 31);
 		JPAdmFuncionario.add(textAdmFunNumero);
 
 		// Campos de texto - contato
 		textAdmFunContato = new JTextField();
 		textAdmFunContato.setColumns(10);
-		textAdmFunContato.setBounds(463, 334, 225, 31);
+		textAdmFunContato.setBounds(473, 305, 225, 31);
 		JPAdmFuncionario.add(textAdmFunContato);
 
 		// Campos de texto - username
 		textAdmFunUser = new JTextField();
 		textAdmFunUser.setColumns(10);
-		textAdmFunUser.setBounds(464, 469, 225, 31);
+		textAdmFunUser.setBounds(474, 440, 225, 31);
 		JPAdmFuncionario.add(textAdmFunUser);
 
 		// Campos de texto - pass
 		textAdmFunPass = new JTextField();
 		textAdmFunPass.setColumns(10);
-		textAdmFunPass.setBounds(722, 469, 225, 31);
+		textAdmFunPass.setBounds(732, 440, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
 
 		// lista dos funcionarios
@@ -338,27 +338,27 @@ public class BancoAppAdm implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		dateChooser.setBounds(463, 179, 217, 31);
+		dateChooser.setBounds(473, 150, 217, 31);
 		JPAdmFuncionario.add(dateChooser);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
 		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblSobrenome.setBounds(699, 86, 120, 30);
+		lblSobrenome.setBounds(709, 57, 120, 30);
 		JPAdmFuncionario.add(lblSobrenome);
 
 		textAdmFunSobrenome = new JTextField();
 		textAdmFunSobrenome.setColumns(10);
-		textAdmFunSobrenome.setBounds(709, 117, 217, 31);
+		textAdmFunSobrenome.setBounds(719, 88, 217, 31);
 		JPAdmFuncionario.add(textAdmFunSobrenome);
 
 		textAdmFunMorada = new JTextField();
 		textAdmFunMorada.setColumns(10);
-		textAdmFunMorada.setBounds(463, 399, 225, 31);
+		textAdmFunMorada.setBounds(473, 370, 225, 31);
 		JPAdmFuncionario.add(textAdmFunMorada);
 
 		JLabel lblMorada = new JLabel("Morada: ");
 		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMorada.setBounds(453, 366, 227, 30);
+		lblMorada.setBounds(463, 337, 227, 30);
 		JPAdmFuncionario.add(lblMorada);
 		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
 		lbLAdmFunLista.setBounds(109, 109, 240, 441);
@@ -401,7 +401,7 @@ public class BancoAppAdm implements Serializable {
 
 		JButton btnLimpar = new JButton("Limpar ");
 		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnLimpar.setBounds(529, 42, 120, 38);
+		btnLimpar.setBounds(539, 13, 120, 38);
 		// limpar pesquisa
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -451,13 +451,13 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 
-		btAdmFunNovo.setBounds(647, 512, 120, 38);
+		btAdmFunNovo.setBounds(605, 512, 120, 38);
 		JPAdmFuncionario.add(btAdmFunNovo);
 
 		// botao confirmar funcionario
 		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunConfirmar_1.setBounds(515, 512, 120, 38);
+		btnAdmFunConfirmar_1.setBounds(473, 512, 120, 38);
 
 		// bt confirmar (adicionar ou alterar )
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
@@ -546,7 +546,7 @@ public class BancoAppAdm implements Serializable {
 		// botao eliminar funcionario
 		JButton btnAdmFunEliminar = new JButton("Eliminar");
 		btnAdmFunEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunEliminar.setBounds(779, 512, 120, 38);
+		btnAdmFunEliminar.setBounds(737, 512, 120, 38);
 		// metodo elimina funcionario
 		btnAdmFunEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -583,7 +583,7 @@ public class BancoAppAdm implements Serializable {
 		// Botao de procurar
 		JButton btAdmFunProc = new JButton("Procurar");
 		btAdmFunProc.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btAdmFunProc.setBounds(385, 42, 120, 38);
+		btAdmFunProc.setBounds(395, 13, 120, 38);
 		// pesquisar funcionarios por atributos
 		btAdmFunProc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
