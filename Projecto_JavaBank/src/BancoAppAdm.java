@@ -565,8 +565,13 @@ public class BancoAppAdm implements Serializable {
 					}
 					else
 					{
-						// atualizar admin;
-						
+						gb.javabank.actualizaAdmin(
+								(Administrador) gb.javabank.selectUtilizador(Integer.parseInt(s),
+										gb.javabank.getUtlizadores()),
+								textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
+								Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
+								Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
+								textAdmFunPass.getText());
 					}
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					dmFun.removeAllElements();

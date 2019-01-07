@@ -391,6 +391,23 @@ public class Banco implements Serializable {
 		f.setPassword(password);
 
 	}
+	
+	protected void actualizaAdmin(Administrador adm, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
+		adm.setNome(nome);
+		adm.setSobrenome(sobrenome);
+		adm.setDataDeNascimento(dataDeNascimento);
+		adm.setTipoIndentificacao(tipoIndentificacao);
+		adm.setNumidentificacao(numidentificacao);
+		adm.setMorada(morada);
+		adm.setContacto(contacto);
+		adm.setUsername(username);
+		adm.setPassword(password);
+
+	}
+	
 
 	// atualiza dados do Cliente;
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
