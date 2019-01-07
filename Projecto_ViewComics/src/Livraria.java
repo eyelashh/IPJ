@@ -20,6 +20,8 @@ public class Livraria implements Serializable {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
+	private HashMap <Integer,Integer> livrosVendidos;
+	
 	// criar um atributo privado est�tico que � da pr�pria classe
 
 	public Livraria() {
@@ -29,11 +31,12 @@ public class Livraria implements Serializable {
 		this.transacoes = new ArrayList<Transacao>();
 		this.sessoes = new ArrayList<Sessao>();
 		this.carrinhos = new ArrayList<Carrinho>();
+		this.livrosVendidos=new HashMap<Integer,Integer>();
 
 	}
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
-			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos) {
+			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,HashMap <Integer,Integer>livrosVendidos) {
 		super();
 		this.idLivraria = idLivraria;
 		this.nome = nome;
@@ -42,6 +45,7 @@ public class Livraria implements Serializable {
 		this.transacoes = transacoes;
 		this.sessoes = sessoes;
 		this.carrinhos = carrinhos;
+		this.livrosVendidos = livrosVendidos;
 	}
 
 	// criar m�todo est�tico para retornar a inst�ncia da classe

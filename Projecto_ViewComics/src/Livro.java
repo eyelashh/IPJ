@@ -11,6 +11,7 @@ public class Livro implements  Serializable {
 	private int stock;
 	private String descricao;
 	private int ano;
+	private int vendas;
 	private static AtomicInteger ai=new AtomicInteger(0);
 	
 	public Livro() {
