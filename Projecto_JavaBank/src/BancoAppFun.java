@@ -743,6 +743,7 @@ public class BancoAppFun implements Serializable {
 		tbcodcartao.setColumns(10);
 		tbcodcartao.setBounds(72, 69, 190, 22);
 		panelCartao.add(tbcodcartao);
+		
 
 		JButton btCartao = new JButton("Criar cartao");
 
