@@ -328,57 +328,75 @@ public class AppCliente implements Serializable {
 				int idLivroSelec = gl.viewComics.obterIdLivro(livroSeleccionado);
 				String qtdAlterarCarrinho = txtQuantidadeAlterarLIVROS.getText();
 				String nif = txtNifCarrinhoLIVROS.getText();
-				String stock=txtStockLivros.getText();
-
-				if (gl.viewComics.verificaNif(nif) == false) {
-					JOptionPane.showMessageDialog(null,
-							"O nif tem que conter 9 digitos. Verifique se foi inserido correctamente.");
-					txtQuantidadeActualLivros.setText("0");
-				} else if (gl.viewComics.verificaNif(nif)) {
-					if (gl.viewComics.carrinhoExiste(nif)) {
-
-						gl.viewComics.carrinhoExiste(nif);
-						String quantidadeActualLIVROSstr = gl.viewComics.quantidadeCarrinho(idLivroSelec, nif);
-						txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
-
-						if (rbAdicionarQuantidadeLIVROS.isSelected()) {
-							if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec,stock)) {
-								quantidadeActualLIVROSstr = gl.viewComics
-										.adicionarQuantidade(txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
-								int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-								txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
-								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-
-							} else {
-								JOptionPane.showMessageDialog(null,
-										"Não foi possível adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
-							}
-						}
-						if (rbRemoverQuantidadeLIVROS.isSelected()) {
-							if (gl.viewComics.removerCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec, nif)) {
-								quantidadeActualLIVROSstr = gl.viewComics
-										.removerQuantidade(txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
-								int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-								txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
-								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-
-							} else {
-
-								JOptionPane.showMessageDialog(null,
-										"Não foi possível remover a quantidade referida do carrinho. Verifique a quantidade do carrinho");
-							}
-
-						}
-					} else {
+				String stock = txtStockLivros.getText();
+				if (!listaLivros.isSelectionEmpty()) {
+					if (gl.viewComics.verificaNif(nif) == false) {
 						JOptionPane.showMessageDialog(null,
-								"O nif introduzido nao consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
+								"O nif tem que conter 9 digitos. Verifique se foi inserido correctamente.");
+						txtQuantidadeActualLivros.setText("0");
+					} else if (gl.viewComics.verificaNif(nif)) {
+						if (gl.viewComics.carrinhoExiste(nif)) {
+
+							gl.viewComics.carrinhoExiste(nif);
+							String quantidadeActualLIVROSstr = gl.viewComics.quantidadeCarrinho(idLivroSelec, nif);
+							txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
+
+							if (rbAdicionarQuantidadeLIVROS.isSelected()) {
+								if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec,
+										stock)) {
+									quantidadeActualLIVROSstr = gl.viewComics.adicionarQuantidade(
+											txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
+									int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
+//								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+									txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
+									// actualiza o carrinho
+									gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+
+									// actualiza o stock
+									String novoStockSTR = gl.viewComics.removerQuantidade(stock, qtdAlterarCarrinho);
+									int novoStockINT = Integer.parseInt(novoStockSTR);
+									gl.viewComics.alterarStockLivro(livroSeleccionado, novoStockINT);
+
+								} else {
+									JOptionPane.showMessageDialog(null,
+											"Não foi possível adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
+								}
+							}
+							if (rbRemoverQuantidadeLIVROS.isSelected()) {
+								if (gl.viewComics.removerCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec, nif)) {
+									quantidadeActualLIVROSstr = gl.viewComics
+											.removerQuantidade(txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
+									int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
+//								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+									txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
+									// actualizar carrinho
+									gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+
+									// actualizar stock
+									String novoStockSTR = gl.viewComics.adicionarQuantidade(stock, qtdAlterarCarrinho);
+									int novoStockINT = Integer.parseInt(novoStockSTR);
+									gl.viewComics.alterarStockLivro(livroSeleccionado, novoStockINT);
+
+								} else {
+
+									JOptionPane.showMessageDialog(null,
+											"Não foi possível remover a quantidade referida do carrinho. Verifique a quantidade do carrinho");
+								}
+
+							}
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"O nif introduzido nao consta na nossa base de dados de carrinhos. Por favor primeiro crie um carrinho com o seu nif.");
+						}
+
 					}
-//				modeloLista.removeAllElements();
-//				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
-//				txtNifCarrinhoLIVROS.setText("---------");
+
 				}
+				else {
+					JOptionPane.showMessageDialog(null, "Para alterar o carrinho por favor seleccione um livro da lista");
+				}
+				modeloLista.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 			}
 		});
 		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
