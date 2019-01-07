@@ -9,7 +9,7 @@ public class Venda implements Serializable{
 	
 	private double montante;
 	private static LocalDate data;
-	private HashMap <Integer, Integer> conteudoVenda;
+	private HashMap <Integer, Integer> conteudoVenda;//vai ser igual ao hashmap do carrinho quando o mesmo é pago
 	
 	
 	
@@ -17,7 +17,7 @@ public class Venda implements Serializable{
 		super();
 		this.montante = montante;
 		this.conteudoVenda = conteudoVenda;
-		//confirmar se isto gera a data no momento;
+		//confirmar se isto gera a data no momento!!!!
 		this.data= data.now();
 	}
 	public double getMontante() {
