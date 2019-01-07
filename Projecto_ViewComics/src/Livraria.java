@@ -20,7 +20,10 @@ public class Livraria implements Serializable {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
-	private HashMap <Integer,Integer> livrosVendidos;
+	private ArrayList <Venda> vendas;//para efeitos de historico de vendas, cada vez que um carrinho e eliminado/pago o seu conteudo transforma-se
+									//no conteúdo de uma venda que tem uma data espcifica tambem como atributo
+	 
+	
 	
 	// criar um atributo privado estï¿½tico que ï¿½ da prï¿½pria classe
 
@@ -31,12 +34,11 @@ public class Livraria implements Serializable {
 		this.transacoes = new ArrayList<Transacao>();
 		this.sessoes = new ArrayList<Sessao>();
 		this.carrinhos = new ArrayList<Carrinho>();
-		this.livrosVendidos=new HashMap<Integer,Integer>();
-
+		this.vendas = new ArrayList <Venda>();
 	}
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
-			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,HashMap <Integer,Integer>livrosVendidos) {
+			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos, ArrayList<Venda>vendas) {
 		super();
 		this.idLivraria = idLivraria;
 		this.nome = nome;
@@ -45,7 +47,7 @@ public class Livraria implements Serializable {
 		this.transacoes = transacoes;
 		this.sessoes = sessoes;
 		this.carrinhos = carrinhos;
-		this.livrosVendidos = livrosVendidos;
+		this.vendas=vendas;
 	}
 
 	// criar mï¿½todo estï¿½tico para retornar a instï¿½ncia da classe

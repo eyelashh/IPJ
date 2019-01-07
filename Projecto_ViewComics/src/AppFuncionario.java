@@ -404,7 +404,7 @@ public class AppFuncionario implements Serializable {
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
-
+				//limpa tabela
 				modeloTabelaCarrinhos.setRowCount(0);
 
 				// se a lista estiver seleccionada, copia para as caixas de texto

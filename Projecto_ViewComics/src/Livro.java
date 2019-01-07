@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -11,7 +12,7 @@ public class Livro implements  Serializable {
 	private int stock;
 	private String descricao;
 	private int ano;
-	private int vendas;
+	private ArrayList <Preco> precos; //para fins de histórico de preços
 	private static AtomicInteger ai=new AtomicInteger(0);
 	
 	public Livro() {
@@ -30,6 +31,7 @@ public class Livro implements  Serializable {
 		this.stock = stock;
 		this.ano =ano;
 		this.descricao=descricao;
+		this.precos=new ArrayList <Preco> (); 
  
 	}
 
