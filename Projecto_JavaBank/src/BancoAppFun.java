@@ -284,7 +284,7 @@ public class BancoAppFun implements Serializable {
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
 		JPanel panelMovimentos = new JPanel();
-		panelMovimentos.setBounds(0, 0, 553, 400);
+		panelMovimentos.setBounds(0, 0, 1065, 585);
 		JpanelPrincipal.add(panelMovimentos);
 		panelMovimentos.setLayout(null);
 

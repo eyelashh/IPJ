@@ -72,6 +72,7 @@ public class BancoAppAdm implements Serializable {
 	private JTextField tbadmcontalimmes;
 	private JTextField tbadmcontacartaonome;
 	private JTextField tbadmcontacartaocod;
+	private JDateChooser dcadmcontadata;
 
 	/**
 	 * Launch the application.
@@ -222,11 +223,13 @@ public class BancoAppAdm implements Serializable {
 				jpConta.setLayout(null);
 				
 				tbadmcontanumero = new JTextField();
+				tbadmcontanumero.setEditable(false);
 				tbadmcontanumero.setColumns(10);
 				tbadmcontanumero.setBounds(341, 13, 253, 30);
 				jpConta.add(tbadmcontanumero);
 				
-				JDateChooser dcadmcontadata = new JDateChooser();
+				dcadmcontadata = new JDateChooser();
+				dcadmcontadata.setEnabled(false);
 				dcadmcontadata.setBounds(341, 56, 253, 30);
 				jpConta.add(dcadmcontadata);
 				
@@ -236,16 +239,19 @@ public class BancoAppAdm implements Serializable {
 				jpConta.add(lblNewLabel_1);
 				
 				tbadmcontaolimperacao = new JTextField();
+				tbadmcontaolimperacao.setEditable(false);
 				tbadmcontaolimperacao.setColumns(10);
 				tbadmcontaolimperacao.setBounds(341, 129, 253, 30);
 				jpConta.add(tbadmcontaolimperacao);
 				
 				tbadmcontalimdia = new JTextField();
+				tbadmcontalimdia.setEditable(false);
 				tbadmcontalimdia.setColumns(10);
 				tbadmcontalimdia.setBounds(341, 172, 253, 30);
 				jpConta.add(tbadmcontalimdia);
 				
 				tbadmcontasaldo = new JTextField();
+				tbadmcontasaldo.setEditable(false);
 				tbadmcontasaldo.setColumns(10);
 				tbadmcontasaldo.setBounds(341, 215, 253, 30);
 				jpConta.add(tbadmcontasaldo);
@@ -286,6 +292,7 @@ public class BancoAppAdm implements Serializable {
 				lblContasPoupana.setFont(new Font("Dialog", Font.PLAIN, 17));
 				
 				tbadmcontajuros = new JTextField();
+				tbadmcontajuros.setEditable(false);
 				tbadmcontajuros.setBounds(150, 27, 253, 30);
 				panelContaPadm.add(tbadmcontajuros);
 				tbadmcontajuros.setColumns(10);
@@ -301,6 +308,7 @@ public class BancoAppAdm implements Serializable {
 				lblLimiteMs.setFont(new Font("Dialog", Font.PLAIN, 17));
 				
 				tbadmcontalimmes = new JTextField();
+				tbadmcontalimmes.setEditable(false);
 				tbadmcontalimmes.setBounds(150, 73, 253, 30);
 				panelContaPadm.add(tbadmcontalimmes);
 				tbadmcontalimmes.setColumns(10);
@@ -311,11 +319,13 @@ public class BancoAppAdm implements Serializable {
 				panelCartaoAdm.setLayout(null);
 				
 				tbadmcontacartaonome = new JTextField();
+				tbadmcontacartaonome.setEditable(false);
 				tbadmcontacartaonome.setColumns(10);
 				tbadmcontacartaonome.setBounds(154, 13, 247, 22);
 				panelCartaoAdm.add(tbadmcontacartaonome);
 				
 				JDateChooser tbadmcontacartaovalidade = new JDateChooser();
+				tbadmcontacartaovalidade.setEnabled(false);
 				tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
 				panelCartaoAdm.add(tbadmcontacartaovalidade);
 				
@@ -349,9 +359,10 @@ public class BancoAppAdm implements Serializable {
 				listcontasadm.setBounds(12, 56, 147, 493);
 				jpConta.add(listcontasadm);
 				
-				JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-				chckbxNewCheckBox.setBounds(341, 502, 113, 25);
-				jpConta.add(chckbxNewCheckBox);
+				JCheckBox cboxaberta = new JCheckBox("New check box");
+				cboxaberta.setEnabled(false);
+				cboxaberta.setBounds(341, 502, 113, 25);
+				jpConta.add(cboxaberta);
 				
 				JLabel lblContas = new JLabel("Contas:");
 				lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
