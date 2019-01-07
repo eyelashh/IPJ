@@ -239,37 +239,27 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
 
-		// Modelo da tabela:
-		DefaultTableModel model = new DefaultTableModel(null, new String[] { "Check", "ID", "Nome" }) {
-			private static final long serialVersionUID = 1L;
-
-			@SuppressWarnings("rawtypes")
-			public Class getColumnClass(int c) {
-				switch (c) {
-				case 0:
-					return Boolean.class;
-				case 1:
-					return Integer.class;
-				default:
-					return String.class;
-				}
-			}
-
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				if (mColIndex == 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		};
-
-		// Preencher tabela apartir do tablemodel:
-		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
+
+		// Modelo da tabela clientes:
+		String[] colunas2 = { "Check", "ID", "Nome" };
+		DefaultTableModel model = new DefaultTableModel(colunas2, 0);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(768, 47, 262, 334);
+		
+
+		jpanelContas.add(scrollPane_1);
+
+		tableClts = new JTable(model);
+		
+		
+		scrollPane_1.setViewportView(tableClts);
+
+		// Preencher tabela apartir do tablemodel:
+		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
 		JPanel panelMovimentos = new JPanel();
 		panelMovimentos.setBounds(0, 0, 553, 400);
@@ -280,7 +270,7 @@ public class BancoAppFun implements Serializable {
 		scrollPane.setBounds(55, 51, 418, 293);
 		panelMovimentos.add(scrollPane);
 
-		// Modelo para tabela
+		// Modelo para tabela movimentos
 		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 		table = new JTable(modeloTabela);
@@ -512,24 +502,21 @@ public class BancoAppFun implements Serializable {
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
 
-		tableClts = new JTable(model);
-		tableClts.setBounds(768, 47, 262, 334);
-		jpanelContas.add(tableClts);
-
 		JButton btnMovimentos = new JButton("Movimentos");
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
 				panelMovimentos.setVisible(true);
-				
-				
-				String idConta = lContas.getSelectedValue();
-				Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
 
-				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
 
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
 			}
 		});
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
