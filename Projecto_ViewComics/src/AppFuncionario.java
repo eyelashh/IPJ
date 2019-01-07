@@ -169,8 +169,7 @@ public class AppFuncionario implements Serializable {
 //				Image img;
 //				try {
 //
-//					// img = ImageIO.read(new URL(
-//					// "https://conteudo.imguol.com.br/c/entretenimento/c4/2018/05/15/super-mario-odyssey-1526426783086_v2_1170x540.jpgx"));
+//
 //					img = ImageIO.read(new File(""));
 //					g.drawImage(img, 0, 0, null);
 //				} catch (IOException e) {
