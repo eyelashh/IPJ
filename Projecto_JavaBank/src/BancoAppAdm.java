@@ -65,7 +65,7 @@ public class BancoAppAdm implements Serializable {
 	private static GestaoBanco gb;
 	private JTextField textAdmFunMorada;
 	private JTextField tbadmcontanumero;
-	private JTextField tbadmcontaolimperacao;
+	private JTextField tbadmcontalimoperacao;
 	private JTextField tbadmcontalimdia;
 	private JTextField tbadmcontasaldo;
 	private JTextField tbadmcontajuros;
@@ -238,11 +238,11 @@ public class BancoAppAdm implements Serializable {
 				lblNewLabel_1.setBounds(191, 19, 138, 16);
 				jpConta.add(lblNewLabel_1);
 				
-				tbadmcontaolimperacao = new JTextField();
-				tbadmcontaolimperacao.setEditable(false);
-				tbadmcontaolimperacao.setColumns(10);
-				tbadmcontaolimperacao.setBounds(341, 129, 253, 30);
-				jpConta.add(tbadmcontaolimperacao);
+				tbadmcontalimoperacao = new JTextField();
+				tbadmcontalimoperacao.setEditable(false);
+				tbadmcontalimoperacao.setColumns(10);
+				tbadmcontalimoperacao.setBounds(341, 129, 253, 30);
+				jpConta.add(tbadmcontalimoperacao);
 				
 				tbadmcontalimdia = new JTextField();
 				tbadmcontalimdia.setEditable(false);
@@ -355,11 +355,15 @@ public class BancoAppAdm implements Serializable {
 				btVoltarContasAdm.setBounds(427, 538, 97, 25);
 				jpConta.add(btVoltarContasAdm);
 				
-				JList listcontasadm = new JList();
+				DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dlmcontaadm);
+				JList<String> listcontasadm = new JList<String>(dlmcontaadm);
+				
+				listcontasadm.setVisible(false);
 				listcontasadm.setBounds(12, 56, 147, 493);
 				jpConta.add(listcontasadm);
 				
-				JCheckBox cboxaberta = new JCheckBox("New check box");
+				JCheckBox cboxaberta = new JCheckBox("Aberta");
 				cboxaberta.setEnabled(false);
 				cboxaberta.setBounds(341, 502, 113, 25);
 				jpConta.add(cboxaberta);
@@ -1267,6 +1271,8 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(true);
+				listcontasadm.setVisible(false);
+				listcontasadm.clearSelection();
 				
 				
 				// preenche campos:
@@ -1277,7 +1283,7 @@ public class BancoAppAdm implements Serializable {
 				
 				tbadmcontanumero.setText(cont.getIdConta()+"");
 				dcadmcontadata.setDate(cont.getDataCriacao());
-				tbadmcontaolimperacao.setText(cont.getValorMaxLevantamento()+"");
+				tbadmcontalimoperacao.setText(cont.getValorMaxLevantamento()+"");
 				tbadmcontalimdia.setText(cont.getValorMaxDia()+"");
 				tbadmcontasaldo.setText(cont.getSaldo()+"");
 				
@@ -1310,9 +1316,11 @@ public class BancoAppAdm implements Serializable {
 		// limpa contas e sai do painel de contas para o painel cliente:
 		btVoltarContasAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				tbadmcontanumero.setText(null);
 				dcadmcontadata.setDate(null);
-				tbadmcontaolimperacao.setText(null);
+				tbadmcontalimoperacao.setText(null);
 				tbadmcontalimdia.setText(null);
 				tbadmcontasaldo.setText(null);
 				tbadmcontajuros.setText(null);
@@ -1321,6 +1329,7 @@ public class BancoAppAdm implements Serializable {
 				tbadmcontacartaovalidade.setDate(null);
 				tbadmcontacartaocod.setText(null);
 				
+				cboxaberta.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				JPAdmCliente.setVisible(true);
 				JPAdmFuncionario.setVisible(false);
@@ -1328,9 +1337,7 @@ public class BancoAppAdm implements Serializable {
 				jpConta.setVisible(false);
 				panelContaPadm.setVisible(true);
 				panelCartaoAdm.setVisible(true);
-				
-				
-				
+	
 			}
 		});
 		
@@ -1343,11 +1350,48 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(true);
+				listcontasadm.setVisible(true);
+				
 				
 			}
 		});
 		
-		
+		listcontasadm.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				cboxaberta.setVisible(true);
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(listcontasadm.getSelectedValue()), gb.javabank.getContas());
+				
+				tbadmcontanumero.setText(c.getIdConta()+"");
+				dcadmcontadata.setDate(c.getDataCriacao());
+				tbadmcontalimoperacao.setText(c.getValorMaxLevantamento()+"");
+				tbadmcontalimdia.setText(c.getValorMaxDia()+"");
+				tbadmcontasaldo.setText(c.getSaldo()+"");
+				
+				if(c instanceof ContaCorrente)
+				{
+					if(((ContaCorrente) c).getCartao()!=0)
+					{
+					panelContaPadm.setVisible(false);
+					panelCartaoAdm.setVisible(true);
+					Cartao cartao = gb.javabank.selecionacartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+					tbadmcontacartaonome.setText(cartao.getNomeTitular());
+					tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
+					tbadmcontacartaocod.setText(cartao.getCodvalidacao()+"");
+					}
+				}
+				else
+				{
+					
+					panelContaPadm.setVisible(true);
+					panelCartaoAdm.setVisible(false);
+					tbadmcontajuros.setText(((ContaPoupanca) c).getTaxaJuros()+"");
+					tbadmcontalimmes.setText(((ContaPoupanca) c).getLimiteMensalDebito()+"");
+				}
+				
+				
+			}
+		});
 		
 		// botao estatistica accao que muda de cor
 		btAdmEstatistica.addMouseListener(new MouseListener() {

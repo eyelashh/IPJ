@@ -215,11 +215,11 @@ public class BancoAppFun implements Serializable {
 		JpanelPrincipal.setLayout(null);
 
 		DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
-		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
+		gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dcbm);
 
 		// Lista contas painel conta:
 		DefaultListModel<String> dmconta = new DefaultListModel<String>();
-		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+		gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
 		// Aqui estive a adicionar itens ao combobox de pesquisa
 		String[] itens = new String[] { "Nome", "ID" };
@@ -283,20 +283,9 @@ public class BancoAppFun implements Serializable {
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-		JPanel panelMovimentos = new JPanel();
-		panelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(panelMovimentos);
-		panelMovimentos.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		panelMovimentos.add(scrollPane);
-
 		// Modelo para tabela movimentos
 		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-		table = new JTable(modeloTabela);
-		scrollPane.setViewportView(table);
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -525,22 +514,6 @@ public class BancoAppFun implements Serializable {
 		panelCartao.add(btCartao);
 
 		JButton btnMovimentos = new JButton("Movimentos");
-		btnMovimentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jpanelContas.setVisible(false);
-				panelMovimentos.setVisible(true);
-
-				if (!lContas.isSelectionEmpty()) {
-					String idConta = lContas.getSelectedValue();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
-
-					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-				}
-			}
-		});
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnMovimentos.setBounds(416, 521, 120, 38);
 		btnMovimentos.setVisible(false);
@@ -602,7 +575,7 @@ public class BancoAppFun implements Serializable {
 					// Atribuir titulares das contas:
 					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 				} else {
@@ -643,7 +616,7 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				tbllimitemes.setText(null);
 				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
 			}
 		});
@@ -762,7 +735,7 @@ public class BancoAppFun implements Serializable {
 					dateChooser_2.setEnabled(true);
 					tbllimitemes.setText(null);
 					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 					tbnomecartao.setText(null);
 					dtcartao.setDate(null);
 					tbcodcartao.setText(null);
@@ -820,6 +793,18 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+		
+				JPanel panelMovimentos = new JPanel();
+				panelMovimentos.setBounds(0, 0, 1065, 585);
+				JpanelPrincipal.add(panelMovimentos);
+				panelMovimentos.setLayout(null);
+				
+						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.setBounds(55, 51, 418, 293);
+						panelMovimentos.add(scrollPane);
+						table = new JTable(modeloTabela);
+						scrollPane.setViewportView(table);
+						panelMovimentos.setVisible(false);
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
@@ -888,7 +873,7 @@ public class BancoAppFun implements Serializable {
 				btnMovimentos.setVisible(false);
 				// lClientes.clea
 				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
 			}
 
@@ -1219,7 +1204,6 @@ public class BancoAppFun implements Serializable {
 		jpanelClientes.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelClientes);
 		jpanelClientes.setVisible(true);
-		panelMovimentos.setVisible(false);
 		jpanelClientes.setLayout(null);
 		jpanelClientes.setLayout(null);
 		JComboBox cbCltPesq = new JComboBox(itens);
@@ -1752,7 +1736,7 @@ public class BancoAppFun implements Serializable {
 				jpanelOperacoes.setVisible(true);
 				panelMovimentos.setVisible(false);
 				dcbm.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dcbm);
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dcbm);
 
 			}
 		});
@@ -1780,6 +1764,9 @@ public class BancoAppFun implements Serializable {
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
+		
+		
+		
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
@@ -1895,6 +1882,25 @@ public class BancoAppFun implements Serializable {
 				btFunGesto.setBackground(new Color(65, 106, 105));
 			}
 		});
+		
+		
+		btnMovimentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelContas.setVisible(false);
+				panelMovimentos.setVisible(true);
+
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
+
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
+			}
+		});
+		
 
 	}
 }

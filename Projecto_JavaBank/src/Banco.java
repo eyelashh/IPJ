@@ -155,7 +155,7 @@ public class Banco implements Serializable {
 
 	// isto lista o numero de contas num array unico:
 
-	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
+	protected String[] listanumerodecontasabertas(ArrayList<Conta> cont) {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
@@ -167,6 +167,18 @@ public class Banco implements Serializable {
 		}
 		return numcontas;
 	}
+	
+	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
+		String[] numcontas = new String[cont.size()];
+		String s = "";
+		for (int i = 0; i < cont.size(); i++) {
+				s = "" + cont.get(i).getIdConta();
+				numcontas[i] = s;
+				s = "";
+		}
+		return numcontas;
+	}
+	
 
 	// lista a conta de um determinado cliente
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
