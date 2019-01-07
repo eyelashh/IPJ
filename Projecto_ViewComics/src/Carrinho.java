@@ -107,20 +107,20 @@ public class Carrinho implements Serializable {
 
 	}
 
-	public String[] listaCarrinho2() {
-
-		ArrayList<String> listaC = new ArrayList<String>();
-		
-        // Loop over String keys.
-		for (Entry<Integer, Integer> pair : this.conteudo.entrySet()) {
-            
-			String c = pair.getKey() + "::" + pair.getValue();
-			listaC.add(c);
-		}
-		String[] listaCar = new String[listaC.size()];
-		listaCar= listaC.toArray(listaCar);
-		
-	     return listaCar;
-	  }
+//	public String[] listaCarrinho2() {
+//
+//		ArrayList<String> listaC = new ArrayList<String>();
+//		
+//        // Loop over String keys.
+//		for (Entry<Integer, Integer> pair : this.conteudo.entrySet()) {
+//            
+//			String c = pair.getKey() + "::" + pair.getValue();
+//			listaC.add(c);
+//		}
+//		String[] listaCar = new String[listaC.size()];
+//		listaCar= listaC.toArray(listaCar);
+//		
+//	     return listaCar;
+//	  }
 
 }

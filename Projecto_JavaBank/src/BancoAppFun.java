@@ -88,8 +88,8 @@ public class BancoAppFun implements Serializable {
 	private JTextField tbLevData;
 	private JTextField tbTransMontante;
 	private JTextField tbTransContaDestino;
-	private static Funcionario func;
-	private static GestaoBanco gb;
+	private  Funcionario func;
+	private  GestaoBanco gb;
 	private JTextField tbCltApelido;
 	private JTextField tbCltNum;
 	private JTextField tbContasSaldo;
@@ -619,6 +619,21 @@ public class BancoAppFun implements Serializable {
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
+<<<<<<< HEAD
+=======
+
+		// Painel da conta da parte funcionario
+		JPanel jpanelContas = new JPanel();
+		jpanelContas.setVisible(false);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(768, 47, 262, 334);
+
+		jpanelContas.add(scrollPane_1);
+		tableClts = new JTable(model);
+
+		scrollPane_1.setViewportView(tableClts);
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		separator_2.setForeground(Color.BLACK);
