@@ -474,6 +474,7 @@ public class Banco implements Serializable {
 
 	}
 
+	//vai buscar a descricao
 	protected String descricaoOpercacoes(int idOperacao) {
 
 		String desc = "";

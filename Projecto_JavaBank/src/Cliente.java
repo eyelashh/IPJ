@@ -3,21 +3,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 public class Cliente extends Utilizador implements Serializable {
 
 	private ArrayList<Integer> contas;
 	private int contapoupanca;
 
-	public Cliente(int idUtilizador, String nome, String sobrenome,Date dataDeNascimento,
-			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
-			String password,int contapoupanca) {
+	public Cliente(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento, String tipoIndentificacao,
+			int numidentificacao, String morada, int contacto, String username, String password, int contapoupanca) {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto,
 				username, password);
 		this.contas = new ArrayList<Integer>();
 		this.contapoupanca = contapoupanca;
 	}
- 
+
 	public ArrayList<Integer> getContas() {
 		return contas;
 	}
@@ -33,8 +31,10 @@ public class Cliente extends Utilizador implements Serializable {
 	public void setContapoupanca(int contapoupanca) {
 		this.contapoupanca = contapoupanca;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return contas + " " + this.getNome();
+	}
 
 }
