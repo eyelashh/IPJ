@@ -68,7 +68,6 @@ public class AppCliente implements Serializable {
 	private JTextField txtTotalLivrosCARRINHO;
 	private JPanel JPCarrinho;
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
-
 	DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
@@ -327,8 +326,9 @@ public class AppCliente implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 				String livroSeleccionado = listaLivros.getSelectedValue();
 				int idLivroSelec = gl.viewComics.obterIdLivro(livroSeleccionado);
-
+				String qtdAlterarCarrinho = txtQuantidadeAlterarLIVROS.getText();
 				String nif = txtNifCarrinhoLIVROS.getText();
+				String stock=txtStockLivros.getText();
 
 				if (gl.viewComics.verificaNif(nif) == false) {
 					JOptionPane.showMessageDialog(null,
@@ -342,21 +342,33 @@ public class AppCliente implements Serializable {
 						txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
 
 						if (rbAdicionarQuantidadeLIVROS.isSelected()) {
-							quantidadeActualLIVROSstr = gl.viewComics.adicionarQuantidade(
-									txtQuantidadeActualLivros.getText(), txtQuantidadeAlterarLIVROS.getText());
-							int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-							gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-							txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
-							gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+							if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec,stock)) {
+								quantidadeActualLIVROSstr = gl.viewComics
+										.adicionarQuantidade(txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
+								int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
+								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+								txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
+								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
 
+							} else {
+								JOptionPane.showMessageDialog(null,
+										"Não foi possível adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
+							}
 						}
 						if (rbRemoverQuantidadeLIVROS.isSelected()) {
-							quantidadeActualLIVROSstr = gl.viewComics.removerQuantidade(
-									txtQuantidadeActualLivros.getText(), txtQuantidadeAlterarLIVROS.getText());
-							int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-							gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
-							txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
-							gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+							if (gl.viewComics.removerCarrinhoPossivel(qtdAlterarCarrinho, idLivroSelec, nif)) {
+								quantidadeActualLIVROSstr = gl.viewComics
+										.removerQuantidade(txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
+								int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
+								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+								txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
+								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+
+							} else {
+
+								JOptionPane.showMessageDialog(null,
+										"Não foi possível remover a quantidade referida do carrinho. Verifique a quantidade do carrinho");
+							}
 
 						}
 					} else {
@@ -586,7 +598,6 @@ public class AppCliente implements Serializable {
 		JLabel lblItems = new JLabel("items");
 		lblItems.setBounds(413, 395, 40, 25);
 		JPCarrinho.add(lblItems);
-		
 
 		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloLista);
 
