@@ -312,6 +312,32 @@ public class BancoAppFun implements Serializable {
 		scrollPane_1.setViewportView(tableClts);
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+		
+				// painel movimentos onde aparece a tabela das operaçoes
+				JPanel jpanelMovimentos = new JPanel();
+				jpanelMovimentos.setBounds(0, 0, 1065, 585);
+				JpanelPrincipal.add(jpanelMovimentos);
+						jpanelMovimentos.setLayout(null);
+				
+						// Tabela dos movimentos das operações
+						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.setBounds(55, 51, 418, 293);
+						jpanelMovimentos.add(scrollPane);
+						tableMovimentos = new JTable(modeloTabela);
+						scrollPane.setViewportView(tableMovimentos);
+						
+						JButton btnVoltar = new JButton("Voltar");
+						btnVoltar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+								jpanelMovimentos.setVisible(false);
+								jpanelContas.setVisible(true);
+							}
+						});
+						btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+						btnVoltar.setBounds(206, 356, 120, 38);
+						jpanelMovimentos.add(btnVoltar);
+						jpanelMovimentos.setVisible(false);
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -529,12 +555,6 @@ public class BancoAppFun implements Serializable {
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
 
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel panelMovimentos = new JPanel();
-		panelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(panelMovimentos);
-		panelMovimentos.setLayout(null);
-
 		JButton btnMovimentos = new JButton("Movimentos");
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnMovimentos.setBounds(416, 521, 120, 38);
@@ -542,7 +562,7 @@ public class BancoAppFun implements Serializable {
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
-				panelMovimentos.setVisible(true);
+				jpanelMovimentos.setVisible(true);
 
 				if (!lContas.isSelectionEmpty()) {
 					String idConta = lContas.getSelectedValue();
@@ -1501,14 +1521,6 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setBounds(47, 529, 225, 31);
 		jpanelGestao.add(tbfunidfunc);
 
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		panelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		scrollPane.setViewportView(tableMovimentos);
-		panelMovimentos.setVisible(false);
-
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
@@ -1888,7 +1900,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
-				panelMovimentos.setVisible(false);
+				jpanelMovimentos.setVisible(false);
 			}
 		});
 
@@ -1909,7 +1921,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(true);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(false);
-				panelMovimentos.setVisible(false);
+				jpanelMovimentos.setVisible(false);
 				lContas.clearSelection();
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
@@ -1933,7 +1945,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(false);
 				jpanelOperacoes.setVisible(true);
-				panelMovimentos.setVisible(false);
+				jpanelMovimentos.setVisible(false);
 				dcbm.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dcbm);
 
@@ -1957,7 +1969,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
-				panelMovimentos.setVisible(false);
+				jpanelMovimentos.setVisible(false);
 
 				tbfunnome.setText(func.getNome());
 				tbfunapelido.setText(func.getSobrenome());
