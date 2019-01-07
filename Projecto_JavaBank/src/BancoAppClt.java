@@ -59,8 +59,8 @@ public class BancoAppClt implements Serializable {
 	private JTextField textCltUser;
 	private JTextField textFieldNomeCartao;
 	private JTextField textFieldCOD;
-	private static Cliente clt;
-	private static GestaoBanco gb;
+	private Cliente clt;
+	private GestaoBanco gb;
 	private JTextField textFieldNumCartao;
 	private JTextField txtSaldoConta;
 	private JTextField textMontTransf;
