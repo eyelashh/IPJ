@@ -446,6 +446,21 @@ public class Banco implements Serializable {
 		}
 	}
 
+	// preenche tabela clientes no cliente:
+	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
+		int id = 0;
+		String nome;
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
+				id = clientes.get(i).getIdUtilizador();
+				nome = clientes.get(i).getNome();
+				model.addRow(new Object[] {id, nome });
+
+			}
+		}
+	}
+
+	
 	// preenche tabela operaçoes no cliente:
 	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, Conta c) {
 
