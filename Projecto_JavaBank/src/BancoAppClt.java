@@ -41,6 +41,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ComboBoxModel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 
 public class BancoAppClt implements Serializable {
 
@@ -66,6 +67,13 @@ public class BancoAppClt implements Serializable {
 	private JPasswordField passwordFieldNovaPass;
 	private JPasswordField passwordFieldConfPass;
 	private JTable table;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 
 	/**
 	 * Launch the application.
@@ -356,6 +364,98 @@ public class BancoAppClt implements Serializable {
 																																										passwordFieldConfPass = new JPasswordField();
 																																										passwordFieldConfPass.setBounds(622, 433, 271, 33);
 																																										JPCltGestao.add(passwordFieldConfPass);
+																																										
+																																										JLabel label_12 = new JLabel("Nome:");
+																																										label_12.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_12.setBounds(68, 68, 57, 30);
+																																										JPCltGestao.add(label_12);
+																																										
+																																										textField = new JTextField();
+																																										textField.setBounds(68, 99, 179, 31);
+																																										JPCltGestao.add(textField);
+																																										
+																																										textField_1 = new JTextField();
+																																										textField_1.setBounds(259, 99, 193, 31);
+																																										JPCltGestao.add(textField_1);
+																																										
+																																										JLabel label_13 = new JLabel("Apelido:");
+																																										label_13.setFont(new Font("Dialog", Font.PLAIN, 17));
+																																										label_13.setBounds(259, 68, 72, 30);
+																																										JPCltGestao.add(label_13);
+																																										
+																																										JLabel label_14 = new JLabel("D. Nascimento:");
+																																										label_14.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_14.setBounds(48, 143, 120, 30);
+																																										JPCltGestao.add(label_14);
+																																										
+																																										JDateChooser dateChooser_2 = new JDateChooser();
+																																										dateChooser_2.setBounds(180, 143, 260, 31);
+																																										JPCltGestao.add(dateChooser_2);
+																																										
+																																										JLabel label_15 = new JLabel("Documento:");
+																																										label_15.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_15.setBounds(58, 189, 108, 30);
+																																										JPCltGestao.add(label_15);
+																																										
+																																										JRadioButton radioButton = new JRadioButton("C.C.");
+																																										radioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										radioButton.setBounds(169, 192, 66, 25);
+																																										JPCltGestao.add(radioButton);
+																																										
+																																										JRadioButton radioButton_1 = new JRadioButton("B.I.");
+																																										radioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										radioButton_1.setBounds(248, 192, 57, 25);
+																																										JPCltGestao.add(radioButton_1);
+																																										
+																																										JRadioButton radioButton_2 = new JRadioButton("Passaporte");
+																																										radioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										radioButton_2.setBounds(317, 192, 138, 25);
+																																										JPCltGestao.add(radioButton_2);
+																																										
+																																										JLabel label_16 = new JLabel("Número:");
+																																										label_16.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_16.setBounds(68, 232, 66, 30);
+																																										JPCltGestao.add(label_16);
+																																										
+																																										textField_2 = new JTextField();
+																																										textField_2.setBounds(143, 226, 309, 31);
+																																										JPCltGestao.add(textField_2);
+																																										
+																																										JLabel label_17 = new JLabel("Morada:");
+																																										label_17.setFont(new Font("Dialog", Font.PLAIN, 17));
+																																										label_17.setBounds(68, 268, 66, 30);
+																																										JPCltGestao.add(label_17);
+																																										
+																																										textField_3 = new JTextField();
+																																										textField_3.setBounds(143, 270, 309, 31);
+																																										JPCltGestao.add(textField_3);
+																																										
+																																										JLabel label_18 = new JLabel("Contacto:");
+																																										label_18.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_18.setBounds(58, 325, 81, 31);
+																																										JPCltGestao.add(label_18);
+																																										
+																																										textField_4 = new JTextField();
+																																										textField_4.setBounds(143, 327, 309, 31);
+																																										JPCltGestao.add(textField_4);
+																																										
+																																										JLabel label_19 = new JLabel("Username:");
+																																										label_19.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_19.setBounds(53, 388, 81, 30);
+																																										JPCltGestao.add(label_19);
+																																										
+																																										textField_5 = new JTextField();
+																																										textField_5.setBounds(143, 390, 309, 31);
+																																										JPCltGestao.add(textField_5);
+																																										
+																																										JLabel label_20 = new JLabel("Password:");
+																																										label_20.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+																																										label_20.setBounds(58, 455, 81, 30);
+																																										JPCltGestao.add(label_20);
+																																										
+																																										textField_6 = new JTextField();
+																																										textField_6.setBounds(143, 457, 309, 31);
+																																										JPCltGestao.add(textField_6);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
