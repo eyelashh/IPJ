@@ -428,7 +428,7 @@ public class BancoAppFun implements Serializable {
 					gb.javabank.addelementoslist(contasNumConta, dmconta);
 
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
-					String numConta = tbContaspesqconta.getText();
+					
 					String[] contasCorrent = gb.javabank.listaContasCorrente();
 					gb.javabank.addelementoslist(contasCorrent, dmconta);
 
@@ -856,6 +856,7 @@ public class BancoAppFun implements Serializable {
 				panelCartao.setVisible(false);
 				btPedirCartao.setVisible(false);
 				btnMovimentos.setVisible(false);
+				tbContaspesqconta.setText("");
 				// lClientes.clea
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
