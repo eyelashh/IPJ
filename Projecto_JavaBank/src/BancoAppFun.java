@@ -157,7 +157,7 @@ public class BancoAppFun implements Serializable {
 	/**
 	 * Launch the application.
 	 */
-	
+
 	public void run() {
 		try {
 			BancoAppFun window = new BancoAppFun(func, gb);
@@ -481,26 +481,24 @@ public class BancoAppFun implements Serializable {
 		lblMorada.setBounds(345, 272, 66, 30);
 		jpanelClientes.add(lblMorada);
 
-//		// botao pesquisar cliente
-//		btCltPesquisa.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//
-//				modeloTabelaCliente.setRowCount(0);
-//
-//				if (cbCltPesq.getSelectedItem().equals("Nome")) {
-//					String nome = tbCltPesq.getText();
-//					String[] clientesNome = gb.javabank.listaClientesNome(nome);
-//					gb.javabank.addelementoslist(clientesNome, modeloTabelaCliente);
-//
-//				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
-//					String id = tbCltPesq.getText();
-//					String[] clientesId = gb.javabank.listaClientesID(id);
-//					gb.javabank.addelementoslist(clientesId, modeloTabelaCliente);
-//
-//				}
-//
-//			}
-//		});
+		// botao pesquisar cliente
+		btCltPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				modeloTabelaCliente.setRowCount(0);
+
+				if (cbCltPesq.getSelectedItem().equals("Nome")) {
+					String nome = tbCltPesq.getText();
+					gb.javabank.preenchetabelaclientesNome(modeloTabelaCliente, nome);
+
+				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
+					String id = tbCltPesq.getText();
+					gb.javabank.preenchetabelaclientesID(modeloTabelaCliente, Integer.parseInt(id));
+
+				}
+
+			}
+		});
 
 		// painel movimentos onde aparece a tabela das operaçoes
 		JPanel panelMovimentos = new JPanel();
@@ -595,7 +593,7 @@ public class BancoAppFun implements Serializable {
 		JButton btnLimparClt = new JButton("Limpar pesquisa");
 		btnLimparClt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				tbCltNome.setText("");
 				tbCltApelido.setText("");
 				tbCltMorada.setText(null);
@@ -605,7 +603,8 @@ public class BancoAppFun implements Serializable {
 				tbCltPass.setText("");
 				tbCltNum.setText("");
 				dateChooser_3.setDate(null);
-				
+				tbCltPesq.setText("");
+
 				modeloTabelaCliente.setRowCount(0);
 				dlmcontacliente.removeAllElements();
 				gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
