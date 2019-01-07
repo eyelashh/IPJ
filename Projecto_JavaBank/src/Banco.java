@@ -268,12 +268,12 @@ public class Banco implements Serializable {
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
 
-	protected String[] listaFunc(ArrayList<Utilizador> fun) {
+	protected String[] listaFunceAdm(ArrayList<Utilizador> fun) {
 		ArrayList<String> func = new ArrayList<String>();
 		String f = "";
 
 		for (int i = 0; i < fun.size(); i++) {
-			if (fun.get(i) instanceof Funcionario) {
+			if (fun.get(i) instanceof Funcionario || fun.get(i) instanceof Administrador) {
 				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome() + " " + fun.get(i).getSobrenome();
 				func.add(f);
 			}
@@ -391,6 +391,23 @@ public class Banco implements Serializable {
 		f.setPassword(password);
 
 	}
+	
+	protected void actualizaAdmin(Administrador adm, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
+		adm.setNome(nome);
+		adm.setSobrenome(sobrenome);
+		adm.setDataDeNascimento(dataDeNascimento);
+		adm.setTipoIndentificacao(tipoIndentificacao);
+		adm.setNumidentificacao(numidentificacao);
+		adm.setMorada(morada);
+		adm.setContacto(contacto);
+		adm.setUsername(username);
+		adm.setPassword(password);
+
+	}
+	
 
 	// atualiza dados do Cliente;
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
