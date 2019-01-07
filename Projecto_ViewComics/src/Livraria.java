@@ -638,13 +638,6 @@ public class Livraria implements Serializable {
 				utilizador.remove(i);
 			}
 		}
-
-//PORQUE � QUE O DE CIMA FUNCIONA E O DE BAIXO NAO??
-//	for(Utilizador u:utilizador) {
-//		if (u.getId()==id) {
-//			utilizador.remove(u);
-//		}
-//	}
 	}
 
 	public void removerLivro(String idSTR, ArrayList<Livro> livros) {
@@ -720,51 +713,34 @@ public class Livraria implements Serializable {
 
 //adiciona um valor ao stock do livro 
 
-	protected boolean adicionaStock(String adicionaSTR, int idLivro, String nif) {
+	protected boolean removerCarrinhoPossivel(String qtdremovidaCarrinhoSTR, int idLivro, String nif) {
 
-		boolean adiciona = false;
+		boolean remocaoPossivel = false;
 		Carrinho c = pesquisarCarrinho(nif);
-		int adicionaINT = Integer.parseInt(adicionaSTR);
+		int qtdRemovidaCarrinhoINT = Integer.parseInt(qtdremovidaCarrinhoSTR);
 
-		for (Livro l : this.livros) {
-			int stockACTUAL = l.getStock();
-			int stockNOVO = stockACTUAL;
-			if (l.getIdLivro() == idLivro) {
-				int quantidadeNoCarrinho = c.getConteudo().get(idLivro);
-				if (quantidadeNoCarrinho <= adicionaINT) {
-					stockNOVO = stockACTUAL + quantidadeNoCarrinho;
-					l.setStock(stockNOVO);
-//				}
-
-				} else {
-					stockNOVO = stockACTUAL + adicionaINT;
-					l.setStock(stockNOVO);
-				}
-				adiciona = true;
-
-			}
+		int qtdContidaCarrinhoINT=c.getConteudo().get(idLivro);
+		if (qtdRemovidaCarrinhoINT<=qtdContidaCarrinhoINT) {
+			remocaoPossivel=true;
 		}
-		return adiciona;
-
+		return remocaoPossivel;
+	
 	}
 
 //altera o stock de um carrinho de acordo com a quantidade removida do carrinho de do id do livro
 
-	protected boolean subtraiStock(String subtraiSTR, int idLivro) {
+	protected boolean adicionarAoCarrinhoPossivel(String qtdadicionadaCarrinhoSTR, int idLivro,String stockLivroSTR) {
 
-		boolean subtrai = false;
-
-		int subtraiINT = Integer.parseInt(subtraiSTR);
-		for (Livro l : this.livros) {
-			int stockACTUAL = l.getStock();
-			int stockNOVO = stockACTUAL;
-			if ((l.getIdLivro() == idLivro) && (subtraiINT < stockACTUAL)) {
-				stockNOVO = stockACTUAL - subtraiINT;
-				l.setStock(stockNOVO);
-				subtrai = true;
-			}
+		boolean adicaoPossivel = false;
+		int qtdAdicionadaCarrinhoINT= Integer.parseInt(qtdadicionadaCarrinhoSTR);
+		int stockLivroINT =Integer.parseInt(stockLivroSTR);
+		
+		if (qtdAdicionadaCarrinhoINT<=stockLivroINT) {
+			adicaoPossivel =true;
 		}
-		return subtrai;
+		return adicaoPossivel;
+
+		
 	}
 
 //devolve a quantidade de determinado livro em um carrinho atrav�s do id do livro e do nif
