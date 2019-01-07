@@ -445,7 +445,7 @@ public class Banco implements Serializable {
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
-					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
 					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
