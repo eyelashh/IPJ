@@ -271,309 +271,25 @@ public class BancoAppFun implements Serializable {
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(768, 47, 262, 334);
+		
 
 		jpanelContas.add(scrollPane_1);
 
 		tableClts = new JTable(model);
-
+		
+		
 		scrollPane_1.setViewportView(tableClts);
 
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-<<<<<<< HEAD
 		// Modelo para tabela movimentos
 		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-=======
-		// Pedir cartao
 
-		// Painel principal CLientes
-		JPanel jpanelClientes = new JPanel();
-		jpanelClientes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelClientes);
-		jpanelClientes.setVisible(true);
-		jpanelClientes.setLayout(null);
-		jpanelClientes.setLayout(null);
-		JComboBox cbCltPesq = new JComboBox(itens);
-		cbCltPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		cbCltPesq.setBounds(47, 12, 227, 34);
-		jpanelClientes.add(cbCltPesq);
->>>>>>> 17814eabe6996811f26dd30312e2d8d81059e06c
-
-		JTextField tbCltPesq = new JTextField();
-		tbCltPesq.setBounds(47, 49, 227, 30);
-		jpanelClientes.add(tbCltPesq);
-		JList<String> lbClt = new JList<String>(dmclt);
-		lbClt.setBounds(48, 92, 240, 363);
-		jpanelClientes.add(lbClt);
-
-		JButton btCltPesquisa = new JButton("Pesquisa");
-
-		btCltPesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltPesquisa.setBounds(325, 22, 120, 38);
-		jpanelClientes.add(btCltPesquisa);
-
-		JLabel lblNewLabel_1 = new JLabel("Nome:");
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_1.setBounds(345, 72, 57, 30);
-		jpanelClientes.add(lblNewLabel_1);
-
-		JLabel lblDNascimento = new JLabel("D. Nascimento:");
-		lblDNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDNascimento.setBounds(325, 147, 120, 30);
-		jpanelClientes.add(lblDNascimento);
-
-		JLabel lblDocumento = new JLabel("Documento:");
-		lblDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDocumento.setBounds(335, 193, 108, 30);
-		jpanelClientes.add(lblDocumento);
-
-		JLabel lblNmero = new JLabel("N\u00FAmero:");
-		lblNmero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNmero.setBounds(345, 236, 66, 30);
-		jpanelClientes.add(lblNmero);
-
-		JLabel lblContacto = new JLabel("Contacto:");
-		lblContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContacto.setBounds(335, 329, 81, 31);
-		jpanelClientes.add(lblContacto);
-
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblUsername.setBounds(330, 392, 81, 30);
-		jpanelClientes.add(lblUsername);
-
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblPassword.setBounds(335, 459, 81, 30);
-		jpanelClientes.add(lblPassword);
-
-		tbCltNome = new JTextField();
-		tbCltNome.setBounds(345, 103, 179, 31);
-		jpanelClientes.add(tbCltNome);
-
-		tbCltMorada = new JTextField();
-		tbCltMorada.setBounds(420, 274, 309, 31);
-		jpanelClientes.add(tbCltMorada);
-
-		tbCltContacto = new JTextField();
-		tbCltContacto.setBounds(420, 331, 309, 31);
-		jpanelClientes.add(tbCltContacto);
-
-		tbCltUser = new JTextField();
-		tbCltUser.setBounds(420, 394, 309, 31);
-		jpanelClientes.add(tbCltUser);
-
-		tbCltPass = new JTextField();
-		tbCltPass.setBounds(420, 461, 309, 31);
-		jpanelClientes.add(tbCltPass);
-
-		JLabel lblContas = new JLabel("Contas");
-		lblContas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblContas.setBounds(780, 48, 56, 30);
-		jpanelClientes.add(lblContas);
-		JList<String> lbCltConta = new JList<String>(dlmcontacliente);
-		lbCltConta.setBounds(780, 92, 240, 441);
-		jpanelClientes.add(lbCltConta);
-
-		JButton btCltNovo = new JButton("Novo");
-		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltNovo.setBounds(467, 22, 120, 38);
-		jpanelClientes.add(btCltNovo);
-
-		JButton btCltEliminar = new JButton("Eliminar");
-
-		btCltEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltEliminar.setBounds(609, 22, 120, 38);
-		jpanelClientes.add(btCltEliminar);
-
-		JButton btCltconfirmar = new JButton("Confirmar");
-
-		btCltconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btCltconfirmar.setBounds(506, 505, 120, 38);
-		jpanelClientes.add(btCltconfirmar);
-
-		JRadioButton rbCltcc = new JRadioButton("C.C.");
-		rbCltcc.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		rbCltcc.setBounds(446, 196, 66, 25);
-		jpanelClientes.add(rbCltcc);
-
-		JRadioButton rbCltbi = new JRadioButton("B.I.");
-		rbCltbi.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		rbCltbi.setBounds(525, 196, 57, 25);
-		jpanelClientes.add(rbCltbi);
-
-		JRadioButton rbCltPassaporte = new JRadioButton("Passaporte");
-		rbCltPassaporte.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		rbCltPassaporte.setBounds(594, 196, 138, 25);
-		jpanelClientes.add(rbCltPassaporte);
-		bg.add(rbCltcc);
-		bg.add(rbCltbi);
-		bg.add(rbCltPassaporte);
-
-		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setBounds(457, 147, 260, 31);
-		jpanelClientes.add(dateChooser_3);
-
-		tbCltApelido = new JTextField();
-		tbCltApelido.setBounds(536, 103, 193, 31);
-		jpanelClientes.add(tbCltApelido);
-
-		JLabel lblApelido = new JLabel("Apelido:");
-		lblApelido.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblApelido.setBounds(536, 72, 72, 30);
-		jpanelClientes.add(lblApelido);
-
-		tbCltNum = new JTextField();
-		tbCltNum.setBounds(420, 230, 309, 31);
-		jpanelClientes.add(tbCltNum);
-
-		JLabel lblMorada = new JLabel("Morada:");
-		lblMorada.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblMorada.setBounds(345, 272, 66, 30);
-		jpanelClientes.add(lblMorada);
-
-		JButton btnLimparClt = new JButton("Limpar pesquisa");
-		btnLimparClt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dmclt.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-			}
-		});
-		btnLimparClt.setBounds(97, 466, 133, 23);
-		jpanelClientes.add(btnLimparClt);
-
-		// a�ao do botao novo:
-		btCltNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// limpa tudo:
-
-				lbClt.clearSelection();
-				lbCltConta.clearSelection();
-				tbCltNome.setText("");
-				tbCltApelido.setText("");
-				tbCltMorada.setText(null);
-				tbCltContacto.setText(null);
-				bg.clearSelection();
-				tbCltUser.setText("");
-				tbCltPass.setText("");
-				tbCltNum.setText("");
-				dateChooser_3.setDate(null);
-				dlmcontacliente.removeAllElements();
-
-			}
-		});
-
-		// painel de clientes:
-
-		// bt confirmar (adicionar ou alterar )
-		btCltconfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				String opselect = "";
-				if (rbCltcc.isSelected()) {
-					opselect = rbCltcc.getText();
-				}
-				if (rbCltbi.isSelected()) {
-					opselect = rbCltbi.getText();
-				}
-				if (rbCltPassaporte.isSelected()) {
-					opselect = rbCltPassaporte.getText();
-				}
-
-				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
-				// algum elemento selecionado da lista faz um update:
-				if (lbClt.isSelectionEmpty()) {
-
-					// adicionar Cliente:
-					// criar automaticamente o id;
-					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
-							.getIdUtilizador()) + 1;
-					if (id == 0) {
-						id++;
-					}
-
-					// esta a ser criado o novo cliente:
-					Utilizador clt = new Cliente(id, tbCltNome.getText(), tbCltApelido.getText(),
-							dateChooser_3.getDate(), opselect, Integer.parseInt(tbCltNum.getText()),
-							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
-							tbCltPass.getText(), 0);
-					gb.javabank.getUtlizadores().add(clt);
-
-					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-					dmclt.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-					JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
-				} else {
-					// atualizar Cliente:
-					// seleciona id;
-					String s = (String) lbClt.getSelectedValue();
-					s = s.substring(0, s.indexOf("*"));
-
-					// metedo para atualizar:
-					gb.javabank.atualizacliente(
-							(Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()),
-							tbCltNome.getText(), tbCltApelido.getText(), dateChooser_3.getDate(), opselect,
-							Integer.parseInt(tbCltNum.getText()), tbCltMorada.getText(),
-							Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(), tbCltPass.getText());
-					JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
-				}
-
-				lbClt.clearSelection();
-				lbCltConta.clearSelection();
-				tbCltNome.setText("");
-				tbCltApelido.setText("");
-				tbCltMorada.setText(null);
-				tbCltContacto.setText(null);
-				bg.clearSelection();
-				tbCltUser.setText("");
-				tbCltPass.setText("");
-				tbCltNum.setText("");
-				dateChooser_3.setDate(null);
-				dlmcontacliente.removeAllElements();
-
-			}
-		});
-
-		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-		lbClt.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				bg.clearSelection();
-				dlmcontacliente.removeAllElements();
-				if (!lbClt.isSelectionEmpty()) {
-					String s = (String) lbClt.getSelectedValue();
-					s = s.substring(0, s.indexOf("*"));
-
-					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
-							gb.javabank.getUtlizadores());
-
-					tbCltNome.setText(c.getNome());
-					tbCltApelido.setText(c.getSobrenome());
-					tbCltMorada.setText(c.getMorada());
-					tbCltContacto.setText("" + c.getContacto());
-					tbCltUser.setText(c.getUsername());
-					tbCltPass.setText(c.getPassword());
-					tbCltNum.setText("" + c.getNumidentificacao());
-					dateChooser_3.setDate(c.getDataDeNascimento());
-
-					if (c.getTipoIndentificacao().equals("C.C.")) {
-						rbCltcc.setSelected(true);
-					}
-					if (c.getTipoIndentificacao().equals("B.I.")) {
-						rbCltbi.setSelected(true);
-					}
-					if (c.getTipoIndentificacao().equals("Passaporte")) {
-						rbCltPassaporte.setSelected(true);
-					}
-					// mostra na lista as contas deste cliente
-					gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
-							dlmcontacliente);
-
-				}
-			}
-		});
+		JTextField tbContaspesqconta = new JTextField();
+		tbContaspesqconta.setBounds(26, 63, 238, 31);
+		jpanelContas.add(tbContaspesqconta);
 		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
 		rdbtnContaCorrente.setSelected(true);
 
@@ -584,80 +300,6 @@ public class BancoAppFun implements Serializable {
 
 		rdbtnContaPoupanca.setBounds(560, 81, 144, 25);
 		jpanelContas.add(rdbtnContaPoupanca);
-
-		btCltEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// primeiro ve qual o id selecionado!
-				String s = lbClt.getSelectedValue();
-				s = s.substring(0, s.indexOf("*"));
-
-				// elimina o cliente:
-				gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
-
-				// depois limpa os campos do formulario:
-				lbClt.clearSelection();
-				lbCltConta.clearSelection();
-				tbCltNome.setText("");
-				tbCltApelido.setText("");
-				tbCltMorada.setText(null);
-				tbCltContacto.setText(null);
-				bg.clearSelection();
-				tbCltUser.setText("");
-				tbCltPass.setText("");
-				tbCltNum.setText("");
-				dateChooser_3.setDate(null);
-				rdbtnContaCorrente.setSelected(false);
-				rdbtnContaPoupanca.setSelected(false);
-
-				// atualiza lista:
-				dmclt.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-				dlmcontacliente.removeAllElements();
-
-			}
-		});
-
-		btCltPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				dmclt.removeAllElements();
-
-				if (cbCltPesq.getSelectedItem().equals("Nome")) {
-					String nome = tbCltPesq.getText();
-					String[] clientesNome = gb.javabank.listaClientesNome(nome);
-					gb.javabank.addelementoslist(clientesNome, dmclt);
-
-				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
-					String id = tbCltPesq.getText();
-					String[] clientesId = gb.javabank.listaClientesID(id);
-					gb.javabank.addelementoslist(clientesId, dmclt);
-
-					// String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-					// gb.javabank.addelementoslist(contasCliente,dmconta );
-				}
-
-			}
-		});
-
-		JPanel panelMovimentos = new JPanel();
-		panelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(panelMovimentos);
-		panelMovimentos.setLayout(null);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		panelMovimentos.add(scrollPane);
-
-		// Modelo para tabela movimentos
-		String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
-		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-		table = new JTable(modeloTabela);
-		scrollPane.setViewportView(table);
-
-		JTextField tbContaspesqconta = new JTextField();
-		tbContaspesqconta.setBounds(26, 63, 238, 31);
-		jpanelContas.add(tbContaspesqconta);
 
 		// botao eliminar
 
@@ -946,7 +588,6 @@ public class BancoAppFun implements Serializable {
 					if (c instanceof ContaCorrente) {
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
-<<<<<<< HEAD
 
 						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 
@@ -1188,237 +829,6 @@ public class BancoAppFun implements Serializable {
 		JTextField tbOperacoespesqClt = new JTextField();
 		tbOperacoespesqClt.setBounds(188, 92, 250, 31);
 		jpanelOperacoes.add(tbOperacoespesqClt);
-=======
->>>>>>> 17814eabe6996811f26dd30312e2d8d81059e06c
-
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-
-					} else {
-
-						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-					}
-
-					gb.javabank.limpatabela(model);
-					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-					JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
-
-				}
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContasnum.setText(null);
-				tbContaslimitelevdia.setText(null);
-				tblJuros.setText(null);
-				tbllimitemes.setText(null);
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-
-			}
-		});
-
-		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
-		btContasNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				int numconta;
-				if (gb.javabank.getContas().size() == 0) {
-					numconta = 1;
-				} else {
-					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size() - 1).getIdConta() + 1;
-
-				}
-				lContas.clearSelection();
-				tbContasnum.setText("" + numconta);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(true);
-				dateChooser_2.setEnabled(true);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				tbllimitemes.setText(null);
-			}
-		});
-		// selecionar conta e preencher so campos correctos:
-		lContas.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-
-				gb.javabank.limpatabela(model);
-				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
-				if (!lContas.isSelectionEmpty()) {
-
-					btnMovimentos.setVisible(true);
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-							gb.javabank.getContas());
-					tbContasnum.setText("" + c.getIdConta());
-					dateChooser_2.setDate(c.getDataCriacao());
-					dateChooser_2.setEnabled(false);
-					tbContaslimitelevop.setText("" + c.getValorMaxLevantamento());
-					tbContasSaldo.setText("" + c.getSaldo());
-					tbContasSaldo.setEditable(false);
-					tbContaslimitelevdia.setText(c.getValorMaxDia() + "");
-
-					if (c instanceof ContaPoupanca) {
-						rdbtnContaPoupanca.setSelected(true);
-						rdbtnContaCorrente.setSelected(false);
-						Double juros = ((ContaPoupanca) c).getTaxaJuros();
-						tblJuros.setText(juros + "");
-						Double limite = ((ContaPoupanca) c).getLimiteMensalDebito();
-						tbllimitemes.setText("" + limite);
-						panelCartao.setVisible(false);
-						btPedirCartao.setVisible(false);
-
-					} else {
-						rdbtnContaPoupanca.setSelected(false);
-						rdbtnContaCorrente.setSelected(true);
-
-						if (((ContaCorrente) c).getCartao() == 0) {
-							btPedirCartao.setVisible(true);
-
-						} else {
-
-							btCartao.setVisible(false);
-							panelCartao.setVisible(true);
-							dtcartao.setEnabled(false);
-							tbnomecartao.setEditable(false);
-							tbcodcartao.setEditable(false);
-
-							Cartao card = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
-									((ContaCorrente) c).getCartao());
-							dtcartao.setDate(card.getDataValidade());
-							tbnomecartao.setText(card.getNomeTitular());
-							tbcodcartao.setText(card.getCodvalidacao() + "");
-
-						}
-
-					}
-					gb.javabank.limpatabela(model);
-					gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-					/// seleciona os clientes que estao como titulares � conta:
-					gb.javabank.mostratitulares(c, model);
-
-				}
-			}
-		});
-
-		// elimina contas:
-		btContasEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (!lContas.isSelectionEmpty()) {
-
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
-							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
-
-					lContas.clearSelection();
-					tbContasnum.setText(null);
-					dateChooser_2.setDate(null);
-					tbContaslimitelevop.setText(null);
-					tbContasSaldo.setText(null);
-					tbContasSaldo.setEditable(false);
-					tbContaslimitelevdia.setText(null);
-					rdbtnContaCorrente.setSelected(true);
-					rdbtnContaPoupanca.setSelected(false);
-					tblJuros.setText(null);
-					dateChooser_2.setEnabled(true);
-					tbllimitemes.setText(null);
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
-					tbnomecartao.setText(null);
-					dtcartao.setDate(null);
-					tbcodcartao.setText(null);
-					panelCartao.setVisible(false);
-
-					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
-
-				}
-
-			}
-		});
-
-		btPedirCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				panelCartao.setVisible(true);
-				tbnomecartao.setEditable(true);
-				dtcartao.setEnabled(true);
-				btCartao.setVisible(true);
-
-			}
-		});
-
-		btCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int id = 0;
-				boolean existe = false;
-				do {
-
-					do {
-						id = (int) (Math.random() * 1000);
-					} while (id > 999 || id < 99);
-
-					if (gb.javabank.getCartoes().size() != 0) {
-						for (int i = 0; i < gb.javabank.getCartoes().size(); i++) {
-							if (gb.javabank.getCartoes().get(i).getCodvalidacao() == id) {
-								existe = true;
-							}
-						}
-					}
-				} while (existe);
-
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if (dtcartao.getDate() != null && tbnomecartao.getText() != " ") {
-					Cartao cartao = new Cartao(tbnomecartao.getText(), dtcartao.getDate(), id, c.getIdConta());
-					gb.javabank.getCartoes().add(cartao);
-					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-					tbcodcartao.setText(id + "");
-
-					dtcartao.setEnabled(false);
-					tbnomecartao.setEditable(false);
-					tbcodcartao.setEditable(false);
-					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
-				}
-
-			}
-		});
-		// Painel principal da operaçoes
-		JPanel jpanelOperacoes = new JPanel();
-		jpanelOperacoes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelOperacoes);
-		jpanelOperacoes.setVisible(false);
-		jpanelOperacoes.setLayout(null);
-
-		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
-		cbOperacoesConta.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				if (s != null) {
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-					tbContasaldoc.setText("" + c.getSaldo());
-				}
-
-			}
-		});
-		cbOperacoesConta.setBounds(578, 72, 249, 39);
-		jpanelOperacoes.add(cbOperacoesConta);
-
-		JTextField tbOperacoespesqClt = new JTextField();
-		tbOperacoespesqClt.setBounds(188, 92, 250, 31);
-		jpanelOperacoes.add(tbOperacoespesqClt);
 
 		JButton btnNewButton = new JButton("Pesquisar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -1446,19 +856,6 @@ public class BancoAppFun implements Serializable {
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-<<<<<<< HEAD
-		// Painel principal CLientes
-		JPanel jpanelClientes = new JPanel();
-		jpanelClientes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelClientes);
-		jpanelClientes.setVisible(true);
-		jpanelClientes.setLayout(null);
-		jpanelClientes.setLayout(null);
-		JComboBox cbCltPesq = new JComboBox(itens);
-		cbCltPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		cbCltPesq.setBounds(47, 12, 227, 34);
-		jpanelClientes.add(cbCltPesq);
-=======
 				lContas.clearSelection();
 				tbContasnum.setText(null);
 				dateChooser_2.setDate(null);
@@ -1476,8 +873,7 @@ public class BancoAppFun implements Serializable {
 				btnMovimentos.setVisible(false);
 				// lClientes.clea
 				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmconta);
->>>>>>> 17814eabe6996811f26dd30312e2d8d81059e06c
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
 			}
 
@@ -1800,7 +1196,349 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-		panelMovimentos.setVisible(false);
+
+		// Pedir cartao
+
+		// Painel principal CLientes
+		JPanel jpanelClientes = new JPanel();
+		jpanelClientes.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelClientes);
+		jpanelClientes.setVisible(true);
+		jpanelClientes.setLayout(null);
+		jpanelClientes.setLayout(null);
+		JComboBox cbCltPesq = new JComboBox(itens);
+		cbCltPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		cbCltPesq.setBounds(47, 12, 227, 34);
+		jpanelClientes.add(cbCltPesq);
+
+		JTextField tbCltPesq = new JTextField();
+		tbCltPesq.setBounds(47, 49, 227, 30);
+		jpanelClientes.add(tbCltPesq);
+		JList<String> lbClt = new JList<String>(dmclt);
+		lbClt.setBounds(48, 92, 240, 363);
+		jpanelClientes.add(lbClt);
+
+		JButton btCltPesquisa = new JButton("Pesquisa");
+
+		btCltPesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btCltPesquisa.setBounds(325, 22, 120, 38);
+		jpanelClientes.add(btCltPesquisa);
+
+		JLabel lblNewLabel_1 = new JLabel("Nome:");
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNewLabel_1.setBounds(345, 72, 57, 30);
+		jpanelClientes.add(lblNewLabel_1);
+
+		JLabel lblDNascimento = new JLabel("D. Nascimento:");
+		lblDNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDNascimento.setBounds(325, 147, 120, 30);
+		jpanelClientes.add(lblDNascimento);
+
+		JLabel lblDocumento = new JLabel("Documento:");
+		lblDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDocumento.setBounds(335, 193, 108, 30);
+		jpanelClientes.add(lblDocumento);
+
+		JLabel lblNmero = new JLabel("N\u00FAmero:");
+		lblNmero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNmero.setBounds(345, 236, 66, 30);
+		jpanelClientes.add(lblNmero);
+
+		JLabel lblContacto = new JLabel("Contacto:");
+		lblContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContacto.setBounds(335, 329, 81, 31);
+		jpanelClientes.add(lblContacto);
+
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblUsername.setBounds(330, 392, 81, 30);
+		jpanelClientes.add(lblUsername);
+
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblPassword.setBounds(335, 459, 81, 30);
+		jpanelClientes.add(lblPassword);
+
+		tbCltNome = new JTextField();
+		tbCltNome.setBounds(345, 103, 179, 31);
+		jpanelClientes.add(tbCltNome);
+
+		tbCltMorada = new JTextField();
+		tbCltMorada.setBounds(420, 274, 309, 31);
+		jpanelClientes.add(tbCltMorada);
+
+		tbCltContacto = new JTextField();
+		tbCltContacto.setBounds(420, 331, 309, 31);
+		jpanelClientes.add(tbCltContacto);
+
+		tbCltUser = new JTextField();
+		tbCltUser.setBounds(420, 394, 309, 31);
+		jpanelClientes.add(tbCltUser);
+
+		tbCltPass = new JTextField();
+		tbCltPass.setBounds(420, 461, 309, 31);
+		jpanelClientes.add(tbCltPass);
+
+		JLabel lblContas = new JLabel("Contas");
+		lblContas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblContas.setBounds(780, 48, 56, 30);
+		jpanelClientes.add(lblContas);
+		JList<String> lbCltConta = new JList<String>(dlmcontacliente);
+		lbCltConta.setBounds(780, 92, 240, 441);
+		jpanelClientes.add(lbCltConta);
+
+		JButton btCltNovo = new JButton("Novo");
+		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btCltNovo.setBounds(467, 22, 120, 38);
+		jpanelClientes.add(btCltNovo);
+
+		JButton btCltEliminar = new JButton("Eliminar");
+
+		btCltEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btCltEliminar.setBounds(609, 22, 120, 38);
+		jpanelClientes.add(btCltEliminar);
+
+		JButton btCltconfirmar = new JButton("Confirmar");
+
+		btCltconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btCltconfirmar.setBounds(506, 505, 120, 38);
+		jpanelClientes.add(btCltconfirmar);
+
+		JRadioButton rbCltcc = new JRadioButton("C.C.");
+		rbCltcc.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		rbCltcc.setBounds(446, 196, 66, 25);
+		jpanelClientes.add(rbCltcc);
+
+		JRadioButton rbCltbi = new JRadioButton("B.I.");
+		rbCltbi.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		rbCltbi.setBounds(525, 196, 57, 25);
+		jpanelClientes.add(rbCltbi);
+
+		JRadioButton rbCltPassaporte = new JRadioButton("Passaporte");
+		rbCltPassaporte.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		rbCltPassaporte.setBounds(594, 196, 138, 25);
+		jpanelClientes.add(rbCltPassaporte);
+		bg.add(rbCltcc);
+		bg.add(rbCltbi);
+		bg.add(rbCltPassaporte);
+
+		JDateChooser dateChooser_3 = new JDateChooser();
+		dateChooser_3.setBounds(457, 147, 260, 31);
+		jpanelClientes.add(dateChooser_3);
+
+		tbCltApelido = new JTextField();
+		tbCltApelido.setBounds(536, 103, 193, 31);
+		jpanelClientes.add(tbCltApelido);
+
+		JLabel lblApelido = new JLabel("Apelido:");
+		lblApelido.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblApelido.setBounds(536, 72, 72, 30);
+		jpanelClientes.add(lblApelido);
+
+		tbCltNum = new JTextField();
+		tbCltNum.setBounds(420, 230, 309, 31);
+		jpanelClientes.add(tbCltNum);
+
+		JLabel lblMorada = new JLabel("Morada:");
+		lblMorada.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblMorada.setBounds(345, 272, 66, 30);
+		jpanelClientes.add(lblMorada);
+
+		JButton btnLimparClt = new JButton("Limpar pesquisa");
+		btnLimparClt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dmclt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
+			}
+		});
+		btnLimparClt.setBounds(97, 466, 133, 23);
+		jpanelClientes.add(btnLimparClt);
+
+		// a�ao do botao novo:
+		btCltNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// limpa tudo:
+
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
+
+		// painel de clientes:
+
+		// bt confirmar (adicionar ou alterar )
+		btCltconfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String opselect = "";
+				if (rbCltcc.isSelected()) {
+					opselect = rbCltcc.getText();
+				}
+				if (rbCltbi.isSelected()) {
+					opselect = rbCltbi.getText();
+				}
+				if (rbCltPassaporte.isSelected()) {
+					opselect = rbCltPassaporte.getText();
+				}
+
+				// se nao estiver selecionado nenhum cliente entao cria um novo/ caso exista
+				// algum elemento selecionado da lista faz um update:
+				if (lbClt.isSelectionEmpty()) {
+
+					// adicionar Cliente:
+					// criar automaticamente o id;
+					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
+							.getIdUtilizador()) + 1;
+					if (id == 0) {
+						id++;
+					}
+
+					// esta a ser criado o novo cliente:
+					Utilizador clt = new Cliente(id, tbCltNome.getText(), tbCltApelido.getText(),
+							dateChooser_3.getDate(), opselect, Integer.parseInt(tbCltNum.getText()),
+							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
+							tbCltPass.getText(), 0);
+					gb.javabank.getUtlizadores().add(clt);
+
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmclt.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
+					JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
+				} else {
+					// atualizar Cliente:
+					// seleciona id;
+					String s = (String) lbClt.getSelectedValue();
+					s = s.substring(0, s.indexOf("*"));
+
+					// metedo para atualizar:
+					gb.javabank.atualizacliente(
+							(Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()),
+							tbCltNome.getText(), tbCltApelido.getText(), dateChooser_3.getDate(), opselect,
+							Integer.parseInt(tbCltNum.getText()), tbCltMorada.getText(),
+							Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(), tbCltPass.getText());
+					JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+				}
+
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
+
+		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+		lbClt.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				bg.clearSelection();
+				dlmcontacliente.removeAllElements();
+				if (!lbClt.isSelectionEmpty()) {
+					String s = (String) lbClt.getSelectedValue();
+					s = s.substring(0, s.indexOf("*"));
+
+					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
+							gb.javabank.getUtlizadores());
+
+					tbCltNome.setText(c.getNome());
+					tbCltApelido.setText(c.getSobrenome());
+					tbCltMorada.setText(c.getMorada());
+					tbCltContacto.setText("" + c.getContacto());
+					tbCltUser.setText(c.getUsername());
+					tbCltPass.setText(c.getPassword());
+					tbCltNum.setText("" + c.getNumidentificacao());
+					dateChooser_3.setDate(c.getDataDeNascimento());
+
+					if (c.getTipoIndentificacao().equals("C.C.")) {
+						rbCltcc.setSelected(true);
+					}
+					if (c.getTipoIndentificacao().equals("B.I.")) {
+						rbCltbi.setSelected(true);
+					}
+					if (c.getTipoIndentificacao().equals("Passaporte")) {
+						rbCltPassaporte.setSelected(true);
+					}
+					// mostra na lista as contas deste cliente
+					gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
+							dlmcontacliente);
+
+				}
+			}
+		});
+
+		btCltEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// primeiro ve qual o id selecionado!
+				String s = lbClt.getSelectedValue();
+				s = s.substring(0, s.indexOf("*"));
+
+				// elimina o cliente:
+				gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+
+				// depois limpa os campos do formulario:
+				lbClt.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				rdbtnContaCorrente.setSelected(false);
+				rdbtnContaPoupanca.setSelected(false);
+
+				// atualiza lista:
+				dmclt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
+
+		btCltPesquisa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				dmclt.removeAllElements();
+
+				if (cbCltPesq.getSelectedItem().equals("Nome")) {
+					String nome = tbCltPesq.getText();
+					String[] clientesNome = gb.javabank.listaClientesNome(nome);
+					gb.javabank.addelementoslist(clientesNome, dmclt);
+
+				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
+					String id = tbCltPesq.getText();
+					String[] clientesId = gb.javabank.listaClientesID(id);
+					gb.javabank.addelementoslist(clientesId, dmclt);
+
+					// String[] contasCliente = gb.javabank.listaContasIdCliente(id);
+					// gb.javabank.addelementoslist(contasCliente,dmconta );
+				}
+
+			}
+		});
 
 		jpanelGestao.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelGestao);
