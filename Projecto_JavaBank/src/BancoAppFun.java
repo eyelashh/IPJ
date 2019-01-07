@@ -123,12 +123,34 @@ public class BancoAppFun implements Serializable {
 	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
-
+	// modelo lista das contas dos clientes do painel cliente
 	private DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
-
-	// lista de clientes no painel de clientes;
-	DefaultListModel<String> dmclt = new DefaultListModel<String>();
+	// modelo combobox lista as contas abertas
 	DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
+
+	// Modelo da tabela clientes:
+	String[] colunas3 = { "ID", "Nome" };
+	DefaultTableModel modeloTabelaCliente = new DefaultTableModel(colunas3, 0) {
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("rawtypes")
+		public Class getColumnClass(int c) {
+			switch (c) {
+			case 0:
+				return Integer.class;
+			default:
+				return String.class;
+			}
+		}
+
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			if (mColIndex == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
 
 //	DefaultListModel<String> dmcc = new DefaultListModel<String>();
 //	gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmcc);
@@ -150,7 +172,7 @@ public class BancoAppFun implements Serializable {
 	public BancoAppFun(Funcionario f, GestaoBanco g) {
 		func = f;
 		gb = g;
-		dlmcontacliente = new DefaultListModel<String>();
+
 		initialize();
 
 	}
@@ -351,10 +373,12 @@ public class BancoAppFun implements Serializable {
 		lblContas.setBounds(780, 48, 56, 30);
 		jpanelClientes.add(lblContas);
 
+		// lista das contas dos clientes
 		JList<String> lbCltConta = new JList<String>(dlmcontacliente);
 		lbCltConta.setBounds(780, 92, 240, 441);
 		jpanelClientes.add(lbCltConta);
 
+		// botao novo para criar novo cliente
 		JButton btCltNovo = new JButton("Novo");
 		btCltNovo.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltNovo.setBounds(467, 22, 120, 38);
@@ -375,17 +399,61 @@ public class BancoAppFun implements Serializable {
 				tbCltPass.setText("");
 				tbCltNum.setText("");
 				dateChooser_3.setDate(null);
-				
 				dlmcontacliente.removeAllElements();
 
 			}
 		});
 		jpanelClientes.add(btCltNovo);
 
-		JButton btCltEliminar = new JButton("Eliminar");
+		// Painel da conta da parte funcionario
+		JPanel jpanelContas = new JPanel();
+		jpanelContas.setVisible(false);
 
+		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
+		rdbtnContaCorrente.setSelected(true);
+		rdbtnContaCorrente.setBounds(424, 81, 132, 25);
+		jpanelContas.add(rdbtnContaCorrente);
+
+		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
+		rdbtnContaPoupanca.setBounds(560, 81, 144, 25);
+		jpanelContas.add(rdbtnContaPoupanca);
+
+		// botao eliminar cliente
+		JButton btCltEliminar = new JButton("Eliminar");
 		btCltEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btCltEliminar.setBounds(609, 22, 120, 38);
+		btCltEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// primeiro ve qual o id selecionado!
+				int linha = tableListaClts.getSelectedRow();
+				int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
+
+				// elimina o cliente:
+				gb.javabank.eliminautilizador(idCliente, gb.javabank.getUtlizadores());
+
+				// depois limpa os campos do formulario:
+				tableListaClts.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				rdbtnContaCorrente.setSelected(false);
+				rdbtnContaPoupanca.setSelected(false);
+
+				// atualiza lista:
+				modeloTabelaCliente.setRowCount(0);
+				gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
 		jpanelClientes.add(btCltEliminar);
 
 		JButton btCltconfirmar = new JButton("Confirmar");
@@ -412,28 +480,28 @@ public class BancoAppFun implements Serializable {
 		lblMorada.setBounds(345, 272, 66, 30);
 		jpanelClientes.add(lblMorada);
 
-		btCltPesquisa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+//		// botao pesquisar cliente
+//		btCltPesquisa.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				modeloTabelaCliente.setRowCount(0);
+//
+//				if (cbCltPesq.getSelectedItem().equals("Nome")) {
+//					String nome = tbCltPesq.getText();
+//					String[] clientesNome = gb.javabank.listaClientesNome(nome);
+//					gb.javabank.addelementoslist(clientesNome, modeloTabelaCliente);
+//
+//				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
+//					String id = tbCltPesq.getText();
+//					String[] clientesId = gb.javabank.listaClientesID(id);
+//					gb.javabank.addelementoslist(clientesId, modeloTabelaCliente);
+//
+//				}
+//
+//			}
+//		});
 
-				dmclt.removeAllElements();
-
-				if (cbCltPesq.getSelectedItem().equals("Nome")) {
-					String nome = tbCltPesq.getText();
-					String[] clientesNome = gb.javabank.listaClientesNome(nome);
-					gb.javabank.addelementoslist(clientesNome, dmclt);
-
-				} else if (cbCltPesq.getSelectedItem().equals("ID")) {
-					String id = tbCltPesq.getText();
-					String[] clientesId = gb.javabank.listaClientesID(id);
-					gb.javabank.addelementoslist(clientesId, dmclt);
-
-					// String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-					// gb.javabank.addelementoslist(contasCliente,dmconta );
-				}
-
-			}
-		});
-
+		// painel movimentos onde aparece a tabela das operaçoes
 		JPanel panelMovimentos = new JPanel();
 		panelMovimentos.setBounds(0, 0, 1065, 585);
 		JpanelPrincipal.add(panelMovimentos);
@@ -468,35 +536,20 @@ public class BancoAppFun implements Serializable {
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-		// Modelo da tabela clientes:
-		String[] colunas3 = { "ID", "Nome" };
-		DefaultTableModel modeloTabelaCliente = new DefaultTableModel(colunas3, 0) {
-			private static final long serialVersionUID = 1L;
-
-			@SuppressWarnings("rawtypes")
-			public Class getColumnClass(int c) {
-				switch (c) {
-				case 0:
-					return Integer.class;
-				default:
-					return String.class;
-				}
-			}
-
-			public boolean isCellEditable(int rowIndex, int mColIndex) {
-				if (mColIndex == 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-		};
+		// Tabela clientes nas contas
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(768, 47, 262, 334);
+		jpanelContas.add(scrollPane_1);
+		tableClts = new JTable(model);
+		scrollPane_1.setViewportView(tableClts);
 
 		// Tabela clientes no painel cliente
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(48, 92, 240, 363);
 		jpanelClientes.add(scrollPane_2);
 		tableListaClts = new JTable(modeloTabelaCliente);
+		// Preencher tabela apartir do tablemodel:
+		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 
 		tableListaClts.addMouseListener(new MouseAdapter() {
 			@Override
@@ -531,7 +584,6 @@ public class BancoAppFun implements Serializable {
 				}
 
 				// mostra na lista as contas deste cliente
-				// modeloTabelaCliente.setRowCount(0);
 				dlmcontacliente.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
 						dlmcontacliente);
@@ -539,22 +591,27 @@ public class BancoAppFun implements Serializable {
 		});
 		scrollPane_2.setViewportView(tableListaClts);
 
-		// Preencher tabela apartir do tablemodel:
-		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
-
 		JButton btnLimparClt = new JButton("Limpar pesquisa");
 		btnLimparClt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				
+				modeloTabelaCliente.setRowCount(0);
 				dlmcontacliente.removeAllElements();
-				// gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()),
-				// modeloTabelaCliente);
 				gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 			}
 		});
 		btnLimparClt.setBounds(97, 466, 133, 23);
 		jpanelClientes.add(btnLimparClt);
-
-		// painel de clientes:
 
 		// bt confirmar (adicionar ou alterar )
 		btCltconfirmar.addActionListener(new ActionListener() {
@@ -591,8 +648,8 @@ public class BancoAppFun implements Serializable {
 					gb.javabank.getUtlizadores().add(clt);
 
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-					dmclt.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
+					modeloTabelaCliente.setRowCount(0);
+					gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 					JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
 				} else {
 					// atualizar Cliente:
@@ -628,10 +685,6 @@ public class BancoAppFun implements Serializable {
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
 		jpanelGestao.setVisible(false);
-
-		// Painel da conta da parte funcionario
-		JPanel jpanelContas = new JPanel();
-		jpanelContas.setVisible(false);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
@@ -733,55 +786,6 @@ public class BancoAppFun implements Serializable {
 		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
 		lblIdFuncionario.setBounds(47, 496, 227, 30);
 		jpanelGestao.add(lblIdFuncionario);
-
-		// Tabela clientes nas contas
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(768, 47, 262, 334);
-		jpanelContas.add(scrollPane_1);
-		tableClts = new JTable(model);
-		scrollPane_1.setViewportView(tableClts);
-
-		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
-		rdbtnContaCorrente.setSelected(true);
-		rdbtnContaCorrente.setBounds(424, 81, 132, 25);
-		jpanelContas.add(rdbtnContaCorrente);
-
-		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
-		rdbtnContaPoupanca.setBounds(560, 81, 144, 25);
-		jpanelContas.add(rdbtnContaPoupanca);
-
-		btCltEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// primeiro ve qual o id selecionado!
-				int linha = tableListaClts.getSelectedRow();
-				int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
-
-				// elimina o cliente:
-				gb.javabank.eliminautilizador(idCliente, gb.javabank.getUtlizadores());
-
-				// depois limpa os campos do formulario:
-				tableListaClts.clearSelection();
-				lbCltConta.clearSelection();
-				tbCltNome.setText("");
-				tbCltApelido.setText("");
-				tbCltMorada.setText(null);
-				tbCltContacto.setText(null);
-				bg.clearSelection();
-				tbCltUser.setText("");
-				tbCltPass.setText("");
-				tbCltNum.setText("");
-				dateChooser_3.setDate(null);
-				rdbtnContaCorrente.setSelected(false);
-				rdbtnContaPoupanca.setSelected(false);
-
-				// atualiza lista:
-				dmclt.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmclt);
-				dlmcontacliente.removeAllElements();
-
-			}
-		});
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -1505,7 +1509,7 @@ public class BancoAppFun implements Serializable {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(55, 51, 418, 293);
 		panelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(model);
+		tableMovimentos = new JTable(modeloTabela);
 		scrollPane.setViewportView(tableMovimentos);
 		panelMovimentos.setVisible(false);
 
@@ -1516,7 +1520,9 @@ public class BancoAppFun implements Serializable {
 		jpanelOperacoes.setVisible(false);
 		jpanelOperacoes.setLayout(null);
 
+		// combobox com a lista das contas abertas
 		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
+		// metodo que vai buscar as contas
 		gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dcbm);
 		cbOperacoesConta.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -1899,8 +1905,7 @@ public class BancoAppFun implements Serializable {
 		btFunConta.setOpaque(true);
 		btFunConta.setBackground(new Color(188, 127, 82));
 		btFunConta.setBounds(0, 148, 170, 144);
-		JpanelMenu.add(btFunConta);
-
+		btFunConta.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		// coloca o painel conta visivel:
 		btFunConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1910,12 +1915,12 @@ public class BancoAppFun implements Serializable {
 				jpanelOperacoes.setVisible(false);
 				panelMovimentos.setVisible(false);
 				lContas.clearSelection();
-				// dmcc.removeAllElements();
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 			}
 		});
-		btFunConta.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+
+		JpanelMenu.add(btFunConta);
 
 		// Botao Menu Operacoes
 		JButton btFunOperaes = new JButton("Opera\u00E7\u00F5es");
