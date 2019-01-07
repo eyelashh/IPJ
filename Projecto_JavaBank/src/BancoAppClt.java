@@ -41,6 +41,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ComboBoxModel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 
 public class BancoAppClt implements Serializable {
 
@@ -66,6 +67,13 @@ public class BancoAppClt implements Serializable {
 	private JPasswordField passwordFieldNovaPass;
 	private JPasswordField passwordFieldConfPass;
 	private JTable table;
+	private JTextField textFieldNomeClt;
+	private JTextField textFieldApelidoClt;
+	private JTextField textFieldNumIdentClt;
+	private JTextField textFieldMorada;
+	private JTextField textFieldContactoClt;
+	private JTextField textFieldUserClt;
+	private JTextField textFieldPassClt;
 
 	/**
 	 * Launch the application.
@@ -209,6 +217,253 @@ public class BancoAppClt implements Serializable {
 		// Painel principal gestao
 		JPanel JPCltGestao = new JPanel();
 		JPCltGestao.setVisible(false);
+		JPCltGestao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltGestao);
+		JPCltGestao.setLayout(null);
+
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		separator_1.setForeground(Color.BLACK);
+		separator_1.setAlignmentX(0.0f);
+		separator_1.setBounds(483, 68, 29, 433);
+		JPCltGestao.add(separator_1);
+
+		JLabel label = new JLabel("Password :");
+		label.setVerifyInputWhenFocusTarget(false);
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label.setBounds(612, 272, 131, 41);
+		JPCltGestao.add(label);
+
+		JLabel label_1 = new JLabel("Nova Password :");
+		label_1.setVerifyInputWhenFocusTarget(false);
+		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_1.setBounds(612, 341, 168, 26);
+		JPCltGestao.add(label_1);
+
+		JLabel label_2 = new JLabel("Confirmar Password :");
+		label_2.setVerifyInputWhenFocusTarget(false);
+		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_2.setBounds(612, 399, 175, 33);
+		JPCltGestao.add(label_2);
+
+		// botao confirmar alteracao da pass
+		JButton button = new JButton("Confirmar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga1.getPassword()))
+						&& (String.valueOf(passwordFieldConfPass.getPassword())
+								.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
+
+					clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
+
+					passwordFieldAntiga1.setText(null);
+					passwordFieldConfPass.setText(null);
+					passwordFieldNovaPass.setText(null);
+					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
+
+				}
+			}
+		});
+
+		button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button.setBounds(643, 478, 110, 32);
+		JPCltGestao.add(button);
+
+		// botao cancelar da alteracao da pass
+		JButton button_2 = new JButton("Cancelar");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				passwordFieldAntiga1.setText(null);
+				passwordFieldConfPass.setText(null);
+				passwordFieldNovaPass.setText(null);
+			}
+		});
+		button_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_2.setBounds(765, 478, 110, 32);
+		JPCltGestao.add(button_2);
+
+		// botao cancelar alterar user
+		JButton button_3 = new JButton("Cancelar");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				passwordFieldAntiga.setText(null);
+				txtCltNewUser.setText(null);
+
+			}
+		});
+		button_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_3.setBounds(763, 239, 110, 32);
+		JPCltGestao.add(button_3);
+
+		// botao confirmar da alteraçao do user
+		JButton button_4 = new JButton("Confirmar");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword()))) {
+
+					clt.setUsername(txtCltNewUser.getText());
+					passwordFieldAntiga.setText(null);
+					txtCltNewUser.setText(null);
+					textCltUser.setText(clt.getUsername());
+					JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
+				}
+			}
+		});
+
+		button_4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		button_4.setBounds(642, 239, 110, 32);
+		JPCltGestao.add(button_4);
+
+		txtCltNewUser = new JTextField();
+		txtCltNewUser.setColumns(10);
+		txtCltNewUser.setBounds(622, 194, 271, 33);
+		JPCltGestao.add(txtCltNewUser);
+
+		JLabel label_3 = new JLabel("Nova Username :");
+		label_3.setVerifyInputWhenFocusTarget(false);
+		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_3.setBounds(613, 166, 191, 26);
+		JPCltGestao.add(label_3);
+
+		JLabel label_4 = new JLabel("Password :");
+		label_4.setVerifyInputWhenFocusTarget(false);
+		label_4.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_4.setBounds(612, 102, 131, 41);
+		JPCltGestao.add(label_4);
+
+		textCltUser = new JTextField(clt.getUsername());
+		textCltUser.setBounds(622, 75, 271, 33);
+		textCltUser.setEditable(false);
+		JPCltGestao.add(textCltUser);
+
+		JLabel label_5 = new JLabel("Username :");
+		label_5.setVerifyInputWhenFocusTarget(false);
+		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_5.setBounds(612, 42, 131, 41);
+		JPCltGestao.add(label_5);
+
+		passwordFieldAntiga = new JPasswordField();
+		passwordFieldAntiga.setBounds(622, 133, 271, 33);
+		JPCltGestao.add(passwordFieldAntiga);
+
+		passwordFieldAntiga1 = new JPasswordField();
+		passwordFieldAntiga1.setBounds(622, 308, 271, 33);
+		JPCltGestao.add(passwordFieldAntiga1);
+
+		passwordFieldNovaPass = new JPasswordField();
+		passwordFieldNovaPass.setBounds(622, 368, 271, 33);
+		JPCltGestao.add(passwordFieldNovaPass);
+
+		passwordFieldConfPass = new JPasswordField();
+		passwordFieldConfPass.setBounds(622, 433, 271, 33);
+		JPCltGestao.add(passwordFieldConfPass);
+
+		JLabel label_12 = new JLabel("Nome:");
+		label_12.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_12.setBounds(61, 52, 57, 30);
+		JPCltGestao.add(label_12);
+
+		textFieldNomeClt = new JTextField(clt.getNome());
+		textFieldNomeClt.setBounds(61, 83, 179, 31);
+		textFieldNomeClt.setEditable(false);
+		JPCltGestao.add(textFieldNomeClt);
+
+		textFieldApelidoClt = new JTextField(clt.getSobrenome());
+		textFieldApelidoClt.setEditable(false);
+		textFieldApelidoClt.setBounds(252, 83, 193, 31);
+		JPCltGestao.add(textFieldApelidoClt);
+
+		JLabel label_13 = new JLabel("Apelido:");
+		label_13.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_13.setBounds(252, 52, 72, 30);
+		JPCltGestao.add(label_13);
+
+		JLabel label_14 = new JLabel("D. Nascimento:");
+		label_14.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_14.setBounds(71, 112, 131, 30);
+		JPCltGestao.add(label_14);
+
+		JDateChooser dateChooserNascimClt = new JDateChooser(clt.getDataDeNascimento());
+		dateChooserNascimClt.setEnabled(false);
+		dateChooserNascimClt.setBounds(81, 144, 260, 31);
+		JPCltGestao.add(dateChooserNascimClt);
+
+		JLabel label_15 = new JLabel("Documento:");
+		label_15.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_15.setBounds(61, 176, 108, 30);
+		JPCltGestao.add(label_15);
+
+		JRadioButton radioButton = new JRadioButton("C.C.");
+		radioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		radioButton.setBounds(169, 178, 66, 25);
+		JPCltGestao.add(radioButton);
+
+		JRadioButton radioButton_1 = new JRadioButton("B.I.");
+		radioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		radioButton_1.setBounds(236, 177, 57, 25);
+		JPCltGestao.add(radioButton_1);
+
+		JRadioButton radioButton_2 = new JRadioButton("Passaporte");
+		radioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		radioButton_2.setBounds(293, 177, 138, 25);
+		JPCltGestao.add(radioButton_2);
+
+		JLabel label_16 = new JLabel("Número:");
+		label_16.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_16.setBounds(71, 210, 91, 30);
+		JPCltGestao.add(label_16);
+
+		textFieldNumIdentClt = new JTextField(clt.getNumidentificacao());
+		textFieldNumIdentClt.setEditable(false);
+		textFieldNumIdentClt.setBounds(81, 242, 271, 31);
+		JPCltGestao.add(textFieldNumIdentClt);
+
+		JLabel label_17 = new JLabel("Morada:");
+		label_17.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_17.setBounds(71, 274, 66, 30);
+		JPCltGestao.add(label_17);
+
+		textFieldMorada = new JTextField(clt.getMorada());
+		textFieldMorada.setEditable(false);
+		textFieldMorada.setBounds(81, 302, 271, 31);
+		JPCltGestao.add(textFieldMorada);
+
+		JLabel label_18 = new JLabel("Contacto:");
+		label_18.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_18.setBounds(71, 335, 81, 31);
+		JPCltGestao.add(label_18);
+
+		textFieldContactoClt = new JTextField(clt.getContacto());
+		textFieldContactoClt.setEditable(false);
+		textFieldContactoClt.setBounds(81, 364, 271, 33);
+		JPCltGestao.add(textFieldContactoClt);
+
+		JLabel label_19 = new JLabel("Username:");
+		label_19.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_19.setBounds(71, 394, 115, 30);
+		JPCltGestao.add(label_19);
+
+		textFieldUserClt = new JTextField(clt.getUsername());
+		textFieldUserClt.setEditable(false);
+		textFieldUserClt.setBounds(82, 424, 271, 33);
+		JPCltGestao.add(textFieldUserClt);
+
+		JLabel label_20 = new JLabel("Password:");
+		label_20.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_20.setBounds(71, 460, 91, 30);
+		JPCltGestao.add(label_20);
+
+		textFieldPassClt = new JTextField(clt.getPassword());
+		textFieldPassClt.setEditable(false);
+		textFieldPassClt.setBounds(81, 493, 271, 31);
+		JPCltGestao.add(textFieldPassClt);
 
 		// Painel principal cliente
 		JPanel JPCltCM = new JPanel();
@@ -698,153 +953,6 @@ public class BancoAppClt implements Serializable {
 		button_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		button_1.setBounds(264, 364, 116, 38);
 		JPCltTransferencia.add(button_1);
-		JPCltGestao.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltGestao);
-		JPCltGestao.setLayout(null);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setForeground(Color.BLACK);
-		separator_1.setAlignmentX(0.0f);
-		separator_1.setBounds(483, 68, 29, 433);
-		JPCltGestao.add(separator_1);
-
-		JLabel label = new JLabel("Password :");
-		label.setVerifyInputWhenFocusTarget(false);
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label.setBounds(570, 95, 131, 41);
-		JPCltGestao.add(label);
-
-		JLabel label_1 = new JLabel("Nova Password :");
-		label_1.setVerifyInputWhenFocusTarget(false);
-		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_1.setBounds(570, 192, 168, 41);
-		JPCltGestao.add(label_1);
-
-		JLabel label_2 = new JLabel("Confirmar Password :");
-		label_2.setVerifyInputWhenFocusTarget(false);
-		label_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_2.setBounds(570, 289, 271, 41);
-		JPCltGestao.add(label_2);
-
-		// botao confirmar alteracao da pass
-		JButton button = new JButton("Confirmar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga1.getPassword()))
-						&& (String.valueOf(passwordFieldConfPass.getPassword())
-								.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
-
-					clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
-
-					passwordFieldAntiga1.setText(null);
-					passwordFieldConfPass.setText(null);
-					passwordFieldNovaPass.setText(null);
-					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
-
-				}
-			}
-		});
-
-		button.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button.setBounds(570, 429, 131, 41);
-		JPCltGestao.add(button);
-
-		// botao cancelar da alteracao da pass
-		JButton button_2 = new JButton("Cancelar");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				passwordFieldAntiga1.setText(null);
-				passwordFieldConfPass.setText(null);
-				passwordFieldNovaPass.setText(null);
-			}
-		});
-		button_2.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_2.setBounds(720, 429, 131, 41);
-		JPCltGestao.add(button_2);
-
-		// botao cancelar alterar user
-		JButton button_3 = new JButton("Cancelar");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				passwordFieldAntiga.setText(null);
-				txtCltNewUser.setText(null);
-
-			}
-		});
-		button_3.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_3.setBounds(285, 429, 131, 41);
-		JPCltGestao.add(button_3);
-
-		// botao confirmar da alteraçao do user
-		JButton button_4 = new JButton("Confirmar");
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword()))) {
-
-					clt.setUsername(txtCltNewUser.getText());
-					passwordFieldAntiga.setText(null);
-					txtCltNewUser.setText(null);
-					textCltUser.setText(clt.getUsername());
-					JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
-				}
-			}
-		});
-
-		button_4.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		button_4.setBounds(135, 429, 131, 41);
-		JPCltGestao.add(button_4);
-
-		txtCltNewUser = new JTextField();
-		txtCltNewUser.setColumns(10);
-		txtCltNewUser.setBounds(135, 341, 271, 33);
-		JPCltGestao.add(txtCltNewUser);
-
-		JLabel label_3 = new JLabel("Nova Username :");
-		label_3.setVerifyInputWhenFocusTarget(false);
-		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_3.setBounds(135, 289, 191, 41);
-		JPCltGestao.add(label_3);
-
-		JLabel label_4 = new JLabel("Password :");
-		label_4.setVerifyInputWhenFocusTarget(false);
-		label_4.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_4.setBounds(135, 192, 131, 41);
-		JPCltGestao.add(label_4);
-
-		textCltUser = new JTextField(clt.getUsername());
-		textCltUser.setBounds(135, 148, 271, 33);
-		textCltUser.setEditable(false);
-		JPCltGestao.add(textCltUser);
-
-		JLabel label_5 = new JLabel("Username :");
-		label_5.setVerifyInputWhenFocusTarget(false);
-		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		label_5.setBounds(135, 95, 131, 41);
-		JPCltGestao.add(label_5);
-
-		passwordFieldAntiga = new JPasswordField();
-		passwordFieldAntiga.setBounds(135, 244, 271, 33);
-		JPCltGestao.add(passwordFieldAntiga);
-
-		passwordFieldAntiga1 = new JPasswordField();
-		passwordFieldAntiga1.setBounds(580, 147, 271, 33);
-		JPCltGestao.add(passwordFieldAntiga1);
-
-		passwordFieldNovaPass = new JPasswordField();
-		passwordFieldNovaPass.setBounds(580, 245, 271, 33);
-		JPCltGestao.add(passwordFieldNovaPass);
-
-		passwordFieldConfPass = new JPasswordField();
-		passwordFieldConfPass.setBounds(580, 342, 271, 33);
-		JPCltGestao.add(passwordFieldConfPass);
 
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
