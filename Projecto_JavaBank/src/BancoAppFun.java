@@ -111,6 +111,7 @@ public class BancoAppFun implements Serializable {
 	/**
 	 * Launch the application.
 	 */
+	
 	public void run() {
 		try {
 			BancoAppFun window = new BancoAppFun(func, gb);

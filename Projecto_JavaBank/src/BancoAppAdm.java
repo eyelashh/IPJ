@@ -238,37 +238,37 @@ public class BancoAppAdm implements Serializable {
 		// texto : Nome
 		JLabel lblAdmFunNome = new JLabel("Nome:");
 		lblAdmFunNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunNome.setBounds(463, 59, 57, 30);
+		lblAdmFunNome.setBounds(420, 111, 57, 30);
 		JPAdmFuncionario.add(lblAdmFunNome);
 
 		// texto : data de nascimento
 		JLabel lblAdmFunDataDeNascimento = new JLabel("Data de Nascimento:");
 		lblAdmFunDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunDataDeNascimento.setBounds(463, 119, 177, 30);
+		lblAdmFunDataDeNascimento.setBounds(420, 171, 177, 30);
 		JPAdmFuncionario.add(lblAdmFunDataDeNascimento);
 
 		// texto : documento
 		JLabel lblAdmFunDocumento = new JLabel("Documento:");
 		lblAdmFunDocumento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunDocumento.setBounds(463, 180, 108, 30);
+		lblAdmFunDocumento.setBounds(420, 232, 108, 30);
 		JPAdmFuncionario.add(lblAdmFunDocumento);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunCC = new JRadioButton("C.C.");
 		rbAdmFunCC.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunCC.setBounds(574, 183, 66, 25);
+		rbAdmFunCC.setBounds(531, 235, 66, 25);
 		JPAdmFuncionario.add(rbAdmFunCC);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunBI = new JRadioButton("B.I.");
 		rbAdmFunBI.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunBI.setBounds(653, 183, 57, 25);
+		rbAdmFunBI.setBounds(610, 235, 57, 25);
 		JPAdmFuncionario.add(rbAdmFunBI);
 
 		// radiobutton : documento
 		JRadioButton rbAdmFunPass = new JRadioButton("Passaporte");
 		rbAdmFunPass.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		rbAdmFunPass.setBounds(722, 183, 138, 25);
+		rbAdmFunPass.setBounds(679, 235, 138, 25);
 		JPAdmFuncionario.add(rbAdmFunPass);
 		bg.add(rbAdmFunCC);
 		bg.add(rbAdmFunBI);
@@ -277,60 +277,73 @@ public class BancoAppAdm implements Serializable {
 		// texto : numero do documento
 		JLabel lblAdmFunNumero = new JLabel("Número de Identificação:");
 		lblAdmFunNumero.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunNumero.setBounds(463, 208, 227, 30);
+		lblAdmFunNumero.setBounds(420, 260, 227, 30);
 		JPAdmFuncionario.add(lblAdmFunNumero);
 
 		// texto : contato
 		JLabel lblAdmFunContacto = new JLabel("Contacto:");
 		lblAdmFunContacto.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunContacto.setBounds(463, 274, 81, 31);
+		lblAdmFunContacto.setBounds(420, 326, 81, 31);
 		JPAdmFuncionario.add(lblAdmFunContacto);
 
 		// texto : username
 		JLabel lblAdmFunUsername = new JLabel("UserName:");
 		lblAdmFunUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunUsername.setBounds(464, 412, 120, 30);
+		lblAdmFunUsername.setBounds(421, 464, 120, 30);
 		JPAdmFuncionario.add(lblAdmFunUsername);
 
 		// texto : username
 		JLabel lblAdmFunPassword = new JLabel("Password:");
 		lblAdmFunPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdmFunPassword.setBounds(722, 412, 153, 30);
+		lblAdmFunPassword.setBounds(689, 464, 153, 30);
 		JPAdmFuncionario.add(lblAdmFunPassword);
 
 		// Campos de texto - nome
 		textAdmFunNome = new JTextField();
 		textAdmFunNome.setColumns(10);
-		textAdmFunNome.setBounds(473, 90, 217, 31);
+		textAdmFunNome.setBounds(430, 142, 217, 31);
 		JPAdmFuncionario.add(textAdmFunNome);
 
 		// Campos de texto - numero
 		textAdmFunNumero = new JTextField();
 		textAdmFunNumero.setColumns(10);
-		textAdmFunNumero.setBounds(473, 241, 225, 31);
+		textAdmFunNumero.setBounds(430, 293, 225, 31);
 		JPAdmFuncionario.add(textAdmFunNumero);
 
 		// Campos de texto - contato
 		textAdmFunContato = new JTextField();
 		textAdmFunContato.setColumns(10);
-		textAdmFunContato.setBounds(473, 305, 225, 31);
+		textAdmFunContato.setBounds(430, 357, 225, 31);
 		JPAdmFuncionario.add(textAdmFunContato);
 
 		// Campos de texto - username
 		textAdmFunUser = new JTextField();
 		textAdmFunUser.setColumns(10);
-		textAdmFunUser.setBounds(474, 440, 225, 31);
+		textAdmFunUser.setBounds(431, 492, 225, 31);
 		JPAdmFuncionario.add(textAdmFunUser);
 
 		// Campos de texto - pass
 		textAdmFunPass = new JTextField();
 		textAdmFunPass.setColumns(10);
-		textAdmFunPass.setBounds(732, 440, 225, 31);
+		textAdmFunPass.setBounds(689, 492, 225, 31);
 		JPAdmFuncionario.add(textAdmFunPass);
+		
+		
+		JRadioButton rbadmfuncionario = new JRadioButton("Funcionario");
+		rbadmfuncionario.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		rbadmfuncionario.setBounds(420, 84, 121, 25);
+		JPAdmFuncionario.add(rbadmfuncionario);
+		
+		JRadioButton rbadmadministrador = new JRadioButton("Administrador");
+		rbadmadministrador.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		rbadmadministrador.setBounds(539, 84, 138, 25);
+		JPAdmFuncionario.add(rbadmadministrador);
+		
+		
 
 		// lista dos funcionarios
 				DefaultListModel<String> dmFun = new DefaultListModel<String>();
-				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
 		
 		// Data do funcionario
 		JDateChooser dateChooser = new JDateChooser();
@@ -338,27 +351,27 @@ public class BancoAppAdm implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		dateChooser.setBounds(473, 150, 217, 31);
+		dateChooser.setBounds(430, 202, 217, 31);
 		JPAdmFuncionario.add(dateChooser);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
 		lblSobrenome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblSobrenome.setBounds(709, 57, 120, 30);
+		lblSobrenome.setBounds(666, 109, 120, 30);
 		JPAdmFuncionario.add(lblSobrenome);
 
 		textAdmFunSobrenome = new JTextField();
 		textAdmFunSobrenome.setColumns(10);
-		textAdmFunSobrenome.setBounds(719, 88, 217, 31);
+		textAdmFunSobrenome.setBounds(676, 140, 217, 31);
 		JPAdmFuncionario.add(textAdmFunSobrenome);
 
 		textAdmFunMorada = new JTextField();
 		textAdmFunMorada.setColumns(10);
-		textAdmFunMorada.setBounds(473, 370, 225, 31);
+		textAdmFunMorada.setBounds(430, 422, 225, 31);
 		JPAdmFuncionario.add(textAdmFunMorada);
 
 		JLabel lblMorada = new JLabel("Morada: ");
 		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMorada.setBounds(463, 337, 227, 30);
+		lblMorada.setBounds(420, 389, 227, 30);
 		JPAdmFuncionario.add(lblMorada);
 		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
 		lbLAdmFunLista.setBounds(109, 109, 240, 441);
@@ -372,9 +385,13 @@ public class BancoAppAdm implements Serializable {
 
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
-					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
-							gb.javabank.getUtlizadores());
-
+					
+					
+				//	Funcionario f = (Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
+					//		gb.javabank.getUtlizadores());
+					
+					Utilizador f = gb.javabank.selectUtilizador(Integer.parseInt(s),gb.javabank.getUtlizadores());
+					
 					textAdmFunNome.setText(f.getNome());
 					textAdmFunSobrenome.setText(f.getSobrenome());
 					textAdmFunMorada.setText(f.getMorada());
@@ -392,6 +409,17 @@ public class BancoAppAdm implements Serializable {
 					}
 					if (f.getTipoIndentificacao().equals("Passaporte")) {
 						rbAdmFunPass.setSelected(true);
+					}
+					
+					if(f instanceof Administrador)
+					{
+						rbadmadministrador.setSelected(true);
+						rbadmfuncionario.setSelected(false);
+					}
+					else
+					{
+						rbadmadministrador.setSelected(false);
+						rbadmfuncionario.setSelected(true);
 					}
 
 				}
@@ -417,10 +445,12 @@ public class BancoAppAdm implements Serializable {
 				textAdmFunUser.setText(null);
 				dateChooser.setCalendar(null);
 				tbAdmFunPesq.setText(null);
+				rbadmfuncionario.setSelected(false);
+				rbadmadministrador.setSelected(false);
 
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmFun.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
 
 			}
 		});
@@ -446,18 +476,18 @@ public class BancoAppAdm implements Serializable {
 
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmFun.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
 
 			}
 		});
 
-		btAdmFunNovo.setBounds(605, 512, 120, 38);
+		btAdmFunNovo.setBounds(608, 525, 120, 38);
 		JPAdmFuncionario.add(btAdmFunNovo);
 
 		// botao confirmar funcionario
 		JButton btnAdmFunConfirmar_1 = new JButton("Confirmar");
 		btnAdmFunConfirmar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunConfirmar_1.setBounds(473, 512, 120, 38);
+		btnAdmFunConfirmar_1.setBounds(476, 525, 120, 38);
 
 		// bt confirmar (adicionar ou alterar )
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
@@ -492,25 +522,39 @@ public class BancoAppAdm implements Serializable {
 						id2++;
 					}
 
-					// esta a criar o novo funcionario:
-					Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
-							dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
-							textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
-							textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
-					gb.javabank.getUtlizadores().add(fun);
+					if(rbadmfuncionario.isSelected())
+					{
+						// esta a criar o novo funcionario:
+						Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+								dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+								textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+								textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
+						gb.javabank.getUtlizadores().add(fun);
 
-					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-					dmFun.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
-					JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
+						// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+						dmFun.removeAllElements();
+						gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
+						JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
+					}
+					else
+					{
+						Utilizador adm = new Administrador(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+								dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+								textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+								textAdmFunUser.getText(), textAdmFunPass.getText());
+						gb.javabank.getUtlizadores().add(adm);
+					}
+					
 
 				} else {
-					// atualizar Funcionario:
+					// atualizar Funcionario ou admin:
 					// seleciona id;
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 
 					// metedo para atualizar:
+					if(gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores()) instanceof Funcionario)
+					{
 					gb.javabank.actualizaFun(
 							(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
 									gb.javabank.getUtlizadores()),
@@ -518,10 +562,15 @@ public class BancoAppAdm implements Serializable {
 							Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
 							Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
 							textAdmFunPass.getText());
-
+					}
+					else
+					{
+						// atualizar admin;
+						
+					}
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					dmFun.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
 
 					JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
 
@@ -546,7 +595,7 @@ public class BancoAppAdm implements Serializable {
 		// botao eliminar funcionario
 		JButton btnAdmFunEliminar = new JButton("Eliminar");
 		btnAdmFunEliminar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmFunEliminar.setBounds(737, 512, 120, 38);
+		btnAdmFunEliminar.setBounds(740, 525, 120, 38);
 		// metodo elimina funcionario
 		btnAdmFunEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -561,7 +610,7 @@ public class BancoAppAdm implements Serializable {
 
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					dmFun.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+					gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
 					JOptionPane.showMessageDialog(null, "Funcionario eliminado com sucesso!");
 				}
 
@@ -649,7 +698,15 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		JPAdmFuncionario.add(btAdmFunProc);
-
+		
+		
+		
+		// grupo de botoes:
+		ButtonGroup bgadm = new ButtonGroup();
+		bgadm.add(rbadmadministrador);
+		bgadm.add(rbadmfuncionario);
+		
+		
 		// Painel da gestao do administrador
 		JPanel JPAdmGestao = new JPanel();
 		JPAdmGestao.setBounds(0, 0, 1042, 576);
