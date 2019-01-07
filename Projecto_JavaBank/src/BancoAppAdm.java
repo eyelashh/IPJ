@@ -611,12 +611,20 @@ public class BancoAppAdm implements Serializable {
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 
+					if(Integer.parseInt(s)== adm.getIdUtilizador())
+					{
+						JOptionPane.showMessageDialog(null, "Nao pode eliminar o seu proprio utilizador!");
+					}
+					else
+					{
+					
 					gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
 
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					dmFun.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
-					JOptionPane.showMessageDialog(null, "Funcionario eliminado com sucesso!");
+					JOptionPane.showMessageDialog(null, "Utilizador eliminado com sucesso!");
+					}
 				}
 
 				lbLAdmFunLista.clearSelection();
