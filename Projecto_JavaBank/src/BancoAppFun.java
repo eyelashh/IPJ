@@ -1100,10 +1100,6 @@ public class BancoAppFun implements Serializable {
 		tbfuncontacto.setBounds(49, 387, 225, 31);
 		jpanelGestao.add(tbfuncontacto);
 
-		/*JLabel label_7 = new JLabel("Morada: ");
-		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
-		label_7.setBounds(39, 419, 227, 30);
-		jpanelGestao.add(label_7);*/
 
 		tbfunmorada = new JTextField();
 		tbfunmorada.setEditable(false);
@@ -1117,10 +1113,6 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setBounds(47, 529, 225, 31);
 		jpanelGestao.add(tbfunidfunc);
 
-		/*JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
-		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblIdFuncionario.setBounds(47, 496, 227, 30);
-		jpanelGestao.add(lblIdFuncionario);*/
 
 		JPanel panelMovimentos = new JPanel();
 		panelMovimentos.setBounds(0, 0, 1065, 585);
