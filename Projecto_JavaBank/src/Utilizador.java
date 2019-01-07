@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Date;
+
 public class Utilizador implements Serializable {
 
 	private int idUtilizador;
@@ -12,10 +13,9 @@ public class Utilizador implements Serializable {
 	private int contacto;
 	private String username;
 	private String password;
-	
-	public Utilizador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento,
-			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
-			String password) {
+
+	public Utilizador(int idUtilizador, String nome, String sobrenome, Date dataDeNascimento, String tipoIndentificacao,
+			int numidentificacao, String morada, int contacto, String username, String password) {
 		super();
 		this.idUtilizador = idUtilizador;
 		this.nome = nome;
@@ -27,7 +27,7 @@ public class Utilizador implements Serializable {
 		this.contacto = contacto;
 		this.username = username;
 		this.password = password;
-		
+
 	}
 
 	public Utilizador() {
@@ -112,7 +112,15 @@ public class Utilizador implements Serializable {
 
 	public void setDataDeNascimento(Date date) {
 		this.dataDeNascimento = date;
-		
+
+	}
+
+	@Override
+	public String toString() {
+		return "Utilizador [idUtilizador=" + idUtilizador + ", nome=" + nome + ", sobrenome=" + sobrenome
+				+ ", dataDeNascimento=" + dataDeNascimento + ", tipoIndentificacao=" + tipoIndentificacao
+				+ ", numidentificacao=" + numidentificacao + ", morada=" + morada + ", contacto=" + contacto
+				+ ", username=" + username + ", password=" + password + "]";
 	}
 
 }
