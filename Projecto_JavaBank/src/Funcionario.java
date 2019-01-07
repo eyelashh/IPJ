@@ -11,30 +11,30 @@ public class Funcionario extends Utilizador implements Serializable {
 		super(idUtilizador, nome, sobrenome, dataDeNascimento, tipoIndentificacao, numidentificacao, morada, contacto,
 				username, password);
 		this.idFuncionario = idFuncionario;
-		
+
 	}
 
 	public int getIdFuncionario() {
 		return idFuncionario;
 	}
- 
+
 	public void setIdFuncionario(int idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
-	
-	protected String[] listar(ArrayList<Funcionario> fun)
-	{
-		String[] f=new String[fun.size()];
+
+	protected String[] listar(ArrayList<Funcionario> fun) {
+		String[] f = new String[fun.size()];
 		String s = "";
-		for(int i=0; i<f.length;i++)
-		{
-			s = fun.get(i).getIdUtilizador()+" * "+ fun.get(i).getNome();
-			f[i]=s;
+		for (int i = 0; i < f.length; i++) {
+			s = fun.get(i).getIdUtilizador() + " * " + fun.get(i).getNome();
+			f[i] = s;
 		}
 		return f;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return idFuncionario + " " + this.getNome();
+	}
 
 }
