@@ -73,6 +73,11 @@ public class BancoAppAdm implements Serializable {
 	private JTextField tbadmcontacartaonome;
 	private JTextField tbadmcontacartaocod;
 	private JDateChooser dcadmcontadata;
+	private JTextField tbadmnome;
+	private JTextField tbadmapelido;
+	private JTextField tbadmnident;
+	private JTextField tbadmcontacto;
+	private JTextField tbadmmorada;
 
 	/**
 	 * Launch the application.
@@ -107,7 +112,7 @@ public class BancoAppAdm implements Serializable {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 			}
 		});
 
@@ -123,7 +128,6 @@ public class BancoAppAdm implements Serializable {
 		frame.getContentPane().add(JpanelCabecalho);
 		JpanelCabecalho.setLayout(null);
 
-
 		// Botao de logout, metodo que vai buscar a class
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -132,7 +136,7 @@ public class BancoAppAdm implements Serializable {
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(),gb.javabank.getCartoes());
+				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 				Login logout = new Login();
 				frame.setVisible(false);
 				logout.run();
@@ -197,10 +201,6 @@ public class BancoAppAdm implements Serializable {
 		// Agrupei num grupo os radio button
 		ButtonGroup bg = new ButtonGroup();
 
-		// Painel da funcionario da parte administrador
-		JPanel JPAdmFuncionario = new JPanel();
-		JPAdmFuncionario.setVisible(false);
-
 		// Box de pesquisa no Cliente
 		String[] texto2 = new String[] { "Nome", "ID" };
 
@@ -210,368 +210,15 @@ public class BancoAppAdm implements Serializable {
 
 		// Lista das contas dos clientes
 		DefaultListModel<String> dmCltContas = new DefaultListModel<String>();
-		
 
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
 		JPAdmCliente.setBounds(0, 0, 1042, 576);
 		JPAdmCliente.setVisible(false);
-		
-				JPanel jpConta = new JPanel();
-				jpConta.setBounds(0, 0, 1042, 576);
-				JPAdm.add(jpConta);
-				jpConta.setLayout(null);
-				
-				tbadmcontanumero = new JTextField();
-				tbadmcontanumero.setEditable(false);
-				tbadmcontanumero.setColumns(10);
-				tbadmcontanumero.setBounds(341, 13, 253, 30);
-				jpConta.add(tbadmcontanumero);
-				
-				dcadmcontadata = new JDateChooser();
-				dcadmcontadata.setEnabled(false);
-				dcadmcontadata.setBounds(341, 56, 253, 30);
-				jpConta.add(dcadmcontadata);
-				
-				JLabel lblNewLabel_1 = new JLabel("Numero de Conta:");
-				lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-				lblNewLabel_1.setBounds(191, 19, 138, 16);
-				jpConta.add(lblNewLabel_1);
-				
-				tbadmcontalimoperacao = new JTextField();
-				tbadmcontalimoperacao.setEditable(false);
-				tbadmcontalimoperacao.setColumns(10);
-				tbadmcontalimoperacao.setBounds(341, 129, 253, 30);
-				jpConta.add(tbadmcontalimoperacao);
-				
-				tbadmcontalimdia = new JTextField();
-				tbadmcontalimdia.setEditable(false);
-				tbadmcontalimdia.setColumns(10);
-				tbadmcontalimdia.setBounds(341, 172, 253, 30);
-				jpConta.add(tbadmcontalimdia);
-				
-				tbadmcontasaldo = new JTextField();
-				tbadmcontasaldo.setEditable(false);
-				tbadmcontasaldo.setColumns(10);
-				tbadmcontasaldo.setBounds(341, 215, 253, 30);
-				jpConta.add(tbadmcontasaldo);
-				
-				JLabel lblDataDaCriao = new JLabel("Data da Cria\u00E7\u00E3o:");
-				lblDataDaCriao.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblDataDaCriao.setBounds(197, 62, 125, 24);
-				jpConta.add(lblDataDaCriao);
-				
-				JLabel lblPorOperao = new JLabel("Por Opera\u00E7\u00E3o:");
-				lblPorOperao.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblPorOperao.setBounds(216, 130, 113, 24);
-				jpConta.add(lblPorOperao);
-				
-				JLabel lblPorDia = new JLabel("Por dia:");
-				lblPorDia.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblPorDia.setBounds(262, 173, 67, 24);
-				jpConta.add(lblPorDia);
-				
-				JLabel lblSaldo = new JLabel("Saldo:");
-				lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblSaldo.setBounds(278, 216, 51, 24);
-				jpConta.add(lblSaldo);
-				
-				JLabel lblLimites = new JLabel("Limites de Levantamento:");
-				lblLimites.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblLimites.setBounds(366, 99, 198, 24);
-				jpConta.add(lblLimites);
-				
-				JPanel panelContaPadm = new JPanel();
-				panelContaPadm.setBounds(191, 258, 415, 111);
-				jpConta.add(panelContaPadm);
-				panelContaPadm.setLayout(null);
-				
-				JLabel lblContasPoupana = new JLabel("Contas Poupan\u00E7a:");
-				lblContasPoupana.setBounds(211, 0, 138, 24);
-				panelContaPadm.add(lblContasPoupana);
-				lblContasPoupana.setFont(new Font("Dialog", Font.PLAIN, 17));
-				
-				tbadmcontajuros = new JTextField();
-				tbadmcontajuros.setEditable(false);
-				tbadmcontajuros.setBounds(150, 27, 253, 30);
-				panelContaPadm.add(tbadmcontajuros);
-				tbadmcontajuros.setColumns(10);
-				
-				JLabel lblJuros = new JLabel("Juros (%):");
-				lblJuros.setBounds(54, 28, 84, 24);
-				panelContaPadm.add(lblJuros);
-				lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
-				
-				JLabel lblLimiteMs = new JLabel("Limite M\u00EAs");
-				lblLimiteMs.setBounds(54, 74, 84, 24);
-				panelContaPadm.add(lblLimiteMs);
-				lblLimiteMs.setFont(new Font("Dialog", Font.PLAIN, 17));
-				
-				tbadmcontalimmes = new JTextField();
-				tbadmcontalimmes.setEditable(false);
-				tbadmcontalimmes.setBounds(150, 73, 253, 30);
-				panelContaPadm.add(tbadmcontalimmes);
-				tbadmcontalimmes.setColumns(10);
-				
-				JPanel panelCartaoAdm = new JPanel();
-				panelCartaoAdm.setBounds(191, 382, 415, 111);
-				jpConta.add(panelCartaoAdm);
-				panelCartaoAdm.setLayout(null);
-				
-				tbadmcontacartaonome = new JTextField();
-				tbadmcontacartaonome.setEditable(false);
-				tbadmcontacartaonome.setColumns(10);
-				tbadmcontacartaonome.setBounds(154, 13, 247, 22);
-				panelCartaoAdm.add(tbadmcontacartaonome);
-				
-				JDateChooser tbadmcontacartaovalidade = new JDateChooser();
-				tbadmcontacartaovalidade.setEnabled(false);
-				tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
-				panelCartaoAdm.add(tbadmcontacartaovalidade);
-				
-				tbadmcontacartaocod = new JTextField();
-				tbadmcontacartaocod.setEditable(false);
-				tbadmcontacartaocod.setColumns(10);
-				tbadmcontacartaocod.setBounds(154, 83, 247, 22);
-				panelCartaoAdm.add(tbadmcontacartaocod);
-				
-				JLabel label = new JLabel("Nome:");
-				label.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				label.setBounds(83, 15, 72, 16);
-				panelCartaoAdm.add(label);
-				
-				JLabel label_1 = new JLabel("Validade");
-				label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				label_1.setBounds(83, 54, 72, 16);
-				panelCartaoAdm.add(label_1);
-				
-				JLabel label_2 = new JLabel("COD:");
-				label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				label_2.setBounds(83, 85, 59, 16);
-				panelCartaoAdm.add(label_2);
-				
-				JButton btVoltarContasAdm = new JButton("Voltar");
-				
-				btVoltarContasAdm.setBounds(427, 538, 97, 25);
-				jpConta.add(btVoltarContasAdm);
-				
-				DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dlmcontaadm);
-				JList<String> listcontasadm = new JList<String>(dlmcontaadm);
-				
-				listcontasadm.setVisible(false);
-				listcontasadm.setBounds(12, 56, 147, 493);
-				jpConta.add(listcontasadm);
-				
-				JCheckBox cboxaberta = new JCheckBox("Aberta");
-				cboxaberta.setEnabled(false);
-				cboxaberta.setBounds(341, 502, 113, 25);
-				jpConta.add(cboxaberta);
-				
-				JLabel lblContas = new JLabel("Contas:");
-				lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
-				lblContas.setBounds(12, 20, 67, 24);
-				jpConta.add(lblContas);
-				
-				
-				
-		JPAdmCliente.setLayout(null);
-		JPAdm.add(JPAdmCliente);
-		JComboBox boxAdminCliePesquisa = new JComboBox(texto2);
-		boxAdminCliePesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		boxAdminCliePesquisa.setBounds(400, 16, 218, 43);
-		JPAdmCliente.add(boxAdminCliePesquisa);
 
-		// caixa da data
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(366, 209, 217, 31);
-		JPAdmCliente.add(dateChooser_1);
-
-		JList<String> listaAdminClie = new JList<String>(dmClt);
-		listaAdminClie.setBounds(56, 85, 240, 441);
-		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
-
-		listaAdminClie.addListSelectionListener(new ListSelectionListener() {
-
-			public void valueChanged(ListSelectionEvent e) {
-				dmCltContas.removeAllElements();
-				bg.clearSelection();
-				if (!listaAdminClie.isSelectionEmpty()) {
-
-					String s = listaAdminClie.getSelectedValue();
-					s = s.substring(0, s.indexOf("*"));
-					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
-							gb.javabank.getUtlizadores());
-					textAdminClieNome.setText(c.getNome());
-					textAdminClieEndereco.setText(c.getMorada());
-					textAdminClieContato.setText("" + c.getContacto());
-					textAdminClieNif.setText("" + c.getNumidentificacao());
-					dateChooser_1.setDate(c.getDataDeNascimento());
-					dmCltContas.removeAllElements();
-					
-					gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
-							dmCltContas);
-
-				}
-			}
-		});
-
-		JPAdmCliente.add(listaAdminClie);
-
-		// text onde podemos fazer pesquisas
-		textAdminCliePesquisa = new JTextField();
-		textAdminCliePesquisa.setBounds(410, 55, 196, 31);
-		JPAdmCliente.add(textAdminCliePesquisa);
-		textAdminCliePesquisa.setColumns(10);
-
-		// texto do nome
-		JLabel lblAdminClieNome = new JLabel("Nome :");
-		lblAdminClieNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdminClieNome.setBounds(356, 115, 79, 23);
-		JPAdmCliente.add(lblAdminClieNome);
-
-		// texto da data
-		JLabel LblAdminClieDataDeNascimento = new JLabel("Data de Nascimento :");
-		LblAdminClieDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		LblAdminClieDataDeNascimento.setBounds(356, 181, 218, 23);
-		JPAdmCliente.add(LblAdminClieDataDeNascimento);
-
-		// texto do contato
-		JLabel lblAdminClieContacto_1 = new JLabel("Contacto :");
-		lblAdminClieContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdminClieContacto_1.setBounds(356, 318, 127, 23);
-		JPAdmCliente.add(lblAdminClieContacto_1);
-
-		// texto do endereço
-		JLabel lblAdminClieEndereo = new JLabel("Endereço :");
-		lblAdminClieEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
-		JPAdmCliente.add(lblAdminClieEndereo);
-		
-		
-		// lista de contas do admin:
-		JList<String> listAdminClieContas = new JList<String>(dmCltContas);
-		listAdminClieContas.setBounds(736, 85, 240, 441);
-		JPAdmCliente.add(listAdminClieContas);
-
-		// campos de texto para o nome
-		textAdminClieNome = new JTextField();
-		textAdminClieNome.setColumns(10);
-		textAdminClieNome.setBounds(366, 144, 297, 31);
-		JPAdmCliente.add(textAdminClieNome);
-
-		// campos de texto para o contatco
-		textAdminClieContato = new JTextField();
-		textAdminClieContato.setColumns(10);
-		textAdminClieContato.setBounds(366, 347, 169, 31);
-		JPAdmCliente.add(textAdminClieContato);
-
-		// campos de texto para o endereco
-		textAdminClieEndereco = new JTextField();
-		textAdminClieEndereco.setColumns(10);
-		textAdminClieEndereco.setBounds(366, 415, 297, 31);
-		JPAdmCliente.add(textAdminClieEndereco);
-
-		// campos de texto para o nif
-		textAdminClieNif = new JTextField();
-		textAdminClieNif.setColumns(10);
-		textAdminClieNif.setBounds(366, 281, 169, 31);
-		JPAdmCliente.add(textAdminClieNif);
-
-		// texto do nif
-		JLabel lblAdminClieNif = new JLabel("NIF :");
-		lblAdminClieNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblAdminClieNif.setBounds(356, 252, 127, 23);
-		JPAdmCliente.add(lblAdminClieNif);
-
-		// botao a limpar os dados no ecra
-		JButton btnAdminClieLimpar = new JButton("Limpar");
-		btnAdminClieLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				dmCltContas.removeAllElements();
-				listaAdminClie.clearSelection();
-				listAdminClieContas.clearSelection();
-				textAdminClieNome.setText(null);
-				textAdminClieEndereco.setText(null);
-				textAdminClieContato.setText(null);
-				textAdminClieNif.setText(null);
-				dateChooser_1.setDate(null);
-				textAdminCliePesquisa.setText(null);
-
-				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-				dmClt.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmClt);
-				dmCltContas.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
-			}
-		});
-		btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminClieLimpar.setBounds(522, 488, 120, 38);
-		JPAdmCliente.add(btnAdminClieLimpar);
-
-		JButton btnAdmCltPesquisar = new JButton("Pesquisar");
-		btnAdmCltPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (boxAdminCliePesquisa.getSelectedItem().equals("ID")) {
-
-					int id = Integer.parseInt(textAdminCliePesquisa.getText());
-
-					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-
-//					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
-//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
-
-					textAdminClieNome.setText(c.getNome());
-					textAdminClieEndereco.setText(c.getMorada());
-					textAdminClieContato.setText("" + c.getContacto());
-					textAdminClieNif.setText("" + c.getNumidentificacao());
-					dateChooser_1.setDate(c.getDataDeNascimento());
-
-					dmClt.removeAllElements();
-					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
-					dmCltContas.removeAllElements();
-
-				}
-
-				if (boxAdminCliePesquisa.getSelectedItem().equals("Nome")) {
-
-					String nome = textAdminCliePesquisa.getText();
-
-					Cliente c = (Cliente) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
-
-
-
-					textAdminClieNome.setText(c.getNome());
-					textAdminClieEndereco.setText(c.getMorada());
-					textAdminClieContato.setText("" + c.getContacto());
-					textAdminClieNif.setText("" + c.getNumidentificacao());
-					dateChooser_1.setDate(c.getDataDeNascimento());
-
-					dmClt.removeAllElements();
-					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
-					dmCltContas.removeAllElements();
-
-				}
-
-			}
-		});
-
-		btnAdmCltPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdmCltPesquisar.setBounds(376, 488, 120, 38);
-		JPAdmCliente.add(btnAdmCltPesquisar);
-		
-		JButton btVerConta = new JButton("Ver Conta");
-		btVerConta.setBounds(879, 42, 97, 25);
-		JPAdmCliente.add(btVerConta);
-		
-		JButton bttodascontas = new JButton("Todas as Conta");
-		
-		bttodascontas.setBounds(738, 42, 129, 25);
-		JPAdmCliente.add(bttodascontas);
-				
-				
+		// Painel da funcionario da parte administrador
+		JPanel JPAdmFuncionario = new JPanel();
+		JPAdmFuncionario.setVisible(false);
 
 		// Painel da gestao do administrador
 		JPanel JPAdmGestao = new JPanel();
@@ -585,46 +232,46 @@ public class BancoAppAdm implements Serializable {
 		separator_1.setForeground(Color.BLACK);
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		separator_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		separator_1.setBounds(483, 68, 29, 433);
+		separator_1.setBounds(705, 74, 29, 433);
 		JPAdmGestao.add(separator_1);
 
 		// texto : username
 		JLabel lblUsername_1 = new JLabel("Username :");
 		lblUsername_1.setVerifyInputWhenFocusTarget(false);
 		lblUsername_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblUsername_1.setBounds(144, 81, 131, 41);
+		lblUsername_1.setBounds(450, 85, 206, 41);
 		JPAdmGestao.add(lblUsername_1);
 
 		// campo de texto na gestão da parte do administrador
 
 		lblAdminGestUsername = new JTextField(adm.getUsername());
-		lblAdminGestUsername.setBounds(144, 134, 271, 33);
+		lblAdminGestUsername.setBounds(450, 138, 206, 33);
 		JPAdmGestao.add(lblAdminGestUsername);
 
 		// texto : password
 		JLabel lblPassword_1 = new JLabel("Password :");
 		lblPassword_1.setVerifyInputWhenFocusTarget(false);
 		lblPassword_1.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_1.setBounds(144, 178, 131, 41);
+		lblPassword_1.setBounds(450, 182, 206, 41);
 		JPAdmGestao.add(lblPassword_1);
 
 		// campo de texto na gestão da parte do administrador
 		textAdminGestPass = new JTextField();
 		textAdminGestPass.setColumns(10);
-		textAdminGestPass.setBounds(144, 230, 271, 33);
+		textAdminGestPass.setBounds(450, 234, 206, 33);
 		JPAdmGestao.add(textAdminGestPass);
 
 		// texto : novausername
 		JLabel textFieldAdminGestUsername = new JLabel("Nova Username :");
 		textFieldAdminGestUsername.setVerifyInputWhenFocusTarget(false);
 		textFieldAdminGestUsername.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		textFieldAdminGestUsername.setBounds(144, 275, 191, 41);
+		textFieldAdminGestUsername.setBounds(450, 279, 206, 41);
 		JPAdmGestao.add(textFieldAdminGestUsername);
 
 		// campo de texto na gestão da parte do administrador
 		textFieldAdminGestNovaUser = new JTextField();
 		textFieldAdminGestNovaUser.setColumns(10);
-		textFieldAdminGestNovaUser.setBounds(144, 327, 271, 33);
+		textFieldAdminGestNovaUser.setBounds(450, 331, 206, 33);
 		JPAdmGestao.add(textFieldAdminGestNovaUser);
 
 		// botao de confimar - submete a nova username
@@ -643,7 +290,7 @@ public class BancoAppAdm implements Serializable {
 				}
 			}
 		});
-		btnAdminGestConfirmar.setBounds(144, 415, 131, 41);
+		btnAdminGestConfirmar.setBounds(412, 419, 131, 41);
 		JPAdmGestao.add(btnAdminGestConfirmar);
 
 		// botao de cancelar - limpar
@@ -657,46 +304,46 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		btnAdminGestCancelar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnAdminGestCancelar.setBounds(294, 415, 131, 41);
+		btnAdminGestCancelar.setBounds(562, 419, 131, 41);
 		JPAdmGestao.add(btnAdminGestCancelar);
 
 		// campo de texto na gestão da parte do administrador
 		textFieldAdminGestPass1 = new JTextField();
 		textFieldAdminGestPass1.setColumns(10);
-		textFieldAdminGestPass1.setBounds(579, 134, 271, 33);
+		textFieldAdminGestPass1.setBounds(817, 138, 195, 33);
 		JPAdmGestao.add(textFieldAdminGestPass1);
 
 		// texto : password 2
 		JLabel lblPassword_2 = new JLabel("Password :");
 		lblPassword_2.setVerifyInputWhenFocusTarget(false);
 		lblPassword_2.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblPassword_2.setBounds(579, 81, 131, 41);
+		lblPassword_2.setBounds(817, 85, 195, 41);
 		JPAdmGestao.add(lblPassword_2);
 
 		// texto : nova password
 		JLabel lblNovaPassword = new JLabel("Nova Password :");
 		lblNovaPassword.setVerifyInputWhenFocusTarget(false);
 		lblNovaPassword.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblNovaPassword.setBounds(579, 178, 168, 41);
+		lblNovaPassword.setBounds(817, 182, 195, 41);
 		JPAdmGestao.add(lblNovaPassword);
 
 		// campo de texto na gestão da parte do administrador
 		textFieldAdminGestNovaPass = new JTextField();
 		textFieldAdminGestNovaPass.setColumns(10);
-		textFieldAdminGestNovaPass.setBounds(579, 230, 271, 33);
+		textFieldAdminGestNovaPass.setBounds(817, 234, 195, 33);
 		JPAdmGestao.add(textFieldAdminGestNovaPass);
 
 		// texto : confirmar password
 		JLabel lblConfirmarNovaPass = new JLabel("Confirmar Password :");
 		lblConfirmarNovaPass.setVerifyInputWhenFocusTarget(false);
 		lblConfirmarNovaPass.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		lblConfirmarNovaPass.setBounds(579, 275, 271, 41);
+		lblConfirmarNovaPass.setBounds(817, 279, 195, 41);
 		JPAdmGestao.add(lblConfirmarNovaPass);
 
 		// campo de texto na gestão da parte do administrador
 		textFieldAdminGestConf = new JTextField();
 		textFieldAdminGestConf.setColumns(10);
-		textFieldAdminGestConf.setBounds(579, 327, 271, 33);
+		textFieldAdminGestConf.setBounds(817, 331, 195, 33);
 		JPAdmGestao.add(textFieldAdminGestConf);
 
 		// botao de confimar - submete a nova pass
@@ -718,7 +365,7 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		buttonAdminGestConf.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestConf.setBounds(579, 415, 131, 41);
+		buttonAdminGestConf.setBounds(761, 419, 131, 41);
 		JPAdmGestao.add(buttonAdminGestConf);
 
 		// botao de cancelar - limpar
@@ -732,20 +379,105 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		buttonAdminGestCan.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		buttonAdminGestCan.setBounds(729, 415, 131, 41);
+		buttonAdminGestCan.setBounds(911, 419, 131, 41);
 		JPAdmGestao.add(buttonAdminGestCan);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setAlignmentX(0.0f);
+		separator_2.setBounds(371, 74, 29, 433);
+		JPAdmGestao.add(separator_2);
+
+		JLabel label_3 = new JLabel("Nome:");
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_3.setBounds(12, 64, 57, 30);
+		JPAdmGestao.add(label_3);
+
+		tbadmnome = new JTextField();
+		tbadmnome.setEditable(false);
+		tbadmnome.setColumns(10);
+		tbadmnome.setBounds(22, 95, 217, 31);
+		JPAdmGestao.add(tbadmnome);
+
+		tbadmapelido = new JTextField();
+		tbadmapelido.setEditable(false);
+		tbadmapelido.setColumns(10);
+		tbadmapelido.setBounds(22, 166, 217, 31);
+		JPAdmGestao.add(tbadmapelido);
+
+		JLabel label_4 = new JLabel("Sobrenome:");
+		label_4.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_4.setBounds(12, 135, 120, 30);
+		JPAdmGestao.add(label_4);
+
+		JDateChooser dcadmdtnasc = new JDateChooser();
+		dcadmdtnasc.setEnabled(false);
+		dcadmdtnasc.setBounds(22, 230, 217, 31);
+		JPAdmGestao.add(dcadmdtnasc);
+
+		JLabel label_5 = new JLabel("Data de Nascimento:");
+		label_5.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_5.setBounds(12, 199, 177, 30);
+		JPAdmGestao.add(label_5);
+
+		JRadioButton rbadmcc = new JRadioButton("C.C.");
+		rbadmcc.setEnabled(false);
+		rbadmcc.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmcc.setBounds(22, 270, 66, 25);
+		JPAdmGestao.add(rbadmcc);
+
+		JRadioButton rbadmbi = new JRadioButton("B.I.");
+		rbadmbi.setEnabled(false);
+		rbadmbi.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmbi.setBounds(101, 270, 57, 25);
+		JPAdmGestao.add(rbadmbi);
+
+		JRadioButton rbadmpassporte = new JRadioButton("Passaporte");
+		rbadmpassporte.setEnabled(false);
+		rbadmpassporte.setFont(new Font("Dialog", Font.PLAIN, 15));
+		rbadmpassporte.setBounds(170, 270, 138, 25);
+		JPAdmGestao.add(rbadmpassporte);
+
+		tbadmnident = new JTextField();
+		tbadmnident.setEditable(false);
+		tbadmnident.setColumns(10);
+		tbadmnident.setBounds(14, 332, 225, 31);
+		JPAdmGestao.add(tbadmnident);
+
+		JLabel label_7 = new JLabel("N\u00C3\u00BAmero de Identifica\u00C3\u00A7\u00C3\u00A3o:");
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_7.setBounds(4, 296, 227, 30);
+		JPAdmGestao.add(label_7);
+
+		JLabel label_8 = new JLabel("Contacto:");
+		label_8.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_8.setBounds(4, 365, 81, 31);
+		JPAdmGestao.add(label_8);
+
+		tbadmcontacto = new JTextField();
+		tbadmcontacto.setEditable(false);
+		tbadmcontacto.setColumns(10);
+		tbadmcontacto.setBounds(14, 396, 225, 31);
+		JPAdmGestao.add(tbadmcontacto);
+
+		JLabel label_9 = new JLabel("Morada: ");
+		label_9.setFont(new Font("Dialog", Font.PLAIN, 17));
+		label_9.setBounds(4, 428, 227, 30);
+		JPAdmGestao.add(label_9);
+
+		tbadmmorada = new JTextField();
+		tbadmmorada.setEditable(false);
+		tbadmmorada.setColumns(10);
+		tbadmmorada.setBounds(14, 461, 225, 31);
+		JPAdmGestao.add(tbadmmorada);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
-
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(true);
-		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-		JPAdmEstatistica.setLayout(null);
-		JPAdm.add(JPAdmEstatistica);
-
-		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
+		// lista dos funcionarios
+		DefaultListModel<String> dmFun = new DefaultListModel<String>();
+		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
+		
 		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -878,11 +610,7 @@ public class BancoAppAdm implements Serializable {
 		lblMorada.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblMorada.setBounds(453, 366, 227, 30);
 		JPAdmFuncionario.add(lblMorada);
-
-		// lista dos funcionarios
-		DefaultListModel<String> dmFun = new DefaultListModel<String>();
 		JList<String> lbLAdmFunLista = new JList<String>(dmFun);
-		gb.javabank.addelementoslist(gb.javabank.listaFunc(gb.javabank.getUtlizadores()), dmFun);
 		lbLAdmFunLista.setBounds(109, 109, 240, 441);
 		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
 
@@ -1172,6 +900,367 @@ public class BancoAppAdm implements Serializable {
 		});
 		JPAdmFuncionario.add(btAdmFunProc);
 
+		JPanel jpConta = new JPanel();
+		jpConta.setBounds(0, 0, 1042, 576);
+		JPAdm.add(jpConta);
+		jpConta.setLayout(null);
+
+		tbadmcontanumero = new JTextField();
+		tbadmcontanumero.setEditable(false);
+		tbadmcontanumero.setColumns(10);
+		tbadmcontanumero.setBounds(341, 13, 253, 30);
+		jpConta.add(tbadmcontanumero);
+
+		dcadmcontadata = new JDateChooser();
+		dcadmcontadata.setEnabled(false);
+		dcadmcontadata.setBounds(341, 56, 253, 30);
+		jpConta.add(dcadmcontadata);
+
+		JLabel lblNewLabel_1 = new JLabel("Numero de Conta:");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_1.setBounds(191, 19, 138, 16);
+		jpConta.add(lblNewLabel_1);
+
+		tbadmcontalimoperacao = new JTextField();
+		tbadmcontalimoperacao.setEditable(false);
+		tbadmcontalimoperacao.setColumns(10);
+		tbadmcontalimoperacao.setBounds(341, 129, 253, 30);
+		jpConta.add(tbadmcontalimoperacao);
+
+		tbadmcontalimdia = new JTextField();
+		tbadmcontalimdia.setEditable(false);
+		tbadmcontalimdia.setColumns(10);
+		tbadmcontalimdia.setBounds(341, 172, 253, 30);
+		jpConta.add(tbadmcontalimdia);
+
+		tbadmcontasaldo = new JTextField();
+		tbadmcontasaldo.setEditable(false);
+		tbadmcontasaldo.setColumns(10);
+		tbadmcontasaldo.setBounds(341, 215, 253, 30);
+		jpConta.add(tbadmcontasaldo);
+
+		JLabel lblDataDaCriao = new JLabel("Data da Cria\u00E7\u00E3o:");
+		lblDataDaCriao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblDataDaCriao.setBounds(197, 62, 125, 24);
+		jpConta.add(lblDataDaCriao);
+
+		JLabel lblPorOperao = new JLabel("Por Opera\u00E7\u00E3o:");
+		lblPorOperao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblPorOperao.setBounds(216, 130, 113, 24);
+		jpConta.add(lblPorOperao);
+
+		JLabel lblPorDia = new JLabel("Por dia:");
+		lblPorDia.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblPorDia.setBounds(262, 173, 67, 24);
+		jpConta.add(lblPorDia);
+
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblSaldo.setBounds(278, 216, 51, 24);
+		jpConta.add(lblSaldo);
+
+		JLabel lblLimites = new JLabel("Limites de Levantamento:");
+		lblLimites.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblLimites.setBounds(366, 99, 198, 24);
+		jpConta.add(lblLimites);
+
+		JPanel panelContaPadm = new JPanel();
+		panelContaPadm.setBounds(191, 258, 415, 111);
+		jpConta.add(panelContaPadm);
+		panelContaPadm.setLayout(null);
+
+		JLabel lblContasPoupana = new JLabel("Contas Poupan\u00E7a:");
+		lblContasPoupana.setBounds(211, 0, 138, 24);
+		panelContaPadm.add(lblContasPoupana);
+		lblContasPoupana.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		tbadmcontajuros = new JTextField();
+		tbadmcontajuros.setEditable(false);
+		tbadmcontajuros.setBounds(150, 27, 253, 30);
+		panelContaPadm.add(tbadmcontajuros);
+		tbadmcontajuros.setColumns(10);
+
+		JLabel lblJuros = new JLabel("Juros (%):");
+		lblJuros.setBounds(54, 28, 84, 24);
+		panelContaPadm.add(lblJuros);
+		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		JLabel lblLimiteMs = new JLabel("Limite M\u00EAs");
+		lblLimiteMs.setBounds(54, 74, 84, 24);
+		panelContaPadm.add(lblLimiteMs);
+		lblLimiteMs.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		tbadmcontalimmes = new JTextField();
+		tbadmcontalimmes.setEditable(false);
+		tbadmcontalimmes.setBounds(150, 73, 253, 30);
+		panelContaPadm.add(tbadmcontalimmes);
+		tbadmcontalimmes.setColumns(10);
+
+		JPanel panelCartaoAdm = new JPanel();
+		panelCartaoAdm.setBounds(191, 382, 415, 111);
+		jpConta.add(panelCartaoAdm);
+		panelCartaoAdm.setLayout(null);
+
+		tbadmcontacartaonome = new JTextField();
+		tbadmcontacartaonome.setEditable(false);
+		tbadmcontacartaonome.setColumns(10);
+		tbadmcontacartaonome.setBounds(154, 13, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaonome);
+
+		JDateChooser tbadmcontacartaovalidade = new JDateChooser();
+		tbadmcontacartaovalidade.setEnabled(false);
+		tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaovalidade);
+
+		tbadmcontacartaocod = new JTextField();
+		tbadmcontacartaocod.setEditable(false);
+		tbadmcontacartaocod.setColumns(10);
+		tbadmcontacartaocod.setBounds(154, 83, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaocod);
+
+		JLabel label = new JLabel("Nome:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label.setBounds(83, 15, 72, 16);
+		panelCartaoAdm.add(label);
+
+		JLabel label_1 = new JLabel("Validade");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(83, 54, 72, 16);
+		panelCartaoAdm.add(label_1);
+
+		JLabel label_2 = new JLabel("COD:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(83, 85, 59, 16);
+		panelCartaoAdm.add(label_2);
+
+		JButton btVoltarContasAdm = new JButton("Voltar");
+
+		btVoltarContasAdm.setBounds(427, 538, 97, 25);
+		jpConta.add(btVoltarContasAdm);
+
+		DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
+		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dlmcontaadm);
+		JList<String> listcontasadm = new JList<String>(dlmcontaadm);
+
+		listcontasadm.setVisible(false);
+		listcontasadm.setBounds(12, 56, 147, 493);
+		jpConta.add(listcontasadm);
+
+		JCheckBox cboxaberta = new JCheckBox("Aberta");
+		cboxaberta.setEnabled(false);
+		cboxaberta.setBounds(341, 502, 113, 25);
+		jpConta.add(cboxaberta);
+
+		JLabel lblContas = new JLabel("Contas:");
+		lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblContas.setBounds(12, 20, 67, 24);
+		jpConta.add(lblContas);
+
+		JPAdmCliente.setLayout(null);
+		JPAdm.add(JPAdmCliente);
+		JComboBox boxAdminCliePesquisa = new JComboBox(texto2);
+		boxAdminCliePesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		boxAdminCliePesquisa.setBounds(400, 16, 218, 43);
+		JPAdmCliente.add(boxAdminCliePesquisa);
+
+		// caixa da data
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(366, 209, 217, 31);
+		JPAdmCliente.add(dateChooser_1);
+
+		JList<String> listaAdminClie = new JList<String>(dmClt);
+		listaAdminClie.setBounds(56, 85, 240, 441);
+		// Metedo que seleciona e passa todos os argumentos para as caixas de texto :
+
+		listaAdminClie.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+				dmCltContas.removeAllElements();
+				bg.clearSelection();
+				if (!listaAdminClie.isSelectionEmpty()) {
+
+					String s = listaAdminClie.getSelectedValue();
+					s = s.substring(0, s.indexOf("*"));
+					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
+							gb.javabank.getUtlizadores());
+					textAdminClieNome.setText(c.getNome());
+					textAdminClieEndereco.setText(c.getMorada());
+					textAdminClieContato.setText("" + c.getContacto());
+					textAdminClieNif.setText("" + c.getNumidentificacao());
+					dateChooser_1.setDate(c.getDataDeNascimento());
+					dmCltContas.removeAllElements();
+
+					gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
+							dmCltContas);
+
+				}
+			}
+		});
+
+		JPAdmCliente.add(listaAdminClie);
+
+		// text onde podemos fazer pesquisas
+		textAdminCliePesquisa = new JTextField();
+		textAdminCliePesquisa.setBounds(410, 55, 196, 31);
+		JPAdmCliente.add(textAdminCliePesquisa);
+		textAdminCliePesquisa.setColumns(10);
+
+		// texto do nome
+		JLabel lblAdminClieNome = new JLabel("Nome :");
+		lblAdminClieNome.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNome.setBounds(356, 115, 79, 23);
+		JPAdmCliente.add(lblAdminClieNome);
+
+		// texto da data
+		JLabel LblAdminClieDataDeNascimento = new JLabel("Data de Nascimento :");
+		LblAdminClieDataDeNascimento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		LblAdminClieDataDeNascimento.setBounds(356, 181, 218, 23);
+		JPAdmCliente.add(LblAdminClieDataDeNascimento);
+
+		// texto do contato
+		JLabel lblAdminClieContacto_1 = new JLabel("Contacto :");
+		lblAdminClieContacto_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieContacto_1.setBounds(356, 318, 127, 23);
+		JPAdmCliente.add(lblAdminClieContacto_1);
+
+		// texto do endereço
+		JLabel lblAdminClieEndereo = new JLabel("Endereço :");
+		lblAdminClieEndereo.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
+		JPAdmCliente.add(lblAdminClieEndereo);
+
+		// lista de contas do admin:
+		JList<String> listAdminClieContas = new JList<String>(dmCltContas);
+		listAdminClieContas.setBounds(736, 85, 240, 441);
+		JPAdmCliente.add(listAdminClieContas);
+
+		// campos de texto para o nome
+		textAdminClieNome = new JTextField();
+		textAdminClieNome.setColumns(10);
+		textAdminClieNome.setBounds(366, 144, 297, 31);
+		JPAdmCliente.add(textAdminClieNome);
+
+		// campos de texto para o contatco
+		textAdminClieContato = new JTextField();
+		textAdminClieContato.setColumns(10);
+		textAdminClieContato.setBounds(366, 347, 169, 31);
+		JPAdmCliente.add(textAdminClieContato);
+
+		// campos de texto para o endereco
+		textAdminClieEndereco = new JTextField();
+		textAdminClieEndereco.setColumns(10);
+		textAdminClieEndereco.setBounds(366, 415, 297, 31);
+		JPAdmCliente.add(textAdminClieEndereco);
+
+		// campos de texto para o nif
+		textAdminClieNif = new JTextField();
+		textAdminClieNif.setColumns(10);
+		textAdminClieNif.setBounds(366, 281, 169, 31);
+		JPAdmCliente.add(textAdminClieNif);
+
+		// texto do nif
+		JLabel lblAdminClieNif = new JLabel("NIF :");
+		lblAdminClieNif.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblAdminClieNif.setBounds(356, 252, 127, 23);
+		JPAdmCliente.add(lblAdminClieNif);
+
+		// botao a limpar os dados no ecra
+		JButton btnAdminClieLimpar = new JButton("Limpar");
+		btnAdminClieLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				dmCltContas.removeAllElements();
+				listaAdminClie.clearSelection();
+				listAdminClieContas.clearSelection();
+				textAdminClieNome.setText(null);
+				textAdminClieEndereco.setText(null);
+				textAdminClieContato.setText(null);
+				textAdminClieNif.setText(null);
+				dateChooser_1.setDate(null);
+				textAdminCliePesquisa.setText(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmClt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmClt);
+				dmCltContas.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+			}
+		});
+		btnAdminClieLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdminClieLimpar.setBounds(522, 488, 120, 38);
+		JPAdmCliente.add(btnAdminClieLimpar);
+
+		JButton btnAdmCltPesquisar = new JButton("Pesquisar");
+		btnAdmCltPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (boxAdminCliePesquisa.getSelectedItem().equals("ID")) {
+
+					int id = Integer.parseInt(textAdminCliePesquisa.getText());
+
+					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+
+//					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
+//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+
+					textAdminClieNome.setText(c.getNome());
+					textAdminClieEndereco.setText(c.getMorada());
+					textAdminClieContato.setText("" + c.getContacto());
+					textAdminClieNif.setText("" + c.getNumidentificacao());
+					dateChooser_1.setDate(c.getDataDeNascimento());
+
+					dmClt.removeAllElements();
+					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
+					dmCltContas.removeAllElements();
+
+				}
+
+				if (boxAdminCliePesquisa.getSelectedItem().equals("Nome")) {
+
+					String nome = textAdminCliePesquisa.getText();
+
+					Cliente c = (Cliente) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+
+					textAdminClieNome.setText(c.getNome());
+					textAdminClieEndereco.setText(c.getMorada());
+					textAdminClieContato.setText("" + c.getContacto());
+					textAdminClieNif.setText("" + c.getNumidentificacao());
+					dateChooser_1.setDate(c.getDataDeNascimento());
+
+					dmClt.removeAllElements();
+					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
+					dmCltContas.removeAllElements();
+
+				}
+
+			}
+		});
+
+		btnAdmCltPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnAdmCltPesquisar.setBounds(376, 488, 120, 38);
+		JPAdmCliente.add(btnAdmCltPesquisar);
+
+		JButton btVerConta = new JButton("Ver Conta");
+		btVerConta.setBounds(879, 42, 97, 25);
+		JPAdmCliente.add(btVerConta);
+
+		JButton bttodascontas = new JButton("Todas as Conta");
+
+		bttodascontas.setBounds(738, 42, 129, 25);
+		JPAdmCliente.add(bttodascontas);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(true);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdmEstatistica.setLayout(null);
+		JPAdm.add(JPAdmEstatistica);
+
+		// box onde escolhemos como queremos fazer a pesquisa do funcionario Nome ou ID
+		
+
+
+
 		// Botão da estatistica do menu
 		JButton btAdmEstatistica = new JButton("Estatist\u00EDcas");
 		btAdmEstatistica.setBorderPainted(false);
@@ -1191,7 +1280,7 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmGestao.setVisible(false);
 				jpConta.setVisible(false);
-				
+
 			}
 		});
 		btAdmEstatistica.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -1234,6 +1323,32 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(false);
+				
+				//preenche dados do funcionario:
+				
+				tbadmnome.setText(adm.getNome());
+				tbadmapelido.setText(adm.getSobrenome());
+				dcadmdtnasc.setDate(adm.getDataDeNascimento());
+				
+				if (adm.getTipoIndentificacao().equals("C.C.")) {
+					rbadmcc.setSelected(true);
+				}
+				if (adm.getTipoIndentificacao().equals("B.I.")) {
+					rbadmbi.setSelected(true);
+				}
+				if (adm.getTipoIndentificacao().equals("Passaporte")) {
+					rbadmpassporte.setSelected(true);
+				}
+				
+
+				tbadmnident.setText(adm.getNumidentificacao()+"");
+				tbadmcontacto.setText(adm.getContacto()+"");
+				tbadmmorada.setText(adm.getMorada());
+				
+				
+				
+				
+				
 			}
 		});
 		btAdmGestao.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -1260,8 +1375,6 @@ public class BancoAppAdm implements Serializable {
 		});
 		btAdmFuncionarios.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
-		
-		
 		// Metedo para ver detalhes das contas selecionadas:
 		btVerConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1273,51 +1386,44 @@ public class BancoAppAdm implements Serializable {
 				jpConta.setVisible(true);
 				listcontasadm.setVisible(false);
 				listcontasadm.clearSelection();
-				
-				
+
 				// preenche campos:
-				
+
 				int id = Integer.parseInt(listAdminClieContas.getSelectedValue());
-				
-				Conta cont= gb.javabank.SelectConta(id, gb.javabank.getContas());
-				
-				tbadmcontanumero.setText(cont.getIdConta()+"");
+
+				Conta cont = gb.javabank.SelectConta(id, gb.javabank.getContas());
+
+				tbadmcontanumero.setText(cont.getIdConta() + "");
 				dcadmcontadata.setDate(cont.getDataCriacao());
-				tbadmcontalimoperacao.setText(cont.getValorMaxLevantamento()+"");
-				tbadmcontalimdia.setText(cont.getValorMaxDia()+"");
-				tbadmcontasaldo.setText(cont.getSaldo()+"");
-				
-				if(cont instanceof ContaCorrente)
-				{
-					if(((ContaCorrente) cont).getCartao()!=0)
-					{
-					panelContaPadm.setVisible(false);
-					panelCartaoAdm.setVisible(true);
-					Cartao c = gb.javabank.selecionacartao(gb.javabank.getCartoes(), ((ContaCorrente) cont).getCartao());
-					tbadmcontacartaonome.setText(c.getNomeTitular());
-					tbadmcontacartaovalidade.setDate(c.getDataValidade());
-					tbadmcontacartaocod.setText(c.getCodvalidacao()+"");
+				tbadmcontalimoperacao.setText(cont.getValorMaxLevantamento() + "");
+				tbadmcontalimdia.setText(cont.getValorMaxDia() + "");
+				tbadmcontasaldo.setText(cont.getSaldo() + "");
+
+				if (cont instanceof ContaCorrente) {
+					if (((ContaCorrente) cont).getCartao() != 0) {
+						panelContaPadm.setVisible(false);
+						panelCartaoAdm.setVisible(true);
+						Cartao c = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+								((ContaCorrente) cont).getCartao());
+						tbadmcontacartaonome.setText(c.getNomeTitular());
+						tbadmcontacartaovalidade.setDate(c.getDataValidade());
+						tbadmcontacartaocod.setText(c.getCodvalidacao() + "");
 					}
-				}
-				else
-				{
-					
+				} else {
+
 					panelContaPadm.setVisible(true);
 					panelCartaoAdm.setVisible(false);
-					tbadmcontajuros.setText(((ContaPoupanca) cont).getTaxaJuros()+"");
-					tbadmcontalimmes.setText(((ContaPoupanca) cont).getLimiteMensalDebito()+"");
+					tbadmcontajuros.setText(((ContaPoupanca) cont).getTaxaJuros() + "");
+					tbadmcontalimmes.setText(((ContaPoupanca) cont).getLimiteMensalDebito() + "");
 				}
-				
-				
-				
+
 			}
 		});
-		
+
 		// limpa contas e sai do painel de contas para o painel cliente:
 		btVoltarContasAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 				tbadmcontanumero.setText(null);
 				dcadmcontadata.setDate(null);
 				tbadmcontalimoperacao.setText(null);
@@ -1328,7 +1434,7 @@ public class BancoAppAdm implements Serializable {
 				tbadmcontacartaonome.setText(null);
 				tbadmcontacartaovalidade.setDate(null);
 				tbadmcontacartaocod.setText(null);
-				
+
 				cboxaberta.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				JPAdmCliente.setVisible(true);
@@ -1337,13 +1443,13 @@ public class BancoAppAdm implements Serializable {
 				jpConta.setVisible(false);
 				panelContaPadm.setVisible(true);
 				panelCartaoAdm.setVisible(true);
-	
+
 			}
 		});
-		
+
 		bttodascontas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// Visivel ao painel:
 				JPAdmGestao.setVisible(false);
 				JPAdmCliente.setVisible(false);
@@ -1351,48 +1457,44 @@ public class BancoAppAdm implements Serializable {
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(true);
 				listcontasadm.setVisible(true);
-				
-				
+
 			}
 		});
-		
+
 		listcontasadm.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				
+
 				cboxaberta.setVisible(true);
-				Conta c = gb.javabank.SelectConta(Integer.parseInt(listcontasadm.getSelectedValue()), gb.javabank.getContas());
-				
-				tbadmcontanumero.setText(c.getIdConta()+"");
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(listcontasadm.getSelectedValue()),
+						gb.javabank.getContas());
+
+				tbadmcontanumero.setText(c.getIdConta() + "");
 				dcadmcontadata.setDate(c.getDataCriacao());
-				tbadmcontalimoperacao.setText(c.getValorMaxLevantamento()+"");
-				tbadmcontalimdia.setText(c.getValorMaxDia()+"");
-				tbadmcontasaldo.setText(c.getSaldo()+"");
-				
-				if(c instanceof ContaCorrente)
-				{
-					if(((ContaCorrente) c).getCartao()!=0)
-					{
-					panelContaPadm.setVisible(false);
-					panelCartaoAdm.setVisible(true);
-					Cartao cartao = gb.javabank.selecionacartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
-					tbadmcontacartaonome.setText(cartao.getNomeTitular());
-					tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
-					tbadmcontacartaocod.setText(cartao.getCodvalidacao()+"");
+				tbadmcontalimoperacao.setText(c.getValorMaxLevantamento() + "");
+				tbadmcontalimdia.setText(c.getValorMaxDia() + "");
+				tbadmcontasaldo.setText(c.getSaldo() + "");
+
+				if (c instanceof ContaCorrente) {
+					if (((ContaCorrente) c).getCartao() != 0) {
+						panelContaPadm.setVisible(false);
+						panelCartaoAdm.setVisible(true);
+						Cartao cartao = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+								((ContaCorrente) c).getCartao());
+						tbadmcontacartaonome.setText(cartao.getNomeTitular());
+						tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
+						tbadmcontacartaocod.setText(cartao.getCodvalidacao() + "");
 					}
-				}
-				else
-				{
-					
+				} else {
+
 					panelContaPadm.setVisible(true);
 					panelCartaoAdm.setVisible(false);
-					tbadmcontajuros.setText(((ContaPoupanca) c).getTaxaJuros()+"");
-					tbadmcontalimmes.setText(((ContaPoupanca) c).getLimiteMensalDebito()+"");
+					tbadmcontajuros.setText(((ContaPoupanca) c).getTaxaJuros() + "");
+					tbadmcontalimmes.setText(((ContaPoupanca) c).getLimiteMensalDebito() + "");
 				}
-				
-				
+
 			}
 		});
-		
+
 		// botao estatistica accao que muda de cor
 		btAdmEstatistica.addMouseListener(new MouseListener() {
 
