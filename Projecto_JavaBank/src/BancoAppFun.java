@@ -589,13 +589,11 @@ public class BancoAppFun implements Serializable {
 								true);
 						gb.javabank.getContas().add(c);
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-						
-						JOptionPane.showMessageDialog(null,
-								"O/A cliente " 
-										+ " ja tem uma conta poupan�a neste banco!");
-						
+
+						JOptionPane.showMessageDialog(null, "O/A cliente " + " ja tem uma conta poupan�a neste banco!");
+
 						// verifica se o cliente já tem conta poupança
-					}else if ((rdbtnContaPoupanca.isSelected()) && (tableListaClts.getSelectedRow() == 1)) {
+					} else if ((rdbtnContaPoupanca.isSelected()) && (tableListaClts.getSelectedRow() == 1)) {
 
 						// primeiro ve qual o id selecionado!
 						int linha = tableListaClts.getSelectedRow();
@@ -612,7 +610,7 @@ public class BancoAppFun implements Serializable {
 
 						} else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
 								.getContapoupanca() == 0) {
-							
+
 							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 									Double.parseDouble(tbContasSaldo.getText()), clientes,
 									Double.parseDouble(tbContaslimitelevop.getText()),
@@ -623,15 +621,13 @@ public class BancoAppFun implements Serializable {
 							// Atribuir titulares das contas:
 							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-							
-							
-						}
-				
 
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
-							dmconta);
-					
+						}
+
+						dmconta.removeAllElements();
+						gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
+								dmconta);
+
 					}
 				} else {
 					// atualizar:
@@ -672,9 +668,9 @@ public class BancoAppFun implements Serializable {
 				tbllimitemes.setText(null);
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-				
+
 			}
-			
+
 		});
 
 		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
