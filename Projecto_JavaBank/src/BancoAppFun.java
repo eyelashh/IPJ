@@ -569,6 +569,11 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 					// CRIA NOVA CONTA
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
+					
+					// primeiro ve qual o id selecionado!
+					int linha = tableListaClts.getSelectedRow();
+					int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
+					
 					// cartao nulo inicialmente;
 					Conta c;
 					if (rdbtnContaCorrente.isSelected()) {
@@ -577,10 +582,14 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0, true);
 						gb.javabank.getContas().add(c);
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
 					} else if (rdbtnContaPoupanca.isSelected()) {
 
+						// verifica se o cliente já tem conta poupança
+						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
+								.getContapoupanca() != 0) {
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
@@ -588,17 +597,15 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
 								true);
 						gb.javabank.getContas().add(c);
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
-						JOptionPane.showMessageDialog(null, "O/A cliente " + " ja tem uma conta poupan�a neste banco!");
-
+						
+						}
 						// verifica se o cliente já tem conta poupança
-					} else if ((rdbtnContaPoupanca.isSelected()) && (tableListaClts.getSelectedRow() == 1)) {
+						
+					}else if ((rdbtnContaPoupanca.isSelected()) && (Boolean) model.getValueAt(linha, 0) == true) {
 
-						// primeiro ve qual o id selecionado!
-						int linha = tableListaClts.getSelectedRow();
-						int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
-
+					
 						// verifica se o cliente já tem conta poupança
 						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
 								.getContapoupanca() != 0) {
@@ -609,8 +616,8 @@ public class BancoAppFun implements Serializable {
 							tableListaClts.setValueAt(false, idCliente, 0);
 
 						} else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
-								.getContapoupanca() == 0) {
-
+								.getContapoupanca() == 0 && (Boolean) model.getValueAt(linha, 0) == true) {
+							
 							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 									Double.parseDouble(tbContasSaldo.getText()), clientes,
 									Double.parseDouble(tbContaslimitelevop.getText()),
@@ -619,15 +626,18 @@ public class BancoAppFun implements Serializable {
 									true);
 
 							// Atribuir titulares das contas:
+							gb.javabank.getContas().add(c);
 							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
+							
+							
 						}
+				
 
-						dmconta.removeAllElements();
-						gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
-								dmconta);
-
+					dmconta.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
+							dmconta);
+					
 					}
 				} else {
 					// atualizar:
@@ -668,9 +678,9 @@ public class BancoAppFun implements Serializable {
 				tbllimitemes.setText(null);
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-
+				
 			}
-
+			
 		});
 
 		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:

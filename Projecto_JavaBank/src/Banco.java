@@ -193,8 +193,8 @@ public class Banco implements Serializable {
 				}
 			}
 		}
-		if (c.getContapoupanca() != 0) {
-			listprov.add(c.getContapoupanca() + "");
+		if(c.getContapoupanca()!=0){
+			listprov.add(c.getContapoupanca()+"");
 		}
 		String[] lista = new String[listprov.size()];
 		lista = listprov.toArray(lista);
@@ -226,9 +226,8 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < this.contas.size(); i++) {
 			for (int j = 0; j < this.utilizadores.size(); j++) {
-
-				if ((contas.get(i) instanceof ContaPoupanca)
-						&& ((ContaPoupanca) contas.get(i)).getClientes().get(j) == id) {
+				
+				if ((contas.get(i) instanceof ContaPoupanca) && ((ContaPoupanca)contas.get(i)).getClientes().get(j) == id) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
 				}
@@ -674,12 +673,16 @@ public class Banco implements Serializable {
 
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-
+					
 					if (c instanceof ContaCorrente) {
 						((Cliente) clt).getContas().add(c.getIdConta());
 					} else {
 						if (((Cliente) clt).getContapoupanca() == 0) {
 							((Cliente) clt).setContapoupanca(c.getIdConta());
+						} else {
+							JOptionPane.showMessageDialog(null, "O/A cliente " + model.getValueAt(i, 1)
+									+ " ja tem uma conta poupan�a neste banco!");
+							model.setValueAt(false, i, 0);
 						}
 					}
 
