@@ -181,14 +181,13 @@ public class Banco implements Serializable {
 
 	// lista a conta de um determinado cliente
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
-
 		ArrayList<String> listprov = new ArrayList<String>();
 		String s = "";
-		for (int i = 0; i < contas.size(); i++) {
-			for (int x = 0; x < c.getContas().size(); x++) {
-				if (contas.get(i).getIdConta() == c.getContas().get(x)
-						&& contas.get(i).getClientes().get(x) == c.getIdUtilizador()) {
-					s = Integer.toString(c.getContas().get(x));
+		for (int i = 0; i < contas.size(); i++) {	
+		for (int x = 0; x < c.getContas().size(); x++) {
+			if(contas.get(i).getIdConta()==c.getContas().get(x))
+			{
+					s =c.getContas().get(x)+"";
 					listprov.add(s);
 				}
 			}
@@ -672,13 +671,13 @@ public class Banco implements Serializable {
 			if ((Boolean) model.getValueAt(i, 0) == true) {
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
 				if (clt instanceof Cliente) {
-					c.getClientes().add(clt.getIdUtilizador());
-					if (c instanceof ContaCorrente) {
+					//c.getClientes().add(clt.getIdUtilizador());
+					//if (c instanceof ContaCorrente) {
 						idconta = c.getIdConta();
 						idclt = clt.getIdUtilizador();
 						((Cliente) clt).getContas().add(idconta);
 						c.getClientes().add(idclt);
-					}
+					//}
 				}
 			}
 		}
