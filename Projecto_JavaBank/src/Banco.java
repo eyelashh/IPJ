@@ -186,13 +186,16 @@ public class Banco implements Serializable {
 		String s = "";
 		for (int i = 0; i < contas.size(); i++) {
 			for (int x = 0; x < c.getContas().size(); x++) {
-				if (contas.get(i).getIdConta() == c.getContas().get(x)) {
-					s = c.getContas().get(x).toString();
+				if (contas.get(i).getIdConta() == c.getContas().get(x)
+						&& contas.get(i).getClientes().get(x) == c.getIdUtilizador()) {
+					s = Integer.toString(c.getContas().get(x));
 					listprov.add(s);
 				}
 			}
 		}
-
+		if (c.getContapoupanca() != 0) {
+			listprov.add(c.getContapoupanca() + "");
+		}
 		String[] lista = new String[listprov.size()];
 		lista = listprov.toArray(lista);
 		return lista;
@@ -217,14 +220,17 @@ public class Banco implements Serializable {
 	}
 
 	// lista a conta de um determinado cliente
-	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
+	protected String[] listacontaspoupanca(int id, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
 
-		for (int i = 0; i < contas.size(); i++) {
-			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
-					listprov.add(c.getContas().get(j) + "");
+		for (int i = 0; i < this.contas.size(); i++) {
+			for (int j = 0; j < this.utilizadores.size(); j++) {
+
+				if ((contas.get(i) instanceof ContaPoupanca)
+						&& ((ContaPoupanca) contas.get(i)).getClientes().get(j) == id) {
+					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
+					listprov.add(idSTR);
 				}
 			}
 		}
@@ -668,16 +674,12 @@ public class Banco implements Serializable {
 
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-					// ((Cliente) clt).getContas().add(c.getIdConta());
+
 					if (c instanceof ContaCorrente) {
 						((Cliente) clt).getContas().add(c.getIdConta());
 					} else {
 						if (((Cliente) clt).getContapoupanca() == 0) {
 							((Cliente) clt).setContapoupanca(c.getIdConta());
-						} else {
-							JOptionPane.showMessageDialog(null, "O/A cliente " + model.getValueAt(i, 1)
-									+ " ja tem uma conta poupan�a neste banco!");
-							model.setValueAt(false, i, 0);
 						}
 					}
 
