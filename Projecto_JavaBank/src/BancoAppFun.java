@@ -120,7 +120,7 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "ID", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 	// modelo lista das contas dos clientes do painel cliente
@@ -528,12 +528,6 @@ public class BancoAppFun implements Serializable {
 		JButton btCartao = new JButton("Criar cartao");
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
-		
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel jpanelMovimentos = new JPanel();
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
 
 		JButton btnMovimentos = new JButton("Movimentos");
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -852,26 +846,6 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(206, 356, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-		jpanelMovimentos.setVisible(false);
 
 		// Pedir cartao
 
