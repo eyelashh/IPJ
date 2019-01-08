@@ -34,7 +34,7 @@ public class Cliente extends Utilizador implements Serializable {
 
 	@Override
 	public String toString() {
-		return contas + " " + this.getNome();
+		return this.getIdUtilizador() + " " + this.getNome();
 	}
 
 }

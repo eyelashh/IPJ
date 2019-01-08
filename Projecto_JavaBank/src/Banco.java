@@ -232,48 +232,51 @@ public class Banco implements Serializable {
 		return lista;
 	}
 
-//	// lista as contas a ordem
-//	protected String listacontasordem(ArrayList<Integer> idClientes, ArrayList<Conta> cont) {
-//		ArrayList<String> listordem = new ArrayList<String>();
-//		String s = "";
-//		for (int i = 0; i < cont.size(); i++) {
-//			if ((cont.get(i) instanceof ContaCorrente) && (cont.get(i).getClientes() == idClientes)) {
-//				s = "" + cont.get(i).getIdConta();
-//				listordem.add(s);
-//			}
-//		}
-//		String[] numcontas = new String[listordem.size()];
-//		numcontas = listordem.toArray(numcontas);
-//
-//		return s;
-//	}
+	// retorna o array das contas poupan�a
+	protected String[] listaContasPoupanca() {
 
-	//// lista as contas poupan�a
+		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
 
-//	protected String[] listacontaspoupanca(ArrayList<Conta> cont) {
-//		ArrayList<String> listapoupancia = new ArrayList<String>();
-//		String s = "";
-//		for (int i = 0; i < cont.size(); i++) {
-//			if (cont.get(i) instanceof ContaPoupanca) {
-//				s = "" + cont.get(i).getIdConta();
-//				listapoupancia.add(s);
-//			}
-//		}
-//
-//		String[] numcontas = new String[listapoupancia.size()];
-//		numcontas = listapoupancia.toArray(numcontas);
-//		return numcontas;
-//	}
+		for (int i = 0; i < this.contas.size(); i++) {
+
+			if ((contas.get(i) instanceof ContaPoupanca)) {
+				String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
+				idsContaPoupanca.add(idSTR);
+			}
+		}
+		String[] contasP = new String[idsContaPoupanca.size()];
+		contasP = idsContaPoupanca.toArray(contasP);
+
+		return contasP;
+	}
+
+	// retorna o array das contas corrente
+	protected String[] listaContasCorrente() {
+
+		ArrayList<String> idsContasCorrente = new ArrayList<String>();
+
+		for (int i = 0; i < this.contas.size(); i++) {
+
+			if ((contas.get(i) instanceof ContaCorrente)) {
+				String idSTR = Integer.toString(((ContaCorrente) contas.get(i)).getIdConta());
+				idsContasCorrente.add(idSTR);
+			}
+		}
+		String[] contasCorrente = new String[idsContasCorrente.size()];
+		contasCorrente = idsContasCorrente.toArray(contasCorrente);
+
+		return contasCorrente;
+	}
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
 
-	protected String[] listaFunc(ArrayList<Utilizador> fun) {
+	protected String[] listaFunceAdm(ArrayList<Utilizador> fun) {
 		ArrayList<String> func = new ArrayList<String>();
 		String f = "";
 
 		for (int i = 0; i < fun.size(); i++) {
-			if (fun.get(i) instanceof Funcionario) {
+			if (fun.get(i) instanceof Funcionario || fun.get(i) instanceof Administrador) {
 				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome() + " " + fun.get(i).getSobrenome();
 				func.add(f);
 			}
@@ -392,6 +395,22 @@ public class Banco implements Serializable {
 
 	}
 
+	protected void actualizaAdmin(Administrador adm, String nome, String sobrenome, Date dataDeNascimento,
+			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
+			String password) {
+
+		adm.setNome(nome);
+		adm.setSobrenome(sobrenome);
+		adm.setDataDeNascimento(dataDeNascimento);
+		adm.setTipoIndentificacao(tipoIndentificacao);
+		adm.setNumidentificacao(numidentificacao);
+		adm.setMorada(morada);
+		adm.setContacto(contacto);
+		adm.setUsername(username);
+		adm.setPassword(password);
+
+	}
+
 	// atualiza dados do Cliente;
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
@@ -446,6 +465,71 @@ public class Banco implements Serializable {
 		}
 	}
 
+	// preenche tabela clientes no cliente:
+	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
+		int id = 0;
+		String nome;
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
+				id = clientes.get(i).getIdUtilizador();
+				nome = clientes.get(i).getNome();
+				model.addRow(new Object[] { id, nome });
+
+			}
+		}
+	}
+
+	protected String[] listaClientesNome(String nomeCliente) {
+
+		ArrayList<Utilizador> util = this.utilizadores;
+		ArrayList<String> utilNome = new ArrayList<String>();
+		String cliente = "";
+
+		for (Utilizador c : util) {
+			String nome = c.getNome();
+			if ((nome.toLowerCase().contains(nomeCliente.toLowerCase())) && (c instanceof Cliente)) {
+				cliente = "" + c.getIdUtilizador() + "*" + c.getNome() + " " + c.getSobrenome();
+				utilNome.add(cliente);
+			}
+		}
+
+		String[] clientesNome = new String[utilNome.size()];
+		clientesNome = utilNome.toArray(clientesNome);
+
+		return clientesNome;
+	}
+
+	// preenche tabela clientes no cliente pelo nome:
+	protected void preenchetabelaclientesNome(DefaultTableModel model, String nome) {
+		int id = 0;
+
+		for (int i = 0; i < utilizadores.size(); i++) {
+			String nomeCliente = utilizadores.get(i).getNome();
+			if ((nomeCliente.toLowerCase().contains(nome.toLowerCase())) && (utilizadores.get(i) instanceof Cliente)) {
+
+				id = utilizadores.get(i).getIdUtilizador();
+
+				model.addRow(new Object[] { id, nomeCliente });
+
+			}
+		}
+	}
+
+	// preenche tabela clientes no cliente pelo id:
+	protected void preenchetabelaclientesID(DefaultTableModel model, int idCliente) {
+		int id = 0;
+		String cliente;
+		for (int i = 0; i < utilizadores.size(); i++) {
+			if ((utilizadores.get(i).getIdUtilizador() == idCliente) && (utilizadores.get(i) instanceof Cliente)) {
+
+				id = utilizadores.get(i).getIdUtilizador();
+				cliente = utilizadores.get(i).getNome();
+				model.addRow(new Object[] { id, cliente });
+
+			}
+		}
+	}
+
 	// preenche tabela operaçoes no cliente:
 	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, Conta c) {
 
@@ -457,8 +541,8 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
@@ -474,7 +558,7 @@ public class Banco implements Serializable {
 
 	}
 
-	//vai buscar a descricao
+	// vai buscar a descricao
 	protected String descricaoOpercacoes(int idOperacao) {
 
 		String desc = "";
@@ -506,14 +590,14 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-
-					Object[] texto = { id, resp, data, valor, null, null };
-					model.addRow(texto);
-
-				}
+					
+						Object[] texto = { id, resp, data, valor, null, null };
+						model.addRow(texto);
+					}
+				
 
 			}
 		}
@@ -531,12 +615,12 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-
-					Object[] texto = { id, resp, data, valor, null, null };
-					model.addRow(texto);
+					
+						Object[] texto = { id, resp, data, valor, null, null };
+						model.addRow(texto);
 
 				}
 
@@ -686,42 +770,6 @@ public class Banco implements Serializable {
 
 	}
 
-	// retorna o array das contas poupan�a
-	protected String[] listaContasPoupanca() {
-		ArrayList<Conta> contas = this.contas;
-		String id = "";
-		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
-
-		for (Conta c : contas) {
-			String idSTR = Integer.toString(c.getIdConta());
-			if (c instanceof ContaPoupanca) {
-				idsContaPoupanca.add(idSTR);
-			}
-		}
-		String[] contasP = new String[idsContaPoupanca.size() + 1];
-		contasP = idsContaPoupanca.toArray(contasP);
-
-		return contasP;
-	}
-
-	// retorna o array das contas corrente
-	protected String[] listaContasCorrente() {
-
-		ArrayList<Conta> contas = this.contas;
-		ArrayList<String> idsContasCorrente = new ArrayList<String>();
-
-		for (Conta c : contas) {
-			String idSTR = Integer.toString(c.getIdConta());
-			if (c instanceof ContaCorrente) {
-				idsContasCorrente.add(idSTR);
-			}
-		}
-		String[] contasCorrente = new String[idsContasCorrente.size()];
-		contasCorrente = idsContasCorrente.toArray(contasCorrente);
-
-		return contasCorrente;
-	}
-
 //retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {
 
@@ -765,26 +813,6 @@ public class Banco implements Serializable {
 		contaId = contaNum.toArray(contaId);
 
 		return contaId;
-	}
-
-	protected String[] listaClientesNome(String nomeCliente) {
-
-		ArrayList<Utilizador> util = this.utilizadores;
-		ArrayList<String> utilNome = new ArrayList<String>();
-		String cliente = "";
-
-		for (Utilizador c : util) {
-			String nome = c.getNome();
-			if ((nome.toLowerCase().contains(nomeCliente.toLowerCase())) && (c instanceof Cliente)) {
-				cliente = "" + c.getIdUtilizador() + "*" + c.getNome() + " " + c.getSobrenome();
-				utilNome.add(cliente);
-			}
-		}
-
-		String[] clientesNome = new String[utilNome.size()];
-		clientesNome = utilNome.toArray(clientesNome);
-
-		return clientesNome;
 	}
 
 	protected String[] listaClientesID(String idCliente) {

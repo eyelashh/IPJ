@@ -79,7 +79,7 @@ public class Operacao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Operacao [idOperacao=" + idOperacao + ", responsavel=" + responsavel + ", dataOperacao=" + dataOperacao
+		return "Operacao [idOperacao=" + idOperacao + ", responsavel=" + responsavel + ", dataOperacao=" + dataOperacao.toString()
 				+ ", valor=" + valor + ", descricao=" + descricao + "]\n";
 	}
 	
