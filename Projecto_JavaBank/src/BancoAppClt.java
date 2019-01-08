@@ -322,11 +322,12 @@ public class BancoAppClt implements Serializable {
 
 					// cartao:
 
-					if(c instanceof ContaCorrente) {
-					Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) c).getCartao());
+					if (c instanceof ContaCorrente) {
+						Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
+								((ContaCorrente) c).getCartao());
 
-					textFieldCltCartao.setText(card.getNomeTitular());
-					textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
+						textFieldCltCartao.setText(card.getNomeTitular());
+						textFieldNumCartao.setText(Integer.toString(card.getCodvalidacao()));
 					}
 					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
 					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
