@@ -120,7 +120,7 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "ID", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 	// modelo lista das contas dos clientes do painel cliente
