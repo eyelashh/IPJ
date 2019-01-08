@@ -595,11 +595,10 @@ public class Banco implements Serializable {
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-					
-						Object[] texto = { id, resp, data, valor, null, null };
-						model.addRow(texto);
-					}
-				
+
+					Object[] texto = { id, resp, data, valor, null, null };
+					model.addRow(texto);
+				}
 
 			}
 		}
@@ -620,9 +619,9 @@ public class Banco implements Serializable {
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-					
-						Object[] texto = { id, resp, data, valor, null, null };
-						model.addRow(texto);
+
+					Object[] texto = { id, resp, data, valor, null, null };
+					model.addRow(texto);
 
 				}
 
@@ -660,16 +659,16 @@ public class Banco implements Serializable {
 	// atribuir cliente a conta e conta ao cliente;
 	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
-		
+
 		for (int i = 0; i < model.getRowCount(); i++) {
-			
+
 			if ((Boolean) model.getValueAt(i, 0) == true) {
-				
+
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
-				
+
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-					//((Cliente) clt).getContas().add(c.getIdConta());
+					// ((Cliente) clt).getContas().add(c.getIdConta());
 					if (c instanceof ContaCorrente) {
 						((Cliente) clt).getContas().add(c.getIdConta());
 					} else {

@@ -88,8 +88,8 @@ public class AppFuncionario implements Serializable {
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
 
-	private static GestaoLivraria gl;
-	private static Funcionario func;
+	private  GestaoLivraria gl;
+	private  Funcionario func;
 	private JTextField txtPrecoCarrinho;
 	private JTextField txtQuantidadeLivrosCarrinho;
 	private JTable tabelaCarrinhos;
