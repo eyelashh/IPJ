@@ -572,7 +572,7 @@ public class BancoAppFun implements Serializable {
 					
 					// primeiro ve qual o id selecionado!
 					int linha = tableListaClts.getSelectedRow();
-					int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
+					//int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
 					
 					// cartao nulo inicialmente;
 					Conta c;
@@ -582,23 +582,12 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0, true);
 						gb.javabank.getContas().add(c);
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
-					} else if (rdbtnContaPoupanca.isSelected()) {
-
-						// verifica se o cliente já tem conta poupança
-						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
-								.getContapoupanca() != 0) {
+					}  
+					else {
 						
-						
-						JOptionPane.showMessageDialog(null,
-								"O/A cliente " + tableListaClts.getModel().getValueAt(idCliente, 0)
-										+ " ja tem uma conta poupan�a neste banco!");
-						
-						}else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
-								.getContapoupanca() == 0){
-							
 							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 									Double.parseDouble(tbContasSaldo.getText()), clientes,
 									Double.parseDouble(tbContaslimitelevop.getText()),
@@ -606,48 +595,15 @@ public class BancoAppFun implements Serializable {
 									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
 									true);
 							gb.javabank.getContas().add(c);
-							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+							
+							gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 						
-						}
 						// verifica se o cliente já tem conta poupança
 						
-					}else if ((rdbtnContaPoupanca.isSelected()) && (Boolean) model.getValueAt(linha, 0) == true) {
-
-					
-						// verifica se o cliente já tem conta poupança
-						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
-								.getContapoupanca() != 0) {
-
-							JOptionPane.showMessageDialog(null,
-									"O/A cliente " + tableListaClts.getModel().getValueAt(idCliente, 0)
-											+ " ja tem uma conta poupan�a neste banco!");
-							tableListaClts.setValueAt(false, idCliente, 0);
-
-						} else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
-								.getContapoupanca() == 0 && (Boolean) model.getValueAt(linha, 0) == true) {
-							
-							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-									Double.parseDouble(tbContasSaldo.getText()), clientes,
-									Double.parseDouble(tbContaslimitelevop.getText()),
-									Double.parseDouble(tbContaslimitelevdia.getText()),
-									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
-									true);
-
-							// Atribuir titulares das contas:
-							gb.javabank.getContas().add(c);
-							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-							
-							
-						}
-				
-
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
-							dmconta);
-					
 					}
+					
+						
 				} else {
 					// atualizar:
 
@@ -659,14 +615,14 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
 
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 
 					} else {
 
 						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 					}
 
 					gb.javabank.limpatabela(model);
@@ -725,11 +681,9 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-
 				if (!lContas.isSelectionEmpty()) {
-
 					btnMovimentos.setVisible(true);
-
+					
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
