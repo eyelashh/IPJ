@@ -231,43 +231,42 @@ public class Banco implements Serializable {
 		lista = listprov.toArray(lista);
 		return lista;
 	}
-	
+
 	// retorna o array das contas poupan�a
-		protected String[] listaContasPoupanca() {
-			
-			ArrayList<String> idsContaPoupanca = new ArrayList<String>();
+	protected String[] listaContasPoupanca() {
 
-			for (int i = 0; i < this.contas.size(); i++) {
-				
-				if ((contas.get(i) instanceof ContaPoupanca)) {
-					String idSTR = Integer.toString(((ContaPoupanca)contas.get(i)).getIdConta());
-					idsContaPoupanca.add(idSTR);
-				}
+		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
+
+		for (int i = 0; i < this.contas.size(); i++) {
+
+			if ((contas.get(i) instanceof ContaPoupanca)) {
+				String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
+				idsContaPoupanca.add(idSTR);
 			}
-			String[] contasP = new String[idsContaPoupanca.size()];
-			contasP = idsContaPoupanca.toArray(contasP);
-
-			return contasP;
 		}
-		
-		// retorna o array das contas corrente
-		protected String[] listaContasCorrente() {
+		String[] contasP = new String[idsContaPoupanca.size()];
+		contasP = idsContaPoupanca.toArray(contasP);
 
-		
-			ArrayList<String> idsContasCorrente = new ArrayList<String>();
+		return contasP;
+	}
 
-			for (int i = 0; i < this.contas.size(); i++) {
-				
-				if ((contas.get(i) instanceof ContaCorrente)) {
-					String idSTR = Integer.toString(((ContaCorrente)contas.get(i)).getIdConta());
-					idsContasCorrente.add(idSTR);
-				}
+	// retorna o array das contas corrente
+	protected String[] listaContasCorrente() {
+
+		ArrayList<String> idsContasCorrente = new ArrayList<String>();
+
+		for (int i = 0; i < this.contas.size(); i++) {
+
+			if ((contas.get(i) instanceof ContaCorrente)) {
+				String idSTR = Integer.toString(((ContaCorrente) contas.get(i)).getIdConta());
+				idsContasCorrente.add(idSTR);
 			}
-			String[] contasCorrente = new String[idsContasCorrente.size()];
-			contasCorrente = idsContasCorrente.toArray(contasCorrente);
-
-			return contasCorrente;
 		}
+		String[] contasCorrente = new String[idsContasCorrente.size()];
+		contasCorrente = idsContasCorrente.toArray(contasCorrente);
+
+		return contasCorrente;
+	}
 
 	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
 	// Strings para ser recebido nas listas de funcionario!
@@ -542,8 +541,8 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 					int contadestino = ((Transferencia) contas.get(i).getOperacoes().get(j)).getcontatransf()
 							.getIdConta();
@@ -591,14 +590,14 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-
-					Object[] texto = { id, resp, data, valor, null, null };
-					model.addRow(texto);
-
-				}
+					
+						Object[] texto = { id, resp, data, valor, null, null };
+						model.addRow(texto);
+					}
+				
 
 			}
 		}
@@ -616,12 +615,12 @@ public class Banco implements Serializable {
 						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
-					String resp = contas.get(i).getOperacoes().get(j).getResponsavel().toString();
-					String data = contas.get(i).getOperacoes().get(j).getDataOperacao().toString();
+					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
-
-					Object[] texto = { id, resp, data, valor, null, null };
-					model.addRow(texto);
+					
+						Object[] texto = { id, resp, data, valor, null, null };
+						model.addRow(texto);
 
 				}
 
@@ -770,10 +769,6 @@ public class Banco implements Serializable {
 		return card;
 
 	}
-
-	
-
-	
 
 //retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {

@@ -1817,7 +1817,7 @@ public class BancoAppFun implements Serializable {
 				String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
 
 				Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
-						Double.parseDouble(tbContasaldoc.getText()), descricao);
+						Double.parseDouble(tbDepMontante.getText()), descricao);
 				c.getOperacoes().add(op);
 				tbContasaldoc.setText(c.getSaldo() + "");
 				JOptionPane.showMessageDialog(null, "Deposito efectuado!");
