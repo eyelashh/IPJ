@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.regex.*;
 
 
 public class Validador {
@@ -65,7 +64,7 @@ public class Validador {
 			teste=false;
 		}
 		
-		return true;
+		return teste;
 	}
 	
 	// valida username:
@@ -99,20 +98,25 @@ public class Validador {
 		boolean existe=false;
 		
 		do {
-			idfun =(int) (Math.random()*1000);
+			do {
+				idfun =(int) (Math.random()*10000);
+				
+				}while(idfun<999);
 			
 			for(int i=0; i<util.size();i++)
 			{
 				if(util.get(i) instanceof Funcionario)
 				{
-					
+					if(((Funcionario) util.get(i)).getIdFuncionario()==idfun)
+					{
+						existe=true;
+					}
 				}
-				
 			}
 				
 		} while(existe);
 		
-		return 0;
+		return idfun;
 	}
 	
 	
@@ -122,15 +126,24 @@ public class Validador {
 	// CARTOES:
 	
 	// valida id cartao:
-	protected int valIdCartao()
+	protected int valIdCartao(ArrayList <Cartao> cart)
 	{
-		return 0;
+		
+		int id = 1;
+		if(cart.size()!=0)
+		{
+			//id = cart.get(cart.size()-1).get+1;
+		}
+		
+		return id;
 	}
 	
 	// valida titular de cartao:
-	protected boolean valTitularCartao()
+	protected boolean valTitularCartao(String nome)
 	{
-		return true;
+		boolean teste = nome.matches("\\p{Upper}(\\p{Lower}+\\s?)");
+		
+		return teste;
 		
 	}
 	
@@ -138,7 +151,14 @@ public class Validador {
 	
 	protected int valCodCartao()
 	{
-		return 0;
+		int codval = 0;
+		
+		do {
+			codval = (int) (Math.random()*1000);
+			
+		}while(codval<100);
+		
+		return codval;
 	}
 	
 	
@@ -165,9 +185,11 @@ public class Validador {
 	}
 	
 	// valida valor max levantamento por dia:
-	protected boolean valVMaxLevContaDia()
+	protected boolean valVMaxLevContaDia(String valor)
 	{
-		return true;
+		boolean teste=valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		return teste;
 	}
 	
 	
@@ -176,30 +198,37 @@ public class Validador {
 	// CONTA POUPANÇA:
 	
 	// valida juros
-	protected boolean valJuros()
+	protected boolean valJuros(String valor)
 	{
 		
-		return true;
+		boolean teste=valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		return teste;
 	}
 	
 	// valida valor max levantamento por mes:
-	protected boolean valVMaxLevContaMes()
+	protected boolean valVMaxLevContaMes(String valor)
 	{
-		return true;
+		boolean teste=valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		return teste;
 	}
 	
 	// OPERAÇOES:
 	
 	// valida valor de operacao:
-	protected boolean valValorOperacao()
+	protected boolean valValorOperacao(String valor)
 	{
-		return true;
+		boolean teste=valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		return teste;
 	}
 	
 	// valida conta a transferir:
-	protected boolean valContaTransferir()
+	protected boolean valContaTransferir(String valor)
 	{
-		return true;
+		boolean teste=valor.matches("^[-+]?\\d+(\\.\\d+)?$");	
+		return teste;
 	}
 	
 	
