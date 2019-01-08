@@ -516,9 +516,9 @@ public class AppCliente implements Serializable {
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
 		
 		JComboBox cbOrdenarLIVROS = new JComboBox();
-		cbOrdenarLIVROS.addItem("Titulo");
-		cbOrdenarLIVROS.addItem("Ano");
-		cbOrdenarLIVROS.addItem("Preco");
+//		cbOrdenarLIVROS.addItem("Titulo");
+//		cbOrdenarLIVROS.addItem("Ano");
+//		cbOrdenarLIVROS.addItem("Preco");
 		JPLivros.add(cbOrdenarLIVROS);
 		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
 		cbOrdenarLIVROS.addItemListener(new ItemListener() {
