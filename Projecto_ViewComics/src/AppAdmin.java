@@ -78,7 +78,11 @@ public class AppAdmin implements Serializable {
 	private JTextField textField_2;
 	private JTable tabelaLivrosLIVROS;
 	String[] colunasLivro = { "Id do livro", "Titulo", "Autor" };
-	DefaultTableModel modeloTabelaLivrosLIVROS = new DefaultTableModel(colunasLivro, 0);
+	DefaultTableModel modeloTabelaLivrosLIVROS = new DefaultTableModel(colunasLivro, 0) {
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+};
 
 	/**
 	 * Launch the application.
@@ -209,7 +213,6 @@ public class AppAdmin implements Serializable {
 		JTextArea txtDescricaoLivros = new JTextArea();
 		txtDescricaoLivros.setLineWrap(true);
 		scrollPane_3.setViewportView(txtDescricaoLivros);
-		txtDescricaoLivros.setEditable(false);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(629, 60, 97, 38);
@@ -420,7 +423,7 @@ public class AppAdmin implements Serializable {
 		btnNewButton.setBackground(new Color(204, 255, 153));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(rbCriarLivro.isSelected()) {
+				if (rbCriarLivro.isSelected()) {
 					txtTituloLivros.setText("");
 					txtAutorLivros.setText("");
 					txtStockLivros.setText("");
@@ -484,11 +487,11 @@ public class AppAdmin implements Serializable {
 			}
 		});
 		scrollPane.setViewportView(tabelaLivrosLIVROS);
-		
+
 		JComboBox cbCriterioOrdenacaoLIVROS = new JComboBox();
 		cbCriterioOrdenacaoLIVROS.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				String seleccao=(String) cbCriterioOrdenacaoLIVROS.getSelectedItem();
+				String seleccao = (String) cbCriterioOrdenacaoLIVROS.getSelectedItem();
 				gl.viewComics.ordenarTabelaLivros(tabelaLivrosLIVROS, seleccao);
 			}
 		});
@@ -496,11 +499,10 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(cbCriterioOrdenacaoLIVROS);
 		cbCriterioOrdenacaoLIVROS.addItem("Titulo");
 		cbCriterioOrdenacaoLIVROS.addItem("ID");
-		
+
 		JLabel lblCriterioDeOrdenacao = new JLabel("criterio de ordenacao :");
 		lblCriterioDeOrdenacao.setBounds(36, 24, 117, 25);
 		jpAdmLivros.add(lblCriterioDeOrdenacao);
-		gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 
 		// pesquisar livros consoante os atributos
 		btnPesquisarLivro.addActionListener(new ActionListener() {
@@ -529,71 +531,6 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-
-		JPanel jpAdmEstatisticas = new JPanel();
-		jpAdmEstatisticas.setBounds(0, 0, 968, 545);
-		panelPrincipal.add(jpAdmEstatisticas);
-		jpAdmEstatisticas.setLayout(null);
-
-		JLabel lblLivroMaisVendido = new JLabel("Mais vendas");
-		lblLivroMaisVendido.setBounds(31, 11, 97, 31);
-		jpAdmEstatisticas.add(lblLivroMaisVendido);
-
-		JLabel lblTabelaComOs = new JLabel(
-				"tabela com os livros todos e o dinheiro que entrou na loja at\u00E9 \u00E0 data de cada um");
-		lblTabelaComOs.setBounds(482, 11, 532, 31);
-		jpAdmEstatisticas.add(lblTabelaComOs);
-
-		JLabel lblLivroMenosVendido = new JLabel("Menos vendas");
-		lblLivroMenosVendido.setBounds(31, 53, 86, 31);
-		jpAdmEstatisticas.add(lblLivroMenosVendido);
-
-		JLabel lblTabelaComData = new JLabel("Historico de precos");
-		lblTabelaComData.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTabelaComData.setBounds(227, 106, 152, 31);
-		jpAdmEstatisticas.add(lblTabelaComData);
-
-		JList<String> listaLivrosEstatistica = new JList<String>(modeloListaLivros);
-		DefaultListModel<String> modeloListaPrecos = new DefaultListModel<String>();
-		JList<String> list = new JList<String>(modeloListaPrecos);
-		list.setBounds(227, 186, 152, 204);
-		jpAdmEstatisticas.add(list);
-
-		listaLivrosEstatistica.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!listaLivrosEstatistica.isSelectionEmpty()) {
-					modeloListaPrecos.removeAllElements();
-					String seleccao = listaLivrosEstatistica.getSelectedValue();
-					txtLivroSelecSTATS.setText(seleccao.substring(0, seleccao.indexOf(",")));
-					gl.viewComics.addArrayLista(gl.viewComics.precosHistoricoArray(seleccao), modeloListaPrecos);
-//					String historicoPreco=gl.viewComics.devolvePrecosLivroSeleccionado(seleccao);
-//					txtTesteSTATS.setText(historicoPreco);
-				} else {
-					JOptionPane.showMessageDialog(null, "seleccione um livro da lista");
-				}
-			}
-		});
-		listaLivrosEstatistica.setBounds(31, 113, 186, 277);
-		jpAdmEstatisticas.add(listaLivrosEstatistica);
-
-		txtLivroSelecSTATS = new JTextField();
-		txtLivroSelecSTATS.setEditable(false);
-		txtLivroSelecSTATS.setBounds(227, 142, 152, 33);
-		jpAdmEstatisticas.add(txtLivroSelecSTATS);
-		txtLivroSelecSTATS.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setBackground(new Color(204, 255, 51));
-		textField_1.setBounds(138, 13, 201, 26);
-		jpAdmEstatisticas.add(textField_1);
-		textField_1.setColumns(10);
-
-		textField_2 = new JTextField();
-		textField_2.setBackground(new Color(255, 204, 204));
-		textField_2.setColumns(10);
-		textField_2.setBounds(138, 55, 201, 26);
-		jpAdmEstatisticas.add(textField_2);
-		jpAdmEstatisticas.setVisible(false);
 
 		jpAdmGestaoUtil = new JPanel();
 		jpAdmGestaoUtil.setBounds(0, 0, 763, 545);
@@ -868,6 +805,72 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
+		gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
+
+		JPanel jpAdmEstatisticas = new JPanel();
+		jpAdmEstatisticas.setBounds(0, 0, 968, 545);
+		panelPrincipal.add(jpAdmEstatisticas);
+		jpAdmEstatisticas.setLayout(null);
+
+		JLabel lblLivroMaisVendido = new JLabel("Mais vendas");
+		lblLivroMaisVendido.setBounds(31, 11, 97, 31);
+		jpAdmEstatisticas.add(lblLivroMaisVendido);
+
+		JLabel lblTabelaComOs = new JLabel(
+				"tabela com os livros todos e o dinheiro que entrou na loja at\u00E9 \u00E0 data de cada um");
+		lblTabelaComOs.setBounds(482, 11, 532, 31);
+		jpAdmEstatisticas.add(lblTabelaComOs);
+
+		JLabel lblLivroMenosVendido = new JLabel("Menos vendas");
+		lblLivroMenosVendido.setBounds(31, 53, 86, 31);
+		jpAdmEstatisticas.add(lblLivroMenosVendido);
+
+		JLabel lblTabelaComData = new JLabel("Historico de precos");
+		lblTabelaComData.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTabelaComData.setBounds(227, 106, 152, 31);
+		jpAdmEstatisticas.add(lblTabelaComData);
+
+		JList<String> listaLivrosEstatistica = new JList<String>(modeloListaLivros);
+		DefaultListModel<String> modeloListaPrecos = new DefaultListModel<String>();
+		JList<String> list = new JList<String>(modeloListaPrecos);
+		list.setBounds(227, 186, 152, 204);
+		jpAdmEstatisticas.add(list);
+
+		listaLivrosEstatistica.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (!listaLivrosEstatistica.isSelectionEmpty()) {
+					modeloListaPrecos.removeAllElements();
+					String seleccao = listaLivrosEstatistica.getSelectedValue();
+					txtLivroSelecSTATS.setText(seleccao.substring(0, seleccao.indexOf(",")));
+					gl.viewComics.addArrayLista(gl.viewComics.precosHistoricoArray(seleccao), modeloListaPrecos);
+//					String historicoPreco=gl.viewComics.devolvePrecosLivroSeleccionado(seleccao);
+//					txtTesteSTATS.setText(historicoPreco);
+				} else {
+					JOptionPane.showMessageDialog(null, "seleccione um livro da lista");
+				}
+			}
+		});
+		listaLivrosEstatistica.setBounds(31, 113, 186, 277);
+		jpAdmEstatisticas.add(listaLivrosEstatistica);
+
+		txtLivroSelecSTATS = new JTextField();
+		txtLivroSelecSTATS.setEditable(false);
+		txtLivroSelecSTATS.setBounds(227, 142, 152, 33);
+		jpAdmEstatisticas.add(txtLivroSelecSTATS);
+		txtLivroSelecSTATS.setColumns(10);
+
+		textField_1 = new JTextField();
+		textField_1.setBackground(new Color(204, 255, 51));
+		textField_1.setBounds(138, 13, 201, 26);
+		jpAdmEstatisticas.add(textField_1);
+		textField_1.setColumns(10);
+
+		textField_2 = new JTextField();
+		textField_2.setBackground(new Color(255, 204, 204));
+		textField_2.setColumns(10);
+		textField_2.setBounds(138, 55, 201, 26);
+		jpAdmEstatisticas.add(textField_2);
+		jpAdmEstatisticas.setVisible(false);
 
 		JPanel jpAdmConta = new JPanel();
 		jpAdmConta.setBackground(SystemColor.menu);
