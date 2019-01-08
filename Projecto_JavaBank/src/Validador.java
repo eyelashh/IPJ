@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.regex.*;
+
 
 public class Validador {
 	
@@ -9,46 +12,66 @@ public class Validador {
 	// UTILIZADORES:
 	
 	// cria id de utilizador:
-	protected int ValUtilizadorid()
+	protected int ValUtilizadorid(ArrayList<Utilizador> util)
 	{
-		return 0;
+		int id = 1;
+		if(util.size()!=0)
+		{
+			id = util.get(util.size()-1).getIdUtilizador()+1;
+		}
+		
+		return id;
 	}
 	
 	// valida nome:
-	protected boolean valNome()
+	protected boolean valNome(String nome)
 	{
+		boolean teste = nome.matches("\\p{Upper}(\\p{Lower}+\\s?)");
 		
-		return true;
+		return teste;
 	}
 	
 	// valida apelido
-	protected boolean valSobrenome()
+	protected boolean valSobrenome(String apelido)
 	{
-		return true;
+		boolean teste = apelido.matches("\\p{Upper}(\\p{Lower}+\\s?)");
+		
+		return teste;
 	}
 	
-	// valida data:
-	protected boolean valDataNasc()
-	{
+	// valida data: (nao sei se é necessario)
 	
-		return true;
-	}
 	
 	// valida numero de indentificaçao:
-	protected boolean valNIdentificacao()
+	protected boolean valNumIdentificacao(String str)
 	{
-		return true;
+		boolean teste=str.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		if(str.indexOf(".")!=-1)
+		{
+			teste=false;
+		}
+		return teste;
+
 	}
 	
 	// valida contacto:
-	protected boolean valContacto()
+	protected boolean valContacto(String contacto)
 	{
+		boolean teste=contacto.matches("^[-+]?\\d+(\\.\\d+)?$");
+		
+		if(contacto.indexOf(".")!=-1 || contacto.charAt(0)!='9' || contacto.charAt(0)!='2' || contacto.length()!=9)
+		{
+			teste=false;
+		}
+		
 		return true;
 	}
 	
 	// valida username:
 	protected boolean valUsername()
 	{
+		
 		return true;
 	}
 	
