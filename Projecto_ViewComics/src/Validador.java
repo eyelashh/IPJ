@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Validador {
 
@@ -9,64 +10,108 @@ public class Validador {
 		// UTILIZADOR:
 	
 		// valida nome do Funcionario ou Administrador:
-		protected boolean valNome()
+		protected boolean valNome(String nome)
 		{
-			return true;
+			boolean teste = nome.matches("\\p{Upper}(\\p{Lower}+\\s?)");
+			
+			return teste;
 		}
 		
 		// valida contacto:
-		protected boolean valContacto()
+		protected boolean valContacto(String contacto)
 		{
-			return true;
+			boolean teste=contacto.matches("^[-+]?\\d+(\\d+)?$");
+			
+			if(contacto.indexOf(".")!=-1 || contacto.charAt(0)!='9' || contacto.charAt(0)!='2' || contacto.length()!=9)
+			{
+				teste=false;
+			}
+			
+			return teste;
+			
 		}
 		
 		// valida username:
-		protected boolean valUsername()
+		protected boolean valUsername(String user, ArrayList<Utilizador> utilizadores)
 		{
-			return true;
+			boolean existe=false;
+			
+			for(int i=0; i<utilizadores.size();i++)
+			{
+				if(utilizadores.get(i).getUsername().equals(user))
+				{
+					existe= true;
+				}
+			}
+			return existe;
 		}
 		
 		// valida passe
-		protected boolean valPassword()
+		protected boolean valPassword(String password)
 		{
-			return true;
+			
+			// 8 caracteres com 1 numero e 1 letra
+			
+			boolean valida=password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+			
+			return valida;
 		}
 		
 		
 		// LIVRO:
 		
-		protected boolean valTitulo()
-		{
-			return true;
-		}
+		// validacao de titulo nao necessario
 		
-		protected boolean autor()
+		protected boolean autor(String nome)
 		{
-			return true;
+			boolean teste = nome.matches("\\p{Upper}(\\p{Lower}+\\s?)");
+			
+			return teste;
 			
 		}
 		
-		protected boolean valPreco()
+		protected boolean valPreco(String preco)
 		{
-			return true;
+			boolean teste=preco.matches("^\\d+(\\d+)?$");
+			
+			return teste;
 			
 		}
 		
-		protected boolean valStock()
+		protected boolean valStock(String stock)
 		{
-			return true;
+			boolean teste=stock.matches("^\\d+(\\d+)?$");
+			
+			return teste;
 		}
 		
-		protected boolean valAno()
+		protected boolean valAno(String ano)
 		{
+			boolean teste=ano.matches("^\\d+(\\d+)?$");
 			
-			return true;
+			try
+			{
+			int a = Integer.parseInt(ano);
+			
+			if(a<0 && a>2019)
+			{
+				teste = false;
+			}
+			}
+			catch(Exception i)
+			{
+				teste = false;
+			}
+
+			return teste;
 		}
 		// id de livros nao sei de é necessario;
 		
 		
 		protected boolean valNif()
 		{
+			
+			
 			return true;
 		}
 	

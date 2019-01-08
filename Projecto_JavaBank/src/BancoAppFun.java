@@ -124,7 +124,7 @@ public class BancoAppFun implements Serializable {
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 	// modelo lista das contas dos clientes do painel cliente
-	private DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
+	DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
 	// modelo combobox lista as contas abertas
 	DefaultComboBoxModel<String> dcbm = new DefaultComboBoxModel<String>();
 
@@ -533,7 +533,7 @@ public class BancoAppFun implements Serializable {
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnMovimentos.setBounds(416, 521, 120, 38);
 		btnMovimentos.setVisible(false);
-		
+
 		jpanelContas.add(btnMovimentos);
 
 		// metedos depainel de contas:
@@ -569,6 +569,11 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 					// CRIA NOVA CONTA
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
+					
+					// primeiro ve qual o id selecionado!
+					int linha = tableListaClts.getSelectedRow();
+					int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
+					
 					// cartao nulo inicialmente;
 					Conta c;
 					if (rdbtnContaCorrente.isSelected()) {
@@ -577,9 +582,14 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0, true);
 						gb.javabank.getContas().add(c);
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
-					} else {
+					} else if (rdbtnContaPoupanca.isSelected()) {
 
+						// verifica se o cliente já tem conta poupança
+						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
+								.getContapoupanca() != 0) {
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
@@ -587,15 +597,48 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
 								true);
 						gb.javabank.getContas().add(c);
-					}
+						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+						
+						}
+						// verifica se o cliente já tem conta poupança
+						
+					}else if ((rdbtnContaPoupanca.isSelected()) && (Boolean) model.getValueAt(linha, 0) == true) {
 
-					// Atribuir titulares das contas:
-					gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+					
+						// verifica se o cliente já tem conta poupança
+						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
+								.getContapoupanca() != 0) {
+
+							JOptionPane.showMessageDialog(null,
+									"O/A cliente " + tableListaClts.getModel().getValueAt(idCliente, 0)
+											+ " ja tem uma conta poupan�a neste banco!");
+							tableListaClts.setValueAt(false, idCliente, 0);
+
+						} else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
+								.getContapoupanca() == 0 && (Boolean) model.getValueAt(linha, 0) == true) {
+							
+							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+									Double.parseDouble(tbContasSaldo.getText()), clientes,
+									Double.parseDouble(tbContaslimitelevop.getText()),
+									Double.parseDouble(tbContaslimitelevdia.getText()),
+									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
+									true);
+
+							// Atribuir titulares das contas:
+							gb.javabank.getContas().add(c);
+							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+							
+							
+						}
+				
+
 					dmconta.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
 							dmconta);
-					JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
+					
+					}
 				} else {
 					// atualizar:
 
@@ -635,8 +678,9 @@ public class BancoAppFun implements Serializable {
 				tbllimitemes.setText(null);
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-
+				
 			}
+			
 		});
 
 		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
@@ -846,6 +890,28 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
+		// painel movimentos onde aparece a tabela das operaçoes
+		JPanel jpanelMovimentos = new JPanel();
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		btnMovimentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelContas.setVisible(false);
+				jpanelMovimentos.setVisible(true);
+
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
+
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
+			}
+		});
 
 		// Pedir cartao
 
@@ -1108,8 +1174,10 @@ public class BancoAppFun implements Serializable {
 
 				// mostra na lista as contas deste cliente
 				dlmcontacliente.removeAllElements();
+
 				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
 						dlmcontacliente);
+
 			}
 		});
 		scrollPane_2.setViewportView(tableListaClts);
@@ -1205,12 +1273,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel jpanelMovimentos = new JPanel();
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
 
 		// Tabela dos movimentos das operações
 		JScrollPane scrollPane = new JScrollPane();
@@ -1980,26 +2042,6 @@ public class BancoAppFun implements Serializable {
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
-		
-		btnMovimentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jpanelContas.setVisible(false);
-				jpanelMovimentos.setVisible(true);
-
-				if (!lContas.isSelectionEmpty()) {
-					String idConta = lContas.getSelectedValue();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
-
-					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-				}
-			}
-		});
-		
-		
-		
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
