@@ -44,6 +44,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class AppCliente implements Serializable {
 
@@ -240,7 +243,7 @@ public class AppCliente implements Serializable {
 		JPLivros.setLayout(null);
 
 		Choice choiceAtributoLivroCliente = new Choice();
-		choiceAtributoLivroCliente.setBounds(65, 63, 200, 20);
+		choiceAtributoLivroCliente.setBounds(144, 71, 211, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
 		choiceAtributoLivroCliente.add("(por que criterio pretende pesquisar o livro)");
 		choiceAtributoLivroCliente.add("Titulo");
@@ -274,7 +277,7 @@ public class AppCliente implements Serializable {
 				}
 			}
 		});
-		listaLivros.setBounds(65, 140, 289, 348);
+		listaLivros.setBounds(66, 162, 289, 348);
 		JPLivros.add(listaLivros);
 
 		// botaoPesquisarLivro
@@ -301,21 +304,21 @@ public class AppCliente implements Serializable {
 			}
 		});
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
-		btnPesquisarLivro.setBounds(286, 98, 115, 20);
+		btnPesquisarLivro.setBounds(112, 124, 115, 26);
 		JPLivros.add(btnPesquisarLivro);
 
 		txtQuantidadeAlterarLIVROS = new JTextField();
 		txtQuantidadeAlterarLIVROS.setColumns(10);
-		txtQuantidadeAlterarLIVROS.setBounds(816, 129, 40, 41);
+		txtQuantidadeAlterarLIVROS.setBounds(631, 127, 57, 43);
 		JPLivros.add(txtQuantidadeAlterarLIVROS);
 		JRadioButton rbAdicionarQuantidadeLIVROS = new JRadioButton("Adicionar");
 		alterarQuantidadeCarrinhoLIVROS.add(rbAdicionarQuantidadeLIVROS);
-		rbAdicionarQuantidadeLIVROS.setBounds(862, 127, 109, 23);
+		rbAdicionarQuantidadeLIVROS.setBounds(694, 127, 109, 23);
 		JPLivros.add(rbAdicionarQuantidadeLIVROS);
 
 		JRadioButton rbRemoverQuantidadeLIVROS = new JRadioButton("Remover");
 		alterarQuantidadeCarrinhoLIVROS.add(rbRemoverQuantidadeLIVROS);
-		rbRemoverQuantidadeLIVROS.setBounds(862, 147, 109, 23);
+		rbRemoverQuantidadeLIVROS.setBounds(694, 147, 109, 23);
 		JPLivros.add(rbRemoverQuantidadeLIVROS);
 		// actualiza o carrinho do nif inserido
 		// dependendo
@@ -401,7 +404,7 @@ public class AppCliente implements Serializable {
 		});
 		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
 		btnAddCarrinhoFinalCliente.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnAddCarrinhoFinalCliente.setBounds(746, 84, 183, 42);
+		btnAddCarrinhoFinalCliente.setBounds(698, 79, 183, 42);
 		JPLivros.add(btnAddCarrinhoFinalCliente);
 
 		JLabel label_2 = new JLabel("Nome:");
@@ -471,23 +474,24 @@ public class AppCliente implements Serializable {
 		JPLivros.add(txtTituloLivros);
 
 		txtNifCarrinhoLIVROS = new JTextField("");
-		txtNifCarrinhoLIVROS.setBounds(513, 34, 175, 29);
+		txtNifCarrinhoLIVROS.setBounds(513, 31, 175, 40);
 		JPLivros.add(txtNifCarrinhoLIVROS);
 		txtNifCarrinhoLIVROS.setColumns(10);
 
 		JLabel lblIntroduzaOSeu = new JLabel("INTRODUZA O SEU NIF");
 		lblIntroduzaOSeu.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblIntroduzaOSeu.setBounds(519, 11, 140, 20);
+		lblIntroduzaOSeu.setBounds(513, 11, 140, 20);
 		JPLivros.add(lblIntroduzaOSeu);
 
 		txtQuantidadeActualLivros = new JTextField();
 		txtQuantidadeActualLivros.setEditable(false);
-		txtQuantidadeActualLivros.setBounds(657, 71, 40, 30);
+		txtQuantidadeActualLivros.setBounds(631, 84, 57, 39);
 		JPLivros.add(txtQuantidadeActualLivros);
 		txtQuantidadeActualLivros.setColumns(10);
 
-		JLabel lblqtddCarrinho = new JLabel("Quantidade deste item no seu carrinho:");
-		lblqtddCarrinho.setBounds(462, 75, 232, 22);
+		JLabel lblqtddCarrinho = new JLabel("No seu carrinho :");
+		lblqtddCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblqtddCarrinho.setBounds(513, 84, 128, 22);
 		JPLivros.add(lblqtddCarrinho);
 
 		JButton btnLimparPesquisaCliente = new JButton("Limpar");
@@ -499,7 +503,7 @@ public class AppCliente implements Serializable {
 			}
 		});
 		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
-		btnLimparPesquisaCliente.setBounds(286, 63, 115, 20);
+		btnLimparPesquisaCliente.setBounds(271, 96, 84, 38);
 		JPLivros.add(btnLimparPesquisaCliente);
 
 		txtIdLivros = new JTextField();
@@ -542,8 +546,38 @@ public class AppCliente implements Serializable {
 		});
 		btnVerificarCarrinhoLIVROS.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnVerificarCarrinhoLIVROS.setBackground(SystemColor.controlHighlight);
-		btnVerificarCarrinhoLIVROS.setBounds(746, 31, 183, 42);
+		btnVerificarCarrinhoLIVROS.setBounds(698, 31, 183, 42);
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
+		
+		JComboBox cbOrdenarLIVROS = new JComboBox();
+		cbOrdenarLIVROS.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if( cbOrdenarLIVROS.getSelectedItem().equals("Titulo")) {
+					//ordenar o modelo por titulo
+				
+				}
+				else if (cbOrdenarLIVROS.getSelectedItem().equals("Ano")) {
+					//ordenar por ano
+				}
+				else if (cbOrdenarLIVROS.getSelectedItem().equals("Preco")) {
+					//ordenar por preco
+				}
+			}
+		});
+		cbOrdenarLIVROS.addItem("Titulo");
+		cbOrdenarLIVROS.addItem("Ano");
+		cbOrdenarLIVROS.addItem("Preco");
+		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
+		JPLivros.add(cbOrdenarLIVROS);
+		
+		JLabel lblNewLabel_2 = new JLabel("Filtrar por : ");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(10, 71, 128, 20);
+		JPLivros.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Ordenar por :");
+		lblNewLabel_3.setBounds(65, 44, 73, 14);
+		JPLivros.add(lblNewLabel_3);
 		JPCarrinho.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
@@ -564,7 +598,8 @@ public class AppCliente implements Serializable {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (gl.viewComics.carrinhoExiste(nif)) {
 						Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-						gl.viewComics.limpatabela(modeloTabela);
+						modeloTabela.setRowCount(0);
+						//gl.viewComics.limpatabela(modeloTabela);
 						gl.viewComics.carrinhoTabela(c, modeloTabela);
 						String precoTotal = gl.viewComics.precoTotalCarrinho(c);
 						String totalLivros = gl.viewComics.totalLivrosCarrinho(c);
@@ -640,7 +675,8 @@ public class AppCliente implements Serializable {
 
 					if (gl.viewComics.carrinhoExiste(txtNifCARRINHO.getText())) {
 						Carrinho c = gl.viewComics.pesquisarCarrinho(txtNifCARRINHO.getText());
-						gl.viewComics.limpatabela(modeloTabela);
+						//gl.viewComics.limpatabela(modeloTabela);
+						modeloTabela.setRowCount(0);
 						gl.viewComics.carrinhoTabela(c, modeloTabela);
 						String precoTotal = gl.viewComics.precoTotalCarrinho(c);
 						String totalLivros = gl.viewComics.totalLivrosCarrinho(c);

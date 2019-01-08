@@ -12,7 +12,7 @@ public class Livro implements  Serializable {
 	private int stock;
 	private String descricao;
 	private int ano;
-	private ArrayList <Preco> precos; //para fins de histórico de preços
+	private ArrayList <Preco> precos; //para fins de historico de preços
 	private static AtomicInteger ai=new AtomicInteger(0);
 	
 	public Livro() {
@@ -94,6 +94,17 @@ public class Livro implements  Serializable {
 	@Override
 	public String toString() {
 		return idLivro + " | " + titulo + ", de "+autor ;
+	}
+
+	public ArrayList<Preco> getPrecos() {
+		return precos;
+	}
+
+	public void setPrecos(ArrayList<Preco> precos) {
+		this.precos = precos;
+	}
+	public void addAlteracaoPreco(Preco p) {
+		this.precos.add(p);
 	}
 
 }
