@@ -345,11 +345,11 @@ public class Livraria implements Serializable {
 	}
 
 	// aletrar um livro
-	public void alterarLivro(String selecao, String titulo, String autor, String preco, String stock, String ano,
+	public void alterarLivro(int idLivro, String titulo, String autor, String preco, String stock, String ano,
 			String descricao) {
 
 		for (Livro l : this.livros) {
-			if (l.toString().equals(selecao)) {
+			if (l.getIdLivro()==idLivro) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
 				l.setPreco(Double.parseDouble(preco));
@@ -651,12 +651,10 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	public void removerLivro(String idSTR, ArrayList<Livro> livros) {
-
-		int idINT = Integer.parseInt(idSTR);
+	public void removerLivro(int idLivro, ArrayList<Livro> livros) {
 
 		for (int i = 0; i < livros.size(); i++) {
-			if (livros.get(i).getIdLivro() == idINT) {
+			if (livros.get(i).getIdLivro() == idLivro) {
 				livros.remove(i);
 			}
 		}
@@ -938,6 +936,7 @@ public class Livraria implements Serializable {
 			}
 
 	}
+	
 
 	public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 
@@ -1025,10 +1024,10 @@ public class Livraria implements Serializable {
 	}
 	// METODOS ESTATISTICA
 
-	public void updatePrecoLivro(String seleccao, Preco p) {
+	public void updatePrecoLivro(int idLivro, Preco p) {
 
 		for (Livro l : this.livros) {
-			if (l.toString().equals(seleccao)) {
+			if (l.getIdLivro()==idLivro) {
 				l.addAlteracaoPreco(p);
 			}
 		}

@@ -74,9 +74,17 @@ public class AppCliente implements Serializable {
 	private JTable tabelaLivros;
 	private JTable tabelaCarrinho;
 	String[] colunasCarrinho = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-	DefaultTableModel modeloTabelaCarrinho = new DefaultTableModel(colunasCarrinho, 0);
+	DefaultTableModel modeloTabelaCarrinho = new DefaultTableModel(colunasCarrinho, 0){
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+};
 	String[] colunasLivro = { "Id do livro", "Titulo", "Autor", "Ano", "Preco" };
-	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLivro, 0);
+	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLivro, 0){
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+};
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -519,11 +527,11 @@ public class AppCliente implements Serializable {
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
 		
 		JComboBox cbOrdenarLIVROS = new JComboBox();
+		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
 		cbOrdenarLIVROS.addItem("Titulo");
 		cbOrdenarLIVROS.addItem("Ano");
 		cbOrdenarLIVROS.addItem("Preco");
 		JPLivros.add(cbOrdenarLIVROS);
-		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
 		cbOrdenarLIVROS.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				

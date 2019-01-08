@@ -94,7 +94,11 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtQuantidadeLivrosCarrinho;
 	private JTable tabelaCarrinhos;
 	String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0);
+	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0){
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+};
 	DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
 	JPanel jpPagamento = new JPanel();
 	JPanel jpFuncLivros = new JPanel();
