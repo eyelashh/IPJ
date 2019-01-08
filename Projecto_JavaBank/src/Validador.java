@@ -69,21 +69,49 @@ public class Validador {
 	}
 	
 	// valida username:
-	protected boolean valUsername()
+	protected boolean valUsername(String user, ArrayList<Utilizador> utilizadores)
 	{
+		boolean existe=false;
 		
-		return true;
+		for(int i=0; i<utilizadores.size();i++)
+		{
+			if(utilizadores.get(i).getUsername().equals(user))
+			{
+				existe= true;
+			}
+		}
+		return existe;
 	}
 	
 	// valida passe
-	protected boolean valPassword()
+	protected boolean valPassword(String password)
 	{
-		return true;
+		// 8 caracteres com 1 numero e 1 letra
+		boolean valida=password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+		
+		return valida;
 	}
 	
 	// valida id funcionario
-	protected int valIdFuncionario()
+	protected int valIdFuncionario(ArrayList<Utilizador> util)
 	{
+		int idfun = 0;
+		boolean existe=false;
+		
+		do {
+			idfun =(int) (Math.random()*1000);
+			
+			for(int i=0; i<util.size();i++)
+			{
+				if(util.get(i) instanceof Funcionario)
+				{
+					
+				}
+				
+			}
+				
+		} while(existe);
+		
 		return 0;
 	}
 	

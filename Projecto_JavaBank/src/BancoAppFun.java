@@ -120,7 +120,7 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "ID", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 	// modelo lista das contas dos clientes do painel cliente
@@ -528,33 +528,12 @@ public class BancoAppFun implements Serializable {
 		JButton btCartao = new JButton("Criar cartao");
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
-		
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel jpanelMovimentos = new JPanel();
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
 
 		JButton btnMovimentos = new JButton("Movimentos");
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnMovimentos.setBounds(416, 521, 120, 38);
 		btnMovimentos.setVisible(false);
-		btnMovimentos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jpanelContas.setVisible(false);
-				jpanelMovimentos.setVisible(true);
-
-				if (!lContas.isSelectionEmpty()) {
-					String idConta = lContas.getSelectedValue();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
-
-					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-				}
-			}
-		});
+		
 		jpanelContas.add(btnMovimentos);
 
 		// metedos depainel de contas:
@@ -868,26 +847,6 @@ public class BancoAppFun implements Serializable {
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
 
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(206, 356, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-		jpanelMovimentos.setVisible(false);
-
 		// Pedir cartao
 
 		// Painel principal CLientes
@@ -1113,13 +1072,12 @@ public class BancoAppFun implements Serializable {
 		scrollPane_2.setBounds(48, 92, 240, 363);
 		jpanelClientes.add(scrollPane_2);
 		tableListaClts = new JTable(modeloTabelaCliente);
-		// Preencher tabela apartir do tablemodel:
-		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 
 		tableListaClts.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				dlmcontacliente.removeAllElements();
 				// quando o rato seleciona uma linha da tabela:
 
 				bg.clearSelection();
@@ -1212,17 +1170,17 @@ public class BancoAppFun implements Serializable {
 							tbCltMorada.getText(), Integer.parseInt(tbCltContacto.getText()), tbCltUser.getText(),
 							tbCltPass.getText(), 0);
 					gb.javabank.getUtlizadores().add(clt);
-
 					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 					modeloTabelaCliente.setRowCount(0);
 					gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 					JOptionPane.showMessageDialog(null, "Cliente criado com sucesso!");
-				} else {
+				}
+
+				else {
 					// atualizar Cliente:
 					// seleciona id;
 					int linha = tableListaClts.getSelectedRow();
 					int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
-
 					// metedo para atualizar:
 					gb.javabank.atualizacliente(
 							(Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()),
@@ -1247,6 +1205,34 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+
+		// painel movimentos onde aparece a tabela das operaçoes
+		JPanel jpanelMovimentos = new JPanel();
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 51, 418, 293);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(206, 356, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+		jpanelMovimentos.setVisible(false);
+		// Preencher tabela apartir do tablemodel:
+		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 
 		// Painel da gestao do administrador
 		JPanel jpanelGestao = new JPanel();
@@ -1994,6 +1980,26 @@ public class BancoAppFun implements Serializable {
 		});
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
+		
+		btnMovimentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jpanelContas.setVisible(false);
+				jpanelMovimentos.setVisible(true);
+
+				if (!lContas.isSelectionEmpty()) {
+					String idConta = lContas.getSelectedValue();
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
+
+					gb.javabank.limpatabela(modeloTabela);
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+				}
+			}
+		});
+		
+		
+		
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
