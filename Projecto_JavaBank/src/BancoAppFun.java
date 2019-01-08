@@ -590,15 +590,24 @@ public class BancoAppFun implements Serializable {
 						// verifica se o cliente já tem conta poupança
 						if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
 								.getContapoupanca() != 0) {
-						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-								Double.parseDouble(tbContasSaldo.getText()), clientes,
-								Double.parseDouble(tbContaslimitelevop.getText()),
-								Double.parseDouble(tbContaslimitelevdia.getText()),
-								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
-								true);
-						gb.javabank.getContas().add(c);
-						gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
-						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+						
+						
+						JOptionPane.showMessageDialog(null,
+								"O/A cliente " + tableListaClts.getModel().getValueAt(idCliente, 0)
+										+ " ja tem uma conta poupan�a neste banco!");
+						
+						}else if (((Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()))
+								.getContapoupanca() == 0){
+							
+							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+									Double.parseDouble(tbContasSaldo.getText()), clientes,
+									Double.parseDouble(tbContaslimitelevop.getText()),
+									Double.parseDouble(tbContaslimitelevdia.getText()),
+									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
+									true);
+							gb.javabank.getContas().add(c);
+							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
+							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 						
 						}
 						// verifica se o cliente já tem conta poupança
