@@ -23,12 +23,7 @@
 	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="C:\Users\Joana\eclipse-workspace\IPJ\.git">
-			<item value="false"/>
-			<item value="Joana &lt;joannapestanna@gmail.com&gt;"/>
-			<item value="fff"/>
-			<item value="Joana &lt;joannapestanna@gmail.com&gt;"/>
-			<item value="fc805e3eae508fec2aab039c829c93cc19cff211"/>
-			<item value="0"/>
+			<item value="empty"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
