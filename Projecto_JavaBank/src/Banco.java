@@ -660,14 +660,16 @@ public class Banco implements Serializable {
 	// atribuir cliente a conta e conta ao cliente;
 	protected void atruibuititular(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
+		
 		for (int i = 0; i < model.getRowCount(); i++) {
+			
 			if ((Boolean) model.getValueAt(i, 0) == true) {
+				
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
+				
 				if (clt instanceof Cliente) {
 					c.getClientes().add(clt.getIdUtilizador());
-
-					((Cliente) clt).getContas().add(c.getIdConta());
-
+					//((Cliente) clt).getContas().add(c.getIdConta());
 					if (c instanceof ContaCorrente) {
 						((Cliente) clt).getContas().add(c.getIdConta());
 					} else {
