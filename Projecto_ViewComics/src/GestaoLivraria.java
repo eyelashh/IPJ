@@ -144,9 +144,11 @@ public class GestaoLivraria implements Serializable{
 		//CASO 1:FICHEIRO NAO EXISTE --> cria um novo ficheiro
 		if(!this.fileLivros.exists())
 		{
-			viewComics.addLivro(new Livro("CapuchinhoVermelho","Autor1",2.99,10,1970,""));
-			viewComics.addLivro(new Livro("Tintin","Herge",11.99,5,1933,""));
-			viewComics.addLivro(new Livro("Asterix","Albert Underzo",7.99,20,1940,""));
+			viewComics.addLivro(new Livro("Tintin","Herge",11.99,41,1933,""));
+			viewComics.addLivro(new Livro("Asterix","Albert Underzo",12.99,22,1937,""));
+			viewComics.addLivro(new Livro("Lucky Luke","Morris e Goscinny",6.99,40,1940,""));
+			viewComics.addLivro(new Livro("Spider-verse","Dan Slott e Fabrice Sapolsky",8.49,37,2015,""));
+			viewComics.addLivro(new Livro("Planeta Hulk","Greg Pak",8.79,16,2006,""));
 			try
 			{
 				this.fileLivros.createNewFile();
