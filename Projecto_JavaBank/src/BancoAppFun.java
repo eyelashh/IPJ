@@ -498,7 +498,7 @@ public class BancoAppFun implements Serializable {
 				dlmcontacliente.removeAllElements();
 				// quando o rato seleciona uma linha da tabela:
 				bg.clearSelection();
-				
+
 				int linha = tableListaClts.getSelectedRow();
 				int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
 				Cliente c = (Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores());
@@ -524,7 +524,8 @@ public class BancoAppFun implements Serializable {
 
 				// mostra na lista as contas deste cliente
 				dlmcontacliente.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),dlmcontacliente);
+				gb.javabank.addelementoslist(gb.javabank.listacontadecliente(c, gb.javabank.getContas()),
+						dlmcontacliente);
 
 			}
 		});
