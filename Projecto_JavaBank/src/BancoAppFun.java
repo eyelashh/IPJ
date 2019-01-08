@@ -209,8 +209,7 @@ public class BancoAppFun implements Serializable {
 	@SuppressWarnings("unchecked")
 	private void initialize() {
 		Validador val = new Validador();
-		
-		
+
 		frame = new JFrame();
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -592,7 +591,7 @@ public class BancoAppFun implements Serializable {
 					// cartao nulo inicialmente;
 					Conta c;
 					if (rdbtnContaCorrente.isSelected()) {
-						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()), 0, true);
@@ -602,7 +601,7 @@ public class BancoAppFun implements Serializable {
 
 					} else {
 
-						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
 								Double.parseDouble(tbContaslimitelevdia.getText()),
@@ -736,8 +735,7 @@ public class BancoAppFun implements Serializable {
 							dtcartao.setDate(card.getDataValidade());
 							tbnomecartao.setText(card.getNomeTitular());
 							tbcodcartao.setText(card.getCodvalidacao() + "");
-							tbncartao.setText(card.getnCartao()+"");
-							
+							tbncartao.setText(card.getnCartao() + "");
 
 						}
 
@@ -800,21 +798,22 @@ public class BancoAppFun implements Serializable {
 
 		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id =  val.valIdCartao(gb.javabank.getCartoes()) ;
+				int id = val.valIdCartao(gb.javabank.getCartoes());
 				int codval = val.valCodCartao();
 
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),gb.javabank.getContas());
-					 Cartao cartao = new Cartao(id,tbnomecartao.getText(), dtcartao.getDate(), 	codval,c.getIdConta());
-					gb.javabank.getCartoes().add(cartao);
-					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-					tbcodcartao.setText(codval + "");
-					tbncartao.setText(id+"");
-					
-					dtcartao.setEnabled(false);
-					tbnomecartao.setEditable(false);
-					tbcodcartao.setEditable(false);
-					tbncartao.setEditable(false);
-					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta());
+				gb.javabank.getCartoes().add(cartao);
+				((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+				tbcodcartao.setText(codval + "");
+				tbncartao.setText(id + "");
+
+				dtcartao.setEnabled(false);
+				tbnomecartao.setEditable(false);
+				tbcodcartao.setEditable(false);
+				tbncartao.setEditable(false);
+				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 
 			}
 		});
@@ -852,8 +851,6 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
-
-		
 
 		// Pedir cartao
 
@@ -1985,8 +1982,7 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-		
-		
+
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
@@ -2003,8 +1999,7 @@ public class BancoAppFun implements Serializable {
 				}
 			}
 		});
-		
-		
+
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
 		// botao cliente accao que muda de cor
