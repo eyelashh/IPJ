@@ -742,14 +742,10 @@ public class Banco implements Serializable {
 
 	// retorna o cartao
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
-
 		Cartao card = new Cartao();
-
 		if (cartoes.size() != 0) {
-
 			for (int j = 0; j < cartoes.size(); j++) {
 				if (cartoes.get(j).getCodvalidacao() == id) {
-
 					card = cartoes.get(j);
 
 				}
@@ -768,7 +764,7 @@ public class Banco implements Serializable {
 
 		for (i = 0; i < contas.size(); i++) {
 			if ((contas.get(i) instanceof ContaCorrente)) {
-
+				
 				this.cartoes.add(card);
 				((ContaCorrente) c).setCartao(card.getCodvalidacao());
 
@@ -776,17 +772,6 @@ public class Banco implements Serializable {
 		}
 	}
 
-	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id) {
-		Cartao card = null;
-		for (int i = 0; i < cartoes.size(); i++) {
-			if (cartoes.get(i).getCodvalidacao() == id) {
-				card = cartoes.get(i);
-			}
-		}
-
-		return card;
-
-	}
 
 //retorna as contas de um cliente atraves do seu id
 	protected String[] listaContasIdCliente(String idCliente) {
