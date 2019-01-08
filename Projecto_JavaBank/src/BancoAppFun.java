@@ -624,6 +624,7 @@ public class BancoAppFun implements Serializable {
 							gb.javabank.atruibuititular(model, c, gb.javabank.getUtlizadores());
 							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 							
+							
 						}
 				
 
