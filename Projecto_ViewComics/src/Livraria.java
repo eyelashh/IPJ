@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -9,7 +10,11 @@ import java.util.Map.Entry;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class Livraria implements Serializable {
 
@@ -20,11 +25,10 @@ public class Livraria implements Serializable {
 	private ArrayList<Transacao> transacoes;
 	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
-	private ArrayList <Venda> vendas;//para efeitos de historico de vendas, cada vez que um carrinho e eliminado/pago o seu conteudo transforma-se
-									//no conteúdo de uma venda que tem uma data espcifica tambem como atributo
-	 
-	
-	
+	private ArrayList<Venda> vendas;// para efeitos de historico de vendas, cada vez que um carrinho e
+									// eliminado/pago o seu conteudo transforma-se
+									// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
+
 	// criar um atributo privado estï¿½tico que ï¿½ da prï¿½pria classe
 
 	public Livraria() {
@@ -34,11 +38,12 @@ public class Livraria implements Serializable {
 		this.transacoes = new ArrayList<Transacao>();
 		this.sessoes = new ArrayList<Sessao>();
 		this.carrinhos = new ArrayList<Carrinho>();
-		this.vendas = new ArrayList <Venda>();
+		this.vendas = new ArrayList<Venda>();
 	}
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
-			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos, ArrayList<Venda>vendas) {
+			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,
+			ArrayList<Venda> vendas) {
 		super();
 		this.idLivraria = idLivraria;
 		this.nome = nome;
@@ -47,7 +52,7 @@ public class Livraria implements Serializable {
 		this.transacoes = transacoes;
 		this.sessoes = sessoes;
 		this.carrinhos = carrinhos;
-		this.vendas=vendas;
+		this.vendas = vendas;
 	}
 
 	// criar mï¿½todo estï¿½tico para retornar a instï¿½ncia da classe
@@ -141,7 +146,7 @@ public class Livraria implements Serializable {
 		for (Livro l : livros) {
 			stockINT = l.getStock();
 		}
-		String stockSTR=Integer.toString(stockINT);
+		String stockSTR = Integer.toString(stockINT);
 		return stockSTR;
 	}
 
@@ -725,28 +730,27 @@ public class Livraria implements Serializable {
 		Carrinho c = pesquisarCarrinho(nif);
 		int qtdRemovidaCarrinhoINT = Integer.parseInt(qtdremovidaCarrinhoSTR);
 
-		int qtdContidaCarrinhoINT=c.getConteudo().get(idLivro);
-		if (qtdRemovidaCarrinhoINT<=qtdContidaCarrinhoINT) {
-			remocaoPossivel=true;
+		int qtdContidaCarrinhoINT = c.getConteudo().get(idLivro);
+		if (qtdRemovidaCarrinhoINT <= qtdContidaCarrinhoINT) {
+			remocaoPossivel = true;
 		}
 		return remocaoPossivel;
-	
+
 	}
 
 //altera o stock de um carrinho de acordo com a quantidade removida do carrinho de do id do livro
 
-	protected boolean adicionarAoCarrinhoPossivel(String qtdadicionadaCarrinhoSTR, int idLivro,String stockLivroSTR) {
+	protected boolean adicionarAoCarrinhoPossivel(String qtdadicionadaCarrinhoSTR, int idLivro, String stockLivroSTR) {
 
 		boolean adicaoPossivel = false;
-		int qtdAdicionadaCarrinhoINT= Integer.parseInt(qtdadicionadaCarrinhoSTR);
-		int stockLivroINT =Integer.parseInt(stockLivroSTR);
-		
-		if (qtdAdicionadaCarrinhoINT<=stockLivroINT) {
-			adicaoPossivel =true;
+		int qtdAdicionadaCarrinhoINT = Integer.parseInt(qtdadicionadaCarrinhoSTR);
+		int stockLivroINT = Integer.parseInt(stockLivroSTR);
+
+		if (qtdAdicionadaCarrinhoINT <= stockLivroINT) {
+			adicaoPossivel = true;
 		}
 		return adicaoPossivel;
 
-		
 	}
 
 //devolve a quantidade de determinado livro em um carrinho atravï¿½s do id do livro e do nif
@@ -846,6 +850,95 @@ public class Livraria implements Serializable {
 		return carrinhoNif;
 	}
 
+	public void livrosTabela(DefaultTableModel dtm) {
+
+		ArrayList<Livro> livros = this.livros;
+
+		for (Livro l : livros) {
+			int id = l.getIdLivro();
+			String titulo = l.getTitulo();
+			String autor = l.getAutor();
+			int ano = l.getAno();
+			double preco = l.getPreco();
+
+			Object[] data = { id, titulo, autor, ano, preco };
+			dtm.addRow(data);
+		}
+
+	}
+
+	public void tabelaLivrosCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
+
+		ArrayList<Livro> livros = this.livros;
+
+		for (Livro l : livros) {
+			int id = l.getIdLivro();
+			String titulo = l.getTitulo();
+			String autor = l.getAutor();
+			int ano = l.getAno();
+			double preco = l.getPreco();
+
+			Object[] data = { id, titulo, autor, ano, preco };
+			if (criterioSeleccao.equals("Titulo")) {
+				if (titulo.toLowerCase().contains(pesquisa.toLowerCase())) {
+					dtm.addRow(data);
+				}
+			}
+			if (criterioSeleccao.equals("Autor")) {
+				if (autor.toLowerCase().contains(pesquisa.toLowerCase())) {
+					dtm.addRow(data);
+				}
+			}
+			if (criterioSeleccao.equals("Id")) {
+				if (Integer.toString(id).contains(pesquisa)) {
+					dtm.addRow(data);
+				}
+			}
+			if (criterioSeleccao.equals("Ano")) {
+				if (Integer.toString(ano).contains(pesquisa)) {
+					dtm.addRow(data);
+				}
+			}
+
+		}
+
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void ordenarTabelaLivros(JTable tabela, String criterioOrdenacao) {
+
+		TableRowSorter<TableModel> sorter = new TableRowSorter<>(tabela.getModel());
+		tabela.setRowSorter(sorter);
+		List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+
+		if (criterioOrdenacao.equals("Titulo")) {
+			int columnIndexToSort = 1;
+			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+			sorter.setSortKeys(sortKeys);
+			sorter.sort();
+		} else if (criterioOrdenacao.equals("Autor")) {
+			int columnIndexToSort = 2;
+			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+			sorter.setSortKeys(sortKeys);
+			sorter.sort();
+
+		} else if (criterioOrdenacao.equals("Ano")) {
+			int columnIndexToSort = 3;
+			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+			sorter.setSortKeys(sortKeys);
+			sorter.sort();
+
+		}
+		 else if (criterioOrdenacao.equals("Preco")) {
+			 int columnIndexToSort = 4;
+				sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+				sorter.setSortKeys(sortKeys);
+				sorter.sort();
+
+			}
+
+	}
+
 	public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 
 		Carrinho c = car;
@@ -893,86 +986,87 @@ public class Livraria implements Serializable {
 
 	}
 
-	public String [] carrinhosFinalizados() {
+	public String[] carrinhosFinalizados() {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
 		ArrayList<String> nifCarrinhosFinalizados = new ArrayList<String>();
-		String nifFinalizado="";
-		
+		String nifFinalizado = "";
+
 		for (Carrinho c : carrinhos) {
 			if (c.isFinalizado()) {
-				nifFinalizado=c.getNif();
+				nifFinalizado = c.getNif();
 				nifCarrinhosFinalizados.add(nifFinalizado);
 			}
 
 		}
-		String [] finalizados =new String [(nifCarrinhosFinalizados.size())];
+		String[] finalizados = new String[(nifCarrinhosFinalizados.size())];
 		finalizados = nifCarrinhosFinalizados.toArray(finalizados);
 
 		return finalizados;
-		
+
 	}
-	
-	public String [] carrinhosNAOFinalizados() {
+
+	public String[] carrinhosNAOFinalizados() {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
 		ArrayList<String> nifCarrinhosNAOFinalizados = new ArrayList<String>();
-		String nifNAOFinalizado="";
-		
+		String nifNAOFinalizado = "";
+
 		for (Carrinho c : carrinhos) {
 			if (!c.isFinalizado()) {
-				nifNAOFinalizado=c.getNif();
+				nifNAOFinalizado = c.getNif();
 				nifCarrinhosNAOFinalizados.add(nifNAOFinalizado);
 			}
 
 		}
-		String [] naoFinalizados =new String [(nifCarrinhosNAOFinalizados.size())];
+		String[] naoFinalizados = new String[(nifCarrinhosNAOFinalizados.size())];
 		naoFinalizados = nifCarrinhosNAOFinalizados.toArray(naoFinalizados);
 
 		return naoFinalizados;
-		
+
 	}
-	//METODOS ESTATISTICA
-	
-	public void updatePrecoLivro(String seleccao,Preco p) {
-	
-		for(Livro l:this.livros) {
+	// METODOS ESTATISTICA
+
+	public void updatePrecoLivro(String seleccao, Preco p) {
+
+		for (Livro l : this.livros) {
 			if (l.toString().equals(seleccao)) {
 				l.addAlteracaoPreco(p);
 			}
 		}
 	}
+
 	public String devolvePrecosLivroSeleccionado(String seleccao) {
-		ArrayList <Livro> livros=this.livros;
-		String historicoPreco="nao ha historico";
-		for(Livro l:livros) {
+		ArrayList<Livro> livros = this.livros;
+		String historicoPreco = "nao ha historico";
+		for (Livro l : livros) {
 			if (l.toString().equals(seleccao))
-			historicoPreco=l.getPrecos().toString();
+				historicoPreco = l.getPrecos().toString();
 		}
 		return historicoPreco;
 	}
-	public String [] precosHistoricoArray(String seleccao) {
-		
-		ArrayList<Livro>livros=this.livros;
-		String preco="";
-		ArrayList <String> precosLista =new ArrayList <String>();
-		Livro livroSelec=null;
-		//procura o livro e passa o para a variavel livroSelec
-		for (Livro l:livros) {
+
+	public String[] precosHistoricoArray(String seleccao) {
+
+		ArrayList<Livro> livros = this.livros;
+		String preco = "";
+		ArrayList<String> precosLista = new ArrayList<String>();
+		Livro livroSelec = null;
+		// procura o livro e passa o para a variavel livroSelec
+		for (Livro l : livros) {
 			if (l.toString().equals(seleccao)) {
-				livroSelec=l;
+				livroSelec = l;
 			}
-			
+
 		}
-		//passa todo o historial de precos para string enquanto o passa para um string array
-		for (Preco p:livroSelec.getPrecos()) {
+		// passa todo o historial de precos para string enquanto o passa para um string
+		// array
+		for (Preco p : livroSelec.getPrecos()) {
 			precosLista.add(p.toString());
 		}
-		String [] precosArray = new String [precosLista.size()];
-		precosArray=precosLista.toArray(precosArray);
-		
+		String[] precosArray = new String[precosLista.size()];
+		precosArray = precosLista.toArray(precosArray);
+
 		return precosArray;
-		
-		
+
 	};
-	
 
 }

@@ -64,8 +64,8 @@ public class AppAdmin implements Serializable {
 	private JTextField txtContactoFunc;
 	private JTextField txtUsernameFunc;
 	private JTextField txtPassFunc;
-	private static Utilizador admin;
-	private static GestaoLivraria gl;
+	private Utilizador admin;
+	private GestaoLivraria gl;
 	private JTextField txtAtributoLivro;
 	private JTextField txtIdLivros;
 	private JTextField txtStockSTOCK;
