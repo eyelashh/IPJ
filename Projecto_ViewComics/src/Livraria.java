@@ -150,10 +150,10 @@ public class Livraria implements Serializable {
 		return stockSTR;
 	}
 
-	public void alterarStockLivro(String seleccao, int quantidadeTotal) {
+	public void alterarStockLivro(int idLivro, int quantidadeTotal) {
 
 		for (Livro l : this.livros) {
-			if (l.toString().equals(seleccao)) {
+			if (l.getIdLivro()==idLivro) {
 				l.setStock(quantidadeTotal);
 				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo()
 						+ " foi alterado com sucesso. Existem agora " + quantidadeTotal + " exemplares.");
@@ -931,7 +931,7 @@ public class Livraria implements Serializable {
 		}
 		 else if (criterioOrdenacao.equals("Preco")) {
 			 int columnIndexToSort = 4;
-				sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+				sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
 				sorter.setSortKeys(sortKeys);
 				sorter.sort();
 

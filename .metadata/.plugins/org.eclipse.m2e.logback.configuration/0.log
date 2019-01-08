@@ -6993,3 +6993,4 @@ Was expecting:
 	at org.apache.lucene.queryParser.QueryParser.TopLevelQuery(QueryParser.java:1226) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	at org.apache.lucene.queryParser.QueryParser.parse(QueryParser.java:206) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	... 66 common frames omitted
+2019-01-08 14:37:17,860 [Worker-2: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
