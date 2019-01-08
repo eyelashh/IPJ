@@ -183,10 +183,12 @@ public class Banco implements Serializable {
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
+		String s = "";
 		for (int i = 0; i < contas.size(); i++) {
 			for (int x = 0; x < c.getContas().size(); x++) {
 				if (contas.get(i).getIdConta() == c.getContas().get(x)) {
-					listprov.add(c.getContas().get(x) + "");
+					s = c.getContas().get(x).toString();
+					listprov.add(s);
 				}
 			}
 		}

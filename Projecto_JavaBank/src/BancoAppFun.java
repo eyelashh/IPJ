@@ -290,6 +290,8 @@ public class BancoAppFun implements Serializable {
 		JpanelPrincipal.setBounds(198, 142, 1065, 598);
 		frame.getContentPane().add(JpanelPrincipal);
 		JpanelPrincipal.setLayout(null);
+		// Preencher tabela apartir do tablemodel:
+		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
 		// Painel da conta da parte funcionario
 		JPanel jpanelContas = new JPanel();
@@ -310,34 +312,6 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(scrollPane_1);
 		tableClts = new JTable(model);
 		scrollPane_1.setViewportView(tableClts);
-		// Preencher tabela apartir do tablemodel:
-		gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-		
-				// painel movimentos onde aparece a tabela das operaçoes
-				JPanel jpanelMovimentos = new JPanel();
-				jpanelMovimentos.setBounds(0, 0, 1065, 585);
-				JpanelPrincipal.add(jpanelMovimentos);
-						jpanelMovimentos.setLayout(null);
-				
-						// Tabela dos movimentos das operações
-						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.setBounds(55, 51, 418, 293);
-						jpanelMovimentos.add(scrollPane);
-						tableMovimentos = new JTable(modeloTabela);
-						scrollPane.setViewportView(tableMovimentos);
-						
-						JButton btnVoltar = new JButton("Voltar");
-						btnVoltar.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-								jpanelMovimentos.setVisible(false);
-								jpanelContas.setVisible(true);
-							}
-						});
-						btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-						btnVoltar.setBounds(206, 356, 120, 38);
-						jpanelMovimentos.add(btnVoltar);
-						jpanelMovimentos.setVisible(false);
 
 		JTextField tbContaspesqconta = new JTextField();
 		tbContaspesqconta.setBounds(26, 63, 238, 31);
@@ -454,7 +428,7 @@ public class BancoAppFun implements Serializable {
 					gb.javabank.addelementoslist(contasNumConta, dmconta);
 
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
-					
+
 					String[] contasCorrent = gb.javabank.listaContasCorrente();
 					gb.javabank.addelementoslist(contasCorrent, dmconta);
 
@@ -554,6 +528,12 @@ public class BancoAppFun implements Serializable {
 		JButton btCartao = new JButton("Criar cartao");
 		btCartao.setBounds(108, 103, 112, 25);
 		panelCartao.add(btCartao);
+		
+		// painel movimentos onde aparece a tabela das operaçoes
+		JPanel jpanelMovimentos = new JPanel();
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
 
 		JButton btnMovimentos = new JButton("Movimentos");
 		btnMovimentos.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -887,6 +867,26 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 51, 418, 293);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(206, 356, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+		jpanelMovimentos.setVisible(false);
 
 		// Pedir cartao
 
