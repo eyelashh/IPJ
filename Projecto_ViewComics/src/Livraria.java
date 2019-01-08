@@ -930,14 +930,49 @@ public class Livraria implements Serializable {
 		return naoFinalizados;
 		
 	}
+	//METODOS ESTATISTICA
 	
-
-// limpa tabela:
-
-	protected void limpatabela(DefaultTableModel model) {
-		for (int i = model.getRowCount() - 1; i >= 0; i--) {
-			model.removeRow(i);
+	public void updatePrecoLivro(String seleccao,Preco p) {
+	
+		for(Livro l:this.livros) {
+			if (l.toString().equals(seleccao)) {
+				l.addAlteracaoPreco(p);
+			}
 		}
 	}
+	public String devolvePrecosLivroSeleccionado(String seleccao) {
+		ArrayList <Livro> livros=this.livros;
+		String historicoPreco="nao ha historico";
+		for(Livro l:livros) {
+			if (l.toString().equals(seleccao))
+			historicoPreco=l.getPrecos().toString();
+		}
+		return historicoPreco;
+	}
+	public String [] precosHistoricoArray(String seleccao) {
+		
+		ArrayList<Livro>livros=this.livros;
+		String preco="";
+		ArrayList <String> precosLista =new ArrayList <String>();
+		Livro livroSelec=null;
+		//procura o livro e passa o para a variavel livroSelec
+		for (Livro l:livros) {
+			if (l.toString().equals(seleccao)) {
+				livroSelec=l;
+			}
+			
+		}
+		//passa todo o historial de precos para string enquanto o passa para um string array
+		for (Preco p:livroSelec.getPrecos()) {
+			precosLista.add(p.toString());
+		}
+		String [] precosArray = new String [precosLista.size()];
+		precosArray=precosLista.toArray(precosArray);
+		
+		return precosArray;
+		
+		
+	};
+	
 
 }
