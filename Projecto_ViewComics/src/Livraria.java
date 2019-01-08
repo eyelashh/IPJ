@@ -847,6 +847,50 @@ public class Livraria implements Serializable {
 		}
 		return carrinhoNif;
 	}
+	public void tabelaUtilizadores(DefaultTableModel dtm) {
+
+		ArrayList<Utilizador> users = this.utilizadores;
+
+		for (Utilizador u : users) {
+			int id=u.getId();
+			String nome=u.getNome();
+			String username=u.getUsername();
+			Object[] data = { id, nome, username };
+			dtm.addRow(data);
+		}
+
+	}
+	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa){
+		
+		ArrayList<Utilizador> users = this.utilizadores;
+
+		for (Utilizador u : users) {
+			int id = u.getId();
+			String nome=u.getNome();
+			String username=u.getUsername();
+	
+			Object[] data = { id, nome, username};
+			
+			if (criterioSeleccao.equals("Id")) {
+				if (Integer.toString(id).contains(pesquisa.toLowerCase())) {
+					dtm.addRow(data);
+				}
+			}
+			if (criterioSeleccao.equals("Nome")) {
+				if (nome.toLowerCase().contains(pesquisa.toLowerCase())) {
+					dtm.addRow(data);
+				}
+			}
+			if (criterioSeleccao.equals("Username")) {
+				if (username.toLowerCase().contains(pesquisa)) {
+					dtm.addRow(data);
+				}
+			}	
+
+		}
+
+	}
+		
 
 	public void livrosTabela(DefaultTableModel dtm) {
 
