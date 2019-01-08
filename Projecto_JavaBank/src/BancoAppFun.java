@@ -177,7 +177,7 @@ public class BancoAppFun implements Serializable {
 			}
 		}
 	};
-	private JTextField textField;
+	private JTextField tbncartao;
 
 	/**
 	 * Launch the application.
@@ -533,10 +533,11 @@ public class BancoAppFun implements Serializable {
 		btCartao.setBounds(108, 131, 112, 25);
 		panelCartao.add(btCartao);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(72, 13, 190, 22);
-		panelCartao.add(textField);
+		tbncartao = new JTextField();
+		tbncartao.setEditable(false);
+		tbncartao.setColumns(10);
+		tbncartao.setBounds(72, 13, 190, 22);
+		panelCartao.add(tbncartao);
 
 		JLabel lblNumero = new JLabel("Numero:");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -730,12 +731,13 @@ public class BancoAppFun implements Serializable {
 							dtcartao.setEnabled(false);
 							tbnomecartao.setEditable(false);
 							tbcodcartao.setEditable(false);
-
 							Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 									((ContaCorrente) c).getCartao());
 							dtcartao.setDate(card.getDataValidade());
 							tbnomecartao.setText(card.getNomeTitular());
 							tbcodcartao.setText(card.getCodvalidacao() + "");
+							tbncartao.setText(card.getnCartao()+"");
+							
 
 						}
 
@@ -802,15 +804,16 @@ public class BancoAppFun implements Serializable {
 				int codval = val.valCodCartao();
 
 				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),gb.javabank.getContas());
-				
 					 Cartao cartao = new Cartao(id,tbnomecartao.getText(), dtcartao.getDate(), 	codval,c.getIdConta());
 					gb.javabank.getCartoes().add(cartao);
 					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-					tbcodcartao.setText(id + "");
-
+					tbcodcartao.setText(codval + "");
+					tbncartao.setText(id+"");
+					
 					dtcartao.setEnabled(false);
 					tbnomecartao.setEditable(false);
 					tbcodcartao.setEditable(false);
+					tbncartao.setEditable(false);
 					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 
 			}
