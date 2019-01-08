@@ -3,36 +3,46 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Conta implements Serializable{
+public class Conta implements Serializable {
 	private int idConta;
 	private Date dataCriacao;
+	private Date dataFecho;
 	private double saldo;
-	private ArrayList <Operacao> operacoes;
-	private ArrayList <Integer> clientes;
+	private ArrayList<Operacao> operacoes;
+	private ArrayList<Integer> clientes;
 	private double valorMaxLevantamento;
 	private double valorMaxDia;
 	private boolean aberta = true;
-	
+
 	public Conta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
- 
-	public Conta(int idConta, Date dataCriacao, double saldo,
-			ArrayList<Integer> clientes, double valorMaxLevantamento, double valorMaxDia,boolean aberta) {
+
+	public Conta(int idConta, Date dataCriacao, Date dataFecho, double saldo, ArrayList<Integer> clientes,
+			double valorMaxLevantamento, double valorMaxDia, boolean aberta) {
 		super();
+
 		this.idConta = idConta;
 		this.dataCriacao = dataCriacao;
+		this.dataFecho = dataFecho;
 		this.saldo = saldo;
 		this.valorMaxLevantamento = valorMaxLevantamento;
 		this.valorMaxDia = valorMaxDia;
-		operacoes = new ArrayList <Operacao>();
+		operacoes = new ArrayList<Operacao>();
 		this.clientes = clientes;
 		this.aberta = aberta;
-		
+
 	}
 
-	
+	public Date getDataFecho() {
+		return dataFecho;
+	}
+
+	public void setDataFecho(Date dataFecho) {
+		this.dataFecho = dataFecho;
+	}
+
 	public boolean isAberta() {
 		return aberta;
 	}
@@ -96,10 +106,5 @@ public class Conta implements Serializable{
 	public void setValorMaxDia(double valorMaxDia) {
 		this.valorMaxDia = valorMaxDia;
 	}
-	
-	
-	
-	
-	
 
 }

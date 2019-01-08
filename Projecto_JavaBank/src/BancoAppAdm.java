@@ -89,6 +89,24 @@ public class BancoAppAdm implements Serializable {
 	String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
 	private JTextField textFieldAdminDescr;
+	private JTable table_1;
+
+	// Modelo da tabela estatistica:
+	String[] colunas3 = { "IDConta", "DataCriação", "DataFecho", "Saldo", "EstadoConta" };
+	DefaultTableModel modeloTabelaEstatistica = new DefaultTableModel(colunas3, 0) {
+		private static final long serialVersionUID = 1L;
+
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			if (mColIndex == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
+	private JTextField textFieldnNovasConta;
+	private JTextField textFieldFechaConat;
+	private JTextField textFieldTotalCapital;
 
 	/**
 	 * Launch the application.
@@ -230,6 +248,71 @@ public class BancoAppAdm implements Serializable {
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(true);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdmEstatistica.setLayout(null);
+		JPAdm.add(JPAdmEstatistica);
+
+		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2.setBounds(55, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooser_2);
+
+		JDateChooser dateChooser_3 = new JDateChooser();
+		dateChooser_3.setBounds(329, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooser_3);
+
+		JLabel lblDataInicial = new JLabel("Data Inicio:");
+		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataInicial.setBounds(39, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataInicial);
+
+		JLabel lblDataFim = new JLabel("Data Fim:");
+		lblDataFim.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataFim.setBounds(317, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataFim);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(143, 134, 729, 261);
+		JPAdmEstatistica.add(scrollPane_1);
+		table_1 = new JTable(modeloTabelaEstatistica);
+		scrollPane_1.setViewportView(table_1);
+		
+		textFieldnNovasConta = new JTextField();
+		textFieldnNovasConta.setBounds(455, 407, 321, 33);
+		JPAdmEstatistica.add(textFieldnNovasConta);
+		textFieldnNovasConta.setColumns(10);
+		
+		textFieldFechaConat = new JTextField();
+		textFieldFechaConat.setColumns(10);
+		textFieldFechaConat.setBounds(455, 446, 321, 33);
+		JPAdmEstatistica.add(textFieldFechaConat);
+		
+		textFieldTotalCapital = new JTextField();
+		textFieldTotalCapital.setColumns(10);
+		textFieldTotalCapital.setBounds(455, 491, 321, 33);
+		JPAdmEstatistica.add(textFieldTotalCapital);
+		
+		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
+		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContasNovas.setBounds(237, 407, 247, 33);
+		JPAdmEstatistica.add(lblContasNovas);
+		
+		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
+		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNmeroDeContas.setBounds(212, 444, 247, 33);
+		JPAdmEstatistica.add(lblNmeroDeContas);
+		
+		JLabel lblTotalCapital = new JLabel("Total Capital: ");
+		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblTotalCapital.setBounds(335, 489, 124, 33);
+		JPAdmEstatistica.add(lblTotalCapital);
+		
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setBounds(609, 53, 117, 29);
+		JPAdmEstatistica.add(btnPesquisar);
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
@@ -413,13 +496,6 @@ public class BancoAppAdm implements Serializable {
 		JPAdm.add(JPAdmGestao);
 		JPAdmGestao.setLayout(null);
 		JPAdmGestao.setVisible(false);
-
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(true);
-		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-		JPAdmEstatistica.setLayout(null);
-		JPAdm.add(JPAdmEstatistica);
 
 		// limpa contas e sai do painel de contas para o painel cliente:
 		btVoltarContasAdm.addActionListener(new ActionListener() {
