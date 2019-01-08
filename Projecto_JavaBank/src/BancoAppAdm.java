@@ -471,7 +471,7 @@ public class BancoAppAdm implements Serializable {
 					if (((ContaCorrente) c).getCartao() != 0) {
 						panelContaPadm.setVisible(false);
 						panelCartaoAdm.setVisible(true);
-						Cartao cartao = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+						Cartao cartao = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 								((ContaCorrente) c).getCartao());
 						tbadmcontacartaonome.setText(cartao.getNomeTitular());
 						tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
@@ -1546,7 +1546,7 @@ public class BancoAppAdm implements Serializable {
 					if (((ContaCorrente) cont).getCartao() != 0) {
 						panelContaPadm.setVisible(false);
 						panelCartaoAdm.setVisible(true);
-						Cartao c = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+						Cartao c = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 								((ContaCorrente) cont).getCartao());
 						tbadmcontacartaonome.setText(c.getNomeTitular());
 						tbadmcontacartaovalidade.setDate(c.getDataValidade());

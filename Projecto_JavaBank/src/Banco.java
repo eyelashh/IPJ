@@ -183,11 +183,10 @@ public class Banco implements Serializable {
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
 		ArrayList<String> listprov = new ArrayList<String>();
 		String s = "";
-		for (int i = 0; i < contas.size(); i++) {	
-		for (int x = 0; x < c.getContas().size(); x++) {
-			if(contas.get(i).getIdConta()==c.getContas().get(x))
-			{
-					s =c.getContas().get(x)+"";
+		for (int i = 0; i < contas.size(); i++) {
+			for (int x = 0; x < c.getContas().size(); x++) {
+				if (contas.get(i).getIdConta() == c.getContas().get(x)) {
+					s = c.getContas().get(x) + "";
 					listprov.add(s);
 				}
 			}
@@ -666,18 +665,18 @@ public class Banco implements Serializable {
 		Utilizador clt;
 		Integer idconta;
 		Integer idclt;
-		
+
 		for (int i = 0; i < model.getRowCount(); i++) {
 			if ((Boolean) model.getValueAt(i, 0) == true) {
 				clt = this.selectUtilizador((int) model.getValueAt(i, 1), clientes);
 				if (clt instanceof Cliente) {
-					//c.getClientes().add(clt.getIdUtilizador());
-					//if (c instanceof ContaCorrente) {
-						idconta = c.getIdConta();
-						idclt = clt.getIdUtilizador();
-						((Cliente) clt).getContas().add(idconta);
-						c.getClientes().add(idclt);
-					//}
+					// c.getClientes().add(clt.getIdUtilizador());
+					// if (c instanceof ContaCorrente) {
+					idconta = c.getIdConta();
+					idclt = clt.getIdUtilizador();
+					((Cliente) clt).getContas().add(idconta);
+					c.getClientes().add(idclt);
+					// }
 				}
 			}
 		}
@@ -695,7 +694,7 @@ public class Banco implements Serializable {
 							c.getClientes().add(clt.getIdUtilizador());
 						} else {
 							JOptionPane.showMessageDialog(null, "O/A cliente " + clt.getNome()
-									+ " ja tem uma conta poupança neste banco. Nao sera adicionado como titular!");
+									+ " ja tem uma conta poupanï¿½a neste banco. Nao sera adicionado como titular!");
 						}
 					}
 				}
