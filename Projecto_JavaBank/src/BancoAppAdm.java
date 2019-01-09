@@ -256,13 +256,124 @@ public class BancoAppAdm implements Serializable {
 		JPAdmCliente.setBounds(0, 0, 1042, 576);
 		JPAdmCliente.setVisible(false);
 
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(true);
-
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
+
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(true);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdmEstatistica.setLayout(null);
+		JPAdm.add(JPAdmEstatistica);
+
+		JDateChooser dateChooserInicio = new JDateChooser();
+		dateChooserInicio.setBounds(55, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserInicio);
+
+		JDateChooser dateChooserFim = new JDateChooser();
+		dateChooserFim.setBounds(329, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserFim);
+
+		JLabel lblDataInicial = new JLabel("Data Inicio:");
+		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataInicial.setBounds(39, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataInicial);
+
+		JLabel lblDataFim = new JLabel("Data Fim:");
+		lblDataFim.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataFim.setBounds(317, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataFim);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(143, 134, 729, 261);
+		JPAdmEstatistica.add(scrollPane_1);
+		table_1 = new JTable(modeloTabelaEstatistica);
+		scrollPane_1.setViewportView(table_1);
+
+		textFieldnNovasConta = new JTextField();
+		textFieldnNovasConta.setBounds(455, 407, 321, 33);
+		JPAdmEstatistica.add(textFieldnNovasConta);
+		textFieldnNovasConta.setColumns(10);
+
+		textFieldFechaConat = new JTextField();
+		textFieldFechaConat.setColumns(10);
+		textFieldFechaConat.setBounds(455, 446, 321, 33);
+		JPAdmEstatistica.add(textFieldFechaConat);
+
+		textFieldTotalCapital = new JTextField();
+		textFieldTotalCapital.setColumns(10);
+		textFieldTotalCapital.setBounds(455, 491, 321, 33);
+		JPAdmEstatistica.add(textFieldTotalCapital);
+
+		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
+		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContasNovas.setBounds(237, 407, 247, 33);
+		JPAdmEstatistica.add(lblContasNovas);
+
+		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
+		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNmeroDeContas.setBounds(212, 444, 247, 33);
+		JPAdmEstatistica.add(lblNmeroDeContas);
+
+		JLabel lblTotalCapital = new JLabel("Total Capital: ");
+		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblTotalCapital.setBounds(335, 489, 124, 33);
+		JPAdmEstatistica.add(lblTotalCapital);
+
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Date data1 = dateChooserInicio.getDate();
+				Date data2 = dateChooserFim.getDate();
+
+				modeloTabelaEstatistica.setRowCount(0);
+				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
+						data2);
+
+				int numeroContasNovas = gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2);
+				textFieldnNovasConta.setText(Integer.toString(numeroContasNovas));
+
+				int numeroContasFechadas = gb.javabank.numeroContasFechadas(gb.javabank.getContas(), data1, data2);
+				textFieldFechaConat.setText(Integer.toString(numeroContasFechadas));
+
+				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
+				textFieldTotalCapital.setText(Integer.toString(totalCapital));
+
+				double balanco = gb.javabank.balanco(gb.javabank.getContas(), data1, data2);
+				textFieldBalanco.setText(Double.toString(balanco));
+
+			}
+		});
+		btnPesquisar.setBounds(609, 53, 117, 29);
+		JPAdmEstatistica.add(btnPesquisar);
+
+		JButton btnLimpar_1 = new JButton("Limpar");
+		btnLimpar_1.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				dateChooserInicio.setDate(null);
+				dateChooserFim.setDate(null);
+				modeloTabelaEstatistica.setRowCount(0);
+				textFieldnNovasConta.setText(null);
+				textFieldFechaConat.setText(null);
+				textFieldTotalCapital.setText(null);
+			}
+		});
+		btnLimpar_1.setBounds(738, 53, 117, 29);
+		JPAdmEstatistica.add(btnLimpar_1);
+
+		JLabel lblBalano = new JLabel("Balanço: ");
+		lblBalano.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblBalano.setBounds(374, 534, 73, 33);
+		JPAdmEstatistica.add(lblBalano);
+
+		textFieldBalanco = new JTextField();
+		textFieldBalanco.setColumns(10);
+		textFieldBalanco.setBounds(455, 536, 321, 33);
+		JPAdmEstatistica.add(textFieldBalanco);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
@@ -753,137 +864,6 @@ public class BancoAppAdm implements Serializable {
 		ButtonGroup bgadm = new ButtonGroup();
 		bgadm.add(rbadmadministrador);
 		bgadm.add(rbadmfuncionario);
-		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-		JPAdmEstatistica.setLayout(null);
-		JPAdm.add(JPAdmEstatistica);
-
-		JDateChooser dateChooserInicio = new JDateChooser();
-		dateChooserInicio.setBounds(55, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooserInicio);
-
-		JDateChooser dateChooserFim = new JDateChooser();
-		dateChooserFim.setBounds(329, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooserFim);
-
-		JLabel lblDataInicial = new JLabel("Data Inicio:");
-		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataInicial.setBounds(39, 17, 124, 33);
-		JPAdmEstatistica.add(lblDataInicial);
-
-		JLabel lblDataFim = new JLabel("Data Fim:");
-		lblDataFim.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataFim.setBounds(317, 17, 124, 33);
-		JPAdmEstatistica.add(lblDataFim);
-
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(143, 134, 729, 261);
-		JPAdmEstatistica.add(scrollPane_1);
-		table_1 = new JTable(modeloTabelaEstatistica);
-		scrollPane_1.setViewportView(table_1);
-
-		textFieldnNovasConta = new JTextField();
-		textFieldnNovasConta.setBounds(455, 407, 321, 33);
-		JPAdmEstatistica.add(textFieldnNovasConta);
-		textFieldnNovasConta.setColumns(10);
-
-		textFieldFechaConat = new JTextField();
-		textFieldFechaConat.setColumns(10);
-		textFieldFechaConat.setBounds(455, 446, 321, 33);
-		JPAdmEstatistica.add(textFieldFechaConat);
-
-		textFieldTotalCapital = new JTextField();
-		textFieldTotalCapital.setColumns(10);
-		textFieldTotalCapital.setBounds(455, 491, 321, 33);
-		JPAdmEstatistica.add(textFieldTotalCapital);
-
-		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
-		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContasNovas.setBounds(237, 407, 247, 33);
-		JPAdmEstatistica.add(lblContasNovas);
-
-		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
-		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNmeroDeContas.setBounds(212, 444, 247, 33);
-		JPAdmEstatistica.add(lblNmeroDeContas);
-
-		JLabel lblTotalCapital = new JLabel("Total Capital: ");
-		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblTotalCapital.setBounds(335, 489, 124, 33);
-		JPAdmEstatistica.add(lblTotalCapital);
-
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-//				Date dateChooserInicio; // your date
-//				Calendar cal = Calendar.getInstance();
-//				cal.setTime(dateChooserInicio);
-//				int year = cal.get(Calendar.YEAR);
-//				int month = cal.get(Calendar.MONTH);
-//				int day = cal.get(Calendar.DAY_OF_MONTH);
-//
-//				Date dateChooserFim; // your date
-//				Calendar cal2 = Calendar.getInstance();
-//				cal.setTime(dateChooserInicio);
-//				int year2 = cal2.get(Calendar.YEAR);
-//				int month2 = cal2.get(Calendar.MONTH);
-//				int day2 = cal2.get(Calendar.DAY_OF_MONTH);
-//				System.out.println(df.format(dt));
-//				cal.add(Calendar.DATE, +1);
-//				dt = cal.getTime();
-
-				// for (Date dt = dateChooserInicio.getDate();
-				// dt.compareTo(dateChooserFim.getDate()) <= 0;) {
-
-				Date data1 = dateChooserInicio.getDate();
-				Date data2 = dateChooserFim.getDate();
-
-				modeloTabelaEstatistica.setRowCount(0);
-				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
-						data2);
-
-				int numeroContasNovas = gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2);
-				textFieldnNovasConta.setText(Integer.toString(numeroContasNovas));
-
-				int numeroContasFechadas = gb.javabank.numeroContasFechadas(gb.javabank.getContas(), data1, data2);
-				textFieldFechaConat.setText(Integer.toString(numeroContasFechadas));
-
-				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
-				textFieldTotalCapital.setText(Integer.toString(totalCapital));
-
-				double balanco = gb.javabank.balanco(gb.javabank.getContas(), data1, data2);
-				textFieldBalanco.setText(Double.toString(balanco));
-
-			}
-		});
-		btnPesquisar.setBounds(609, 53, 117, 29);
-		JPAdmEstatistica.add(btnPesquisar);
-
-		JButton btnLimpar_1 = new JButton("Limpar");
-		btnLimpar_1.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				dateChooserInicio.setDate(null);
-				dateChooserFim.setDate(null);
-				modeloTabelaEstatistica.setRowCount(0);
-				textFieldnNovasConta.setText(null);
-				textFieldFechaConat.setText(null);
-				textFieldTotalCapital.setText(null);
-			}
-		});
-		btnLimpar_1.setBounds(738, 53, 117, 29);
-		JPAdmEstatistica.add(btnLimpar_1);
-
-		JLabel lblBalano = new JLabel("Balanço: ");
-		lblBalano.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblBalano.setBounds(374, 534, 73, 33);
-		JPAdmEstatistica.add(lblBalano);
-
-		textFieldBalanco = new JTextField();
-		textFieldBalanco.setColumns(10);
-		textFieldBalanco.setBounds(455, 536, 321, 33);
-		JPAdmEstatistica.add(textFieldBalanco);
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
