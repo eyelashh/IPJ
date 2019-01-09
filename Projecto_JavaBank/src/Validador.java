@@ -47,10 +47,11 @@ public class Validador {
 
 	// valida contacto:
 	protected boolean valContacto(String contacto) {
+		
 		boolean teste = contacto.matches("^\\d+(\\d+)?$");
 
-		if (contacto.charAt(0) != '9' || contacto.charAt(0) != '2'
-				|| contacto.length() != 9) {
+		if (contacto.charAt(0) != '9' && contacto.charAt(0) != '2' && contacto.length()!=9) {
+			
 			teste = false;
 		}
 
@@ -65,6 +66,7 @@ public class Validador {
 		{
 			existe = false;
 		}
+		
 		for (int i = 0; i < utilizadores.size(); i++) {
 			if (utilizadores.get(i).getUsername().equals(user)) {
 				existe = false;
@@ -76,8 +78,9 @@ public class Validador {
 	// valida passe
 	protected boolean valPassword(String password) {
 		// 8 caracteres com 1 numero e 1 letra
-		boolean valida = password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
-
+		
+		//boolean valida = password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+		boolean valida = true;
 		return valida;
 	}
 

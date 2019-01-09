@@ -587,7 +587,7 @@ public class BancoAppFun implements Serializable {
 
 				if (val.valNome(tbCltNome.getText()) && val.valSobrenome(tbCltApelido.getText())
 						&& val.valUsername(tbCltUser.getText(), gb.javabank.getUtlizadores())
-						&& val.valPassword(tbCltPass.getText()) && val.valContacto(tbCltNum.getText())) {
+						&& val.valPassword(tbCltPass.getText()) && val.valContacto(tbCltContacto.getText())) {
 
 					String opselect = "";
 					if (rbCltcc.isSelected()) {
@@ -627,9 +627,6 @@ public class BancoAppFun implements Serializable {
 						int linha = tableListaClts.getSelectedRow();
 						int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
 						// metedo para atualizar:
-						if (val.valNome(tbCltNome.getText()) && val.valSobrenome(tbCltApelido.getText())
-								&& val.valPassword(tbCltPass.getText()) && val.valContacto(tbCltNum.getText())) {
-
 							gb.javabank.atualizacliente(
 									(Cliente) gb.javabank.selectUtilizador(idCliente, gb.javabank.getUtlizadores()),
 									tbCltNome.getText(), tbCltApelido.getText(), dateChooser_3.getDate(), opselect,
@@ -638,9 +635,6 @@ public class BancoAppFun implements Serializable {
 									tbCltPass.getText());
 							JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
 
-						} else {
-							JOptionPane.showMessageDialog(null, "CLiente nao atualizado!Verifique os dados inseridos");
-						}
 					}
 
 					tableListaClts.clearSelection();
@@ -958,8 +952,7 @@ public class BancoAppFun implements Serializable {
 
 				if (val.valVMaxLevConta(tbContaslimitelevop.getText())
 						&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
-						&& val.valsaldo(tbContasSaldo.getText()) && val.valJuros(tblJuros.getText())
-						&& val.valVMaxLevContaMes(tbllimitemes.getText())) {
+						&& val.valsaldo(tbContasSaldo.getText())) {
 
 					Conta c;
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
@@ -985,7 +978,9 @@ public class BancoAppFun implements Serializable {
 						double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
 						double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
 						double vlevmes = Double.parseDouble(tbllimitemes.getText());
-						if (vlevdia >= vlevop && vlevdia < vlevmes) {
+						
+						if (vlevdia > vlevop && vlevdia < vlevmes && val.valJuros(tblJuros.getText())&& val.valVMaxLevContaMes(tbllimitemes.getText())) {	
+							
 							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
 									null, Double.parseDouble(tbContasSaldo.getText()), clientes,
 									Double.parseDouble(tbContaslimitelevop.getText()),
@@ -993,18 +988,44 @@ public class BancoAppFun implements Serializable {
 									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
 									true);
 							gb.javabank.getContas().add(c);
-
 							gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+							dmconta.removeAllElements();
+							lContas.clearSelection();
+							tbContasnum.setText(null);
+							dateChooser_2.setDate(null);
+							tbContaslimitelevop.setText(null);
+							tbContasSaldo.setText(null);
+							tbContasSaldo.setEditable(false);
+							tbContaslimitelevdia.setText(null);
+							rdbtnContaCorrente.setSelected(true);
+							rdbtnContaPoupanca.setSelected(false);
+							tblJuros.setText(null);
+							dateChooser_2.setEnabled(true);
+							tbllimitemes.setText(null);
+							panelCartao.setVisible(false);
+							btPedirCartao.setVisible(false);
+							btnMovimentos.setVisible(false);
+							tbContaspesqconta.setText("");
+							gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);							
 						} else {
-							JOptionPane.showMessageDialog(null, "Limites dia/mes/operacao com valores incorrectos");
+							
+							if(!val.valJuros(tblJuros.getText())|| !val.valVMaxLevContaMes(tbllimitemes.getText()))
+							{
+								JOptionPane.showMessageDialog(null, "Verifique os dados introduzidos");
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Limites dia/mes/operacao com valores incorrectos");
+							}
 						}
 					}
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Verifique os dados introduzidos");
+					
+				} 
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Limites dia/mes/operacao com valores incorrectos");
 				}
-
 			}
 
 		});
@@ -1165,7 +1186,6 @@ public class BancoAppFun implements Serializable {
 				btPedirCartao.setVisible(false);
 				btnMovimentos.setVisible(false);
 				tbContaspesqconta.setText("");
-				// lClientes.clea
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
