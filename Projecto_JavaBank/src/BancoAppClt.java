@@ -317,8 +317,9 @@ public class BancoAppClt implements Serializable {
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 
 							Calendar cal = new GregorianCalendar();
-							cal.setTime(Date.valueOf(LocalDate.now()));
-							cal.add(Calendar.YEAR, 5);
+							// Date.valueOf(LocalDate.now())
+							cal.set(2019, 01, 8);
+							cal.add(Calendar.DAY_OF_MONTH, 1);
 
 							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(), cal.getTime(), nvalcartao,
 									conta.getIdConta(), true);
