@@ -582,15 +582,16 @@ public class Banco implements Serializable {
 	}
 
 	// faz a soma dos levantamentos:
-	protected int somaLevant(ArrayList<Conta> contas, Date data1, Date data2) {
+	protected double somaLevant(ArrayList<Conta> contas, Date data1, Date data2) {
 
-		int soma = 0;
+		double soma = 0;
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
 				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
-						&& contas.get(i).isAberta() == true) {
+						&& contas.get(i).isAberta() == true
+						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
 					soma += ((Levantamento) contas.get(i).getOperacoes().get(j)).getValor();
 
@@ -602,15 +603,16 @@ public class Banco implements Serializable {
 	}
 
 	// faz a soma dos depositos:
-	protected int somaDepo(ArrayList<Conta> contas, Date data1, Date data2) {
+	protected double somaDepo(ArrayList<Conta> contas, Date data1, Date data2) {
 
-		int soma2 = 0;
+		double soma2 = 0;
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
 				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
-						&& contas.get(i).isAberta() == true) {
+						&& contas.get(i).isAberta() == true
+						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
 
 					soma2 += ((Deposito) contas.get(i).getOperacoes().get(j)).getValor();
 
@@ -622,9 +624,9 @@ public class Banco implements Serializable {
 	}
 
 	// faz o balanco :
-	protected int balanco(ArrayList<Conta> contas, Date data1, Date data2) {
+	protected double balanco(ArrayList<Conta> contas, Date data1, Date data2) {
 
-		int balanco = 0;
+		double balanco = 0;
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
