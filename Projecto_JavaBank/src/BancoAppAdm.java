@@ -642,10 +642,6 @@ public class BancoAppAdm implements Serializable {
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (val.valNome(textAdmFunNome.getText()) && val.valNome(textAdmFunSobrenome.getText())
-						&& val.valNome(textAdmFunNumero.getText()) && val.valContacto(textAdmFunContato.getText())
-						&& val.valUsername(textAdmFunUser.getText(), gb.javabank.getUtlizadores())
-						&& val.valPassword(textAdmFunPass.getText())) {
 					// valida qual dos botoes estao atualizados:
 					String opselect = "";
 					if (rbAdmFunCC.isSelected()) {
@@ -727,11 +723,10 @@ public class BancoAppAdm implements Serializable {
 						// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 						dmFun.removeAllElements();
 						gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
-
 						JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
 
 					}
-
+					
 					lbLAdmFunLista.clearSelection();
 					textAdmFunNome.setText("");
 					textAdmFunSobrenome.setText("");
@@ -742,11 +737,6 @@ public class BancoAppAdm implements Serializable {
 					textAdmFunPass.setText("");
 					textAdmFunNumero.setText("");
 					dateChooser.setDate(null);
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Confirme os dados intruduzidos!");
-
-				}
 			}
 		});
 
