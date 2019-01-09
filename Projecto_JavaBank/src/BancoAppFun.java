@@ -691,6 +691,7 @@ public class BancoAppFun implements Serializable {
 				panelCartao.setVisible(false);
 
 				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+				
 
 			}
 		});
