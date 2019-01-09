@@ -1079,13 +1079,12 @@ public class Livraria implements Serializable {
 	
 	public void tabelaVendasMontante(DefaultTableModel dtm) {
 
-		ArrayList<Venda> vendas =this.vendas;
-
-		for (Venda v : vendas) {
-			int id = v.getId();
-			double montante=v.getMontante();
-			LocalDate data = v.getData();
-			Object[] dados = { id, montante,data };
+		ArrayList <Venda> vendas =this.vendas;
+		for (Venda v:vendas) {
+			int idVenda=v.getId();
+			double montante = v.getMontante();
+			LocalDate data= v.getData();
+			Object[]dados= {idVenda,montante,data};
 			dtm.addRow(dados);
 		}
 
