@@ -36,7 +36,7 @@ public class Validador {
 
 	// valida numero de indentificaçao:
 	protected boolean valNumIdentificacao(String str) {
-		boolean teste = str.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = str.matches("^\\d+(\\d+)?$");
 
 		if (str.indexOf(".") != -1) {
 			teste = false;
@@ -47,9 +47,9 @@ public class Validador {
 
 	// valida contacto:
 	protected boolean valContacto(String contacto) {
-		boolean teste = contacto.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = contacto.matches("^\\d+(\\d+)?$");
 
-		if (contacto.indexOf(".") != -1 || contacto.charAt(0) != '9' || contacto.charAt(0) != '2'
+		if (contacto.charAt(0) != '9' || contacto.charAt(0) != '2'
 				|| contacto.length() != 9) {
 			teste = false;
 		}
@@ -59,11 +59,15 @@ public class Validador {
 
 	// valida username:
 	protected boolean valUsername(String user, ArrayList<Utilizador> utilizadores) {
-		boolean existe = false;
+		boolean existe = true;
 
+		if(user.equals(""))
+		{
+			existe = false;
+		}
 		for (int i = 0; i < utilizadores.size(); i++) {
 			if (utilizadores.get(i).getUsername().equals(user)) {
-				existe = true;
+				existe = false;
 			}
 		}
 		return existe;
@@ -149,23 +153,32 @@ public class Validador {
 	// CONTAS:
 
 	// valida idconta (ainda é necessario ver se é necessario)
-	protected int idConta() {
-		return 0;
+	protected int idConta(ArrayList<Conta> contas) {
+		int id = 1;
+		if (contas.size() != 0) {
+			id = contas.get(contas.size() - 1).getIdConta() + 1;
+		}
+		return id;
 	}
 
 	// valida valor max de levantamento por operacao em conta:
-	protected boolean valVMaxLevConta() {
-		return true;
+	protected boolean valVMaxLevConta(String valor) {
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
+
+		return teste;
 	}
 
 	// valida valor max levantamento por operacao:
-	protected boolean valVMaxLevContaOP() {
-		return true;
+	protected boolean valVMaxLevContaOP(String valor) {
+		
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
+
+		return teste;
 	}
 
 	// valida valor max levantamento por dia:
 	protected boolean valVMaxLevContaDia(String valor) {
-		boolean teste = valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
 	}
@@ -175,14 +188,14 @@ public class Validador {
 	// valida juros
 	protected boolean valJuros(String valor) {
 
-		boolean teste = valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
 	}
 
 	// valida valor max levantamento por mes:
 	protected boolean valVMaxLevContaMes(String valor) {
-		boolean teste = valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
 	}
@@ -191,14 +204,14 @@ public class Validador {
 
 	// valida valor de operacao:
 	protected boolean valValorOperacao(String valor) {
-		boolean teste = valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
 	}
 
 	// valida conta a transferir:
 	protected boolean valContaTransferir(String valor) {
-		boolean teste = valor.matches("^[-+]?\\d+(\\.\\d+)?$");
+		boolean teste = valor.matches("^\\d+(\\d+)?$");
 		return teste;
 	}
 
