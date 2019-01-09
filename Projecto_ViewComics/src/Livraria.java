@@ -641,8 +641,6 @@ public class Livraria implements Serializable {
 
 	public void removerUtil(int id) {
 		
-		
-
 		for (int i = 0; i < this.utilizadores.size(); i++) {
 			if (utilizadores.get(i).getId() == id) {
 				utilizadores.remove(i);
