@@ -247,7 +247,7 @@ public class BancoAppClt implements Serializable {
 		label.setBounds(612, 272, 131, 41);
 		JPCltGestao.add(label);
 
-		JLabel label_1 = new JLabel("Nova Password :");
+		JLabel label_1 = new JLabel("Nova Password (8 caracteres com 1 numero e 1 letra) :");
 		label_1.setVerifyInputWhenFocusTarget(false);
 		label_1.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		label_1.setBounds(612, 341, 168, 26);
@@ -263,22 +263,38 @@ public class BancoAppClt implements Serializable {
 		JButton button = new JButton("Confirmar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
 				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword()))
 						&& (String.valueOf(passwordFieldConfPass.getPassword())
 								.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
-
+					
+					if(val.valPassword(String.valueOf(passwordFieldAntiga.getPassword())))
+					{
 					clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
 
 					passwordFieldAntiga.setText(null);
 					passwordFieldConfPass.setText(null);
 					passwordFieldNovaPass.setText(null);
-					JOptionPane.showMessageDialog(null, "A password foi alterado com sucesso!");
-
+					JOptionPane.showMessageDialog(null, "A password foi alterada com sucesso!");
+					
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Password nao cumpre requisitos");
+					}
+				}
+				else
+				{
+					if(!clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword())))
+					{
+						JOptionPane.showMessageDialog(null, "A atual password esta errada!");
+					}
+					
+					if((String.valueOf(passwordFieldConfPass.getPassword()).equals(String.valueOf(passwordFieldNovaPass.getPassword()))))
+					{
+						JOptionPane.showMessageDialog(null, "A nova password e confirmaçao nao correspondem!");
+					}
+					
 				}
 			}
 		});
@@ -330,14 +346,14 @@ public class BancoAppClt implements Serializable {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null, "PassWord errado");
+						JOptionPane.showMessageDialog(null, "PassWord errada");
 						
 					}
 				}
 				else
 				{
 					
-					
+					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
 				}
 				
 			}

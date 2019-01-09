@@ -172,9 +172,11 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			s = "" + cont.get(i).getIdConta();
-			numcontas[i] = s;
-			s = "";
+			if (cont.get(i).isAberta()) {
+				s = "" + cont.get(i).getIdConta();
+				numcontas[i] = s;
+				s = "";
+			}
 		}
 		return numcontas;
 	}
@@ -377,27 +379,23 @@ public class Banco implements Serializable {
 
 	// elimina utilizador do arraylist
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador, ArrayList<Conta> contas) {
-		
-		Integer remove = 0; 
-		for(int x=0; x<contas.size(); x++)
-		{
-			for(int y=0; y<contas.get(x).getClientes().size();y++ )
-			{
-				if(contas.get(x).getClientes().get(y)==id)
-				 {
-					 remove = id;
-					 contas.get(x).getClientes().remove(remove);
-				 }
+
+		Integer remove = 0;
+		for (int x = 0; x < contas.size(); x++) {
+			for (int y = 0; y < contas.get(x).getClientes().size(); y++) {
+				if (contas.get(x).getClientes().get(y) == id) {
+					remove = id;
+					contas.get(x).getClientes().remove(remove);
+				}
 			}
-		 
+
 		}
-		
+
 		for (int i = 0; i < utilizador.size(); i++) {
 			if (utilizador.get(i).getIdUtilizador() == id) {
 				utilizador.remove(i);
 			}
-			
-			
+
 		}
 	}
 
@@ -470,6 +468,7 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
 				contas.get(i).setAberta(false);
+				contas.get(i).setSaldo(0);
 				contas.get(i).setDataFecho(datafecho);
 			}
 		}
@@ -490,21 +489,95 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela conta na estatistica:
-	protected void preenchetabelaContaEstatistica(DefaultTableModel model, ArrayList<Conta> contas) {
-		int id = 0;
-		String nome;
+	protected void preenchetabelaContaEstatistica(DefaultTableModel model, ArrayList<Conta> contas, Date data1,
+			Date data2) {
+		int idConta = 0;
+		Date dataCriacao;
+		Date dataFecho;
+		Double saldo;
+		boolean estadoConta;
 
 		for (int i = 0; i < contas.size(); i++) {
-			if (clientes.get(i) instanceof Cliente) {
-				id = clientes.get(i).getIdUtilizador();
-				nome = clientes.get(i).getNome();
-				model.addRow(new Object[] { false, id, nome });
+			if (contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2)) {
 
+				idConta = contas.get(i).getIdConta();
+				dataCriacao = contas.get(i).getDataCriacao();
+				dataFecho = contas.get(i).getDataFecho();
+				saldo = contas.get(i).getSaldo();
+				estadoConta = contas.get(i).isAberta();
+
+				model.addRow(new Object[] { idConta, dataCriacao, dataFecho, saldo, estadoConta });
 			}
 		}
 	}
 
-	
+	// retornar quantas contas abertas existem:
+	protected int numeroContasAbertas(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int cont = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+					&& contas.get(i).isAberta() == true) {
+				cont++;
+			}
+		}
+		return cont;
+	}
+
+	// retornar quantas contas fechadas existem:
+	protected int numeroContasFechadas(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int cont = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+					&& contas.get(i).isAberta() == false) {
+				cont++;
+			}
+		}
+		return cont;
+	}
+
+	// preenche tabela conta na estatistica:
+	protected int totalCapital(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int soma = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))) {
+
+				soma += contas.get(i).getSaldo();
+
+			}
+		}
+		return soma;
+	}
+
+	// preenche tabela conta na estatistica:
+	protected int balanco(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int soma = 0;
+		int soma2 = 0;
+
+		int balanco = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2)) && contas.get(i).isAberta() == true) {
+
+					soma += ((Levantamento) contas.get(i).getOperacoes().get(j)).getValor();
+					soma2 += ((Deposito) contas.get(i).getOperacoes().get(j)).getValor();
+
+					balanco = soma - soma2;
+				}
+
+			}
+		}
+		return balanco;
+	}
+
 	// preenche tabela clientes no cliente:
 	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
 		int id = 0;
@@ -772,9 +845,6 @@ public class Banco implements Serializable {
 		}
 
 	}
-
-	
-	
 
 	// retorna o cartao
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
