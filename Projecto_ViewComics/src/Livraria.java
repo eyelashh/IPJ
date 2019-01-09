@@ -25,7 +25,10 @@ public class Livraria implements Serializable {
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Livro> livros;
 	private ArrayList<Carrinho> carrinhos;
-	private ArrayList<Venda> vendas;// para efeitos de historico de vendas, cada vez que um carrinho e
+	private ArrayList<Venda> vendas;
+	
+	
+	// para efeitos de historico de vendas, cada vez que um carrinho e
 									// eliminado/pago o seu conteudo transforma-se
 									// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
 
@@ -1077,8 +1080,7 @@ public class Livraria implements Serializable {
 
 	}
 	
-	public void tabelaVendasMontante(DefaultTableModel dtm) {
-
+	public void tabelaVendaMontante(DefaultTableModel dtm) {
 		ArrayList <Venda> vendas =this.vendas;
 		for (Venda v:vendas) {
 			int idVenda=v.getId();
@@ -1087,8 +1089,8 @@ public class Livraria implements Serializable {
 			Object[]dados= {idVenda,montante,data};
 			dtm.addRow(dados);
 		}
-
 	}
+	
 	public void incrementarVendasLivros(Venda v) {
 		
 		HashMap<Integer,Integer> venda = v.getConteudoVenda();

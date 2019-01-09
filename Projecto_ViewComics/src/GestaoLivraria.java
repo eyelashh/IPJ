@@ -267,7 +267,7 @@ public class GestaoLivraria implements Serializable{
 		try
 		{
 			oS = new ObjectOutputStream(new FileOutputStream(this.fileVendas));
-			oS.writeObject(livros);
+			oS.writeObject(vendas);
 			oS.close();
 		}
 		catch(IOException e)

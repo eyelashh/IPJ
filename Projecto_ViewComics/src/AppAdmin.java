@@ -100,7 +100,7 @@ public class AppAdmin implements Serializable {
 		}
 	};
 	String[] colunasVendas = { "ID", "Montante","Data"};
-	DefaultTableModel modeloTabelaVENDAS = new DefaultTableModel(colunasVendas, 0) {
+	DefaultTableModel modeloVendasMontante = new DefaultTableModel(colunasVendas, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
@@ -337,8 +337,8 @@ public class AppAdmin implements Serializable {
 		scrollVendasMontante.setBounds(360, 75, 216, 459);
 		jpAdmEstatisticas.add(scrollVendasMontante);
 
-		tabelaVendasMontante = new JTable(modeloTabelaVENDAS);
-		gl.viewComics.tabelaVendasMontante(modeloTabelaVENDAS);
+		tabelaVendasMontante = new JTable(modeloVendasMontante);
+		gl.viewComics.tabelaVendaMontante(modeloVendasMontante);
 		tabelaVendasMontante.setAutoCreateRowSorter(true);
 		scrollVendasMontante.setViewportView(tabelaVendasMontante);
 
