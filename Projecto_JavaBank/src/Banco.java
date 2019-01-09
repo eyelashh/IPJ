@@ -958,6 +958,9 @@ public class Banco implements Serializable {
 		return card;
 
 	}
+	
+	
+
 
 	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumContaAbertas(String numConta) {

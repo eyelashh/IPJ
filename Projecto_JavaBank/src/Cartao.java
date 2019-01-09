@@ -72,5 +72,6 @@ public class Cartao implements Serializable {
 	public void setCodvalidacao(int codvalidacao) {
 		this.codvalidacao = codvalidacao;
 	}
+	
 
 }
