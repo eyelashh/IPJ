@@ -376,11 +376,28 @@ public class Banco implements Serializable {
 	}
 
 	// elimina utilizador do arraylist
-	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
+	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador, ArrayList<Conta> contas) {
+		
+		Integer remove = 0; 
+		for(int x=0; x<contas.size(); x++)
+		{
+			for(int y=0; y<contas.get(x).getClientes().size();y++ )
+			{
+				if(contas.get(x).getClientes().get(y)==id)
+				 {
+					 remove = id;
+					 contas.get(x).getClientes().remove(remove);
+				 }
+			}
+		 
+		}
+		
 		for (int i = 0; i < utilizador.size(); i++) {
 			if (utilizador.get(i).getIdUtilizador() == id) {
 				utilizador.remove(i);
 			}
+			
+			
 		}
 	}
 
