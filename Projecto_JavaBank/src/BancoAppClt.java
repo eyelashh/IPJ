@@ -267,34 +267,28 @@ public class BancoAppClt implements Serializable {
 				if (clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword()))
 						&& (String.valueOf(passwordFieldConfPass.getPassword())
 								.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
-					
-					if(val.valPassword(String.valueOf(passwordFieldAntiga.getPassword())))
-					{
-					clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
 
-					passwordFieldAntiga.setText(null);
-					passwordFieldConfPass.setText(null);
-					passwordFieldNovaPass.setText(null);
-					JOptionPane.showMessageDialog(null, "A password foi alterada com sucesso!");
-					
-					}
-					else
-					{
+					if (val.valPassword(String.valueOf(passwordFieldNovaPass.getPassword()))) {
+						clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
+
+						passwordFieldAntiga.setText(null);
+						passwordFieldConfPass.setText(null);
+						passwordFieldNovaPass.setText(null);
+						JOptionPane.showMessageDialog(null, "A password foi alterada com sucesso!");
+
+					} else {
 						JOptionPane.showMessageDialog(null, "Password nao cumpre requisitos");
 					}
-				}
-				else
-				{
-					if(!clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword())))
-					{
+				} else {
+					if (!clt.getPassword().equals(String.valueOf(passwordFieldAntiga.getPassword()))) {
 						JOptionPane.showMessageDialog(null, "A atual password esta errada!");
 					}
-					
-					if((String.valueOf(passwordFieldConfPass.getPassword()).equals(String.valueOf(passwordFieldNovaPass.getPassword()))))
-					{
-						JOptionPane.showMessageDialog(null, "A nova password e confirmaçao nao correspondem!");
+
+					if ((String.valueOf(passwordFieldConfPass.getPassword())
+							.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
+						JOptionPane.showMessageDialog(null, "A nova password e confirmaï¿½ao nao correspondem!");
 					}
-					
+
 				}
 			}
 		});
@@ -334,8 +328,7 @@ public class BancoAppClt implements Serializable {
 		JButton button_4 = new JButton("Confirmar");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(val.valUsername(txtCltNewUser.getText(), gb.javabank.getUtlizadores()))
-				{
+				if (val.valUsername(txtCltNewUser.getText(), gb.javabank.getUtlizadores())) {
 					if (clt.getPassword().equals(String.valueOf(passwordField.getPassword()))) {
 
 						clt.setUsername(txtCltNewUser.getText());
@@ -343,19 +336,15 @@ public class BancoAppClt implements Serializable {
 						txtCltNewUser.setText(null);
 						textCltUser.setText(clt.getUsername());
 						JOptionPane.showMessageDialog(null, "O username foi alterado com sucesso!");
-					}
-					else
-					{
+					} else {
 						JOptionPane.showMessageDialog(null, "PassWord errada");
-						
+
 					}
+				} else {
+
+					JOptionPane.showMessageDialog(null, "O username jï¿½ existe, insira outro pf.");
 				}
-				else
-				{
-					
-					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
-				}
-				
+
 			}
 		});
 
@@ -924,7 +913,7 @@ public class BancoAppClt implements Serializable {
 
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(),
-									dateChooserCartao.getDate(), nvalcartao, conta.getIdConta());
+									dateChooserCartao.getDate(), nvalcartao, conta.getIdConta(), true);
 							gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
 
 							textFieldCOD.setText(nvalcartao + "");

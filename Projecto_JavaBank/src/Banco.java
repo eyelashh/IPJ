@@ -181,6 +181,33 @@ public class Banco implements Serializable {
 		return numcontas;
 	}
 
+	// retorna as contas de um cliente atraves do seu id
+	protected String[] listaContasIdCliente(String idCliente) {
+
+		ArrayList<Utilizador> utilizadores = this.utilizadores;
+		ArrayList<Integer> idcontasClienteINT = new ArrayList<Integer>();
+		ArrayList<String> idContasClienteSTR = new ArrayList<String>();
+
+		Cliente c = null;
+		for (Utilizador u : utilizadores) {
+			String idSTR = Integer.toString(u.getIdUtilizador());
+			if ((idSTR.contains(idCliente)) && (u instanceof Cliente)) {
+				c = (Cliente) u;
+				idcontasClienteINT = c.getContas();
+			}
+		}
+		for (int id : idcontasClienteINT) {
+
+			String idSTR = Integer.toString(id);
+			idContasClienteSTR.add(idSTR);
+		}
+		String[] contasCliente = new String[idContasClienteSTR.size()];
+		contasCliente = idContasClienteSTR.toArray(contasCliente);
+
+		return contasCliente;
+
+	}
+
 	// lista a conta de um determinado cliente
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
 		ArrayList<String> listprov = new ArrayList<String>();
@@ -227,7 +254,7 @@ public class Banco implements Serializable {
 		for (int i = 0; i < this.contas.size(); i++) {
 			for (int j = 0; j < this.utilizadores.size(); j++) {
 
-				if ((contas.get(i) instanceof ContaPoupanca)
+				if ((contas.get(i) instanceof ContaPoupanca && contas.get(i).isAberta() == true)
 						&& ((ContaPoupanca) contas.get(i)).getClientes().get(j) == id) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
@@ -265,7 +292,7 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < this.contas.size(); i++) {
 
-			if ((contas.get(i) instanceof ContaCorrente)) {
+			if ((contas.get(i) instanceof ContaCorrente) && contas.get(i).isAberta() == true) {
 				String idSTR = Integer.toString(((ContaCorrente) contas.get(i)).getIdConta());
 				idsContasCorrente.add(idSTR);
 			}
@@ -539,7 +566,7 @@ public class Banco implements Serializable {
 		return cont;
 	}
 
-	// preenche tabela conta na estatistica:
+	// faz o total de capital:
 	protected int totalCapital(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int soma = 0;
@@ -554,23 +581,61 @@ public class Banco implements Serializable {
 		return soma;
 	}
 
-	// preenche tabela conta na estatistica:
-	protected int balanco(ArrayList<Conta> contas, Date data1, Date data2) {
+	// faz a soma dos levantamentos:
+	protected double somaLevant(ArrayList<Conta> contas, Date data1, Date data2) {
 
-		int soma = 0;
-		int soma2 = 0;
-
-		int balanco = 0;
+		double soma = 0;
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2)) && contas.get(i).isAberta() == true) {
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+						&& contas.get(i).isAberta() == true
+						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
 
 					soma += ((Levantamento) contas.get(i).getOperacoes().get(j)).getValor();
+
+				}
+
+			}
+		}
+		return soma;
+	}
+
+	// faz a soma dos depositos:
+	protected double somaDepo(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		double soma2 = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+						&& contas.get(i).isAberta() == true
+						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
+
 					soma2 += ((Deposito) contas.get(i).getOperacoes().get(j)).getValor();
 
-					balanco = soma - soma2;
+				}
+
+			}
+		}
+		return soma2;
+	}
+
+	// faz o balanco :
+	protected double balanco(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		double balanco = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+						&& contas.get(i).isAberta() == true) {
+
+					balanco = this.somaDepo(getContas(), data1, data2) - this.somaLevant(getContas(), data1, data2);
+
 				}
 
 			}
@@ -894,41 +959,15 @@ public class Banco implements Serializable {
 
 	}
 
-//retorna as contas de um cliente atraves do seu id
-	protected String[] listaContasIdCliente(String idCliente) {
-
-		ArrayList<Utilizador> utilizadores = this.utilizadores;
-		ArrayList<Integer> idcontasClienteINT = new ArrayList<Integer>();
-		ArrayList<String> idContasClienteSTR = new ArrayList<String>();
-
-		Cliente c = null;
-		for (Utilizador u : utilizadores) {
-			String idSTR = Integer.toString(u.getIdUtilizador());
-			if ((idSTR.contains(idCliente)) && (u instanceof Cliente)) {
-				c = (Cliente) u;
-				idcontasClienteINT = c.getContas();
-			}
-		}
-		for (int id : idcontasClienteINT) {
-			String idSTR = Integer.toString(id);
-			idContasClienteSTR.add(idSTR);
-		}
-		String[] contasCliente = new String[idContasClienteSTR.size()];
-		contasCliente = idContasClienteSTR.toArray(contasCliente);
-
-		return contasCliente;
-
-	}
-
 	// retorna a conta atraves do seu numero
-	protected String[] listaContasNumConta(String numConta) {
+	protected String[] listaContasNumContaAbertas(String numConta) {
 
 		ArrayList<Conta> contas = this.contas;
 		ArrayList<String> contaNum = new ArrayList<String>();
 
 		for (Conta c : contas) {
 			String numContaSTR = Integer.toString(c.getIdConta());
-			if (numContaSTR.contains(numConta)) {
+			if (numContaSTR.contains(numConta) && c.isAberta() == true) {
 				contaNum.add(numContaSTR);
 			}
 		}
