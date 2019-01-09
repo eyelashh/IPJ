@@ -206,6 +206,18 @@ public class AppAdmin implements Serializable {
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
 		tabelaUtilizadores = new JTable(modeloTabelaUTILIZADORES);
+		tabelaUtilizadores.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+				Utilizador u=gl.viewComics.devolveUtilizador(idUtil);
+				txtIdFunc.setText(Integer.toString(idUtil));
+				txtNomeUTILIZADOR.setText(u.getNome());
+				txtContactoUTILIZADOR.setText(u.getContato());
+				txtUsernameUTILIZADOR.setText(u.getUsername());
+				txtPassUTILIZADOR.setText(u.getPassword());
+			}
+		});
 
 		jpAdmGestaoUtil = new JPanel();
 		jpAdmGestaoUtil.setBounds(0, 0, 763, 545);
@@ -372,7 +384,7 @@ public class AppAdmin implements Serializable {
 				else if(rbAlterarUTILIZADOR.isSelected()) {
 					
 					
-					if (tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
+					if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
 						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
 						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
 					}
@@ -382,7 +394,7 @@ public class AppAdmin implements Serializable {
 				}
 				else if (rbRemoverUTILIZADOR.isSelected()) {
 					
-					if (tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
+					if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
 						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
 						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
 					}

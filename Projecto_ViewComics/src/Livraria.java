@@ -153,7 +153,7 @@ public class Livraria implements Serializable {
 	public void alterarStockLivro(int idLivro, int quantidadeTotal) {
 
 		for (Livro l : this.livros) {
-			if (l.getIdLivro()==idLivro) {
+			if (l.getIdLivro() == idLivro) {
 				l.setStock(quantidadeTotal);
 				JOptionPane.showMessageDialog(null, "O stock do livro " + l.getTitulo()
 						+ " foi alterado com sucesso. Existem agora " + quantidadeTotal + " exemplares.");
@@ -189,7 +189,6 @@ public class Livraria implements Serializable {
 	// alterar funcionario
 	public void alterarUtilizador(int id, String nome, String contacto, String username, String password) {
 
-		
 		boolean funcionarioAlterado = false;
 		for (Utilizador u : this.utilizadores) {
 			if (u.getId() == id) {
@@ -201,7 +200,7 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (funcionarioAlterado) {
-			JOptionPane.showMessageDialog(null, "Os dados do utilizador de id "+id+" foram alterados com sucesso");
+			JOptionPane.showMessageDialog(null, "Os dados do utilizador de id " + id + " foram alterados com sucesso");
 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel alterar os dados");
@@ -349,7 +348,7 @@ public class Livraria implements Serializable {
 			String descricao) {
 
 		for (Livro l : this.livros) {
-			if (l.getIdLivro()==idLivro) {
+			if (l.getIdLivro() == idLivro) {
 				l.setTitulo(titulo);
 				l.setAutor(autor);
 				l.setPreco(Double.parseDouble(preco));
@@ -627,17 +626,15 @@ public class Livraria implements Serializable {
 	}
 
 	// retornar um funcionario
-	protected Utilizador devolveFunc(String seleccao) {
+	protected Utilizador devolveUtilizador(int id) {
 
+		ArrayList<Utilizador> users = this.utilizadores;
 		Utilizador func = new Utilizador();
-		if (seleccao != null) {
 
-			for (Utilizador u : this.utilizadores) {
-				if ((u.toString().equals(seleccao)) && (u instanceof Funcionario)) {
-					func = u;
-				}
+		for (Utilizador u : users) {
+			if (u.getId() == id) {
+				func = u;
 			}
-
 		}
 		return func;
 	}
@@ -847,30 +844,32 @@ public class Livraria implements Serializable {
 		}
 		return carrinhoNif;
 	}
+
 	public void tabelaUtilizadores(DefaultTableModel dtm) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
 
 		for (Utilizador u : users) {
-			int id=u.getId();
-			String nome=u.getNome();
-			String username=u.getUsername();
+			int id = u.getId();
+			String nome = u.getNome();
+			String username = u.getUsername();
 			Object[] data = { id, nome, username };
 			dtm.addRow(data);
 		}
 
 	}
-	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa){
-		
+
+	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
+
 		ArrayList<Utilizador> users = this.utilizadores;
 
 		for (Utilizador u : users) {
 			int id = u.getId();
-			String nome=u.getNome();
-			String username=u.getUsername();
-	
-			Object[] data = { id, nome, username};
-			
+			String nome = u.getNome();
+			String username = u.getUsername();
+
+			Object[] data = { id, nome, username };
+
 			if (criterioSeleccao.equals("Id")) {
 				if (Integer.toString(id).contains(pesquisa.toLowerCase())) {
 					dtm.addRow(data);
@@ -885,12 +884,11 @@ public class Livraria implements Serializable {
 				if (username.toLowerCase().contains(pesquisa)) {
 					dtm.addRow(data);
 				}
-			}	
+			}
 
 		}
 
 	}
-		
 
 	public void livrosTabela(DefaultTableModel dtm) {
 
@@ -970,17 +968,15 @@ public class Livraria implements Serializable {
 			sorter.setSortKeys(sortKeys);
 			sorter.sort();
 
-		}
-		 else if (criterioOrdenacao.equals("Preco")) {
-			 int columnIndexToSort = 4;
-				sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-				sorter.setSortKeys(sortKeys);
-				sorter.sort();
+		} else if (criterioOrdenacao.equals("Preco")) {
+			int columnIndexToSort = 4;
+			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
+			sorter.setSortKeys(sortKeys);
+			sorter.sort();
 
-			}
+		}
 
 	}
-	
 
 	public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 
@@ -1071,7 +1067,7 @@ public class Livraria implements Serializable {
 	public void updatePrecoLivro(int idLivro, Preco p) {
 
 		for (Livro l : this.livros) {
-			if (l.getIdLivro()==idLivro) {
+			if (l.getIdLivro() == idLivro) {
 				l.addAlteracaoPreco(p);
 			}
 		}
