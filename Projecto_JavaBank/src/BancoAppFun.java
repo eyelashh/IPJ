@@ -1107,6 +1107,12 @@ public class BancoAppFun implements Serializable {
 
 							if (card.getDataValidade().after(cal.getTime())) {
 
+								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+										card.getCodvalidacao());
+								card2.setAtivo(false);
+								card2.setIdconta(0);
+								((ContaCorrente) c).setCartao(0);
+
 								btPedirCartao.setVisible(true);
 								panelCartao.setVisible(true);
 								tbnomecartao.setEditable(true);

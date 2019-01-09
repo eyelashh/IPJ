@@ -283,6 +283,25 @@ public class BancoAppClt implements Serializable {
 					// verifica se a conta já tem cartao
 					if (((ContaCorrente) conta).getCartao() != 0) {
 
+						Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
+								((ContaCorrente) conta).getCartao());
+
+						Calendar cal = new GregorianCalendar();
+						cal.setTime(card.getDataValidade());
+						cal.add(Calendar.DAY_OF_MONTH, 1);
+
+						if (card.getDataValidade().after(cal.getTime())) {
+
+							Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+									card.getCodvalidacao());
+							card2.setAtivo(false);
+							card2.setIdconta(0);
+							((ContaCorrente) conta).setCartao(0);
+
+							textFieldNomeCartao.setEditable(true);
+
+						}
+
 						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
 						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
 					}
@@ -314,7 +333,7 @@ public class BancoAppClt implements Serializable {
 							JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 						} else {
 
-							JOptionPane.showMessageDialog(null, "Corriga o nome no cartao!");
+							JOptionPane.showMessageDialog(null, "Corrija o nome no cartao!");
 						}
 
 					}
