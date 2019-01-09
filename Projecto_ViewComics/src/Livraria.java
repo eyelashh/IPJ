@@ -639,11 +639,13 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-	public void removerUtil(int id, ArrayList<Utilizador> utilizador) {
+	public void removerUtil(int id) {
+		
+		
 
-		for (int i = 0; i < utilizador.size(); i++) {
-			if (utilizador.get(i).getId() == id) {
-				utilizador.remove(i);
+		for (int i = 0; i < this.utilizadores.size(); i++) {
+			if (utilizadores.get(i).getId() == id) {
+				utilizadores.remove(i);
 			}
 		}
 	}

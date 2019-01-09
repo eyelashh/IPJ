@@ -396,7 +396,7 @@ public class AppAdmin implements Serializable {
 					
 					if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
 						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
-						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista que deseja remover da loja");
