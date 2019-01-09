@@ -565,7 +565,7 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))) {
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2)) && contas.get(i).isAberta() == true) {
 
 					soma += ((Levantamento) contas.get(i).getOperacoes().get(j)).getValor();
 					soma2 += ((Deposito) contas.get(i).getOperacoes().get(j)).getValor();
