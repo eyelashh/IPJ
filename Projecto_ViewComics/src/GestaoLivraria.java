@@ -15,6 +15,7 @@ public class GestaoLivraria implements Serializable{
 	private File fileUtilizadores;
 	private File fileCarrinhos;
 	private File fileLivros;
+	private File fileVendas;
 	private ObjectInputStream iS;
 	private ObjectOutputStream oS;
 	
@@ -27,6 +28,7 @@ public class GestaoLivraria implements Serializable{
 		this.fileUtilizadores = new File("fileUtilizadores.dat");
 		this.fileCarrinhos = new File("fileCarrinhos.dat");
 		this.fileLivros = new File("fileLivros.dat");
+		this.fileVendas = new File("fileVendas.dat");
 	}
 	
 
@@ -171,6 +173,46 @@ public class GestaoLivraria implements Serializable{
 				try
 				{
 					this.viewComics.setLivros((ArrayList<Livro>) iS.readObject());
+					iS.close();
+				}
+				catch(ClassNotFoundException y)
+				{
+					
+				}
+			}
+			catch(IOException e)
+			{
+				
+			}
+			
+		}
+		
+		//VENDAS
+		//CASO 1:FICHEIRO NAO EXISTE --> cria um novo ficheiro
+		if(!this.fileVendas.exists())
+		{
+			try
+			{
+				this.fileVendas.createNewFile();
+				this.oS = new ObjectOutputStream(new FileOutputStream(this.fileVendas));
+				oS.writeObject(viewComics.getVendas());
+				oS.close();
+			}
+			catch(IOException e)
+			{
+				
+			}	
+		}
+		//CASO 2:FICHEIRO EXISTE -- > l� o ficheiro existente
+		else
+		{
+			
+			try
+			{
+				this.iS = new ObjectInputStream(new FileInputStream(this.fileVendas));
+				try
+				{
+					this.viewComics.setVendas((ArrayList<Venda>) iS.readObject());
 					iS.close();
 				}
 				catch(ClassNotFoundException y)

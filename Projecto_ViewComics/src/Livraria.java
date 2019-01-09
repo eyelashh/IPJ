@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,21 +24,16 @@ public class Livraria implements Serializable {
 	private String nome;
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Livro> livros;
-	private ArrayList<Transacao> transacoes;
-	private ArrayList<Sessao> sessoes;
 	private ArrayList<Carrinho> carrinhos;
 	private ArrayList<Venda> vendas;// para efeitos de historico de vendas, cada vez que um carrinho e
 									// eliminado/pago o seu conteudo transforma-se
 									// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
 
-	// criar um atributo privado estï¿½tico que ï¿½ da prï¿½pria classe
 
 	public Livraria() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.livros = new ArrayList<Livro>();
-		this.transacoes = new ArrayList<Transacao>();
-		this.sessoes = new ArrayList<Sessao>();
 		this.carrinhos = new ArrayList<Carrinho>();
 		this.vendas = new ArrayList<Venda>();
 	}
@@ -49,8 +46,6 @@ public class Livraria implements Serializable {
 		this.nome = nome;
 		this.utilizadores = utilizadores;
 		this.livros = livros;
-		this.transacoes = transacoes;
-		this.sessoes = sessoes;
 		this.carrinhos = carrinhos;
 		this.vendas = vendas;
 	}
@@ -89,22 +84,6 @@ public class Livraria implements Serializable {
 		this.livros = livros;
 	}
 
-	public ArrayList<Transacao> getTransacoes() {
-		return transacoes;
-	}
-
-	public void setTransacoes(ArrayList<Transacao> transacoes) {
-		this.transacoes = transacoes;
-	}
-
-	public ArrayList<Sessao> getSessoes() {
-		return sessoes;
-	}
-
-	public void setSessoes(ArrayList<Sessao> sessoes) {
-		this.sessoes = sessoes;
-	}
-
 	public ArrayList<Carrinho> getCarrinhos() {
 		return carrinhos;
 	}
@@ -113,22 +92,19 @@ public class Livraria implements Serializable {
 		this.carrinhos = carrinhos;
 	}
 
+	public ArrayList<Venda> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(ArrayList<Venda> vendas) {
+		this.vendas = vendas;
+	}
+
 	@Override
 	public String toString() {
 		return "Livraria [idLivraria=" + idLivraria + ", nome=" + nome + ", utilizadores=" + utilizadores + ", livros="
-				+ livros + ", transacoes=" + transacoes + ", sessoes=" + sessoes + ", carrinhos=" + carrinhos + "]";
+				+ livros + ", carrinhos=" + carrinhos + ", vendas=" + vendas + "]";
 	}
-
-	// inicia/adiciona uma sessao
-	public void addSessao(Sessao s) {
-		this.sessoes.add(s);
-	}
-
-	public void removeSessao(Sessao s) {
-		this.sessoes.remove(s);
-	}
-
-	// fecha/remove uma sessao
 
 	// adiciona livro
 	public void addLivro(Livro l) {
@@ -138,6 +114,12 @@ public class Livraria implements Serializable {
 	// remove um livro
 	public void removeLivros(Livro l) {
 		this.livros.remove(l);
+	}
+	public void addVenda(Venda v) {
+		this.vendas.add(v);
+	}
+	public void removeVenda(Venda v) {
+		this.vendas.remove(v);
 	}
 
 	public String devolveStock(int idLivro) {
@@ -170,12 +152,6 @@ public class Livraria implements Serializable {
 	public void removeUtilizador(Utilizador u) {
 		this.utilizadores.remove(u);
 	}
-
-	// adiciona transaccao
-	public void addTransacao(Transacao t) {
-		this.transacoes.add(t);
-	}
-
 	// adiciona um carrinho
 	public void addCarrinho(Carrinho c) {
 		this.carrinhos.add(c);
@@ -446,17 +422,10 @@ public class Livraria implements Serializable {
 
 		String[] listaLivros = new String[this.livros.size()];
 
-//		for(int i=0; i<livros.size();i++)
-//		{
-//			livro = ""+livros.get(i).getIdLivro();
-//			listaLivros[i]= livro;
-//			livro="";
-//		}
 		int i = 0;
 		for (Livro l : livros) {
 			listaLivros[i] = l.toString();
 			i++;
-
 		}
 
 		return listaLivros;
@@ -858,7 +827,7 @@ public class Livraria implements Serializable {
 		}
 
 	}
-
+	
 	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
@@ -1061,7 +1030,8 @@ public class Livraria implements Serializable {
 		return naoFinalizados;
 
 	}
-	// METODOS ESTATISTICA
+	
+// METODOS ESTATISTICA
 
 	public void updatePrecoLivro(int idLivro, Preco p) {
 
@@ -1105,6 +1075,52 @@ public class Livraria implements Serializable {
 
 		return precosArray;
 
-	};
+	}
+	
+	public void tabelaVendasMontante(DefaultTableModel dtm) {
+
+		ArrayList<Venda> vendas =this.vendas;
+
+		for (Venda v : vendas) {
+			int id = v.getId();
+			double montante=v.getMontante();
+			LocalDate data = v.getData();
+			Object[] dados = { id, montante,data };
+			dtm.addRow(dados);
+		}
+
+	}
+	public void incrementarVendasLivros(Venda v) {
+		
+		HashMap<Integer,Integer> venda = v.getConteudoVenda();
+		//id livro , quantidade
+		
+		for (HashMap.Entry<Integer, Integer> entry : venda.entrySet()) {
+		    int id = entry.getKey();
+		    int quantidade = entry.getValue();
+		    for (Livro l:this.livros) {
+		    	if (l.getIdLivro()==id) {
+		    		l.incrementarVendas(quantidade);
+		    	}
+		    }
+		}
+		
+	}
+	
+	public void tabelaLivrosVendas(DefaultTableModel dtm) {
+		
+		ArrayList<Livro> livros =this.livros;
+
+		for (Livro l : livros) {
+			int id = l.getIdLivro();
+			String titulo =l.getTitulo();
+			int vendas=l.getVendas();
+			Object[] dados = { id, titulo,vendas };
+			dtm.addRow(dados);
+		}
+
+		
+	}
+
 
 }
