@@ -148,7 +148,7 @@ public class AppFuncionario implements Serializable {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+						gl.getViewComics().getLivros(), gl.getViewComics().getVendas());
 			}
 
 		});
@@ -332,8 +332,8 @@ public class AppFuncionario implements Serializable {
 				if (!txtTotalPAGAMENTO.getText().isEmpty()) {
 					String nif = textFieldNifPagamento.getText();
 					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-					String total =txtTotalPAGAMENTO.getText();
-					String total2=total.replace(",", ".");
+					String total = txtTotalPAGAMENTO.getText();
+					String total2 = total.replace(",", ".");
 					double montante = Double.parseDouble(total2);
 					HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
 					Venda v = new Venda(montante, conteudoVenda, nif);
@@ -464,11 +464,12 @@ public class AppFuncionario implements Serializable {
 				jpFuncLivros.setVisible(false);
 				jpFuncConta.setVisible(false);
 				jpPagamento.setVisible(true);
+				if (!listNifsClientes.isSelectionEmpty()) {
+					int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
+					textFieldNifPagamento.setText(nif + "");
+					txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
 
-				int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
-				textFieldNifPagamento.setText(nif + "");
-				txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
-
+				}
 			}
 		});
 		btnPagamento.setBackground(SystemColor.controlHighlight);
@@ -891,7 +892,7 @@ public class AppFuncionario implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 
 				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+						gl.getViewComics().getLivros(), gl.getViewComics().getVendas());
 
 				AppCliente clt = new AppCliente();
 				clt.run();

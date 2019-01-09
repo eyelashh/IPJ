@@ -143,7 +143,7 @@ public class AppCliente implements Serializable {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+						gl.getViewComics().getLivros(), gl.getViewComics().getVendas());
 			}
 
 		});

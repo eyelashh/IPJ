@@ -231,7 +231,7 @@ public class GestaoLivraria implements Serializable{
 	
 	//GUARDAR OS FICHEIROS
 	//CHAMADO em caso de logOut / fecho janela
-	protected void atualizaficheiro(ArrayList<Utilizador> utilizador, ArrayList<Carrinho> carrinhos,ArrayList <Livro> livros)
+	protected void atualizaficheiro(ArrayList<Utilizador> utilizador, ArrayList<Carrinho> carrinhos,ArrayList <Livro> livros,ArrayList <Venda>vendas)
 	{
 		try
 		{
@@ -258,6 +258,16 @@ public class GestaoLivraria implements Serializable{
 		{
 			oS = new ObjectOutputStream(new FileOutputStream(this.fileLivros));
 			oS.writeObject(livros);
+			oS.close();
+		}
+		catch(IOException e)
+		{
+			
+		}
+		try
+		{
+			oS = new ObjectOutputStream(new FileOutputStream(this.fileVendas));
+			oS.writeObject(vendas);
 			oS.close();
 		}
 		catch(IOException e)

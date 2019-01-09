@@ -99,8 +99,8 @@ public class AppAdmin implements Serializable {
 			return returnValue;
 		}
 	};
-	String[] colunasVendas = { "ID", "Montante", "Data" };
-	DefaultTableModel modeloTabelaVENDAS = new DefaultTableModel(colunasVendas, 0) {
+	String[] colunasVendas = { "ID", "Montante","Data"};
+	DefaultTableModel modeloVendasMontante = new DefaultTableModel(colunasVendas, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
@@ -170,7 +170,7 @@ public class AppAdmin implements Serializable {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+						gl.getViewComics().getLivros(), gl.getViewComics().getVendas());
 			}
 		});
 		DefaultListModel<String> modeloListaLivros = new DefaultListModel<String>();
@@ -332,13 +332,13 @@ public class AppAdmin implements Serializable {
 		textField_2.setColumns(10);
 		textField_2.setBounds(93, 55, 246, 26);
 		jpAdmEstatisticas.add(textField_2);
-		gl.viewComics.tabelaVendasMontante(modeloTabelaVENDAS);
 
 		JScrollPane scrollVendasMontante = new JScrollPane();
 		scrollVendasMontante.setBounds(360, 75, 216, 459);
 		jpAdmEstatisticas.add(scrollVendasMontante);
 
-		tabelaVendasMontante = new JTable(modeloTabelaVENDAS);
+		tabelaVendasMontante = new JTable(modeloVendasMontante);
+		gl.viewComics.tabelaVendaMontante(modeloVendasMontante);
 		tabelaVendasMontante.setAutoCreateRowSorter(true);
 		scrollVendasMontante.setViewportView(tabelaVendasMontante);
 
@@ -1064,7 +1064,7 @@ public class AppAdmin implements Serializable {
 			public void actionPerformed(ActionEvent arg0) {
 
 				gl.atualizaficheiro(gl.getViewComics().getUtilizadores(), gl.getViewComics().getCarrinhos(),
-						gl.getViewComics().getLivros());
+						gl.getViewComics().getLivros(),gl.getViewComics().getVendas());
 
 				AppCliente clt = new AppCliente();
 				clt.run();
