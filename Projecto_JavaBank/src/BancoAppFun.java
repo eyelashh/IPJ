@@ -338,11 +338,11 @@ public class BancoAppFun implements Serializable {
 		bttConfirmarEliminação.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
-				
 				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
 						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(), gb.javabank.getContas());
+
+				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(),
+						gb.javabank.getContas());
 
 				lContas.clearSelection();
 				tbContasnum.setText(null);
@@ -356,9 +356,7 @@ public class BancoAppFun implements Serializable {
 				tblJuros.setText(null);
 				dateChooser_2.setEnabled(true);
 				tbllimitemes.setText(null);
-				
-				
-				
+
 				dmconta.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 				tbnomecartao.setText(null);
@@ -384,6 +382,7 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				jpanelContas.setVisible(true);
+				jpanelEliminarContaDataFecho.setVisible(false);
 
 			}
 		});
