@@ -292,16 +292,19 @@ public class BancoAppAdm implements Serializable {
 		scrollPane_1.setViewportView(table_1);
 
 		textFieldnNovasConta = new JTextField();
+		textFieldnNovasConta.setEditable(false);
 		textFieldnNovasConta.setBounds(455, 407, 321, 33);
 		JPAdmEstatistica.add(textFieldnNovasConta);
 		textFieldnNovasConta.setColumns(10);
 
 		textFieldFechaConat = new JTextField();
+		textFieldFechaConat.setEditable(false);
 		textFieldFechaConat.setColumns(10);
 		textFieldFechaConat.setBounds(455, 446, 321, 33);
 		JPAdmEstatistica.add(textFieldFechaConat);
 
 		textFieldTotalCapital = new JTextField();
+		textFieldTotalCapital.setEditable(false);
 		textFieldTotalCapital.setColumns(10);
 		textFieldTotalCapital.setBounds(455, 491, 321, 33);
 		JPAdmEstatistica.add(textFieldTotalCapital);
@@ -371,6 +374,7 @@ public class BancoAppAdm implements Serializable {
 		JPAdmEstatistica.add(lblBalano);
 
 		textFieldBalanco = new JTextField();
+		textFieldBalanco.setEditable(false);
 		textFieldBalanco.setColumns(10);
 		textFieldBalanco.setBounds(455, 536, 321, 33);
 		JPAdmEstatistica.add(textFieldBalanco);
