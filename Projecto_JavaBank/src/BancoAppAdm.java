@@ -279,37 +279,37 @@ public class BancoAppAdm implements Serializable {
 		JPAdmEstatistica.add(scrollPane_1);
 		table_1 = new JTable(modeloTabelaEstatistica);
 		scrollPane_1.setViewportView(table_1);
-		
+
 		textFieldnNovasConta = new JTextField();
 		textFieldnNovasConta.setBounds(455, 407, 321, 33);
 		JPAdmEstatistica.add(textFieldnNovasConta);
 		textFieldnNovasConta.setColumns(10);
-		
+
 		textFieldFechaConat = new JTextField();
 		textFieldFechaConat.setColumns(10);
 		textFieldFechaConat.setBounds(455, 446, 321, 33);
 		JPAdmEstatistica.add(textFieldFechaConat);
-		
+
 		textFieldTotalCapital = new JTextField();
 		textFieldTotalCapital.setColumns(10);
 		textFieldTotalCapital.setBounds(455, 491, 321, 33);
 		JPAdmEstatistica.add(textFieldTotalCapital);
-		
+
 		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
 		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblContasNovas.setBounds(237, 407, 247, 33);
 		JPAdmEstatistica.add(lblContasNovas);
-		
+
 		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
 		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblNmeroDeContas.setBounds(212, 444, 247, 33);
 		JPAdmEstatistica.add(lblNmeroDeContas);
-		
+
 		JLabel lblTotalCapital = new JLabel("Total Capital: ");
 		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
 		lblTotalCapital.setBounds(335, 489, 124, 33);
 		JPAdmEstatistica.add(lblTotalCapital);
-		
+
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setBounds(609, 53, 117, 29);
 		JPAdmEstatistica.add(btnPesquisar);
