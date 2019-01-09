@@ -344,9 +344,15 @@ public class BancoAppAdm implements Serializable {
 				modeloTabelaEstatistica.setRowCount(0);
 				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
 						data2);
-				
-				int numeroContasNovas = ;
-				textFieldnNovasConta.setText(gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2));
+
+				int numeroContasNovas = gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2);
+				textFieldnNovasConta.setText(Integer.toString(numeroContasNovas));
+
+				int numeroContasFechadas = gb.javabank.numeroContasFechadas(gb.javabank.getContas(), data1, data2);
+				textFieldFechaConat.setText(Integer.toString(numeroContasFechadas));
+
+				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
+				textFieldTotalCapital.setText(Integer.toString(totalCapital));
 
 			}
 		});

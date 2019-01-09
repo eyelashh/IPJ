@@ -466,6 +466,7 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
 				contas.get(i).setAberta(false);
+				contas.get(i).setSaldo(0);
 				contas.get(i).setDataFecho(datafecho);
 			}
 		}
@@ -509,7 +510,7 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela conta na estatistica:
-	protected void numeroContasAbertas(ArrayList<Conta> contas, Date data1, Date data2) {
+	protected int numeroContasAbertas(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int cont = 0;
 
@@ -519,6 +520,36 @@ public class Banco implements Serializable {
 				cont++;
 			}
 		}
+		return cont;
+	}
+
+	// retornar quantas contas abertas existem:
+	protected int numeroContasFechadas(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int cont = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))
+					&& contas.get(i).isAberta() == false) {
+				cont++;
+			}
+		}
+		return cont;
+	}
+
+	// preenche tabela conta na estatistica:
+	protected int totalCapital(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int soma = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))) {
+
+				soma += contas.get(i).getSaldo();
+
+			}
+		}
+		return soma;
 	}
 
 	// preenche tabela clientes no cliente:
