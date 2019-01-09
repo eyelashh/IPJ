@@ -376,11 +376,28 @@ public class Banco implements Serializable {
 	}
 
 	// elimina utilizador do arraylist
-	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador) {
+	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador, ArrayList<Conta> contas) {
+		
+		Integer remove = 0; 
+		for(int x=0; x<contas.size(); x++)
+		{
+			for(int y=0; y<contas.get(x).getClientes().size();y++ )
+			{
+				if(contas.get(x).getClientes().get(y)==id)
+				 {
+					 remove = id;
+					 contas.get(x).getClientes().remove(remove);
+				 }
+			}
+		 
+		}
+		
 		for (int i = 0; i < utilizador.size(); i++) {
 			if (utilizador.get(i).getIdUtilizador() == id) {
 				utilizador.remove(i);
 			}
+			
+			
 		}
 	}
 
@@ -449,10 +466,11 @@ public class Banco implements Serializable {
 	}
 
 	// elimina contas:
-	protected void eliminaconta(int id, ArrayList<Conta> contas) {
+	protected void eliminaconta(int id, Date datafecho, ArrayList<Conta> contas) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
-				contas.remove(i);
+				contas.get(i).setAberta(false);
+				contas.get(i).setDataFecho(datafecho);
 			}
 		}
 	}
@@ -471,6 +489,22 @@ public class Banco implements Serializable {
 		}
 	}
 
+	// preenche tabela conta na estatistica:
+	protected void preenchetabelaContaEstatistica(DefaultTableModel model, ArrayList<Conta> contas) {
+		int id = 0;
+		String nome;
+
+		for (int i = 0; i < contas.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
+				id = clientes.get(i).getIdUtilizador();
+				nome = clientes.get(i).getNome();
+				model.addRow(new Object[] { false, id, nome });
+
+			}
+		}
+	}
+
+	
 	// preenche tabela clientes no cliente:
 	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
 		int id = 0;
@@ -738,6 +772,9 @@ public class Banco implements Serializable {
 		}
 
 	}
+
+	
+	
 
 	// retorna o cartao
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {

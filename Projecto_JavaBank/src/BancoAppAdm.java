@@ -27,6 +27,10 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
@@ -256,13 +260,13 @@ public class BancoAppAdm implements Serializable {
 		JPAdmEstatistica.setLayout(null);
 		JPAdm.add(JPAdmEstatistica);
 
-		JDateChooser dateChooser_2 = new JDateChooser();
-		dateChooser_2.setBounds(55, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooser_2);
+		JDateChooser dateChooserInicio = new JDateChooser();
+		dateChooserInicio.setBounds(55, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserInicio);
 
-		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setBounds(329, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooser_3);
+		JDateChooser dateChooserFim = new JDateChooser();
+		dateChooserFim.setBounds(329, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserFim);
 
 		JLabel lblDataInicial = new JLabel("Data Inicio:");
 		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
@@ -311,12 +315,45 @@ public class BancoAppAdm implements Serializable {
 		JPAdmEstatistica.add(lblTotalCapital);
 
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+//				Date dateChooserInicio; // your date
+//				Calendar cal = Calendar.getInstance();
+//				cal.setTime(dateChooserInicio);
+//				int year = cal.get(Calendar.YEAR);
+//				int month = cal.get(Calendar.MONTH);
+//				int day = cal.get(Calendar.DAY_OF_MONTH);
+//
+//				Date dateChooserFim; // your date
+//				Calendar cal2 = Calendar.getInstance();
+//				cal.setTime(dateChooserInicio);
+//				int year2 = cal2.get(Calendar.YEAR);
+//				int month2 = cal2.get(Calendar.MONTH);
+//				int day2 = cal2.get(Calendar.DAY_OF_MONTH);
+
+				for (Date dt = dateChooserInicio.getDate(); dt.compareTo(dateChooserFim.getDate()) <= 0;) {
+					for (int i = 0; i < gb.javabank.getContas().size(); i++) {
+
+						if (gb.javabank.getContas().get(i).getDataCriacao().after(dateChooserInicio.getDate())
+								&& gb.javabank.getContas().get(i).getDataCriacao().before(dateChooserFim.getDate())) {
+
+						}
+
+//						System.out.println(df.format(dt));
+//						cal.add(Calendar.DATE, +1);
+//						dt = cal.getTime();
+					}
+				}
+			}
+		});
 		btnPesquisar.setBounds(609, 53, 117, 29);
 		JPAdmEstatistica.add(btnPesquisar);
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
 		JPAdm.add(jpConta);
+		jpConta.setVisible(false);
 		jpConta.setLayout(null);
 
 		tbadmcontanumero = new JTextField();
@@ -946,7 +983,8 @@ public class BancoAppAdm implements Serializable {
 						JOptionPane.showMessageDialog(null, "Nao pode eliminar o seu proprio utilizador!");
 					} else {
 
-						gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+						gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores(),
+								gb.javabank.getContas());
 
 						// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 						dmFun.removeAllElements();
