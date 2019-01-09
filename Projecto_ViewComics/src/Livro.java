@@ -12,8 +12,10 @@ public class Livro implements  Serializable {
 	private int stock;
 	private String descricao;
 	private int ano;
+	private int vendas;
 	private ArrayList <Preco> precos; //para fins de historico de preços
 	private static AtomicInteger ai=new AtomicInteger(0);
+	
 	
 	public Livro() {
 		super();
@@ -33,6 +35,15 @@ public class Livro implements  Serializable {
 		this.descricao=descricao;
 		this.precos=new ArrayList <Preco> (); 
  
+	}
+	
+
+	public int getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(int vendas) {
+		this.vendas = vendas;
 	}
 
 	public int getAno() {
@@ -105,6 +116,9 @@ public class Livro implements  Serializable {
 	}
 	public void addAlteracaoPreco(Preco p) {
 		this.precos.add(p);
+	}
+	public void incrementarVendas(int quantidade) {
+		this.vendas=this.vendas+quantidade;
 	}
 
 }

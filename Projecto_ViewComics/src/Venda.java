@@ -4,9 +4,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Venda implements Serializable{
 	
+	private static AtomicInteger aiVenda=new AtomicInteger(0);
+	private int id;
 	private String nif;
 	private double montante;
 	private static LocalDate data;
@@ -17,10 +20,27 @@ public class Venda implements Serializable{
 		super();
 		this.montante = montante;
 		this.conteudoVenda = conteudoVenda;
-	
-		//confirmar se isto gera a data no momento!!!!
+		this.nif=nif;
+		this.id=aiVenda.incrementAndGet();
 		this.data= data.now();
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+
 	public double getMontante() {
 		return montante;
 	}

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -88,17 +89,17 @@ public class AppFuncionario implements Serializable {
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
 
-	private  GestaoLivraria gl;
-	private  Funcionario func;
+	private GestaoLivraria gl;
+	private Funcionario func;
 	private JTextField txtPrecoCarrinho;
 	private JTextField txtQuantidadeLivrosCarrinho;
 	private JTable tabelaCarrinhos;
 	String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0){
+	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
-};
+	};
 	DefaultListModel<String> modeloListaNif = new DefaultListModel<String>();
 	JPanel jpPagamento = new JPanel();
 	JPanel jpFuncLivros = new JPanel();
@@ -302,8 +303,8 @@ public class AppFuncionario implements Serializable {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String totalComVirgula=txtTotalPAGAMENTO.getText();
-					String totalSemVirgula=totalComVirgula.replace(',', '.');
+					String totalComVirgula = txtTotalPAGAMENTO.getText();
+					String totalSemVirgula = totalComVirgula.replace(',', '.');
 					Double total = Double.parseDouble(totalSemVirgula);
 					Double recebido = Double.parseDouble(txtRecebidoPAGAMENTO.getText());
 					Double troco = recebido - total;
@@ -328,11 +329,17 @@ public class AppFuncionario implements Serializable {
 		btnConcluirPagamento.setBounds(33, 114, 125, 30);
 		btnConcluirPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				String nif = textFieldNifPagamento.getText();
-				Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-				
-
+				if (!txtTotalPAGAMENTO.getText().isEmpty()) {
+					String nif = textFieldNifPagamento.getText();
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+					String total =txtTotalPAGAMENTO.getText();
+					String total2=total.replace(",", ".");
+					double montante = Double.parseDouble(total2);
+					HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
+					Venda v = new Venda(montante, conteudoVenda, nif);
+					gl.viewComics.addVenda(v);
+					gl.viewComics.incrementarVendasLivros(v);
+				}
 			}
 		});
 		jpDinheiro.add(btnConcluirPagamento);
@@ -376,7 +383,7 @@ public class AppFuncionario implements Serializable {
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 
 			public void valueChanged(ListSelectionEvent e) {
-				//limpa tabela
+				// limpa tabela
 				modeloTabelaCarrinhos.setRowCount(0);
 
 				// se a lista estiver seleccionada, copia para as caixas de texto
