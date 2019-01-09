@@ -199,6 +199,13 @@ public class Validador {
 
 		return teste;
 	}
+	
+	protected boolean valsaldo(String valor) {
+		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
+
+		return teste;
+	}
+	
 
 	// OPERAÇOES:
 

@@ -585,8 +585,18 @@ public class BancoAppFun implements Serializable {
 					Conta c;
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
 					if (rdbtnContaCorrente.isSelected()) {
+<<<<<<< HEAD
+						if(val.valVMaxLevConta(tbContaslimitelevop.getText())&&val.valVMaxLevContaDia(tbContaslimitelevdia.getText())&&val.valsaldo(tbContasSaldo.getText()))
+						{
+						double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
+						double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
+						if(vlevia)
+						{
+					
+=======
 						// if()
 						// {
+>>>>>>> 3d59b25ffb69860004c335060137c69169099257
 						// CRIA NOVA CONTA
 
 						// cartao nulo inicialmente;
@@ -598,7 +608,16 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.getContas().add(c);
 						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+<<<<<<< HEAD
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Limite dia inferior ao");
+						}
+						}
+=======
 						// }
+>>>>>>> 3d59b25ffb69860004c335060137c69169099257
 					} else {
 
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
