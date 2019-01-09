@@ -458,9 +458,8 @@ public class BancoAppFun implements Serializable {
 		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btGestaouserconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(val.valUsername(tbGestaoNovoUser.getText(), gb.javabank.getUtlizadores()))
-				{
+
+				if (val.valUsername(tbGestaoNovoUser.getText(), gb.javabank.getUtlizadores())) {
 					if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
 						func.setUsername(tbGestaoNovoUser.getText());
 						tbGestaoUsername.setText(null);
@@ -468,17 +467,14 @@ public class BancoAppFun implements Serializable {
 						tbGestaoNovoUser.setText(null);
 						JOptionPane.showMessageDialog(null, "Alteracao de Nome efectuado com sucesso");
 						lUtilizador.setText(func.getNome());
-					} 
-					else {
-						
+					} else {
+
 						JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "O username jï¿½ existe, insira outro pf.");
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
-				}
-				
+
 			}
 		});
 		btGestaouserconfirmar.setBounds(415, 415, 131, 41);
@@ -526,23 +522,19 @@ public class BancoAppFun implements Serializable {
 		btGestaopassConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
 						&& new String(tbGestaoNovapass.getPassword())
 								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
-					
-					if(val.valPassword(String.valueOf(tbGestaoNovapass.getPassword())))
-					{
 
-					func.setPassword(new String(tbGestaoNovapass.getPassword()));
-					JOptionPane.showMessageDialog(null, "Alteraï¿½ï¿½o efectuada com sucesso!");
-					tbGestaoPass.setText(null);
-					tbGestaoNovapass.setText(null);
-					tbGestaoConfirmPass.setText(null);
+					if (val.valPassword(String.valueOf(tbGestaoNovapass.getPassword()))) {
 
-					}
-					else
-					{
+						func.setPassword(new String(tbGestaoNovapass.getPassword()));
+						JOptionPane.showMessageDialog(null, "Alteraï¿½ï¿½o efectuada com sucesso!");
+						tbGestaoPass.setText(null);
+						tbGestaoNovapass.setText(null);
+						tbGestaoConfirmPass.setText(null);
+
+					} else {
 						JOptionPane.showMessageDialog(null, "Password nao cumpre requisitos");
 					}
 				} else {
@@ -1077,7 +1069,7 @@ public class BancoAppFun implements Serializable {
 				dmconta.removeAllElements();
 				if (cbContaspesqconta.getSelectedItem().equals("Numero de conta")) {
 					String numConta = tbContaspesqconta.getText();
-					String[] contasNumConta = gb.javabank.listaContasNumConta(numConta);
+					String[] contasNumConta = gb.javabank.listaContasNumContaAbertas(numConta);
 					gb.javabank.addelementoslist(contasNumConta, dmconta);
 
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
@@ -1088,10 +1080,6 @@ public class BancoAppFun implements Serializable {
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas poupanca")) {
 					String[] contasPoup = gb.javabank.listaContasPoupanca();
 					gb.javabank.addelementoslist(contasPoup, dmconta);
-				} else if (cbContaspesqconta.getSelectedItem().equals("Titular")) {
-					String id = tbContaspesqconta.getText();
-					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-					gb.javabank.addelementoslist(contasCliente, dmconta);
 
 				}
 			}
