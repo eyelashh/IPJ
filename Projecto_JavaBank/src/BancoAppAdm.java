@@ -363,6 +363,7 @@ public class BancoAppAdm implements Serializable {
 				textFieldnNovasConta.setText(null);
 				textFieldFechaConat.setText(null);
 				textFieldTotalCapital.setText(null);
+				textFieldBalanco.setText(null);
 			}
 		});
 		btnLimpar_1.setBounds(738, 53, 117, 29);
