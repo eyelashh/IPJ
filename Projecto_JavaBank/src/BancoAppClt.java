@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -230,6 +232,172 @@ public class BancoAppClt implements Serializable {
 		// Painel principal gestao
 		JPanel JPCltGestao = new JPanel();
 		JPCltGestao.setVisible(false);
+
+		// Painel principal cartao
+		JPanel JPCltCartao = new JPanel();
+		JPCltCartao.setBounds(16, 16, 1032, 563);
+		JpanelPrincipal.add(JPCltCartao);
+		JPCltCartao.setLayout(null);
+		JPCltCartao.setVisible(false);
+
+		JComboBox comboBoxContasCartao = new JComboBox(pesquisaContasCartao);
+
+		comboBoxContasCartao.setBounds(623, 82, 249, 39);
+		JPCltCartao.add(comboBoxContasCartao);
+
+		JLabel lblNomeAGravar = new JLabel("Nome:");
+		lblNomeAGravar.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNomeAGravar.setBounds(623, 203, 229, 23);
+		JPCltCartao.add(lblNomeAGravar);
+
+		textFieldNomeCartao = new JTextField();
+
+		textFieldNomeCartao.setBounds(633, 235, 239, 31);
+		JPCltCartao.add(textFieldNomeCartao);
+
+		JLabel lblCdigoDigitos = new JLabel("COD:");
+		lblCdigoDigitos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblCdigoDigitos.setBounds(623, 353, 172, 23);
+		JPCltCartao.add(lblCdigoDigitos);
+
+		textFieldCOD = new JTextField();
+		textFieldCOD.setEditable(false);
+		textFieldCOD.setBounds(635, 377, 227, 30);
+		JPCltCartao.add(textFieldCOD);
+
+		JDateChooser dateChooserCartao = new JDateChooser();
+		dateChooserCartao.setEnabled(false);
+		dateChooserCartao.setDate(Date.valueOf(LocalDate.now()));
+		dateChooserCartao.setBounds(633, 310, 239, 31);
+		JPCltCartao.add(dateChooserCartao);
+
+		JButton btnPedirCarto = new JButton("Pedir Cartão");
+		btnPedirCarto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (comboBoxContasCartao.getSelectedIndex() != -1) {
+
+					String s = (String) comboBoxContasCartao.getSelectedItem();
+					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+					// verifica se a conta já tem cartao
+					if (((ContaCorrente) conta).getCartao() != 0) {
+
+						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
+						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+					}
+
+					// adiciona um cartao á conta
+					if (((ContaCorrente) conta).getCartao() == 0) {
+
+						// gera o codigo de 3 digitos:
+						// gera numero de cartao de 5 digitoas;
+						int idcartao = val.valIdCartao(gb.javabank.getCartoes());
+						int nvalcartao = val.valCodCartao();
+
+						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
+
+							Calendar cal = new GregorianCalendar();
+							cal.setTime(Date.valueOf(LocalDate.now()));
+							cal.add(Calendar.YEAR, 5);
+
+							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(), cal.getTime(), nvalcartao,
+									conta.getIdConta(), true);
+							gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
+
+							textFieldCOD.setText(nvalcartao + "");
+							tbcltcartaonumero.setText(idcartao + "");
+
+							textFieldNomeCartao.setEditable(false);
+							dateChooserCartao.setEnabled(false);
+							textFieldCOD.setEditable(false);
+							JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+						} else {
+
+							JOptionPane.showMessageDialog(null, "Corriga o nome no cartao!");
+						}
+
+					}
+
+				}
+			}
+		});
+		btnPedirCarto.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnPedirCarto.setBounds(623, 438, 120, 38);
+		JPCltCartao.add(btnPedirCarto);
+
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				comboBoxContasCartao.getSelectedIndex();
+				tbcltcartaonumero.setText("");
+				textFieldNomeCartao.setText("");
+				dateChooserCartao.setDate(Date.valueOf(LocalDate.now()));
+				textFieldCOD.setText("");
+
+			}
+		});
+		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnLimpar.setBounds(767, 439, 120, 38);
+		JPCltCartao.add(btnLimpar);
+
+		JLabel lblCartoVerde = new JLabel("Cartão Verde");
+		lblCartoVerde.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblCartoVerde.setBounds(116, 341, 151, 16);
+		JPCltCartao.add(lblCartoVerde);
+
+		JLabel lblValidadeAnos = new JLabel("Validade: 5 anos");
+		lblValidadeAnos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblValidadeAnos.setBounds(116, 371, 151, 16);
+		JPCltCartao.add(lblValidadeAnos);
+
+		JLabel lblRedeVisaE = new JLabel("Rede: Visa e Multibanco");
+		lblRedeVisaE.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblRedeVisaE.setBounds(116, 402, 264, 16);
+		JPCltCartao.add(lblRedeVisaE);
+
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(
+				new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/cartao34.jpg"));
+		lblNewLabel_1.setBounds(99, 93, 335, 207);
+		JPCltCartao.add(lblNewLabel_1);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setForeground(Color.BLACK);
+		separator_2.setAlignmentX(0.0f);
+		separator_2.setBounds(509, 69, 29, 433);
+		JPCltCartao.add(separator_2);
+
+		JLabel label_11 = new JLabel("Validade");
+		label_11.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_11.setBounds(623, 282, 72, 16);
+		JPCltCartao.add(label_11);
+
+		tbcltcartaonumero = new JTextField();
+		tbcltcartaonumero.setEditable(false);
+		tbcltcartaonumero.setBounds(632, 159, 240, 31);
+		JPCltCartao.add(tbcltcartaonumero);
+
+		JLabel lblNumeroDoCartao = new JLabel("Numero do Cartao:");
+		lblNumeroDoCartao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		lblNumeroDoCartao.setBounds(622, 127, 229, 23);
+		JPCltCartao.add(lblNumeroDoCartao);
+
+		comboBoxContasCartao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBoxContasCartao.getSelectedIndex() != -1) {
+					ContaCorrente conta = (ContaCorrente) gb.javabank.SelectConta(
+							Integer.parseInt((String) comboBoxContasCartao.getSelectedItem()), gb.javabank.getContas());
+					Cartao c = gb.javabank.obterCartao(gb.javabank.getCartoes(), conta.getCartao());
+					textFieldNomeCartao.setText(c.getNomeTitular());
+					tbcltcartaonumero.setText(c.getnCartao() + "");
+					dateChooserCartao.setDate(c.getDataValidade());
+					textFieldCOD.setText(c.getCodvalidacao() + "");
+				}
+			}
+		});
 		JPCltGestao.setBounds(16, 16, 1032, 563);
 		JpanelPrincipal.add(JPCltGestao);
 		JPCltGestao.setLayout(null);
@@ -849,153 +1017,6 @@ public class BancoAppClt implements Serializable {
 			}
 		});
 
-		// Painel principal cartao
-		JPanel JPCltCartao = new JPanel();
-		JPCltCartao.setBounds(16, 16, 1032, 563);
-		JpanelPrincipal.add(JPCltCartao);
-		JPCltCartao.setLayout(null);
-		JPCltCartao.setVisible(false);
-
-		JComboBox comboBoxContasCartao = new JComboBox(pesquisaContasCartao);
-
-		comboBoxContasCartao.setBounds(623, 82, 249, 39);
-		JPCltCartao.add(comboBoxContasCartao);
-
-		JLabel lblNomeAGravar = new JLabel("Nome:");
-		lblNomeAGravar.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNomeAGravar.setBounds(623, 203, 229, 23);
-		JPCltCartao.add(lblNomeAGravar);
-
-		textFieldNomeCartao = new JTextField();
-
-		textFieldNomeCartao.setBounds(633, 235, 239, 31);
-		JPCltCartao.add(textFieldNomeCartao);
-
-		JLabel lblCdigoDigitos = new JLabel("COD:");
-		lblCdigoDigitos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblCdigoDigitos.setBounds(623, 353, 172, 23);
-		JPCltCartao.add(lblCdigoDigitos);
-
-		textFieldCOD = new JTextField();
-		textFieldCOD.setEditable(false);
-		textFieldCOD.setBounds(635, 377, 227, 30);
-		JPCltCartao.add(textFieldCOD);
-
-		JDateChooser dateChooserCartao = new JDateChooser();
-		dateChooserCartao.setEnabled(false);
-		dateChooserCartao.setDate(Date.valueOf(LocalDate.now()));
-		dateChooserCartao.setBounds(633, 310, 239, 31);
-		JPCltCartao.add(dateChooserCartao);
-
-		JButton btnPedirCarto = new JButton("Pedir Cartão");
-		btnPedirCarto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (comboBoxContasCartao.getSelectedIndex() != -1) {
-
-					String s = (String) comboBoxContasCartao.getSelectedItem();
-					Conta conta = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-
-					// verifica se a conta já tem cartao
-					if (((ContaCorrente) conta).getCartao() != 0) {
-
-						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
-						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
-					}
-
-					// adiciona um cartao á conta
-					if (((ContaCorrente) conta).getCartao() == 0) {
-
-						// gera o codigo de 3 digitos:
-						// gera numero de cartao de 5 digitoas;
-						int idcartao = val.valIdCartao(gb.javabank.getCartoes());
-						int nvalcartao = val.valCodCartao();
-
-						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
-							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(),
-									dateChooserCartao.getDate(), nvalcartao, conta.getIdConta(), true);
-							gb.javabank.criaCartao(Integer.parseInt(s), card, conta);
-
-							textFieldCOD.setText(nvalcartao + "");
-							tbcltcartaonumero.setText(idcartao + "");
-
-							textFieldNomeCartao.setEditable(false);
-							dateChooserCartao.setEnabled(false);
-							textFieldCOD.setEditable(false);
-							JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
-						} else {
-
-							JOptionPane.showMessageDialog(null, "Corriga o nome no cartao!");
-						}
-
-					}
-
-				}
-			}
-		});
-		btnPedirCarto.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnPedirCarto.setBounds(623, 438, 120, 38);
-		JPCltCartao.add(btnPedirCarto);
-
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				comboBoxContasCartao.getSelectedIndex();
-				tbcltcartaonumero.setText("");
-				textFieldNomeCartao.setText("");
-				dateChooserCartao.setDate(Date.valueOf(LocalDate.now()));
-				textFieldCOD.setText("");
-
-			}
-		});
-		btnLimpar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnLimpar.setBounds(767, 439, 120, 38);
-		JPCltCartao.add(btnLimpar);
-
-		JLabel lblCartoVerde = new JLabel("Cartão Verde");
-		lblCartoVerde.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblCartoVerde.setBounds(116, 341, 151, 16);
-		JPCltCartao.add(lblCartoVerde);
-
-		JLabel lblValidadeAnos = new JLabel("Validade: 5 anos");
-		lblValidadeAnos.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblValidadeAnos.setBounds(116, 371, 151, 16);
-		JPCltCartao.add(lblValidadeAnos);
-
-		JLabel lblRedeVisaE = new JLabel("Rede: Visa e Multibanco");
-		lblRedeVisaE.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblRedeVisaE.setBounds(116, 402, 264, 16);
-		JPCltCartao.add(lblRedeVisaE);
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(
-				new ImageIcon("/Users/tamarabarros/Dropbox/IPJ_ProjectoFinal/Design/JavaBank2/imagens/cartao34.jpg"));
-		lblNewLabel_1.setBounds(99, 93, 335, 207);
-		JPCltCartao.add(lblNewLabel_1);
-
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setForeground(Color.BLACK);
-		separator_2.setAlignmentX(0.0f);
-		separator_2.setBounds(509, 69, 29, 433);
-		JPCltCartao.add(separator_2);
-
-		JLabel label_11 = new JLabel("Validade");
-		label_11.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_11.setBounds(623, 282, 72, 16);
-		JPCltCartao.add(label_11);
-
-		tbcltcartaonumero = new JTextField();
-		tbcltcartaonumero.setEditable(false);
-		tbcltcartaonumero.setBounds(632, 159, 240, 31);
-		JPCltCartao.add(tbcltcartaonumero);
-
-		JLabel lblNumeroDoCartao = new JLabel("Numero do Cartao:");
-		lblNumeroDoCartao.setFont(new Font("Dialog", Font.PLAIN, 17));
-		lblNumeroDoCartao.setBounds(622, 127, 229, 23);
-		JPCltCartao.add(lblNumeroDoCartao);
-
 		JTextField tbAdmFunPesq = new JTextField();
 		tbAdmFunPesq.setBounds(12, 52, 240, 30);
 		tbAdmFunPesq.setColumns(10);
@@ -1092,20 +1113,6 @@ public class BancoAppClt implements Serializable {
 				}
 				if (clt.getTipoIndentificacao().equals("Passaporte")) {
 					radioButton_2.setSelected(true);
-				}
-			}
-		});
-
-		comboBoxContasCartao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (comboBoxContasCartao.getSelectedIndex() != -1) {
-					ContaCorrente conta = (ContaCorrente) gb.javabank.SelectConta(
-							Integer.parseInt((String) comboBoxContasCartao.getSelectedItem()), gb.javabank.getContas());
-					Cartao c = gb.javabank.obterCartao(gb.javabank.getCartoes(), conta.getCartao());
-					textFieldNomeCartao.setText(c.getNomeTitular());
-					tbcltcartaonumero.setText(c.getnCartao() + "");
-					dateChooserCartao.setDate(c.getDataValidade());
-					textFieldCOD.setText(c.getCodvalidacao() + "");
 				}
 			}
 		});
