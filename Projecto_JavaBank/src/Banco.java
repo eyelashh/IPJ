@@ -172,9 +172,12 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
+			if(cont.get(i).isAberta())
+			{
 			s = "" + cont.get(i).getIdConta();
 			numcontas[i] = s;
 			s = "";
+			}
 		}
 		return numcontas;
 	}
