@@ -458,9 +458,8 @@ public class BancoAppFun implements Serializable {
 		btGestaouserconfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btGestaouserconfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(val.valUsername(tbGestaoNovoUser.getText(), gb.javabank.getUtlizadores()))
-				{
+
+				if (val.valUsername(tbGestaoNovoUser.getText(), gb.javabank.getUtlizadores())) {
 					if (func.getPassword().equals(new String(tbGestaopassuser.getPassword()))) {
 						func.setUsername(tbGestaoNovoUser.getText());
 						tbGestaoUsername.setText(null);
@@ -468,17 +467,14 @@ public class BancoAppFun implements Serializable {
 						tbGestaoNovoUser.setText(null);
 						JOptionPane.showMessageDialog(null, "Alteracao de Nome efectuado com sucesso");
 						lUtilizador.setText(func.getNome());
-					} 
-					else {
-						
+					} else {
+
 						JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
 					}
-				}
-				else
-				{
+				} else {
 					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
 				}
-				
+
 			}
 		});
 		btGestaouserconfirmar.setBounds(415, 415, 131, 41);
@@ -526,23 +522,19 @@ public class BancoAppFun implements Serializable {
 		btGestaopassConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				if ((func.getPassword().equals(new String(tbGestaoPass.getPassword())))
 						&& new String(tbGestaoNovapass.getPassword())
 								.equals(new String(tbGestaoConfirmPass.getPassword()))) {
-					
-					if(val.valPassword(String.valueOf(tbGestaoNovapass.getPassword())))
-					{
 
-					func.setPassword(new String(tbGestaoNovapass.getPassword()));
-					JOptionPane.showMessageDialog(null, "Alteraï¿½ï¿½o efectuada com sucesso!");
-					tbGestaoPass.setText(null);
-					tbGestaoNovapass.setText(null);
-					tbGestaoConfirmPass.setText(null);
+					if (val.valPassword(String.valueOf(tbGestaoNovapass.getPassword()))) {
 
-					}
-					else
-					{
+						func.setPassword(new String(tbGestaoNovapass.getPassword()));
+						JOptionPane.showMessageDialog(null, "Alteraï¿½ï¿½o efectuada com sucesso!");
+						tbGestaoPass.setText(null);
+						tbGestaoNovapass.setText(null);
+						tbGestaoConfirmPass.setText(null);
+
+					} else {
 						JOptionPane.showMessageDialog(null, "Password nao cumpre requisitos");
 					}
 				} else {
@@ -1220,14 +1212,15 @@ public class BancoAppFun implements Serializable {
 		btContasConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (lContas.isSelectionEmpty()) {
+				if (val.valVMaxLevConta(tbContaslimitelevop.getText())
+						&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
+						&& val.valsaldo(tbContasSaldo.getText()) && val.valJuros(tblJuros.getText())
+						&& val.valVMaxLevContaMes(tbllimitemes.getText())) {
 
 					Conta c;
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
-					if (rdbtnContaCorrente.isSelected()) {
-						if (val.valVMaxLevConta(tbContaslimitelevop.getText())
-								&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
-								&& val.valsaldo(tbContasSaldo.getText())) {
+					if (lContas.isSelectionEmpty()) {
+						if (rdbtnContaCorrente.isSelected()) {
 							double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
 							double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
 							if (vlevdia >= vlevop) {
@@ -1243,112 +1236,30 @@ public class BancoAppFun implements Serializable {
 							} else {
 								JOptionPane.showMessageDialog(null, "Limite dia inferior ao limite da operacao");
 							}
-						} else {
-							JOptionPane.showMessageDialog(null, "Verifique os dados introduzidos");
 						}
-
 					} else {
+						double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
+						double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
+						double vlevmes = Double.parseDouble(tbllimitemes.getText());
+						if (vlevdia >= vlevop && vlevdia < vlevmes) {
+							c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
+									null, Double.parseDouble(tbContasSaldo.getText()), clientes,
+									Double.parseDouble(tbContaslimitelevop.getText()),
+									Double.parseDouble(tbContaslimitelevdia.getText()),
+									Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()),
+									true);
+							gb.javabank.getContas().add(c);
 
-						if (val.valVMaxLevConta(tbContaslimitelevop.getText())
-								&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
-								&& val.valsaldo(tbContasSaldo.getText()) && val.valJuros(tblJuros.getText())
-								&& val.valVMaxLevContaMes(tbllimitemes.getText())) {
-							double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
-							double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
-							double vlevmes = Double.parseDouble(tbllimitemes.getText());
-
-							if (vlevdia >= vlevop && vlevdia < vlevmes) {
-
-								c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(),
-										null, Double.parseDouble(tbContasSaldo.getText()), clientes,
-										Double.parseDouble(tbContaslimitelevop.getText()),
-										Double.parseDouble(tbContaslimitelevdia.getText()),
-										Double.parseDouble(tblJuros.getText()),
-										Double.parseDouble(tbllimitemes.getText()), true);
-								gb.javabank.getContas().add(c);
-
-								gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
-								JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-							} else {
-								JOptionPane.showMessageDialog(null, "Limites dia/mes/operacao com valores incorrectos");
-							}
+							gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
+							JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 						} else {
-							JOptionPane.showMessageDialog(null, "Verifique o formato dos dados introduzidos");
+							JOptionPane.showMessageDialog(null, "Limites dia/mes/operacao com valores incorrectos");
 						}
-
 					}
 
 				} else {
-					// atualizar:
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-							gb.javabank.getContas());
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
-							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-
-					if (c instanceof ContaCorrente) {
-						if (rdbtnContaCorrente.isSelected()) {
-							if (val.valVMaxLevConta(tbContaslimitelevop.getText())
-									&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
-									&& val.valsaldo(tbContasSaldo.getText())) {
-								double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
-								double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
-								if (vlevdia >= vlevop) {
-
-									gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
-											Double.parseDouble(tbContaslimitelevdia.getText()), 0.0, 0.0);
-
-									gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
-								} else {
-									JOptionPane.showMessageDialog(null, "Limite dia inferior ao limite da operacao");
-								}
-							} else {
-								JOptionPane.showMessageDialog(null, "Verifique o formato dos dados introduzidos");
-							}
-
-						} else {
-
-							if (val.valVMaxLevConta(tbContaslimitelevop.getText())
-									&& val.valVMaxLevContaDia(tbContaslimitelevdia.getText())
-									&& val.valsaldo(tbContasSaldo.getText()) && val.valJuros(tblJuros.getText())
-									&& val.valVMaxLevContaMes(tbllimitemes.getText())) {
-								double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
-								double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
-								double vlevmes = Double.parseDouble(tbllimitemes.getText());
-
-								if (vlevdia >= vlevop && vlevdia < vlevmes) {
-
-									gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
-											Double.parseDouble(tbContaslimitelevdia.getText()),
-											Double.parseDouble(tblJuros.getText()),
-											Double.parseDouble(tbllimitemes.getText()));
-									gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
-								} else {
-									JOptionPane.showMessageDialog(null,
-											"Limites dia/mes/operacao com valores incorrectos");
-								}
-							} else {
-								JOptionPane.showMessageDialog(null, "Verifique o formato dos dados introduzidos");
-							}
-						}
-
-						gb.javabank.limpatabela(model);
-						gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-						JOptionPane.showMessageDialog(null, "Conta atualizada com sucesso!");
-					}
+					JOptionPane.showMessageDialog(null, "Verifique os dados introduzidos");
 				}
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContasnum.setText(null);
-				tbContaslimitelevdia.setText(null);
-				tblJuros.setText(null);
-				tbllimitemes.setText(null);
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
 
 			}
 
