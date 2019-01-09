@@ -706,12 +706,18 @@ public class BancoAppFun implements Serializable {
 							tbnomecartao.setText(card.getNomeTitular());
 							tbcodcartao.setText(card.getCodvalidacao() + "");
 							tbncartao.setText(card.getnCartao() + "");
-							
+
 							Calendar cal = new GregorianCalendar();
 							cal.setTime(card.getDataValidade());
 							cal.add(Calendar.DAY_OF_MONTH, 1);
 
 							if (card.getDataValidade().after(cal.getTime())) {
+
+								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
+										card.getCodvalidacao());
+								card2.setAtivo(false);
+								card2.setIdconta(0);
+								((ContaCorrente) c).setCartao(0);
 
 								btPedirCartao.setVisible(true);
 								panelCartao.setVisible(true);
