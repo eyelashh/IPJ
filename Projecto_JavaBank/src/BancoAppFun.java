@@ -472,7 +472,11 @@ public class BancoAppFun implements Serializable {
 						JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
 					}
 				} else {
+<<<<<<< HEAD
 					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
+=======
+					JOptionPane.showMessageDialog(null, "O username jï¿½ existe, insira outro pf.");
+>>>>>>> e9e9d9f549e7afbe4a5558114a3dad1448def34c
 				}
 
 			}
@@ -1069,7 +1073,7 @@ public class BancoAppFun implements Serializable {
 				dmconta.removeAllElements();
 				if (cbContaspesqconta.getSelectedItem().equals("Numero de conta")) {
 					String numConta = tbContaspesqconta.getText();
-					String[] contasNumConta = gb.javabank.listaContasNumConta(numConta);
+					String[] contasNumConta = gb.javabank.listaContasNumContaAbertas(numConta);
 					gb.javabank.addelementoslist(contasNumConta, dmconta);
 
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas corrente")) {
@@ -1080,10 +1084,6 @@ public class BancoAppFun implements Serializable {
 				} else if (cbContaspesqconta.getSelectedItem().equals("Contas poupanca")) {
 					String[] contasPoup = gb.javabank.listaContasPoupanca();
 					gb.javabank.addelementoslist(contasPoup, dmconta);
-				} else if (cbContaspesqconta.getSelectedItem().equals("Titular")) {
-					String id = tbContaspesqconta.getText();
-					String[] contasCliente = gb.javabank.listaContasIdCliente(id);
-					gb.javabank.addelementoslist(contasCliente, dmconta);
 
 				}
 			}
