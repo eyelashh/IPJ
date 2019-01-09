@@ -209,13 +209,15 @@ public class AppAdmin implements Serializable {
 		tabelaUtilizadores.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
-				Utilizador u=gl.viewComics.devolveUtilizador(idUtil);
-				txtIdFunc.setText(Integer.toString(idUtil));
-				txtNomeUTILIZADOR.setText(u.getNome());
-				txtContactoUTILIZADOR.setText(u.getContato());
-				txtUsernameUTILIZADOR.setText(u.getUsername());
-				txtPassUTILIZADOR.setText(u.getPassword());
+				if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
+					int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+					Utilizador u = gl.viewComics.devolveUtilizador(idUtil);
+					txtIdFunc.setText(Integer.toString(idUtil));
+					txtNomeUTILIZADOR.setText(u.getNome());
+					txtContactoUTILIZADOR.setText(u.getContato());
+					txtUsernameUTILIZADOR.setText(u.getUsername());
+					txtPassUTILIZADOR.setText(u.getPassword());
+				}
 			}
 		});
 
@@ -380,28 +382,26 @@ public class AppAdmin implements Serializable {
 				} else if (rbAdicionarAdministrador.isSelected()) {
 					Administrador a = new Administrador(nome, contacto, username, password);
 					gl.viewComics.addUtilizador(a);
-				}
-				else if(rbAlterarUTILIZADOR.isSelected()) {
-					
-					
+				} else if (rbAlterarUTILIZADOR.isSelected()) {
+
 					if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
-						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(),
+								0);
 						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista que deseja alterar");
 					}
-				}
-				else if (rbRemoverUTILIZADOR.isSelected()) {
-					
+				} else if (rbRemoverUTILIZADOR.isSelected()) {
+
 					if (!tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
-						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(),
+								0);
 						gl.viewComics.removerUtil(idUtil);
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Seleccione o utilizador da lista que deseja remover da loja");
 					}
-					else {
-						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista que deseja remover da loja");
-					}
-					
+
 				}
 				modeloTabelaUTILIZADORES.setRowCount(0);
 				gl.viewComics.tabelaUtilizadores(modeloTabelaUTILIZADORES);
