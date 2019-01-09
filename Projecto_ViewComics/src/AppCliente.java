@@ -78,11 +78,31 @@ public class AppCliente implements Serializable {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
+		public Class getColumnClass(int column) {
+			Class returnValue;
+			if ((column>=0)&&(column<getColumnCount())) {
+				returnValue =getValueAt(0,column).getClass();
+			}
+			else {
+				returnValue =Object.class;
+			}
+			return returnValue;
+		}
 };
 	String[] colunasLivro = { "Id do livro", "Titulo", "Autor", "Ano", "Preco" };
 	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLivro, 0){
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
+		}
+		public Class getColumnClass(int column) {
+			Class returnValue;
+			if ((column>=0)&&(column<getColumnCount())) {
+				returnValue =getValueAt(0,column).getClass();
+			}
+			else {
+				returnValue =Object.class;
+			}
+			return returnValue;
 		}
 };
 
@@ -557,6 +577,7 @@ public class AppCliente implements Serializable {
 		JPLivros.add(scrollPane_1);
 
 		tabelaLivros = new JTable(modeloTabelaLivros);
+		tabelaLivros.setAutoCreateRowSorter(true);
 		tabelaLivros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

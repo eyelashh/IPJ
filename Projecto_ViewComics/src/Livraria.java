@@ -973,7 +973,6 @@ public class Livraria implements Serializable {
 			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
 			sorter.setSortKeys(sortKeys);
 			sorter.sort();
-
 		}
 
 	}

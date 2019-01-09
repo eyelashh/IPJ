@@ -7,16 +7,17 @@ import java.util.HashMap;
 
 public class Venda implements Serializable{
 	
+	private String nif;
 	private double montante;
 	private static LocalDate data;
 	private HashMap <Integer, Integer> conteudoVenda;//vai ser igual ao hashmap do carrinho quando o mesmo é pago
 	
 	
-	
-	public Venda(double montante, HashMap<Integer, Integer> conteudoVenda) {
+	public Venda(double montante, HashMap<Integer, Integer> conteudoVenda, String nif) {
 		super();
 		this.montante = montante;
 		this.conteudoVenda = conteudoVenda;
+	
 		//confirmar se isto gera a data no momento!!!!
 		this.data= data.now();
 	}

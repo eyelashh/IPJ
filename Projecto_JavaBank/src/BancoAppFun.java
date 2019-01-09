@@ -585,6 +585,7 @@ public class BancoAppFun implements Serializable {
 					Conta c;
 					ArrayList<Integer> clientes = new ArrayList<Integer>();
 					if (rdbtnContaCorrente.isSelected()) {
+<<<<<<< HEAD
 						if(val.valVMaxLevConta(tbContaslimitelevop.getText())&&val.valVMaxLevContaDia(tbContaslimitelevdia.getText())&&val.valsaldo(tbContasSaldo.getText()))
 						{
 						double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
@@ -592,10 +593,14 @@ public class BancoAppFun implements Serializable {
 						if(vlevia)
 						{
 					
+=======
+						// if()
+						// {
+>>>>>>> 3d59b25ffb69860004c335060137c69169099257
 						// CRIA NOVA CONTA
-						
+
 						// cartao nulo inicialmente;
-						
+
 						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
@@ -603,12 +608,16 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.getContas().add(c);
 						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
+<<<<<<< HEAD
 						}
 						else
 						{
 							JOptionPane.showMessageDialog(null, "Limite dia inferior ao");
 						}
 						}
+=======
+						// }
+>>>>>>> 3d59b25ffb69860004c335060137c69169099257
 					} else {
 
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
@@ -621,7 +630,6 @@ public class BancoAppFun implements Serializable {
 
 						gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
 
 					}
 
@@ -675,7 +683,7 @@ public class BancoAppFun implements Serializable {
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-				int numconta= val.idConta(gb.javabank.getContas());
+				int numconta = val.idConta(gb.javabank.getContas());
 				lContas.clearSelection();
 				tbContasnum.setText("" + numconta);
 				dateChooser_2.setDate(null);
@@ -767,8 +775,7 @@ public class BancoAppFun implements Serializable {
 				int id = val.valIdCartao(gb.javabank.getCartoes());
 				int codval = val.valCodCartao();
 
-				if(val.valTitularCartao(tbnomecartao.getText()))
-				{
+				if (val.valTitularCartao(tbnomecartao.getText())) {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta());
@@ -783,13 +790,10 @@ public class BancoAppFun implements Serializable {
 					tbncartao.setEditable(false);
 					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 
-				}
-				else
-				{
+				} else {
 					JOptionPane.showMessageDialog(null, "Nome de cartao invalido. corriga o nome do titular");
 				}
-				
-				
+
 			}
 		});
 
@@ -892,8 +896,6 @@ public class BancoAppFun implements Serializable {
 		btnVoltar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnVoltar_1.setBounds(122, 246, 99, 38);
 		jpanelEliminarContaDataFecho.add(btnVoltar_1);
-
-		
 
 		// Pedir cartao
 
@@ -2154,7 +2156,7 @@ public class BancoAppFun implements Serializable {
 				btFunGesto.setBackground(new Color(65, 106, 105));
 			}
 		});
-		
+
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
