@@ -334,13 +334,12 @@ public class BancoAppAdm implements Serializable {
 
 				for (Date dt = dateChooserInicio.getDate(); dt.compareTo(dateChooserFim.getDate()) <= 0;) {
 					for (int i = 0; i < gb.javabank.getContas().size(); i++) {
-					
-						if(gb.javabank.getContas().get(i).getDataCriacao().after(dateChooserInicio.getDate()) && gb.javabank.getContas().get(i).getDataCriacao().before(dateChooserFim.getDate())) {
-							
-							
-							
+
+						if (gb.javabank.getContas().get(i).getDataCriacao().after(dateChooserInicio.getDate())
+								&& gb.javabank.getContas().get(i).getDataCriacao().before(dateChooserFim.getDate())) {
+
 						}
-						
+
 //						System.out.println(df.format(dt));
 //						cal.add(Calendar.DATE, +1);
 //						dt = cal.getTime();
@@ -350,8 +349,6 @@ public class BancoAppAdm implements Serializable {
 		});
 		btnPesquisar.setBounds(609, 53, 117, 29);
 		JPAdmEstatistica.add(btnPesquisar);
-		
-		
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
@@ -986,7 +983,8 @@ public class BancoAppAdm implements Serializable {
 						JOptionPane.showMessageDialog(null, "Nao pode eliminar o seu proprio utilizador!");
 					} else {
 
-						gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
+						gb.javabank.eliminautilizador(Integer.parseInt(s), gb.javabank.getUtlizadores(),
+								gb.javabank.getContas());
 
 						// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 						dmFun.removeAllElements();
