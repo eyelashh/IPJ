@@ -583,11 +583,12 @@ public class BancoAppFun implements Serializable {
 				if (lContas.isSelectionEmpty()) {
 
 					Conta c;
+					ArrayList<Integer> clientes = new ArrayList<Integer>();
 					if (rdbtnContaCorrente.isSelected()) {
 						//if()
 						//{
 						// CRIA NOVA CONTA
-						ArrayList<Integer> clientes = new ArrayList<Integer>();
+						
 						// cartao nulo inicialmente;
 						
 						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
@@ -775,7 +776,7 @@ public class BancoAppFun implements Serializable {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Nome de cartao invalido. corriga o nome!");
+					JOptionPane.showMessageDialog(null, "Nome de cartao invalido. corriga o nome do titular");
 				}
 				
 				
