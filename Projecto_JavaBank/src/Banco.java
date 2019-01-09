@@ -449,10 +449,11 @@ public class Banco implements Serializable {
 	}
 
 	// elimina contas:
-	protected void eliminaconta(int id, ArrayList<Conta> contas) {
+	protected void eliminaconta(int id, Date datafecho, ArrayList<Conta> contas) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
-				contas.remove(i);
+				contas.get(i).setAberta(false);
+				contas.get(i).setDataFecho(datafecho);
 			}
 		}
 	}
@@ -462,6 +463,21 @@ public class Banco implements Serializable {
 		int id = 0;
 		String nome;
 		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i) instanceof Cliente) {
+				id = clientes.get(i).getIdUtilizador();
+				nome = clientes.get(i).getNome();
+				model.addRow(new Object[] { false, id, nome });
+
+			}
+		}
+	}
+
+	// preenche tabela conta na estatistica:
+	protected void preenchetabelaContaEstatistica(DefaultTableModel model, ArrayList<Conta> contas) {
+		int id = 0;
+		String nome;
+
+		for (int i = 0; i < contas.size(); i++) {
 			if (clientes.get(i) instanceof Cliente) {
 				id = clientes.get(i).getIdUtilizador();
 				nome = clientes.get(i).getNome();
@@ -738,6 +754,9 @@ public class Banco implements Serializable {
 		}
 
 	}
+
+	
+	
 
 	// retorna o cartao
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {

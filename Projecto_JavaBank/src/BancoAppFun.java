@@ -300,6 +300,21 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
 
+		JPanel jpanelEliminarContaDataFecho = new JPanel();
+		jpanelEliminarContaDataFecho.setBounds(0, 0, 354, 368);
+		JpanelPrincipal.add(jpanelEliminarContaDataFecho);
+		jpanelEliminarContaDataFecho.setVisible(false);
+		jpanelEliminarContaDataFecho.setLayout(null);
+
+		JDateChooser dateChooserFechoConta = new JDateChooser();
+		dateChooserFechoConta.setBounds(40, 134, 269, 35);
+		jpanelEliminarContaDataFecho.add(dateChooserFechoConta);
+
+		// lista das contas no painel contas
+		JList<String> lContas = new JList<String>(dmconta);
+		lContas.setBounds(24, 109, 240, 386);
+		jpanelContas.add(lContas);
+
 		JRadioButton rdbtnContaCorrente = new JRadioButton("Conta Corrente");
 		rdbtnContaCorrente.setSelected(true);
 		rdbtnContaCorrente.setBounds(424, 81, 132, 25);
@@ -308,6 +323,73 @@ public class BancoAppFun implements Serializable {
 		JRadioButton rdbtnContaPoupanca = new JRadioButton("Conta Poupan\u00E7a");
 		rdbtnContaPoupanca.setBounds(560, 81, 144, 25);
 		jpanelContas.add(rdbtnContaPoupanca);
+
+		JPanel panelCartao = new JPanel();
+		panelCartao.setVisible(false);
+		panelCartao.setBounds(752, 394, 278, 169);
+		jpanelContas.add(panelCartao);
+		panelCartao.setLayout(null);
+
+		JDateChooser dtcartao = new JDateChooser();
+		dtcartao.setBounds(72, 67, 190, 22);
+		panelCartao.add(dtcartao);
+
+		JButton bttConfirmarEliminação = new JButton("Confirmar Eliminação");
+		bttConfirmarEliminação.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				
+				
+				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
+						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(), gb.javabank.getContas());
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				
+				
+				
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
+				tbnomecartao.setText(null);
+				dtcartao.setDate(null);
+				tbcodcartao.setText(null);
+				panelCartao.setVisible(false);
+
+				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+
+			}
+		});
+		bttConfirmarEliminação.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		bttConfirmarEliminação.setBounds(83, 196, 178, 38);
+		jpanelEliminarContaDataFecho.add(bttConfirmarEliminação);
+
+		JLabel lblDataDeFecho = new JLabel("Data de fecho:");
+		lblDataDeFecho.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDeFecho.setBounds(25, 98, 178, 24);
+		jpanelEliminarContaDataFecho.add(lblDataDeFecho);
+
+		JButton btnVoltar_1 = new JButton("Voltar");
+		btnVoltar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelContas.setVisible(true);
+
+			}
+		});
+		btnVoltar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar_1.setBounds(122, 246, 99, 38);
+		jpanelEliminarContaDataFecho.add(btnVoltar_1);
 
 		// Tabela clientes nas contas
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -325,11 +407,6 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.setBounds(0, 0, 1042, 576);
 		JpanelPrincipal.add(jpanelContas);
 		jpanelContas.setLayout(null);
-
-		// lista das contas no painel contas
-		JList<String> lContas = new JList<String>(dmconta);
-		lContas.setBounds(24, 109, 240, 386);
-		jpanelContas.add(lContas);
 
 		JComboBox<String> cbContaspesqconta = new JComboBox<String>();
 		cbContaspesqconta.addActionListener(new ActionListener() {
@@ -492,20 +569,10 @@ public class BancoAppFun implements Serializable {
 		btPedirCartao.setBounds(548, 521, 120, 38);
 		jpanelContas.add(btPedirCartao);
 
-		JPanel panelCartao = new JPanel();
-		panelCartao.setVisible(false);
-		panelCartao.setBounds(752, 394, 278, 169);
-		jpanelContas.add(panelCartao);
-		panelCartao.setLayout(null);
-
 		JLabel VALIDADE = new JLabel("Validade");
 		VALIDADE.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		VALIDADE.setBounds(12, 67, 72, 16);
 		panelCartao.add(VALIDADE);
-
-		JDateChooser dtcartao = new JDateChooser();
-		dtcartao.setBounds(72, 67, 190, 22);
-		panelCartao.add(dtcartao);
 
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -749,37 +816,43 @@ public class BancoAppFun implements Serializable {
 			}
 		});
 
+		// Painel principal CLientes
+		JPanel jpanelClientes = new JPanel();
+		jpanelClientes.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelClientes);
+		jpanelClientes.setVisible(true);
+		jpanelClientes.setLayout(null);
+		jpanelClientes.setLayout(null);
+
+		// painel movimentos onde aparece a tabela das operaçoes
+		JPanel jpanelMovimentos = new JPanel();
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Painel da gestao do administrador
+		JPanel jpanelGestao = new JPanel();
+		jpanelGestao.setVisible(false);
+
+		// Painel principal da operaçoes
+		JPanel jpanelOperacoes = new JPanel();
+		jpanelOperacoes.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelOperacoes);
+		jpanelOperacoes.setVisible(false);
+		jpanelOperacoes.setLayout(null);
+
 		// elimina contas:
 		btContasEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!lContas.isSelectionEmpty()) {
 
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
-							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-					gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), gb.javabank.getContas());
-
-					lContas.clearSelection();
-					tbContasnum.setText(null);
-					dateChooser_2.setDate(null);
-					tbContaslimitelevop.setText(null);
-					tbContasSaldo.setText(null);
-					tbContasSaldo.setEditable(false);
-					tbContaslimitelevdia.setText(null);
-					rdbtnContaCorrente.setSelected(true);
-					rdbtnContaPoupanca.setSelected(false);
-					tblJuros.setText(null);
-					dateChooser_2.setEnabled(true);
-					tbllimitemes.setText(null);
-					dmconta.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
-							dmconta);
-					tbnomecartao.setText(null);
-					dtcartao.setDate(null);
-					tbcodcartao.setText(null);
-					panelCartao.setVisible(false);
-
-					JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+					jpanelEliminarContaDataFecho.setVisible(true);
+					jpanelContas.setVisible(false);
+					jpanelClientes.setVisible(false);
+					jpanelMovimentos.setVisible(false);
+					jpanelGestao.setVisible(false);
+					jpanelOperacoes.setVisible(false);
 
 				}
 
@@ -853,14 +926,6 @@ public class BancoAppFun implements Serializable {
 		jpanelContas.add(btnLimpar);
 
 		// Pedir cartao
-
-		// Painel principal CLientes
-		JPanel jpanelClientes = new JPanel();
-		jpanelClientes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelClientes);
-		jpanelClientes.setVisible(true);
-		jpanelClientes.setLayout(null);
-		jpanelClientes.setLayout(null);
 
 		JComboBox cbCltPesq = new JComboBox(itens);
 		cbCltPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
@@ -1177,11 +1242,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel jpanelMovimentos = new JPanel();
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
 
 		btCltEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1237,10 +1297,6 @@ public class BancoAppFun implements Serializable {
 		jpanelMovimentos.setVisible(false);
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
-
-		// Painel da gestao do administrador
-		JPanel jpanelGestao = new JPanel();
-		jpanelGestao.setVisible(false);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
@@ -1510,13 +1566,6 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setColumns(10);
 		tbfunidfunc.setBounds(47, 529, 225, 31);
 		jpanelGestao.add(tbfunidfunc);
-
-		// Painel principal da operaçoes
-		JPanel jpanelOperacoes = new JPanel();
-		jpanelOperacoes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelOperacoes);
-		jpanelOperacoes.setVisible(false);
-		jpanelOperacoes.setLayout(null);
 
 		// combobox com a lista das contas abertas
 		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
