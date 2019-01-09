@@ -505,6 +505,8 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+		
+		
 
 		// Tabela clientes no painel cliente
 		JScrollPane scrollPane_2 = new JScrollPane();

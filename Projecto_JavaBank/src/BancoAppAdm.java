@@ -350,6 +350,8 @@ public class BancoAppAdm implements Serializable {
 		});
 		btnPesquisar.setBounds(609, 53, 117, 29);
 		JPAdmEstatistica.add(btnPesquisar);
+		
+		
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);

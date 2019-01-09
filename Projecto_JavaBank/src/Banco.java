@@ -504,6 +504,7 @@ public class Banco implements Serializable {
 		}
 	}
 
+	
 	// preenche tabela clientes no cliente:
 	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
 		int id = 0;
