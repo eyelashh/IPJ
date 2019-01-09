@@ -324,6 +324,97 @@ public class BancoAppFun implements Serializable {
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
 
+<<<<<<< HEAD
+		JButton bttConfirmarEliminacao = new JButton("Confirmar Eliminação");
+		bttConfirmarEliminacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
+						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+
+				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(),
+						gb.javabank.getContas());
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
+				tbnomecartao.setText(null);
+				dtcartao.setDate(null);
+				tbcodcartao.setText(null);
+				panelCartao.setVisible(false);
+
+				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+
+			}
+		});
+		bttConfirmarEliminacao.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		bttConfirmarEliminacao.setBounds(83, 196, 178, 38);
+		jpanelEliminarContaDataFecho.add(bttConfirmarEliminacao);
+
+		JLabel lblDataDeFecho = new JLabel("Data de fecho:");
+		lblDataDeFecho.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDeFecho.setBounds(25, 98, 178, 24);
+		jpanelEliminarContaDataFecho.add(lblDataDeFecho);
+
+		JButton btnVoltar_1 = new JButton("Voltar");
+		btnVoltar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelContas.setVisible(true);
+				jpanelEliminarContaDataFecho.setVisible(false);
+
+			}
+		});
+		btnVoltar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar_1.setBounds(122, 246, 99, 38);
+		jpanelEliminarContaDataFecho.add(btnVoltar_1);
+
+		btCltEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// primeiro ve qual o id selecionado!
+				int linha = tableListaClts.getSelectedRow();
+				int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
+
+				// elimina o cliente:
+				gb.javabank.eliminautilizador(idCliente, gb.javabank.getUtlizadores(), gb.javabank.getContas());
+
+				// depois limpa os campos do formulario:
+				tableListaClts.clearSelection();
+				lbCltConta.clearSelection();
+				tbCltNome.setText("");
+				tbCltApelido.setText("");
+				tbCltMorada.setText(null);
+				tbCltContacto.setText(null);
+				bg.clearSelection();
+				tbCltUser.setText("");
+				tbCltPass.setText("");
+				tbCltNum.setText("");
+				dateChooser_3.setDate(null);
+				rdbtnContaCorrente.setSelected(false);
+				rdbtnContaPoupanca.setSelected(false);
+
+				// atualiza lista:
+				modeloTabelaCliente.setRowCount(0);
+				gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
+				dlmcontacliente.removeAllElements();
+
+			}
+		});
+
+=======
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		// Tabela clientes nas contas
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(768, 47, 262, 334);
