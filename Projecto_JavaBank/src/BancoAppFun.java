@@ -472,11 +472,8 @@ public class BancoAppFun implements Serializable {
 						JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
 					}
 				} else {
-<<<<<<< HEAD
 					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
-=======
-					JOptionPane.showMessageDialog(null, "O username jï¿½ existe, insira outro pf.");
->>>>>>> e9e9d9f549e7afbe4a5558114a3dad1448def34c
+
 				}
 
 			}
