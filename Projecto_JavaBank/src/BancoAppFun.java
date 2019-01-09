@@ -471,7 +471,7 @@ public class BancoAppFun implements Serializable {
 						JOptionPane.showMessageDialog(null, "Dados errados! Confirme o que escreveu!");
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "O username já existe, insira outro pf.");
+					JOptionPane.showMessageDialog(null, "O username jï¿½ existe, insira outro pf.");
 
 				}
 
@@ -1362,7 +1362,8 @@ public class BancoAppFun implements Serializable {
 				if (val.valTitularCartao(tbnomecartao.getText())) {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 							gb.javabank.getContas());
-					Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta());
+					Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta(),
+							true);
 					gb.javabank.getCartoes().add(cartao);
 					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
 					tbcodcartao.setText(codval + "");
