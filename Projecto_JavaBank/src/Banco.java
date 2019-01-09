@@ -172,11 +172,10 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			if(cont.get(i).isAberta())
-			{
-			s = "" + cont.get(i).getIdConta();
-			numcontas[i] = s;
-			s = "";
+			if (cont.get(i).isAberta()) {
+				s = "" + cont.get(i).getIdConta();
+				numcontas[i] = s;
+				s = "";
 			}
 		}
 		return numcontas;
@@ -512,7 +511,7 @@ public class Banco implements Serializable {
 		}
 	}
 
-	// preenche tabela conta na estatistica:
+	// retornar quantas contas abertas existem:
 	protected int numeroContasAbertas(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int cont = 0;
@@ -526,7 +525,7 @@ public class Banco implements Serializable {
 		return cont;
 	}
 
-	// retornar quantas contas abertas existem:
+	// retornar quantas contas fechadas existem:
 	protected int numeroContasFechadas(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int cont = 0;
@@ -553,6 +552,30 @@ public class Banco implements Serializable {
 			}
 		}
 		return soma;
+	}
+
+	// preenche tabela conta na estatistica:
+	protected int balanço(ArrayList<Conta> contas, Date data1, Date data2) {
+
+		int soma = 0;
+		int soma2 = 0;
+
+		int balanco = 0;
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((contas.get(i).getDataCriacao().after(data1) && contas.get(i).getDataCriacao().before(data2))) {
+
+					soma += ((Levantamento) contas.get(i).getOperacoes().get(j)).getValor();
+					soma2 += ((Deposito) contas.get(i).getOperacoes().get(j)).getValor();
+
+					balanco = soma - soma2;
+				}
+
+			}
+		}
+		return balanco;
 	}
 
 	// preenche tabela clientes no cliente:

@@ -111,6 +111,7 @@ public class BancoAppAdm implements Serializable {
 	private JTextField textFieldnNovasConta;
 	private JTextField textFieldFechaConat;
 	private JTextField textFieldTotalCapital;
+	private JTextField textFieldBalanco;
 
 	/**
 	 * Launch the application.
@@ -354,6 +355,9 @@ public class BancoAppAdm implements Serializable {
 				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
 				textFieldTotalCapital.setText(Integer.toString(totalCapital));
 
+				int balanco = gb.javabank.balanço(gb.javabank.getContas(), data1, data2);
+				textFieldBalanco.setText(Integer.toString(balanco));
+
 			}
 		});
 		btnPesquisar.setBounds(609, 53, 117, 29);
@@ -374,6 +378,16 @@ public class BancoAppAdm implements Serializable {
 		});
 		btnLimpar_1.setBounds(738, 53, 117, 29);
 		JPAdmEstatistica.add(btnLimpar_1);
+
+		JLabel lblBalano = new JLabel("Balanço: ");
+		lblBalano.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblBalano.setBounds(374, 534, 73, 33);
+		JPAdmEstatistica.add(lblBalano);
+
+		textFieldBalanco = new JTextField();
+		textFieldBalanco.setColumns(10);
+		textFieldBalanco.setBounds(455, 536, 321, 33);
+		JPAdmEstatistica.add(textFieldBalanco);
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);

@@ -672,16 +672,15 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				if (lContas.isSelectionEmpty()) {
-					// CRIA NOVA CONTA
-					ArrayList<Integer> clientes = new ArrayList<Integer>();
 
-					// primeiro ve qual o id selecionado!
-					int linha = tableListaClts.getSelectedRow();
-					// int idCliente = (int) tableListaClts.getModel().getValueAt(linha, 0);
-
-					// cartao nulo inicialmente;
 					Conta c;
 					if (rdbtnContaCorrente.isSelected()) {
+						//if()
+						//{
+						// CRIA NOVA CONTA
+						ArrayList<Integer> clientes = new ArrayList<Integer>();
+						// cartao nulo inicialmente;
+						
 						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
@@ -689,7 +688,7 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.getContas().add(c);
 						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
+						//}
 					} else {
 
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
@@ -703,7 +702,6 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
 
-						// verifica se o cliente já tem conta poupança
 
 					}
 
@@ -757,13 +755,7 @@ public class BancoAppFun implements Serializable {
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
-				int numconta;
-				if (gb.javabank.getContas().size() == 0) {
-					numconta = 1;
-				} else {
-					numconta = gb.javabank.getContas().get(gb.javabank.getContas().size() - 1).getIdConta() + 1;
-
-				}
+				int numconta= val.idConta(gb.javabank.getContas());
 				lContas.clearSelection();
 				tbContasnum.setText("" + numconta);
 				dateChooser_2.setDate(null);
@@ -855,20 +847,29 @@ public class BancoAppFun implements Serializable {
 				int id = val.valIdCartao(gb.javabank.getCartoes());
 				int codval = val.valCodCartao();
 
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta());
-				gb.javabank.getCartoes().add(cartao);
-				((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
-				tbcodcartao.setText(codval + "");
-				tbncartao.setText(id + "");
+				if(val.valTitularCartao(tbnomecartao.getText()))
+				{
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+							gb.javabank.getContas());
+					Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta());
+					gb.javabank.getCartoes().add(cartao);
+					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+					tbcodcartao.setText(codval + "");
+					tbncartao.setText(id + "");
 
-				dtcartao.setEnabled(false);
-				tbnomecartao.setEditable(false);
-				tbcodcartao.setEditable(false);
-				tbncartao.setEditable(false);
-				JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+					dtcartao.setEnabled(false);
+					tbnomecartao.setEditable(false);
+					tbcodcartao.setEditable(false);
+					tbncartao.setEditable(false);
+					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Nome de cartao invalido. corriga o nome!");
+				}
+				
+				
 			}
 		});
 
