@@ -268,7 +268,7 @@ public class BancoAppClt implements Serializable {
 						&& (String.valueOf(passwordFieldConfPass.getPassword())
 								.equals(String.valueOf(passwordFieldNovaPass.getPassword())))) {
 					
-					if(val.valPassword(String.valueOf(passwordFieldAntiga.getPassword())))
+					if(val.valPassword(String.valueOf(passwordFieldNovaPass.getPassword())))
 					{
 					clt.setPassword(String.valueOf(passwordFieldNovaPass.getPassword()));
 
