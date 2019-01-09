@@ -96,7 +96,7 @@ public class BancoAppAdm implements Serializable {
 	private JTable table_1;
 
 	// Modelo da tabela estatistica:
-	String[] colunas3 = { "IDConta", "DataCriação", "DataFecho", "Saldo", "EstadoConta" };
+	String[] colunas3 = { "IDConta", "DataCriação", "DataFecho", "Saldo", "Aberta" };
 	DefaultTableModel modeloTabelaEstatistica = new DefaultTableModel(colunas3, 0) {
 		private static final long serialVersionUID = 1L;
 
@@ -331,24 +331,43 @@ public class BancoAppAdm implements Serializable {
 //				int year2 = cal2.get(Calendar.YEAR);
 //				int month2 = cal2.get(Calendar.MONTH);
 //				int day2 = cal2.get(Calendar.DAY_OF_MONTH);
+//				System.out.println(df.format(dt));
+//				cal.add(Calendar.DATE, +1);
+//				dt = cal.getTime();
 
-				for (Date dt = dateChooserInicio.getDate(); dt.compareTo(dateChooserFim.getDate()) <= 0;) {
-					for (int i = 0; i < gb.javabank.getContas().size(); i++) {
+				// for (Date dt = dateChooserInicio.getDate();
+				// dt.compareTo(dateChooserFim.getDate()) <= 0;) {
 
-						if (gb.javabank.getContas().get(i).getDataCriacao().after(dateChooserInicio.getDate())
-								&& gb.javabank.getContas().get(i).getDataCriacao().before(dateChooserFim.getDate())) {
+				Date data1 = dateChooserInicio.getDate();
+				Date data2 = dateChooserFim.getDate();
 
-						}
+				modeloTabelaEstatistica.setRowCount(0);
+				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
+						data2);
+				
+				int numeroContasNovas = ;
+				textFieldnNovasConta.setText(gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2));
 
-//						System.out.println(df.format(dt));
-//						cal.add(Calendar.DATE, +1);
-//						dt = cal.getTime();
-					}
-				}
 			}
 		});
 		btnPesquisar.setBounds(609, 53, 117, 29);
 		JPAdmEstatistica.add(btnPesquisar);
+
+		JButton btnLimpar_1 = new JButton("Limpar");
+		btnLimpar_1.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				dateChooserInicio.setDate(null);
+				dateChooserFim.setDate(null);
+				modeloTabelaEstatistica.setRowCount(0);
+				textFieldnNovasConta.setText(null);
+				textFieldFechaConat.setText(null);
+				textFieldTotalCapital.setText(null);
+			}
+		});
+		btnLimpar_1.setBounds(738, 53, 117, 29);
+		JPAdmEstatistica.add(btnLimpar_1);
 
 		JPanel jpConta = new JPanel();
 		jpConta.setBounds(0, 0, 1042, 576);
