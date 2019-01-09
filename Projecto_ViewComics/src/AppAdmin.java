@@ -59,10 +59,10 @@ public class AppAdmin implements Serializable {
 	private JPasswordField txtPasswordALTERAPASS;
 	private JTextField txtPesquisaUTILIZADOR;
 	private JTextField txtIdFunc;
-	private JTextField txtNomeFunc;
-	private JTextField txtContactoFunc;
-	private JTextField txtUsernameFunc;
-	private JTextField txtPassFunc;
+	private JTextField txtNomeUTILIZADOR;
+	private JTextField txtContactoUTILIZADOR;
+	private JTextField txtUsernameUTILIZADOR;
+	private JTextField txtPassUTILIZADOR;
 	private Utilizador admin;
 	private GestaoLivraria gl;
 	private JTextField txtPesquisaLIVROS;
@@ -83,13 +83,13 @@ public class AppAdmin implements Serializable {
 			return false;
 		}
 	};
-	String[] colunasFuncionario = {"ID" , "Nome" ,"Username"};
+	String[] colunasFuncionario = { "ID", "Nome", "Username" };
 	DefaultTableModel modeloTabelaUTILIZADORES = new DefaultTableModel(colunasFuncionario, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
 	};
-	private JTable tabelaUtilizadores;
+	private JTable tabelaUtilizadores = new JTable(modeloTabelaUTILIZADORES);
 
 	/**
 	 * Launch the application.
@@ -205,6 +205,7 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+		tabelaUtilizadores = new JTable(modeloTabelaUTILIZADORES);
 
 		jpAdmGestaoUtil = new JPanel();
 		jpAdmGestaoUtil.setBounds(0, 0, 763, 545);
@@ -237,22 +238,22 @@ public class AppAdmin implements Serializable {
 		lblNome.setFont(new Font("Tahoma", Font.BOLD, 15));
 		jpAdmGestaoUtil.add(lblNome);
 
-		txtNomeFunc = new JTextField();
-		txtNomeFunc.setBounds(395, 149, 345, 30);
-		txtNomeFunc.setEditable(false);
-		txtNomeFunc.setColumns(10);
-		jpAdmGestaoUtil.add(txtNomeFunc);
+		txtNomeUTILIZADOR = new JTextField();
+		txtNomeUTILIZADOR.setBounds(395, 149, 345, 30);
+		txtNomeUTILIZADOR.setEditable(false);
+		txtNomeUTILIZADOR.setColumns(10);
+		jpAdmGestaoUtil.add(txtNomeUTILIZADOR);
 
 		JLabel lblContacto = new JLabel("Contacto :");
 		lblContacto.setBounds(302, 186, 87, 24);
 		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 15));
 		jpAdmGestaoUtil.add(lblContacto);
 
-		txtContactoFunc = new JTextField();
-		txtContactoFunc.setBounds(394, 185, 345, 30);
-		txtContactoFunc.setEditable(false);
-		txtContactoFunc.setColumns(10);
-		jpAdmGestaoUtil.add(txtContactoFunc);
+		txtContactoUTILIZADOR = new JTextField();
+		txtContactoUTILIZADOR.setBounds(394, 185, 345, 30);
+		txtContactoUTILIZADOR.setEditable(false);
+		txtContactoUTILIZADOR.setColumns(10);
+		jpAdmGestaoUtil.add(txtContactoUTILIZADOR);
 
 		JLabel lblUsername = new JLabel("Username :");
 		lblUsername.setBounds(292, 231, 97, 16);
@@ -264,17 +265,17 @@ public class AppAdmin implements Serializable {
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		jpAdmGestaoUtil.add(lblPassword);
 
-		txtUsernameFunc = new JTextField();
-		txtUsernameFunc.setBounds(394, 226, 345, 30);
-		txtUsernameFunc.setEditable(false);
-		txtUsernameFunc.setColumns(10);
-		jpAdmGestaoUtil.add(txtUsernameFunc);
+		txtUsernameUTILIZADOR = new JTextField();
+		txtUsernameUTILIZADOR.setBounds(394, 226, 345, 30);
+		txtUsernameUTILIZADOR.setEditable(false);
+		txtUsernameUTILIZADOR.setColumns(10);
+		jpAdmGestaoUtil.add(txtUsernameUTILIZADOR);
 
-		txtPassFunc = new JTextField();
-		txtPassFunc.setBounds(394, 267, 345, 30);
-		txtPassFunc.setEditable(false);
-		txtPassFunc.setColumns(10);
-		jpAdmGestaoUtil.add(txtPassFunc);
+		txtPassUTILIZADOR = new JTextField();
+		txtPassUTILIZADOR.setBounds(394, 267, 345, 30);
+		txtPassUTILIZADOR.setEditable(false);
+		txtPassUTILIZADOR.setColumns(10);
+		jpAdmGestaoUtil.add(txtPassUTILIZADOR);
 
 		JComboBox<String> cbPesquisaUTILIZADOR = new JComboBox<String>();
 		cbPesquisaUTILIZADOR.setBounds(10, 60, 200, 22);
@@ -284,15 +285,15 @@ public class AppAdmin implements Serializable {
 		btnCancelarFunc.setBounds(581, 326, 89, 23);
 		btnCancelarFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtNomeFunc.setText("");
-				txtContactoFunc.setText("");
-				txtPassFunc.setText("");
-				txtUsernameFunc.setText("");
+				txtNomeUTILIZADOR.setText("");
+				txtContactoUTILIZADOR.setText("");
+				txtPassUTILIZADOR.setText("");
+				txtUsernameUTILIZADOR.setText("");
 				txtIdFunc.setText("");
-				txtNomeFunc.setEditable(false);
-				txtContactoFunc.setEditable(false);
-				txtPassFunc.setEditable(false);
-				txtUsernameFunc.setEditable(false);
+				txtNomeUTILIZADOR.setEditable(false);
+				txtContactoUTILIZADOR.setEditable(false);
+				txtPassUTILIZADOR.setEditable(false);
+				txtUsernameUTILIZADOR.setEditable(false);
 
 			}
 		});
@@ -303,36 +304,36 @@ public class AppAdmin implements Serializable {
 		cbPesquisaUTILIZADOR.addItem("Username");
 		cbPesquisaUTILIZADOR.addItem("Contacto");
 
-		JRadioButton rbAdicionarFUNCIONARIOS = new JRadioButton("Adicionar funcionario a loja");
-		rbAdicionarFUNCIONARIOS.setBounds(525, 29, 186, 23);
-		rbGroupUtilizadores.add(rbAdicionarFUNCIONARIOS);
-		jpAdmGestaoUtil.add(rbAdicionarFUNCIONARIOS);
+		JRadioButton rbAdicionarFUNCIONARIO = new JRadioButton("Adicionar funcionario a loja");
+		rbAdicionarFUNCIONARIO.setBounds(525, 29, 186, 23);
+		rbGroupUtilizadores.add(rbAdicionarFUNCIONARIO);
+		jpAdmGestaoUtil.add(rbAdicionarFUNCIONARIO);
 
-		JRadioButton rbAlterarFUNCIONARIO = new JRadioButton("Alterar dados do funcionario seleccionado");
-		rbAlterarFUNCIONARIO.setBounds(525, 55, 232, 23);
-		rbGroupUtilizadores.add(rbAlterarFUNCIONARIO);
-		jpAdmGestaoUtil.add(rbAlterarFUNCIONARIO);
+		JRadioButton rbAlterarUTILIZADOR = new JRadioButton("Alterar dados do utilizador seleccionado");
+		rbAlterarUTILIZADOR.setBounds(525, 55, 232, 23);
+		rbGroupUtilizadores.add(rbAlterarUTILIZADOR);
+		jpAdmGestaoUtil.add(rbAlterarUTILIZADOR);
 
-		JRadioButton rbRemoverFuncionario = new JRadioButton("Remover funcionario");
-		rbRemoverFuncionario.setBounds(525, 81, 175, 23);
-		rbGroupUtilizadores.add(rbRemoverFuncionario);
-		jpAdmGestaoUtil.add(rbRemoverFuncionario);
+		JRadioButton rbRemoverUTILIZADOR = new JRadioButton("Remover utilizador seleccionado");
+		rbRemoverUTILIZADOR.setBounds(525, 81, 215, 23);
+		rbGroupUtilizadores.add(rbRemoverUTILIZADOR);
+		jpAdmGestaoUtil.add(rbRemoverUTILIZADOR);
 
 		JButton btnLimparCamposFUNCIONARIO = new JButton("Permitir alteracao dos campos");
 		btnLimparCamposFUNCIONARIO.setBounds(525, 116, 215, 23);
 		btnLimparCamposFUNCIONARIO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtNomeFunc.setEditable(true);
-				txtContactoFunc.setEditable(true);
-				txtUsernameFunc.setEditable(true);
-				txtPassFunc.setEditable(true);
-				if (rbAdicionarFUNCIONARIOS.isSelected()) {
-					if (rbAdicionarFUNCIONARIOS.isSelected())
+				txtNomeUTILIZADOR.setEditable(true);
+				txtContactoUTILIZADOR.setEditable(true);
+				txtUsernameUTILIZADOR.setEditable(true);
+				txtPassUTILIZADOR.setEditable(true);
+				if (rbAdicionarFUNCIONARIO.isSelected()) {
+					if (rbAdicionarFUNCIONARIO.isSelected())
 						txtIdFunc.setText("");
-					txtNomeFunc.setText("");
-					txtContactoFunc.setText("");
-					txtUsernameFunc.setText("");
-					txtPassFunc.setText("");
+					txtNomeUTILIZADOR.setText("");
+					txtContactoUTILIZADOR.setText("");
+					txtUsernameUTILIZADOR.setText("");
+					txtPassUTILIZADOR.setText("");
 
 				}
 			}
@@ -353,68 +354,58 @@ public class AppAdmin implements Serializable {
 		JButton btnConfirmarFUNCIONARIOS2 = new JButton("Confirmar");
 		btnConfirmarFUNCIONARIOS2.setBounds(447, 326, 89, 23);
 		btnConfirmarFUNCIONARIOS2.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent arg0) {
-				
-				if (rbAdicionarFUNCIONARIOS.isSelected()) {
-					
 
+				String nome = txtNomeUTILIZADOR.getText();
+				String contacto = txtContactoUTILIZADOR.getText();
+				String username = txtUsernameUTILIZADOR.getText();
+				String password = txtPassUTILIZADOR.getText();
+
+				if (rbAdicionarFUNCIONARIO.isSelected()) {
+					Funcionario f = new Funcionario(nome, contacto, username, password);
+					gl.viewComics.addUtilizador(f);
 				} else if (rbAdicionarAdministrador.isSelected()) {
-					
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Seleccione a opcao desejada");
+					Administrador a = new Administrador(nome, contacto, username, password);
+					gl.viewComics.addUtilizador(a);
 				}
-//				if (!listaFuncionarios.isSelectionEmpty()) {
-//					if (rbAlterarFUNCIONARIO.isSelected()) {
-//						String novoNome = txtNomeFunc.getText();
-//						String novoUsername = txtUsernameFunc.getText();
-//						String novaPass = txtPassFunc.getText();
-//						String novoContacto = txtContactoFunc.getText();
-//						String id = txtIdFunc.getText();
-//						gl.viewComics.alterarFuncionario(id, novoNome, novoContacto, novoUsername, novaPass);
-//						txtNomeFunc.setEditable(false);
-//						txtContactoFunc.setEditable(false);
-//						txtUsernameFunc.setEditable(false);
-//						txtPassFunc.setEditable(false);
-//
-//						modeloListaUTILIZADORES.removeAllElements();
-//						gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()),
-//								modeloListaUTILIZADORES);
-//						txtIdFunc.setText("");
-//
-//				} else if (rbRemoverFuncionario.isSelected()) {
-//						
-//						
-//						
-//					}
-//						else {
-//							JOptionPane.showMessageDialog(null, "Não pode remover-se a si mesmo");
-//						}
-//						
-//						
-//					}
-//					
-//
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista");
-//				}
-
+				else if(rbAlterarUTILIZADOR.isSelected()) {
+					
+					
+					if (tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
+						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista que deseja alterar");
+					}
+				}
+				else if (rbRemoverUTILIZADOR.isSelected()) {
+					
+					if (tabelaUtilizadores.getSelectionModel().isSelectionEmpty()) {
+						int idUtil = (int) tabelaUtilizadores.getModel().getValueAt(tabelaUtilizadores.getSelectedRow(), 0);
+						gl.viewComics.alterarUtilizador(idUtil, nome, contacto, usernameLogado, password);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Seleccione o utilizador da lista que deseja remover da loja");
+					}
+					
+				}
+				modeloTabelaUTILIZADORES.setRowCount(0);
+				gl.viewComics.tabelaUtilizadores(modeloTabelaUTILIZADORES);
+				tabelaUtilizadores.getSelectionModel().isSelectionEmpty();
 			}
 		});
 		jpAdmGestaoUtil.add(btnConfirmarFUNCIONARIOS2);
-		
-		tabelaUtilizadores = new JTable(modeloTabelaUTILIZADORES);
+
 		tabelaUtilizadores.setBounds(10, 137, 272, 382);
 		jpAdmGestaoUtil.add(tabelaUtilizadores);
-		gl.viewComics.tabelaUtilizadores(modeloTabelaUTILIZADORES);
-		
 
 		// pesquisar funcionarios por atributos
 		btnPesquisaFunc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				modeloTabelaUTILIZADORES.setRowCount(0);
-				String seleccao=(String) cbPesquisaUTILIZADOR.getSelectedItem();
+				String seleccao = (String) cbPesquisaUTILIZADOR.getSelectedItem();
 				String pesquisa = txtPesquisaUTILIZADOR.getText();
 				gl.viewComics.tabelaUtilizadoresCriterioSeleccao(modeloTabelaUTILIZADORES, seleccao, pesquisa);
 
@@ -568,7 +559,7 @@ public class AppAdmin implements Serializable {
 						int idLivroSelec = (int) tabelaLivrosLIVROS.getModel()
 								.getValueAt(tabelaLivrosLIVROS.getSelectedRow(), 0);
 						Livro l = gl.viewComics.livroId(idLivroSelec);
-
+						// alterarLivro
 						if (rbAlterarLivro.isSelected()) {
 							if ((!titulo.isEmpty()) && (!autor.isEmpty()) && (!stock.isEmpty()) && (!ano.isEmpty())
 									&& (!preco.isEmpty())) {
@@ -586,44 +577,38 @@ public class AppAdmin implements Serializable {
 								JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatorios por favor");
 							}
 						} else if (rbRemoverLivro.isSelected()) {
-//						if (!tabelaLivrosLIVROS.getSelectionModel().isSelectionEmpty()) {
-//							int idLivroSelec = (int) tabelaLivrosLIVROS.getModel().getValueAt(tabelaLivrosLIVROS.getSelectedRow(), 0);
 							gl.viewComics.removerLivro(idLivroSelec, gl.viewComics.getLivros());
 						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Seleccione uma opcao da lista");
 					}
 				}
 
 				else if (rbCriarLivro.isSelected()) {
 					if ((!titulo.isEmpty()) && (!autor.isEmpty()) && (!stock.isEmpty()) && (!ano.isEmpty())
 							&& (!preco.isEmpty())) {
-
 						Livro novoLivro = new Livro(titulo, autor, Double.parseDouble(preco), Integer.parseInt(stock),
-								Integer.parseInt(ano), descricao);
+								Integer.parseInt(ano), txtDescricaoLivros.getText());
 						gl.viewComics.addLivro(novoLivro);
 					} else {
 						JOptionPane.showMessageDialog(null, "Certifique-se que preencheu todos os campos obrigatorios");
 					}
-
-					txtPesquisaLIVROS.setText("");
-					txtIdLivros.setText("");
-					txtTituloLivros.setText("");
-					txtAutorLivros.setText("");
-					txtStockLivros.setText("");
-					txtPrecoLivros.setText("");
-					txtDescricaoLivros.setText("");
-					txtAnoLivros.setText("");
-					txtTituloLivros.setEditable(false);
-					txtAutorLivros.setEditable(false);
-					txtStockLivros.setEditable(false);
-					txtDescricaoLivros.setEditable(false);
-					txtAnoLivros.setEditable(false);
-					txtPrecoLivros.setEditable(false);
-
-					modeloTabelaLivrosLIVROS.setRowCount(0);
-					gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 				}
+				txtPesquisaLIVROS.setText("");
+				txtIdLivros.setText("");
+				txtTituloLivros.setText("");
+				txtAutorLivros.setText("");
+				txtStockLivros.setText("");
+				txtPrecoLivros.setText("");
+				txtDescricaoLivros.setText("");
+				txtAnoLivros.setText("");
+				txtTituloLivros.setEditable(false);
+				txtAutorLivros.setEditable(false);
+				txtStockLivros.setEditable(false);
+				txtDescricaoLivros.setEditable(false);
+				txtAnoLivros.setEditable(false);
+				txtPrecoLivros.setEditable(false);
+
+				modeloTabelaLivrosLIVROS.setRowCount(0);
+				gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 			}
 		});
 		jpAdmLivros.add(btnConfirmarAlteracoesLIVROS);
@@ -692,6 +677,7 @@ public class AppAdmin implements Serializable {
 		jpAdmLivros.add(scrollPane);
 
 		tabelaLivrosLIVROS = new JTable(modeloTabelaLivrosLIVROS);
+		gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 		tabelaLivrosLIVROS.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -752,7 +738,8 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
+		gl.viewComics.tabelaUtilizadores(modeloTabelaUTILIZADORES);
+		// gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 
 		JPanel jpAdmEstatisticas = new JPanel();
 		jpAdmEstatisticas.setBounds(0, 0, 968, 545);

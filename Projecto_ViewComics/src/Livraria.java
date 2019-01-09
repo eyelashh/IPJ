@@ -187,12 +187,12 @@ public class Livraria implements Serializable {
 	}
 
 	// alterar funcionario
-	public void alterarFuncionario(String idSTR, String nome, String contacto, String username, String password) {
+	public void alterarUtilizador(int id, String nome, String contacto, String username, String password) {
 
-		int id = Integer.parseInt(idSTR);
+		
 		boolean funcionarioAlterado = false;
 		for (Utilizador u : this.utilizadores) {
-			if ((u.getId() == id) && (u instanceof Funcionario)) {
+			if (u.getId() == id) {
 				u.setNome(nome);
 				u.setContato(contacto);
 				u.setUsername(username);
@@ -201,20 +201,20 @@ public class Livraria implements Serializable {
 			}
 		}
 		if (funcionarioAlterado) {
-			JOptionPane.showMessageDialog(null, "Funcion�rio alterado com sucesso");
+			JOptionPane.showMessageDialog(null, "Os dados do utilizador de id "+id+" foram alterados com sucesso");
 
 		} else {
-			JOptionPane.showMessageDialog(null, "N�o foi possivel alterar o funcionario");
+			JOptionPane.showMessageDialog(null, "Nao foi possivel alterar os dados");
 		}
 
 	}
 
 	// adiciona funcionario
-	public void adicionarFuncionario(String nome, String contacto, String username, String password) {
-
-		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
-
-	}
+//	public void adicionarFuncionario(String nome, String contacto, String username, String password) {
+//
+//		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
+//
+//	}
 
 	public void removeLivro(int idLivro, ArrayList<Livro> livros) {
 

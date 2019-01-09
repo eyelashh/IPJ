@@ -305,12 +305,14 @@ public class AppCliente implements Serializable {
 		btnAddCarrinhoFinalCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//int linha = tabelaLivros.getSelectedRow();
-				int idLivroSelec = (int) tabelaLivros.getModel().getValueAt(tabelaLivros.getSelectedRow(), 0);
+				//if (!tabelaLivros.getSelectionModel().isSelectionEmpty())
+				
 				//Livro l = gl.viewComics.livroId(idLivro);
 				String qtdAlterarCarrinho = txtQuantidadeAlterarLIVROS.getText();
 				String nif = txtNifCarrinhoLIVROS.getText();
 				String stock = txtStockLivros.getText();
 				if (!tabelaLivros.getSelectionModel().isSelectionEmpty()) {
+					int idLivroSelec = (int) tabelaLivros.getModel().getValueAt(tabelaLivros.getSelectedRow(), 0);
 					if (gl.viewComics.verificaNif(nif) == false) {
 						JOptionPane.showMessageDialog(null,
 								"O nif tem que conter 9 digitos. Verifique se foi inserido correctamente.");
