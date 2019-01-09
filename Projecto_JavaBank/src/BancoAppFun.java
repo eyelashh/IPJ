@@ -660,8 +660,8 @@ public class BancoAppFun implements Serializable {
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
 
-		JButton bttConfirmarEliminação = new JButton("Confirmar Eliminação");
-		bttConfirmarEliminação.addActionListener(new ActionListener() {
+		JButton bttConfirmarEliminacao = new JButton("Confirmar Eliminação");
+		bttConfirmarEliminacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
@@ -694,9 +694,9 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-		bttConfirmarEliminação.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		bttConfirmarEliminação.setBounds(83, 196, 178, 38);
-		jpanelEliminarContaDataFecho.add(bttConfirmarEliminação);
+		bttConfirmarEliminacao.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		bttConfirmarEliminacao.setBounds(83, 196, 178, 38);
+		jpanelEliminarContaDataFecho.add(bttConfirmarEliminacao);
 
 		JLabel lblDataDeFecho = new JLabel("Data de fecho:");
 		lblDataDeFecho.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
