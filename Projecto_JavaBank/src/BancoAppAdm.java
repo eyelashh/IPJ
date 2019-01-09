@@ -355,7 +355,7 @@ public class BancoAppAdm implements Serializable {
 				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
 				textFieldTotalCapital.setText(Integer.toString(totalCapital));
 
-				int balanco = gb.javabank.balanço(gb.javabank.getContas(), data1, data2);
+				int balanco = gb.javabank.balanco(gb.javabank.getContas(), data1, data2);
 				textFieldBalanco.setText(Integer.toString(balanco));
 
 			}

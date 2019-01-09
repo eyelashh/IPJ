@@ -555,7 +555,7 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela conta na estatistica:
-	protected int balanço(ArrayList<Conta> contas, Date data1, Date data2) {
+	protected int balanco(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int soma = 0;
 		int soma2 = 0;
