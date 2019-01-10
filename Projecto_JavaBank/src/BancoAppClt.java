@@ -143,7 +143,7 @@ public class BancoAppClt implements Serializable {
 				gb.javabank.listacontasordem(clt, gb.javabank.getContas()));
 
 		// box onde escolhemos qual conta o cliente quer ver
-		String[] contas = new String[] { "Conta a ordem", "Conta Poupança" };
+		String[] contas = new String[] { "Conta a ordem", "Conta Poupanca" };
 
 		ButtonGroup bg = new ButtonGroup();
 
@@ -354,7 +354,7 @@ public class BancoAppClt implements Serializable {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontasordem(clt, gb.javabank.getContas()),
 							dmListaContas);
-				} else if (comboBoxCltConta.getSelectedItem().equals("Conta Poupança")) {
+				} else if (comboBoxCltConta.getSelectedItem().equals("Conta Poupanca")) {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
 							dmListaContas);

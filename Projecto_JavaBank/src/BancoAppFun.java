@@ -352,7 +352,6 @@ public class BancoAppFun implements Serializable {
 		tbfunapelido.setEditable(false);
 		tbfunapelido.setColumns(10);
 		tbfunapelido.setBounds(57, 157, 217, 31);
-		jpanelGestao.add(tbfunapelido);
 
 		JLabel label_3 = new JLabel("Data de Nascimento:");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -419,7 +418,6 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setEditable(false);
 		tbfunidfunc.setColumns(10);
 		tbfunidfunc.setBounds(47, 529, 225, 31);
-		jpanelGestao.add(tbfunidfunc);
 
 		JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
 		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -574,37 +572,31 @@ public class BancoAppFun implements Serializable {
 		tbfunnome.setEditable(false);
 		tbfunnome.setColumns(10);
 		tbfunnome.setBounds(57, 86, 217, 31);
-		jpanelGestao.add(tbfunnome);
 
 		tbfunapelido = new JTextField();
 		tbfunapelido.setEditable(false);
 		tbfunapelido.setColumns(10);
 		tbfunapelido.setBounds(57, 157, 217, 31);
-		jpanelGestao.add(tbfunapelido);
 
 		tbfunident = new JTextField();
 		tbfunident.setEditable(false);
 		tbfunident.setColumns(10);
 		tbfunident.setBounds(49, 323, 225, 31);
-		jpanelGestao.add(tbfunident);
 
 		tbfuncontacto = new JTextField();
 		tbfuncontacto.setEditable(false);
 		tbfuncontacto.setColumns(10);
 		tbfuncontacto.setBounds(49, 387, 225, 31);
-		jpanelGestao.add(tbfuncontacto);
 
 		tbfunmorada = new JTextField();
 		tbfunmorada.setEditable(false);
 		tbfunmorada.setColumns(10);
 		tbfunmorada.setBounds(49, 452, 225, 31);
-		jpanelGestao.add(tbfunmorada);
 
 		tbfunidfunc = new JTextField();
 		tbfunidfunc.setEditable(false);
 		tbfunidfunc.setColumns(10);
 		tbfunidfunc.setBounds(47, 529, 225, 31);
-		jpanelGestao.add(tbfunidfunc);
 
 		// painel movimentos onde aparece a tabela das operaçoes
 		JPanel jpanelMovimentos = new JPanel();
@@ -2073,9 +2065,6 @@ public class BancoAppFun implements Serializable {
 
 		// coloca o painel gestao visivel:
 
-
-		
-
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
@@ -2202,12 +2191,10 @@ public class BancoAppFun implements Serializable {
 
 		// botao funcionario accao que muda de cor
 		btFunGesto.addMouseListener(new MouseListener() {
-			
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				btFunGesto.setBackground(new Color(188, 127, 82));
-				
 			}
 
 			@Override
@@ -2230,10 +2217,8 @@ public class BancoAppFun implements Serializable {
 				btFunGesto.setBackground(new Color(65, 106, 105));
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
-				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
 				jpanelMovimentos.setVisible(false);
-				
 				
 				tbGestaoUsername.setText(func.getUsername());
 				tbfunnome.setText(func.getNome());
@@ -2254,9 +2239,17 @@ public class BancoAppFun implements Serializable {
 					rbfuncpass.setSelected(true);
 				}
 				
-				jpanelGestao.revalidate();
-				jpanelGestao.repaint();
 				
+				jpanelGestao.add(tbfunidfunc);
+				jpanelGestao.add(tbfunmorada);
+				jpanelGestao.add(tbfuncontacto);
+				jpanelGestao.add(tbfunident);
+				jpanelGestao.add(dtfunnasc);
+				jpanelGestao.add(tbfunnome);
+				jpanelGestao.add(tbGestaoUsername);
+				jpanelGestao.add(tbfunapelido);
+				jpanelGestao.setVisible(true);
+
 			}
 		});
 
