@@ -241,7 +241,7 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
+				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).isAberta() == true) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					listprov.add(c.getContas().get(j) + "");
 				}
 			}
@@ -253,15 +253,15 @@ public class Banco implements Serializable {
 	}
 
 	// lista a conta de um determinado cliente
-	protected String[] listacontaspoupanca(int id, ArrayList<Conta> contas) {
+	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
 
-		for (int i = 0; i < this.contas.size(); i++) {
-			for (int j = 0; j < this.utilizadores.size(); j++) {
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < c.getContas().size(); j++) {
 
-				if ((contas.get(i) instanceof ContaPoupanca && contas.get(i).isAberta() == true)
-						&& ((ContaPoupanca) contas.get(i)).getClientes().get(j) == id) {
+				if ((contas.get(i) instanceof ContaPoupanca) 
+						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
 				}

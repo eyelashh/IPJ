@@ -2068,9 +2068,11 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.setOpaque(true);
 		btFunGesto.setBounds(0, 455, 170, 150);
 		btFunGesto.setBackground(new Color(188, 127, 82));
+		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JpanelMenu.add(btFunGesto);
 
 		// coloca o painel gestao visivel:
+<<<<<<< HEAD
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -2103,11 +2105,11 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.revalidate();
 				jpanelGestao.repaint();
 				btFunGesto.setBackground(new Color(65, 106, 105));
+=======
 
-			}
-		});
+>>>>>>> 413c4f7c9c2de11b470d44d9b5669190b7eaa39f
 
-		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		
 
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
@@ -2235,6 +2237,7 @@ public class BancoAppFun implements Serializable {
 
 		// botao funcionario accao que muda de cor
 		btFunGesto.addMouseListener(new MouseListener() {
+			
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -2260,6 +2263,34 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(true);
+				jpanelOperacoes.setVisible(false);
+				jpanelMovimentos.setVisible(false);
+				
+				
+				tbGestaoUsername.setText(func.getUsername());
+				tbfunnome.setText(func.getNome());
+				tbfunapelido.setText(func.getSobrenome());
+				dtfunnasc.setDate(func.getDataDeNascimento());
+				tbfunident.setText(func.getNumidentificacao() + "");
+				tbfuncontacto.setText(func.getContacto() + "");
+				tbfunmorada.setText(func.getMorada());
+				tbfunidfunc.setText(func.getIdFuncionario() + "");
+
+				if (func.getTipoIndentificacao().equals("C.C.")) {
+					rbfuncc.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("B.I.")) {
+					rbfunbi.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("Passaporte")) {
+					rbfuncpass.setSelected(true);
+				}
+				
+				jpanelGestao.revalidate();
+				jpanelGestao.repaint();
 				
 				
 			}
