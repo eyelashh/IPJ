@@ -339,6 +339,8 @@ public class AppFuncionario implements Serializable {
 					Venda v = new Venda(montante, conteudoVenda, nif);
 					gl.viewComics.addVenda(v);
 					gl.viewComics.incrementarVendasLivros(v);
+					gl.viewComics.removeCarrinho(c);
+					JOptionPane.showMessageDialog(null, "Pagamento concluido");
 				}
 			}
 		});
@@ -353,6 +355,7 @@ public class AppFuncionario implements Serializable {
 		scrollPane_1.setBounds(283, 140, 500, 178);
 		jpFuncCarrinhos.add(scrollPane_1);
 		tabelaCarrinhos = new JTable(modeloTabelaCarrinhos);
+		tabelaCarrinhos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabelaCarrinhos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -379,6 +382,7 @@ public class AppFuncionario implements Serializable {
 		scrollPane.setBounds(25, 144, 200, 320);
 		jpFuncCarrinhos.add(scrollPane);
 		JList<String> listNifsClientes = new JList<String>(modeloListaNif);
+		listNifsClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listNifsClientes);
 		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
 

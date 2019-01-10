@@ -49,6 +49,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.ListSelectionModel;
 
 public class AppCliente implements Serializable {
 
@@ -577,11 +578,13 @@ public class AppCliente implements Serializable {
 		JPLivros.add(scrollPane_1);
 
 		tabelaLivros = new JTable(modeloTabelaLivros);
+		tabelaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabelaLivros.setAutoCreateRowSorter(true);
 		tabelaLivros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				int linha = tabelaLivros.getSelectedRow();
+				//a linha é actualizada para o caso de ter havido ordenacao
+				int linha = tabelaLivros.convertRowIndexToModel(tabelaLivros.getSelectedRow());
 				int idLivro = (int) tabelaLivros.getModel().getValueAt(linha, 0);
 				String nif =txtNifCarrinhoLIVROS.getText();
 				Livro l = gl.viewComics.livroId(idLivro);
@@ -605,6 +608,7 @@ public class AppCliente implements Serializable {
 		scrollPane.setBounds(32, 129, 462, 221);
 		JPCarrinho.add(scrollPane);
 		tabelaCarrinho = new JTable(modeloTabelaCarrinho);
+		tabelaCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		txtNifCARRINHO = new JTextField();
 		txtNifCARRINHO.addKeyListener(new KeyAdapter() {
