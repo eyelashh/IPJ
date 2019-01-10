@@ -1716,8 +1716,6 @@ public class BancoAppAdm implements Serializable {
 					tbadmcontajuros.setText(((ContaPoupanca) cont).getTaxaJuros() + "");
 					tbadmcontalimmes.setText(((ContaPoupanca) cont).getLimiteMensalDebito() + "");
 				}
-				
-				
 
 			}
 		});
