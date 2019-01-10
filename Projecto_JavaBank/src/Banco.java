@@ -156,14 +156,12 @@ public class Banco implements Serializable {
 	// isto lista o numero de contas num array unico:
 
 	protected String[] listanumerodecontasabertas(ArrayList<Conta> cont) {
-		
-		ArrayList<String> arrAxu = new ArrayList<String> ();
-		
-		
-		
+
+		ArrayList<String> arrAxu = new ArrayList<String>();
+
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			
+
 			if (cont.get(i).isAberta()) {
 				s = "" + cont.get(i).getIdConta();
 				arrAxu.add(s);
@@ -241,7 +239,8 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).isAberta() == true) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
+				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).isAberta() == true)
+						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					listprov.add(c.getContas().get(j) + "");
 				}
 			}
@@ -261,11 +260,15 @@ public class Banco implements Serializable {
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
 
-				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
-						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
-					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
-					listprov.add(idSTR);
-					
+				if ((contas.get(i) instanceof ContaPoupanca) && contas.get(i).isAberta()) {
+
+					if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
+							&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
+
+						String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
+						listprov.add(idSTR);
+
+					}
 				}
 			}
 		}
@@ -273,6 +276,7 @@ public class Banco implements Serializable {
 		String[] lista = new String[listprov.size()];
 		lista = listprov.toArray(lista);
 		return lista;
+
 	}
 
 	// retorna o array das contas poupan�a
@@ -966,9 +970,6 @@ public class Banco implements Serializable {
 		return card;
 
 	}
-	
-	
-
 
 	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumContaAbertas(String numConta) {
