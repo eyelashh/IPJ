@@ -639,101 +639,98 @@ public class BancoAppAdm implements Serializable {
 		btnAdmFunConfirmar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-					// valida qual dos botoes estao atualizados:
-					String opselect = "";
-					if (rbAdmFunCC.isSelected()) {
-						opselect = rbAdmFunCC.getText();
+				// valida qual dos botoes estao atualizados:
+				String opselect = "";
+				if (rbAdmFunCC.isSelected()) {
+					opselect = rbAdmFunCC.getText();
+				}
+				if (rbAdmFunBI.isSelected()) {
+					opselect = rbAdmFunBI.getText();
+				}
+				if (rbAdmFunPass.isSelected()) {
+					opselect = rbAdmFunPass.getText();
+				}
+
+				// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista
+				// algum elemento selecionado da lista faz um update:
+				if (lbLAdmFunLista.isSelectionEmpty()) {
+
+					// adicionar funcionario:
+					// criar automaticamente os 2 id;
+					int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
+							.getIdUtilizador()) + 1;
+					int id2 = (gb.javabank.getUtlizadores().get(id + 1)).getIdUtilizador() + 1;
+					if (id == 0) {
+						id++;
 					}
-					if (rbAdmFunBI.isSelected()) {
-						opselect = rbAdmFunBI.getText();
-					}
-					if (rbAdmFunPass.isSelected()) {
-						opselect = rbAdmFunPass.getText();
+
+					if (id2 == id) {
+						id2++;
 					}
 
-					// se nao estiver selecionado nenhum funcionario entao cria um novo/ caso exista
-					// algum elemento selecionado da lista faz um update:
-					if (lbLAdmFunLista.isSelectionEmpty()) {
+					if (rbadmfuncionario.isSelected()) {
+						// esta a criar o novo funcionario:
+						Utilizador fun = new Funcionario(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+								dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+								textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+								textAdmFunUser.getText(), textAdmFunPass.getText(), id2);
+						gb.javabank.getUtlizadores().add(fun);
 
-						// adicionar funcionario:
-						// criar automaticamente os 2 id;
-						int id = (gb.javabank.getUtlizadores().get(gb.javabank.getUtlizadores().size() - 1)
-								.getIdUtilizador()) + 1;
-						int id2 = (gb.javabank.getUtlizadores().get(id + 1)).getIdUtilizador() + 1;
-						if (id == 0) {
-							id++;
-						}
-
-						if (id2 == id) {
-							id2++;
-						}
-
-						if (rbadmfuncionario.isSelected()) {
-							// esta a criar o novo funcionario:
-							Utilizador fun = new Funcionario(id, textAdmFunNome.getText(),
-									textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
-									Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
-									Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
-									textAdmFunPass.getText(), id2);
-							gb.javabank.getUtlizadores().add(fun);
-
-							// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
-							dmFun.removeAllElements();
-							gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()),
-									dmFun);
-							JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
-						} else {
-							Utilizador adm = new Administrador(id, textAdmFunNome.getText(),
-									textAdmFunSobrenome.getText(), dateChooser.getDate(), opselect,
-									Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
-									Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
-									textAdmFunPass.getText());
-							gb.javabank.getUtlizadores().add(adm);
-							JOptionPane.showMessageDialog(null, "Administrador criado com sucesso!");
-						}
-
-					} else {
-						// atualizar Funcionario ou admin:
-						// seleciona id;
-						String s = lbLAdmFunLista.getSelectedValue();
-						s = s.substring(0, s.indexOf(" "));
-
-						// metedo para atualizar:
-						if (gb.javabank.selectUtilizador(Integer.parseInt(s),
-								gb.javabank.getUtlizadores()) instanceof Funcionario) {
-							gb.javabank.actualizaFun(
-									(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
-											gb.javabank.getUtlizadores()),
-									textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(),
-									opselect, Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
-									Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
-									textAdmFunPass.getText());
-						} else {
-							gb.javabank.actualizaAdmin(
-									(Administrador) gb.javabank.selectUtilizador(Integer.parseInt(s),
-											gb.javabank.getUtlizadores()),
-									textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(),
-									opselect, Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
-									Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
-									textAdmFunPass.getText());
-						}
 						// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 						dmFun.removeAllElements();
 						gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
-						JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
-
+						JOptionPane.showMessageDialog(null, "Funcionario criado com sucesso!");
+					} else {
+						Utilizador adm = new Administrador(id, textAdmFunNome.getText(), textAdmFunSobrenome.getText(),
+								dateChooser.getDate(), opselect, Integer.parseInt(textAdmFunNumero.getText()),
+								textAdmFunMorada.getText(), Integer.parseInt(textAdmFunContato.getText()),
+								textAdmFunUser.getText(), textAdmFunPass.getText());
+						gb.javabank.getUtlizadores().add(adm);
+						JOptionPane.showMessageDialog(null, "Administrador criado com sucesso!");
 					}
-					
-					lbLAdmFunLista.clearSelection();
-					textAdmFunNome.setText("");
-					textAdmFunSobrenome.setText("");
-					textAdmFunMorada.setText(null);
-					textAdmFunContato.setText(null);
-					bg.clearSelection();
-					textAdmFunUser.setText("");
-					textAdmFunPass.setText("");
-					textAdmFunNumero.setText("");
-					dateChooser.setDate(null);
+
+				} else {
+					// atualizar Funcionario ou admin:
+					// seleciona id;
+					String s = lbLAdmFunLista.getSelectedValue();
+					s = s.substring(0, s.indexOf(" "));
+
+					// metedo para atualizar:
+					if (gb.javabank.selectUtilizador(Integer.parseInt(s),
+							gb.javabank.getUtlizadores()) instanceof Funcionario) {
+						gb.javabank.actualizaFun(
+								(Funcionario) gb.javabank.selectUtilizador(Integer.parseInt(s),
+										gb.javabank.getUtlizadores()),
+								textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(),
+								opselect, Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
+								Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
+								textAdmFunPass.getText());
+					} else {
+						gb.javabank.actualizaAdmin(
+								(Administrador) gb.javabank.selectUtilizador(Integer.parseInt(s),
+										gb.javabank.getUtlizadores()),
+								textAdmFunNome.getText(), textAdmFunSobrenome.getText(), dateChooser.getDate(),
+								opselect, Integer.parseInt(textAdmFunNumero.getText()), textAdmFunMorada.getText(),
+								Integer.parseInt(textAdmFunContato.getText()), textAdmFunUser.getText(),
+								textAdmFunPass.getText());
+					}
+					// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+					dmFun.removeAllElements();
+					gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
+					JOptionPane.showMessageDialog(null, "Funcionario atualizado com sucesso!");
+
+				}
+
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText("");
+				textAdmFunSobrenome.setText("");
+				textAdmFunMorada.setText(null);
+				textAdmFunContato.setText(null);
+				bg.clearSelection();
+				textAdmFunUser.setText("");
+				textAdmFunPass.setText("");
+				textAdmFunNumero.setText("");
+				dateChooser.setDate(null);
 			}
 		});
 
