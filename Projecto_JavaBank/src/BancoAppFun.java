@@ -840,7 +840,6 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
-		
 
 		bttConfirmarEliminacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -2034,8 +2033,7 @@ public class BancoAppFun implements Serializable {
 				btFunCliente.setBackground(new Color(65, 106, 105));
 			}
 		});
-		
-		
+
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
@@ -2054,23 +2052,23 @@ public class BancoAppFun implements Serializable {
 		});
 
 		// elimina contas:
-				btContasEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+		btContasEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-						if (!lContas.isSelectionEmpty()) {
+				if (!lContas.isSelectionEmpty()) {
 
-							jpanelEliminarContaDataFecho.setVisible(true);
-							jpanelContas.setVisible(false);
-							jpanelClientes.setVisible(false);
-							jpanelMovimentos.setVisible(false);
-							jpanelGestao.setVisible(false);
-							jpanelOperacoes.setVisible(false);
+					jpanelEliminarContaDataFecho.setVisible(true);
+					jpanelContas.setVisible(false);
+					jpanelClientes.setVisible(false);
+					jpanelMovimentos.setVisible(false);
+					jpanelGestao.setVisible(false);
+					jpanelOperacoes.setVisible(false);
 
-						}
+				}
 
-					}
-				});
-		
+			}
+		});
+
 		// botao conta accao que muda de cor
 		btFunConta.addMouseListener(new MouseListener() {
 
