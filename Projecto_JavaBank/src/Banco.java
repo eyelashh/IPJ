@@ -256,10 +256,11 @@ public class Banco implements Serializable {
 	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
-		for (int i = 0; i < this.contas.size(); i++) {
+		
+		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
-						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
+				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta())&& (contas.get(i).getIdConta() == c.getContapoupanca()))
+				{
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
 				}

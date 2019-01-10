@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1092,12 +1093,17 @@ public class BancoAppFun implements Serializable {
 							tbcodcartao.setText(card.getCodvalidacao() + "");
 							tbncartao.setText(card.getnCartao() + "");
 
-							Calendar cal = new GregorianCalendar();
-							cal.setTime(card.getDataValidade());
-							cal.add(Calendar.DAY_OF_MONTH, 1);
 
-							if (card.getDataValidade().after(cal.getTime())) {
 
+							// ver situacao se o cartao expirou ou nao
+
+							if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
+
+								// o cartao nao expirou aqui
+
+							} else {
+
+								// o cartao expirou aqui
 								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 										card.getCodvalidacao());
 								card2.setAtivo(false);
@@ -1123,6 +1129,7 @@ public class BancoAppFun implements Serializable {
 		});
 
 		btPedirCartao.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				panelCartao.setVisible(true);
 				tbnomecartao.setEditable(true);
@@ -2038,7 +2045,6 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
@@ -2068,9 +2074,7 @@ public class BancoAppFun implements Serializable {
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
-
 		// botao cliente accao que muda de cor
-
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
@@ -2227,7 +2231,7 @@ public class BancoAppFun implements Serializable {
 				jpanelContas.setVisible(false);
 				jpanelOperacoes.setVisible(false);
 				jpanelMovimentos.setVisible(false);
-				
+
 				tbGestaoUsername.setText(func.getUsername());
 				tbfunnome.setText(func.getNome());
 				tbfunapelido.setText(func.getSobrenome());
@@ -2246,14 +2250,16 @@ public class BancoAppFun implements Serializable {
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
 				}
-				
-				/*tbfunidfunc.update(tbfunidfunc.getGraphics());
-				tbfunmorada.update(tbfunmorada.getGraphics());
-				tbfuncontacto.update(tbfuncontacto.getGraphics());
-				tbfunident.update(tbfunident.getGraphics());
-				dtfunnasc.update(dtfunnasc.getGraphics());
-				tbfunnome.update(tbfunnome.getGraphics());
-				tbGestaoUsername.update(tbGestaoUsername.getGraphics());*/
+
+				/*
+				 * tbfunidfunc.update(tbfunidfunc.getGraphics());
+				 * tbfunmorada.update(tbfunmorada.getGraphics());
+				 * tbfuncontacto.update(tbfuncontacto.getGraphics());
+				 * tbfunident.update(tbfunident.getGraphics());
+				 * dtfunnasc.update(dtfunnasc.getGraphics());
+				 * tbfunnome.update(tbfunnome.getGraphics());
+				 * tbGestaoUsername.update(tbGestaoUsername.getGraphics());
+				 */
 				jpanelGestao.setVisible(true);
 
 			}
