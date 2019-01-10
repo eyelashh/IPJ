@@ -356,7 +356,7 @@ public class BancoAppClt implements Serializable {
 							dmListaContas);
 				} else if (comboBoxCltConta.getSelectedItem().equals("Conta Poupanca")) {
 					dmListaContas.removeAllElements();
-					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt),
 							dmListaContas);
 					
 					
