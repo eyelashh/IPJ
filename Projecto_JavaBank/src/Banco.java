@@ -259,28 +259,14 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-<<<<<<< HEAD
-
 
 				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
 						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
-					
-=======
 
-				if ((contas.get(i) instanceof ContaPoupanca) && contas.get(i).isAberta()) {
-
-					if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
-							&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
-
-						String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
-						listprov.add(idSTR);
-						
-
-					}
->>>>>>> dfadcde367da3a36cbb3268e1514aebc34ec2b7a
 				}
+
 			}
 		}
 
