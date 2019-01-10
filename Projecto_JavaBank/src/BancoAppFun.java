@@ -129,7 +129,10 @@ public class BancoAppFun implements Serializable {
 	{
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
+			
 	}
+		
+		
 	};
 	// modelo lista das contas dos clientes do painel cliente
 	DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
@@ -334,20 +337,19 @@ public class BancoAppFun implements Serializable {
 				
 						// Tabela dos movimentos das operações
 						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.addMouseListener(new MouseAdapter() {
+						scrollPane.setBounds(55, 51, 936, 293);
+						jpanelMovimentos.add(scrollPane);
+						tableMovimentos = new JTable(modeloTabela);
+						tableMovimentos.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
+								
 								int linha = tableMovimentos.getSelectedRow();
 								int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
 								String desc = gb.javabank.descricaoOpercacoes(id);
 								tbdescop.setText(desc);
-								
-								
 							}
 						});
-						scrollPane.setBounds(55, 51, 936, 293);
-						jpanelMovimentos.add(scrollPane);
-						tableMovimentos = new JTable(modeloTabela);
 						scrollPane.setViewportView(tableMovimentos);
 						
 								JButton btnVoltar = new JButton("Voltar");
@@ -1971,6 +1973,25 @@ public class BancoAppFun implements Serializable {
 				lContas.clearSelection();
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+				
+				// limpa painel:
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+
+				btnMovimentos.setVisible(false);
+				btPedirCartao.setVisible(false);
+				
+				
 			}
 		});
 
