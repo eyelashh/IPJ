@@ -2066,8 +2066,6 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
-=======
 				
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
@@ -2098,7 +2096,7 @@ public class BancoAppFun implements Serializable {
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
@@ -2249,7 +2247,6 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
-<<<<<<< HEAD
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelOperacoes.setVisible(false);
@@ -2285,8 +2282,7 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.add(tbfunapelido);
 				jpanelGestao.setVisible(true);
 
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 			}
 		});
 
