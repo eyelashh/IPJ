@@ -538,9 +538,6 @@ public class BancoAppAdm implements Serializable {
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 
-					// Funcionario f = (Funcionario)
-					// gb.javabank.selectUtilizador(Integer.parseInt(s),
-					// gb.javabank.getUtlizadores());
 
 					Utilizador f = gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
 
@@ -1500,8 +1497,7 @@ public class BancoAppAdm implements Serializable {
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
 
-//					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
-//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+//					
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());
