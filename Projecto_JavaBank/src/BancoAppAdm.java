@@ -91,7 +91,17 @@ public class BancoAppAdm implements Serializable {
 	DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
 	// Modelo para tabela
 	String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
-	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
+		private static final long serialVersionUID = 1L;
+
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			if (mColIndex == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
 	private JTextField textFieldAdminDescr;
 	private JTable table_1;
 
@@ -538,7 +548,6 @@ public class BancoAppAdm implements Serializable {
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 
-
 					Utilizador f = gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
 
 					textAdmFunNome.setText(f.getNome());
@@ -596,7 +605,8 @@ public class BancoAppAdm implements Serializable {
 				rbadmfuncionario.setSelected(false);
 				rbadmadministrador.setSelected(false);
 				rbadmadministrador.setEnabled(true);
-				rbadmfuncionario.setEnabled(true);;
+				rbadmfuncionario.setEnabled(true);
+				;
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmFun.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
@@ -799,16 +809,12 @@ public class BancoAppAdm implements Serializable {
 
 					int id = Integer.parseInt(tbAdmFunPesq.getText());
 					Utilizador u;
-					
-					if(gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores()) instanceof Funcionario)
-					{
-						u = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-					}
-					else
-					{
-						u =  (Administrador) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-					}
 
+					if (gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores()) instanceof Funcionario) {
+						u = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+					} else {
+						u = (Administrador) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+					}
 
 					textAdmFunNome.setText(u.getNome());
 					textAdmFunSobrenome.setText(u.getSobrenome());
@@ -831,15 +837,15 @@ public class BancoAppAdm implements Serializable {
 
 					dmFun.removeAllElements();
 					// para o funcionario:
-					
-						dmFun.addElement(u.getIdUtilizador() + " " + u.getNome() + " " + u.getSobrenome());
+
+					dmFun.addElement(u.getIdUtilizador() + " " + u.getNome() + " " + u.getSobrenome());
 				}
 
 				if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
 
 					String nome = tbAdmFunPesq.getText();
 
-					Utilizador u =  gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+					Utilizador u = gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
 
 					textAdmFunNome.setText(u.getNome());
 					textAdmFunSobrenome.setText(u.getSobrenome());

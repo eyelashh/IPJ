@@ -125,12 +125,7 @@ public class BancoAppFun implements Serializable {
 	// Modelo para tabela movimentos
 	String[] colunas = { "IDOperacao", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
-	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0)
-	{
-		public boolean isCellEditable(int rowIndex, int mColIndex) {
-			return false;
-	}
-	};
+	DefaultTableModel modeloTabela=new DefaultTableModel(colunas,0){public boolean isCellEditable(int rowIndex,int mColIndex){return false;}};
 	// modelo lista das contas dos clientes do painel cliente
 	DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
 	// modelo combobox lista as contas abertas
@@ -138,49 +133,19 @@ public class BancoAppFun implements Serializable {
 
 	// Modelo da tabela clientes:
 	String[] colunas3 = { "ID", "Nome" };
-	DefaultTableModel modeloTabelaCliente = new DefaultTableModel(colunas3, 0) {
-		private static final long serialVersionUID = 1L;
+	DefaultTableModel modeloTabelaCliente=new DefaultTableModel(colunas3,0){private static final long serialVersionUID=1L;
 
-		@SuppressWarnings("rawtypes")
-		public Class getColumnClass(int c) {
-			switch (c) {
-			case 0:
-				return Integer.class;
-			default:
-				return String.class;
-			}
-		}
+	@SuppressWarnings("rawtypes")public Class getColumnClass(int c){switch(c){case 0:return Integer.class;default:return String.class;}}
 
-		public boolean isCellEditable(int rowIndex, int mColIndex) {
-				return false;
-		}
-	};
+	public boolean isCellEditable(int rowIndex,int mColIndex){return false;}};
 
 	// Modelo da tabela clientes checkBox:
 	String[] colunas2 = { "Check", "ID", "Nome" };
-	DefaultTableModel model = new DefaultTableModel(colunas2, 0) {
-		private static final long serialVersionUID = 1L;
+	DefaultTableModel model=new DefaultTableModel(colunas2,0){private static final long serialVersionUID=1L;
 
-		@SuppressWarnings("rawtypes")
-		public Class getColumnClass(int c) {
-			switch (c) {
-			case 0:
-				return Boolean.class;
-			case 1:
-				return Integer.class;
-			default:
-				return String.class;
-			}
-		}
+	@SuppressWarnings("rawtypes")public Class getColumnClass(int c){switch(c){case 0:return Boolean.class;case 1:return Integer.class;default:return String.class;}}
 
-		public boolean isCellEditable(int rowIndex, int mColIndex) {
-			if (mColIndex == 0) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	};
+	public boolean isCellEditable(int rowIndex,int mColIndex){if(mColIndex==0){return true;}else{return false;}}};
 	private JTextField tbncartao;
 	private JTextField tbdescop;
 
@@ -2158,27 +2123,27 @@ public class BancoAppFun implements Serializable {
 		// botao conta accao que muda de cor
 		btFunConta.addMouseListener(new MouseListener() {
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				btFunConta.setBackground(new Color(188, 127, 82));
-			}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		btFunConta.setBackground(new Color(188, 127, 82));
+	}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				btFunConta.setBackground(new Color(188, 127, 82));
-			}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		btFunConta.setBackground(new Color(188, 127, 82));
+	}
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-				btFunConta.setBackground(new Color(188, 127, 82));
-			}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		btFunConta.setBackground(new Color(188, 127, 82));
+	}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btFunConta.setBackground(new Color(65, 106, 105));
-			}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		btFunConta.setBackground(new Color(65, 106, 105));
+	}
 
-			@Override
+	@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunConta.setBackground(new Color(65, 106, 105));
 			}
