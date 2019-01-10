@@ -466,13 +466,18 @@ public class AppFuncionario implements Serializable {
 						gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
 						
 					}
-					
+					String preco=gl.viewComics.precoTotalCarrinho(gl.viewComics.pesquisarCarrinho(nif));
+					txtPrecoCarrinho.setText(preco);
+					String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(gl.viewComics.pesquisarCarrinho(nif));
+					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
+							
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "Seleccione o nif do carrinho");
 				}
 				txtNovaQuantidadeCARRINHO.setText("");
 				txtNovaQuantidadeCARRINHO.setEditable(false);
+				
 
 			}
 		});

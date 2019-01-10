@@ -45,4 +45,5 @@
     <fullyQualifiedTypeName name="java.util.concurrent.atomic.AtomicInteger"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.SingleSelectionModel"/>
 </qualifiedTypeNameHistroy>
