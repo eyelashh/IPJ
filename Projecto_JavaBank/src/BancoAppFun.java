@@ -2034,6 +2034,42 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.setBackground(new Color(188, 127, 82));
 		JpanelMenu.add(btFunGesto);
 
+		// coloca o painel gestao visivel:
+		btFunGesto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(true);
+				jpanelOperacoes.setVisible(false);
+				jpanelMovimentos.setVisible(false);
+				tbGestaoUsername.setText(func.getUsername());
+				tbfunnome.setText(func.getNome());
+				tbfunapelido.setText(func.getSobrenome());
+				dtfunnasc.setDate(func.getDataDeNascimento());
+				tbfunident.setText(func.getNumidentificacao() + "");
+				tbfuncontacto.setText(func.getContacto() + "");
+				tbfunmorada.setText(func.getMorada());
+				tbfunidfunc.setText(func.getIdFuncionario() + "");
+
+				if (func.getTipoIndentificacao().equals("C.C.")) {
+					rbfuncc.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("B.I.")) {
+					rbfunbi.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("Passaporte")) {
+					rbfuncpass.setSelected(true);
+				}
+
+			}
+		});
+
+		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+
+
+		// botao cliente accao que muda de cor
 
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));

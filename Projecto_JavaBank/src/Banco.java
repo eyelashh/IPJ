@@ -256,6 +256,7 @@ public class Banco implements Serializable {
 	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
+<<<<<<< HEAD
 
 		for (int i = 0; i < this.contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
@@ -266,6 +267,24 @@ public class Banco implements Serializable {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
 					
+=======
+		ArrayList<Conta> contas = this.contas;
+		ArrayList <Integer> clienteContas=c.getContas();
+
+		for (int i = 0; i < contas.size(); i++) {
+			for (int j = 0; j < clienteContas.size(); j++) {
+
+				if ((contas.get(i) instanceof ContaPoupanca) && contas.get(i).isAberta()) {
+
+					if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta())
+							&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
+
+						String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
+						listprov.add(idSTR);
+						
+
+					}
+>>>>>>> 88524af8f1cc17f2d6a222bbb30e769af77317ca
 				}
 			}
 		}
@@ -274,6 +293,7 @@ public class Banco implements Serializable {
 		lista = listprov.toArray(lista);
 		return lista;
 	}
+
 
 	// retorna o array das contas poupan�a
 	protected String[] listaContasPoupanca() {
