@@ -264,6 +264,7 @@ public class Banco implements Serializable {
 						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
+					
 				}
 			}
 		}
