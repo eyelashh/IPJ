@@ -95,11 +95,9 @@ public class BancoAppAdm implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
-			if (mColIndex == 0) {
-				return true;
-			} else {
-				return false;
-			}
+
+			return false;
+
 		}
 	};
 	private JTextField textFieldAdminDescr;
@@ -111,11 +109,9 @@ public class BancoAppAdm implements Serializable {
 		private static final long serialVersionUID = 1L;
 
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
-			if (mColIndex == 0) {
-				return true;
-			} else {
-				return false;
-			}
+
+			return false;
+
 		}
 	};
 	private JTextField textFieldnNovasConta;
@@ -1077,6 +1073,7 @@ public class BancoAppAdm implements Serializable {
 				tbadmcontacartaonome.setText(null);
 				tbadmcontacartaovalidade.setDate(null);
 				tbadmcontacartaocod.setText(null);
+				textFieldAdminDescr.setText(null);
 
 				cboxaberta.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
@@ -1719,6 +1716,8 @@ public class BancoAppAdm implements Serializable {
 					tbadmcontajuros.setText(((ContaPoupanca) cont).getTaxaJuros() + "");
 					tbadmcontalimmes.setText(((ContaPoupanca) cont).getLimiteMensalDebito() + "");
 				}
+				
+				
 
 			}
 		});
