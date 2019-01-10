@@ -1093,14 +1093,17 @@ public class BancoAppFun implements Serializable {
 							tbcodcartao.setText(card.getCodvalidacao() + "");
 							tbncartao.setText(card.getnCartao() + "");
 
-//							Calendar cal = new GregorianCalendar();
-//							cal.setTime(card.getDataValidade());
-//							cal.add(Calendar.DAY_OF_YEAR, 1);
+
 
 							// ver situacao se o cartao expirou ou nao
 
 							if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
+								// o cartao nao expirou aqui
+
+							} else {
+
+								// o cartao expirou aqui
 								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 										card.getCodvalidacao());
 								card2.setAtivo(false);
@@ -1126,6 +1129,7 @@ public class BancoAppFun implements Serializable {
 		});
 
 		btPedirCartao.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				panelCartao.setVisible(true);
 				tbnomecartao.setEditable(true);
