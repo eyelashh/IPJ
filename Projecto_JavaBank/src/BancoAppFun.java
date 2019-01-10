@@ -2073,13 +2073,13 @@ public class BancoAppFun implements Serializable {
 		// coloca o painel gestao visivel:
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
 				jpanelOperacoes.setVisible(false);
 				jpanelMovimentos.setVisible(false);
+				
 				tbGestaoUsername.setText(func.getUsername());
 				tbfunnome.setText(func.getNome());
 				tbfunapelido.setText(func.getSobrenome());
@@ -2098,6 +2098,9 @@ public class BancoAppFun implements Serializable {
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
 				}
+				
+				jpanelGestao.revalidate();
+				jpanelGestao.repaint();
 
 			}
 		});
@@ -2234,6 +2237,7 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				btFunGesto.setBackground(new Color(188, 127, 82));
+				
 			}
 
 			@Override
@@ -2254,6 +2258,7 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
+				
 			}
 		});
 
