@@ -14,7 +14,10 @@ public class Validador {
 		if (util.size() != 0) {
 			id = util.get(util.size() - 1).getIdUtilizador() + 1;
 		}
-
+		if(id==0)
+		{
+			id=1;
+		}
 		return id;
 	}
 

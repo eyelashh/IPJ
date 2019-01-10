@@ -538,9 +538,6 @@ public class BancoAppAdm implements Serializable {
 					String s = lbLAdmFunLista.getSelectedValue();
 					s = s.substring(0, s.indexOf(" "));
 
-					// Funcionario f = (Funcionario)
-					// gb.javabank.selectUtilizador(Integer.parseInt(s),
-					// gb.javabank.getUtlizadores());
 
 					Utilizador f = gb.javabank.selectUtilizador(Integer.parseInt(s), gb.javabank.getUtlizadores());
 
@@ -570,6 +567,8 @@ public class BancoAppAdm implements Serializable {
 						rbadmadministrador.setSelected(false);
 						rbadmfuncionario.setSelected(true);
 					}
+					rbadmadministrador.setEnabled(false);
+					rbadmfuncionario.setEnabled(false);
 
 				}
 			}
@@ -596,7 +595,8 @@ public class BancoAppAdm implements Serializable {
 				tbAdmFunPesq.setText(null);
 				rbadmfuncionario.setSelected(false);
 				rbadmadministrador.setSelected(false);
-
+				rbadmadministrador.setEnabled(true);
+				rbadmfuncionario.setEnabled(true);;
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmFun.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
@@ -622,7 +622,8 @@ public class BancoAppAdm implements Serializable {
 				textAdmFunPass.setText(null);
 				textAdmFunUser.setText(null);
 				dateChooser.setCalendar(null);
-
+				rbadmadministrador.setEnabled(true);
+				rbadmfuncionario.setEnabled(true);
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmFun.removeAllElements();
 				gb.javabank.addelementoslist(gb.javabank.listaFunceAdm(gb.javabank.getUtlizadores()), dmFun);
@@ -734,6 +735,10 @@ public class BancoAppAdm implements Serializable {
 				textAdmFunPass.setText("");
 				textAdmFunNumero.setText("");
 				dateChooser.setDate(null);
+				rbadmadministrador.setEnabled(true);
+				rbadmfuncionario.setEnabled(true);
+				rbadmadministrador.setSelected(false);
+				rbadmfuncionario.setSelected(false);
 			}
 		});
 
@@ -793,59 +798,70 @@ public class BancoAppAdm implements Serializable {
 				if (cbAdmFunPesq.getSelectedItem().equals("ID")) {
 
 					int id = Integer.parseInt(tbAdmFunPesq.getText());
+					Utilizador u;
+					
+					if(gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores()) instanceof Funcionario)
+					{
+						u = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+					}
+					else
+					{
+						u =  (Administrador) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
+					}
 
-					Funcionario f = (Funcionario) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
 
-					textAdmFunNome.setText(f.getNome());
-					textAdmFunSobrenome.setText(f.getSobrenome());
-					textAdmFunMorada.setText(f.getMorada());
-					textAdmFunContato.setText(String.valueOf(f.getContacto()));
-					textAdmFunUser.setText(f.getUsername());
-					textAdmFunPass.setText(f.getPassword());
-					textAdmFunNumero.setText("" + f.getNumidentificacao());
-					dateChooser.setDate(f.getDataDeNascimento());
+					textAdmFunNome.setText(u.getNome());
+					textAdmFunSobrenome.setText(u.getSobrenome());
+					textAdmFunMorada.setText(u.getMorada());
+					textAdmFunContato.setText(String.valueOf(u.getContacto()));
+					textAdmFunUser.setText(u.getUsername());
+					textAdmFunPass.setText(u.getPassword());
+					textAdmFunNumero.setText("" + u.getNumidentificacao());
+					dateChooser.setDate(u.getDataDeNascimento());
 
-					if (f.getTipoIndentificacao().equals("C.C.")) {
+					if (u.getTipoIndentificacao().equals("C.C.")) {
 						rbAdmFunCC.setSelected(true);
 					}
-					if (f.getTipoIndentificacao().equals("B.I.")) {
+					if (u.getTipoIndentificacao().equals("B.I.")) {
 						rbAdmFunBI.setSelected(true);
 					}
-					if (f.getTipoIndentificacao().equals("Passaporte")) {
+					if (u.getTipoIndentificacao().equals("Passaporte")) {
 						rbAdmFunPass.setSelected(true);
 					}
 
 					dmFun.removeAllElements();
-					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+					// para o funcionario:
+					
+						dmFun.addElement(u.getIdUtilizador() + " " + u.getNome() + " " + u.getSobrenome());
 				}
 
 				if (cbAdmFunPesq.getSelectedItem().equals("Nome")) {
 
 					String nome = tbAdmFunPesq.getText();
 
-					Funcionario f = (Funcionario) gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
+					Utilizador u =  gb.javabank.selectUtilizadorNome(nome, gb.javabank.getUtlizadores());
 
-					textAdmFunNome.setText(f.getNome());
-					textAdmFunSobrenome.setText(f.getSobrenome());
-					textAdmFunMorada.setText(f.getMorada());
-					textAdmFunContato.setText(String.valueOf(f.getContacto()));
-					textAdmFunUser.setText(f.getUsername());
-					textAdmFunPass.setText(f.getPassword());
-					textAdmFunNumero.setText("" + f.getNumidentificacao());
-					dateChooser.setDate(f.getDataDeNascimento());
+					textAdmFunNome.setText(u.getNome());
+					textAdmFunSobrenome.setText(u.getSobrenome());
+					textAdmFunMorada.setText(u.getMorada());
+					textAdmFunContato.setText(String.valueOf(u.getContacto()));
+					textAdmFunUser.setText(u.getUsername());
+					textAdmFunPass.setText(u.getPassword());
+					textAdmFunNumero.setText("" + u.getNumidentificacao());
+					dateChooser.setDate(u.getDataDeNascimento());
 
-					if (f.getTipoIndentificacao().equals("C.C.")) {
+					if (u.getTipoIndentificacao().equals("C.C.")) {
 						rbAdmFunCC.setSelected(true);
 					}
-					if (f.getTipoIndentificacao().equals("B.I.")) {
+					if (u.getTipoIndentificacao().equals("B.I.")) {
 						rbAdmFunBI.setSelected(true);
 					}
-					if (f.getTipoIndentificacao().equals("Passaporte")) {
+					if (u.getTipoIndentificacao().equals("Passaporte")) {
 						rbAdmFunPass.setSelected(true);
 					}
 
 					dmFun.removeAllElements();
-					dmFun.addElement(f.getIdFuncionario() + " " + f.getNome() + " " + f.getSobrenome());
+					dmFun.addElement(u.getIdUtilizador() + " " + u.getNome() + " " + u.getSobrenome());
 				}
 
 			}
@@ -1497,8 +1513,7 @@ public class BancoAppAdm implements Serializable {
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
 
-//					String[] conta = (gb.javabank.listacontasUtilizadorID(id, gb.javabank.getContas(), gb.javabank.getUtlizadores()));
-//					gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+//					
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());

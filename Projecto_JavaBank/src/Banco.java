@@ -156,15 +156,21 @@ public class Banco implements Serializable {
 	// isto lista o numero de contas num array unico:
 
 	protected String[] listanumerodecontasabertas(ArrayList<Conta> cont) {
-		String[] numcontas = new String[cont.size()];
+		
+		ArrayList<String> arrAxu = new ArrayList<String> ();
+		
+		
+		
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
+			
 			if (cont.get(i).isAberta()) {
 				s = "" + cont.get(i).getIdConta();
-				numcontas[i] = s;
-				s = "";
+				arrAxu.add(s);
 			}
 		}
+		String[] numcontas = new String[arrAxu.size()];
+		numcontas = arrAxu.toArray(numcontas);
 		return numcontas;
 	}
 
