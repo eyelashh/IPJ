@@ -463,12 +463,13 @@ public class BancoAppClt implements Serializable {
 						Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 								((ContaCorrente) conta).getCartao());
 
-						Calendar cal = new GregorianCalendar();
-						cal.setTime(card.getDataValidade());
-						Date.valueOf(LocalDate.now());
-						cal.add(Calendar.YEAR, 5);
-
-						if (card.getDataValidade().after(cal.getTime())) {
+//						Calendar cal = new GregorianCalendar();
+//						cal.setTime(card.getDataValidade());
+//						cal.add(Calendar.DAY_OF_YEAR, 1);
+						
+// ver situacao se o cartao expirou ou nao
+						
+						if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
 							Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 									card.getCodvalidacao());
@@ -500,7 +501,6 @@ public class BancoAppClt implements Serializable {
 
 							Calendar cal = new GregorianCalendar();
 							Date.valueOf(LocalDate.now());
-							// cal.set(2019, 01, 8);
 							cal.add(Calendar.YEAR, 5);
 
 							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(), cal.getTime(), nvalcartao,
