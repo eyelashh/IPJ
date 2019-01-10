@@ -2074,6 +2074,7 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelGestao.setVisible(true);
@@ -2101,6 +2102,7 @@ public class BancoAppFun implements Serializable {
 				
 				jpanelGestao.revalidate();
 				jpanelGestao.repaint();
+				btFunGesto.setBackground(new Color(65, 106, 105));
 
 			}
 		});
@@ -2258,6 +2260,7 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
+				
 				
 			}
 		});
