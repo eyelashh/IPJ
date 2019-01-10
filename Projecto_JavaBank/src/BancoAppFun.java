@@ -936,7 +936,7 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
-<<<<<<< HEAD
+
 
 		bttConfirmarEliminacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -971,8 +971,7 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
+
 
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
