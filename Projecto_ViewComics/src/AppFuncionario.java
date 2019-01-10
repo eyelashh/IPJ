@@ -438,8 +438,36 @@ public class AppFuncionario implements Serializable {
 					int linha = tabelaCarrinhos.getSelectedRow();
 					int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
 					int novaQuantidadeINT = Integer.parseInt(novaQuantidadeSTR);
-					tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
-					gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+					int antigaQuantidadeINT=(int) tabelaCarrinhos.getModel().getValueAt(linha, 4);
+					Livro l = gl.viewComics.livroId(idLivro);
+					int stockINT=l.getStock();
+					String stock=Integer.toString(stockINT);
+					if (novaQuantidadeINT>=antigaQuantidadeINT) {
+						int qtdAlterarCarrinhoINT = novaQuantidadeINT-antigaQuantidadeINT;
+						String qtdAlterarCarrinhoSTR=Integer.toString(qtdAlterarCarrinhoINT);
+						if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinhoSTR, idLivro,
+								stock)) {
+							int novoStock=stockINT-qtdAlterarCarrinhoINT;
+							gl.viewComics.alterarStockLivro(idLivro, novoStock);
+							tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
+							gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Não foi possível adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
+						}
+						
+					}
+					else if (novaQuantidadeINT<antigaQuantidadeINT) {
+						int qtdAlterarCarrinhoINT = antigaQuantidadeINT-novaQuantidadeINT;
+						int novoStock=stockINT+qtdAlterarCarrinhoINT;
+						gl.viewComics.alterarStockLivro(idLivro, novoStock);
+						tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
+						gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+						
+					}
+					
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Seleccione o nif do carrinho");
 				}

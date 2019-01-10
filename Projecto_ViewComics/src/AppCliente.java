@@ -349,7 +349,7 @@ public class AppCliente implements Serializable {
 									quantidadeActualLIVROSstr = gl.viewComics.adicionarQuantidade(
 											txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
 									int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-//								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+
 									txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
 									// actualiza o carrinho
 									gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
