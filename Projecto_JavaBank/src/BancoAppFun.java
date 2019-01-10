@@ -123,9 +123,14 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "Descrição", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "IDOperacao", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
-	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0);
+	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0)
+	{
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+	}
+	};
 	// modelo lista das contas dos clientes do painel cliente
 	DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
 	// modelo combobox lista as contas abertas
@@ -147,11 +152,7 @@ public class BancoAppFun implements Serializable {
 		}
 
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
-			if (mColIndex == 0) {
-				return true;
-			} else {
 				return false;
-			}
 		}
 	};
 
@@ -181,6 +182,7 @@ public class BancoAppFun implements Serializable {
 		}
 	};
 	private JTextField tbncartao;
+	private JTextField tbdescop;
 
 	/**
 	 * Launch the application.
@@ -307,40 +309,6 @@ public class BancoAppFun implements Serializable {
 		JPanel jpanelContas = new JPanel();
 		jpanelContas.setVisible(false);
 
-		JPanel jpanelEliminarContaDataFecho = new JPanel();
-		jpanelEliminarContaDataFecho.setVisible(false);
-		jpanelEliminarContaDataFecho.setBounds(0, 0, 354, 368);
-		jpanelContas.add(jpanelEliminarContaDataFecho);
-		jpanelEliminarContaDataFecho.setLayout(null);
-
-		JDateChooser dateChooserFechoConta = new JDateChooser();
-		dateChooserFechoConta.setBounds(40, 134, 269, 35);
-		jpanelEliminarContaDataFecho.add(dateChooserFechoConta);
-
-		JButton bttConfirmarEliminacao = new JButton("Confirmar Eliminação");
-
-		bttConfirmarEliminacao.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		bttConfirmarEliminacao.setBounds(83, 196, 178, 38);
-		jpanelEliminarContaDataFecho.add(bttConfirmarEliminacao);
-
-		JLabel lblDataDeFecho = new JLabel("Data de fecho:");
-		lblDataDeFecho.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDeFecho.setBounds(25, 98, 178, 24);
-		jpanelEliminarContaDataFecho.add(lblDataDeFecho);
-
-		JButton btnVoltar_1 = new JButton("Voltar");
-		btnVoltar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelContas.setVisible(true);
-				jpanelEliminarContaDataFecho.setVisible(false);
-
-			}
-		});
-		btnVoltar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar_1.setBounds(122, 246, 99, 38);
-		jpanelEliminarContaDataFecho.add(btnVoltar_1);
-
 		// lista das contas no painel contas
 		JList<String> lContas = new JList<String>(dmconta);
 		lContas.setBounds(24, 109, 240, 386);
@@ -357,13 +325,127 @@ public class BancoAppFun implements Serializable {
 
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
-		panelCartao.setBounds(752, 394, 278, 169);
-		jpanelContas.add(panelCartao);
-		panelCartao.setLayout(null);
+		
+				// painel movimentos onde aparece a tabela das operaçoes
+				JPanel jpanelMovimentos = new JPanel();
+				jpanelMovimentos.setBounds(0, 0, 1065, 585);
+				JpanelPrincipal.add(jpanelMovimentos);
+				jpanelMovimentos.setLayout(null);
+				
+						// Tabela dos movimentos das operações
+						JScrollPane scrollPane = new JScrollPane();
+						scrollPane.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								int linha = tableMovimentos.getSelectedRow();
+								int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+								String desc = gb.javabank.descricaoOpercacoes(id);
+								tbdescop.setText(desc);
+								
+								
+							}
+						});
+						scrollPane.setBounds(55, 51, 936, 293);
+						jpanelMovimentos.add(scrollPane);
+						tableMovimentos = new JTable(modeloTabela);
+						scrollPane.setViewportView(tableMovimentos);
+						
+								JButton btnVoltar = new JButton("Voltar");
+								btnVoltar.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+
+										jpanelMovimentos.setVisible(false);
+										jpanelContas.setVisible(true);
+										modeloTabela.setRowCount(0);
+										tbdescop.setText("");
+										
+									}
+								});
+								btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+								btnVoltar.setBounds(469, 478, 120, 38);
+								jpanelMovimentos.add(btnVoltar);
+								
+								tbdescop = new JTextField();
+								tbdescop.setBounds(55, 378, 936, 30);
+								jpanelMovimentos.add(tbdescop);
+								tbdescop.setColumns(10);
+								jpanelMovimentos.setVisible(false);
+
+		JPanel jpanelEliminarContaDataFecho = new JPanel();
+		jpanelEliminarContaDataFecho.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelEliminarContaDataFecho);
+		jpanelEliminarContaDataFecho.setVisible(false);
+		jpanelEliminarContaDataFecho.setLayout(null);
+
+		JDateChooser dateChooserFechoConta = new JDateChooser();
+		dateChooserFechoConta.setBounds(392, 126, 269, 35);
+		jpanelEliminarContaDataFecho.add(dateChooserFechoConta);
+
+		JButton bttConfirmarEliminacao = new JButton("Confirmar Eliminacao");
+
+		bttConfirmarEliminacao.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		bttConfirmarEliminacao.setBounds(432, 198, 178, 38);
+		jpanelEliminarContaDataFecho.add(bttConfirmarEliminacao);
+
+		JLabel lblDataDeFecho = new JLabel("Data de fecho:");
+		lblDataDeFecho.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDeFecho.setBounds(453, 89, 178, 24);
+		jpanelEliminarContaDataFecho.add(lblDataDeFecho);
+
+		JButton btnVoltar_1 = new JButton("Voltar");
+		btnVoltar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelContas.setVisible(true);
+				jpanelEliminarContaDataFecho.setVisible(false);
+
+			}
+		});
+		btnVoltar_1.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar_1.setBounds(466, 249, 99, 38);
+		jpanelEliminarContaDataFecho.add(btnVoltar_1);
 
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
+		
+		bttConfirmarEliminacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
+						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(),
+						gb.javabank.getContas());
+
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
+				tbnomecartao.setText(null);
+				dtcartao.setDate(null);
+				tbcodcartao.setText(null);
+				panelCartao.setVisible(false);
+
+				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
+
+			}
+		});
+		panelCartao.setBounds(752, 394, 278, 169);
+		jpanelContas.add(panelCartao);
+		panelCartao.setLayout(null);
+
+		
 
 		// Tabela clientes nas contas
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -619,10 +701,9 @@ public class BancoAppFun implements Serializable {
 				Conta c;
 				ArrayList<Integer> clientes = new ArrayList<Integer>();
 				if (lContas.isSelectionEmpty()) {
+					// CRIA NOVA CONTA
 					if (rdbtnContaCorrente.isSelected()) {
-						double vlevdia = Double.parseDouble(tbContaslimitelevdia.getText());
-						double vlevop = Double.parseDouble(tbContaslimitelevop.getText());
-						// CRIA NOVA CONTA
+						// conta Corrente:
 						// cartao nulo inicialmente;
 						c = new ContaCorrente(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
@@ -631,9 +712,8 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.getContas().add(c);
 						gb.javabank.atruibuititularCCorrente(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-
 					} else {
-
+						// conta Poupanca:
 						c = new ContaPoupanca(Integer.parseInt(tbContasnum.getText()), dateChooser_2.getDate(), null,
 								Double.parseDouble(tbContasSaldo.getText()), clientes,
 								Double.parseDouble(tbContaslimitelevop.getText()),
@@ -643,28 +723,43 @@ public class BancoAppFun implements Serializable {
 						gb.javabank.getContas().add(c);
 						gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 						JOptionPane.showMessageDialog(null, "Conta adicionada com sucesso!");
-						dmconta.removeAllElements();
-						gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()),
-								dmconta);
-						lContas.clearSelection();
-						tbContasnum.setText(null);
-						dateChooser_2.setDate(null);
-						tbContaslimitelevop.setText(null);
-						tbContasSaldo.setText(null);
-						tbContasSaldo.setEditable(false);
-						tbContaslimitelevdia.setText(null);
-						rdbtnContaCorrente.setSelected(true);
-						rdbtnContaPoupanca.setSelected(false);
-						tblJuros.setText(null);
-						dateChooser_2.setEnabled(true);
-						tbllimitemes.setText(null);
-						panelCartao.setVisible(false);
-						btPedirCartao.setVisible(false);
-						btnMovimentos.setVisible(false);
-						tbContaspesqconta.setText("");
-
 					}
+				} else {
+					// Atualizar:
+					c = gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas());
+					if (c instanceof ContaCorrente) {
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()), 0, 0);
+					} else {
+						gb.javabank.atualizarconta(c, Double.parseDouble(tbContaslimitelevop.getText()),
+								Double.parseDouble(tbContaslimitelevdia.getText()),
+								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
+					}
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
+							gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+					gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
+					JOptionPane.showMessageDialog(null, "Conta Atualizada com sucesso!");
+
 				}
+				dmconta.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
+				lContas.clearSelection();
+				tbContasnum.setText(null);
+				dateChooser_2.setDate(null);
+				tbContaslimitelevop.setText(null);
+				tbContasSaldo.setText(null);
+				tbContasSaldo.setEditable(false);
+				tbContaslimitelevdia.setText(null);
+				rdbtnContaCorrente.setSelected(true);
+				rdbtnContaPoupanca.setSelected(false);
+				tblJuros.setText(null);
+				dateChooser_2.setEnabled(true);
+				tbllimitemes.setText(null);
+				panelCartao.setVisible(false);
+				btPedirCartao.setVisible(false);
+				btnMovimentos.setVisible(false);
+				tbContaspesqconta.setText("");
+
 			}
 
 		});
@@ -696,6 +791,7 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
+				
 				if (!lContas.isSelectionEmpty()) {
 					btnMovimentos.setVisible(true);
 
@@ -840,41 +936,6 @@ public class BancoAppFun implements Serializable {
 
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
-		
-
-		bttConfirmarEliminacao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
-						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-
-				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(),
-						gb.javabank.getContas());
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				dateChooser_2.setEnabled(true);
-				tbllimitemes.setText(null);
-
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-				tbnomecartao.setText(null);
-				dtcartao.setDate(null);
-				tbcodcartao.setText(null);
-				panelCartao.setVisible(false);
-
-				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
-
-			}
-		});
 
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
@@ -1233,12 +1294,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
-		// painel movimentos onde aparece a tabela das operaçoes
-		JPanel jpanelMovimentos = new JPanel();
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
 
 		// Painel principal da operaçoes
 		JPanel jpanelOperacoes = new JPanel();
@@ -1868,26 +1923,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 418, 293);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(206, 356, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-		jpanelMovimentos.setVisible(false);
 		// Preencher tabela apartir do tablemodel:
 		gb.javabank.preenchetabelaclientes2(modeloTabelaCliente, gb.javabank.getUtlizadores());
 		gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
@@ -2034,8 +2069,7 @@ public class BancoAppFun implements Serializable {
 				btFunCliente.setBackground(new Color(65, 106, 105));
 			}
 		});
-		
-		
+
 		btnMovimentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jpanelContas.setVisible(false);
@@ -2054,23 +2088,17 @@ public class BancoAppFun implements Serializable {
 		});
 
 		// elimina contas:
-				btContasEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+		btContasEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-						if (!lContas.isSelectionEmpty()) {
+				if (!lContas.isSelectionEmpty()) {
+					jpanelEliminarContaDataFecho.setVisible(true);
+					jpanelContas.setVisible(false);
+				}
 
-							jpanelEliminarContaDataFecho.setVisible(true);
-							jpanelContas.setVisible(false);
-							jpanelClientes.setVisible(false);
-							jpanelMovimentos.setVisible(false);
-							jpanelGestao.setVisible(false);
-							jpanelOperacoes.setVisible(false);
+			}
+		});
 
-						}
-
-					}
-				});
-		
 		// botao conta accao que muda de cor
 		btFunConta.addMouseListener(new MouseListener() {
 
