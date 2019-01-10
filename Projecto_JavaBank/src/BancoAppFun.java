@@ -125,7 +125,11 @@ public class BancoAppFun implements Serializable {
 	// Modelo para tabela movimentos
 	String[] colunas = { "IDOperacao", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
-	DefaultTableModel modeloTabela=new DefaultTableModel(colunas,0){public boolean isCellEditable(int rowIndex,int mColIndex){return false;}};
+	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+	};
 	// modelo lista das contas dos clientes do painel cliente
 	DefaultListModel<String> dlmcontacliente = new DefaultListModel<String>();
 	// modelo combobox lista as contas abertas
@@ -133,19 +137,49 @@ public class BancoAppFun implements Serializable {
 
 	// Modelo da tabela clientes:
 	String[] colunas3 = { "ID", "Nome" };
-	DefaultTableModel modeloTabelaCliente=new DefaultTableModel(colunas3,0){private static final long serialVersionUID=1L;
+	DefaultTableModel modeloTabelaCliente = new DefaultTableModel(colunas3, 0) {
+		private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("rawtypes")public Class getColumnClass(int c){switch(c){case 0:return Integer.class;default:return String.class;}}
+		@SuppressWarnings("rawtypes")
+		public Class getColumnClass(int c) {
+			switch (c) {
+			case 0:
+				return Integer.class;
+			default:
+				return String.class;
+			}
+		}
 
-	public boolean isCellEditable(int rowIndex,int mColIndex){return false;}};
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+	};
 
 	// Modelo da tabela clientes checkBox:
 	String[] colunas2 = { "Check", "ID", "Nome" };
-	DefaultTableModel model=new DefaultTableModel(colunas2,0){private static final long serialVersionUID=1L;
+	DefaultTableModel model = new DefaultTableModel(colunas2, 0) {
+		private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("rawtypes")public Class getColumnClass(int c){switch(c){case 0:return Boolean.class;case 1:return Integer.class;default:return String.class;}}
+		@SuppressWarnings("rawtypes")
+		public Class getColumnClass(int c) {
+			switch (c) {
+			case 0:
+				return Boolean.class;
+			case 1:
+				return Integer.class;
+			default:
+				return String.class;
+			}
+		}
 
-	public boolean isCellEditable(int rowIndex,int mColIndex){if(mColIndex==0){return true;}else{return false;}}};
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			if (mColIndex == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	};
 	private JTextField tbncartao;
 	private JTextField tbdescop;
 
@@ -290,51 +324,50 @@ public class BancoAppFun implements Serializable {
 
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
-		
-				// painel movimentos onde aparece a tabela das operaçoes
-				JPanel jpanelMovimentos = new JPanel();
-				jpanelMovimentos.setBounds(0, 0, 1065, 585);
-				JpanelPrincipal.add(jpanelMovimentos);
-				jpanelMovimentos.setLayout(null);
-				
-						// Tabela dos movimentos das operações
-						JScrollPane scrollPane = new JScrollPane();
-						scrollPane.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
-								int linha = tableMovimentos.getSelectedRow();
-								int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
-								String desc = gb.javabank.descricaoOpercacoes(id);
-								tbdescop.setText(desc);
-								
-								
-							}
-						});
-						scrollPane.setBounds(55, 51, 936, 293);
-						jpanelMovimentos.add(scrollPane);
-						tableMovimentos = new JTable(modeloTabela);
-						scrollPane.setViewportView(tableMovimentos);
-						
-								JButton btnVoltar = new JButton("Voltar");
-								btnVoltar.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
 
-										jpanelMovimentos.setVisible(false);
-										jpanelContas.setVisible(true);
-										modeloTabela.setRowCount(0);
-										tbdescop.setText("");
-										
-									}
-								});
-								btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-								btnVoltar.setBounds(469, 478, 120, 38);
-								jpanelMovimentos.add(btnVoltar);
-								
-								tbdescop = new JTextField();
-								tbdescop.setBounds(55, 378, 936, 30);
-								jpanelMovimentos.add(tbdescop);
-								tbdescop.setColumns(10);
-								jpanelMovimentos.setVisible(false);
+		// painel movimentos onde aparece a tabela das operaçoes
+		JPanel jpanelMovimentos = new JPanel();
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int linha = tableMovimentos.getSelectedRow();
+				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+				String desc = gb.javabank.descricaoOpercacoes(id);
+				tbdescop.setText(desc);
+
+			}
+		});
+		scrollPane.setBounds(55, 51, 936, 293);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+				modeloTabela.setRowCount(0);
+				tbdescop.setText("");
+
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		tbdescop = new JTextField();
+		tbdescop.setBounds(55, 378, 936, 30);
+		jpanelMovimentos.add(tbdescop);
+		tbdescop.setColumns(10);
+		jpanelMovimentos.setVisible(false);
 
 		JPanel jpanelEliminarContaDataFecho = new JPanel();
 		jpanelEliminarContaDataFecho.setBounds(0, 0, 1042, 576);
@@ -373,7 +406,7 @@ public class BancoAppFun implements Serializable {
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
-		
+
 		bttConfirmarEliminacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -409,8 +442,6 @@ public class BancoAppFun implements Serializable {
 		panelCartao.setBounds(752, 394, 278, 169);
 		jpanelContas.add(panelCartao);
 		panelCartao.setLayout(null);
-
-		
 
 		// Tabela clientes nas contas
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -700,8 +731,8 @@ public class BancoAppFun implements Serializable {
 								Double.parseDouble(tbContaslimitelevdia.getText()),
 								Double.parseDouble(tblJuros.getText()), Double.parseDouble(tbllimitemes.getText()));
 					}
-					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
-							gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
+					gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(), gb.javabank
+							.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
 					gb.javabank.atruibuititularCPoupanca(model, c, gb.javabank.getUtlizadores());
 					JOptionPane.showMessageDialog(null, "Conta Atualizada com sucesso!");
 
@@ -756,7 +787,7 @@ public class BancoAppFun implements Serializable {
 
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
-				
+
 				if (!lContas.isSelectionEmpty()) {
 					btnMovimentos.setVisible(true);
 
@@ -902,7 +933,6 @@ public class BancoAppFun implements Serializable {
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
 
-
 		bttConfirmarEliminacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -936,7 +966,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
 
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
@@ -2093,57 +2122,45 @@ public class BancoAppFun implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				if (!lContas.isSelectionEmpty()) {
-<<<<<<< HEAD
-=======
+
 					jpanelEliminarContaDataFecho.setVisible(true);
 					jpanelContas.setVisible(false);
 				}
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 
-<<<<<<< HEAD
-					jpanelEliminarContaDataFecho.setVisible(true);
-					jpanelContas.setVisible(false);
-					jpanelClientes.setVisible(false);
-					jpanelMovimentos.setVisible(false);
-					jpanelGestao.setVisible(false);
-					jpanelOperacoes.setVisible(false);
-=======
-			}
-		});
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
-
-<<<<<<< HEAD
-				}
+				jpanelEliminarContaDataFecho.setVisible(true);
+				jpanelContas.setVisible(false);
+				jpanelClientes.setVisible(false);
+				jpanelMovimentos.setVisible(false);
+				jpanelGestao.setVisible(false);
+				jpanelOperacoes.setVisible(false);
 
 			}
 		});
 
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		// botao conta accao que muda de cor
 		btFunConta.addMouseListener(new MouseListener() {
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		btFunConta.setBackground(new Color(188, 127, 82));
-	}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				btFunConta.setBackground(new Color(188, 127, 82));
+			}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		btFunConta.setBackground(new Color(188, 127, 82));
-	}
+			@Override
+			public void mousePressed(MouseEvent e) {
+				btFunConta.setBackground(new Color(188, 127, 82));
+			}
 
-	@Override
-	public void mouseExited(MouseEvent e) {
-		btFunConta.setBackground(new Color(188, 127, 82));
-	}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btFunConta.setBackground(new Color(188, 127, 82));
+			}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		btFunConta.setBackground(new Color(65, 106, 105));
-	}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btFunConta.setBackground(new Color(65, 106, 105));
+			}
 
-	@Override
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunConta.setBackground(new Color(65, 106, 105));
 			}
