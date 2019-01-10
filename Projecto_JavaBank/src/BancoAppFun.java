@@ -352,6 +352,7 @@ public class BancoAppFun implements Serializable {
 		tbfunapelido.setEditable(false);
 		tbfunapelido.setColumns(10);
 		tbfunapelido.setBounds(57, 157, 217, 31);
+		jpanelGestao.add(tbfunapelido);
 
 		JLabel label_3 = new JLabel("Data de Nascimento:");
 		label_3.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -418,6 +419,7 @@ public class BancoAppFun implements Serializable {
 		tbfunidfunc.setEditable(false);
 		tbfunidfunc.setColumns(10);
 		tbfunidfunc.setBounds(47, 529, 225, 31);
+		jpanelGestao.add(tbfunidfunc);
 
 		JLabel lblIdFuncionario = new JLabel("ID Funcionario:");
 		lblIdFuncionario.setFont(new Font("Dialog", Font.PLAIN, 17));
@@ -567,36 +569,6 @@ public class BancoAppFun implements Serializable {
 		separator_1.setAlignmentX(0.0f);
 		separator_1.setBounds(708, 83, 29, 433);
 		jpanelGestao.add(separator_1);
-
-		tbfunnome = new JTextField();
-		tbfunnome.setEditable(false);
-		tbfunnome.setColumns(10);
-		tbfunnome.setBounds(57, 86, 217, 31);
-
-		tbfunapelido = new JTextField();
-		tbfunapelido.setEditable(false);
-		tbfunapelido.setColumns(10);
-		tbfunapelido.setBounds(57, 157, 217, 31);
-
-		tbfunident = new JTextField();
-		tbfunident.setEditable(false);
-		tbfunident.setColumns(10);
-		tbfunident.setBounds(49, 323, 225, 31);
-
-		tbfuncontacto = new JTextField();
-		tbfuncontacto.setEditable(false);
-		tbfuncontacto.setColumns(10);
-		tbfuncontacto.setBounds(49, 387, 225, 31);
-
-		tbfunmorada = new JTextField();
-		tbfunmorada.setEditable(false);
-		tbfunmorada.setColumns(10);
-		tbfunmorada.setBounds(49, 452, 225, 31);
-
-		tbfunidfunc = new JTextField();
-		tbfunidfunc.setEditable(false);
-		tbfunidfunc.setColumns(10);
-		tbfunidfunc.setBounds(47, 529, 225, 31);
 
 		// painel movimentos onde aparece a tabela das operaçoes
 		JPanel jpanelMovimentos = new JPanel();
@@ -2062,44 +2034,10 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.setBackground(new Color(188, 127, 82));
 		JpanelMenu.add(btFunGesto);
 
-		// coloca o painel gestao visivel:
-		btFunGesto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
-<<<<<<< HEAD
-=======
-				
-				jpanelClientes.setVisible(false);
-				jpanelContas.setVisible(false);
-				jpanelGestao.setVisible(true);
-				jpanelOperacoes.setVisible(false);
-				jpanelMovimentos.setVisible(false);
-				tbGestaoUsername.setText(func.getUsername());
-				tbfunnome.setText(func.getNome());
-				tbfunapelido.setText(func.getSobrenome());
-				dtfunnasc.setDate(func.getDataDeNascimento());
-				tbfunident.setText(func.getNumidentificacao() + "");
-				tbfuncontacto.setText(func.getContacto() + "");
-				tbfunmorada.setText(func.getMorada());
-				tbfunidfunc.setText(func.getIdFuncionario() + "");
-
-				if (func.getTipoIndentificacao().equals("C.C.")) {
-					rbfuncc.setSelected(true);
-				}
-				if (func.getTipoIndentificacao().equals("B.I.")) {
-					rbfunbi.setSelected(true);
-				}
-				if (func.getTipoIndentificacao().equals("Passaporte")) {
-					rbfuncpass.setSelected(true);
-				}
-
-			}
-		});
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
-		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
 			@Override
@@ -2249,7 +2187,6 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
-<<<<<<< HEAD
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelOperacoes.setVisible(false);
@@ -2274,19 +2211,15 @@ public class BancoAppFun implements Serializable {
 					rbfuncpass.setSelected(true);
 				}
 				
-				
-				jpanelGestao.add(tbfunidfunc);
-				jpanelGestao.add(tbfunmorada);
-				jpanelGestao.add(tbfuncontacto);
-				jpanelGestao.add(tbfunident);
-				jpanelGestao.add(dtfunnasc);
-				jpanelGestao.add(tbfunnome);
-				jpanelGestao.add(tbGestaoUsername);
-				jpanelGestao.add(tbfunapelido);
+				/*tbfunidfunc.update(tbfunidfunc.getGraphics());
+				tbfunmorada.update(tbfunmorada.getGraphics());
+				tbfuncontacto.update(tbfuncontacto.getGraphics());
+				tbfunident.update(tbfunident.getGraphics());
+				dtfunnasc.update(dtfunnasc.getGraphics());
+				tbfunnome.update(tbfunnome.getGraphics());
+				tbGestaoUsername.update(tbGestaoUsername.getGraphics());*/
 				jpanelGestao.setVisible(true);
 
-=======
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 			}
 		});
 
