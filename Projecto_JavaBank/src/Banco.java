@@ -253,11 +253,12 @@ public class Banco implements Serializable {
 	}
 
 	// lista a conta de um determinado cliente
-	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
+	protected String[] listacontaspoupanca(Cliente c) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
+		ArrayList<Conta> contas = this.contas;
 
-		for (int i = 0; i < this.contas.size(); i++) {
+		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
 
 				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
