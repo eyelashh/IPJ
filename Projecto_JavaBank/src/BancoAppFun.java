@@ -2060,11 +2060,45 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.setOpaque(true);
 		btFunGesto.setBounds(0, 455, 170, 150);
 		btFunGesto.setBackground(new Color(188, 127, 82));
-		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		JpanelMenu.add(btFunGesto);
 
 		// coloca o painel gestao visivel:
+		btFunGesto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
+<<<<<<< HEAD
+=======
+				
+				jpanelClientes.setVisible(false);
+				jpanelContas.setVisible(false);
+				jpanelGestao.setVisible(true);
+				jpanelOperacoes.setVisible(false);
+				jpanelMovimentos.setVisible(false);
+				tbGestaoUsername.setText(func.getUsername());
+				tbfunnome.setText(func.getNome());
+				tbfunapelido.setText(func.getSobrenome());
+				dtfunnasc.setDate(func.getDataDeNascimento());
+				tbfunident.setText(func.getNumidentificacao() + "");
+				tbfuncontacto.setText(func.getContacto() + "");
+				tbfunmorada.setText(func.getMorada());
+				tbfunidfunc.setText(func.getIdFuncionario() + "");
+
+				if (func.getTipoIndentificacao().equals("C.C.")) {
+					rbfuncc.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("B.I.")) {
+					rbfunbi.setSelected(true);
+				}
+				if (func.getTipoIndentificacao().equals("Passaporte")) {
+					rbfuncpass.setSelected(true);
+				}
+
+			}
+		});
+
+		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 		// botao cliente accao que muda de cor
 		btFunCliente.addMouseListener(new MouseListener() {
 
@@ -2215,6 +2249,7 @@ public class BancoAppFun implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				btFunGesto.setBackground(new Color(65, 106, 105));
+<<<<<<< HEAD
 				jpanelClientes.setVisible(false);
 				jpanelContas.setVisible(false);
 				jpanelOperacoes.setVisible(false);
@@ -2250,6 +2285,8 @@ public class BancoAppFun implements Serializable {
 				jpanelGestao.add(tbfunapelido);
 				jpanelGestao.setVisible(true);
 
+=======
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 			}
 		});
 

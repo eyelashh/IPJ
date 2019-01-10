@@ -75,37 +75,37 @@ public class AppCliente implements Serializable {
 	private JTable tabelaLivros;
 	private JTable tabelaCarrinho;
 	String[] colunasCarrinho = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-	DefaultTableModel modeloTabelaCarrinho = new DefaultTableModel(colunasCarrinho, 0){
+	DefaultTableModel modeloTabelaCarrinho = new DefaultTableModel(colunasCarrinho, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
+
 		public Class getColumnClass(int column) {
 			Class returnValue;
-			if ((column>=0)&&(column<getColumnCount())) {
-				returnValue =getValueAt(0,column).getClass();
-			}
-			else {
-				returnValue =Object.class;
+			if ((column >= 0) && (column < getColumnCount())) {
+				returnValue = getValueAt(0, column).getClass();
+			} else {
+				returnValue = Object.class;
 			}
 			return returnValue;
 		}
-};
+	};
 	String[] colunasLivro = { "Id do livro", "Titulo", "Autor", "Ano", "Preco" };
-	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLivro, 0){
+	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLivro, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
+
 		public Class getColumnClass(int column) {
 			Class returnValue;
-			if ((column>=0)&&(column<getColumnCount())) {
-				returnValue =getValueAt(0,column).getClass();
-			}
-			else {
-				returnValue =Object.class;
+			if ((column >= 0) && (column < getColumnCount())) {
+				returnValue = getValueAt(0, column).getClass();
+			} else {
+				returnValue = Object.class;
 			}
 			return returnValue;
 		}
-};
+	};
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -295,8 +295,8 @@ public class AppCliente implements Serializable {
 		btnPesquisarLivro.setBounds(112, 124, 115, 26);
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String criterioPesquisa=choiceAtributoLivroCliente.getSelectedItem();
-				String pesquisa=txtAtributoLivros.getText();
+				String criterioPesquisa = choiceAtributoLivroCliente.getSelectedItem();
+				String pesquisa = txtAtributoLivros.getText();
 				modeloTabelaLivros.setRowCount(0);
 				gl.viewComics.tabelaLivrosCriterioSeleccao(modeloTabelaLivros, criterioPesquisa, pesquisa);
 			}
@@ -325,15 +325,15 @@ public class AppCliente implements Serializable {
 		btnAddCarrinhoFinalCliente.setBounds(698, 79, 183, 42);
 		btnAddCarrinhoFinalCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//int linha = tabelaLivros.getSelectedRow();
-				//if (!tabelaLivros.getSelectionModel().isSelectionEmpty())
-				
-				//Livro l = gl.viewComics.livroId(idLivro);
+				// int linha = tabelaLivros.getSelectedRow();
+				// if (!tabelaLivros.getSelectionModel().isSelectionEmpty())
+
 				String qtdAlterarCarrinho = txtQuantidadeAlterarLIVROS.getText();
 				String nif = txtNifCarrinhoLIVROS.getText();
 				String stock = txtStockLivros.getText();
 				if (!tabelaLivros.getSelectionModel().isSelectionEmpty()) {
 					int idLivroSelec = (int) tabelaLivros.getModel().getValueAt(tabelaLivros.getSelectedRow(), 0);
+					Livro l = gl.viewComics.livroId(idLivroSelec);
 					if (gl.viewComics.verificaNif(nif) == false) {
 						JOptionPane.showMessageDialog(null,
 								"O nif tem que conter 9 digitos. Verifique se foi inserido correctamente.");
@@ -349,7 +349,7 @@ public class AppCliente implements Serializable {
 									quantidadeActualLIVROSstr = gl.viewComics.adicionarQuantidade(
 											txtQuantidadeActualLivros.getText(), qtdAlterarCarrinho);
 									int quantidadeActualLIVROSint = Integer.parseInt(quantidadeActualLIVROSstr);
-//								gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
+
 									txtQuantidadeActualLivros.setText(quantidadeActualLIVROSstr);
 									// actualiza o carrinho
 									gl.viewComics.updateConteudoCarrinho(nif, idLivroSelec, quantidadeActualLIVROSint);
@@ -393,6 +393,7 @@ public class AppCliente implements Serializable {
 
 					}
 
+					txtStockLivros.setText(Integer.toString(l.getStock()));
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Para alterar o carrinho por favor seleccione um livro da lista");
@@ -400,8 +401,7 @@ public class AppCliente implements Serializable {
 				modeloTabelaLivros.setRowCount(0);
 				gl.viewComics.livrosTabela(modeloTabelaLivros);
 				tabelaLivros.getSelectionModel().isSelectionEmpty();
-				
-				
+
 			}
 		});
 		btnAddCarrinhoFinalCliente.setBackground(SystemColor.controlHighlight);
@@ -500,7 +500,7 @@ public class AppCliente implements Serializable {
 		btnLimparPesquisaCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivros.setText("");
-				
+
 			}
 		});
 		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
@@ -548,7 +548,7 @@ public class AppCliente implements Serializable {
 		btnVerificarCarrinhoLIVROS.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnVerificarCarrinhoLIVROS.setBackground(SystemColor.controlHighlight);
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
-		
+
 		JComboBox cbOrdenarLIVROS = new JComboBox();
 		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
 		cbOrdenarLIVROS.addItem("Titulo");
@@ -557,12 +557,11 @@ public class AppCliente implements Serializable {
 		JPLivros.add(cbOrdenarLIVROS);
 		cbOrdenarLIVROS.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				
-				String seleccao=(String) cbOrdenarLIVROS.getSelectedItem();
+
+				String seleccao = (String) cbOrdenarLIVROS.getSelectedItem();
 				gl.viewComics.ordenarTabelaLivros(tabelaLivros, seleccao);
 			}
 		});
-		
 
 		JLabel lblNewLabel_2 = new JLabel("Filtrar por : ");
 		lblNewLabel_2.setBounds(10, 71, 128, 20);
@@ -583,18 +582,18 @@ public class AppCliente implements Serializable {
 		tabelaLivros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//a linha é actualizada para o caso de ter havido ordenacao
+				// a linha é actualizada para o caso de ter havido ordenacao
 				int linha = tabelaLivros.convertRowIndexToModel(tabelaLivros.getSelectedRow());
 				int idLivro = (int) tabelaLivros.getModel().getValueAt(linha, 0);
-				String nif =txtNifCarrinhoLIVROS.getText();
+				String nif = txtNifCarrinhoLIVROS.getText();
 				Livro l = gl.viewComics.livroId(idLivro);
 				txtIdLivros.setText(Integer.toString(idLivro));
 				txtTituloLivros.setText(l.getTitulo());
 				txtAutorLivros.setText(l.getAutor());
 				txtAnoLivros.setText(Integer.toString(l.getAno()));
-				txtPrecoLivros.setText(Double.toString(l.getPreco()));	
+				txtPrecoLivros.setText(Double.toString(l.getPreco()));
 				txtStockLivros.setText(Integer.toString(l.getStock()));
-				String qtdNoCarrinho=gl.viewComics.quantidadeCarrinho(idLivro, nif);
+				String qtdNoCarrinho = gl.viewComics.quantidadeCarrinho(idLivro, nif);
 				txtQuantidadeActualLivros.setText(qtdNoCarrinho);
 			}
 		});

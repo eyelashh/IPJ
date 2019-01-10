@@ -257,11 +257,18 @@ public class Banco implements Serializable {
 
 		ArrayList<String> listprov = new ArrayList<String>();
 
-		for (int i = 0; i < contas.size(); i++) {
+		for (int i = 0; i < this.contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
+<<<<<<< HEAD
 				if ((contas.get(i) instanceof ContaPoupanca) && contas.get(i).isAberta() ) {
+=======
+
+				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta() == true)
+						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
+					
 				}
 			}
 		}
