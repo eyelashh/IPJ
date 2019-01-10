@@ -358,6 +358,8 @@ public class BancoAppClt implements Serializable {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
 							dmListaContas);
+					
+					
 				}
 
 			}
