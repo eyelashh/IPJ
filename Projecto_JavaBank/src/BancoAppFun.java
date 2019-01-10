@@ -2034,7 +2034,6 @@ public class BancoAppFun implements Serializable {
 		btFunGesto.setBackground(new Color(188, 127, 82));
 		JpanelMenu.add(btFunGesto);
 
-<<<<<<< HEAD
 		// coloca o painel gestao visivel:
 		btFunGesto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -2071,12 +2070,10 @@ public class BancoAppFun implements Serializable {
 
 
 		// botao cliente accao que muda de cor
-=======
 
 
 		btFunGesto.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
->>>>>>> 714a41acdd14c67afeb89453c8233dff789038e3
 		btFunCliente.addMouseListener(new MouseListener() {
 
 			@Override
@@ -2258,10 +2255,6 @@ public class BancoAppFun implements Serializable {
 				tbfunnome.update(tbfunnome.getGraphics());
 				tbGestaoUsername.update(tbGestaoUsername.getGraphics());*/
 				jpanelGestao.setVisible(true);
-<<<<<<< HEAD
-
-=======
->>>>>>> 714a41acdd14c67afeb89453c8233dff789038e3
 
 			}
 		});
