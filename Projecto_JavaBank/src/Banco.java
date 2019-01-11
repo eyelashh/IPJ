@@ -1,5 +1,8 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -1018,6 +1021,40 @@ public class Banco implements Serializable {
 		}
 
 		return existe;
+	}
+	
+	protected void pagajuros(ArrayList<Conta> contasp)
+	{
+		LocalDate localDate = LocalDate.now();
+		Date agora = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		Validador val = new Validador();
+		
+		for(int i=0; i<contasp.size(); i++)
+		{
+			if(contasp.get(i) instanceof ContaPoupanca)
+			{	
+				if(!((ContaPoupanca)contasp.get(i)).getPagajuros().before(agora))
+				{
+					// faz aumento de juros
+					// cria operacao
+					// alteraçao da data de juros
+					
+					//1:
+					double jurosdeposito = (contasp.get(i).getSaldo()* ((ContaPoupanca)contasp.get(i)).getTaxaJuros())/100;
+					contasp.get(i).setSaldo(contasp.get(i).getSaldo()+jurosdeposito);
+					//2:
+					Operacao op = new Deposito(val.validoperaçoes(contasp.get(i).getOperacoes()),null,agora,jurosdeposito,"Pagamento de juros no valor de: "+jurosdeposito);
+					contasp.get(i).getOperacoes().add(op);
+					//3:
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(((ContaPoupanca)contasp.get(i)).getPagajuros());
+					cal.add(Calendar.YEAR, 1);
+					((ContaPoupanca)contasp.get(i)).setPagajuros(cal.getTime());
+				}				
+				
+			}
+		}
 	}
 
 }
