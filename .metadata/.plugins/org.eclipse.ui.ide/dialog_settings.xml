@@ -4,7 +4,15 @@
 		<item value="C:\Users\Joana\eclipse-workspace\IPJ\Projecto_ViewComics"/>
 		<item value="C:\Users\Joana\eclipse-workspace\IPJ\Projecto_JavaBank"/>
 	</list>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
 	<section name="NewWizardAction">
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="376" key="DIALOG_X_ORIGIN"/>
+		<item value="158" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="SaveAsDialogSettings">
 		<item value="525" key="DIALOG_WIDTH"/>
