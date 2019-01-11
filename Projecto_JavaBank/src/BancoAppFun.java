@@ -1110,6 +1110,8 @@ public class BancoAppFun implements Serializable {
 								btPedirCartao.setVisible(true);
 								panelCartao.setVisible(true);
 								tbnomecartao.setEditable(true);
+								
+								JOptionPane.showMessageDialog(null, "Cartão revalidado!! Novo cartão criado!!");
 
 							}
 

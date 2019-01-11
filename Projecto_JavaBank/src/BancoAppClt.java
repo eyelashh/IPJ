@@ -360,7 +360,6 @@ public class BancoAppClt implements Serializable {
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
 							dmListaContas);
 
-
 				}
 
 			}
@@ -465,12 +464,8 @@ public class BancoAppClt implements Serializable {
 						Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 								((ContaCorrente) conta).getCartao());
 
-//						Calendar cal = new GregorianCalendar();
-//						cal.setTime(card.getDataValidade());
-//						cal.add(Calendar.DAY_OF_YEAR, 1);
-						
-// ver situacao se o cartao expirou ou nao
-						
+						// ver situacao se o cartao expirou ou nao
+
 						if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
 							Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
@@ -480,7 +475,6 @@ public class BancoAppClt implements Serializable {
 							((ContaCorrente) conta).setCartao(0);
 
 							textFieldNomeCartao.setEditable(true);
-							JOptionPane.showMessageDialog(null, "");
 							JOptionPane.showMessageDialog(null, "Cartão revalidado!! Novo cartão criado!!");
 
 						} else {
@@ -488,7 +482,6 @@ public class BancoAppClt implements Serializable {
 									"Já existe um cartão associado a sua conta dentro da data de validade!");
 						}
 
-						
 					}
 
 					// adiciona um cartao á conta
