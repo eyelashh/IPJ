@@ -904,16 +904,23 @@ public class Banco implements Serializable {
 	// Elimina todas as contas nos clientes:
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
-
-		Cliente clt;
 		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i) instanceof Cliente) {
-
-				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()
-							|| (((Cliente) clientes.get(i)).getContapoupanca() == c.getIdConta())) {
-						((Cliente) clientes.get(i)).getContas().remove(x);
-						((Cliente) clientes.get(i)).setContapoupanca(0);
+				if(c instanceof ContaCorrente)
+				{
+					for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
+						if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
+							((Cliente) clientes.get(i)).getContas().remove(x);
+							Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
+							c.getClientes().remove(id);
+						}
+					}
+				}
+				else
+				{
+					if(((Cliente)clientes.get(i)).getContapoupanca()==c.getIdConta())
+					{
+						((Cliente)clientes.get(i)).setContapoupanca(0);
 						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
 						c.getClientes().remove(id);
 					}
