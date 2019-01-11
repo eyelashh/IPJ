@@ -1,10 +1,4 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,12 +26,10 @@ public class Livraria implements Serializable {
 	private ArrayList<Livro> livros;
 	private ArrayList<Carrinho> carrinhos;
 	private ArrayList<Venda> vendas;
-	
-	
-	// para efeitos de historico de vendas, cada vez que um carrinho e
-									// eliminado/pago o seu conteudo transforma-se
-									// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
 
+	// para efeitos de historico de vendas, cada vez que um carrinho e
+	// eliminado/pago o seu conteudo transforma-se
+	// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
 
 	public Livraria() {
 		super();
@@ -45,7 +37,7 @@ public class Livraria implements Serializable {
 		this.livros = new ArrayList<Livro>();
 		this.carrinhos = new ArrayList<Carrinho>();
 		this.vendas = new ArrayList<Venda>();
-	}
+	} 
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
 			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,
@@ -124,9 +116,11 @@ public class Livraria implements Serializable {
 	public void removeLivros(Livro l) {
 		this.livros.remove(l);
 	}
+
 	public void addVenda(Venda v) {
 		this.vendas.add(v);
 	}
+
 	public void removeVenda(Venda v) {
 		this.vendas.remove(v);
 	}
@@ -161,6 +155,7 @@ public class Livraria implements Serializable {
 	public void removeUtilizador(Utilizador u) {
 		this.utilizadores.remove(u);
 	}
+
 	// adiciona um carrinho
 	public void addCarrinho(Carrinho c) {
 		this.carrinhos.add(c);
@@ -618,7 +613,7 @@ public class Livraria implements Serializable {
 	}
 
 	public void removerUtil(int id) {
-		
+
 		for (int i = 0; i < this.utilizadores.size(); i++) {
 			if (utilizadores.get(i).getId() == id) {
 				utilizadores.remove(i);
@@ -836,7 +831,7 @@ public class Livraria implements Serializable {
 		}
 
 	}
-	
+
 	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
@@ -1039,7 +1034,7 @@ public class Livraria implements Serializable {
 		return naoFinalizados;
 
 	}
-	
+
 // METODOS ESTATISTICA
 
 	public void updatePrecoLivro(int idLivro, Preco p) {
@@ -1085,79 +1080,97 @@ public class Livraria implements Serializable {
 		return precosArray;
 
 	}
-	
+
 	public void tabelaVendaMontante(DefaultTableModel dtm) {
-		ArrayList <Venda> vendas =this.vendas;
-		for (Venda v:vendas) {
-			int idVenda=v.getId();
+		ArrayList<Venda> vendas = this.vendas;
+		for (Venda v : vendas) {
+			int idVenda = v.getId();
 			double montante = v.getMontante();
-			LocalDate data= v.getData();
-			Object[]dados= {idVenda,montante,data};
+			LocalDate data = v.getData();
+			Object[] dados = { idVenda, montante, data };
 			dtm.addRow(dados);
 		}
 	}
-	
+
 	public void incrementarVendasLivros(Venda v) {
-		
-		HashMap<Integer,Integer> venda = v.getConteudoVenda();
-		//id livro , quantidade
-		
+
+		HashMap<Integer, Integer> venda = v.getConteudoVenda();
+		// id livro , quantidade
+
 		for (HashMap.Entry<Integer, Integer> entry : venda.entrySet()) {
-		    int id = entry.getKey();
-		    int quantidade = entry.getValue();
-		    for (Livro l:this.livros) {
-		    	if (l.getIdLivro()==id) {
-		    		l.incrementarVendas(quantidade);
-		    	}
-		    }
+			int id = entry.getKey();
+			int quantidade = entry.getValue();
+			for (Livro l : this.livros) {
+				if (l.getIdLivro() == id) {
+					l.incrementarVendas(quantidade);
+				}
+			}
 		}
-		
+
 	}
-	
+
 	public void tabelaLivrosVendas(DefaultTableModel dtm) {
-		
-		ArrayList<Livro> livros =this.livros;
+
+		ArrayList<Livro> livros = this.livros;
 
 		for (Livro l : livros) {
 			int id = l.getIdLivro();
-			String titulo =l.getTitulo();
-			int vendas=l.getVendas();
-			Object[] dados = { id, titulo,vendas };
+			String titulo = l.getTitulo();
+			int vendas = l.getVendas();
+			Object[] dados = { id, titulo, vendas };
 			dtm.addRow(dados);
 		}
 
-		
 	}
 
 //metodo para escrever no ficheiro 
 	public void escreveDadosPagamentoFicheiro(String s) throws ClassNotFoundException, IOException {
 		// int idCartao, double montante, int codigo
-		
+
 //		String idCartaoSTR=Integer.toString(idCartao);
 //		String montanteSTR = Double.toString(montante);
 //		String codigoSTR=Integer.toString(codigo);
-		
-		ObjectInputStream iS ;
-		ObjectOutputStream oS ;
 
-		File f = new File("dadosPagamento.dat");
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-        oos.writeObject(s);
-        oos.flush();
-        oos.close();        
-        
-//		try
-//		{
-//			oS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
-//			oS.writeObject("");
-//			oS.close();
-//		}
-//		catch(IOException e)
-//		{
-//			
-//		}
-//		
-		
+
 	
+		
+		File f = new File("dadosPagamento.txt");
+		if(f.exists()) {
+			//BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
+			BufferedWriter fW=new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+			fW.write(s);
+			fW.newLine();
+			fW.close();
+			
+		}
+		else {
+			f.createNewFile();
+			//BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
+			BufferedWriter fW=new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+			fW.write(s);
+			fW.newLine();
+			fW.close();
+		}
+		
+		
 	}
+	
+	
+	//metodo para escrever no ficheiro 
+	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
+			
+			BufferedReader fW=new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+			String s=fW.readLine();
+			System.out.println(s);
+	
+			if (s.equals("AUTORIZADO")) {
+				return true;
+				
+			}
+			else {
+				return false;
+			}
+	
+		}
 }
+

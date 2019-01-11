@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -5,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -1061,5 +1066,98 @@ public class Banco implements Serializable {
 			}
 		}
 	}
+	
+	protected Conta obterContaPorCartao(int nCartao) {
+		ArrayList<Conta>contas =this.contas;
+		Conta conta=new Conta();
+		for (Conta c:contas) {
+			if (((ContaCorrente)c).getCartao()==nCartao) {
+				conta = c;
+			}
+		}
+		return conta;
+	}
+	//recebe os dados de pagamento da livraria 
+	protected boolean autorizaVenda(String dadosPagamento) {
+		
+		boolean autorizado =false;
+		
+		Scanner sc=new Scanner(dadosPagamento);
+		String montanteSTR="";
+		String ncartaoSTR="";
+		String pinSTR="";
+		//divide a string 
+		while (sc.hasNext()) {
+			montanteSTR =sc.next();
+			ncartaoSTR=sc.next();
+			pinSTR=sc.next();			
+		}
+		double montante=Double.parseDouble(montanteSTR);
+		int nCartao=Integer.parseInt(ncartaoSTR);
+		int pin=Integer.parseInt(pinSTR);	
+		
+		ArrayList<Cartao> cartoes =this.cartoes;
+		//verifica as condicoes (existencia do cartao , cod Validacao, montante disponivel)
+//		for (Cartao c:cartoes) {
+//			if (c.getnCartao()==nCartao) {
+//				if (c.getCodvalidacao()==pin) {
+//					if (obterContaPorCartao(nCartao).getSaldo()>montante) {
+//						autorizado =true;
+//					}
+//					
+//				}
+//			}
+//		}
+		if (dadosPagamento.equals("ooo")) {
+			autorizado=true;
+		}
+		
+		return autorizado;
+	}
 
+	protected void escreveFicheiro(String s) throws ClassNotFoundException, IOException {
+		
+		if (autorizaVenda(s)) {
+			String autorizacao="AUTORIZADO";
+			File f = new File("Autorizacao.txt");
+			if(f.exists()) {
+				
+				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+				fW.write(autorizacao);
+				fW.newLine();
+				fW.close();
+				
+			}
+			else {
+				f.createNewFile();
+				
+				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+				fW.write(autorizacao);
+				fW.newLine();
+				fW.close();
+			}
+		}
+		else {
+			String autorizacao="NAO AUTORIZADO";
+			File f = new File("Autorizacao.txt");
+			if(f.exists()) {
+				
+				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+				fW.write(autorizacao);
+				fW.newLine();
+				fW.close();
+				
+			}
+			else {
+				f.createNewFile();
+				
+				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+				fW.write(autorizacao);
+				fW.newLine();
+				fW.close();
+			}
+			
+		}
+		
+	}
 }

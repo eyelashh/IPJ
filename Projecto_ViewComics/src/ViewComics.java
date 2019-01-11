@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.swing.JDialog;
@@ -5,18 +9,19 @@ import javax.swing.JDialog;
 
 public class ViewComics implements  Serializable {
 
-
+	
+	
 	public static void main(String[] args) {	
+		
+		
 	int counter = 1000;
 	Thread t1 = new Thread(new Runnable() {
-		//crio um objecto da classe cliente?
-		AppCliente cliente = new AppCliente();
 		
-	//	log.run();
+		AppCliente cliente = new AppCliente();
 		
 		@Override
 		public void run() {
-			//inicio um runnable para appCliente que criei??
+			
 			cliente.run();
 			//show(counter, "New Thread!");
 		}
@@ -31,7 +36,20 @@ private static void show(int counter, String msg) {
 	
 	//ler o ficheiro partilhado
 	while (counter-- > 0) {
-		System.out.println(msg);
+		
+		try {
+			BufferedReader fW=new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+			String s=fW.readLine();
+			System.out.println(s);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//System.out.println(msg);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -40,5 +58,7 @@ private static void show(int counter, String msg) {
 		}
 	}
 }
+
+
 
 }

@@ -1,35 +1,30 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JDialog;
 
 public class JavaBank {
+
 	public static void main(String[] args) {
-		
-		File f= new File("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.dat");
-		Scanner sc;
-		String s="";
-		try {
-			sc = new Scanner(f);
-			 s=sc.next();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(s);
-		
+
+	
 		int counter = 1000;
 		Thread t1 = new Thread(new Runnable() {
-			//crio um objecto da classe login??
 			Login log = new Login();
-		//	log.run();
-			
 			@Override
 			public void run() {
-				//inicio um runnable para o login que criei??
+				// inicio um runnable para o login que criei
 				log.run();
 				show(counter, "New Thread!");
 			}
@@ -39,11 +34,25 @@ public class JavaBank {
 
 		show(counter, "Main method!");
 	}
-	
+
 	private static void show(int counter, String msg) {
 		while (counter-- > 0) {
+
+			try {
+				BufferedReader fW = new BufferedReader(new FileReader(
+						"C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+				String s = fW.readLine();
+				System.out.println(s);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //			System.out.println(msg);
 			try {
+
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

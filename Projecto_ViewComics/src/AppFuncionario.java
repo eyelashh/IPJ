@@ -115,9 +115,9 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtLivroSeleccionadoCARRINHO;
 	private JTextField txtNifSeleccionado;
 	String[] itens = new String[] { "Escolha o método de pagamento", "Dinheiro", "Multibanco" };
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_3;
+	private JTextField txtMontanteMULTIBANCO;
+	private JTextField txtNumCartaoMULTIBANCO;
+	private JTextField txtPinMULTIBANCO;
 
 	/**
 	 * Launch the application.
@@ -262,15 +262,15 @@ public class AppFuncionario implements Serializable {
 		jpMultibanco.setLayout(null);
 		jpMultibanco.setVisible(false);
 
-		textField = new JTextField();
-		textField.setBounds(21, 44, 169, 28);
-		jpMultibanco.add(textField);
-		textField.setColumns(10);
+		txtMontanteMULTIBANCO = new JTextField();
+		txtMontanteMULTIBANCO.setBounds(21, 44, 169, 28);
+		jpMultibanco.add(txtMontanteMULTIBANCO);
+		txtMontanteMULTIBANCO.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(21, 105, 169, 28);
-		jpMultibanco.add(textField_1);
-		textField_1.setColumns(10);
+		txtNumCartaoMULTIBANCO = new JTextField();
+		txtNumCartaoMULTIBANCO.setBounds(21, 105, 169, 28);
+		jpMultibanco.add(txtNumCartaoMULTIBANCO);
+		txtNumCartaoMULTIBANCO.setColumns(10);
 
 		JLabel lblMontante = new JLabel("Montante");
 		lblMontante.setBounds(21, 19, 132, 28);
@@ -280,27 +280,41 @@ public class AppFuncionario implements Serializable {
 		lblNumeroDoCartao.setBounds(21, 83, 108, 21);
 		jpMultibanco.add(lblNumeroDoCartao);
 
-		textField_3 = new JTextField();
-		textField_3.setBounds(21, 172, 108, 28);
-		jpMultibanco.add(textField_3);
-		textField_3.setColumns(10);
+		txtPinMULTIBANCO = new JTextField();
+		txtPinMULTIBANCO.setBounds(21, 172, 108, 28);
+		jpMultibanco.add(txtPinMULTIBANCO);
+		txtPinMULTIBANCO.setColumns(10);
 
 		JLabel lblPin = new JLabel("PIN");
 		lblPin.setBounds(21, 157, 46, 14);
+
 		jpMultibanco.add(lblPin);
 
 		JButton btnNewButton = new JButton("CONCLUIR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String s = "isto sao os meus dados de pagamento";
+				
+				//String s = "isto sao os meus dados de pagamento2";
+//				String montante = txtMontanteMULTIBANCO.getText();
+//				String numCartao =txtNumCartaoMULTIBANCO.getText();
+//				String pin = txtPinMULTIBANCO.getText();
+//				String s= montante + " " + numCartao +" "+pin;
+				//String montante = 
 				// escrever os dados para o banco (num conta, pin, montante)
 				try {
-					gl.viewComics.escreveDadosPagamentoFicheiro(s);
+					gl.viewComics.escreveDadosPagamentoFicheiro("ooo");
+					
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// metodo que constantemente le o ficheiro objecto boolean
+				try {
+					gl.viewComics.verificaAutorizacao();
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				jpMultibanco.setVisible(false);
 			}
 		});
