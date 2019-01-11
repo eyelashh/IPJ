@@ -908,7 +908,7 @@ public class Banco implements Serializable {
 			if (clientes.get(i) instanceof Cliente) {
 
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
+					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta() ||  (((Cliente) clientes.get(i)).getContapoupanca() == c.getIdConta())) {
 						((Cliente) clientes.get(i)).getContas().remove(x);
 						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
 						c.getClientes().remove(id);
