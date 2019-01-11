@@ -26,13 +26,13 @@ public class JavaBank {
 			public void run() {
 				// inicio um runnable para o login que criei
 				log.run();
-				show(counter, "New Thread!");
+				//show(counter, "New Thread!");
 			}
 		});
 
 		t1.start();
 
-		show(counter, "Main method!");
+		//show(counter, "Main method!");
 	}
 
 	private static void show(int counter, String msg) {
