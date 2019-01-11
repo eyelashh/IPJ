@@ -348,8 +348,25 @@ public class BancoAppAdm implements Serializable {
 		lblAdminClieEndereo.setBounds(356, 383, 127, 23);
 		JPAdmCliente.add(lblAdminClieEndereo);
 
+		JButton btVerConta = new JButton("Ver Conta");
+		btVerConta.setBounds(879, 42, 97, 25);
+		btVerConta.setVisible(false);
+		JPAdmCliente.add(btVerConta);
+
 		// lista de contas do admin:
 		JList<String> listAdminClieContas = new JList<String>(dmCltContas);
+		listAdminClieContas.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+
+				if (!listAdminClieContas.isSelectionEmpty()) {
+
+					btVerConta.setVisible(true);
+				}
+
+			}
+		});
+
 		listAdminClieContas.setBounds(736, 85, 240, 441);
 		JPAdmCliente.add(listAdminClieContas);
 
@@ -397,6 +414,7 @@ public class BancoAppAdm implements Serializable {
 				textAdminClieNif.setText(null);
 				dateChooser_1.setDate(null);
 				textAdminCliePesquisa.setText(null);
+				btVerConta.setVisible(false);
 
 				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
 				dmClt.removeAllElements();
@@ -418,7 +436,6 @@ public class BancoAppAdm implements Serializable {
 					int id = Integer.parseInt(textAdminCliePesquisa.getText());
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-				
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());
@@ -457,10 +474,6 @@ public class BancoAppAdm implements Serializable {
 		btnAdmCltPesquisar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnAdmCltPesquisar.setBounds(376, 488, 120, 38);
 		JPAdmCliente.add(btnAdmCltPesquisar);
-
-		JButton btVerConta = new JButton("Ver Conta");
-		btVerConta.setBounds(879, 42, 97, 25);
-		JPAdmCliente.add(btVerConta);
 
 		JButton bttodascontas = new JButton("Todas as Conta");
 
@@ -523,6 +536,8 @@ public class BancoAppAdm implements Serializable {
 				listcontasadm.setVisible(false);
 				lblContas.setVisible(false);
 				listcontasadm.clearSelection();
+				
+				cboxaberta.setVisible(true);
 
 				// preenche campos:
 
@@ -725,27 +740,52 @@ public class BancoAppAdm implements Serializable {
 		btVoltarContasAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				tbadmcontanumero.setText(null);
-				dcadmcontadata.setDate(null);
-				tbadmcontalimoperacao.setText(null);
-				tbadmcontalimdia.setText(null);
-				tbadmcontasaldo.setText(null);
-				tbadmcontajuros.setText(null);
-				tbadmcontalimmes.setText(null);
-				tbadmcontacartaonome.setText(null);
-				tbadmcontacartaovalidade.setDate(null);
-				tbadmcontacartaocod.setText(null);
-				textFieldAdminDescr.setText(null);
-				modeloTabela.removeRow(0);
+				if (listAdminClieContas.isSelectionEmpty()) {
 
-				cboxaberta.setVisible(false);
-				JPAdmEstatistica.setVisible(false);
-				JPAdmCliente.setVisible(true);
-				JPAdmFuncionario.setVisible(false);
-				JPAdmGestao.setVisible(false);
-				jpConta.setVisible(false);
-				panelContaPadm.setVisible(true);
-				panelCartaoAdm.setVisible(true);
+					tbadmcontanumero.setText(null);
+					dcadmcontadata.setDate(null);
+					tbadmcontalimoperacao.setText(null);
+					tbadmcontalimdia.setText(null);
+					tbadmcontasaldo.setText(null);
+					tbadmcontajuros.setText(null);
+					tbadmcontalimmes.setText(null);
+					tbadmcontacartaonome.setText(null);
+					tbadmcontacartaovalidade.setDate(null);
+					tbadmcontacartaocod.setText(null);
+					textFieldAdminDescr.setText(null);
+					
+
+					cboxaberta.setVisible(false);
+					JPAdmEstatistica.setVisible(false);
+					JPAdmCliente.setVisible(true);
+					JPAdmFuncionario.setVisible(false);
+					JPAdmGestao.setVisible(false);
+					jpConta.setVisible(false);
+					panelContaPadm.setVisible(true);
+					panelCartaoAdm.setVisible(true);
+				} else {
+					tbadmcontanumero.setText(null);
+					dcadmcontadata.setDate(null);
+					tbadmcontalimoperacao.setText(null);
+					tbadmcontalimdia.setText(null);
+					tbadmcontasaldo.setText(null);
+					tbadmcontajuros.setText(null);
+					tbadmcontalimmes.setText(null);
+					tbadmcontacartaonome.setText(null);
+					tbadmcontacartaovalidade.setDate(null);
+					tbadmcontacartaocod.setText(null);
+					textFieldAdminDescr.setText(null);
+					modeloTabela.removeRow(0);
+
+					cboxaberta.setVisible(false);
+					JPAdmEstatistica.setVisible(false);
+					JPAdmCliente.setVisible(true);
+					JPAdmFuncionario.setVisible(false);
+					JPAdmGestao.setVisible(false);
+					jpConta.setVisible(false);
+					panelContaPadm.setVisible(true);
+					panelCartaoAdm.setVisible(true);
+				}
 
 			}
 		});
