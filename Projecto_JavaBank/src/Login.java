@@ -55,7 +55,7 @@ public class Login {
 		gb.run();
 
 		gb.javabank.pagajuros(gb.javabank.getContas());
-		
+		gb.javabank.threadLeDadosAutoriza();
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1086, 741);

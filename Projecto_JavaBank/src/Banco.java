@@ -1171,7 +1171,7 @@ public class Banco implements Serializable {
 				while (true) {
 					try {
 						escreveFicheiro();
-						System.out.println("A aguardar confirmacao do banco");
+						System.out.println("A aguardar dados correctos");
 						Thread.sleep(1000);
 						
 					} catch (ClassNotFoundException | IOException | InterruptedException e) {

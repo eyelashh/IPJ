@@ -1172,10 +1172,10 @@ public class Livraria implements Serializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 100;
+				int counter = 50;
 				try {
 					escreveDadosPagamentoFicheiro(s);
-					while ((counter-- > 0 )||(!verificaAutorizacao())) {
+					while ((counter-- > 0 )&&(!verificaAutorizacao())) {
 
 						//thread espera por autorizacao durante 100 seg 
 						System.out.println("wait");
@@ -1187,6 +1187,8 @@ public class Livraria implements Serializable {
 					else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
+					//quando tem a resposta limpa o ficheiro
+					escreveDadosPagamentoFicheiro("000 000 000");
 				} catch (ClassNotFoundException | IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
