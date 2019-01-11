@@ -9,14 +9,19 @@ public class Validador {
 	// UTILIZADORES:
 
 	// cria id de utilizador:
+	/**
+	 * @param util
+	 * @return
+	 * 
+	 * Faz coisas bonitas!!!!
+	 */
 	protected int ValUtilizadorid(ArrayList<Utilizador> util) {
 		int id = 1;
 		if (util.size() != 0) {
 			id = util.get(util.size() - 1).getIdUtilizador() + 1;
 		}
-		if(id==0)
-		{
-			id=1;
+		if (id == 0) {
+			id = 1;
 		}
 		return id;
 	}
@@ -35,9 +40,9 @@ public class Validador {
 		return teste;
 	}
 
-	// valida data: (nao sei se é necessario)
+	// valida data: (nao sei se ï¿½ necessario)
 
-	// valida numero de indentificaçao:
+	// valida numero de indentificaï¿½ao:
 	protected boolean valNumIdentificacao(String str) {
 		boolean teste = str.matches("^\\d+(\\d+)?$");
 
@@ -50,11 +55,11 @@ public class Validador {
 
 	// valida contacto:
 	protected boolean valContacto(String contacto) {
-		
+
 		boolean teste = contacto.matches("^\\d+(\\d+)?$");
 
-		if (contacto.charAt(0) != '9' && contacto.charAt(0) != '2' && contacto.length()!=9) {
-			
+		if (contacto.charAt(0) != '9' && contacto.charAt(0) != '2' && contacto.length() != 9) {
+
 			teste = false;
 		}
 
@@ -65,11 +70,10 @@ public class Validador {
 	protected boolean valUsername(String user, ArrayList<Utilizador> utilizadores) {
 		boolean existe = true;
 
-		if(user.equals(""))
-		{
+		if (user.equals("")) {
 			existe = false;
 		}
-		
+
 		for (int i = 0; i < utilizadores.size(); i++) {
 			if (utilizadores.get(i).getUsername().equals(user)) {
 				existe = false;
@@ -81,8 +85,9 @@ public class Validador {
 	// valida passe
 	protected boolean valPassword(String password) {
 		// 8 caracteres com 1 numero e 1 letra
-		
-		//boolean valida = password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
+
+		// boolean valida =
+		// password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 		boolean valida = true;
 		return valida;
 	}
@@ -158,7 +163,7 @@ public class Validador {
 
 	// CONTAS:
 
-	// valida idconta (ainda é necessario ver se é necessario)
+	// valida idconta (ainda ï¿½ necessario ver se ï¿½ necessario)
 	protected int idConta(ArrayList<Conta> contas) {
 		int id = 1;
 		if (contas.size() != 0) {
@@ -176,7 +181,7 @@ public class Validador {
 
 	// valida valor max levantamento por operacao:
 	protected boolean valVMaxLevContaOP(String valor) {
-		
+
 		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
@@ -189,13 +194,12 @@ public class Validador {
 		return teste;
 	}
 
-	// CONTA POUPANÇA:
+	// CONTA POUPANï¿½A:
 
 	// valida juros
 	protected boolean valJuros(String valor) {
 
 		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
-
 		return teste;
 	}
 
@@ -205,15 +209,14 @@ public class Validador {
 
 		return teste;
 	}
-	
+
 	protected boolean valsaldo(String valor) {
 		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
 
 		return teste;
 	}
-	
 
-	// OPERAÇOES:
+	// OPERAï¿½OES:
 
 	// valida valor de operacao:
 	protected boolean valValorOperacao(String valor) {
@@ -226,6 +229,15 @@ public class Validador {
 	protected boolean valContaTransferir(String valor) {
 		boolean teste = valor.matches("^\\d+(\\d+)?$");
 		return teste;
+	}
+
+	// validador de operaï¿½oes:
+	protected int validoperacoes(ArrayList<Operacao> op) {
+		int id = 1;
+		if (op.size() != 0) {
+			id = op.get(op.size() - 1).getIdOperacao() + 1;
+		}
+		return id;
 	}
 
 }

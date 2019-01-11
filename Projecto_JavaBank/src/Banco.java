@@ -1,5 +1,8 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -156,14 +159,12 @@ public class Banco implements Serializable {
 	// isto lista o numero de contas num array unico:
 
 	protected String[] listanumerodecontasabertas(ArrayList<Conta> cont) {
-		
-		ArrayList<String> arrAxu = new ArrayList<String> ();
-		
-		
-		
+
+		ArrayList<String> arrAxu = new ArrayList<String>();
+
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			
+
 			if (cont.get(i).isAberta()) {
 				s = "" + cont.get(i).getIdConta();
 				arrAxu.add(s);
@@ -241,7 +242,8 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).isAberta() == true) && (contas.get(i).getIdConta() == c.getContas().get(j))) {
+				if ((contas.get(i) instanceof ContaCorrente) && (contas.get(i).isAberta() == true)
+						&& (contas.get(i).getIdConta() == c.getContas().get(j))) {
 					listprov.add(c.getContas().get(j) + "");
 				}
 			}
@@ -256,11 +258,11 @@ public class Banco implements Serializable {
 	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
-		
+
 		for (int i = 0; i < contas.size(); i++) {
 			for (int j = 0; j < c.getContas().size(); j++) {
-				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta())&& (contas.get(i).getIdConta() == c.getContapoupanca()))
-				{
+				if ((contas.get(i) instanceof ContaPoupanca) && (contas.get(i).isAberta())
+						&& (contas.get(i).getIdConta() == c.getContapoupanca())) {
 					String idSTR = Integer.toString(((ContaPoupanca) contas.get(i)).getIdConta());
 					listprov.add(idSTR);
 				}
@@ -271,7 +273,6 @@ public class Banco implements Serializable {
 		lista = listprov.toArray(lista);
 		return lista;
 	}
-
 
 	// retorna o array das contas poupan�a
 	protected String[] listaContasPoupanca() {
@@ -503,6 +504,10 @@ public class Banco implements Serializable {
 				contas.get(i).setAberta(false);
 				contas.get(i).setSaldo(0);
 				contas.get(i).setDataFecho(datafecho);
+				
+				
+				
+				
 			}
 		}
 	}
@@ -905,8 +910,10 @@ public class Banco implements Serializable {
 			if (clientes.get(i) instanceof Cliente) {
 
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
+					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()
+							|| (((Cliente) clientes.get(i)).getContapoupanca() == c.getIdConta())) {
 						((Cliente) clientes.get(i)).getContas().remove(x);
+						((Cliente) clientes.get(i)).setContapoupanca(0);
 						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
 						c.getClientes().remove(id);
 					}
@@ -964,9 +971,6 @@ public class Banco implements Serializable {
 		return card;
 
 	}
-	
-	
-
 
 	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumContaAbertas(String numConta) {
@@ -1018,6 +1022,37 @@ public class Banco implements Serializable {
 		}
 
 		return existe;
+	}
+
+	protected void pagajuros(ArrayList<Conta> contasp) {
+		LocalDate localDate = LocalDate.now();
+		Date agora = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+		Validador val = new Validador();
+
+		for (int i = 0; i < contasp.size(); i++) {
+			if (contasp.get(i) instanceof ContaPoupanca) {
+				if (!((ContaPoupanca) contasp.get(i)).getPagajuros().after(agora)) {
+					// faz aumento de juros
+					// cria operacao
+					// altera�ao da data de juros
+					// 1:
+					double jurosdeposito = (contasp.get(i).getSaldo() * ((ContaPoupanca) contasp.get(i)).getTaxaJuros())
+							/ 100;
+					contasp.get(i).setSaldo(contasp.get(i).getSaldo() + jurosdeposito);
+					// 2:
+					Operacao op = new Deposito(val.validoperacoes(contasp.get(i).getOperacoes()), null, agora,
+							jurosdeposito, "Pagamento de juros no valor de: " + jurosdeposito);
+					contasp.get(i).getOperacoes().add(op);
+					// 3:
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(((ContaPoupanca) contasp.get(i)).getPagajuros());
+					cal.add(Calendar.YEAR, 1);
+					((ContaPoupanca) contasp.get(i)).setPagajuros(cal.getTime());
+				}
+
+			}
+		}
 	}
 
 }

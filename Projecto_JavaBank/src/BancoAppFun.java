@@ -1093,13 +1093,10 @@ public class BancoAppFun implements Serializable {
 							tbcodcartao.setText(card.getCodvalidacao() + "");
 							tbncartao.setText(card.getnCartao() + "");
 
-
-
 							// ver situacao se o cartao expirou ou nao
 
 							if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
-			
 								// o cartao expirou aqui
 								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 										card.getCodvalidacao());
@@ -1110,7 +1107,7 @@ public class BancoAppFun implements Serializable {
 								btPedirCartao.setVisible(true);
 								panelCartao.setVisible(true);
 								tbnomecartao.setEditable(true);
-								
+
 								JOptionPane.showMessageDialog(null, "Cartão revalidado!! Novo cartão criado!!");
 
 							}

@@ -495,7 +495,6 @@ public class BancoAppClt implements Serializable {
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 
 							Calendar cal = new GregorianCalendar();
-
 							Date.valueOf(LocalDate.now());
 							cal.add(Calendar.YEAR, 5);
 

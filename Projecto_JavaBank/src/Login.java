@@ -44,6 +44,11 @@ public class Login {
 		GestaoBanco gb = new GestaoBanco();
 		gb.run();
 		
+		gb.javabank.pagajuros(gb.javabank.getContas());
+		
+	
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1086, 741);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
