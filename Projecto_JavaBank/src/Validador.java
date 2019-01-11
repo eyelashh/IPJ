@@ -9,6 +9,12 @@ public class Validador {
 	// UTILIZADORES:
 
 	// cria id de utilizador:
+	/**
+	 * @param util
+	 * @return
+	 * 
+	 * Faz coisas bonitas!!!!
+	 */
 	protected int ValUtilizadorid(ArrayList<Utilizador> util) {
 		int id = 1;
 		if (util.size() != 0) {
