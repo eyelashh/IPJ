@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -1123,5 +1129,35 @@ public class Livraria implements Serializable {
 		
 	}
 
+//metodo para escrever no ficheiro 
+	public void escreveDadosPagamentoFicheiro(String s) throws ClassNotFoundException, IOException {
+		// int idCartao, double montante, int codigo
+		
+//		String idCartaoSTR=Integer.toString(idCartao);
+//		String montanteSTR = Double.toString(montante);
+//		String codigoSTR=Integer.toString(codigo);
+		
+		ObjectInputStream iS ;
+		ObjectOutputStream oS ;
 
+		File f = new File("dadosPagamento.dat");
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+        oos.writeObject(s);
+        oos.flush();
+        oos.close();        
+        
+//		try
+//		{
+//			oS = new ObjectOutputStream(new FileOutputStream("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+//			oS.writeObject("");
+//			oS.close();
+//		}
+//		catch(IOException e)
+//		{
+//			
+//		}
+//		
+		
+	
+	}
 }

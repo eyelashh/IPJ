@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class GestaoBanco implements Serializable {
+public class GestaoBanco implements Serializable{
 
 	Banco javabank;
 	private File fileUtil;
