@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionListener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -183,9 +184,16 @@ public class BancoAppAdm implements Serializable {
 			public void actionPerformed(ActionEvent e) {
 
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
-				Login logout = new Login();
+				Login logout;
+				try {
+					logout = new Login();
+					logout.run();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.setVisible(false);
-				logout.run();
+				
 
 			}
 		});

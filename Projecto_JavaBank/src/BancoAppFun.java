@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -245,10 +246,15 @@ public class BancoAppFun implements Serializable {
 
 				gb.atualizaficheiro(gb.javabank.getUtlizadores(), gb.javabank.getContas(), gb.javabank.getCartoes());
 
-				Login logout = new Login();
+				Login logout;
+				try {
+					logout = new Login();
+					logout.run();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				frame.setVisible(false);
-				logout.run();
-
 			}
 		});
 		btnLogOut.setBounds(1070, 30, 143, 42);

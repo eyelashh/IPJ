@@ -37,7 +37,7 @@ public class Livraria implements Serializable {
 		this.livros = new ArrayList<Livro>();
 		this.carrinhos = new ArrayList<Carrinho>();
 		this.vendas = new ArrayList<Venda>();
-	} 
+	}
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
 			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,
@@ -1131,46 +1131,70 @@ public class Livraria implements Serializable {
 //		String montanteSTR = Double.toString(montante);
 //		String codigoSTR=Integer.toString(codigo);
 
-
-	
-		
 		File f = new File("dadosPagamento.txt");
-		if(f.exists()) {
-			//BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
-			BufferedWriter fW=new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+		if (f.exists()) {
+			// BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
+			BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 			fW.write(s);
 			fW.newLine();
 			fW.close();
-			
-		}
-		else {
+
+		} else {
 			f.createNewFile();
-			//BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
-			BufferedWriter fW=new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+			// BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
+			BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 			fW.write(s);
 			fW.newLine();
 			fW.close();
 		}
-		
-		
+
 	}
-	
-	
-	//metodo para escrever no ficheiro 
+
+	// metodo para escrever no ficheiro
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
-			
-			BufferedReader fW=new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
-			String s=fW.readLine();
-			System.out.println(s);
-	
-			if (s.equals("AUTORIZADO")) {
-				return true;
+
+		BufferedReader fW = new BufferedReader(
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+		String s = fW.readLine();
+		System.out.println(s);
+
+		if (s.equals("AUTORIZADO")) {
+			return true;
+
+		} else {
+			return false;
+		}
+
+	}
+//metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
+	public void threadWaitAutorizacao(String s)  {
+
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int counter = 100;
+				try {
+					escreveDadosPagamentoFicheiro(s);
+					while ((counter-- > 0 )||(!verificaAutorizacao())) {
+
+						//thread espera por autorizacao durante 100 seg 
+						System.out.println("wait");
+					}
+					if (verificaAutorizacao()) {
+						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
+					}
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
-			else {
-				return false;
-			}
-	
-		}
-}
+		});
 
+		t1.start();
+
+	}
+}

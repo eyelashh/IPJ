@@ -293,28 +293,13 @@ public class AppFuncionario implements Serializable {
 		JButton btnNewButton = new JButton("CONCLUIR");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//String s = "isto sao os meus dados de pagamento2";
 				String montante = txtMontanteMULTIBANCO.getText();
 				String numCartao =txtNumCartaoMULTIBANCO.getText();
 				String pin = txtPinMULTIBANCO.getText();
 				String s= montante + " " + numCartao +" "+pin;
 				
-				// escrever os dados para o banco (num conta, pin, montante)
-				try {
-					gl.viewComics.escreveDadosPagamentoFicheiro(s);
-					
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				// metodo que constantemente le o ficheiro objecto boolean
-				try {
-					gl.viewComics.verificaAutorizacao();
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				gl.viewComics.threadWaitAutorizacao(s);
+				
 				jpMultibanco.setVisible(false);
 			}
 		});
