@@ -10,6 +10,9 @@ import javax.swing.JPasswordField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
@@ -33,15 +36,17 @@ public class Login {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public Login() {
+	public Login() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		GestaoBanco gb = new GestaoBanco();
 		gb.run();
 
@@ -57,11 +62,15 @@ public class Login {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		String s;
+		s = fW.readLine();
+		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					gb.javabank.escreveFicheiro("222222 22222 22");
+					gb.javabank.escreveFicheiro(s);
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

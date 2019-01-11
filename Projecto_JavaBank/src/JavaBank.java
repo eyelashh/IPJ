@@ -16,7 +16,7 @@ import javax.swing.JDialog;
 
 public class JavaBank {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 	
 		int counter = 1000;

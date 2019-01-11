@@ -1062,11 +1062,11 @@ public class Banco implements Serializable {
 		}
 	}
 	
-	protected Conta obterContaPorCartao(int nCartao) {
+	protected Conta obterContaPorCartao(int pin) {
 		ArrayList<Conta>contas =this.contas;
 		Conta conta=new Conta();
 		for (Conta c:contas) {
-			if (((ContaCorrente)c).getCartao()==nCartao) {
+			if (((ContaCorrente)c).getCartao()==pin) {
 				conta = c;
 			}
 		}
@@ -1093,18 +1093,15 @@ public class Banco implements Serializable {
 		
 		ArrayList<Cartao> cartoes =this.cartoes;
 		//verifica as condicoes (existencia do cartao , cod Validacao, montante disponivel)
-//		for (Cartao c:cartoes) {
-//			if (c.getnCartao()==nCartao) {
-//				if (c.getCodvalidacao()==pin) {
-//					if (obterContaPorCartao(nCartao).getSaldo()>montante) {
-//						autorizado =true;
-//					}
-//					
-//				}
-//			}
-//		}
-		if (dadosPagamento.equals("ooo")) {
-			autorizado=true;
+		for (Cartao c:cartoes) {
+			if (c.getnCartao()==nCartao) {
+				if (c.getCodvalidacao()==pin) {
+					if (obterContaPorCartao(pin).getSaldo()>montante) {
+						autorizado =true;
+					}
+					
+				}
+			}
 		}
 		
 		return autorizado;
