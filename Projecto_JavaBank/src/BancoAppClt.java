@@ -356,13 +356,10 @@ public class BancoAppClt implements Serializable {
 							dmListaContas);
 				} else if (comboBoxCltConta.getSelectedItem().equals("Conta Poupanca")) {
 					dmListaContas.removeAllElements();
-<<<<<<< HEAD
-					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt,gb.javabank.getContas()),dmListaContas);
-					
-=======
+
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
 							dmListaContas);
->>>>>>> 20af9021913b621e072ee3e8fade6e9d0539c985
+
 
 				}
 
@@ -505,14 +502,9 @@ public class BancoAppClt implements Serializable {
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 
 							Calendar cal = new GregorianCalendar();
-<<<<<<< HEAD
-							//Date.valueOf(LocalDate.now());
-							cal.set(2019, 01, 8);
-							cal.add(Calendar.DAY_OF_MONTH, 1);
-=======
+
 							Date.valueOf(LocalDate.now());
 							cal.add(Calendar.YEAR, 5);
->>>>>>> 20af9021913b621e072ee3e8fade6e9d0539c985
 
 							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(), cal.getTime(), nvalcartao,
 									conta.getIdConta(), true);

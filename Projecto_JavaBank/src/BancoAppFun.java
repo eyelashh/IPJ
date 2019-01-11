@@ -2250,20 +2250,7 @@ public class BancoAppFun implements Serializable {
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
 				}
-<<<<<<< HEAD
-				
-=======
 
-				/*
-				 * tbfunidfunc.update(tbfunidfunc.getGraphics());
-				 * tbfunmorada.update(tbfunmorada.getGraphics());
-				 * tbfuncontacto.update(tbfuncontacto.getGraphics());
-				 * tbfunident.update(tbfunident.getGraphics());
-				 * dtfunnasc.update(dtfunnasc.getGraphics());
-				 * tbfunnome.update(tbfunnome.getGraphics());
-				 * tbGestaoUsername.update(tbGestaoUsername.getGraphics());
-				 */
->>>>>>> 20af9021913b621e072ee3e8fade6e9d0539c985
 				jpanelGestao.setVisible(true);
 
 			}
