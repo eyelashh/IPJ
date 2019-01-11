@@ -358,9 +358,7 @@ public class BancoAppClt implements Serializable {
 					dmListaContas.removeAllElements();
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt,gb.javabank.getContas()),dmListaContas);
 					
-					
-					
-					
+
 				}
 
 			}
@@ -496,7 +494,7 @@ public class BancoAppClt implements Serializable {
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 
 							Calendar cal = new GregorianCalendar();
-							// Date.valueOf(LocalDate.now())
+							//Date.valueOf(LocalDate.now());
 							cal.set(2019, 01, 8);
 							cal.add(Calendar.DAY_OF_MONTH, 1);
 

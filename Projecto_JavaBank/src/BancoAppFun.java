@@ -2247,13 +2247,6 @@ public class BancoAppFun implements Serializable {
 					rbfuncpass.setSelected(true);
 				}
 				
-				/*tbfunidfunc.update(tbfunidfunc.getGraphics());
-				tbfunmorada.update(tbfunmorada.getGraphics());
-				tbfuncontacto.update(tbfuncontacto.getGraphics());
-				tbfunident.update(tbfunident.getGraphics());
-				dtfunnasc.update(dtfunnasc.getGraphics());
-				tbfunnome.update(tbfunnome.getGraphics());
-				tbGestaoUsername.update(tbGestaoUsername.getGraphics());*/
 				jpanelGestao.setVisible(true);
 
 			}
