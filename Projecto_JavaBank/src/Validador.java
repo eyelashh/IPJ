@@ -35,9 +35,9 @@ public class Validador {
 		return teste;
 	}
 
-	// valida data: (nao sei se é necessario)
+	// valida data: (nao sei se ï¿½ necessario)
 
-	// valida numero de indentificaçao:
+	// valida numero de indentificaï¿½ao:
 	protected boolean valNumIdentificacao(String str) {
 		boolean teste = str.matches("^\\d+(\\d+)?$");
 
@@ -158,7 +158,7 @@ public class Validador {
 
 	// CONTAS:
 
-	// valida idconta (ainda é necessario ver se é necessario)
+	// valida idconta (ainda ï¿½ necessario ver se ï¿½ necessario)
 	protected int idConta(ArrayList<Conta> contas) {
 		int id = 1;
 		if (contas.size() != 0) {
@@ -189,7 +189,7 @@ public class Validador {
 		return teste;
 	}
 
-	// CONTA POUPANÇA:
+	// CONTA POUPANï¿½A:
 
 	// valida juros
 	protected boolean valJuros(String valor) {
@@ -212,7 +212,7 @@ public class Validador {
 	}
 	
 
-	// OPERAÇOES:
+	// OPERAï¿½OES:
 
 	// valida valor de operacao:
 	protected boolean valValorOperacao(String valor) {
@@ -227,8 +227,8 @@ public class Validador {
 		return teste;
 	}
 	
-	// validador de operaçoes:
-	protected int validoperaçoes(ArrayList<Operacao> op)
+	// validador de operaï¿½oes:
+	protected int validoperacoes(ArrayList<Operacao> op)
 	{
 		int id =1;
 		if (op.size() != 0) {

@@ -1038,13 +1038,13 @@ public class Banco implements Serializable {
 				{
 					// faz aumento de juros
 					// cria operacao
-					// alteraçao da data de juros
+					// alteraï¿½ao da data de juros
 					
 					//1:
 					double jurosdeposito = (contasp.get(i).getSaldo()* ((ContaPoupanca)contasp.get(i)).getTaxaJuros())/100;
 					contasp.get(i).setSaldo(contasp.get(i).getSaldo()+jurosdeposito);
 					//2:
-					Operacao op = new Deposito(val.validoperaçoes(contasp.get(i).getOperacoes()),null,agora,jurosdeposito,"Pagamento de juros no valor de: "+jurosdeposito);
+					Operacao op = new Deposito(val.validoperacoes(contasp.get(i).getOperacoes()),null,agora,jurosdeposito,"Pagamento de juros no valor de: "+jurosdeposito);
 					contasp.get(i).getOperacoes().add(op);
 					//3:
 					Calendar cal = Calendar.getInstance();
