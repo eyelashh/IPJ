@@ -312,7 +312,7 @@ public class AppFuncionario implements Serializable {
 		jpDinheiro.setLayout(null);
 		jpDinheiro.setVisible(false);
 
-		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+		JComboBox <String>comboBoxTipoPagamento = new JComboBox<String>(itens);
 		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
 		comboBoxTipoPagamento.addActionListener(new ActionListener() {
 			@Override

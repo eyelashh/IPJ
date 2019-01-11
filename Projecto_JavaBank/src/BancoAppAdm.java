@@ -191,6 +191,9 @@ public class BancoAppAdm implements Serializable {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				frame.setVisible(false);
 				

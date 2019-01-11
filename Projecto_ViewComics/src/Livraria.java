@@ -1179,6 +1179,7 @@ public class Livraria implements Serializable {
 
 						//thread espera por autorizacao durante 100 seg 
 						System.out.println("wait");
+						Thread.sleep(1000);
 					}
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
@@ -1186,7 +1187,7 @@ public class Livraria implements Serializable {
 					else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
-				} catch (ClassNotFoundException | IOException e) {
+				} catch (ClassNotFoundException | IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

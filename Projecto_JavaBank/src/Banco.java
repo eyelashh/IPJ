@@ -1,5 +1,8 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -509,10 +512,7 @@ public class Banco implements Serializable {
 				contas.get(i).setAberta(false);
 				contas.get(i).setSaldo(0);
 				contas.get(i).setDataFecho(datafecho);
-				
-				
-				
-				
+
 			}
 		}
 	}
@@ -914,18 +914,18 @@ public class Banco implements Serializable {
 			System.out.println("Teste-1");
 			if (clientes.get(i) instanceof Cliente) {
 				System.out.println("Teste0");
-					for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-						System.out.println("Teste");
-						if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
-							System.out.println("Teste1");	
-							((Cliente) clientes.get(i)).getContas().remove(c.getIdConta());
-							System.out.println("Teste2");
-							Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
-							System.out.println("Teste3");
-							c.getClientes().remove(id);
-							System.out.println("Teste4");
-						}
+				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
+					System.out.println("Teste");
+					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
+						System.out.println("Teste1");
+						((Cliente) clientes.get(i)).getContas().remove(c.getIdConta());
+						System.out.println("Teste2");
+						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
+						System.out.println("Teste3");
+						c.getClientes().remove(id);
+						System.out.println("Teste4");
 					}
+				}
 			}
 		}
 
@@ -1061,95 +1061,128 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-	
+
 	protected Conta obterContaPorCartao(int pin) {
-		ArrayList<Conta>contas =this.contas;
-		Conta conta=new Conta();
-		for (Conta c:contas) {
-			if (((ContaCorrente)c).getCartao()==pin) {
+		ArrayList<Conta> contas = this.contas;
+		Conta conta = new Conta();
+		for (Conta c : contas) {
+			if (((ContaCorrente) c).getCartao() == pin) {
 				conta = c;
 			}
 		}
 		return conta;
 	}
-	//recebe os dados de pagamento da livraria 
-	protected boolean autorizaVenda(String dadosPagamento) {
-		
-		boolean autorizado =false;
-		
-		Scanner sc=new Scanner(dadosPagamento);
-		String montanteSTR="";
-		String ncartaoSTR="";
-		String pinSTR="";
-		//divide a string 
+	// recebe os dados de pagamento da livraria
+
+	public String lerDadosPagamento() throws IOException {
+
+		BufferedReader fW = new BufferedReader(
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+
+		String dadosPagamento = fW.readLine();
+
+		return dadosPagamento;
+
+	}
+
+	protected boolean autorizaVenda() throws IOException {
+
+		boolean autorizado = false;
+
+		String dadosPagamento = lerDadosPagamento();
+		Scanner sc = new Scanner(dadosPagamento);
+		String montanteSTR = "";
+		String ncartaoSTR = "";
+		String pinSTR = "";
 		while (sc.hasNext()) {
-			montanteSTR =sc.next();
-			ncartaoSTR=sc.next();
-			pinSTR=sc.next();			
+			montanteSTR = sc.next();
+			ncartaoSTR = sc.next();
+			pinSTR = sc.next();
 		}
-		double montante=Double.parseDouble(montanteSTR);
-		int nCartao=Integer.parseInt(ncartaoSTR);
-		int pin=Integer.parseInt(pinSTR);	
-		
-		ArrayList<Cartao> cartoes =this.cartoes;
-		//verifica as condicoes (existencia do cartao , cod Validacao, montante disponivel)
-		for (Cartao c:cartoes) {
-			if (c.getnCartao()==nCartao) {
-				if (c.getCodvalidacao()==pin) {
-					if (obterContaPorCartao(pin).getSaldo()>montante) {
-						autorizado =true;
+		double montante = Double.parseDouble(montanteSTR);
+		int nCartao = Integer.parseInt(ncartaoSTR);
+		int pin = Integer.parseInt(pinSTR);
+
+		ArrayList<Cartao> cartoes = this.cartoes;
+		// verifica as condicoes (existencia do cartao , cod Validacao, montante
+		// disponivel)
+		for (Cartao c : cartoes) {
+			if (c.getnCartao() == nCartao) {
+				if (c.getCodvalidacao() == pin) {
+					if (obterContaPorCartao(pin).getSaldo() > montante) {
+						autorizado = true;
 					}
-					
+
 				}
 			}
 		}
-		
+
 		return autorizado;
 	}
 
-	protected void escreveFicheiro(String s) throws ClassNotFoundException, IOException {
-		
-		if (autorizaVenda(s)) {
-			String autorizacao="AUTORIZADO";
+	protected void escreveFicheiro() throws ClassNotFoundException, IOException {
+
+		if (autorizaVenda()) {
+			String autorizacao = "AUTORIZADO";
 			File f = new File("Autorizacao.txt");
-			if(f.exists()) {
-				
-				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+			if (f.exists()) {
+
+				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
-				
-			}
-			else {
+
+			} else {
 				f.createNewFile();
-				
-				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+
+				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
 			}
-		}
-		else {
-			String autorizacao="NAO AUTORIZADO";
+		} else {
+			String autorizacao = "NAO AUTORIZADO";
 			File f = new File("Autorizacao.txt");
-			if(f.exists()) {
-				
-				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+			if (f.exists()) {
+
+				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
-				
-			}
-			else {
+
+			} else {
 				f.createNewFile();
-				
-				BufferedWriter fW=new BufferedWriter(new FileWriter(f));
+
+				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
 			}
-			
+
 		}
-		
+
+	}
+
+	public void threadLeDadosAutoriza() {
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int counter = 100;
+				while (true) {
+					try {
+						escreveFicheiro();
+						System.out.println("A aguardar confirmacao do banco");
+						Thread.sleep(1000);
+						
+					} catch (ClassNotFoundException | IOException | InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
+		t2.start();
+
 	}
 }

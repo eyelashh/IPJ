@@ -16,7 +16,7 @@ import javax.swing.JDialog;
 
 public class JavaBank {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 	
 		int counter = 1000;

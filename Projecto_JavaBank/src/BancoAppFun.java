@@ -250,7 +250,7 @@ public class BancoAppFun implements Serializable {
 				try {
 					logout = new Login();
 					logout.run();
-				} catch (IOException e) {
+				} catch (IOException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

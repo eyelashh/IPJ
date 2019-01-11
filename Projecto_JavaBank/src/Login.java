@@ -36,22 +36,27 @@ public class Login {
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
 	 */
-	public Login() throws IOException {
+	public Login() throws IOException, ClassNotFoundException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
-	private void initialize() throws IOException {
+	private void initialize() throws IOException, ClassNotFoundException {
 		GestaoBanco gb = new GestaoBanco();
 		gb.run();
 
 		gb.javabank.pagajuros(gb.javabank.getContas());
-
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1086, 741);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,25 +66,6 @@ public class Login {
 		panel.setBounds(0, 0, 1280, 746);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
-		String s;
-		s = fW.readLine();
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					gb.javabank.escreveFicheiro(s);
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		});
-		btnNewButton.setBounds(27, 40, 74, 63);
-		panel.add(btnNewButton);
 
 		JLabel label = new JLabel("JavaBank");
 		label.setVerifyInputWhenFocusTarget(false);
