@@ -1099,10 +1099,7 @@ public class BancoAppFun implements Serializable {
 
 							if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
-								// o cartao nao expirou aqui
-
-							} else {
-
+			
 								// o cartao expirou aqui
 								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 										card.getCodvalidacao());
