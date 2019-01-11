@@ -539,6 +539,7 @@ public class BancoAppAdm implements Serializable {
 				
 				cboxaberta.setVisible(true);
 
+				
 				// preenche campos:
 
 				int id = Integer.parseInt(listAdminClieContas.getSelectedValue());
