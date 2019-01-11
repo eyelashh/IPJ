@@ -356,8 +356,13 @@ public class BancoAppClt implements Serializable {
 							dmListaContas);
 				} else if (comboBoxCltConta.getSelectedItem().equals("Conta Poupanca")) {
 					dmListaContas.removeAllElements();
+<<<<<<< HEAD
 					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt,gb.javabank.getContas()),dmListaContas);
 					
+=======
+					gb.javabank.addelementoslist(gb.javabank.listacontaspoupanca(clt, gb.javabank.getContas()),
+							dmListaContas);
+>>>>>>> 20af9021913b621e072ee3e8fade6e9d0539c985
 
 				}
 
@@ -463,11 +468,13 @@ public class BancoAppClt implements Serializable {
 						Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 								((ContaCorrente) conta).getCartao());
 
-						Calendar cal = new GregorianCalendar();
-						cal.setTime(card.getDataValidade());
-						cal.add(Calendar.DAY_OF_MONTH, 1);
-
-						if (card.getDataValidade().after(cal.getTime())) {
+//						Calendar cal = new GregorianCalendar();
+//						cal.setTime(card.getDataValidade());
+//						cal.add(Calendar.DAY_OF_YEAR, 1);
+						
+// ver situacao se o cartao expirou ou nao
+						
+						if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
 
 							Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
 									card.getCodvalidacao());
@@ -476,11 +483,15 @@ public class BancoAppClt implements Serializable {
 							((ContaCorrente) conta).setCartao(0);
 
 							textFieldNomeCartao.setEditable(true);
+							JOptionPane.showMessageDialog(null, "");
+							JOptionPane.showMessageDialog(null, "Cartão revalidado!! Novo cartão criado!!");
 
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Já existe um cartão associado a sua conta dentro da data de validade!");
 						}
 
-						gb.javabank.obterCartao(gb.javabank.getCartoes(), ((ContaCorrente) conta).getCartao());
-						JOptionPane.showMessageDialog(null, "Já existe um cartão associado a sua conta!");
+						
 					}
 
 					// adiciona um cartao á conta
@@ -494,9 +505,14 @@ public class BancoAppClt implements Serializable {
 						if (val.valTitularCartao(textFieldNomeCartao.getText())) {
 
 							Calendar cal = new GregorianCalendar();
+<<<<<<< HEAD
 							//Date.valueOf(LocalDate.now());
 							cal.set(2019, 01, 8);
 							cal.add(Calendar.DAY_OF_MONTH, 1);
+=======
+							Date.valueOf(LocalDate.now());
+							cal.add(Calendar.YEAR, 5);
+>>>>>>> 20af9021913b621e072ee3e8fade6e9d0539c985
 
 							Cartao card = new Cartao(idcartao, textFieldNomeCartao.getText(), cal.getTime(), nvalcartao,
 									conta.getIdConta(), true);
