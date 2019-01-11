@@ -536,10 +536,9 @@ public class BancoAppAdm implements Serializable {
 				listcontasadm.setVisible(false);
 				lblContas.setVisible(false);
 				listcontasadm.clearSelection();
-				
+
 				cboxaberta.setVisible(true);
 
-				
 				// preenche campos:
 
 				int id = Integer.parseInt(listAdminClieContas.getSelectedValue());
@@ -754,7 +753,6 @@ public class BancoAppAdm implements Serializable {
 					tbadmcontacartaovalidade.setDate(null);
 					tbadmcontacartaocod.setText(null);
 					textFieldAdminDescr.setText(null);
-					
 
 					cboxaberta.setVisible(false);
 					JPAdmEstatistica.setVisible(false);
@@ -765,6 +763,16 @@ public class BancoAppAdm implements Serializable {
 					panelContaPadm.setVisible(true);
 					panelCartaoAdm.setVisible(true);
 				} else {
+
+					cboxaberta.setVisible(false);
+					JPAdmEstatistica.setVisible(false);
+					JPAdmCliente.setVisible(true);
+					JPAdmFuncionario.setVisible(false);
+					JPAdmGestao.setVisible(false);
+					jpConta.setVisible(false);
+					panelContaPadm.setVisible(true);
+					panelCartaoAdm.setVisible(true);
+
 					tbadmcontanumero.setText(null);
 					dcadmcontadata.setDate(null);
 					tbadmcontalimoperacao.setText(null);
@@ -777,15 +785,6 @@ public class BancoAppAdm implements Serializable {
 					tbadmcontacartaocod.setText(null);
 					textFieldAdminDescr.setText(null);
 					modeloTabela.removeRow(0);
-
-					cboxaberta.setVisible(false);
-					JPAdmEstatistica.setVisible(false);
-					JPAdmCliente.setVisible(true);
-					JPAdmFuncionario.setVisible(false);
-					JPAdmGestao.setVisible(false);
-					jpConta.setVisible(false);
-					panelContaPadm.setVisible(true);
-					panelCartaoAdm.setVisible(true);
 				}
 
 			}
