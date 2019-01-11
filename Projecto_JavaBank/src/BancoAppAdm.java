@@ -272,10 +272,10 @@ public class BancoAppAdm implements Serializable {
 		// Painel do cliente da parte administrador
 		JPanel JPAdmCliente = new JPanel();
 		JPAdmCliente.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmCliente);
 		JPAdmCliente.setVisible(false);
 
 		JPAdmCliente.setLayout(null);
-		JPAdm.add(JPAdmCliente);
 		JComboBox boxAdminCliePesquisa = new JComboBox(texto2);
 		boxAdminCliePesquisa.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		boxAdminCliePesquisa.setBounds(400, 16, 218, 43);
@@ -299,6 +299,7 @@ public class BancoAppAdm implements Serializable {
 
 					String s = listaAdminClie.getSelectedValue();
 					s = s.substring(0, s.indexOf("*"));
+
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(Integer.parseInt(s),
 							gb.javabank.getUtlizadores());
 					textAdminClieNome.setText(c.getNome());
@@ -417,8 +418,7 @@ public class BancoAppAdm implements Serializable {
 					int id = Integer.parseInt(textAdminCliePesquisa.getText());
 
 					Cliente c = (Cliente) gb.javabank.selectUtilizador(id, gb.javabank.getUtlizadores());
-
-//					
+				
 
 					textAdminClieNome.setText(c.getNome());
 					textAdminClieEndereco.setText(c.getMorada());
@@ -427,7 +427,8 @@ public class BancoAppAdm implements Serializable {
 					dateChooser_1.setDate(c.getDataDeNascimento());
 
 					dmClt.removeAllElements();
-					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
+					gb.javabank.addelementoslist(gb.javabank.listaClientesID(Integer.toString(id)), dmClt);
+
 					dmCltContas.removeAllElements();
 
 				}
@@ -445,7 +446,7 @@ public class BancoAppAdm implements Serializable {
 					dateChooser_1.setDate(c.getDataDeNascimento());
 
 					dmClt.removeAllElements();
-					dmClt.addElement(c.getIdUtilizador() + " " + c.getNome() + " " + c.getSobrenome());
+					gb.javabank.addelementoslist(gb.javabank.listaClientesNome(nome), dmClt);
 					dmCltContas.removeAllElements();
 
 				}
@@ -484,6 +485,11 @@ public class BancoAppAdm implements Serializable {
 		listcontasadm.setVisible(false);
 		jpConta.add(listcontasadm);
 
+		JCheckBox cboxaberta = new JCheckBox("Aberta");
+		cboxaberta.setBounds(341, 502, 113, 25);
+		cboxaberta.setEnabled(false);
+		jpConta.add(cboxaberta);
+
 		JPanel panelContaPadm = new JPanel();
 		panelContaPadm.setBounds(191, 258, 415, 111);
 		jpConta.add(panelContaPadm);
@@ -499,9 +505,15 @@ public class BancoAppAdm implements Serializable {
 		tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
 		panelCartaoAdm.add(tbadmcontacartaovalidade);
 
+		JLabel lblContas = new JLabel("Contas:");
+		lblContas.setBounds(12, 20, 67, 24);
+		lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblContas);
+
 		// Metedo para ver detalhes das contas selecionadas:
 		btVerConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				// Visivel ao painel:
 				JPAdmGestao.setVisible(false);
 				JPAdmCliente.setVisible(false);
@@ -509,6 +521,7 @@ public class BancoAppAdm implements Serializable {
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(true);
 				listcontasadm.setVisible(false);
+				lblContas.setVisible(false);
 				listcontasadm.clearSelection();
 
 				// preenche campos:
@@ -522,6 +535,16 @@ public class BancoAppAdm implements Serializable {
 				tbadmcontalimoperacao.setText(cont.getValorMaxLevantamento() + "");
 				tbadmcontalimdia.setText(cont.getValorMaxDia() + "");
 				tbadmcontasaldo.setText(cont.getSaldo() + "");
+
+				if (cont.isAberta()) {
+					cboxaberta.setSelected(true);
+				} else {
+					cboxaberta.setSelected(false);
+				}
+
+				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, cont);
+				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, cont);
+				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, cont);
 
 				if (cont instanceof ContaCorrente) {
 					if (((ContaCorrente) cont).getCartao() != 0) {
@@ -675,16 +698,6 @@ public class BancoAppAdm implements Serializable {
 		btVoltarContasAdm.setBounds(427, 538, 97, 25);
 		jpConta.add(btVoltarContasAdm);
 
-		JCheckBox cboxaberta = new JCheckBox("Aberta");
-		cboxaberta.setBounds(341, 502, 113, 25);
-		cboxaberta.setEnabled(false);
-		jpConta.add(cboxaberta);
-
-		JLabel lblContas = new JLabel("Contas:");
-		lblContas.setBounds(12, 20, 67, 24);
-		lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblContas);
-
 		textFieldAdminDescr = new JTextField();
 		textFieldAdminDescr.setBounds(644, 443, 373, 38);
 		textFieldAdminDescr.setEditable(false);
@@ -723,6 +736,7 @@ public class BancoAppAdm implements Serializable {
 				tbadmcontacartaovalidade.setDate(null);
 				tbadmcontacartaocod.setText(null);
 				textFieldAdminDescr.setText(null);
+				modeloTabela.removeRow(0);
 
 				cboxaberta.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
@@ -775,9 +789,11 @@ public class BancoAppAdm implements Serializable {
 
 			}
 		});
+
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
+
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		cbAdmFunPesq.setBounds(111, 13, 227, 34);
@@ -1645,6 +1661,15 @@ public class BancoAppAdm implements Serializable {
 				JPAdmGestao.setVisible(false);
 				jpConta.setVisible(false);
 
+				// limpar os campos estatistica
+				dateChooserInicio.setDate(null);
+				dateChooserFim.setDate(null);
+				modeloTabelaEstatistica.setRowCount(0);
+				textFieldnNovasConta.setText(null);
+				textFieldFechaConat.setText(null);
+				textFieldTotalCapital.setText(null);
+				textFieldBalanco.setText(null);
+
 			}
 		});
 		btAdmEstatistica.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -1666,6 +1691,24 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(false);
+
+				// limpa os campos do cliente
+				dmCltContas.removeAllElements();
+				listaAdminClie.clearSelection();
+				listAdminClieContas.clearSelection();
+				textAdminClieNome.setText(null);
+				textAdminClieEndereco.setText(null);
+				textAdminClieContato.setText(null);
+				textAdminClieNif.setText(null);
+				dateChooser_1.setDate(null);
+				textAdminCliePesquisa.setText(null);
+
+				// faz atualiza�ao da lista (elimina e de seguida preenche tudo)
+				dmClt.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listarClientes(gb.javabank.getUtlizadores()), dmClt);
+				dmCltContas.removeAllElements();
+				gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dmCltContas);
+
 			}
 		});
 		btAdmClientes.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -1687,6 +1730,13 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(false);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(false);
+
+				// limpar os campos na gestao
+				textFieldAdminGestPass1.setText(null);
+				textFieldAdminGestConf.setText(null);
+				textFieldAdminGestNovaPass.setText(null);
+				textAdminGestPass.setText(null);
+				textFieldAdminGestNovaUser.setText(null);
 
 				// preenche dados do funcionario:
 
@@ -1730,6 +1780,24 @@ public class BancoAppAdm implements Serializable {
 				JPAdmFuncionario.setVisible(true);
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(false);
+
+				// limpa os campos funcionario
+				lbLAdmFunLista.clearSelection();
+				textAdmFunNome.setText(null);
+				textAdmFunSobrenome.setText(null);
+				textAdmFunContato.setText(null);
+				textAdmFunMorada.setText(null);
+				bg.clearSelection();
+				textAdmFunNumero.setText(null);
+				textAdmFunPass.setText(null);
+				textAdmFunUser.setText(null);
+				dateChooser.setCalendar(null);
+				tbAdmFunPesq.setText(null);
+				rbadmfuncionario.setSelected(false);
+				rbadmadministrador.setSelected(false);
+				rbadmadministrador.setEnabled(true);
+				rbadmfuncionario.setEnabled(true);
+
 			}
 		});
 		btAdmFuncionarios.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
