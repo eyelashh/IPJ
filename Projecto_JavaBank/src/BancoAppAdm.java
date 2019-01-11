@@ -88,6 +88,10 @@ public class BancoAppAdm implements Serializable {
 	private JTextField tbadmcontacto;
 	private JTextField tbadmmorada;
 	private JTable table;
+	// grupo de botoes:
+	ButtonGroup bgadm = new ButtonGroup();
+	String[] texto = new String[] { "Nome", "ID" };
+
 	DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
 	// Modelo para tabela
 	String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
@@ -262,134 +266,267 @@ public class BancoAppAdm implements Serializable {
 		JPAdmCliente.setBounds(0, 0, 1042, 576);
 		JPAdmCliente.setVisible(false);
 
+		// Painel da estatistica da parte administrador
+		JPanel JPAdmEstatistica = new JPanel();
+		JPAdmEstatistica.setVisible(true);
+
 		// Painel da funcionario da parte administrador
 		JPanel JPAdmFuncionario = new JPanel();
 		JPAdmFuncionario.setVisible(false);
 
-		// Painel da estatistica da parte administrador
-		JPanel JPAdmEstatistica = new JPanel();
-		JPAdmEstatistica.setVisible(true);
-		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
-		JPAdmEstatistica.setLayout(null);
-		JPAdm.add(JPAdmEstatistica);
+		JPanel jpConta = new JPanel();
+		jpConta.setBounds(0, 0, 1042, 576);
+		JPAdm.add(jpConta);
+		jpConta.setVisible(false);
+		jpConta.setLayout(null);
 
-		JDateChooser dateChooserInicio = new JDateChooser();
-		dateChooserInicio.setBounds(55, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooserInicio);
+		tbadmcontanumero = new JTextField();
+		tbadmcontanumero.setBounds(341, 13, 253, 30);
+		tbadmcontanumero.setEditable(false);
+		tbadmcontanumero.setColumns(10);
+		jpConta.add(tbadmcontanumero);
 
-		JDateChooser dateChooserFim = new JDateChooser();
-		dateChooserFim.setBounds(329, 49, 230, 33);
-		JPAdmEstatistica.add(dateChooserFim);
+		dcadmcontadata = new JDateChooser();
+		dcadmcontadata.setBounds(341, 56, 253, 30);
+		dcadmcontadata.setEnabled(false);
+		jpConta.add(dcadmcontadata);
 
-		JLabel lblDataInicial = new JLabel("Data Inicio:");
-		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataInicial.setBounds(39, 17, 124, 33);
-		JPAdmEstatistica.add(lblDataInicial);
+		JLabel lblNewLabel_1 = new JLabel("Numero de Conta:");
+		lblNewLabel_1.setBounds(191, 19, 138, 16);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		jpConta.add(lblNewLabel_1);
 
-		JLabel lblDataFim = new JLabel("Data Fim:");
-		lblDataFim.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataFim.setBounds(317, 17, 124, 33);
-		JPAdmEstatistica.add(lblDataFim);
+		tbadmcontalimoperacao = new JTextField();
+		tbadmcontalimoperacao.setBounds(341, 129, 253, 30);
+		tbadmcontalimoperacao.setEditable(false);
+		tbadmcontalimoperacao.setColumns(10);
+		jpConta.add(tbadmcontalimoperacao);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(143, 134, 729, 261);
-		JPAdmEstatistica.add(scrollPane_1);
-		table_1 = new JTable(modeloTabelaEstatistica);
-		scrollPane_1.setViewportView(table_1);
+		tbadmcontalimdia = new JTextField();
+		tbadmcontalimdia.setBounds(341, 172, 253, 30);
+		tbadmcontalimdia.setEditable(false);
+		tbadmcontalimdia.setColumns(10);
+		jpConta.add(tbadmcontalimdia);
 
-		textFieldnNovasConta = new JTextField();
-		textFieldnNovasConta.setEditable(false);
-		textFieldnNovasConta.setBounds(455, 407, 321, 33);
-		JPAdmEstatistica.add(textFieldnNovasConta);
-		textFieldnNovasConta.setColumns(10);
+		tbadmcontasaldo = new JTextField();
+		tbadmcontasaldo.setBounds(341, 215, 253, 30);
+		tbadmcontasaldo.setEditable(false);
+		tbadmcontasaldo.setColumns(10);
+		jpConta.add(tbadmcontasaldo);
 
-		textFieldFechaConat = new JTextField();
-		textFieldFechaConat.setEditable(false);
-		textFieldFechaConat.setColumns(10);
-		textFieldFechaConat.setBounds(455, 446, 321, 33);
-		JPAdmEstatistica.add(textFieldFechaConat);
+		JLabel lblDataDaCriao = new JLabel("Data da Cria\u00E7\u00E3o:");
+		lblDataDaCriao.setBounds(197, 62, 125, 24);
+		lblDataDaCriao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblDataDaCriao);
 
-		textFieldTotalCapital = new JTextField();
-		textFieldTotalCapital.setEditable(false);
-		textFieldTotalCapital.setColumns(10);
-		textFieldTotalCapital.setBounds(455, 491, 321, 33);
-		JPAdmEstatistica.add(textFieldTotalCapital);
+		JLabel lblPorOperao = new JLabel("Por Opera\u00E7\u00E3o:");
+		lblPorOperao.setBounds(216, 130, 113, 24);
+		lblPorOperao.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblPorOperao);
 
-		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
-		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContasNovas.setBounds(237, 407, 247, 33);
-		JPAdmEstatistica.add(lblContasNovas);
+		JLabel lblPorDia = new JLabel("Por dia:");
+		lblPorDia.setBounds(262, 173, 67, 24);
+		lblPorDia.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblPorDia);
 
-		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
-		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNmeroDeContas.setBounds(212, 444, 247, 33);
-		JPAdmEstatistica.add(lblNmeroDeContas);
+		JLabel lblSaldo = new JLabel("Saldo:");
+		lblSaldo.setBounds(278, 216, 51, 24);
+		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblSaldo);
 
-		JLabel lblTotalCapital = new JLabel("Total Capital: ");
-		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblTotalCapital.setBounds(335, 489, 124, 33);
-		JPAdmEstatistica.add(lblTotalCapital);
+		JLabel lblLimites = new JLabel("Limites de Levantamento:");
+		lblLimites.setBounds(366, 99, 198, 24);
+		lblLimites.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblLimites);
 
-		JButton btnPesquisar = new JButton("Pesquisar");
-		btnPesquisar.addActionListener(new ActionListener() {
+		JPanel panelContaPadm = new JPanel();
+		panelContaPadm.setBounds(191, 258, 415, 111);
+		jpConta.add(panelContaPadm);
+		panelContaPadm.setLayout(null);
+
+		JLabel lblContasPoupana = new JLabel("Contas Poupan\u00E7a:");
+		lblContasPoupana.setBounds(211, 0, 138, 24);
+		panelContaPadm.add(lblContasPoupana);
+		lblContasPoupana.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		tbadmcontajuros = new JTextField();
+		tbadmcontajuros.setEditable(false);
+		tbadmcontajuros.setBounds(150, 27, 253, 30);
+		panelContaPadm.add(tbadmcontajuros);
+		tbadmcontajuros.setColumns(10);
+
+		JLabel lblJuros = new JLabel("Juros (%):");
+		lblJuros.setBounds(54, 28, 84, 24);
+		panelContaPadm.add(lblJuros);
+		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		JLabel lblLimiteMs = new JLabel("Limite M\u00EAs");
+		lblLimiteMs.setBounds(54, 74, 84, 24);
+		panelContaPadm.add(lblLimiteMs);
+		lblLimiteMs.setFont(new Font("Dialog", Font.PLAIN, 17));
+
+		tbadmcontalimmes = new JTextField();
+		tbadmcontalimmes.setEditable(false);
+		tbadmcontalimmes.setBounds(150, 73, 253, 30);
+		panelContaPadm.add(tbadmcontalimmes);
+		tbadmcontalimmes.setColumns(10);
+
+		JPanel panelCartaoAdm = new JPanel();
+		panelCartaoAdm.setBounds(191, 382, 415, 111);
+		jpConta.add(panelCartaoAdm);
+		panelCartaoAdm.setLayout(null);
+
+		tbadmcontacartaonome = new JTextField();
+		tbadmcontacartaonome.setEditable(false);
+		tbadmcontacartaonome.setColumns(10);
+		tbadmcontacartaonome.setBounds(154, 13, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaonome);
+
+		JDateChooser tbadmcontacartaovalidade = new JDateChooser();
+		tbadmcontacartaovalidade.setEnabled(false);
+		tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaovalidade);
+
+		tbadmcontacartaocod = new JTextField();
+		tbadmcontacartaocod.setEditable(false);
+		tbadmcontacartaocod.setColumns(10);
+		tbadmcontacartaocod.setBounds(154, 83, 247, 22);
+		panelCartaoAdm.add(tbadmcontacartaocod);
+
+		JLabel label = new JLabel("Nome:");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label.setBounds(83, 15, 72, 16);
+		panelCartaoAdm.add(label);
+
+		JLabel label_1 = new JLabel("Validade");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_1.setBounds(83, 54, 72, 16);
+		panelCartaoAdm.add(label_1);
+
+		JLabel label_2 = new JLabel("COD:");
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		label_2.setBounds(83, 85, 59, 16);
+		panelCartaoAdm.add(label_2);
+
+		JButton btVoltarContasAdm = new JButton("Voltar");
+		btVoltarContasAdm.setBounds(427, 538, 97, 25);
+		jpConta.add(btVoltarContasAdm);
+
+		JList<String> listcontasadm = new JList<String>(dlmcontaadm);
+		listcontasadm.setBounds(12, 56, 147, 493);
+		listcontasadm.setVisible(false);
+		jpConta.add(listcontasadm);
+
+		JCheckBox cboxaberta = new JCheckBox("Aberta");
+		cboxaberta.setBounds(341, 502, 113, 25);
+		cboxaberta.setEnabled(false);
+		jpConta.add(cboxaberta);
+
+		JLabel lblContas = new JLabel("Contas:");
+		lblContas.setBounds(12, 20, 67, 24);
+		lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
+		jpConta.add(lblContas);
+
+		textFieldAdminDescr = new JTextField();
+		textFieldAdminDescr.setBounds(644, 443, 373, 38);
+		textFieldAdminDescr.setEditable(false);
+		textFieldAdminDescr.setColumns(10);
+		jpConta.add(textFieldAdminDescr);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(644, 59, 373, 372);
+		jpConta.add(scrollPane);
+		table = new JTable(modeloTabela);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int linha = table.getSelectedRow();
+				int idDesc = (int) table.getModel().getValueAt(linha, 0);
+				String descricao = gb.javabank.descricaoOpercacoes(idDesc);
+
+				textFieldAdminDescr.setText(descricao);
+			}
+		});
+		scrollPane.setViewportView(table);
+
+		// Painel da gestao do administrador
+		JPanel JPAdmGestao = new JPanel();
+		JPAdmGestao.setBounds(0, 0, 1042, 576);
+		JPAdm.add(JPAdmGestao);
+		JPAdmGestao.setLayout(null);
+		JPAdmGestao.setVisible(false);
+
+		// limpa contas e sai do painel de contas para o painel cliente:
+		btVoltarContasAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Date data1 = dateChooserInicio.getDate();
-				Date data2 = dateChooserFim.getDate();
+				tbadmcontanumero.setText(null);
+				dcadmcontadata.setDate(null);
+				tbadmcontalimoperacao.setText(null);
+				tbadmcontalimdia.setText(null);
+				tbadmcontasaldo.setText(null);
+				tbadmcontajuros.setText(null);
+				tbadmcontalimmes.setText(null);
+				tbadmcontacartaonome.setText(null);
+				tbadmcontacartaovalidade.setDate(null);
+				tbadmcontacartaocod.setText(null);
+				textFieldAdminDescr.setText(null);
 
-				modeloTabelaEstatistica.setRowCount(0);
-				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
-						data2);
-
-				int numeroContasNovas = gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2);
-				textFieldnNovasConta.setText(Integer.toString(numeroContasNovas));
-
-				int numeroContasFechadas = gb.javabank.numeroContasFechadas(gb.javabank.getContas(), data1, data2);
-				textFieldFechaConat.setText(Integer.toString(numeroContasFechadas));
-
-				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
-				textFieldTotalCapital.setText(Integer.toString(totalCapital));
-
-				double balanco = gb.javabank.balanco(gb.javabank.getContas(), data1, data2);
-				textFieldBalanco.setText(Double.toString(balanco));
+				cboxaberta.setVisible(false);
+				JPAdmEstatistica.setVisible(false);
+				JPAdmCliente.setVisible(true);
+				JPAdmFuncionario.setVisible(false);
+				JPAdmGestao.setVisible(false);
+				jpConta.setVisible(false);
+				panelContaPadm.setVisible(true);
+				panelCartaoAdm.setVisible(true);
 
 			}
 		});
-		btnPesquisar.setBounds(609, 53, 117, 29);
-		JPAdmEstatistica.add(btnPesquisar);
 
-		JButton btnLimpar_1 = new JButton("Limpar");
-		btnLimpar_1.addActionListener(new ActionListener() {
+		listcontasadm.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
 
-			public void actionPerformed(ActionEvent e) {
+				modeloTabela.setRowCount(0);
 
-				dateChooserInicio.setDate(null);
-				dateChooserFim.setDate(null);
-				modeloTabelaEstatistica.setRowCount(0);
-				textFieldnNovasConta.setText(null);
-				textFieldFechaConat.setText(null);
-				textFieldTotalCapital.setText(null);
-				textFieldBalanco.setText(null);
+				cboxaberta.setVisible(true);
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(listcontasadm.getSelectedValue()),
+						gb.javabank.getContas());
+
+				tbadmcontanumero.setText(c.getIdConta() + "");
+				dcadmcontadata.setDate(c.getDataCriacao());
+				tbadmcontalimoperacao.setText(c.getValorMaxLevantamento() + "");
+				tbadmcontalimdia.setText(c.getValorMaxDia() + "");
+				tbadmcontasaldo.setText(c.getSaldo() + "");
+
+				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+				if (c instanceof ContaCorrente) {
+					if (((ContaCorrente) c).getCartao() != 0) {
+						panelContaPadm.setVisible(false);
+						panelCartaoAdm.setVisible(true);
+						Cartao cartao = gb.javabank.obterCartao(gb.javabank.getCartoes(),
+								((ContaCorrente) c).getCartao());
+						tbadmcontacartaonome.setText(cartao.getNomeTitular());
+						tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
+						tbadmcontacartaocod.setText(cartao.getCodvalidacao() + "");
+					}
+				} else {
+
+					panelContaPadm.setVisible(true);
+					panelCartaoAdm.setVisible(false);
+					tbadmcontajuros.setText(((ContaPoupanca) c).getTaxaJuros() + "");
+					tbadmcontalimmes.setText(((ContaPoupanca) c).getLimiteMensalDebito() + "");
+				}
+
 			}
 		});
-		btnLimpar_1.setBounds(738, 53, 117, 29);
-		JPAdmEstatistica.add(btnLimpar_1);
-
-		JLabel lblBalano = new JLabel("Balanço: ");
-		lblBalano.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblBalano.setBounds(374, 534, 73, 33);
-		JPAdmEstatistica.add(lblBalano);
-
-		textFieldBalanco = new JTextField();
-		textFieldBalanco.setEditable(false);
-		textFieldBalanco.setColumns(10);
-		textFieldBalanco.setBounds(455, 536, 321, 33);
-		JPAdmEstatistica.add(textFieldBalanco);
 		JPAdmFuncionario.setLayout(null);
 		JPAdmFuncionario.setBounds(0, 0, 1042, 576);
 		JPAdm.add(JPAdmFuncionario);
-
-		String[] texto = new String[] { "Nome", "ID" };
 		JComboBox cbAdmFunPesq = new JComboBox(texto);
 		cbAdmFunPesq.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		cbAdmFunPesq.setBounds(111, 13, 227, 34);
@@ -869,263 +1006,126 @@ public class BancoAppAdm implements Serializable {
 			}
 		});
 		JPAdmFuncionario.add(btAdmFunProc);
-
-		// grupo de botoes:
-		ButtonGroup bgadm = new ButtonGroup();
 		bgadm.add(rbadmadministrador);
 		bgadm.add(rbadmfuncionario);
+		JPAdmEstatistica.setBounds(0, 0, 1042, 576);
+		JPAdmEstatistica.setLayout(null);
+		JPAdm.add(JPAdmEstatistica);
 
-		JPanel jpConta = new JPanel();
-		jpConta.setBounds(0, 0, 1042, 576);
-		JPAdm.add(jpConta);
-		jpConta.setVisible(false);
-		jpConta.setLayout(null);
+		JDateChooser dateChooserInicio = new JDateChooser();
+		dateChooserInicio.setBounds(55, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserInicio);
 
-		tbadmcontanumero = new JTextField();
-		tbadmcontanumero.setBounds(341, 13, 253, 30);
-		tbadmcontanumero.setEditable(false);
-		tbadmcontanumero.setColumns(10);
-		jpConta.add(tbadmcontanumero);
+		JDateChooser dateChooserFim = new JDateChooser();
+		dateChooserFim.setBounds(329, 49, 230, 33);
+		JPAdmEstatistica.add(dateChooserFim);
 
-		dcadmcontadata = new JDateChooser();
-		dcadmcontadata.setBounds(341, 56, 253, 30);
-		dcadmcontadata.setEnabled(false);
-		jpConta.add(dcadmcontadata);
+		JLabel lblDataInicial = new JLabel("Data Inicio:");
+		lblDataInicial.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataInicial.setBounds(39, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataInicial);
 
-		JLabel lblNewLabel_1 = new JLabel("Numero de Conta:");
-		lblNewLabel_1.setBounds(191, 19, 138, 16);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		jpConta.add(lblNewLabel_1);
+		JLabel lblDataFim = new JLabel("Data Fim:");
+		lblDataFim.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataFim.setBounds(317, 17, 124, 33);
+		JPAdmEstatistica.add(lblDataFim);
 
-		tbadmcontalimoperacao = new JTextField();
-		tbadmcontalimoperacao.setBounds(341, 129, 253, 30);
-		tbadmcontalimoperacao.setEditable(false);
-		tbadmcontalimoperacao.setColumns(10);
-		jpConta.add(tbadmcontalimoperacao);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(143, 134, 729, 261);
+		JPAdmEstatistica.add(scrollPane_1);
+		table_1 = new JTable(modeloTabelaEstatistica);
+		scrollPane_1.setViewportView(table_1);
 
-		tbadmcontalimdia = new JTextField();
-		tbadmcontalimdia.setBounds(341, 172, 253, 30);
-		tbadmcontalimdia.setEditable(false);
-		tbadmcontalimdia.setColumns(10);
-		jpConta.add(tbadmcontalimdia);
+		textFieldnNovasConta = new JTextField();
+		textFieldnNovasConta.setEditable(false);
+		textFieldnNovasConta.setBounds(455, 407, 321, 33);
+		JPAdmEstatistica.add(textFieldnNovasConta);
+		textFieldnNovasConta.setColumns(10);
 
-		tbadmcontasaldo = new JTextField();
-		tbadmcontasaldo.setBounds(341, 215, 253, 30);
-		tbadmcontasaldo.setEditable(false);
-		tbadmcontasaldo.setColumns(10);
-		jpConta.add(tbadmcontasaldo);
+		textFieldFechaConat = new JTextField();
+		textFieldFechaConat.setEditable(false);
+		textFieldFechaConat.setColumns(10);
+		textFieldFechaConat.setBounds(455, 446, 321, 33);
+		JPAdmEstatistica.add(textFieldFechaConat);
 
-		JLabel lblDataDaCriao = new JLabel("Data da Cria\u00E7\u00E3o:");
-		lblDataDaCriao.setBounds(197, 62, 125, 24);
-		lblDataDaCriao.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblDataDaCriao);
+		textFieldTotalCapital = new JTextField();
+		textFieldTotalCapital.setEditable(false);
+		textFieldTotalCapital.setColumns(10);
+		textFieldTotalCapital.setBounds(455, 491, 321, 33);
+		JPAdmEstatistica.add(textFieldTotalCapital);
 
-		JLabel lblPorOperao = new JLabel("Por Opera\u00E7\u00E3o:");
-		lblPorOperao.setBounds(216, 130, 113, 24);
-		lblPorOperao.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblPorOperao);
+		JLabel lblContasNovas = new JLabel("Número de novas contas: ");
+		lblContasNovas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContasNovas.setBounds(237, 407, 247, 33);
+		JPAdmEstatistica.add(lblContasNovas);
 
-		JLabel lblPorDia = new JLabel("Por dia:");
-		lblPorDia.setBounds(262, 173, 67, 24);
-		lblPorDia.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblPorDia);
+		JLabel lblNmeroDeContas = new JLabel("Número de contas fechadas: ");
+		lblNmeroDeContas.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNmeroDeContas.setBounds(212, 444, 247, 33);
+		JPAdmEstatistica.add(lblNmeroDeContas);
 
-		JLabel lblSaldo = new JLabel("Saldo:");
-		lblSaldo.setBounds(278, 216, 51, 24);
-		lblSaldo.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblSaldo);
+		JLabel lblTotalCapital = new JLabel("Total Capital: ");
+		lblTotalCapital.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblTotalCapital.setBounds(335, 489, 124, 33);
+		JPAdmEstatistica.add(lblTotalCapital);
 
-		JLabel lblLimites = new JLabel("Limites de Levantamento:");
-		lblLimites.setBounds(366, 99, 198, 24);
-		lblLimites.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblLimites);
-
-		JPanel panelContaPadm = new JPanel();
-		panelContaPadm.setBounds(191, 258, 415, 111);
-		jpConta.add(panelContaPadm);
-		panelContaPadm.setLayout(null);
-
-		JLabel lblContasPoupana = new JLabel("Contas Poupan\u00E7a:");
-		lblContasPoupana.setBounds(211, 0, 138, 24);
-		panelContaPadm.add(lblContasPoupana);
-		lblContasPoupana.setFont(new Font("Dialog", Font.PLAIN, 17));
-
-		tbadmcontajuros = new JTextField();
-		tbadmcontajuros.setEditable(false);
-		tbadmcontajuros.setBounds(150, 27, 253, 30);
-		panelContaPadm.add(tbadmcontajuros);
-		tbadmcontajuros.setColumns(10);
-
-		JLabel lblJuros = new JLabel("Juros (%):");
-		lblJuros.setBounds(54, 28, 84, 24);
-		panelContaPadm.add(lblJuros);
-		lblJuros.setFont(new Font("Dialog", Font.PLAIN, 17));
-
-		JLabel lblLimiteMs = new JLabel("Limite M\u00EAs");
-		lblLimiteMs.setBounds(54, 74, 84, 24);
-		panelContaPadm.add(lblLimiteMs);
-		lblLimiteMs.setFont(new Font("Dialog", Font.PLAIN, 17));
-
-		tbadmcontalimmes = new JTextField();
-		tbadmcontalimmes.setEditable(false);
-		tbadmcontalimmes.setBounds(150, 73, 253, 30);
-		panelContaPadm.add(tbadmcontalimmes);
-		tbadmcontalimmes.setColumns(10);
-
-		JPanel panelCartaoAdm = new JPanel();
-		panelCartaoAdm.setBounds(191, 382, 415, 111);
-		jpConta.add(panelCartaoAdm);
-		panelCartaoAdm.setLayout(null);
-
-		tbadmcontacartaonome = new JTextField();
-		tbadmcontacartaonome.setEditable(false);
-		tbadmcontacartaonome.setColumns(10);
-		tbadmcontacartaonome.setBounds(154, 13, 247, 22);
-		panelCartaoAdm.add(tbadmcontacartaonome);
-
-		JDateChooser tbadmcontacartaovalidade = new JDateChooser();
-		tbadmcontacartaovalidade.setEnabled(false);
-		tbadmcontacartaovalidade.setBounds(154, 48, 247, 22);
-		panelCartaoAdm.add(tbadmcontacartaovalidade);
-
-		tbadmcontacartaocod = new JTextField();
-		tbadmcontacartaocod.setEditable(false);
-		tbadmcontacartaocod.setColumns(10);
-		tbadmcontacartaocod.setBounds(154, 83, 247, 22);
-		panelCartaoAdm.add(tbadmcontacartaocod);
-
-		JLabel label = new JLabel("Nome:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label.setBounds(83, 15, 72, 16);
-		panelCartaoAdm.add(label);
-
-		JLabel label_1 = new JLabel("Validade");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(83, 54, 72, 16);
-		panelCartaoAdm.add(label_1);
-
-		JLabel label_2 = new JLabel("COD:");
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_2.setBounds(83, 85, 59, 16);
-		panelCartaoAdm.add(label_2);
-
-		JButton btVoltarContasAdm = new JButton("Voltar");
-		btVoltarContasAdm.setBounds(427, 538, 97, 25);
-		jpConta.add(btVoltarContasAdm);
-
-		JList<String> listcontasadm = new JList<String>(dlmcontaadm);
-		listcontasadm.setBounds(12, 56, 147, 493);
-		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dlmcontaadm);
-		listcontasadm.setVisible(false);
-		jpConta.add(listcontasadm);
-
-		JCheckBox cboxaberta = new JCheckBox("Aberta");
-		cboxaberta.setBounds(341, 502, 113, 25);
-		cboxaberta.setEnabled(false);
-		jpConta.add(cboxaberta);
-
-		JLabel lblContas = new JLabel("Contas:");
-		lblContas.setBounds(12, 20, 67, 24);
-		lblContas.setFont(new Font("Dialog", Font.PLAIN, 17));
-		jpConta.add(lblContas);
-
-		textFieldAdminDescr = new JTextField();
-		textFieldAdminDescr.setBounds(644, 443, 373, 38);
-		textFieldAdminDescr.setEditable(false);
-		textFieldAdminDescr.setColumns(10);
-		jpConta.add(textFieldAdminDescr);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(644, 59, 373, 372);
-		jpConta.add(scrollPane);
-		table = new JTable(modeloTabela);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linha = table.getSelectedRow();
-				int idDesc = (int) table.getModel().getValueAt(linha, 0);
-				String descricao = gb.javabank.descricaoOpercacoes(idDesc);
-
-				textFieldAdminDescr.setText(descricao);
-			}
-		});
-		scrollPane.setViewportView(table);
-
-		// Painel da gestao do administrador
-		JPanel JPAdmGestao = new JPanel();
-		JPAdmGestao.setBounds(0, 0, 1042, 576);
-		JPAdm.add(JPAdmGestao);
-		JPAdmGestao.setLayout(null);
-		JPAdmGestao.setVisible(false);
-
-		// limpa contas e sai do painel de contas para o painel cliente:
-		btVoltarContasAdm.addActionListener(new ActionListener() {
+		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				tbadmcontanumero.setText(null);
-				dcadmcontadata.setDate(null);
-				tbadmcontalimoperacao.setText(null);
-				tbadmcontalimdia.setText(null);
-				tbadmcontasaldo.setText(null);
-				tbadmcontajuros.setText(null);
-				tbadmcontalimmes.setText(null);
-				tbadmcontacartaonome.setText(null);
-				tbadmcontacartaovalidade.setDate(null);
-				tbadmcontacartaocod.setText(null);
-				textFieldAdminDescr.setText(null);
+				Date data1 = dateChooserInicio.getDate();
+				Date data2 = dateChooserFim.getDate();
 
-				cboxaberta.setVisible(false);
-				JPAdmEstatistica.setVisible(false);
-				JPAdmCliente.setVisible(true);
-				JPAdmFuncionario.setVisible(false);
-				JPAdmGestao.setVisible(false);
-				jpConta.setVisible(false);
-				panelContaPadm.setVisible(true);
-				panelCartaoAdm.setVisible(true);
+				modeloTabelaEstatistica.setRowCount(0);
+				gb.javabank.preenchetabelaContaEstatistica(modeloTabelaEstatistica, gb.javabank.getContas(), data1,
+						data2);
+
+				int numeroContasNovas = gb.javabank.numeroContasAbertas(gb.javabank.getContas(), data1, data2);
+				textFieldnNovasConta.setText(Integer.toString(numeroContasNovas));
+
+				int numeroContasFechadas = gb.javabank.numeroContasFechadas(gb.javabank.getContas(), data1, data2);
+				textFieldFechaConat.setText(Integer.toString(numeroContasFechadas));
+
+				int totalCapital = gb.javabank.totalCapital(gb.javabank.getContas(), data1, data2);
+				textFieldTotalCapital.setText(Integer.toString(totalCapital));
+
+				double balanco = gb.javabank.balanco(gb.javabank.getContas(), data1, data2);
+				textFieldBalanco.setText(Double.toString(balanco));
 
 			}
 		});
+		btnPesquisar.setBounds(609, 53, 117, 29);
+		JPAdmEstatistica.add(btnPesquisar);
 
-		listcontasadm.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
+		JButton btnLimpar_1 = new JButton("Limpar");
+		btnLimpar_1.addActionListener(new ActionListener() {
 
-				modeloTabela.setRowCount(0);
+			public void actionPerformed(ActionEvent e) {
 
-				cboxaberta.setVisible(true);
-				Conta c = gb.javabank.SelectConta(Integer.parseInt(listcontasadm.getSelectedValue()),
-						gb.javabank.getContas());
-
-				tbadmcontanumero.setText(c.getIdConta() + "");
-				dcadmcontadata.setDate(c.getDataCriacao());
-				tbadmcontalimoperacao.setText(c.getValorMaxLevantamento() + "");
-				tbadmcontalimdia.setText(c.getValorMaxDia() + "");
-				tbadmcontasaldo.setText(c.getSaldo() + "");
-
-				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-
-				if (c instanceof ContaCorrente) {
-					if (((ContaCorrente) c).getCartao() != 0) {
-						panelContaPadm.setVisible(false);
-						panelCartaoAdm.setVisible(true);
-						Cartao cartao = gb.javabank.obterCartao(gb.javabank.getCartoes(),
-								((ContaCorrente) c).getCartao());
-						tbadmcontacartaonome.setText(cartao.getNomeTitular());
-						tbadmcontacartaovalidade.setDate(cartao.getDataValidade());
-						tbadmcontacartaocod.setText(cartao.getCodvalidacao() + "");
-					}
-				} else {
-
-					panelContaPadm.setVisible(true);
-					panelCartaoAdm.setVisible(false);
-					tbadmcontajuros.setText(((ContaPoupanca) c).getTaxaJuros() + "");
-					tbadmcontalimmes.setText(((ContaPoupanca) c).getLimiteMensalDebito() + "");
-				}
-
+				dateChooserInicio.setDate(null);
+				dateChooserFim.setDate(null);
+				modeloTabelaEstatistica.setRowCount(0);
+				textFieldnNovasConta.setText(null);
+				textFieldFechaConat.setText(null);
+				textFieldTotalCapital.setText(null);
+				textFieldBalanco.setText(null);
 			}
 		});
+		btnLimpar_1.setBounds(738, 53, 117, 29);
+		JPAdmEstatistica.add(btnLimpar_1);
+
+		JLabel lblBalano = new JLabel("Balanço: ");
+		lblBalano.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblBalano.setBounds(374, 534, 73, 33);
+		JPAdmEstatistica.add(lblBalano);
+
+		textFieldBalanco = new JTextField();
+		textFieldBalanco.setEditable(false);
+		textFieldBalanco.setColumns(10);
+		textFieldBalanco.setBounds(455, 536, 321, 33);
+		JPAdmEstatistica.add(textFieldBalanco);
+
+		gb.javabank.addelementoslist(gb.javabank.listanumerodecontas(gb.javabank.getContas()), dlmcontaadm);
 
 		// linha que separa na parte da gestao
 		JSeparator separator_1 = new JSeparator();
