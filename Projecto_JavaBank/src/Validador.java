@@ -195,7 +195,6 @@ public class Validador {
 	protected boolean valJuros(String valor) {
 
 		boolean teste = valor.matches("^\\d+(\\.\\d+)?$");
-
 		return teste;
 	}
 
@@ -226,6 +225,16 @@ public class Validador {
 	protected boolean valContaTransferir(String valor) {
 		boolean teste = valor.matches("^\\d+(\\d+)?$");
 		return teste;
+	}
+	
+	// validador de operaçoes:
+	protected int validoperaçoes(ArrayList<Operacao> op)
+	{
+		int id =1;
+		if (op.size() != 0) {
+			id = op.get(op.size() - 1).getIdOperacao()+ 1;
+		}
+		return id;
 	}
 
 }
