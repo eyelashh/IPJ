@@ -1032,11 +1032,10 @@ public class Banco implements Serializable {
 
 		for (int i = 0; i < contasp.size(); i++) {
 			if (contasp.get(i) instanceof ContaPoupanca) {
-				if (!((ContaPoupanca) contasp.get(i)).getPagajuros().before(agora)) {
+				if (!((ContaPoupanca) contasp.get(i)).getPagajuros().after(agora)) {
 					// faz aumento de juros
 					// cria operacao
 					// altera�ao da data de juros
-
 					// 1:
 					double jurosdeposito = (contasp.get(i).getSaldo() * ((ContaPoupanca) contasp.get(i)).getTaxaJuros())
 							/ 100;
