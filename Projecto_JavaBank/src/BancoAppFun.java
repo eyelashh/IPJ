@@ -1240,40 +1240,6 @@ public class BancoAppFun implements Serializable {
 		btnLimpar.setBounds(85, 507, 99, 38);
 		jpanelContas.add(btnLimpar);
 
-		bttConfirmarEliminacao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				gb.javabank.eliminacontaemcliente(gb.javabank.getUtlizadores(),
-						gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()), gb.javabank.getContas()));
-
-				gb.javabank.eliminaconta(Integer.parseInt(tbContasnum.getText()), dateChooserFechoConta.getDate(),
-						gb.javabank.getContas());
-
-				lContas.clearSelection();
-				tbContasnum.setText(null);
-				dateChooser_2.setDate(null);
-				tbContaslimitelevop.setText(null);
-				tbContasSaldo.setText(null);
-				tbContasSaldo.setEditable(false);
-				tbContaslimitelevdia.setText(null);
-				rdbtnContaCorrente.setSelected(true);
-				rdbtnContaPoupanca.setSelected(false);
-				tblJuros.setText(null);
-				dateChooser_2.setEnabled(true);
-				tbllimitemes.setText(null);
-
-				dmconta.removeAllElements();
-				gb.javabank.addelementoslist(gb.javabank.listanumerodecontasabertas(gb.javabank.getContas()), dmconta);
-				tbnomecartao.setText(null);
-				dtcartao.setDate(null);
-				tbcodcartao.setText(null);
-				panelCartao.setVisible(false);
-
-				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
-
-			}
-		});
-
 		// Painel principal CLientes
 		JPanel jpanelClientes = new JPanel();
 		jpanelClientes.setBounds(0, 0, 1042, 576);
