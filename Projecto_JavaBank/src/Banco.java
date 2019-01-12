@@ -1077,7 +1077,7 @@ public class Banco implements Serializable {
 	public String lerDadosPagamento() throws IOException {
 
 		BufferedReader fW = new BufferedReader(
-				new FileReader("Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
 
 		String dadosPagamento = fW.readLine();
 
@@ -1167,11 +1167,11 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 100;
+				int counter = 50;
 				while (true) {
 					try {
 						escreveFicheiro();
-						System.out.println("A aguardar confirmacao do banco");
+						System.out.println("A aguardar dados correctos");
 						Thread.sleep(1000);
 						
 					} catch (ClassNotFoundException | IOException | InterruptedException e) {
