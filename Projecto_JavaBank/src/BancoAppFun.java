@@ -2107,6 +2107,8 @@ public class BancoAppFun implements Serializable {
 				}
 				if (func.getTipoIndentificacao().equals("Passaporte")) {
 					rbfuncpass.setSelected(true);
+					
+					
 				}
 
 			}
