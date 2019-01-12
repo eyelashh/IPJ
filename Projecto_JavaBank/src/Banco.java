@@ -972,8 +972,6 @@ public class Banco implements Serializable {
 		}
 	}
 
-
-
 	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumContaAbertas(String numConta) {
 
@@ -1057,11 +1055,11 @@ public class Banco implements Serializable {
 		}
 	}
 
-	protected Conta obterContaPorCartao(int pin) {
+	protected Conta obterContaPorCartao(int nCartao) {
 		ArrayList<Conta> contas = this.contas;
 		Conta conta = new Conta();
 		for (Conta c : contas) {
-			if (((ContaCorrente) c).getCartao() == pin) {
+			if (((ContaCorrente) c).getCartao() == nCartao) {
 				conta = c;
 			}
 		}
