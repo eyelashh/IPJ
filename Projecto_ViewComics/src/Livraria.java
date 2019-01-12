@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -1154,23 +1153,12 @@ public class Livraria implements Serializable {
 	// metodo para escrever no ficheiro
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 
-//		
-//		BufferedReader fW = new BufferedReader(
-//				new FileReader("/Users/tamarabarros/IPJ/Projecto_JavaBank/Autorizacao.txt"));
+		BufferedReader fW = new BufferedReader(
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_JavaBank/Autorizacao.txt"));
+		String s = fW.readLine();
+		System.out.println(s);
 
-		String s = new File("Autorizacao.txt").getAbsolutePath();
-
-		Scanner sc = new Scanner(s);
-
-		String teste = "";
-		while (sc.hasNext()) {
-
-			teste = sc.nextLine();
-			System.out.println(teste);
-
-		}
-
-		if (teste.equals("AUTORIZADO")) {
+		if (s.equals("AUTORIZADO")) {
 			return true;
 
 		} else {
@@ -1178,34 +1166,32 @@ public class Livraria implements Serializable {
 		}
 
 	}
-
 //metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
-	public void threadWaitAutorizacao(String s) {
+	public void threadWaitAutorizacao(String s)  {
 
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 50;
+				int counter = 100;
 				try {
 					escreveDadosPagamentoFicheiro(s);
-					while ((counter-- > 0) && (!verificaAutorizacao())) {
+					while ((counter-- > 0 )||(!verificaAutorizacao())) {
 
-						// thread espera por autorizacao durante 100 seg
+						//thread espera por autorizacao durante 100 seg 
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
-					} else {
+					}
+					else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
-					// quando tem a resposta limpa o ficheiro
-					escreveDadosPagamentoFicheiro("000 000 000");
 				} catch (ClassNotFoundException | IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				
 			}
 		});
 
