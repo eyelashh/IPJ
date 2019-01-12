@@ -1157,6 +1157,8 @@ public class Livraria implements Serializable {
 				new FileReader("/Users/tamarabarros/IPJ/Projecto_JavaBank/Autorizacao.txt"));
 		String s = fW.readLine();
 		System.out.println(s);
+		
+		
 
 		if (s.equals("AUTORIZADO")) {
 			return true;
