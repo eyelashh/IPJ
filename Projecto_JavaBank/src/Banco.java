@@ -1076,13 +1076,7 @@ public class Banco implements Serializable {
 
 	public String lerDadosPagamento() throws IOException {
 
-		BufferedReader fW = new BufferedReader(
-<<<<<<< HEAD
-				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
-=======
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
-
+		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
 		String dadosPagamento = fW.readLine();
 
 		return dadosPagamento;
