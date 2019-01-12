@@ -1183,9 +1183,7 @@ public class Livraria implements Serializable {
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
-					BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
-					fW.write("00 00 00");
-					fW.close();
+					resetFile();
 					
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
@@ -1205,5 +1203,14 @@ public class Livraria implements Serializable {
 
 		t1.start();
 
+	}
+	public void resetFile() throws IOException {
+		File f = new File("dadosPagamento.txt");
+		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+		fW.write("00 00 00");
+		fW.newLine();
+		fW.close();
+		
+		
 	}
 }
