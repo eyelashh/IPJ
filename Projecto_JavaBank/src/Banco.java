@@ -187,11 +187,11 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			if (cont.get(i).isAberta()) {
-				s = "" + cont.get(i).getIdConta();
-				numcontas[i] = s;
-				s = "";
-			}
+
+			s = "" + cont.get(i).getIdConta();
+			numcontas[i] = s;
+			s = "";
+
 		}
 		return numcontas;
 	}
@@ -909,21 +909,26 @@ public class Banco implements Serializable {
 	// Elimina todas as contas nos clientes:
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
-		System.out.println("Teste-2");
+		Integer idconta = c.getIdConta();
+		Integer id = 0;
+
 		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println("Teste-1");
+
 			if (clientes.get(i) instanceof Cliente) {
-				System.out.println("Teste0");
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					System.out.println("Teste");
-					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
-						System.out.println("Teste1");
-						((Cliente) clientes.get(i)).getContas().remove(c.getIdConta());
-						System.out.println("Teste2");
-						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
-						System.out.println("Teste3");
-						c.getClientes().remove(id);
-						System.out.println("Teste4");
+
+					if (c instanceof ContaCorrente) {
+						if (((Cliente) clientes.get(i)).getContas().get(x) == idconta) {
+							((Cliente) clientes.get(i)).getContas().remove(idconta);
+							id = ((Cliente) clientes.get(i)).getIdUtilizador();
+							c.getClientes().remove(id);
+						}
+					} else {
+						if (((Cliente) clientes.get(i)).getContapoupanca() == idconta) {
+							((Cliente) clientes.get(i)).setContapoupanca(0);
+							id = ((Cliente) clientes.get(i)).getIdUtilizador();
+							c.getClientes().remove(id);
+						}
 					}
 				}
 			}
@@ -1076,8 +1081,10 @@ public class Banco implements Serializable {
 
 	public String lerDadosPagamento() throws IOException {
 
-		//BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
-		BufferedReader fW = new BufferedReader(new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+		// BufferedReader fW = new BufferedReader(new
+		// FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		BufferedReader fW = new BufferedReader(
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 		String dadosPagamento = fW.readLine();
 
 		return dadosPagamento;
@@ -1172,7 +1179,7 @@ public class Banco implements Serializable {
 						escreveFicheiro();
 						System.out.println("A aguardar dados correctos");
 						Thread.sleep(1000);
-						
+
 					} catch (ClassNotFoundException | IOException | InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
