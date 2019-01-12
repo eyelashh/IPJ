@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 AUTORIZADO
+=======
+NAO AUTORIZADO
+>>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git

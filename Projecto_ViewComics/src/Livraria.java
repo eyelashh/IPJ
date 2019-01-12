@@ -1154,7 +1154,7 @@ public class Livraria implements Serializable {
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 
 		BufferedReader fW = new BufferedReader(
-				new FileReader("/Users/tamarabarros/IPJ/Projecto_JavaBank/Autorizacao.txt"));
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
 		String s = fW.readLine();
 		System.out.println(s);
 		
@@ -1174,21 +1174,25 @@ public class Livraria implements Serializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 100;
+				int counter = 20;
 				try {
 					escreveDadosPagamentoFicheiro(s);
-					while ((counter-- > 0 )||(!verificaAutorizacao())) {
+					while ((counter-- > 0 )&&(!verificaAutorizacao())) {
 
 						//thread espera por autorizacao durante 100 seg 
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
+					resetFile();
+					
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
+					
+					
 				} catch (ClassNotFoundException | IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1199,5 +1203,14 @@ public class Livraria implements Serializable {
 
 		t1.start();
 
+	}
+	public void resetFile() throws IOException {
+		File f = new File("dadosPagamento.txt");
+		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+		fW.write("00 00 00");
+		fW.newLine();
+		fW.close();
+		
+		
 	}
 }
