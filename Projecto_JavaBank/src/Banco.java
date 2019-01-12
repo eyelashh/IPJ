@@ -1076,10 +1076,17 @@ public class Banco implements Serializable {
 
 	public String lerDadosPagamento() throws IOException {
 
-		BufferedReader fW = new BufferedReader(
-				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+		String dadosPagamento = new File("dadosPagamento.txt").getAbsolutePath();
+		
+		Scanner sc = new Scanner(dadosPagamento);
 
-		String dadosPagamento = fW.readLine();
+//		BufferedReader fW = new BufferedReader(
+//				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/"));
+
+		while (sc.hasNext()) {
+			String teste = sc.nextLine();
+			System.out.println(teste);
+		}
 
 		return dadosPagamento;
 
@@ -1099,8 +1106,7 @@ public class Banco implements Serializable {
 			ncartaoSTR = sc.next();
 			pinSTR = sc.next();
 		}
-		
-		
+
 		double montante = Double.parseDouble(montanteSTR);
 		int nCartao = Integer.parseInt(ncartaoSTR);
 		int pin = Integer.parseInt(pinSTR);
@@ -1159,8 +1165,7 @@ public class Banco implements Serializable {
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
-				
-				
+
 			}
 
 		}
@@ -1177,7 +1182,7 @@ public class Banco implements Serializable {
 						escreveFicheiro();
 						System.out.println("A aguardar dados correctos");
 						Thread.sleep(1000);
-						
+
 					} catch (ClassNotFoundException | IOException | InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
