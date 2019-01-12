@@ -29,7 +29,7 @@ public class Livraria implements Serializable {
 
 	// para efeitos de historico de vendas, cada vez que um carrinho e
 	// eliminado/pago o seu conteudo transforma-se
-	// no conteúdo de uma venda que tem uma data espcifica tambem como atributo
+	// no conteï¿½do de uma venda que tem uma data espcifica tambem como atributo
 
 	public Livraria() {
 		super();
@@ -992,7 +992,7 @@ public class Livraria implements Serializable {
 		} else if (!car.isFinalizado()) {
 
 			JOptionPane.showMessageDialog(null,
-					"Não foi possível finalizar o carrinho porque não consta na base de dados ou porque ainda se encontra vazio. Confirme o nif introduzido e/ou o conteudo do respectivo carrinho.");
+					"Nï¿½o foi possï¿½vel finalizar o carrinho porque nï¿½o consta na base de dados ou porque ainda se encontra vazio. Confirme o nif introduzido e/ou o conteudo do respectivo carrinho.");
 		}
 
 	}
@@ -1154,7 +1154,9 @@ public class Livraria implements Serializable {
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 
 		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_JavaBank/Autorizacao.txt"));
+		
+		
 		String s = fW.readLine();
 		System.out.println(s);
 

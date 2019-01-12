@@ -1077,7 +1077,7 @@ public class Banco implements Serializable {
 	public String lerDadosPagamento() throws IOException {
 
 		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 
 		String dadosPagamento = fW.readLine();
 
@@ -1099,6 +1099,8 @@ public class Banco implements Serializable {
 			ncartaoSTR = sc.next();
 			pinSTR = sc.next();
 		}
+		
+		
 		double montante = Double.parseDouble(montanteSTR);
 		int nCartao = Integer.parseInt(ncartaoSTR);
 		int pin = Integer.parseInt(pinSTR);
@@ -1157,6 +1159,8 @@ public class Banco implements Serializable {
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
+				
+				
 			}
 
 		}
