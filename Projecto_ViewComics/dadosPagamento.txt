@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-100 7104 100
-=======
 00 00 00
->>>>>>> branch 'master' of https://github.com/eyelashh/IPJ.git
