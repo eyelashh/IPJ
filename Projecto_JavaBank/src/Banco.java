@@ -1167,7 +1167,7 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 50;
+				int counter = 20;
 				while (true) {
 					try {
 						escreveFicheiro();
