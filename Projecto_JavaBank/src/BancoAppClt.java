@@ -466,10 +466,9 @@ public class BancoAppClt implements Serializable {
 
 						// ver situacao se o cartao expirou ou nao
 
-						if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
+						if (card.getDataValidade().after(Date.valueOf(LocalDate.now()))) {
 
-							Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
-									card.getCodvalidacao());
+							Cartao card2 = gb.javabank.obterCartao(gb.javabank.getCartoes(), card.getnCartao());
 							card2.setAtivo(false);
 							card2.setIdconta(0);
 							((ContaCorrente) conta).setCartao(0);
@@ -504,9 +503,9 @@ public class BancoAppClt implements Serializable {
 
 							textFieldCOD.setText(nvalcartao + "");
 							tbcltcartaonumero.setText(idcartao + "");
-
 							textFieldNomeCartao.setEditable(false);
 							dateChooserCartao.setEnabled(false);
+							dateChooserCartao.setDate(cal.getTime());
 							textFieldCOD.setEditable(false);
 							JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
 						} else {

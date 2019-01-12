@@ -779,8 +779,8 @@ public class BancoAppFun implements Serializable {
 							if (card.getDataValidade().after(Date.valueOf(LocalDate.now()))) {
 
 								// o cartao expirou aqui
-								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
-										card.getCodvalidacao());
+								Cartao card2 = gb.javabank.obterCartao(gb.javabank.getCartoes(),
+										card.getnCartao());
 								card2.setAtivo(false);
 								card2.setIdconta(0);
 								((ContaCorrente) c).setCartao(0);

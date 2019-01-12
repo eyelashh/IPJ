@@ -944,7 +944,7 @@ public class Banco implements Serializable {
 		if (cartoes.size() != 0) {
 
 			for (int j = 0; j < cartoes.size(); j++) {
-				if (cartoes.get(j).getCodvalidacao() == id) {
+				if (cartoes.get(j).getnCartao() == id) {
 
 					card = cartoes.get(j);
 
@@ -966,23 +966,13 @@ public class Banco implements Serializable {
 			if ((contas.get(i) instanceof ContaCorrente)) {
 
 				this.cartoes.add(card);
-				((ContaCorrente) c).setCartao(card.getCodvalidacao());
+				((ContaCorrente) c).setCartao(card.getnCartao());
 
 			}
 		}
 	}
 
-	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id) {
-		Cartao card = null;
-		for (int i = 0; i < cartoes.size(); i++) {
-			if (cartoes.get(i).getCodvalidacao() == id) {
-				card = cartoes.get(i);
-			}
-		}
 
-		return card;
-
-	}
 
 	// retorna a conta atraves do seu numero
 	protected String[] listaContasNumContaAbertas(String numConta) {
