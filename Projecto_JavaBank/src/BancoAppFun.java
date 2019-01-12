@@ -1019,6 +1019,25 @@ public class BancoAppFun implements Serializable {
 				btPedirCartao.setVisible(false);
 				btnMovimentos.setVisible(false);
 				tbContaspesqconta.setText("");
+				tbContasnum.setEnabled(false);
+				;
+				dateChooser_2.setEnabled(false);
+				tbContaslimitelevop.setEnabled(false);
+				;
+				tbContasSaldo.setEnabled(false);
+				;
+				tbContasSaldo.setEnabled(false);
+				;
+				tbContaslimitelevdia.setEnabled(false);
+				;
+				rdbtnContaCorrente.setEnabled(false);
+				;
+				rdbtnContaPoupanca.setEnabled(false);
+				;
+				tblJuros.setEnabled(false);
+				;
+				tbllimitemes.setEnabled(false);
+				;
 
 			}
 
@@ -1027,6 +1046,28 @@ public class BancoAppFun implements Serializable {
 		// prepara campos para cria�ao de nova conta ou atualiza a lista selecionada:
 		btContasNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				// coloca os campos editaveis
+				tbContasnum.setEnabled(true);
+				;
+				dateChooser_2.setEnabled(true);
+				tbContaslimitelevop.setEnabled(true);
+				;
+				tbContasSaldo.setEnabled(true);
+				;
+				tbContasSaldo.setEnabled(true);
+				;
+				tbContaslimitelevdia.setEnabled(true);
+				;
+				rdbtnContaCorrente.setEnabled(true);
+				;
+				rdbtnContaPoupanca.setEnabled(true);
+				;
+				tblJuros.setEnabled(true);
+				;
+				tbllimitemes.setEnabled(true);
+				;
+				
 				gb.javabank.limpatabela(model);
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
