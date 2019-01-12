@@ -336,54 +336,6 @@ public class BancoAppFun implements Serializable {
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
 
-		// painel movimentos onde aparece a tabela das operaçoes
-
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 936, 293);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		tableMovimentos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linha = tableMovimentos.getSelectedRow();
-				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
-				String desc = gb.javabank.descricaoOpercacoes(id);
-				tbdescop.setText(desc);
-			}
-		});
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-				modeloTabela.setRowCount(0);
-				tbdescop.setText("");
-
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		tbdescop = new JTextField();
-		tbdescop.setBounds(55, 378, 936, 30);
-		jpanelMovimentos.add(tbdescop);
-		tbdescop.setColumns(10);
-		jpanelMovimentos.setVisible(false);
-
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
@@ -560,7 +512,6 @@ public class BancoAppFun implements Serializable {
 
 		JButton btPedirCartao = new JButton("Pedir Cartao");
 		btPedirCartao.setVisible(false);
-
 		btPedirCartao.setFont(new Font("Dialog", Font.PLAIN, 15));
 		btPedirCartao.setBounds(548, 521, 120, 38);
 		jpanelContas.add(btPedirCartao);
@@ -778,9 +729,9 @@ public class BancoAppFun implements Serializable {
 				gb.javabank.preenchetabelaclientes(model, gb.javabank.getUtlizadores());
 
 				if (!lContas.isSelectionEmpty()) {
+					
 					btnMovimentos.setVisible(true);
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()),
 							gb.javabank.getContas());
 					tbContasnum.setText("" + c.getIdConta());
 					dateChooser_2.setDate(c.getDataCriacao());
@@ -809,6 +760,7 @@ public class BancoAppFun implements Serializable {
 
 						} else {
 
+							btPedirCartao.setVisible(false);
 							btCartao.setVisible(false);
 							panelCartao.setVisible(true);
 							dtcartao.setEnabled(false);
@@ -816,6 +768,7 @@ public class BancoAppFun implements Serializable {
 							tbcodcartao.setEditable(false);
 							Cartao card = gb.javabank.obterCartao(gb.javabank.getCartoes(),
 									((ContaCorrente) c).getCartao());
+							
 							dtcartao.setDate(card.getDataValidade());
 							tbnomecartao.setText(card.getNomeTitular());
 							tbcodcartao.setText(card.getCodvalidacao() + "");
@@ -823,7 +776,7 @@ public class BancoAppFun implements Serializable {
 
 							// ver situacao se o cartao expirou ou nao
 
-							if (card.getDataValidade().before(Date.valueOf(LocalDate.now()))) {
+							if (card.getDataValidade().after(Date.valueOf(LocalDate.now()))) {
 
 								// o cartao expirou aqui
 								Cartao card2 = gb.javabank.selecionacartao(gb.javabank.getCartoes(),
@@ -865,16 +818,18 @@ public class BancoAppFun implements Serializable {
 
 		btCartao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int id = val.valIdCartao(gb.javabank.getCartoes());
 				int codval = val.valCodCartao();
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()),
+						gb.javabank.getContas());
 
 				if (val.valTitularCartao(tbnomecartao.getText())) {
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-							gb.javabank.getContas());
+					
 					Cartao cartao = new Cartao(id, tbnomecartao.getText(), dtcartao.getDate(), codval, c.getIdConta(),
 							true);
 					gb.javabank.getCartoes().add(cartao);
-					((ContaCorrente) c).setCartao(cartao.getCodvalidacao());
+					((ContaCorrente) c).setCartao(cartao.getnCartao());
 					tbcodcartao.setText(codval + "");
 					tbncartao.setText(id + "");
 
@@ -883,6 +838,7 @@ public class BancoAppFun implements Serializable {
 					tbcodcartao.setEditable(false);
 					tbncartao.setEditable(false);
 					JOptionPane.showMessageDialog(null, "Cartao criado com sucesso");
+					btCartao.setEnabled(false);
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Nome de cartao invalido. corriga o nome do titular");
@@ -960,6 +916,54 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+
+		// painel movimentos onde aparece a tabela das operaçoes
+
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 51, 936, 293);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		tableMovimentos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int linha = tableMovimentos.getSelectedRow();
+				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+				String desc = gb.javabank.descricaoOpercacoes(id);
+				tbdescop.setText(desc);
+			}
+		});
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+				modeloTabela.setRowCount(0);
+				tbdescop.setText("");
+
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		tbdescop = new JTextField();
+		tbdescop.setBounds(55, 378, 936, 30);
+		jpanelMovimentos.add(tbdescop);
+		tbdescop.setColumns(10);
+		jpanelMovimentos.setVisible(false);
 
 		// Painel principal CLientes
 
