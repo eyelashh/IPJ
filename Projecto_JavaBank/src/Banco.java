@@ -1055,6 +1055,94 @@ public class Banco implements Serializable {
 		}
 	}
 
+	protected void maxlevantamentoOperacao(Conta c, double levantamento, Funcionario func, Date data) {
+
+		Validador val = new Validador();
+		double valortotaldia = 0;
+		double valortotalmes = 0;
+		String desc = data + " - Levantamento no valor de " + levantamento;
+
+		if (c.getSaldo() >= levantamento) {
+
+			if (levantamento <= c.getValorMaxLevantamento()) {
+
+				for (int i = 0; i < c.getOperacoes().size(); i++) {
+
+					if (c.getOperacoes().get(i) instanceof Levantamento) {
+						// e se a data da operacao for igual a data do levantamento
+						if (c.getOperacoes().get(i).getDataOperacao().equals(data)) {
+							// soma todos os montantes de levantamento que foram realizados naquele dia
+							valortotaldia = valortotaldia + c.getOperacoes().get(i).getValor();
+						}
+					}
+				}
+
+				if (c.getValorMaxDia() > valortotaldia) {
+
+					Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data, levantamento,
+							desc);
+
+					c.getOperacoes().add(lev);
+					c.setSaldo(c.getSaldo() - levantamento);
+
+					JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso");
+
+					if (c instanceof ContaPoupanca) {
+
+						for (int i = 0; i < c.getOperacoes().size(); i++) {
+
+							if (c.getOperacoes().get(i) instanceof Levantamento) {
+
+								// retiro o mes e o anor da data introduzida pelo utilizador
+								LocalDate dataIntroduzida = data.toInstant().atZone(ZoneId.systemDefault())
+										.toLocalDate();
+								int mes = dataIntroduzida.getMonthValue();
+								int ano = dataIntroduzida.getYear();
+
+								// retiro o mes e o ano da data da operacao
+								LocalDate dataop = c.getOperacoes().get(i).getDataOperacao().toInstant()
+										.atZone(ZoneId.systemDefault()).toLocalDate();
+								int mes2 = dataop.getMonthValue();
+								int ano2 = dataop.getYear();
+
+								if (mes == mes2 && ano == ano2) {
+
+									valortotalmes += c.getOperacoes().get(i).getValor();
+								}
+							}
+						}
+
+						if (valortotalmes < ((ContaPoupanca) c).getLimiteMensalDebito()) {
+
+							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
+									levantamento, desc);
+							c.getOperacoes().add(lev);
+							c.setSaldo(c.getSaldo() - levantamento);
+							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!");
+
+						} else {
+
+							JOptionPane.showMessageDialog(null, "Não pode efectura mais levantamentos este mes!");
+
+						}
+
+					}
+
+				} else {
+
+					JOptionPane.showMessageDialog(null, "Ultrapassou o montante por Dia");
+				}
+
+			} else
+
+			{
+				JOptionPane.showMessageDialog(null, "Ultrapassou o montante por Operacao");
+			}
+
+		}
+
+	}
+
 	protected Conta obterContaPorCartao(int nCartao) {
 		ArrayList<Conta> contas = this.contas;
 		Conta conta = new Conta();

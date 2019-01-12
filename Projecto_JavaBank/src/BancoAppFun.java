@@ -520,105 +520,110 @@ public class BancoAppFun implements Serializable {
 
 					double valortotalmes = 0;
 
-					// se o saldo da conta for superior ao do levantamento
-					if (c.getSaldo() >= levantamento) {
+					gb.javabank.maxlevantamentoOperacao(c, levantamento, func, data);
+					tbContasaldoc.setText(Double.toString(c.getSaldo()));
 
-						// e o montante para levantamneto for menor ou igual ao montante maximo de
-						// levantamento por operacao estipulado
-						if (levantamento <= c.getValorMaxLevantamento()) {
-
-							// precorre o array das operacoes
-							for (int i = 0; i < c.getOperacoes().size(); i++) {
-								if (c.getOperacoes().get(i) instanceof Levantamento) {
-									// e se a data da operacao for igual a data do levantamento
-									if (c.getOperacoes().get(i).getDataOperacao().equals(data)) {
-										// soma todos os montantes de levantamento que foram realizados naquele dia
-										valortotaldia = valortotaldia + c.getOperacoes().get(i).getValor();
-									}
-								}
-							}
-							// e se o valor estipulado pelo funcionario do limite qt levantamento por dia
-							// for
-							// maior ao total de operacoes feitas naquele dia
-							if (c.getValorMaxDia() > valortotaldia) {
-
-								// a conta a ordem pode fazer o levantamento
-								if (c instanceof ContaCorrente) {
-									String desc = data + " - Levantamento no valor de " + levantamento;
-									Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
-											levantamento, desc);
-									c.getOperacoes().add(lev);
-									c.setSaldo(c.getSaldo() - levantamento);
-									JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!");
-
-									// se for conta poupanca
-								} else {
-
-									for (int x = 0; x < c.getOperacoes().size(); x++) {
-										// retiro o mes e o anor da data introduzida pelo utilizador
-										LocalDate dataIntroduzida = data.toInstant().atZone(ZoneId.systemDefault())
-												.toLocalDate();
-										int mes = dataIntroduzida.getMonthValue();
-										int ano = dataIntroduzida.getYear();
-
-										// retiro o mes e o ano da data da operacao
-										LocalDate dataop = c.getOperacoes().get(x).getDataOperacao().toInstant()
-												.atZone(ZoneId.systemDefault()).toLocalDate();
-										int mes2 = dataop.getMonthValue();
-										int ano2 = dataop.getYear();
-
-										if (mes == mes2 && ano == ano2) {
-
-											valortotalmes += c.getOperacoes().get(x).getValor();
-
-											if (valortotalmes < ((ContaPoupanca) c).getLimiteMensalDebito()) {
-
-												String desc = data + " - Levantamento no valor de " + levantamento
-														+ " na conta " + ((ContaPoupanca) c).getIdConta();
-												Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()),
-														func, data, levantamento, desc);
-												c.getOperacoes().add(lev);
-												c.setSaldo(c.getSaldo() - levantamento);
-												JOptionPane.showMessageDialog(null,
-														"Levantamento efectuado com sucesso!");
-
-											} else {
-
-												JOptionPane.showMessageDialog(null,
-														"Não pode efectura mais levantamentos este mes!");
-
-											}
-
-										}
-
-										LocalDate datainicio = LocalDate.of(ano, mes, 1);
-										LocalDate datafim;
-
-										if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10
-												|| mes == 12) {
-											datafim = LocalDate.of(ano, mes, 31);
-
-										} else {
-											if (mes == 2) {
-												datafim = LocalDate.of(ano, mes, 28);
-											} else {
-												datafim = LocalDate.of(ano, mes, 30);
-											}
-										}
-
-									}
-
-								}
-							} else {
-								JOptionPane.showMessageDialog(null, "Valor ultrapassa o permitido no dia!");
-							}
-						} else {
-							JOptionPane.showMessageDialog(null,
-									"Valor ultrapassa o permitido! Max:" + c.getValorMaxLevantamento());
-						}
-					} else {
-						JOptionPane.showMessageDialog(null, "Saldo insuficiente!");
-					}
+//					// se o saldo da conta for superior ao do levantamento
+//					if (c.getSaldo() >= levantamento) {
+//
+//						// e o montante para levantamneto for menor ou igual ao montante maximo de
+//						// levantamento por operacao estipulado
+//						if (levantamento <= c.getValorMaxLevantamento()) {
+//
+//							// precorre o array das operacoes
+//							for (int i = 0; i < c.getOperacoes().size(); i++) {
+//								if (c.getOperacoes().get(i) instanceof Levantamento) {
+//									// e se a data da operacao for igual a data do levantamento
+//									if (c.getOperacoes().get(i).getDataOperacao().equals(data)) {
+//										// soma todos os montantes de levantamento que foram realizados naquele dia
+//										valortotaldia = valortotaldia + c.getOperacoes().get(i).getValor();
+//									}
+//								}
+//							}
+//							// e se o valor estipulado pelo funcionario do limite qt levantamento por dia
+//							// for
+//							// maior ao total de operacoes feitas naquele dia
+//							if (c.getValorMaxDia() > valortotaldia) {
+//
+//								// a conta a ordem pode fazer o levantamento
+//								if (c instanceof ContaCorrente) {
+//									String desc = data + " - Levantamento no valor de " + levantamento;
+//									Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
+//											levantamento, desc);
+//									c.getOperacoes().add(lev);
+//									c.setSaldo(c.getSaldo() - levantamento);
+//									JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!");
+//
+//									tbContasaldoc.setText(Double.toString(c.getSaldo()));
+//
+//									// se for conta poupanca
+//								} else {
+//
+//									for (int x = 0; x < c.getOperacoes().size(); x++) {
+//										// retiro o mes e o anor da data introduzida pelo utilizador
+//										LocalDate dataIntroduzida = data.toInstant().atZone(ZoneId.systemDefault())
+//												.toLocalDate();
+//										int mes = dataIntroduzida.getMonthValue();
+//										int ano = dataIntroduzida.getYear();
+//
+//										// retiro o mes e o ano da data da operacao
+//										LocalDate dataop = c.getOperacoes().get(x).getDataOperacao().toInstant()
+//												.atZone(ZoneId.systemDefault()).toLocalDate();
+//										int mes2 = dataop.getMonthValue();
+//										int ano2 = dataop.getYear();
+//
+//										if (mes == mes2 && ano == ano2) {
+//
+//											valortotalmes += c.getOperacoes().get(x).getValor();
+//
+//											if (valortotalmes < ((ContaPoupanca) c).getLimiteMensalDebito()) {
+//
+//												String desc = data + " - Levantamento no valor de " + levantamento
+//														+ " na conta " + ((ContaPoupanca) c).getIdConta();
+//												Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()),
+//														func, data, levantamento, desc);
+//												c.getOperacoes().add(lev);
+//												c.setSaldo(c.getSaldo() - levantamento);
+//												JOptionPane.showMessageDialog(null,
+//														"Levantamento efectuado com sucesso!");
+//
+//											} else {
+//
+//												JOptionPane.showMessageDialog(null,
+//														"Não pode efectura mais levantamentos este mes!");
+//
+//											}
+//
+//										}
+//
+//										LocalDate datainicio = LocalDate.of(ano, mes, 1);
+//										LocalDate datafim;
+//
+//										if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10
+//												|| mes == 12) {
+//											datafim = LocalDate.of(ano, mes, 31);
+//
+//										} else {
+//											if (mes == 2) {
+//												datafim = LocalDate.of(ano, mes, 28);
+//											} else {
+//												datafim = LocalDate.of(ano, mes, 30);
+//											}
+//										}
+//
+//									}
+//
+//								}
+//							} else {
+//								JOptionPane.showMessageDialog(null, "Valor ultrapassa o permitido no dia!");
+//							}
+//						} else {
+//							JOptionPane.showMessageDialog(null,
+//									"Valor ultrapassa o permitido! Max:" + c.getValorMaxLevantamento());
+//						}
+//					} else {
+//						JOptionPane.showMessageDialog(null, "Saldo insuficiente!");
+//					}
 
 				}
 			}
