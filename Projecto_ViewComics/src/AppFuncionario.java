@@ -341,7 +341,6 @@ public class AppFuncionario implements Serializable {
 
 				} else if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
 					jpMultibanco.setVisible(true);
-					
 
 				}
 			}
@@ -559,6 +558,7 @@ public class AppFuncionario implements Serializable {
 						jpPagamento.setVisible(true);
 						textFieldNifPagamento.setText(nifSTR);
 						txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
+						txtMontanteMULTIBANCO.setText(txtPrecoCarrinho.getText());
 
 					} else {
 						JOptionPane.showMessageDialog(null,
