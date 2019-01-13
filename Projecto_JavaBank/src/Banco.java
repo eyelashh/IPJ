@@ -1114,14 +1114,14 @@ public class Banco implements Serializable {
 							}
 						}
 
-						if (valortotalmes + valortotaldia + levantamento <= ((ContaPoupanca) c)
+						if (valortotalmes +  levantamento <= ((ContaPoupanca) c)
 								.getLimiteMensalDebito()) {
 
 							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
 									levantamento, desc);
 							c.getOperacoes().add(lev2);
 							c.setSaldo(c.getSaldo() - levantamento);
-							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!");
+							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!" + valortotalmes);
 
 						} else {
 
