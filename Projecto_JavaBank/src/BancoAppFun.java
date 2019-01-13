@@ -493,6 +493,7 @@ public class BancoAppFun implements Serializable {
 				}
 
 			}
+			
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnNewButton.setBounds(258, 131, 116, 38);
