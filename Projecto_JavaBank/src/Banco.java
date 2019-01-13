@@ -186,6 +186,12 @@ public class Banco implements Serializable {
 		return numcontas;
 	}
 
+
+	/**
+	 * @param cont
+	 * @return
+	 * es
+	 */
 	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
