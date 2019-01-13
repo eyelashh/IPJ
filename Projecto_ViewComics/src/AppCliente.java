@@ -71,6 +71,8 @@ public class AppCliente implements Serializable {
 	private JTextField txtNifCARRINHO;
 	private JTextField txtPrecoTotalCARRINHO;
 	private JTextField txtTotalLivrosCARRINHO;
+	private JLabel lblPrecoMinimo;
+	private JLabel lblPrecoMaximo;
 	private JPanel JPCarrinho;
 	private JTable tabelaLivros;
 	private JTable tabelaCarrinho;
@@ -280,35 +282,74 @@ public class AppCliente implements Serializable {
 		JPLivros.setLayout(null);
 
 		Choice choiceAtributoLivroCliente = new Choice();
-		choiceAtributoLivroCliente.setBounds(144, 71, 211, 20);
+		
+		choiceAtributoLivroCliente.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				String criterio =(String) e.getItem();
+//			    Object item = e.getItem();
+
+			    if (criterio.equals("Preco")) {
+			    	txtPrecoMIN.setVisible(true);
+					txtPrecoMAX.setVisible(true);
+					lblPrecoMaximo.setVisible(true);
+					lblPrecoMinimo.setVisible(true);
+//			     JOptionPane.showMessageDialog(null, "preco");
+			    } else  {
+			    	txtPrecoMIN.setVisible(false);
+					txtPrecoMAX.setVisible(false);
+					lblPrecoMaximo.setVisible(false);
+					lblPrecoMinimo.setVisible(false);
+			    	if (e.getStateChange()==0) {
+			    		gl.viewComics.livrosTabela(modeloTabelaLivros);
+			    	}
+			    	
+			    }
+			}
+		});
+		choiceAtributoLivroCliente.setBounds(10, 31, 211, 20);
 		JPLivros.add(choiceAtributoLivroCliente);
 		choiceAtributoLivroCliente.add("(por que criterio pretende pesquisar o livro)");
 		choiceAtributoLivroCliente.add("Titulo");
 		choiceAtributoLivroCliente.add("Autor");
 		choiceAtributoLivroCliente.add("Id");
 		choiceAtributoLivroCliente.add("Ano");
+		choiceAtributoLivroCliente.add("Preco");
 
 		TextField txtAtributoLivros = new TextField();
-		txtAtributoLivros.setBounds(65, 96, 200, 22);
+		txtAtributoLivros.setBounds(10, 57, 211, 22);
 		JPLivros.add(txtAtributoLivros);
 
 		// botaoPesquisarLivro
 		JButton btnPesquisarLivro = new JButton("Pesquisar");
-		btnPesquisarLivro.setBounds(112, 124, 115, 26);
+		btnPesquisarLivro.setBounds(112, 85, 98, 26);
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String criterioPesquisa = choiceAtributoLivroCliente.getSelectedItem();
+				if (!criterioPesquisa.equals("Preco")){
 				String pesquisa = txtAtributoLivros.getText();
 				modeloTabelaLivros.setRowCount(0);
 				gl.viewComics.tabelaLivrosCriterioSeleccao(modeloTabelaLivros, criterioPesquisa, pesquisa);
-				if (criterioPesquisa.equals("Preco")) {
-					txtPrecoMIN.setVisible(true);
-					txtPrecoMAX.setVisible(true);
-					gl.viewComics.tabelaLivrosFiltrarPreco(modeloTabelaLivros, criterioPesquisa, precoMINstr, precoMAXstr);
-					
-					
 				}
 				
+				if (criterioPesquisa.equals("Preco")) {
+					String precoMin=txtPrecoMIN.getText();
+					String precoMax=txtPrecoMAX.getText();
+					if ((precoMin!=null)&&(precoMax!=null)) {
+						modeloTabelaLivros.setRowCount(0);
+						gl.viewComics.tabelaLivrosFiltrarPreco(modeloTabelaLivros, criterioPesquisa, precoMin, precoMax);
+//						lblPrecoMaximo.setVisible(false);
+//						lblPrecoMinimo.setVisible(false);
+//						txtPrecoMAX.setVisible(false);
+//						txtPrecoMIN.setVisible(false);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Verifique os dados introduzidos");
+					}	
+					
+				}
+//				choiceAtributoLivroCliente.select(0);
+			
 			}
 		});
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
@@ -505,12 +546,18 @@ public class AppCliente implements Serializable {
 		lblqtddCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
 		JPLivros.add(lblqtddCarrinho);
 
-		JButton btnLimparPesquisaCliente = new JButton("Limpar");
-		btnLimparPesquisaCliente.setBounds(271, 96, 84, 38);
+		JButton btnLimparPesquisaCliente = new JButton("Limpar pesquisa");
+		btnLimparPesquisaCliente.setBounds(262, 88, 140, 20);
 		btnLimparPesquisaCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtAtributoLivros.setText("");
-
+				choiceAtributoLivroCliente.select(0);
+				modeloTabelaLivros.setRowCount(0);
+				gl.viewComics.livrosTabela(modeloTabelaLivros);
+				txtPrecoMAX.setVisible(false);
+				txtPrecoMIN.setVisible(false);
+				lblPrecoMaximo.setVisible(false);
+				lblPrecoMinimo.setVisible(false);
 			}
 		});
 		btnLimparPesquisaCliente.setBackground(SystemColor.controlHighlight);
@@ -560,12 +607,12 @@ public class AppCliente implements Serializable {
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
 
 		JLabel lblNewLabel_2 = new JLabel("Filtrar por : ");
-		lblNewLabel_2.setBounds(10, 71, 128, 20);
+		lblNewLabel_2.setBounds(10, 11, 68, 20);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		JPLivros.add(lblNewLabel_2);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(39, 185, 411, 314);
+		scrollPane_1.setBounds(10, 122, 440, 377);
 		JPLivros.add(scrollPane_1);
 
 		tabelaLivros = new JTable(modeloTabelaLivros);
@@ -593,16 +640,27 @@ public class AppCliente implements Serializable {
 		scrollPane_1.setViewportView(tabelaLivros);
 		
 		txtPrecoMIN = new JTextField();
-		txtPrecoMIN.setBounds(173, 41, 86, 20);
+		txtPrecoMIN.setBounds(252, 54, 90, 20);
 		JPLivros.add(txtPrecoMIN);
 		txtPrecoMIN.setColumns(10);
 		txtPrecoMIN.setVisible(false);
 		
 		txtPrecoMAX = new JTextField();
 		txtPrecoMAX.setColumns(10);
-		txtPrecoMAX.setBounds(269, 41, 86, 20);
+		txtPrecoMAX.setBounds(352, 54, 86, 20);
 		txtPrecoMAX.setVisible(false);
 		JPLivros.add(txtPrecoMAX);
+		
+		
+		lblPrecoMaximo = new JLabel("Preco maximo");
+		lblPrecoMaximo.setVisible(false);
+		lblPrecoMaximo.setBounds(352, 31, 98, 14);
+		JPLivros.add(lblPrecoMaximo);
+		
+		lblPrecoMinimo = new JLabel("Preco minimo");
+		lblPrecoMinimo .setVisible(false);
+		lblPrecoMinimo.setBounds(252, 31, 98, 14);
+		JPLivros.add(lblPrecoMinimo);
 		JPCarrinho.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);
