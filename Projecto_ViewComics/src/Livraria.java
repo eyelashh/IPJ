@@ -1184,11 +1184,11 @@ public class Livraria implements Serializable {
 	// metodo para escrever no ficheiro
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 
-//		BufferedReader fW = new BufferedReader(
-//				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
-
 		BufferedReader fW = new BufferedReader(
-				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+
+//		BufferedReader fW = new BufferedReader(
+//				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 
 		String s = fW.readLine();
 		System.out.println(s);
