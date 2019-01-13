@@ -1159,10 +1159,19 @@ public class Banco implements Serializable {
 	}
 	// recebe os dados de pagamento da livraria
 
+	protected void actualizaSaldoAposPagamento(double montantePagamento, int idConta) {
+		for (Conta c : this.contas) {
+			if (c.getIdConta() == idConta) {
+				double novoSaldo = c.getSaldo()- montantePagamento;
+				c.setSaldo(novoSaldo);
+			}
+		}
+	}
+
 	public String lerDadosPagamento() throws IOException {
 
-		 BufferedReader fW = new BufferedReader(new
-		 FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		BufferedReader fW = new BufferedReader(
+				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 		String dadosPagamento = fW.readLine();
@@ -1197,6 +1206,9 @@ public class Banco implements Serializable {
 				if (c.getCodvalidacao() == pin) {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						autorizado = true;
+						int idConta=c.getIdconta();
+						actualizaSaldoAposPagamento(montante, idConta);
+
 					}
 
 				}
