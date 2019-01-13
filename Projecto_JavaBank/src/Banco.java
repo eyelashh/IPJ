@@ -27,12 +27,14 @@ public class Banco implements Serializable {
 	private ArrayList<Conta> contas;
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Cartao> cartoes;
+	private Validador val;
 
 	public Banco() {
 		super();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.contas = new ArrayList<Conta>();
 		this.cartoes = new ArrayList<Cartao>();
+		this.val = new Validador();
 	}
 
 	public Banco(int idBanco, String nome, int contacto, String morada, ArrayList<Conta> contas,
@@ -45,6 +47,7 @@ public class Banco implements Serializable {
 		this.contas = new ArrayList<Conta>();
 		this.utilizadores = new ArrayList<Utilizador>();
 		this.cartoes = new ArrayList<Cartao>();
+		this.val = new Validador();
 
 	}
 
@@ -733,7 +736,7 @@ public class Banco implements Serializable {
 
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Transferencia) {
-
+					String tipo = "Transferencia";
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
@@ -742,7 +745,7 @@ public class Banco implements Serializable {
 							.getIdConta();
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 
-					Object[] texto = { id, resp, data, valor, contadestino, clt };
+					Object[] texto = {id, tipo,  resp, data, valor, contadestino, clt };
 					model.addRow(texto);
 
 				}
@@ -782,13 +785,13 @@ public class Banco implements Serializable {
 
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Deposito) {
-
+					String tipo = "Deposito";
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					Object[] texto = { id, resp, data, valor, null, null };
+					Object[] texto = {  id,tipo, resp, data, valor, null, null };
 					model.addRow(texto);
 				}
 
@@ -806,13 +809,13 @@ public class Banco implements Serializable {
 
 				if ((contas.get(i).getIdConta() == c.getIdConta())
 						&& contas.get(i).getOperacoes().get(j) instanceof Levantamento) {
-
+					String tipo = "Levantamento";
 					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
 					Funcionario resp = contas.get(i).getOperacoes().get(j).getResponsavel();
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					Object[] texto = { id, resp, data, valor, null, null };
+					Object[] texto = { id,  tipo,resp, data, valor, null, null };
 					model.addRow(texto);
 
 				}
@@ -821,6 +824,71 @@ public class Banco implements Serializable {
 		}
 
 	}
+	protected void preenchetabelaOperacoesPagamento(DefaultTableModel model, Conta c) {
+
+		for (int i = 0; i < contas.size(); i++) {
+
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				if ((contas.get(i).getIdConta() == c.getIdConta())
+						&& contas.get(i).getOperacoes().get(j) instanceof Pagamento) {
+					String tipo = "Pagamento";
+					int id = contas.get(i).getOperacoes().get(j).getIdOperacao();
+					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
+					Double valor = contas.get(i).getOperacoes().get(j).getValor();
+
+					Object[] texto = { id,  tipo,null, data, valor, null, null };
+					model.addRow(texto);
+
+				}
+
+			}
+		}
+
+	}
+	
+
+	protected void preenchetabelaOperacoesTodas(DefaultTableModel model, Conta c) {
+
+		ArrayList<Conta> contas = this.contas;
+
+		for (int i = 0; i < contas.size(); i++) {
+
+			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+
+				Operacao o = contas.get(i).getOperacoes().get(j);
+				int id = o.getIdOperacao();
+				Funcionario resp=o.getResponsavel();
+				double valor = o.getValor();
+				Date data = o.getDataOperacao();
+				String tipo ="";
+				Cliente cliente=null;
+				Conta contaDestino =null;
+
+				if (o instanceof Levantamento) {
+					tipo = "Levantamento";
+					
+					
+				} else if (o instanceof Deposito) {
+					tipo ="Deposito";
+
+				} else if (o instanceof Transferencia) {
+					tipo = "Transferencia";
+					cliente=((Transferencia) o).getClt();
+					contaDestino=((Transferencia) o).getcontatransf();	
+
+				} else if (o instanceof Pagamento) {
+					tipo = "Pagamento";	
+				}
+
+				
+					Object[] dados = {id, tipo,  resp,data, valor, contaDestino, cliente};
+					model.addRow(dados);
+
+				}
+
+			}
+		}
 
 	// lista das operacoes
 	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
@@ -1160,10 +1228,16 @@ public class Banco implements Serializable {
 	// recebe os dados de pagamento da livraria
 
 	protected void actualizaSaldoAposPagamento(double montantePagamento, int idConta) {
+
 		for (Conta c : this.contas) {
 			if (c.getIdConta() == idConta) {
-				double novoSaldo = c.getSaldo()- montantePagamento;
+				double novoSaldo = c.getSaldo() - montantePagamento;
 				c.setSaldo(novoSaldo);
+				int id = val.validoperacoes(c.getOperacoes());
+				Date today = Calendar.getInstance().getTime();
+				String str = today + " Pagamento livraria no valor de " + montantePagamento;
+				Operacao op = new Pagamento(id, today, montantePagamento, str);
+				c.getOperacoes().add(op);
 			}
 		}
 	}
@@ -1206,7 +1280,7 @@ public class Banco implements Serializable {
 				if (c.getCodvalidacao() == pin) {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						autorizado = true;
-						int idConta=c.getIdconta();
+						int idConta = c.getIdconta();
 						actualizaSaldoAposPagamento(montante, idConta);
 
 					}

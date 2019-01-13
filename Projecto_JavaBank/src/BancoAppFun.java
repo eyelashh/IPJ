@@ -129,7 +129,7 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "IDOperacao", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "Tipo", "IDOperacao", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -337,6 +337,87 @@ public class BancoAppFun implements Serializable {
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
 
+		// painel movimentos onde aparece a tabela das operaçoes
+
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 97, 936, 247);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		tableMovimentos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int linha = tableMovimentos.getSelectedRow();
+				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+				String desc = gb.javabank.descricaoOpercacoes(id);
+				tbdescop.setText(desc);
+			}
+		});
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+				modeloTabela.setRowCount(0);
+				tbdescop.setText("");
+
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		tbdescop = new JTextField();
+		tbdescop.setBounds(55, 378, 936, 30);
+		jpanelMovimentos.add(tbdescop);
+		tbdescop.setColumns(10);
+
+		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
+		JComboBox cbTipoOperacao = new JComboBox(pesquisaTipoOperacao);
+		cbTipoOperacao.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				
+				modeloTabela.setRowCount(0);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Transferencias")) {
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Levantamentos")) {
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Pagamentos")) {
+					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+
+				}
+				else {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+				}
+			}
+		});
+		cbTipoOperacao.setBounds(706, 35, 255, 22);
+		jpanelMovimentos.add(cbTipoOperacao);
+		jpanelMovimentos.setVisible(false);
+
 		// Painel principal da operaçoes
 
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
@@ -361,56 +442,53 @@ public class BancoAppFun implements Serializable {
 		JpanelOpDeposito.setVisible(false);
 		JPanel JpanelOpLevantamento = new JPanel();
 		JpanelOpLevantamento.setVisible(false);
-		
-				JDateChooser dateChooser4 = new JDateChooser();
-				dateChooser4.setBounds(174, 166, 162, 31);
-				JpanelOpLevantamento.add(dateChooser4);
-				JpanelOpLevantamento.setBounds(263, 247, 516, 313);
-				jpanelOperacoes.add(JpanelOpLevantamento);
-				JpanelOpLevantamento.setLayout(null);
-				
-						tbLevMontante = new JTextField();
-						tbLevMontante.setBounds(174, 83, 162, 31);
-						JpanelOpLevantamento.add(tbLevMontante);
-						
-								JLabel label = new JLabel("Data:");
-								label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-								label.setBounds(164, 131, 50, 23);
-								JpanelOpLevantamento.add(label);
-								
-										JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-										lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-										lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-										JpanelOpLevantamento.add(lblMontanteLevantamento);
-										
-												JButton btLevConfirmar = new JButton("Confirmar");
-												btLevConfirmar.addActionListener(new ActionListener() {
-													public void actionPerformed(ActionEvent e) {
 
-														if (val.valValorOperacao(tbLevMontante.getText())) {
+		JDateChooser dateChooser4 = new JDateChooser();
+		dateChooser4.setBounds(174, 166, 162, 31);
+		JpanelOpLevantamento.add(dateChooser4);
+		JpanelOpLevantamento.setBounds(263, 247, 516, 313);
+		jpanelOperacoes.add(JpanelOpLevantamento);
+		JpanelOpLevantamento.setLayout(null);
 
-															Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
-																	gb.javabank.getContas());
+		tbLevMontante = new JTextField();
+		tbLevMontante.setBounds(174, 83, 162, 31);
+		JpanelOpLevantamento.add(tbLevMontante);
 
-															double levantamento = Double.parseDouble(tbLevMontante.getText());
+		JLabel label = new JLabel("Data:");
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label.setBounds(164, 131, 50, 23);
+		JpanelOpLevantamento.add(label);
 
-															java.util.Date data = dateChooser4.getDate();
+		JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+		lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+		JpanelOpLevantamento.add(lblMontanteLevantamento);
 
-															gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
-															tbContasaldoc.setText(Double.toString(c.getSaldo()));
+		JButton btLevConfirmar = new JButton("Confirmar");
+		btLevConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
+				if (val.valValorOperacao(tbLevMontante.getText())) {
 
-															tbLevMontante.setText(null);
-															
-															
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
+							gb.javabank.getContas());
 
-														}
-													}
+					double levantamento = Double.parseDouble(tbLevMontante.getText());
 
-												});
-												btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-												btLevConfirmar.setBounds(201, 219, 120, 38);
-												JpanelOpLevantamento.add(btLevConfirmar);
+					java.util.Date data = dateChooser4.getDate();
+
+					gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
+					tbContasaldoc.setText(Double.toString(c.getSaldo()));
+
+					tbLevMontante.setText(null);
+
+				}
+			}
+
+		});
+		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btLevConfirmar.setBounds(201, 219, 120, 38);
+		JpanelOpLevantamento.add(btLevConfirmar);
 
 		JpanelOpDeposito.setBounds(263, 247, 516, 313);
 		jpanelOperacoes.add(JpanelOpDeposito);
@@ -493,7 +571,7 @@ public class BancoAppFun implements Serializable {
 				}
 
 			}
-			
+
 		});
 		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnNewButton.setBounds(258, 131, 116, 38);
@@ -1266,9 +1344,10 @@ public class BancoAppFun implements Serializable {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
 
 					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+//					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+//					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+//					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
 				}
 			}
 		});
@@ -1653,54 +1732,6 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
-		// painel movimentos onde aparece a tabela das operaçoes
-
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 51, 936, 293);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		tableMovimentos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linha = tableMovimentos.getSelectedRow();
-				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
-				String desc = gb.javabank.descricaoOpercacoes(id);
-				tbdescop.setText(desc);
-			}
-		});
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-				modeloTabela.setRowCount(0);
-				tbdescop.setText("");
-
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		tbdescop = new JTextField();
-		tbdescop.setBounds(55, 378, 936, 30);
-		jpanelMovimentos.add(tbdescop);
-		tbdescop.setColumns(10);
-		jpanelMovimentos.setVisible(false);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
