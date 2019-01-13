@@ -356,7 +356,9 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-
+		JPanel JpanelOpLevantamento = new JPanel();
+		JpanelOpLevantamento.setVisible(false);
+		
 		JPanel JpanelOpDeposito = new JPanel();
 		JpanelOpDeposito.setVisible(false);
 
@@ -479,8 +481,7 @@ public class BancoAppFun implements Serializable {
 		JPanel JpanelOpTransferencia = new JPanel();
 		JpanelOpTransferencia.setVisible(false);
 
-		JPanel JpanelOpLevantamento = new JPanel();
-		JpanelOpLevantamento.setVisible(false);
+		
 
 		JDateChooser dateChooser4 = new JDateChooser();
 		dateChooser4.setBounds(174, 166, 162, 31);
