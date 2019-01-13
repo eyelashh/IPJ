@@ -1019,21 +1019,31 @@ public class BancoAppFun implements Serializable {
 		btLevConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (val.valValorOperacao(tbLevMontante.getText())) {
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
+						gb.javabank.getContas());
 
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
-							gb.javabank.getContas());
+				if (dateChooser4.getDate().after(c.getDataCriacao())) {
 
-					double levantamento = Double.parseDouble(tbLevMontante.getText());
+					if (val.valValorOperacao(tbLevMontante.getText())) {
 
-					java.util.Date data = dateChooser4.getDate();
+						double levantamento = Double.parseDouble(tbLevMontante.getText());
 
-					gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
-					tbContasaldoc.setText(Double.toString(c.getSaldo()));
+						java.util.Date data = dateChooser4.getDate();
 
-					tbLevMontante.setText(null);
+						gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
+						tbContasaldoc.setText(Double.toString(c.getSaldo()));
+
+						tbLevMontante.setText(null);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
 
 				}
+
 			}
 
 		});
@@ -1072,29 +1082,38 @@ public class BancoAppFun implements Serializable {
 		btDepConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (val.valValorOperacao(tbDepMontante.getText())) {
-					// Seleciona conta:
-					String s = (String) cbOperacoesConta.getSelectedItem();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+				// Seleciona conta:
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 
-					// faz deposito:
-					double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
-					c.setSaldo(saldo);
-					// cria opera�ao:
-					int idop = 1;
-					if (c.getOperacoes().size() != 0) {
-						idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
+				if (dtchdeposito.getDate().after(c.getDataCriacao())) {
+
+					if (val.valValorOperacao(tbDepMontante.getText())) {
+
+						// faz deposito:
+						double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
+						c.setSaldo(saldo);
+						// cria opera�ao:
+						int idop = 1;
+						if (c.getOperacoes().size() != 0) {
+							idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
+						}
+						String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
+
+						Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
+								Double.parseDouble(tbDepMontante.getText()), descricao);
+						c.getOperacoes().add(op);
+						tbContasaldoc.setText(c.getSaldo() + "");
+						JOptionPane.showMessageDialog(null, "Deposito efectuado!");
+						tbDepMontante.setText("");
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
 					}
-					String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
 
-					Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
-							Double.parseDouble(tbDepMontante.getText()), descricao);
-					c.getOperacoes().add(op);
-					tbContasaldoc.setText(c.getSaldo() + "");
-					JOptionPane.showMessageDialog(null, "Deposito efectuado!");
-					tbDepMontante.setText("");
 				} else {
-					JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
+					JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
+
 				}
 
 			}
@@ -1244,50 +1263,56 @@ public class BancoAppFun implements Serializable {
 				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
 				Conta cdestino;
 				try {
-					cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
-							gb.javabank.getContas());
+					if (dateChooser_1.getDate().after(corigem.getDataCriacao())) {
 
-					if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
-						// gerado ids:
-						int idoporigem = 1;
-						if (corigem.getOperacoes().size() != 0) {
-							idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
+						cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
+								gb.javabank.getContas());
+
+						if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
+							// gerado ids:
+							int idoporigem = 1;
+							if (corigem.getOperacoes().size() != 0) {
+								idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
+							}
+							int iddestino = 1;
+							if (cdestino.getOperacoes().size() != 0) {
+								iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
+							}
+
+							cdestino.setSaldo(cdestino.getSaldo() + valortransf);
+							corigem.setSaldo(corigem.getSaldo() - valortransf);
+
+							// faz transferencia;
+							String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
+									+ cdestino.getIdConta() + " valor: " + valortransf;
+							String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
+									+ corigem.getIdConta() + " valor: " + valortransf;
+							Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(),
+									valortransf, descorigem, cdestino, null);
+							Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(),
+									valortransf, descdestino, corigem, null);
+
+							corigem.getOperacoes().add(oporigem);
+							cdestino.getOperacoes().add(opdestino);
+
+							JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+							tbTransMontante.setText("");
+							tbTransContaDestino.setText(null);
+							tbContasaldoc.setText(corigem.getSaldo() + "");
+
+						} else {
+							if (corigem.getSaldo() < valortransf) {
+								JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+							}
+							if (corigem.equals(cdestino)) {
+								JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+							}
 						}
-						int iddestino = 1;
-						if (cdestino.getOperacoes().size() != 0) {
-							iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
-						}
-
-						cdestino.setSaldo(cdestino.getSaldo() + valortransf);
-						corigem.setSaldo(corigem.getSaldo() - valortransf);
-
-						// faz transferencia;
-						String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
-								+ cdestino.getIdConta() + " valor: " + valortransf;
-						String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
-								+ corigem.getIdConta() + " valor: " + valortransf;
-						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
-								descorigem, cdestino, null);
-						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
-								descdestino, corigem, null);
-
-						corigem.getOperacoes().add(oporigem);
-						cdestino.getOperacoes().add(opdestino);
-
-						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
-						tbTransMontante.setText("");
-						tbTransContaDestino.setText(null);
-						tbContasaldoc.setText(corigem.getSaldo() + "");
-
 					} else {
-						if (corigem.getSaldo() < valortransf) {
-							JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
-						}
-						if (corigem.equals(cdestino)) {
-							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-						}
+						JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
+
 					}
 
 				} catch (Exception ex) {

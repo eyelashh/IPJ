@@ -133,7 +133,7 @@ public class BancoAppClt implements Serializable {
 		frame.getContentPane().setLayout(null);
 
 		// Modelo para tabela
-		String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+		String[] colunas = { "Tipo", "IDOperacao", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;

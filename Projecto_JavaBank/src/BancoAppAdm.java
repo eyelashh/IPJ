@@ -100,7 +100,7 @@ public class BancoAppAdm implements Serializable {
 
 	DefaultListModel<String> dlmcontaadm = new DefaultListModel<String>();
 	// Modelo para tabela
-	String[] colunas = { "IDOp", "Responsável", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "Tipo", "IDOperacao", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
 		private static final long serialVersionUID = 1L;
 
