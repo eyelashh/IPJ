@@ -106,6 +106,8 @@ public class AppCliente implements Serializable {
 			return returnValue;
 		}
 	};
+	private JTextField txtPrecoMIN;
+	private JTextField txtPrecoMAX;
 
 //a classe cliente nao precisa de um atributo utilizador porque nao precisa de se fazer login para entrar
 	// na janela
@@ -299,6 +301,14 @@ public class AppCliente implements Serializable {
 				String pesquisa = txtAtributoLivros.getText();
 				modeloTabelaLivros.setRowCount(0);
 				gl.viewComics.tabelaLivrosCriterioSeleccao(modeloTabelaLivros, criterioPesquisa, pesquisa);
+				if (criterioPesquisa.equals("Preco")) {
+					txtPrecoMIN.setVisible(true);
+					txtPrecoMAX.setVisible(true);
+					gl.viewComics.tabelaLivrosFiltrarPreco(modeloTabelaLivros, criterioPesquisa, precoMINstr, precoMAXstr);
+					
+					
+				}
+				
 			}
 		});
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
@@ -549,28 +559,10 @@ public class AppCliente implements Serializable {
 		btnVerificarCarrinhoLIVROS.setBackground(SystemColor.controlHighlight);
 		JPLivros.add(btnVerificarCarrinhoLIVROS);
 
-		JComboBox cbOrdenarLIVROS = new JComboBox();
-		cbOrdenarLIVROS.setBounds(144, 38, 211, 20);
-		cbOrdenarLIVROS.addItem("Titulo");
-		cbOrdenarLIVROS.addItem("Ano");
-		cbOrdenarLIVROS.addItem("Preco");
-		JPLivros.add(cbOrdenarLIVROS);
-		cbOrdenarLIVROS.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-
-				String seleccao = (String) cbOrdenarLIVROS.getSelectedItem();
-				gl.viewComics.ordenarTabelaLivros(tabelaLivros, seleccao);
-			}
-		});
-
 		JLabel lblNewLabel_2 = new JLabel("Filtrar por : ");
 		lblNewLabel_2.setBounds(10, 71, 128, 20);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		JPLivros.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("Ordenar por :");
-		lblNewLabel_3.setBounds(65, 44, 73, 14);
-		JPLivros.add(lblNewLabel_3);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(39, 185, 411, 314);
@@ -599,6 +591,18 @@ public class AppCliente implements Serializable {
 		});
 		gl.viewComics.livrosTabela(modeloTabelaLivros);
 		scrollPane_1.setViewportView(tabelaLivros);
+		
+		txtPrecoMIN = new JTextField();
+		txtPrecoMIN.setBounds(173, 41, 86, 20);
+		JPLivros.add(txtPrecoMIN);
+		txtPrecoMIN.setColumns(10);
+		txtPrecoMIN.setVisible(false);
+		
+		txtPrecoMAX = new JTextField();
+		txtPrecoMAX.setColumns(10);
+		txtPrecoMAX.setBounds(269, 41, 86, 20);
+		txtPrecoMAX.setVisible(false);
+		JPLivros.add(txtPrecoMAX);
 		JPCarrinho.setBounds(0, 0, 1008, 544);
 		JPanelPrincipal.add(JPCarrinho);
 		JPCarrinho.setLayout(null);

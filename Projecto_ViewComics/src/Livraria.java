@@ -917,6 +917,36 @@ public class Livraria implements Serializable {
 
 	}
 
+	public void tabelaLivrosFiltrarPreco(DefaultTableModel dtm, String criterioSeleccao, String precoMINstr, String precoMAXstr) {
+		
+		ArrayList<Livro> livros = this.livros;
+		
+		precoMINstr=precoMINstr.replaceAll(",",".");
+		precoMAXstr=precoMAXstr.replaceAll(",",".");
+		
+		double precoMIN=Double.parseDouble(precoMINstr);
+		double precoMAX=Double.parseDouble(precoMAXstr);
+		
+
+		for (Livro l : livros) {
+			int id = l.getIdLivro();
+			String titulo = l.getTitulo();
+			String autor = l.getAutor();
+			int ano = l.getAno();
+			double preco = l.getPreco();
+
+			Object[] data = { id, titulo, autor, ano, preco };
+			if (criterioSeleccao.equals("Preco")) {
+				if ((preco>=precoMIN)&&(preco<=precoMAX)) {
+					dtm.addRow(data);
+				}
+			}
+		}
+			
+	}
+	
+	
+	
 	@SuppressWarnings("rawtypes")
 	public void ordenarTabelaLivros(JTable tabela, String criterioOrdenacao) {
 

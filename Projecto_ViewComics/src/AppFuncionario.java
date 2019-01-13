@@ -72,10 +72,10 @@ public class AppFuncionario implements Serializable {
 	private JFrame frame;
 	private JTextField textField_2;
 	private JTextField textField_4;
-	private JTextField txtAtributoPesquisaLivro;
+	private JTextField txtAtributoLivros;
 	private JTextField txtTituloLivro;
 	private JTextField txtAutorLivro;
-	private JTextField txtDataLivro;
+	private JTextField txtAnoLivro;
 	private JTextField txtDescricaoLivro;
 	private JTextField txtPrecoLivro;
 	private JTextField txtStockLivro;
@@ -95,8 +95,8 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtPrecoCarrinho;
 	private JTextField txtQuantidadeLivrosCarrinho;
 	private JTable tabelaCarrinhos;
-	String[] colunas = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
-	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunas, 0) {
+	String[] colunasCARRINHOS = { "Id do livro", "Titulo", "Autor", "Preco unitario", "Quantidade", "Preco total" };
+	DefaultTableModel modeloTabelaCarrinhos = new DefaultTableModel(colunasCARRINHOS, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
 			return false;
 		}
@@ -118,6 +118,24 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtMontanteMULTIBANCO;
 	private JTextField txtNumCartaoMULTIBANCO;
 	private JTextField txtPinMULTIBANCO;
+	private JTable tabelaLivros;
+	String[] colunasLIVROS = { "Id do livro", "Titulo", "Autor", "Ano", "Preco" };
+	DefaultTableModel modeloTabelaLivros = new DefaultTableModel(colunasLIVROS, 0) {
+		public boolean isCellEditable(int rowIndex, int mColIndex) {
+			return false;
+		}
+
+		public Class getColumnClass(int column) {
+			Class returnValue;
+			if ((column >= 0) && (column < getColumnCount())) {
+				returnValue = getValueAt(0, column).getClass();
+			} else {
+				returnValue = Object.class;
+			}
+			return returnValue;
+		}
+	};
+	private JTextField txtIdLivro;
 
 	/**
 	 * Launch the application.
@@ -249,171 +267,11 @@ public class AppFuncionario implements Serializable {
 		Paineltotal.add(panelMenu);
 
 		JPanel panelPrincipal = new JPanel();
-		// cbPesquisaCARRINHO.add("Estado");
-
-		jpPagamento.setBounds(0, 0, 219, 346);
-		panelPrincipal.add(jpPagamento);
-		jpPagamento.setVisible(false);
-		jpPagamento.setLayout(null);
-
-		JPanel jpMultibanco = new JPanel();
-		jpMultibanco.setBounds(0, 0, 219, 346);
-		jpPagamento.add(jpMultibanco);
-		jpMultibanco.setLayout(null);
-		jpMultibanco.setVisible(false);
-
-		txtMontanteMULTIBANCO = new JTextField();
-		txtMontanteMULTIBANCO.setBounds(21, 44, 169, 28);
-		jpMultibanco.add(txtMontanteMULTIBANCO);
-		txtMontanteMULTIBANCO.setColumns(10);
-
-		txtNumCartaoMULTIBANCO = new JTextField();
-		txtNumCartaoMULTIBANCO.setBounds(21, 105, 169, 28);
-		jpMultibanco.add(txtNumCartaoMULTIBANCO);
-		txtNumCartaoMULTIBANCO.setColumns(10);
-
-		JLabel lblMontante = new JLabel("Montante");
-		lblMontante.setBounds(21, 19, 132, 28);
-		jpMultibanco.add(lblMontante);
-
-		JLabel lblNumeroDoCartao = new JLabel("Numero do cartao");
-		lblNumeroDoCartao.setBounds(21, 83, 108, 21);
-		jpMultibanco.add(lblNumeroDoCartao);
-
-		txtPinMULTIBANCO = new JTextField();
-		txtPinMULTIBANCO.setBounds(21, 172, 108, 28);
-		jpMultibanco.add(txtPinMULTIBANCO);
-		txtPinMULTIBANCO.setColumns(10);
-
-		JLabel lblPin = new JLabel("PIN");
-		lblPin.setBounds(21, 157, 46, 14);
-
-		jpMultibanco.add(lblPin);
-
-		JButton btnNewButton = new JButton("CONCLUIR");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String montante = txtMontanteMULTIBANCO.getText();
-				String numCartao =txtNumCartaoMULTIBANCO.getText();
-				String pin = txtPinMULTIBANCO.getText();
-				String s= montante + " " + numCartao +" "+pin;
-				
-				gl.viewComics.threadWaitAutorizacao(s);
-				
-				jpMultibanco.setVisible(false);
-			}
-		});
-		btnNewButton.setBounds(29, 243, 161, 33);
-		jpMultibanco.add(btnNewButton);
-
-		JPanel jpDinheiro = new JPanel();
-		jpDinheiro.setBounds(10, 190, 199, 171);
-		jpPagamento.add(jpDinheiro);
-		jpDinheiro.setLayout(null);
-		jpDinheiro.setVisible(false);
-
-		JComboBox <String>comboBoxTipoPagamento = new JComboBox<String>(itens);
-		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
-		comboBoxTipoPagamento.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				// check whether there is any selection
-				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-					jpDinheiro.setVisible(true);
-
-				} else if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
-					jpMultibanco.setVisible(true);
-
-				}
-			}
-		});
-		jpPagamento.add(comboBoxTipoPagamento);
-
-		textFieldNifPagamento = new JTextField();
-		textFieldNifPagamento.setBounds(20, 94, 172, 22);
-		jpPagamento.add(textFieldNifPagamento);
-		textFieldNifPagamento.setColumns(10);
-
-		JLabel lblNif_1 = new JLabel("NIF");
-		lblNif_1.setBounds(22, 69, 46, 14);
-		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		jpPagamento.add(lblNif_1);
-
-		JLabel lblNewLabel_1 = new JLabel("A pagar :");
-		lblNewLabel_1.setBounds(10, 11, 76, 23);
-		jpDinheiro.add(lblNewLabel_1);
-
-		JLabel lblRecebido = new JLabel("Recebido : ");
-		lblRecebido.setBounds(10, 45, 76, 23);
-		jpDinheiro.add(lblRecebido);
-
-		JLabel lblTroco = new JLabel("Troco :");
-		lblTroco.setBounds(10, 79, 76, 23);
-		jpDinheiro.add(lblTroco);
-
-		txtTotalPAGAMENTO = new JTextField();
-		txtTotalPAGAMENTO.setBounds(72, 12, 86, 20);
-		jpDinheiro.add(txtTotalPAGAMENTO);
-		txtTotalPAGAMENTO.setColumns(10);
-
-		txtRecebidoPAGAMENTO = new JTextField();
-		txtRecebidoPAGAMENTO.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String totalComVirgula = txtTotalPAGAMENTO.getText();
-					String totalSemVirgula = totalComVirgula.replace(',', '.');
-					Double total = Double.parseDouble(totalSemVirgula);
-					Double recebido = Double.parseDouble(txtRecebidoPAGAMENTO.getText());
-					Double troco = recebido - total;
-					DecimalFormat df = new DecimalFormat("#.##");
-					String trocoSTR = df.format(troco);
-					txtTrocoPAGAMENTO.setText(trocoSTR);
-				}
-			}
-		});
-		txtRecebidoPAGAMENTO.setColumns(10);
-		txtRecebidoPAGAMENTO.setBounds(72, 45, 86, 20);
-		jpDinheiro.add(txtRecebidoPAGAMENTO);
-
-		txtTrocoPAGAMENTO = new JTextField();
-		txtTrocoPAGAMENTO.setColumns(10);
-		txtTrocoPAGAMENTO.setBounds(72, 80, 86, 20);
-		jpDinheiro.add(txtTrocoPAGAMENTO);
 
 		JPanel jpFuncCarrinhos = new JPanel();
 		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncCarrinhos);
 		jpFuncCarrinhos.setLayout(null);
-
-		// botao concluir pagamento
-		JButton btnConcluirPagamento = new JButton("Concluir");
-		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
-		btnConcluirPagamento.setBounds(33, 114, 125, 30);
-		btnConcluirPagamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (!txtTotalPAGAMENTO.getText().isEmpty()) {
-					String nif = textFieldNifPagamento.getText();
-					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-					String total = txtTotalPAGAMENTO.getText();
-					String total2 = total.replace(",", ".");
-					double montante = Double.parseDouble(total2);
-					HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
-					Venda v = new Venda(montante, conteudoVenda, nif);
-					gl.viewComics.addVenda(v);
-					gl.viewComics.incrementarVendasLivros(v);
-					gl.viewComics.removeCarrinho(c);
-					modeloListaNif.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
-					JOptionPane.showMessageDialog(null, "Pagamento concluido");
-					jpFuncCarrinhos.setVisible(true);
-					jpFuncLivros.setVisible(false);
-					jpFuncConta.setVisible(false);
-					jpPagamento.setVisible(false);
-				}
-			}
-		});
-		jpDinheiro.add(btnConcluirPagamento);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(283, 140, 500, 178);
@@ -528,15 +386,23 @@ public class AppFuncionario implements Serializable {
 		btnPagamento.setBounds(563, 332, 172, 30);
 		btnPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jpFuncCarrinhos.setVisible(false);
-				jpFuncLivros.setVisible(false);
-				jpFuncConta.setVisible(false);
-				jpPagamento.setVisible(true);
+				
 				if (!listNifsClientes.isSelectionEmpty()) {
-					int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
-					textFieldNifPagamento.setText(nif + "");
-					txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
+					String nifSTR = listNifsClientes.getSelectedValue();
+//																					int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSTR);
+					if (c.isFinalizado()) {
+						jpFuncCarrinhos.setVisible(false);
+						jpFuncLivros.setVisible(false);
+						jpFuncConta.setVisible(false);
+						jpPagamento.setVisible(true);
+						textFieldNifPagamento.setText(nifSTR);
+						txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
 
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"O carrinho seleccionado ainda não foi dado como finalizado para pagamento");
+					}
 				}
 			}
 		});
@@ -689,106 +555,70 @@ public class AppFuncionario implements Serializable {
 		panelPrincipal.add(jpFuncLivros);
 		jpFuncLivros.setLayout(null);
 		jpFuncLivros.setVisible(false);
-		JComboBox comboBoxAtributoLivro = new JComboBox(OpcoesPesquisaLIVRO);
-		comboBoxAtributoLivro.setBounds(12, 13, 200, 30);
-		jpFuncLivros.add(comboBoxAtributoLivro);
+		JComboBox cbAtributoLIVROS = new JComboBox(OpcoesPesquisaLIVRO);
+		cbAtributoLIVROS.setBounds(12, 13, 200, 30);
+		jpFuncLivros.add(cbAtributoLIVROS);
 
-		txtAtributoPesquisaLivro = new JTextField();
-		txtAtributoPesquisaLivro.setBounds(12, 57, 200, 30);
-		jpFuncLivros.add(txtAtributoPesquisaLivro);
-		txtAtributoPesquisaLivro.setColumns(10);
+		txtAtributoLivros = new JTextField();
+		txtAtributoLivros.setBounds(12, 57, 200, 30);
+		jpFuncLivros.add(txtAtributoLivros);
+		txtAtributoLivros.setColumns(10);
 
-		// Guardar na lista o array/copia da lista de livros
-		JList<String> listaLivros = new JList<String>(dmFunListaLivros);
-		listaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listaLivros.setBounds(22, 111, 190, 395);
-		listaLivros.addListSelectionListener(new ListSelectionListener() {
-
-			public void valueChanged(ListSelectionEvent e) {
-
-				// se a lista estiver seleccionada, copia para as caixas de texto
-				if (!listaLivros.isSelectionEmpty()) {
-
-					String livroSeleccionadoSTR = listaLivros.getSelectedValue();
-					int idLivroSeleccionado = gl.viewComics.obterIdLivro(livroSeleccionadoSTR);
-					Livro l = gl.viewComics.livroId(idLivroSeleccionado);
-
-					txtTituloLivro.setText(l.getTitulo());
-					txtAutorLivro.setText(l.getAutor());
-					txtDataLivro.setText(Integer.toString(l.getAno()));
-					txtDescricaoLivro.setText(l.getDescricao());
-					txtPrecoLivro.setText(Double.toString(l.getPreco()));
-					txtStockLivro.setText(Integer.toString(l.getStock()));
-
-				}
-			}
-		});
-		jpFuncLivros.add(listaLivros);
-
-		JLabel lblNewLabel = new JLabel("Nome:");
+		JLabel lblNewLabel = new JLabel("Titulo:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(263, 120, 48, 16);
+		lblNewLabel.setBounds(12, 121, 58, 16);
 		jpFuncLivros.add(lblNewLabel);
 
 		JLabel lblAutor = new JLabel("Autor:");
 		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblAutor.setBounds(263, 170, 48, 16);
+		lblAutor.setBounds(12, 157, 58, 16);
 		jpFuncLivros.add(lblAutor);
 
-		JLabel lblDescrio = new JLabel("Data:");
+		JLabel lblDescrio = new JLabel("Ano:");
 		lblDescrio.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblDescrio.setBounds(271, 219, 40, 16);
+		lblDescrio.setBounds(192, 193, 40, 16);
 		jpFuncLivros.add(lblDescrio);
 
 		JLabel lblStock = new JLabel("Stock:");
 		lblStock.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblStock.setBounds(263, 455, 48, 16);
+		lblStock.setBounds(680, 62, 48, 16);
 		jpFuncLivros.add(lblStock);
 
-		JLabel lblPreo_1 = new JLabel("Pre\u00E7o:");
-		lblPreo_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo_1.setBounds(263, 404, 48, 16);
-		jpFuncLivros.add(lblPreo_1);
-
-		JLabel lblPreo = new JLabel("Descri\u00E7\u00E3o:");
-		lblPreo.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPreo.setBounds(224, 266, 87, 16);
-		jpFuncLivros.add(lblPreo);
-
 		txtTituloLivro = new JTextField();
+		txtTituloLivro.setFont(new Font("Tahoma", Font.BOLD, 12));
 		txtTituloLivro.setEditable(false);
 		txtTituloLivro.setColumns(10);
-		txtTituloLivro.setBounds(333, 114, 345, 30);
+		txtTituloLivro.setBounds(68, 116, 254, 30);
 		jpFuncLivros.add(txtTituloLivro);
 
 		txtAutorLivro = new JTextField();
 		txtAutorLivro.setEditable(false);
 		txtAutorLivro.setColumns(10);
-		txtAutorLivro.setBounds(333, 164, 345, 30);
+		txtAutorLivro.setBounds(68, 152, 255, 30);
 		jpFuncLivros.add(txtAutorLivro);
 
-		txtDataLivro = new JTextField();
-		txtDataLivro.setEditable(false);
-		txtDataLivro.setColumns(10);
-		txtDataLivro.setBounds(333, 213, 345, 30);
-		jpFuncLivros.add(txtDataLivro);
+		txtAnoLivro = new JTextField();
+		txtAnoLivro.setEditable(false);
+		txtAnoLivro.setColumns(10);
+		txtAnoLivro.setBounds(242, 188, 80, 30);
+		jpFuncLivros.add(txtAnoLivro);
 
 		txtDescricaoLivro = new JTextField();
 		txtDescricaoLivro.setEditable(false);
 		txtDescricaoLivro.setColumns(10);
-		txtDescricaoLivro.setBounds(333, 260, 345, 117);
+		txtDescricaoLivro.setBounds(68, 229, 254, 190);
 		jpFuncLivros.add(txtDescricaoLivro);
 
 		txtPrecoLivro = new JTextField();
 		txtPrecoLivro.setEditable(false);
 		txtPrecoLivro.setColumns(10);
-		txtPrecoLivro.setBounds(333, 402, 345, 30);
+		txtPrecoLivro.setBounds(573, 57, 70, 30);
 		jpFuncLivros.add(txtPrecoLivro);
 
 		txtStockLivro = new JTextField();
 		txtStockLivro.setEditable(false);
 		txtStockLivro.setColumns(10);
-		txtStockLivro.setBounds(333, 453, 345, 30);
+		txtStockLivro.setBounds(735, 57, 80, 30);
 		jpFuncLivros.add(txtStockLivro);
 
 		// botao para pesquisar o livro
@@ -796,28 +626,10 @@ public class AppFuncionario implements Serializable {
 		btnPesquisarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (comboBoxAtributoLivro.getSelectedItem().equals("TÃ­tulo")) {
-
-					String titulo = txtAtributoPesquisaLivro.getText();
-					dmFunListaLivros.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.listaTitulo(titulo), dmFunListaLivros);
-
-				}
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Autor")) {
-
-					String autor = txtAtributoPesquisaLivro.getText();
-					dmFunListaLivros.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.listaAutor(autor), dmFunListaLivros);
-
-				}
-				if (comboBoxAtributoLivro.getSelectedItem().equals("Ano")) {
-
-					String data = txtAtributoPesquisaLivro.getText();
-					dmFunListaLivros.removeAllElements();
-					gl.viewComics.addArrayLista(gl.viewComics.listaData(data), dmFunListaLivros);
-
-				}
-
+				String criterioPesquisa = (String) cbAtributoLIVROS.getSelectedItem();
+				String pesquisa = txtAtributoLivros.getText();
+				modeloTabelaLivros.setRowCount(0);
+				gl.viewComics.tabelaLivrosCriterioSeleccao(modeloTabelaLivros, criterioPesquisa, pesquisa);
 			}
 		});
 		btnPesquisarLivro.setBackground(SystemColor.controlHighlight);
@@ -829,10 +641,10 @@ public class AppFuncionario implements Serializable {
 		btnLimparLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				txtAtributoPesquisaLivro.setText(null);
+				txtAtributoLivros.setText(null);
 				txtTituloLivro.setText(null);
 				txtAutorLivro.setText(null);
-				txtDataLivro.setText(null);
+				txtAnoLivro.setText(null);
 				txtDescricaoLivro.setText(null);
 				txtPrecoLivro.setText(null);
 				txtStockLivro.setText(null);
@@ -842,6 +654,208 @@ public class AppFuncionario implements Serializable {
 		btnLimparLivro.setBackground(SystemColor.controlHighlight);
 		btnLimparLivro.setBounds(224, 60, 97, 25);
 		jpFuncLivros.add(btnLimparLivro);
+
+		modeloTabelaLivros.setRowCount(0);
+		gl.viewComics.livrosTabela(modeloTabelaLivros);
+
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(332, 98, 483, 321);
+		jpFuncLivros.add(scrollPane_2);
+		tabelaLivros = new JTable(modeloTabelaLivros);
+		tabelaLivros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabelaLivros.setAutoCreateRowSorter(true);
+		tabelaLivros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// a linha é actualizada para o caso de ter havido ordenacao
+				int linha = tabelaLivros.convertRowIndexToModel(tabelaLivros.getSelectedRow());
+				int idLivro = (int) tabelaLivros.getModel().getValueAt(linha, 0);
+				Livro l = gl.viewComics.livroId(idLivro);
+				txtIdLivro.setText(Integer.toString(idLivro));
+				txtTituloLivro.setText(l.getTitulo());
+				txtAutorLivro.setText(l.getAutor());
+				txtAnoLivro.setText(Integer.toString(l.getAno()));
+				txtPrecoLivro.setText(Double.toString(l.getPreco()));
+				txtStockLivro.setText(Integer.toString(l.getStock()));
+			}
+		});
+		scrollPane_2.setViewportView(tabelaLivros);
+
+		txtIdLivro = new JTextField();
+		txtIdLivro.setEditable(false);
+		txtIdLivro.setBounds(457, 57, 48, 30);
+		jpFuncLivros.add(txtIdLivro);
+		txtIdLivro.setColumns(10);
+
+		JLabel lblId = new JLabel("ID :");
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblId.setBounds(423, 57, 40, 16);
+		jpFuncLivros.add(lblId);
+
+		JLabel label_11 = new JLabel("\u20AC");
+		label_11.setFont(new Font("Tahoma", Font.BOLD, 15));
+		label_11.setBounds(644, 65, 48, 16);
+		jpFuncLivros.add(label_11);
+		// cbPesquisaCARRINHO.add("Estado");
+
+		jpPagamento.setBounds(0, 0, 219, 346);
+		panelPrincipal.add(jpPagamento);
+		jpPagamento.setVisible(false);
+		jpPagamento.setLayout(null);
+
+		JPanel jpMultibanco = new JPanel();
+		jpMultibanco.setBounds(0, 0, 219, 346);
+		jpPagamento.add(jpMultibanco);
+		jpMultibanco.setLayout(null);
+		jpMultibanco.setVisible(false);
+
+		txtMontanteMULTIBANCO = new JTextField();
+		txtMontanteMULTIBANCO.setBounds(21, 44, 169, 28);
+		jpMultibanco.add(txtMontanteMULTIBANCO);
+		txtMontanteMULTIBANCO.setColumns(10);
+
+		txtNumCartaoMULTIBANCO = new JTextField();
+		txtNumCartaoMULTIBANCO.setBounds(21, 105, 169, 28);
+		jpMultibanco.add(txtNumCartaoMULTIBANCO);
+		txtNumCartaoMULTIBANCO.setColumns(10);
+
+		JLabel lblMontante = new JLabel("Montante");
+		lblMontante.setBounds(21, 19, 132, 28);
+		jpMultibanco.add(lblMontante);
+
+		JLabel lblNumeroDoCartao = new JLabel("Numero do cartao");
+		lblNumeroDoCartao.setBounds(21, 83, 108, 21);
+		jpMultibanco.add(lblNumeroDoCartao);
+
+		txtPinMULTIBANCO = new JTextField();
+		txtPinMULTIBANCO.setBounds(21, 172, 108, 28);
+		jpMultibanco.add(txtPinMULTIBANCO);
+		txtPinMULTIBANCO.setColumns(10);
+
+		JLabel lblPin = new JLabel("PIN");
+		lblPin.setBounds(21, 157, 46, 14);
+
+		jpMultibanco.add(lblPin);
+
+		JButton btnNewButton = new JButton("CONCLUIR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String montante = txtMontanteMULTIBANCO.getText();
+				String numCartao = txtNumCartaoMULTIBANCO.getText();
+				String pin = txtPinMULTIBANCO.getText();
+				String s = montante + " " + numCartao + " " + pin;
+
+				gl.viewComics.threadWaitAutorizacao(s);
+
+				jpMultibanco.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(29, 243, 161, 33);
+		jpMultibanco.add(btnNewButton);
+
+		JPanel jpDinheiro = new JPanel();
+		jpDinheiro.setBounds(10, 190, 199, 171);
+		jpPagamento.add(jpDinheiro);
+		jpDinheiro.setLayout(null);
+		jpDinheiro.setVisible(false);
+
+		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+		comboBoxTipoPagamento.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				// check whether there is any selection
+				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+					jpDinheiro.setVisible(true);
+
+				} else if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+					jpMultibanco.setVisible(true);
+
+				}
+			}
+		});
+		jpPagamento.add(comboBoxTipoPagamento);
+
+		textFieldNifPagamento = new JTextField();
+		textFieldNifPagamento.setBounds(20, 94, 172, 22);
+		jpPagamento.add(textFieldNifPagamento);
+		textFieldNifPagamento.setColumns(10);
+
+		JLabel lblNif_1 = new JLabel("NIF");
+		lblNif_1.setBounds(22, 69, 46, 14);
+		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		jpPagamento.add(lblNif_1);
+
+		JLabel lblNewLabel_1 = new JLabel("A pagar :");
+		lblNewLabel_1.setBounds(10, 11, 76, 23);
+		jpDinheiro.add(lblNewLabel_1);
+
+		JLabel lblRecebido = new JLabel("Recebido : ");
+		lblRecebido.setBounds(10, 45, 76, 23);
+		jpDinheiro.add(lblRecebido);
+
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(10, 79, 76, 23);
+		jpDinheiro.add(lblTroco);
+
+		txtTotalPAGAMENTO = new JTextField();
+		txtTotalPAGAMENTO.setBounds(72, 12, 86, 20);
+		jpDinheiro.add(txtTotalPAGAMENTO);
+		txtTotalPAGAMENTO.setColumns(10);
+
+		txtRecebidoPAGAMENTO = new JTextField();
+		txtRecebidoPAGAMENTO.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String totalComVirgula = txtTotalPAGAMENTO.getText();
+					String totalSemVirgula = totalComVirgula.replace(',', '.');
+					Double total = Double.parseDouble(totalSemVirgula);
+					Double recebido = Double.parseDouble(txtRecebidoPAGAMENTO.getText());
+					Double troco = recebido - total;
+					DecimalFormat df = new DecimalFormat("#.##");
+					String trocoSTR = df.format(troco);
+					txtTrocoPAGAMENTO.setText(trocoSTR);
+				}
+			}
+		});
+		txtRecebidoPAGAMENTO.setColumns(10);
+		txtRecebidoPAGAMENTO.setBounds(72, 45, 86, 20);
+		jpDinheiro.add(txtRecebidoPAGAMENTO);
+
+		txtTrocoPAGAMENTO = new JTextField();
+		txtTrocoPAGAMENTO.setColumns(10);
+		txtTrocoPAGAMENTO.setBounds(72, 80, 86, 20);
+		jpDinheiro.add(txtTrocoPAGAMENTO);
+
+		// botao concluir pagamento
+		JButton btnConcluirPagamento = new JButton("Concluir");
+		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
+		btnConcluirPagamento.setBounds(33, 114, 125, 30);
+		btnConcluirPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!txtTotalPAGAMENTO.getText().isEmpty()) {
+					String nif = textFieldNifPagamento.getText();
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+					String total = txtTotalPAGAMENTO.getText();
+					String total2 = total.replace(",", ".");
+					double montante = Double.parseDouble(total2);
+					HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
+					Venda v = new Venda(montante, conteudoVenda, nif);
+					gl.viewComics.addVenda(v);
+					gl.viewComics.incrementarVendasLivros(v);
+					gl.viewComics.removeCarrinho(c);
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
+					JOptionPane.showMessageDialog(null, "Pagamento concluido");
+					jpFuncCarrinhos.setVisible(true);
+					jpFuncLivros.setVisible(false);
+					jpFuncConta.setVisible(false);
+					jpPagamento.setVisible(false);
+				}
+			}
+		});
+		jpDinheiro.add(btnConcluirPagamento);
 
 		jpFuncConta.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncConta);
