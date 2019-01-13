@@ -1086,7 +1086,9 @@ public class Banco implements Serializable {
 						c.getOperacoes().add(lev);
 						c.setSaldo(c.getSaldo() - levantamento);
 
-						JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso" + valortotaldia);
+						JOptionPane.showMessageDialog(null,
+								"Levantamento efectuado com sucesso!!! Hoje ainda pode levantar "
+										+ ((valortotaldia + levantamento) - c.getValorMaxDia()));
 					}
 
 					if (c instanceof ContaPoupanca) {
@@ -1114,19 +1116,17 @@ public class Banco implements Serializable {
 							}
 						}
 
-						if (valortotalmes +  levantamento <= ((ContaPoupanca) c)
-								.getLimiteMensalDebito()) {
+						if (valortotalmes + levantamento <= ((ContaPoupanca) c).getLimiteMensalDebito()) {
 
 							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
 									levantamento, desc);
 							c.getOperacoes().add(lev2);
 							c.setSaldo(c.getSaldo() - levantamento);
-							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!" + valortotalmes);
+							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!!!  ");
 
 						} else {
 
-							JOptionPane.showMessageDialog(null,
-									"Não pode efectura mais levantamentos este mes!" + valortotalmes);
+							JOptionPane.showMessageDialog(null, "Não pode efectura mais levantamentos este mes!");
 
 						}
 
