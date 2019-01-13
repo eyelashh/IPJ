@@ -1189,7 +1189,7 @@ public class Livraria implements Serializable {
 //		caminhoAtual = caminhoAtual + "\\Projecto_JavaBank\\Autorizacao.txt";
 		
 		String caminhoAtual = new File("").getAbsolutePath();
-		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
+		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("/"));
 		caminhoAtual = caminhoAtual + "/Projecto_JavaBank/Autorizacao.txt";
 		
 		
