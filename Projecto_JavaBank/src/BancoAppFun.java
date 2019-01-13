@@ -337,411 +337,6 @@ public class BancoAppFun implements Serializable {
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
 
-		// painel movimentos onde aparece a tabela das operaçoes
-
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 97, 936, 247);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		tableMovimentos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linha = tableMovimentos.getSelectedRow();
-				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
-				String desc = gb.javabank.descricaoOpercacoes(id);
-				tbdescop.setText(desc);
-			}
-		});
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-				modeloTabela.setRowCount(0);
-				tbdescop.setText("");
-
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		tbdescop = new JTextField();
-		tbdescop.setBounds(55, 378, 936, 30);
-		jpanelMovimentos.add(tbdescop);
-		tbdescop.setColumns(10);
-
-		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
-		JComboBox cbTipoOperacao = new JComboBox(pesquisaTipoOperacao);
-		cbTipoOperacao.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				
-				modeloTabela.setRowCount(0);
-
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Transferencias")) {
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Levantamentos")) {
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Pagamentos")) {
-					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
-
-				}
-				else {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
-				}
-			}
-		});
-		cbTipoOperacao.setBounds(706, 35, 255, 22);
-		jpanelMovimentos.add(cbTipoOperacao);
-		jpanelMovimentos.setVisible(false);
-
-		// Painel principal da operaçoes
-
-		jpanelOperacoes.setBounds(0, 0, 1042, 576);
-		JpanelPrincipal.add(jpanelOperacoes);
-		jpanelOperacoes.setVisible(false);
-		jpanelOperacoes.setLayout(null);
-
-		// combobox com a lista das contas abertas
-		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
-		cbOperacoesConta.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				if (s != null) {
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-					tbContasaldoc.setText("" + c.getSaldo());
-				}
-
-			}
-		});
-
-		JPanel JpanelOpDeposito = new JPanel();
-		JpanelOpDeposito.setVisible(false);
-		JPanel JpanelOpLevantamento = new JPanel();
-		JpanelOpLevantamento.setVisible(false);
-
-		JDateChooser dateChooser4 = new JDateChooser();
-		dateChooser4.setBounds(174, 166, 162, 31);
-		JpanelOpLevantamento.add(dateChooser4);
-		JpanelOpLevantamento.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpLevantamento);
-		JpanelOpLevantamento.setLayout(null);
-
-		tbLevMontante = new JTextField();
-		tbLevMontante.setBounds(174, 83, 162, 31);
-		JpanelOpLevantamento.add(tbLevMontante);
-
-		JLabel label = new JLabel("Data:");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label.setBounds(164, 131, 50, 23);
-		JpanelOpLevantamento.add(label);
-
-		JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-		lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-		JpanelOpLevantamento.add(lblMontanteLevantamento);
-
-		JButton btLevConfirmar = new JButton("Confirmar");
-		btLevConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (val.valValorOperacao(tbLevMontante.getText())) {
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
-							gb.javabank.getContas());
-
-					double levantamento = Double.parseDouble(tbLevMontante.getText());
-
-					java.util.Date data = dateChooser4.getDate();
-
-					gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
-					tbContasaldoc.setText(Double.toString(c.getSaldo()));
-
-					tbLevMontante.setText(null);
-
-				}
-			}
-
-		});
-		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btLevConfirmar.setBounds(201, 219, 120, 38);
-		JpanelOpLevantamento.add(btLevConfirmar);
-
-		JpanelOpDeposito.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpDeposito);
-		JpanelOpDeposito.setLayout(null);
-
-		tbDepMontante = new JTextField();
-		tbDepMontante.setBounds(174, 83, 162, 31);
-		JpanelOpDeposito.add(tbDepMontante);
-
-		JLabel lblData = new JLabel("Data:");
-		lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblData.setBounds(164, 131, 50, 23);
-		JpanelOpDeposito.add(lblData);
-
-		JLabel lblMontantem = new JLabel("Montante Depósito:");
-		lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontantem.setBounds(164, 55, 229, 23);
-		JpanelOpDeposito.add(lblMontantem);
-
-		JButton btDepConfirmar = new JButton("Confirmar");
-		btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btDepConfirmar.setBounds(192, 225, 120, 38);
-		JpanelOpDeposito.add(btDepConfirmar);
-
-		JDateChooser dtchdeposito = new JDateChooser();
-		dtchdeposito.setBounds(174, 166, 162, 31);
-		JpanelOpDeposito.add(dtchdeposito);
-
-		// efectuar deposito:
-		btDepConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (val.valValorOperacao(tbDepMontante.getText())) {
-					// Seleciona conta:
-					String s = (String) cbOperacoesConta.getSelectedItem();
-					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-
-					// faz deposito:
-					double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
-					c.setSaldo(saldo);
-					// cria opera�ao:
-					int idop = 1;
-					if (c.getOperacoes().size() != 0) {
-						idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
-					}
-					String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
-
-					Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
-							Double.parseDouble(tbDepMontante.getText()), descricao);
-					c.getOperacoes().add(op);
-					tbContasaldoc.setText(c.getSaldo() + "");
-					JOptionPane.showMessageDialog(null, "Deposito efectuado!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
-				}
-
-			}
-		});
-		cbOperacoesConta.setBounds(578, 72, 249, 39);
-		jpanelOperacoes.add(cbOperacoesConta);
-
-		JTextField tbOperacoespesqClt = new JTextField();
-		tbOperacoespesqClt.setBounds(188, 92, 250, 31);
-		jpanelOperacoes.add(tbOperacoespesqClt);
-
-		JButton btnNewButton = new JButton("Pesquisar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (val.valContaTransferir(tbOperacoespesqClt.getText())) {
-					int id = Integer.parseInt(tbOperacoespesqClt.getText());
-					boolean existe = gb.javabank.existeconta(dcbm, id);
-
-					if (existe) {
-						cbOperacoesConta.setSelectedItem(id + "");
-					} else {
-						JOptionPane.showMessageDialog(null, "Conta nao encontrada!");
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Formato errado!");
-				}
-
-			}
-
-		});
-		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnNewButton.setBounds(258, 131, 116, 38);
-		jpanelOperacoes.add(btnNewButton);
-
-		JLabel lblNewLabel_3 = new JLabel("Saldo :");
-		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblNewLabel_3.setBounds(568, 107, 162, 23);
-		jpanelOperacoes.add(lblNewLabel_3);
-
-		tbContasaldoc = new JTextField();
-		tbContasaldoc.setEditable(false);
-		tbContasaldoc.setBounds(578, 133, 169, 31);
-		jpanelOperacoes.add(tbContasaldoc);
-
-		JLabel lblConta = new JLabel("Conta:");
-		lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblConta.setBounds(568, 49, 64, 23);
-		jpanelOperacoes.add(lblConta);
-
-		JButton cbOperacoDep = new JButton("Depósito");
-		cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		cbOperacoDep.setBounds(243, 207, 176, 38);
-		jpanelOperacoes.add(cbOperacoDep);
-
-		JButton btnLevantamento = new JButton("Levantamento");
-		btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnLevantamento.setBounds(432, 207, 176, 38);
-		jpanelOperacoes.add(btnLevantamento);
-
-		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
-		btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		btnTransferncia.setBounds(620, 207, 176, 38);
-		jpanelOperacoes.add(btnTransferncia);
-
-		JPanel JpanelOpTransferencia = new JPanel();
-		JpanelOpTransferencia.setVisible(false);
-		JpanelOpTransferencia.setLayout(null);
-		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpTransferencia);
-
-		tbTransMontante = new JTextField();
-		tbTransMontante.setBounds(168, 59, 162, 30);
-		JpanelOpTransferencia.add(tbTransMontante);
-
-		JLabel lblContaDestino = new JLabel("Conta destino:");
-		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblContaDestino.setBounds(158, 101, 137, 23);
-		JpanelOpTransferencia.add(lblContaDestino);
-
-		JLabel label_5 = new JLabel("Montante:");
-		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label_5.setBounds(158, 34, 97, 23);
-		JpanelOpTransferencia.add(label_5);
-
-		tbTransContaDestino = new JTextField();
-		tbTransContaDestino.setBounds(168, 126, 162, 30);
-		JpanelOpTransferencia.add(tbTransContaDestino);
-
-		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
-		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblDataDaOperao.setBounds(158, 168, 189, 23);
-		JpanelOpTransferencia.add(lblDataDaOperao);
-
-		JButton btnConfirmar = new JButton("Confirmar");
-
-		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnConfirmar.setBounds(118, 253, 116, 38);
-		JpanelOpTransferencia.add(btnConfirmar);
-
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(168, 198, 162, 31);
-		JpanelOpTransferencia.add(dateChooser_1);
-
-		JLabel lblNewLabel_4 = new JLabel("Numero de Conta:");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_4.setBounds(188, 63, 149, 16);
-		jpanelOperacoes.add(lblNewLabel_4);
-
-		//// acaba a constru�ao dos botoes e come�a todos os metedos:
-
-		// Dentro do painel gestao:
-		// coloca o painel depositos visivel:
-		cbOperacoDep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				// paineis:
-				JpanelOpDeposito.setVisible(true);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(false);
-
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnLevantamento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(true);
-				JpanelOpTransferencia.setVisible(false);
-			}
-		});
-
-		// coloca o painel depositos visivel:
-		btnTransferncia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JpanelOpDeposito.setVisible(false);
-				JpanelOpLevantamento.setVisible(false);
-				JpanelOpTransferencia.setVisible(true);
-			}
-		});
-
-		// efectuar transferencia
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				double valortransf = Double.parseDouble(tbTransMontante.getText());
-				String s = (String) cbOperacoesConta.getSelectedItem();
-				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
-				Conta cdestino;
-				try {
-					cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
-							gb.javabank.getContas());
-
-					if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
-						// gerado ids:
-						int idoporigem = 1;
-						if (corigem.getOperacoes().size() != 0) {
-							idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
-						}
-						int iddestino = 1;
-						if (cdestino.getOperacoes().size() != 0) {
-							iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1).getIdOperacao()
-									+ 1;
-						}
-
-						cdestino.setSaldo(cdestino.getSaldo() + valortransf);
-						corigem.setSaldo(corigem.getSaldo() - valortransf);
-
-						// faz transferencia;
-						String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
-								+ cdestino.getIdConta() + " valor: " + valortransf;
-						String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
-								+ corigem.getIdConta() + " valor: " + valortransf;
-						Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(), valortransf,
-								descorigem, cdestino, null);
-						Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(), valortransf,
-								descdestino, corigem, null);
-
-						corigem.getOperacoes().add(oporigem);
-						cdestino.getOperacoes().add(opdestino);
-
-						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
-
-					} else {
-						if (corigem.getSaldo() < valortransf) {
-							JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
-						}
-						if (corigem.equals(cdestino)) {
-							JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-						}
-					}
-
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
-				}
-
-			}
-		});
-
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 67, 190, 22);
 		panelCartao.add(dtcartao);
@@ -1139,6 +734,13 @@ public class BancoAppFun implements Serializable {
 
 				if (!lContas.isSelectionEmpty()) {
 
+					dateChooser_2.setEnabled(true);
+
+					tbContaslimitelevop.setEnabled(true);
+					tbContaslimitelevdia.setEnabled(true);
+					tblJuros.setEnabled(true);
+					tbllimitemes.setEnabled(true);
+
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()),
 							gb.javabank.getContas());
 
@@ -1286,6 +888,8 @@ public class BancoAppFun implements Serializable {
 					((ContaCorrente) c).setCartao(cartao.getnCartao());
 					tbcodcartao.setText(codval + "");
 					tbncartao.setText(id + "");
+					dtcartao.setDate(cal.getTime());
+					;
 
 					dtcartao.setEnabled(false);
 					tbnomecartao.setEditable(false);
@@ -1345,9 +949,9 @@ public class BancoAppFun implements Serializable {
 
 					gb.javabank.limpatabela(modeloTabela);
 					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
-//					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-//					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-//					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+					// gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					// gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					// gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
 				}
 			}
 		});
@@ -1371,6 +975,439 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+
+		// Painel principal da operaçoes
+
+		jpanelOperacoes.setBounds(0, 0, 1042, 576);
+		JpanelPrincipal.add(jpanelOperacoes);
+		jpanelOperacoes.setVisible(false);
+		jpanelOperacoes.setLayout(null);
+
+		// combobox com a lista das contas abertas
+		JComboBox<String> cbOperacoesConta = new JComboBox<String>(dcbm);
+		cbOperacoesConta.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				if (s != null) {
+					Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+					tbContasaldoc.setText("" + c.getSaldo());
+				}
+
+			}
+		});
+
+		JPanel JpanelOpDeposito = new JPanel();
+		JpanelOpDeposito.setVisible(false);
+		JPanel JpanelOpLevantamento = new JPanel();
+		JpanelOpLevantamento.setVisible(false);
+
+		JDateChooser dateChooser4 = new JDateChooser();
+		dateChooser4.setBounds(174, 166, 162, 31);
+		JpanelOpLevantamento.add(dateChooser4);
+		JpanelOpLevantamento.setBounds(263, 247, 516, 313);
+		jpanelOperacoes.add(JpanelOpLevantamento);
+		JpanelOpLevantamento.setLayout(null);
+
+		tbLevMontante = new JTextField();
+		tbLevMontante.setBounds(174, 83, 162, 31);
+		JpanelOpLevantamento.add(tbLevMontante);
+
+		JLabel label = new JLabel("Data:");
+		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label.setBounds(164, 131, 50, 23);
+		JpanelOpLevantamento.add(label);
+
+		JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+		lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+		JpanelOpLevantamento.add(lblMontanteLevantamento);
+
+		JButton btLevConfirmar = new JButton("Confirmar");
+		btLevConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
+						gb.javabank.getContas());
+
+				if (dateChooser4.getDate().after(c.getDataCriacao())) {
+
+					if (val.valValorOperacao(tbLevMontante.getText())) {
+
+						double levantamento = Double.parseDouble(tbLevMontante.getText());
+
+						java.util.Date data = dateChooser4.getDate();
+
+						gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
+						tbContasaldoc.setText(Double.toString(c.getSaldo()));
+
+						tbLevMontante.setText(null);
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
+
+				}
+
+			}
+
+		});
+		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btLevConfirmar.setBounds(201, 219, 120, 38);
+		JpanelOpLevantamento.add(btLevConfirmar);
+
+		JpanelOpDeposito.setBounds(263, 247, 516, 313);
+		jpanelOperacoes.add(JpanelOpDeposito);
+		JpanelOpDeposito.setLayout(null);
+
+		tbDepMontante = new JTextField();
+		tbDepMontante.setBounds(174, 83, 162, 31);
+		JpanelOpDeposito.add(tbDepMontante);
+
+		JLabel lblData = new JLabel("Data:");
+		lblData.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblData.setBounds(164, 131, 50, 23);
+		JpanelOpDeposito.add(lblData);
+
+		JLabel lblMontantem = new JLabel("Montante Depósito:");
+		lblMontantem.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblMontantem.setBounds(164, 55, 229, 23);
+		JpanelOpDeposito.add(lblMontantem);
+
+		JButton btDepConfirmar = new JButton("Confirmar");
+		btDepConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btDepConfirmar.setBounds(192, 225, 120, 38);
+		JpanelOpDeposito.add(btDepConfirmar);
+
+		JDateChooser dtchdeposito = new JDateChooser();
+		dtchdeposito.setBounds(174, 166, 162, 31);
+		JpanelOpDeposito.add(dtchdeposito);
+
+		// efectuar deposito:
+		btDepConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// Seleciona conta:
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				Conta c = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+
+				if (dtchdeposito.getDate().after(c.getDataCriacao())) {
+
+					if (val.valValorOperacao(tbDepMontante.getText())) {
+
+						// faz deposito:
+						double saldo = (c.getSaldo()) + Double.parseDouble(tbDepMontante.getText());
+						c.setSaldo(saldo);
+						// cria opera�ao:
+						int idop = 1;
+						if (c.getOperacoes().size() != 0) {
+							idop = c.getOperacoes().get(c.getOperacoes().size() - 1).getIdOperacao() + 1;
+						}
+						String descricao = dtchdeposito.getDate() + " - Deposito: valor " + tbDepMontante.getText();
+
+						Operacao op = new Deposito(idop, func, dtchdeposito.getDate(),
+								Double.parseDouble(tbDepMontante.getText()), descricao);
+						c.getOperacoes().add(op);
+						tbContasaldoc.setText(c.getSaldo() + "");
+						JOptionPane.showMessageDialog(null, "Deposito efectuado!");
+						tbDepMontante.setText("");
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
+
+				}
+
+			}
+		});
+		cbOperacoesConta.setBounds(578, 72, 249, 39);
+		jpanelOperacoes.add(cbOperacoesConta);
+
+		JTextField tbOperacoespesqClt = new JTextField();
+		tbOperacoespesqClt.setBounds(188, 92, 250, 31);
+		jpanelOperacoes.add(tbOperacoespesqClt);
+
+		JButton btnNewButton = new JButton("Pesquisar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (val.valContaTransferir(tbOperacoespesqClt.getText())) {
+					int id = Integer.parseInt(tbOperacoespesqClt.getText());
+					boolean existe = gb.javabank.existeconta(dcbm, id);
+
+					if (existe) {
+						cbOperacoesConta.setSelectedItem(id + "");
+					} else {
+						JOptionPane.showMessageDialog(null, "Conta nao encontrada!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Formato errado!");
+				}
+
+			}
+
+		});
+		btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnNewButton.setBounds(258, 131, 116, 38);
+		jpanelOperacoes.add(btnNewButton);
+
+		JLabel lblNewLabel_3 = new JLabel("Saldo :");
+		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNewLabel_3.setBounds(568, 107, 162, 23);
+		jpanelOperacoes.add(lblNewLabel_3);
+
+		tbContasaldoc = new JTextField();
+		tbContasaldoc.setEditable(false);
+		tbContasaldoc.setBounds(578, 133, 169, 31);
+		jpanelOperacoes.add(tbContasaldoc);
+
+		JLabel lblConta = new JLabel("Conta:");
+		lblConta.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblConta.setBounds(568, 49, 64, 23);
+		jpanelOperacoes.add(lblConta);
+
+		JButton cbOperacoDep = new JButton("Depósito");
+		cbOperacoDep.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		cbOperacoDep.setBounds(243, 207, 176, 38);
+		jpanelOperacoes.add(cbOperacoDep);
+
+		JButton btnLevantamento = new JButton("Levantamento");
+		btnLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnLevantamento.setBounds(432, 207, 176, 38);
+		jpanelOperacoes.add(btnLevantamento);
+
+		JButton btnTransferncia = new JButton("Transfer\u00EAncia");
+		btnTransferncia.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnTransferncia.setBounds(620, 207, 176, 38);
+		jpanelOperacoes.add(btnTransferncia);
+
+		JPanel JpanelOpTransferencia = new JPanel();
+		JpanelOpTransferencia.setVisible(false);
+		JpanelOpTransferencia.setLayout(null);
+		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
+		jpanelOperacoes.add(JpanelOpTransferencia);
+
+		tbTransMontante = new JTextField();
+		tbTransMontante.setBounds(168, 59, 162, 30);
+		JpanelOpTransferencia.add(tbTransMontante);
+
+		JLabel lblContaDestino = new JLabel("Conta destino:");
+		lblContaDestino.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblContaDestino.setBounds(158, 101, 137, 23);
+		JpanelOpTransferencia.add(lblContaDestino);
+
+		JLabel label_5 = new JLabel("Montante:");
+		label_5.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		label_5.setBounds(158, 34, 97, 23);
+		JpanelOpTransferencia.add(label_5);
+
+		tbTransContaDestino = new JTextField();
+		tbTransContaDestino.setBounds(168, 126, 162, 30);
+		JpanelOpTransferencia.add(tbTransContaDestino);
+
+		JLabel lblDataDaOperao = new JLabel("Data da Operação:");
+		lblDataDaOperao.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblDataDaOperao.setBounds(158, 168, 189, 23);
+		JpanelOpTransferencia.add(lblDataDaOperao);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+
+		btnConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnConfirmar.setBounds(118, 253, 116, 38);
+		JpanelOpTransferencia.add(btnConfirmar);
+
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(168, 198, 162, 31);
+		JpanelOpTransferencia.add(dateChooser_1);
+
+		JLabel lblNewLabel_4 = new JLabel("Numero de Conta:");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_4.setBounds(188, 63, 149, 16);
+		jpanelOperacoes.add(lblNewLabel_4);
+
+		//// acaba a constru�ao dos botoes e come�a todos os metedos:
+
+		// Dentro do painel gestao:
+		// coloca o painel depositos visivel:
+		cbOperacoDep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// paineis:
+				JpanelOpDeposito.setVisible(true);
+				JpanelOpLevantamento.setVisible(false);
+				JpanelOpTransferencia.setVisible(false);
+
+			}
+		});
+
+		// coloca o painel depositos visivel:
+		btnLevantamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JpanelOpDeposito.setVisible(false);
+				JpanelOpLevantamento.setVisible(true);
+				JpanelOpTransferencia.setVisible(false);
+			}
+		});
+
+		// coloca o painel depositos visivel:
+		btnTransferncia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JpanelOpDeposito.setVisible(false);
+				JpanelOpLevantamento.setVisible(false);
+				JpanelOpTransferencia.setVisible(true);
+			}
+		});
+
+		// efectuar transferencia
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double valortransf = Double.parseDouble(tbTransMontante.getText());
+				String s = (String) cbOperacoesConta.getSelectedItem();
+				Conta corigem = gb.javabank.SelectConta(Integer.parseInt(s), gb.javabank.getContas());
+				Conta cdestino;
+				try {
+					if (dateChooser_1.getDate().after(corigem.getDataCriacao())) {
+
+						cdestino = gb.javabank.SelectConta(Integer.parseInt(tbTransContaDestino.getText()),
+								gb.javabank.getContas());
+
+						if (corigem.getSaldo() >= valortransf && !corigem.equals(cdestino)) {
+							// gerado ids:
+							int idoporigem = 1;
+							if (corigem.getOperacoes().size() != 0) {
+								idoporigem = corigem.getOperacoes().get(corigem.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
+							}
+							int iddestino = 1;
+							if (cdestino.getOperacoes().size() != 0) {
+								iddestino = cdestino.getOperacoes().get(cdestino.getOperacoes().size() - 1)
+										.getIdOperacao() + 1;
+							}
+
+							cdestino.setSaldo(cdestino.getSaldo() + valortransf);
+							corigem.setSaldo(corigem.getSaldo() - valortransf);
+
+							// faz transferencia;
+							String descorigem = dateChooser_1.getDate() + " - Transferencia efectuada para conta "
+									+ cdestino.getIdConta() + " valor: " + valortransf;
+							String descdestino = dateChooser_1.getDate() + " - Transferencia recebida da conta "
+									+ corigem.getIdConta() + " valor: " + valortransf;
+							Operacao oporigem = new Transferencia(idoporigem, func, dateChooser_1.getDate(),
+									valortransf, descorigem, cdestino, null);
+							Operacao opdestino = new Transferencia(iddestino, func, dateChooser_1.getDate(),
+									valortransf, descdestino, corigem, null);
+
+							corigem.getOperacoes().add(oporigem);
+							cdestino.getOperacoes().add(opdestino);
+
+							JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+							tbTransMontante.setText("");
+							tbTransContaDestino.setText(null);
+							tbContasaldoc.setText(corigem.getSaldo() + "");
+
+						} else {
+							if (corigem.getSaldo() < valortransf) {
+								JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
+							}
+							if (corigem.equals(cdestino)) {
+								JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+							}
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "A data inserida é anterior a data da criacao da conta!!!");
+
+					}
+
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null, "Numero de conta de destino invalido");
+				}
+
+			}
+		});
+
+		// painel movimentos onde aparece a tabela das operaçoes
+
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 97, 936, 247);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		tableMovimentos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int linha = tableMovimentos.getSelectedRow();
+				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+				String desc = gb.javabank.descricaoOpercacoes(id);
+				tbdescop.setText(desc);
+			}
+		});
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+				modeloTabela.setRowCount(0);
+				tbdescop.setText("");
+
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		tbdescop = new JTextField();
+		tbdescop.setBounds(55, 378, 936, 30);
+		jpanelMovimentos.add(tbdescop);
+		tbdescop.setColumns(10);
+
+		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
+		JComboBox cbTipoOperacao = new JComboBox(pesquisaTipoOperacao);
+		cbTipoOperacao.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+
+				modeloTabela.setRowCount(0);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Transferencias")) {
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Levantamentos")) {
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Pagamentos")) {
+					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+
+				} else {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+				}
+			}
+		});
+		cbTipoOperacao.setBounds(706, 35, 255, 22);
+		jpanelMovimentos.add(cbTipoOperacao);
+		jpanelMovimentos.setVisible(false);
 
 		// Painel principal CLientes
 

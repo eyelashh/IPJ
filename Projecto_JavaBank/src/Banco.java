@@ -111,17 +111,26 @@ public class Banco implements Serializable {
 		System.out.println("Run!!!");
 	}
 
-	// adiciona utilizadores
+	/**
+	 * @param u este metodo adiciona utilizadores
+	 */
 	public void addUtilizador(Utilizador u) {
 		this.utilizadores.add(u);
 	}
 
-	// remove utilizadores
+	/**
+	 * @param u este metodo remove utilizadores
+	 */
 	public void removeUtilizador(Utilizador u) {
 		this.utilizadores.remove(u);
 	}
 
-	// verificar se a pass e o user estao corretos
+	/**
+	 * @param user
+	 * @param pass
+	 * @return este metodo verifica se o username e a password inserida pelo
+	 *         utilizador ao logar está correcta
+	 */
 	public boolean verificarUserPass(String user, String pass) {
 
 		boolean verificar = false;
@@ -135,7 +144,11 @@ public class Banco implements Serializable {
 		return verificar;
 	}
 
-	// verificar o nome da pessoa que estÃ¡ logado
+	/**
+	 * @param username
+	 * @param password
+	 * @return este metodo retorna o utilizador logado
+	 */
 	public Utilizador logado(String username, String password) {
 
 		Utilizador u_log = new Utilizador();
@@ -148,27 +161,31 @@ public class Banco implements Serializable {
 		return u_log;
 	}
 
-	// isto lista todos os nomes e numeros dos clientes numa arraylist de Strings
-	// para ser recebido nas listas de clientes!
-	protected String[] listarClientes(ArrayList<Utilizador> fun) {
-		ArrayList<String> clts = new ArrayList<String>();
+	/**
+	 * @param fun
+	 * @return este metodo lista o id e o nome dos clientes
+	 */
+	protected String[] listarClientes(ArrayList<Utilizador> clt) {
+		ArrayList<String> cliente = new ArrayList<String>();
 		String s = "";
-		for (int i = 0; i < fun.size(); i++) {
-			if (fun.get(i) instanceof Cliente) {
-				s = fun.get(i).getIdUtilizador() + "*" + fun.get(i).getNome();
-				clts.add(s);
+		for (int i = 0; i < clt.size(); i++) {
+			if (clt.get(i) instanceof Cliente) {
+				s = clt.get(i).getIdUtilizador() + "*" + clt.get(i).getNome();
+				cliente.add(s);
 			}
 			s = null;
 		}
 
-		String[] clientes = new String[clts.size()];
-		clientes = clts.toArray(clientes);
+		String[] clientes = new String[cliente.size()];
+		clientes = cliente.toArray(clientes);
 
 		return clientes;
 	}
 
-	// isto lista o numero de contas num array unico:
-
+	/**
+	 * @param cont
+	 * @return este metodo lista o id de todas as contas que se encontram abertas
+	 */
 	protected String[] listanumerodecontasabertas(ArrayList<Conta> cont) {
 
 		ArrayList<String> arrAxu = new ArrayList<String>();
@@ -186,6 +203,10 @@ public class Banco implements Serializable {
 		return numcontas;
 	}
 
+	/**
+	 * @param cont
+	 * @return este metodo lista o id de todas as contas
+	 */
 	protected String[] listanumerodecontas(ArrayList<Conta> cont) {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
@@ -199,7 +220,10 @@ public class Banco implements Serializable {
 		return numcontas;
 	}
 
-	// retorna as contas de um cliente atraves do seu id
+	/**
+	 * @param idCliente
+	 * @return este metodo lista o id de todas as contas associadas ao id cliente
+	 */
 	protected String[] listaContasIdCliente(String idCliente) {
 
 		ArrayList<Utilizador> utilizadores = this.utilizadores;
@@ -226,7 +250,11 @@ public class Banco implements Serializable {
 
 	}
 
-	// lista a conta de um determinado cliente
+	/**
+	 * @param c
+	 * @param contas
+	 * @return este metodo lista as contas de um determinado cliente
+	 */
 	protected String[] listacontadecliente(Cliente c, ArrayList<Conta> contas) {
 		ArrayList<String> listprov = new ArrayList<String>();
 		String s = "";
@@ -246,7 +274,11 @@ public class Banco implements Serializable {
 		return lista;
 	}
 
-//lista a conta de um determinado cliente
+	/**
+	 * @param c
+	 * @param contas
+	 * @return este metodo lista todas as contas a ordem de um determinado cliente
+	 */
 	protected String[] listacontasordem(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
@@ -265,7 +297,11 @@ public class Banco implements Serializable {
 		return lista;
 	}
 
-	// lista a conta de um determinado cliente
+	/**
+	 * @param c
+	 * @param contas
+	 * @returneste metodo lista todas as contas poupanca de um determinado cliente
+	 */
 	protected String[] listacontaspoupanca(Cliente c, ArrayList<Conta> contas) {
 
 		ArrayList<String> listprov = new ArrayList<String>();
@@ -285,7 +321,9 @@ public class Banco implements Serializable {
 		return lista;
 	}
 
-	// retorna o array das contas poupanï¿½a
+	/**
+	 * @return este metodo lista todas as contas poupanca
+	 */
 	protected String[] listaContasPoupanca() {
 
 		ArrayList<String> idsContaPoupanca = new ArrayList<String>();
@@ -303,7 +341,9 @@ public class Banco implements Serializable {
 		return contasP;
 	}
 
-	// retorna o array das contas corrente
+	/**
+	 * @returneste metodo lista todas as contas a ordem
+	 */
 	protected String[] listaContasCorrente() {
 
 		ArrayList<String> idsContasCorrente = new ArrayList<String>();
@@ -321,16 +361,17 @@ public class Banco implements Serializable {
 		return contasCorrente;
 	}
 
-	// isto lista todos os nomes e numeros dos funcionarios numa arraylist de
-	// Strings para ser recebido nas listas de funcionario!
-
+	/**
+	 * @param fun
+	 * @return este metodo lista todos os funcionario com o seu id e nome
+	 */
 	protected String[] listaFunceAdm(ArrayList<Utilizador> fun) {
 		ArrayList<String> func = new ArrayList<String>();
 		String f = "";
 
 		for (int i = 0; i < fun.size(); i++) {
 			if (fun.get(i) instanceof Funcionario || fun.get(i) instanceof Administrador) {
-				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome() + " " + fun.get(i).getSobrenome();
+				f = fun.get(i).getIdUtilizador() + " " + fun.get(i).getNome();
 				func.add(f);
 			}
 			f = null;
@@ -342,7 +383,11 @@ public class Banco implements Serializable {
 		return funcionario;
 	}
 
-	// metedo que retorna um utilizador qualquer recebendo o seu id;
+	/**
+	 * @param numUtil
+	 * @param list
+	 * @return este metodo retorna o utilizador recebendo o seu id
+	 */
 	protected Utilizador selectUtilizador(int numUtil, ArrayList<Utilizador> list) {
 		Utilizador u = new Utilizador();
 
@@ -354,8 +399,11 @@ public class Banco implements Serializable {
 		return u;
 	}
 
-	// metedo que retorna um utilizador qualquer recebendo o seu nome;
-	// serve para a pesquisa:
+	/**
+	 * @param nome
+	 * @param list
+	 * @return este metodo retorna o utilizador recebendo o seu nome
+	 */
 	protected Utilizador selectUtilizadorNome(String nome, ArrayList<Utilizador> list) {
 		Utilizador u = new Utilizador();
 
@@ -367,7 +415,10 @@ public class Banco implements Serializable {
 		return u;
 	}
 
-	// extrair o id de uma string
+	/**
+	 * @param s
+	 * @return este metodo retorna o id de um utilizador recebendo uma string
+	 */
 	protected int obterId(String s) {
 
 		int id = 0;
@@ -382,7 +433,11 @@ public class Banco implements Serializable {
 
 	}
 
-//seleciona a conta
+	/**
+	 * @param numconta
+	 * @param contas
+	 * @return este metodo retorna a conta recebendo o id da conta
+	 */
 	protected Conta SelectConta(int numconta, ArrayList<Conta> contas) {
 		Conta c = new Conta();
 
@@ -394,7 +449,11 @@ public class Banco implements Serializable {
 		return c;
 	}
 
-	// seleciona e retorna a conta de um cliente
+	/**
+	 * @param idCliente
+	 * @param contas
+	 * @return este metodo retorna a conta de um cliente
+	 */
 	protected Conta selectContaCliente(ArrayList<Integer> idCliente, ArrayList<Conta> contas) {
 		Conta c = new Conta();
 
@@ -406,8 +465,11 @@ public class Banco implements Serializable {
 		return c;
 	}
 
-	// este metedo recebe o modelo da lista e o array e adiciona os elementos para a
-	// lista:
+	/**
+	 * @param s
+	 * @param dm este metodo recebe o modelo da lista e o array e adiciona os
+	 *           elementos a lista
+	 */
 	protected void addelementoslist(String[] s, DefaultListModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
@@ -415,6 +477,11 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @param s
+	 * @param dm este metodo receb o modelo da combobox e o array e adiciona os
+	 *           elementos a combobox
+	 */
 	protected void addelementoslist(String[] s, DefaultComboBoxModel<String> dm) {
 		for (int i = 0; i < s.length; i++) {
 			dm.addElement(s[i]);
@@ -422,7 +489,12 @@ public class Banco implements Serializable {
 		}
 	}
 
-	// elimina utilizador do arraylist
+	/**
+	 * @param id
+	 * @param utilizador
+	 * @param contas     este metodo elimina um determinado utilizador recebendo o
+	 *                   seu id
+	 */
 	protected void eliminautilizador(int id, ArrayList<Utilizador> utilizador, ArrayList<Conta> contas) {
 
 		Integer remove = 0;
@@ -444,7 +516,18 @@ public class Banco implements Serializable {
 		}
 	}
 
-	// atualiza dados do funcionario
+	/**
+	 * @param f
+	 * @param nome
+	 * @param sobrenome
+	 * @param dataDeNascimento
+	 * @param tipoIndentificacao
+	 * @param numidentificacao
+	 * @param morada
+	 * @param contacto
+	 * @param username
+	 * @param password           este metodo atualiza os dados do funcionario
+	 */
 	protected void actualizaFun(Funcionario f, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -461,6 +544,18 @@ public class Banco implements Serializable {
 
 	}
 
+	/**
+	 * @param adm
+	 * @param nome
+	 * @param sobrenome
+	 * @param dataDeNascimento
+	 * @param tipoIndentificacao
+	 * @param numidentificacao
+	 * @param morada
+	 * @param contacto
+	 * @param username
+	 * @param password           este metodo atualiza os dados do administrador
+	 */
 	protected void actualizaAdmin(Administrador adm, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -477,7 +572,18 @@ public class Banco implements Serializable {
 
 	}
 
-	// atualiza dados do Cliente;
+	/**
+	 * @param c
+	 * @param nome
+	 * @param sobrenome
+	 * @param dataDeNascimento
+	 * @param tipoIndentificacao
+	 * @param numidentificacao
+	 * @param morada
+	 * @param contacto
+	 * @param username
+	 * @param password           este metodo atualiza os dados do cliente
+	 */
 	protected void atualizacliente(Cliente c, String nome, String sobrenome, Date dataDeNascimento,
 			String tipoIndentificacao, int numidentificacao, String morada, int contacto, String username,
 			String password) {
@@ -493,8 +599,13 @@ public class Banco implements Serializable {
 		c.setPassword(password);
 	}
 
-	// atualiza contas
-
+	/**
+	 * @param c
+	 * @param valorMaxLevantamento
+	 * @param valorMaxDia
+	 * @param taxaJuros
+	 * @param limiteMensalDebito   este metodo atualiza os dados da conta
+	 */
 	protected void atualizarconta(Conta c, double valorMaxLevantamento, double valorMaxDia, double taxaJuros,
 			double limiteMensalDebito) {
 		c.setValorMaxLevantamento(valorMaxLevantamento);
@@ -509,6 +620,12 @@ public class Banco implements Serializable {
 	}
 
 	// elimina contas:
+	/**
+	 * @param id
+	 * @param datafecho
+	 * @param contas    este metodo elimina a conta recebendo um id e coloca essa
+	 *                  contada fechada, com o saldo nulo e com a sua data de fecho
+	 */
 	protected void eliminaconta(int id, Date datafecho, ArrayList<Conta> contas) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getIdConta() == id) {
@@ -520,7 +637,11 @@ public class Banco implements Serializable {
 		}
 	}
 
-	// preenche tabela clientes na conta:
+	/**
+	 * @param model
+	 * @param clientes este metodo preenche a tabela com uma checklist o id do
+	 *                 cliente e o seu nome recebendo o modelo da tabela
+	 */
 	protected void preenchetabelaclientes(DefaultTableModel model, ArrayList<Utilizador> clientes) {
 		int id = 0;
 		String nome;
@@ -535,6 +656,14 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela conta na estatistica:
+	/**
+	 * @param model
+	 * @param contas
+	 * @param data1
+	 * @param data2  este metodo preenche a tabela da estatistica com o id da conta,
+	 *               a data de criacao, a data de fecho, o saldo da conta e o estado
+	 *               da conta, recebendo o modelo da tabela
+	 */
 	protected void preenchetabelaContaEstatistica(DefaultTableModel model, ArrayList<Conta> contas, Date data1,
 			Date data2) {
 		int idConta = 0;
@@ -557,7 +686,13 @@ public class Banco implements Serializable {
 		}
 	}
 
-	// retornar quantas contas abertas existem:
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna a quantidade de contas abertas que existem entre
+	 *         duas datas inseridas pelo utilizador para dados estatisticos
+	 */
 	protected int numeroContasAbertas(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int cont = 0;
@@ -571,7 +706,13 @@ public class Banco implements Serializable {
 		return cont;
 	}
 
-	// retornar quantas contas fechadas existem:
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna a quantidade de contas fechadas que existem entre
+	 *         duas datas inseridas pelo utilizador para dados estatisticos
+	 */
 	protected int numeroContasFechadas(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int cont = 0;
@@ -585,7 +726,13 @@ public class Banco implements Serializable {
 		return cont;
 	}
 
-	// faz o total de capital:
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna o total de capital entre duas datas inseridas
+	 *         pelo utilizador para dados estatisticos
+	 */
 	protected int totalCapital(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		int soma = 0;
@@ -600,7 +747,14 @@ public class Banco implements Serializable {
 		return soma;
 	}
 
-	// faz a soma dos levantamentos:
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna a soma total dos levantamento entre duas datas
+	 *         inseridas pelo utilizador para fazer o balanco para os dados
+	 *         estatisticos
+	 */
 	protected double somaLevant(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		double soma = 0;
@@ -621,7 +775,14 @@ public class Banco implements Serializable {
 		return soma;
 	}
 
-	// faz a soma dos depositos:
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna a soma total dos depositos entre duas datas
+	 *         inseridas pelo utilizador para fazer o balanco para os dados
+	 *         estatisticos
+	 */
 	protected double somaDepo(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		double soma2 = 0;
@@ -642,7 +803,13 @@ public class Banco implements Serializable {
 		return soma2;
 	}
 
-	// faz o balanco :
+	/**
+	 * @param contas
+	 * @param data1
+	 * @param data2
+	 * @return este metodo retorna o balanco entre duas datas inseridas pelo
+	 *         utilizador para os dados estatisticos
+	 */
 	protected double balanco(ArrayList<Conta> contas, Date data1, Date data2) {
 
 		double balanco = 0;
@@ -662,7 +829,11 @@ public class Banco implements Serializable {
 		return balanco;
 	}
 
-	// preenche tabela clientes no cliente:
+	/**
+	 * @param model
+	 * @param clientes este metodo preenche a tabela cliente com os seu ide e nome
+	 *                 recebendo o modelo da tabela
+	 */
 	protected void preenchetabelaclientes2(DefaultTableModel model, ArrayList<Utilizador> clientes) {
 		int id = 0;
 		String nome;
@@ -676,6 +847,11 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @param nomeCliente
+	 * @return
+	 * este metodo retorna uma lista dos cliente recebendo o nome do cliente
+	 */
 	protected String[] listaClientesNome(String nomeCliente) {
 
 		ArrayList<Utilizador> util = this.utilizadores;
@@ -685,7 +861,7 @@ public class Banco implements Serializable {
 		for (Utilizador c : util) {
 			String nome = c.getNome();
 			if ((nome.toLowerCase().contains(nomeCliente.toLowerCase())) && (c instanceof Cliente)) {
-				cliente = "" + c.getIdUtilizador() + "*" + c.getNome() + " " + c.getSobrenome();
+				cliente = "" + c.getIdUtilizador() + "*" + c.getNome();
 				utilNome.add(cliente);
 			}
 		}
@@ -697,6 +873,11 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela clientes no cliente pelo nome:
+	/**
+	 * @param model
+	 * @param nome
+	 * este metodo preenche a tabela 
+	 */
 	protected void preenchetabelaclientesNome(DefaultTableModel model, String nome) {
 		int id = 0;
 
@@ -711,6 +892,7 @@ public class Banco implements Serializable {
 			}
 		}
 	}
+
 
 	// preenche tabela clientes no cliente pelo id:
 	protected void preenchetabelaclientesID(DefaultTableModel model, int idCliente) {
