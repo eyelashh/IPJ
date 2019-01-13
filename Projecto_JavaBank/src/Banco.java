@@ -187,11 +187,11 @@ public class Banco implements Serializable {
 		String[] numcontas = new String[cont.size()];
 		String s = "";
 		for (int i = 0; i < cont.size(); i++) {
-			if (cont.get(i).isAberta()) {
-				s = "" + cont.get(i).getIdConta();
-				numcontas[i] = s;
-				s = "";
-			}
+
+			s = "" + cont.get(i).getIdConta();
+			numcontas[i] = s;
+			s = "";
+
 		}
 		return numcontas;
 	}
@@ -909,21 +909,26 @@ public class Banco implements Serializable {
 	// Elimina todas as contas nos clientes:
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
-		System.out.println("Teste-2");
+		Integer idconta = c.getIdConta();
+		Integer id = 0;
+
 		for (int i = 0; i < clientes.size(); i++) {
-			System.out.println("Teste-1");
+
 			if (clientes.get(i) instanceof Cliente) {
-				System.out.println("Teste0");
 				for (int x = 0; x < ((Cliente) clientes.get(i)).getContas().size(); x++) {
-					System.out.println("Teste");
-					if (((Cliente) clientes.get(i)).getContas().get(x) == c.getIdConta()) {
-						System.out.println("Teste1");
-						((Cliente) clientes.get(i)).getContas().remove(c.getIdConta());
-						System.out.println("Teste2");
-						Integer id = ((Cliente) clientes.get(i)).getIdUtilizador();
-						System.out.println("Teste3");
-						c.getClientes().remove(id);
-						System.out.println("Teste4");
+
+					if (c instanceof ContaCorrente) {
+						if (((Cliente) clientes.get(i)).getContas().get(x) == idconta) {
+							((Cliente) clientes.get(i)).getContas().remove(idconta);
+							id = ((Cliente) clientes.get(i)).getIdUtilizador();
+							c.getClientes().remove(id);
+						}
+					} else {
+						if (((Cliente) clientes.get(i)).getContapoupanca() == idconta) {
+							((Cliente) clientes.get(i)).setContapoupanca(0);
+							id = ((Cliente) clientes.get(i)).getIdUtilizador();
+							c.getClientes().remove(id);
+						}
 					}
 				}
 			}
@@ -939,7 +944,7 @@ public class Banco implements Serializable {
 		if (cartoes.size() != 0) {
 
 			for (int j = 0; j < cartoes.size(); j++) {
-				if (cartoes.get(j).getCodvalidacao() == id) {
+				if (cartoes.get(j).getnCartao() == id) {
 
 					card = cartoes.get(j);
 
@@ -961,22 +966,10 @@ public class Banco implements Serializable {
 			if ((contas.get(i) instanceof ContaCorrente)) {
 
 				this.cartoes.add(card);
-				((ContaCorrente) c).setCartao(card.getCodvalidacao());
+				((ContaCorrente) c).setCartao(card.getnCartao());
 
 			}
 		}
-	}
-
-	protected Cartao selecionacartao(ArrayList<Cartao> cartoes, int id) {
-		Cartao card = null;
-		for (int i = 0; i < cartoes.size(); i++) {
-			if (cartoes.get(i).getCodvalidacao() == id) {
-				card = cartoes.get(i);
-			}
-		}
-
-		return card;
-
 	}
 
 	// retorna a conta atraves do seu numero
@@ -1062,11 +1055,103 @@ public class Banco implements Serializable {
 		}
 	}
 
-	protected Conta obterContaPorCartao(int pin) {
+	protected void maxlevantamentoOperacaoDiaMes(Conta c, double levantamento, Funcionario func, Date data) {
+
+		Validador val = new Validador();
+		double valortotaldia = 0;
+		double valortotalmes = 0;
+		String desc = data + " - Levantamento no valor de " + levantamento;
+
+		if (c.getSaldo() >= levantamento) {
+
+			if (levantamento <= c.getValorMaxLevantamento()) {
+
+				for (int i = 0; i < c.getOperacoes().size(); i++) {
+
+					if (c.getOperacoes().get(i) instanceof Levantamento) {
+
+						if (c.getOperacoes().get(i).getDataOperacao().equals(data)) {
+
+							valortotaldia = valortotaldia + c.getOperacoes().get(i).getValor();
+						}
+					}
+				}
+
+				if (c.getValorMaxDia() >= valortotaldia + levantamento) {
+					if (c instanceof ContaCorrente) {
+
+						Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data, levantamento,
+								desc);
+
+						c.getOperacoes().add(lev);
+						c.setSaldo(c.getSaldo() - levantamento);
+
+						JOptionPane.showMessageDialog(null,
+								"Levantamento efectuado com sucesso!!! Hoje ainda pode levantar "
+										+ ((valortotaldia + levantamento) - c.getValorMaxDia()));
+					}
+
+					if (c instanceof ContaPoupanca) {
+
+						for (int i = 0; i < c.getOperacoes().size(); i++) {
+
+							if (c.getOperacoes().get(i) instanceof Levantamento) {
+
+								// retiro o mes e o anor da data introduzida pelo utilizador
+								LocalDate dataIntroduzida = data.toInstant().atZone(ZoneId.systemDefault())
+										.toLocalDate();
+								int mes = dataIntroduzida.getMonthValue();
+								int ano = dataIntroduzida.getYear();
+
+								// retiro o mes e o ano da data da operacao
+								LocalDate dataop = c.getOperacoes().get(i).getDataOperacao().toInstant()
+										.atZone(ZoneId.systemDefault()).toLocalDate();
+								int mes2 = dataop.getMonthValue();
+								int ano2 = dataop.getYear();
+
+								if (mes == mes2 && ano == ano2) {
+
+									valortotalmes += c.getOperacoes().get(i).getValor();
+								}
+							}
+						}
+
+						if (valortotalmes + levantamento <= ((ContaPoupanca) c).getLimiteMensalDebito()) {
+
+							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
+									levantamento, desc);
+							c.getOperacoes().add(lev2);
+							c.setSaldo(c.getSaldo() - levantamento);
+							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!!!  ");
+
+						} else {
+
+							JOptionPane.showMessageDialog(null, "Não pode efectura mais levantamentos este mes!");
+
+						}
+
+					}
+
+				} else {
+
+					JOptionPane.showMessageDialog(null, "Ultrapassou o montante por Dia");
+				}
+
+			} else
+
+			{
+				JOptionPane.showMessageDialog(null, "Ultrapassou o montante por Operacao");
+			}
+
+		}
+
+	}
+
+	protected Conta obterContaPorCartao(int nCartao) {
 		ArrayList<Conta> contas = this.contas;
 		Conta conta = new Conta();
 		for (Conta c : contas) {
-			if (((ContaCorrente) c).getCartao() == pin) {
+			if (((ContaCorrente) c).getCartao() == nCartao) {
 				conta = c;
 			}
 		}
@@ -1076,7 +1161,10 @@ public class Banco implements Serializable {
 
 	public String lerDadosPagamento() throws IOException {
 
-		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		// BufferedReader fW = new BufferedReader(new
+		// FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		BufferedReader fW = new BufferedReader(
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 		String dadosPagamento = fW.readLine();
 
 		return dadosPagamento;
@@ -1171,7 +1259,7 @@ public class Banco implements Serializable {
 						escreveFicheiro();
 						System.out.println("A aguardar dados correctos");
 						Thread.sleep(1000);
-						
+
 					} catch (ClassNotFoundException | IOException | InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
