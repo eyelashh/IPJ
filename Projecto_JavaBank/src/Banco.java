@@ -1246,7 +1246,7 @@ public class Banco implements Serializable {
 		
 		String caminhoAtual = new File("").getAbsolutePath();
 		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
-		caminhoAtual = caminhoAtual + "\\Projecto_ViewComics\\\\dadosPagamento.txt";
+		caminhoAtual = caminhoAtual + "\\Projecto_ViewComics\\dadosPagamento.txt";
 		
 		
 		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
