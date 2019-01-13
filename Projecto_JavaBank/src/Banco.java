@@ -1195,7 +1195,7 @@ public class Banco implements Serializable {
 		for (Cartao c : cartoes) {
 			if (c.getnCartao() == nCartao) {
 				if (c.getCodvalidacao() == pin) {
-					if (obterContaPorCartao(pin).getSaldo() > montante) {
+					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						autorizado = true;
 					}
 
