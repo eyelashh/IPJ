@@ -477,33 +477,63 @@ public class BancoAppAdm implements Serializable {
 		listAdminClieContas.setBounds(736, 85, 240, 441);
 		JPAdmCliente.add(listAdminClieContas);
 
-		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos"};
+		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
 		JComboBox comboBox = new JComboBox(pesquisaTipoOperacao);
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				modeloTabela.setRowCount(0);
 
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) listAdminClieContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if (comboBox.getSelectedItem().equals("Todos")) {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+				if (!listAdminClieContas.isSelectionEmpty()) {
 
-				} else if (comboBox.getSelectedItem().equals("Depositos")) {
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) listAdminClieContas.getSelectedValue()),
+							gb.javabank.getContas());
 
-				} else if (comboBox.getSelectedItem().equals("Transferencias")) {
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+					if (comboBox.getSelectedItem().equals("Todos")) {
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
 
-				} else if (comboBox.getSelectedItem().equals("Levantamentos")) {
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+					} else if (comboBox.getSelectedItem().equals("Depositos")) {
+						gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
 
-				} else if (comboBox.getSelectedItem().equals("Pagamentos")) {
-					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+					} else if (comboBox.getSelectedItem().equals("Transferencias")) {
+						gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
 
-				} else {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					} else if (comboBox.getSelectedItem().equals("Levantamentos")) {
+						gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+					} else if (comboBox.getSelectedItem().equals("Pagamentos")) {
+						gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+
+					} else {
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					}
+
+				} else if (!listcontasadm.isSelectionEmpty()) {
+
+					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) listcontasadm.getSelectedValue()),
+							gb.javabank.getContas());
+
+					if (comboBox.getSelectedItem().equals("Todos")) {
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+
+					} else if (comboBox.getSelectedItem().equals("Depositos")) {
+						gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+
+					} else if (comboBox.getSelectedItem().equals("Transferencias")) {
+						gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+
+					} else if (comboBox.getSelectedItem().equals("Levantamentos")) {
+						gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+					} else if (comboBox.getSelectedItem().equals("Pagamentos")) {
+						gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+
+					} else {
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					}
+
 				}
+
 			}
 		});
 		comboBox.setBounds(764, 39, 253, 30);
@@ -535,6 +565,8 @@ public class BancoAppAdm implements Serializable {
 					jpConta.setVisible(false);
 					panelContaPadm.setVisible(true);
 					panelCartaoAdm.setVisible(true);
+
+					modeloTabela.setRowCount(0);
 				} else {
 
 					cboxaberta.setVisible(false);
@@ -822,8 +854,8 @@ public class BancoAppAdm implements Serializable {
 				listcontasadm.setVisible(false);
 				lblContas.setVisible(false);
 				listcontasadm.clearSelection();
-
 				cboxaberta.setVisible(true);
+				modeloTabela.setRowCount(0);
 
 				// preenche campos:
 
@@ -845,9 +877,9 @@ public class BancoAppAdm implements Serializable {
 
 				gb.javabank.limpatabela(modeloTabela);
 				gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, cont);
-				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, cont);
-				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, cont);
-				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, cont);
+//				gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, cont);
+//				gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, cont);
+//				gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, cont);
 
 				if (cont instanceof ContaCorrente) {
 					if (((ContaCorrente) cont).getCartao() != 0) {
@@ -880,6 +912,7 @@ public class BancoAppAdm implements Serializable {
 				JPAdmEstatistica.setVisible(false);
 				jpConta.setVisible(true);
 				listcontasadm.setVisible(true);
+				modeloTabela.setRowCount(0);
 
 			}
 		});

@@ -337,87 +337,6 @@ public class BancoAppFun implements Serializable {
 		JPanel panelCartao = new JPanel();
 		panelCartao.setVisible(false);
 
-		// painel movimentos onde aparece a tabela das operaçoes
-
-		jpanelMovimentos.setBounds(0, 0, 1065, 585);
-		JpanelPrincipal.add(jpanelMovimentos);
-		jpanelMovimentos.setLayout(null);
-
-		// Tabela dos movimentos das operações
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(55, 97, 936, 247);
-		jpanelMovimentos.add(scrollPane);
-		tableMovimentos = new JTable(modeloTabela);
-		tableMovimentos.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				int linha = tableMovimentos.getSelectedRow();
-				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
-				String desc = gb.javabank.descricaoOpercacoes(id);
-				tbdescop.setText(desc);
-			}
-		});
-		scrollPane.setViewportView(tableMovimentos);
-
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				jpanelMovimentos.setVisible(false);
-				jpanelContas.setVisible(true);
-				modeloTabela.setRowCount(0);
-				tbdescop.setText("");
-
-			}
-		});
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVoltar.setBounds(469, 478, 120, 38);
-		jpanelMovimentos.add(btnVoltar);
-
-		tbdescop = new JTextField();
-		tbdescop.setBounds(55, 378, 936, 30);
-		jpanelMovimentos.add(tbdescop);
-		tbdescop.setColumns(10);
-
-		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
-		JComboBox cbTipoOperacao = new JComboBox(pesquisaTipoOperacao);
-		cbTipoOperacao.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				
-				modeloTabela.setRowCount(0);
-
-				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
-						gb.javabank.getContas());
-				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
-					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Transferencias")) {
-					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Levantamentos")) {
-					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
-
-				} else if (cbTipoOperacao.getSelectedItem().equals("Pagamentos")) {
-					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
-
-				}
-				else {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
-				}
-			}
-		});
-		cbTipoOperacao.setBounds(706, 35, 255, 22);
-		jpanelMovimentos.add(cbTipoOperacao);
-		jpanelMovimentos.setVisible(false);
-
 		// Painel principal da operaçoes
 
 		jpanelOperacoes.setBounds(0, 0, 1042, 576);
@@ -541,6 +460,7 @@ public class BancoAppFun implements Serializable {
 					c.getOperacoes().add(op);
 					tbContasaldoc.setText(c.getSaldo() + "");
 					JOptionPane.showMessageDialog(null, "Deposito efectuado!");
+					tbDepMontante.setText("");
 				} else {
 					JOptionPane.showMessageDialog(null, "Valor inserido esta incorrecto");
 				}
@@ -725,6 +645,8 @@ public class BancoAppFun implements Serializable {
 						cdestino.getOperacoes().add(opdestino);
 
 						JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso");
+						tbTransMontante.setText("");
+						tbTransContaDestino.setText(null);
 
 					} else {
 						if (corigem.getSaldo() < valortransf) {
@@ -741,6 +663,86 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
+
+		// painel movimentos onde aparece a tabela das operaçoes
+
+		jpanelMovimentos.setBounds(0, 0, 1065, 585);
+		JpanelPrincipal.add(jpanelMovimentos);
+		jpanelMovimentos.setLayout(null);
+
+		// Tabela dos movimentos das operações
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(55, 97, 936, 247);
+		jpanelMovimentos.add(scrollPane);
+		tableMovimentos = new JTable(modeloTabela);
+		tableMovimentos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				int linha = tableMovimentos.getSelectedRow();
+				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
+				String desc = gb.javabank.descricaoOpercacoes(id);
+				tbdescop.setText(desc);
+			}
+		});
+		scrollPane.setViewportView(tableMovimentos);
+
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				jpanelMovimentos.setVisible(false);
+				jpanelContas.setVisible(true);
+				modeloTabela.setRowCount(0);
+				tbdescop.setText("");
+
+			}
+		});
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		btnVoltar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnVoltar.setBounds(469, 478, 120, 38);
+		jpanelMovimentos.add(btnVoltar);
+
+		tbdescop = new JTextField();
+		tbdescop.setBounds(55, 378, 936, 30);
+		jpanelMovimentos.add(tbdescop);
+		tbdescop.setColumns(10);
+
+		String[] pesquisaTipoOperacao = { "Todos", "Transferencias", "Depositos", "Levantamentos", "Pagamentos" };
+		JComboBox cbTipoOperacao = new JComboBox(pesquisaTipoOperacao);
+		cbTipoOperacao.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+
+				modeloTabela.setRowCount(0);
+
+				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
+						gb.javabank.getContas());
+				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
+					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Transferencias")) {
+					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Levantamentos")) {
+					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
+
+				} else if (cbTipoOperacao.getSelectedItem().equals("Pagamentos")) {
+					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
+
+				} else {
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+				}
+			}
+		});
+		cbTipoOperacao.setBounds(706, 35, 255, 22);
+		jpanelMovimentos.add(cbTipoOperacao);
+		jpanelMovimentos.setVisible(false);
 
 		JDateChooser dtcartao = new JDateChooser();
 		dtcartao.setBounds(72, 67, 190, 22);
@@ -2039,7 +2041,6 @@ public class BancoAppFun implements Serializable {
 				panelCartao.setVisible(false);
 				jpanelEliminarContaDataFecho.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Conta eliminada com sucesso!");
-				
 
 			}
 		});
