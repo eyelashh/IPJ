@@ -1243,7 +1243,12 @@ public class Banco implements Serializable {
 	}
 
 	public String lerDadosPagamento() throws IOException {
+		 
+//		String caminhoAtual = new File("").getAbsolutePath();
+//		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
+//		caminhoAtual = caminhoAtual + "\\Projecto_ViewComics\\dadosPagamento.txt";
 		
+<<<<<<< HEAD
 //		String caminhoAtual = new File("").getAbsolutePath();
 //		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
 //		caminhoAtual = caminhoAtual + "\\Projecto_ViewComics\\\\dadosPagamento.txt";
@@ -1252,6 +1257,16 @@ public class Banco implements Serializable {
 //		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
 
 		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+=======
+		String caminhoAtual = new File("").getAbsolutePath();
+		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("/"));
+		caminhoAtual = caminhoAtual + "/Projecto_ViewComics/dadosPagamento.txt";
+		
+		
+		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
+
+		//BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+>>>>>>> cfcb417aa66bbffd7f8df2304cadc2b7ed490ea9
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 		String dadosPagamento = fW.readLine();

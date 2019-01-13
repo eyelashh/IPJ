@@ -1186,8 +1186,20 @@ public class Livraria implements Serializable {
 		
 //		String caminhoAtual = new File("").getAbsolutePath();
 //		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
+<<<<<<< HEAD
 //		caminhoAtual = caminhoAtual + "\\Projecto_JavaBank\\\\Autorizacao.txt";
 //		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
+=======
+//		caminhoAtual = caminhoAtual + "\\Projecto_JavaBank\\Autorizacao.txt";
+		
+		String caminhoAtual = new File("").getAbsolutePath();
+		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("/"));
+		caminhoAtual = caminhoAtual + "/Projecto_JavaBank/Autorizacao.txt";
+		
+		
+		
+		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
+>>>>>>> cfcb417aa66bbffd7f8df2304cadc2b7ed490ea9
 		
 		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
 
