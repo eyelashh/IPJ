@@ -1055,7 +1055,7 @@ public class Banco implements Serializable {
 		}
 	}
 
-	protected void maxlevantamentoOperacao(Conta c, double levantamento, Funcionario func, Date data) {
+	protected void maxlevantamentoOperacaoDiaMes(Conta c, double levantamento, Funcionario func, Date data) {
 
 		Validador val = new Validador();
 		double valortotaldia = 0;
@@ -1069,23 +1069,25 @@ public class Banco implements Serializable {
 				for (int i = 0; i < c.getOperacoes().size(); i++) {
 
 					if (c.getOperacoes().get(i) instanceof Levantamento) {
-						// e se a data da operacao for igual a data do levantamento
+
 						if (c.getOperacoes().get(i).getDataOperacao().equals(data)) {
-							// soma todos os montantes de levantamento que foram realizados naquele dia
+
 							valortotaldia = valortotaldia + c.getOperacoes().get(i).getValor();
 						}
 					}
 				}
 
-				if (c.getValorMaxDia() > valortotaldia) {
+				if (c.getValorMaxDia() >= valortotaldia + levantamento) {
+					if (c instanceof ContaCorrente) {
 
-					Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data, levantamento,
-							desc);
+						Operacao lev = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data, levantamento,
+								desc);
 
-					c.getOperacoes().add(lev);
-					c.setSaldo(c.getSaldo() - levantamento);
+						c.getOperacoes().add(lev);
+						c.setSaldo(c.getSaldo() - levantamento);
 
-					JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso");
+						JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso" + valortotaldia);
+					}
 
 					if (c instanceof ContaPoupanca) {
 
@@ -1112,17 +1114,18 @@ public class Banco implements Serializable {
 							}
 						}
 
-						if (valortotalmes < ((ContaPoupanca) c).getLimiteMensalDebito()) {
+						if (valortotalmes <= ((ContaPoupanca) c).getLimiteMensalDebito() + valortotaldia + levantamento) {
 
 							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
 									levantamento, desc);
-							c.getOperacoes().add(lev);
+							c.getOperacoes().add(lev2);
 							c.setSaldo(c.getSaldo() - levantamento);
 							JOptionPane.showMessageDialog(null, "Levantamento efectuado com sucesso!");
 
 						} else {
 
-							JOptionPane.showMessageDialog(null, "Não pode efectura mais levantamentos este mes!");
+							JOptionPane.showMessageDialog(null,
+									"Não pode efectura mais levantamentos este mes!" + valortotalmes);
 
 						}
 

@@ -516,12 +516,13 @@ public class BancoAppFun implements Serializable {
 
 					java.util.Date data = dateChooser4.getDate();
 
-					double valortotaldia = 0;
-
-					double valortotalmes = 0;
-
-					gb.javabank.maxlevantamentoOperacao(c, levantamento, func, data);
+					gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
 					tbContasaldoc.setText(Double.toString(c.getSaldo()));
+					
+					
+//					double valortotaldia = 0;
+//
+//					double valortotalmes = 0;
 
 //					// se o saldo da conta for superior ao do levantamento
 //					if (c.getSaldo() >= levantamento) {
