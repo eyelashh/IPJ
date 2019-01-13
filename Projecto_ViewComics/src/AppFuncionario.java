@@ -267,453 +267,452 @@ public class AppFuncionario implements Serializable {
 		Paineltotal.add(panelMenu);
 
 		JPanel panelPrincipal = new JPanel();
-		
-				JPanel jpFuncCarrinhos = new JPanel();
-				jpFuncCarrinhos.setBounds(0, 0, 825, 545);
-				panelPrincipal.add(jpFuncCarrinhos);
-				jpFuncCarrinhos.setLayout(null);
-				
-						JScrollPane scrollPane_1 = new JScrollPane();
-						scrollPane_1.setBounds(283, 140, 500, 178);
-						jpFuncCarrinhos.add(scrollPane_1);
-						tabelaCarrinhos = new JTable(modeloTabelaCarrinhos);
-						tabelaCarrinhos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						tabelaCarrinhos.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent arg0) {
-								int linha = tabelaCarrinhos.getSelectedRow();
-								int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
-								Livro l = gl.viewComics.livroId(idLivro);
-								txtLivroSeleccionadoCARRINHO.setText(l.toString());
-
-							}
-						});
-						scrollPane_1.setViewportView(tabelaCarrinhos);
-						
-								JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
-								lblPreoDoCarrinho.setBounds(283, 339, 163, 14);
-								lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
-								jpFuncCarrinhos.add(lblPreoDoCarrinho);
-								
-										JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
-										lblQuantidadeDeLivros.setBounds(283, 366, 163, 14);
-										lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
-										jpFuncCarrinhos.add(lblQuantidadeDeLivros);
-										
-												JScrollPane scrollPane = new JScrollPane();
-												scrollPane.setBounds(25, 144, 200, 320);
-												jpFuncCarrinhos.add(scrollPane);
-												JList<String> listNifsClientes = new JList<String>(modeloListaNif);
-												listNifsClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-												scrollPane.setViewportView(listNifsClientes);
-												listNifsClientes.addListSelectionListener(new ListSelectionListener() {
-
-													public void valueChanged(ListSelectionEvent e) {
-														// limpa tabela
-														modeloTabelaCarrinhos.setRowCount(0);
-
-														// se a lista estiver seleccionada, copia para as caixas de texto
-														if (!listNifsClientes.isSelectionEmpty()) {
-															String nifSeleccionado = listNifsClientes.getSelectedValue();
-															txtNifSeleccionado.setText(nifSeleccionado);
-															Carrinho c = gl.viewComics.pesquisarCarrinho(nifSeleccionado);
-															String estado = "";
-															if (c.isFinalizado()) {
-																txtEstadoCarrinho.setText("Finalizado");
-																txtEstadoCarrinho.setBackground(Color.GREEN);
-															} else {
-																txtEstadoCarrinho.setText("Por finalizar");
-																txtEstadoCarrinho.setBackground(Color.RED);
-															}
-
-															String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
-															txtPrecoCarrinho.setText(precoCarrinho);
-															String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(c);
-															txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
-
-															gl.viewComics.carrinhoTabela(c, modeloTabelaCarrinhos);
-														}
-													}
-												});
-												
-														JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
-														btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
-														btnPesquisarCarrinhos.addActionListener(new ActionListener() {
-															public void actionPerformed(ActionEvent e) {
-
-																String nif = txtNifPesquisaCARRINHO.getText();
-
-																if (cbPesquisaCARRINHO.getSelectedItem().equals("NIF")) {
-																	modeloListaNif.removeAllElements();
-																	gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), modeloListaNif);
-																}
-
-																else if (cbPesquisaCARRINHO.getSelectedItem().equals("Finalizado")) {
-																	modeloListaNif.removeAllElements();
-																	gl.viewComics.addArrayLista(gl.viewComics.carrinhosFinalizados(), modeloListaNif);
-
-																} else if (cbPesquisaCARRINHO.getSelectedItem().equals("Por finalizar")) {
-																	modeloListaNif.removeAllElements();
-																	gl.viewComics.addArrayLista(gl.viewComics.carrinhosNAOFinalizados(), modeloListaNif);
-
-																}
-
-															}
-														});
-														btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
-														jpFuncCarrinhos.add(btnPesquisarCarrinhos);
-														
-																JButton btnCancelar = new JButton("Eliminar carrinho");
-																btnCancelar.setBounds(562, 384, 172, 30);
-																btnCancelar.addActionListener(new ActionListener() {
-																	public void actionPerformed(ActionEvent e) {
-
-																		if (!listNifsClientes.isSelectionEmpty()) {
-																			String nif = listNifsClientes.getSelectedValue();
-																			Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-																			gl.viewComics.removeCarrinho(c);
-																		} else if (listNifsClientes.isSelectionEmpty()) {
-																			JOptionPane.showMessageDialog(null,
-																					"Seleccione o nif da lista que corresponde ao carrinho que quer eliminar");
-																		}
-																	}
-																});
-																btnCancelar.setBackground(SystemColor.controlHighlight);
-																jpFuncCarrinhos.add(btnCancelar);
-																
-																		// botao de pagamento, abre a janela pagamento
-																		JButton btnPagamento = new JButton("Realizar pagamento");
-																		btnPagamento.setBounds(563, 332, 172, 30);
-																		btnPagamento.addActionListener(new ActionListener() {
-																			public void actionPerformed(ActionEvent e) {
-																				
-																				if (!listNifsClientes.isSelectionEmpty()) {
-																					String nifSTR = listNifsClientes.getSelectedValue();
-//																					int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
-																					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSTR);
-																					if (c.isFinalizado()) {
-																						jpFuncCarrinhos.setVisible(false);
-																						jpFuncLivros.setVisible(false);
-																						jpFuncConta.setVisible(false);
-																						jpPagamento.setVisible(true);
-																						textFieldNifPagamento.setText(nifSTR);
-																						txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
-
-																					} else {
-																						JOptionPane.showMessageDialog(null,
-																								"O carrinho seleccionado ainda não foi dado como finalizado para pagamento");
-																					}
-																				}
-																				else {
-																					JOptionPane.showMessageDialog(null,
-																							"Seleccione um carrinho da lista");
-																				}
-																			}
-																		});
-																		btnPagamento.setBackground(SystemColor.controlHighlight);
-																		jpFuncCarrinhos.add(btnPagamento);
-																		
-																				JButton bttLimparFun = new JButton("Limpar");
-																				bttLimparFun.setBounds(136, 91, 100, 30);
-																				bttLimparFun.addActionListener(new ActionListener() {
-																					public void actionPerformed(ActionEvent e) {
-
-																						listNifsClientes.clearSelection();
-																						modeloListaNif.removeAllElements();
-																						gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
-
-																					}
-																				});
-																				bttLimparFun.setBackground(SystemColor.controlHighlight);
-																				jpFuncCarrinhos.add(bttLimparFun);
-																				
-																						txtPrecoCarrinho = new JTextField();
-																						txtPrecoCarrinho.setBounds(418, 339, 51, 20);
-																						txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
-																						txtPrecoCarrinho.setEditable(false);
-																						jpFuncCarrinhos.add(txtPrecoCarrinho);
-																						txtPrecoCarrinho.setColumns(10);
-																						
-																								txtQuantidadeLivrosCarrinho = new JTextField();
-																								txtQuantidadeLivrosCarrinho.setBounds(432, 364, 61, 20);
-																								txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
-																								txtQuantidadeLivrosCarrinho.setEditable(false);
-																								jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
-																								txtQuantidadeLivrosCarrinho.setColumns(10);
-																								
-																										JLabel label_8 = new JLabel("\u20AC");
-																										label_8.setBounds(473, 341, 31, 14);
-																										label_8.setHorizontalAlignment(SwingConstants.LEFT);
-																										label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
-																										jpFuncCarrinhos.add(label_8);
-																										
-																												JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
-																												lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
-																												lblConteudoDetalhadoDo.setBounds(283, 108, 275, 20);
-																												jpFuncCarrinhos.add(lblConteudoDetalhadoDo);
-																												
-																														JButton btnAlterarCARRINHO = new JButton("Alterar quantidades");
-																														btnAlterarCARRINHO.addActionListener(new ActionListener() {
-																															public void actionPerformed(ActionEvent arg0) {
-
-																																txtNovaQuantidadeCARRINHO.setEditable(true);
-
-																															}
-																														});
-																														btnAlterarCARRINHO.setBounds(635, 27, 148, 30);
-																														jpFuncCarrinhos.add(btnAlterarCARRINHO);
-																														
-																																JButton btnConcluirAlteracaoCARRINHO = new JButton("Concluir");
-																																btnConcluirAlteracaoCARRINHO.addActionListener(new ActionListener() {
-																																	public void actionPerformed(ActionEvent arg0) {
-																																		if (!listNifsClientes.isSelectionEmpty()) {
-																																			String novaQuantidadeSTR = txtNovaQuantidadeCARRINHO.getText();
-																																			String nif = txtNifSeleccionado.getText();
-																																			int linha = tabelaCarrinhos.getSelectedRow();
-																																			int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
-																																			int novaQuantidadeINT = Integer.parseInt(novaQuantidadeSTR);
-																																			int antigaQuantidadeINT = (int) tabelaCarrinhos.getModel().getValueAt(linha, 4);
-																																			Livro l = gl.viewComics.livroId(idLivro);
-																																			int stockINT = l.getStock();
-																																			String stock = Integer.toString(stockINT);
-																																			if (novaQuantidadeINT >= antigaQuantidadeINT) {
-																																				int qtdAlterarCarrinhoINT = novaQuantidadeINT - antigaQuantidadeINT;
-																																				String qtdAlterarCarrinhoSTR = Integer.toString(qtdAlterarCarrinhoINT);
-																																				if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinhoSTR, idLivro, stock)) {
-																																					int novoStock = stockINT - qtdAlterarCarrinhoINT;
-																																					gl.viewComics.alterarStockLivro(idLivro, novoStock);
-																																					tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
-																																					gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
-
-																																				} else {
-																																					JOptionPane.showMessageDialog(null,
-																																							"Não foi possível adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
-																																				}
-
-																																			} else if (novaQuantidadeINT < antigaQuantidadeINT) {
-																																				int qtdAlterarCarrinhoINT = antigaQuantidadeINT - novaQuantidadeINT;
-																																				int novoStock = stockINT + qtdAlterarCarrinhoINT;
-																																				gl.viewComics.alterarStockLivro(idLivro, novoStock);
-																																				tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
-																																				gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
-
-																																			}
-																																			String preco = gl.viewComics.precoTotalCarrinho(gl.viewComics.pesquisarCarrinho(nif));
-																																			txtPrecoCarrinho.setText(preco);
-																																			String quantidadeItemsCarrinho = gl.viewComics
-																																					.totalLivrosCarrinho(gl.viewComics.pesquisarCarrinho(nif));
-																																			txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
-
-																																		} else {
-																																			JOptionPane.showMessageDialog(null, "Seleccione o nif do carrinho");
-																																		}
-																																		txtNovaQuantidadeCARRINHO.setText("");
-																																		txtNovaQuantidadeCARRINHO.setEditable(false);
-
-																																	}
-																																});
-																																btnConcluirAlteracaoCARRINHO.setBounds(694, 106, 89, 23);
-																																jpFuncCarrinhos.add(btnConcluirAlteracaoCARRINHO);
-																																
-																																		cbPesquisaCARRINHO.setBounds(25, 29, 211, 27);
-																																		jpFuncCarrinhos.add(cbPesquisaCARRINHO);
-																																		
-																																				JLabel lblFiltrarPor = new JLabel("Filtrar por :");
-																																				lblFiltrarPor.setBounds(25, 11, 104, 14);
-																																				jpFuncCarrinhos.add(lblFiltrarPor);
-																																				
-																																						txtNifPesquisaCARRINHO = new JTextField();
-																																						txtNifPesquisaCARRINHO.setBounds(25, 60, 155, 20);
-																																						jpFuncCarrinhos.add(txtNifPesquisaCARRINHO);
-																																						txtNifPesquisaCARRINHO.setColumns(10);
-																																						
-																																								txtEstadoCarrinho = new JTextField();
-																																								txtEstadoCarrinho.setEditable(false);
-																																								txtEstadoCarrinho.setBounds(283, 60, 125, 30);
-																																								jpFuncCarrinhos.add(txtEstadoCarrinho);
-																																								txtEstadoCarrinho.setColumns(10);
-																																								
-																																										txtNovaQuantidadeCARRINHO = new JTextField();
-																																										txtNovaQuantidadeCARRINHO.setEditable(false);
-																																										txtNovaQuantidadeCARRINHO.setBounds(694, 68, 86, 27);
-																																										jpFuncCarrinhos.add(txtNovaQuantidadeCARRINHO);
-																																										txtNovaQuantidadeCARRINHO.setColumns(10);
-																																										
-																																												txtLivroSeleccionadoCARRINHO = new JTextField();
-																																												txtLivroSeleccionadoCARRINHO.setEditable(false);
-																																												txtLivroSeleccionadoCARRINHO.setBounds(434, 67, 253, 30);
-																																												jpFuncCarrinhos.add(txtLivroSeleccionadoCARRINHO);
-																																												txtLivroSeleccionadoCARRINHO.setColumns(10);
-																																												
-																																														JLabel lblNewLabel_2 = new JLabel("Livro seleccionado :");
-																																														lblNewLabel_2.setBounds(434, 46, 148, 20);
-																																														jpFuncCarrinhos.add(lblNewLabel_2);
-																																														
-																																																txtNifSeleccionado = new JTextField();
-																																																txtNifSeleccionado.setEditable(false);
-																																																txtNifSeleccionado.setBounds(283, 22, 125, 30);
-																																																jpFuncCarrinhos.add(txtNifSeleccionado);
-																																																txtNifSeleccionado.setColumns(10);
 		// cbPesquisaCARRINHO.add("Estado");
 
 		jpPagamento.setBounds(0, 0, 219, 346);
 		panelPrincipal.add(jpPagamento);
 		jpPagamento.setVisible(false);
 		jpPagamento.setLayout(null);
-		
-				JPanel jpMultibanco = new JPanel();
-				jpMultibanco.setBounds(0, 0, 219, 346);
-				jpPagamento.add(jpMultibanco);
-				jpMultibanco.setLayout(null);
+
+		JPanel jpMultibanco = new JPanel();
+		jpMultibanco.setBounds(0, 0, 219, 346);
+		jpPagamento.add(jpMultibanco);
+		jpMultibanco.setLayout(null);
+		jpMultibanco.setVisible(false);
+
+		txtMontanteMULTIBANCO = new JTextField();
+		txtMontanteMULTIBANCO.setBounds(21, 44, 169, 28);
+		jpMultibanco.add(txtMontanteMULTIBANCO);
+		txtMontanteMULTIBANCO.setColumns(10);
+
+		txtNumCartaoMULTIBANCO = new JTextField();
+		txtNumCartaoMULTIBANCO.setBounds(21, 105, 169, 28);
+		jpMultibanco.add(txtNumCartaoMULTIBANCO);
+		txtNumCartaoMULTIBANCO.setColumns(10);
+
+		JLabel lblMontante = new JLabel("Montante");
+		lblMontante.setBounds(21, 19, 132, 28);
+		jpMultibanco.add(lblMontante);
+
+		JLabel lblNumeroDoCartao = new JLabel("Numero do cartao");
+		lblNumeroDoCartao.setBounds(21, 83, 108, 21);
+		jpMultibanco.add(lblNumeroDoCartao);
+
+		txtPinMULTIBANCO = new JTextField();
+		txtPinMULTIBANCO.setBounds(21, 172, 108, 28);
+		jpMultibanco.add(txtPinMULTIBANCO);
+		txtPinMULTIBANCO.setColumns(10);
+
+		JLabel lblPin = new JLabel("PIN");
+		lblPin.setBounds(21, 157, 46, 14);
+
+		jpMultibanco.add(lblPin);
+
+		JButton btnNewButton = new JButton("CONCLUIR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String montante = txtMontanteMULTIBANCO.getText();
+				String numCartao = txtNumCartaoMULTIBANCO.getText();
+				String pin = txtPinMULTIBANCO.getText();
+				String s = montante + " " + numCartao + " " + pin;
+
+				gl.viewComics.threadWaitAutorizacao(s);
+
 				jpMultibanco.setVisible(false);
-				
-						txtMontanteMULTIBANCO = new JTextField();
-						txtMontanteMULTIBANCO.setBounds(21, 44, 169, 28);
-						jpMultibanco.add(txtMontanteMULTIBANCO);
-						txtMontanteMULTIBANCO.setColumns(10);
-						
-								txtNumCartaoMULTIBANCO = new JTextField();
-								txtNumCartaoMULTIBANCO.setBounds(21, 105, 169, 28);
-								jpMultibanco.add(txtNumCartaoMULTIBANCO);
-								txtNumCartaoMULTIBANCO.setColumns(10);
-								
-										JLabel lblMontante = new JLabel("Montante");
-										lblMontante.setBounds(21, 19, 132, 28);
-										jpMultibanco.add(lblMontante);
-										
-												JLabel lblNumeroDoCartao = new JLabel("Numero do cartao");
-												lblNumeroDoCartao.setBounds(21, 83, 108, 21);
-												jpMultibanco.add(lblNumeroDoCartao);
-												
-														txtPinMULTIBANCO = new JTextField();
-														txtPinMULTIBANCO.setBounds(21, 172, 108, 28);
-														jpMultibanco.add(txtPinMULTIBANCO);
-														txtPinMULTIBANCO.setColumns(10);
-														
-																JLabel lblPin = new JLabel("PIN");
-																lblPin.setBounds(21, 157, 46, 14);
-																
-																		jpMultibanco.add(lblPin);
-																		
-																				JButton btnNewButton = new JButton("CONCLUIR");
-																				btnNewButton.addActionListener(new ActionListener() {
-																					public void actionPerformed(ActionEvent arg0) {
-																						String montante = txtMontanteMULTIBANCO.getText();
-																						String numCartao = txtNumCartaoMULTIBANCO.getText();
-																						String pin = txtPinMULTIBANCO.getText();
-																						String s = montante + " " + numCartao + " " + pin;
+			}
+		});
+		btnNewButton.setBounds(29, 243, 161, 33);
+		jpMultibanco.add(btnNewButton);
 
-																						gl.viewComics.threadWaitAutorizacao(s);
+		JPanel jpDinheiro = new JPanel();
+		jpDinheiro.setBounds(10, 190, 199, 171);
+		jpPagamento.add(jpDinheiro);
+		jpDinheiro.setLayout(null);
+		jpDinheiro.setVisible(false);
 
-																						jpMultibanco.setVisible(false);
-																					}
-																				});
-																				btnNewButton.setBounds(29, 243, 161, 33);
-																				jpMultibanco.add(btnNewButton);
-																				
-																						JPanel jpDinheiro = new JPanel();
-																						jpDinheiro.setBounds(10, 190, 199, 171);
-																						jpPagamento.add(jpDinheiro);
-																						jpDinheiro.setLayout(null);
-																						jpDinheiro.setVisible(false);
-																						
-																								JComboBox comboBoxTipoPagamento = new JComboBox(itens);
-																								comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
-																								comboBoxTipoPagamento.addActionListener(new ActionListener() {
-																									@Override
-																									public void actionPerformed(ActionEvent ae) {
-																										// check whether there is any selection
-																										if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
-																											jpDinheiro.setVisible(true);
+		JComboBox comboBoxTipoPagamento = new JComboBox(itens);
+		comboBoxTipoPagamento.setBounds(20, 24, 172, 22);
+		comboBoxTipoPagamento.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				// check whether there is any selection
+				if (comboBoxTipoPagamento.getSelectedItem().equals("Dinheiro")) {
+					jpDinheiro.setVisible(true);
 
-																										} else if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
-																											jpMultibanco.setVisible(true);
+				} else if (comboBoxTipoPagamento.getSelectedItem().equals("Multibanco")) {
+					jpMultibanco.setVisible(true);
 
-																										}
-																									}
-																								});
-																								jpPagamento.add(comboBoxTipoPagamento);
-																								
-																										textFieldNifPagamento = new JTextField();
-																										textFieldNifPagamento.setBounds(20, 94, 172, 22);
-																										jpPagamento.add(textFieldNifPagamento);
-																										textFieldNifPagamento.setColumns(10);
-																										
-																												JLabel lblNif_1 = new JLabel("NIF");
-																												lblNif_1.setBounds(22, 69, 46, 14);
-																												lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-																												jpPagamento.add(lblNif_1);
-																												
-																														JLabel lblNewLabel_1 = new JLabel("A pagar :");
-																														lblNewLabel_1.setBounds(10, 11, 76, 23);
-																														jpDinheiro.add(lblNewLabel_1);
-																														
-																																JLabel lblRecebido = new JLabel("Recebido : ");
-																																lblRecebido.setBounds(10, 45, 76, 23);
-																																jpDinheiro.add(lblRecebido);
-																																
-																																		JLabel lblTroco = new JLabel("Troco :");
-																																		lblTroco.setBounds(10, 79, 76, 23);
-																																		jpDinheiro.add(lblTroco);
-																																		
-																																				txtTotalPAGAMENTO = new JTextField();
-																																				txtTotalPAGAMENTO.setBounds(72, 12, 86, 20);
-																																				jpDinheiro.add(txtTotalPAGAMENTO);
-																																				txtTotalPAGAMENTO.setColumns(10);
-																																				
-																																						txtRecebidoPAGAMENTO = new JTextField();
-																																						txtRecebidoPAGAMENTO.addKeyListener(new KeyAdapter() {
-																																							@Override
-																																							public void keyPressed(KeyEvent e) {
-																																								if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-																																									String totalComVirgula = txtTotalPAGAMENTO.getText();
-																																									String totalSemVirgula = totalComVirgula.replace(',', '.');
-																																									Double total = Double.parseDouble(totalSemVirgula);
-																																									Double recebido = Double.parseDouble(txtRecebidoPAGAMENTO.getText());
-																																									Double troco = recebido - total;
-																																									DecimalFormat df = new DecimalFormat("#.##");
-																																									String trocoSTR = df.format(troco);
-																																									txtTrocoPAGAMENTO.setText(trocoSTR);
-																																								}
-																																							}
-																																						});
-																																						txtRecebidoPAGAMENTO.setColumns(10);
-																																						txtRecebidoPAGAMENTO.setBounds(72, 45, 86, 20);
-																																						jpDinheiro.add(txtRecebidoPAGAMENTO);
-																																						
-																																								txtTrocoPAGAMENTO = new JTextField();
-																																								txtTrocoPAGAMENTO.setColumns(10);
-																																								txtTrocoPAGAMENTO.setBounds(72, 80, 86, 20);
-																																								jpDinheiro.add(txtTrocoPAGAMENTO);
-																																								
-																																										// botao concluir pagamento
-																																										JButton btnConcluirPagamento = new JButton("Concluir");
-																																										btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
-																																										btnConcluirPagamento.setBounds(33, 114, 125, 30);
-																																										btnConcluirPagamento.addActionListener(new ActionListener() {
-																																											public void actionPerformed(ActionEvent arg0) {
-																																												if (!txtTotalPAGAMENTO.getText().isEmpty()) {
-																																													String nif = textFieldNifPagamento.getText();
-																																													Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
-																																													String total = txtTotalPAGAMENTO.getText();
-																																													String total2 = total.replace(",", ".");
-																																													double montante = Double.parseDouble(total2);
-																																													HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
-																																													Venda v = new Venda(montante, conteudoVenda, nif);
-																																													gl.viewComics.addVenda(v);
-																																													gl.viewComics.incrementarVendasLivros(v);
-																																													gl.viewComics.removeCarrinho(c);
-																																													modeloListaNif.removeAllElements();
-																																													gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
-																																													JOptionPane.showMessageDialog(null, "Pagamento concluido");
-																																													jpFuncCarrinhos.setVisible(true);
-																																													jpFuncLivros.setVisible(false);
-																																													jpFuncConta.setVisible(false);
-																																													jpPagamento.setVisible(false);
-																																												}
-																																											}
-																																										});
-																																										jpDinheiro.add(btnConcluirPagamento);
+				}
+			}
+		});
+		jpPagamento.add(comboBoxTipoPagamento);
+
+		textFieldNifPagamento = new JTextField();
+		textFieldNifPagamento.setBounds(20, 94, 172, 22);
+		jpPagamento.add(textFieldNifPagamento);
+		textFieldNifPagamento.setColumns(10);
+
+		JLabel lblNif_1 = new JLabel("NIF");
+		lblNif_1.setBounds(22, 69, 46, 14);
+		lblNif_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		jpPagamento.add(lblNif_1);
+
+		JLabel lblNewLabel_1 = new JLabel("A pagar :");
+		lblNewLabel_1.setBounds(10, 11, 76, 23);
+		jpDinheiro.add(lblNewLabel_1);
+
+		JLabel lblRecebido = new JLabel("Recebido : ");
+		lblRecebido.setBounds(10, 45, 76, 23);
+		jpDinheiro.add(lblRecebido);
+
+		JLabel lblTroco = new JLabel("Troco :");
+		lblTroco.setBounds(10, 79, 76, 23);
+		jpDinheiro.add(lblTroco);
+
+		txtTotalPAGAMENTO = new JTextField();
+		txtTotalPAGAMENTO.setBounds(72, 12, 86, 20);
+		jpDinheiro.add(txtTotalPAGAMENTO);
+		txtTotalPAGAMENTO.setColumns(10);
+
+		txtRecebidoPAGAMENTO = new JTextField();
+		txtRecebidoPAGAMENTO.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String totalComVirgula = txtTotalPAGAMENTO.getText();
+					String totalSemVirgula = totalComVirgula.replace(',', '.');
+					Double total = Double.parseDouble(totalSemVirgula);
+					Double recebido = Double.parseDouble(txtRecebidoPAGAMENTO.getText());
+					Double troco = recebido - total;
+					DecimalFormat df = new DecimalFormat("#.##");
+					String trocoSTR = df.format(troco);
+					txtTrocoPAGAMENTO.setText(trocoSTR);
+				}
+			}
+		});
+		txtRecebidoPAGAMENTO.setColumns(10);
+		txtRecebidoPAGAMENTO.setBounds(72, 45, 86, 20);
+		jpDinheiro.add(txtRecebidoPAGAMENTO);
+
+		txtTrocoPAGAMENTO = new JTextField();
+		txtTrocoPAGAMENTO.setColumns(10);
+		txtTrocoPAGAMENTO.setBounds(72, 80, 86, 20);
+		jpDinheiro.add(txtTrocoPAGAMENTO);
+
+		JPanel jpFuncCarrinhos = new JPanel();
+		jpFuncCarrinhos.setBounds(0, 0, 825, 545);
+		panelPrincipal.add(jpFuncCarrinhos);
+		jpFuncCarrinhos.setLayout(null);
+
+		// botao concluir pagamento
+		JButton btnConcluirPagamento = new JButton("Concluir");
+		btnConcluirPagamento.setBackground(SystemColor.controlHighlight);
+		btnConcluirPagamento.setBounds(33, 114, 125, 30);
+		btnConcluirPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!txtTotalPAGAMENTO.getText().isEmpty()) {
+					String nif = textFieldNifPagamento.getText();
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+					String total = txtTotalPAGAMENTO.getText();
+					String total2 = total.replace(",", ".");
+					double montante = Double.parseDouble(total2);
+					HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
+					Venda v = new Venda(montante, conteudoVenda, nif);
+					gl.viewComics.addVenda(v);
+					gl.viewComics.incrementarVendasLivros(v);
+					gl.viewComics.removeCarrinho(c);
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
+					JOptionPane.showMessageDialog(null, "Pagamento concluido");
+					jpFuncCarrinhos.setVisible(true);
+					jpFuncLivros.setVisible(false);
+					jpFuncConta.setVisible(false);
+					jpPagamento.setVisible(false);
+				}
+			}
+		});
+		jpDinheiro.add(btnConcluirPagamento);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(283, 140, 500, 178);
+		jpFuncCarrinhos.add(scrollPane_1);
+		tabelaCarrinhos = new JTable(modeloTabelaCarrinhos);
+		tabelaCarrinhos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabelaCarrinhos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int linha = tabelaCarrinhos.getSelectedRow();
+				int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
+				Livro l = gl.viewComics.livroId(idLivro);
+				txtLivroSeleccionadoCARRINHO.setText(l.toString());
+
+			}
+		});
+		scrollPane_1.setViewportView(tabelaCarrinhos);
+
+		JLabel lblPreoDoCarrinho = new JLabel("Pre\u00E7o do carrinho :");
+		lblPreoDoCarrinho.setBounds(283, 339, 163, 14);
+		lblPreoDoCarrinho.setFont(new Font("Tahoma", Font.BOLD, 13));
+		jpFuncCarrinhos.add(lblPreoDoCarrinho);
+
+		JLabel lblQuantidadeDeLivros = new JLabel("Quantidade de livros :");
+		lblQuantidadeDeLivros.setBounds(283, 366, 163, 14);
+		lblQuantidadeDeLivros.setFont(new Font("Tahoma", Font.BOLD, 13));
+		jpFuncCarrinhos.add(lblQuantidadeDeLivros);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(25, 144, 200, 320);
+		jpFuncCarrinhos.add(scrollPane);
+		JList<String> listNifsClientes = new JList<String>(modeloListaNif);
+		listNifsClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(listNifsClientes);
+		listNifsClientes.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+				// limpa tabela
+				modeloTabelaCarrinhos.setRowCount(0);
+
+				// se a lista estiver seleccionada, copia para as caixas de texto
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String nifSeleccionado = listNifsClientes.getSelectedValue();
+					txtNifSeleccionado.setText(nifSeleccionado);
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSeleccionado);
+					String estado = "";
+					if (c.isFinalizado()) {
+						txtEstadoCarrinho.setText("Finalizado");
+						txtEstadoCarrinho.setBackground(Color.GREEN);
+					} else {
+						txtEstadoCarrinho.setText("Por finalizar");
+						txtEstadoCarrinho.setBackground(Color.RED);
+					}
+
+					String precoCarrinho = gl.viewComics.precoTotalCarrinho(c);
+					txtPrecoCarrinho.setText(precoCarrinho);
+					String quantidadeItemsCarrinho = gl.viewComics.totalLivrosCarrinho(c);
+					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
+
+					gl.viewComics.carrinhoTabela(c, modeloTabelaCarrinhos);
+				}
+			}
+		});
+
+		JButton btnPesquisarCarrinhos = new JButton("Pesquisar");
+		btnPesquisarCarrinhos.setBounds(25, 91, 104, 30);
+		btnPesquisarCarrinhos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String nif = txtNifPesquisaCARRINHO.getText();
+
+				if (cbPesquisaCARRINHO.getSelectedItem().equals("NIF")) {
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.listaNifs(nif), modeloListaNif);
+				}
+
+				else if (cbPesquisaCARRINHO.getSelectedItem().equals("Finalizado")) {
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.carrinhosFinalizados(), modeloListaNif);
+
+				} else if (cbPesquisaCARRINHO.getSelectedItem().equals("Por finalizar")) {
+					modeloListaNif.removeAllElements();
+					gl.viewComics.addArrayLista(gl.viewComics.carrinhosNAOFinalizados(), modeloListaNif);
+
+				}
+
+			}
+		});
+		btnPesquisarCarrinhos.setBackground(SystemColor.controlHighlight);
+		jpFuncCarrinhos.add(btnPesquisarCarrinhos);
+
+		JButton btnCancelar = new JButton("Eliminar carrinho");
+		btnCancelar.setBounds(562, 384, 172, 30);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String nif = listNifsClientes.getSelectedValue();
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nif);
+					gl.viewComics.removeCarrinho(c);
+				} else if (listNifsClientes.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(null,
+							"Seleccione o nif da lista que corresponde ao carrinho que quer eliminar");
+				}
+			}
+		});
+		btnCancelar.setBackground(SystemColor.controlHighlight);
+		jpFuncCarrinhos.add(btnCancelar);
+
+		// botao de pagamento, abre a janela pagamento
+		JButton btnPagamento = new JButton("Realizar pagamento");
+		btnPagamento.setBounds(563, 332, 172, 30);
+		btnPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String nifSTR = listNifsClientes.getSelectedValue();
+//																					int nif = Integer.parseInt(listNifsClientes.getSelectedValue());
+					Carrinho c = gl.viewComics.pesquisarCarrinho(nifSTR);
+					if (c.isFinalizado()) {
+						jpFuncCarrinhos.setVisible(false);
+						jpFuncLivros.setVisible(false);
+						jpFuncConta.setVisible(false);
+						jpPagamento.setVisible(true);
+						textFieldNifPagamento.setText(nifSTR);
+						txtTotalPAGAMENTO.setText(txtPrecoCarrinho.getText());
+						txtMontanteMULTIBANCO.setText(txtPrecoCarrinho.getText());
+
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"O carrinho seleccionado ainda nï¿½o foi dado como finalizado para pagamento");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione um carrinho da lista");
+				}
+			}
+		});
+		btnPagamento.setBackground(SystemColor.controlHighlight);
+		jpFuncCarrinhos.add(btnPagamento);
+
+		JButton bttLimparFun = new JButton("Limpar");
+		bttLimparFun.setBounds(136, 91, 100, 30);
+		bttLimparFun.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				listNifsClientes.clearSelection();
+				modeloListaNif.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
+
+			}
+		});
+		bttLimparFun.setBackground(SystemColor.controlHighlight);
+		jpFuncCarrinhos.add(bttLimparFun);
+
+		txtPrecoCarrinho = new JTextField();
+		txtPrecoCarrinho.setBounds(418, 339, 51, 20);
+		txtPrecoCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtPrecoCarrinho.setEditable(false);
+		jpFuncCarrinhos.add(txtPrecoCarrinho);
+		txtPrecoCarrinho.setColumns(10);
+
+		txtQuantidadeLivrosCarrinho = new JTextField();
+		txtQuantidadeLivrosCarrinho.setBounds(432, 364, 61, 20);
+		txtQuantidadeLivrosCarrinho.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtQuantidadeLivrosCarrinho.setEditable(false);
+		jpFuncCarrinhos.add(txtQuantidadeLivrosCarrinho);
+		txtQuantidadeLivrosCarrinho.setColumns(10);
+
+		JLabel label_8 = new JLabel("\u20AC");
+		label_8.setBounds(473, 341, 31, 14);
+		label_8.setHorizontalAlignment(SwingConstants.LEFT);
+		label_8.setFont(new Font("Tahoma", Font.BOLD, 13));
+		jpFuncCarrinhos.add(label_8);
+
+		JLabel lblConteudoDetalhadoDo = new JLabel("Conteudo detalhado do carrinho:");
+		lblConteudoDetalhadoDo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblConteudoDetalhadoDo.setBounds(283, 108, 275, 20);
+		jpFuncCarrinhos.add(lblConteudoDetalhadoDo);
+
+		JButton btnAlterarCARRINHO = new JButton("Alterar quantidades");
+		btnAlterarCARRINHO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				txtNovaQuantidadeCARRINHO.setEditable(true);
+
+			}
+		});
+		btnAlterarCARRINHO.setBounds(635, 27, 148, 30);
+		jpFuncCarrinhos.add(btnAlterarCARRINHO);
+
+		JButton btnConcluirAlteracaoCARRINHO = new JButton("Concluir");
+		btnConcluirAlteracaoCARRINHO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!listNifsClientes.isSelectionEmpty()) {
+					String novaQuantidadeSTR = txtNovaQuantidadeCARRINHO.getText();
+					String nif = txtNifSeleccionado.getText();
+					int linha = tabelaCarrinhos.getSelectedRow();
+					int idLivro = (int) tabelaCarrinhos.getModel().getValueAt(linha, 0);
+					int novaQuantidadeINT = Integer.parseInt(novaQuantidadeSTR);
+					int antigaQuantidadeINT = (int) tabelaCarrinhos.getModel().getValueAt(linha, 4);
+					Livro l = gl.viewComics.livroId(idLivro);
+					int stockINT = l.getStock();
+					String stock = Integer.toString(stockINT);
+					if (novaQuantidadeINT >= antigaQuantidadeINT) {
+						int qtdAlterarCarrinhoINT = novaQuantidadeINT - antigaQuantidadeINT;
+						String qtdAlterarCarrinhoSTR = Integer.toString(qtdAlterarCarrinhoINT);
+						if (gl.viewComics.adicionarAoCarrinhoPossivel(qtdAlterarCarrinhoSTR, idLivro, stock)) {
+							int novoStock = stockINT - qtdAlterarCarrinhoINT;
+							gl.viewComics.alterarStockLivro(idLivro, novoStock);
+							tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
+							gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Nï¿½o foi possï¿½vel adicionar a quantidade desejada ao carrinho. Verifique o stock disponivel do livro em questao");
+						}
+
+					} else if (novaQuantidadeINT < antigaQuantidadeINT) {
+						int qtdAlterarCarrinhoINT = antigaQuantidadeINT - novaQuantidadeINT;
+						int novoStock = stockINT + qtdAlterarCarrinhoINT;
+						gl.viewComics.alterarStockLivro(idLivro, novoStock);
+						tabelaCarrinhos.getModel().setValueAt(novaQuantidadeINT, linha, 4);
+						gl.viewComics.updateConteudoCarrinho(nif, idLivro, novaQuantidadeINT);
+
+					}
+					String preco = gl.viewComics.precoTotalCarrinho(gl.viewComics.pesquisarCarrinho(nif));
+					txtPrecoCarrinho.setText(preco);
+					String quantidadeItemsCarrinho = gl.viewComics
+							.totalLivrosCarrinho(gl.viewComics.pesquisarCarrinho(nif));
+					txtQuantidadeLivrosCarrinho.setText(quantidadeItemsCarrinho);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Seleccione o nif do carrinho");
+				}
+				txtNovaQuantidadeCARRINHO.setText("");
+				txtNovaQuantidadeCARRINHO.setEditable(false);
+
+			}
+		});
+		btnConcluirAlteracaoCARRINHO.setBounds(694, 106, 89, 23);
+		jpFuncCarrinhos.add(btnConcluirAlteracaoCARRINHO);
+
+		cbPesquisaCARRINHO.setBounds(25, 29, 211, 27);
+		jpFuncCarrinhos.add(cbPesquisaCARRINHO);
+
+		JLabel lblFiltrarPor = new JLabel("Filtrar por :");
+		lblFiltrarPor.setBounds(25, 11, 104, 14);
+		jpFuncCarrinhos.add(lblFiltrarPor);
+
+		txtNifPesquisaCARRINHO = new JTextField();
+		txtNifPesquisaCARRINHO.setBounds(25, 60, 155, 20);
+		jpFuncCarrinhos.add(txtNifPesquisaCARRINHO);
+		txtNifPesquisaCARRINHO.setColumns(10);
+
+		txtEstadoCarrinho = new JTextField();
+		txtEstadoCarrinho.setEditable(false);
+		txtEstadoCarrinho.setBounds(283, 60, 125, 30);
+		jpFuncCarrinhos.add(txtEstadoCarrinho);
+		txtEstadoCarrinho.setColumns(10);
+
+		txtNovaQuantidadeCARRINHO = new JTextField();
+		txtNovaQuantidadeCARRINHO.setEditable(false);
+		txtNovaQuantidadeCARRINHO.setBounds(694, 68, 86, 27);
+		jpFuncCarrinhos.add(txtNovaQuantidadeCARRINHO);
+		txtNovaQuantidadeCARRINHO.setColumns(10);
+
+		txtLivroSeleccionadoCARRINHO = new JTextField();
+		txtLivroSeleccionadoCARRINHO.setEditable(false);
+		txtLivroSeleccionadoCARRINHO.setBounds(434, 67, 253, 30);
+		jpFuncCarrinhos.add(txtLivroSeleccionadoCARRINHO);
+		txtLivroSeleccionadoCARRINHO.setColumns(10);
+
+		JLabel lblNewLabel_2 = new JLabel("Livro seleccionado :");
+		lblNewLabel_2.setBounds(434, 46, 148, 20);
+		jpFuncCarrinhos.add(lblNewLabel_2);
+
+		txtNifSeleccionado = new JTextField();
+		txtNifSeleccionado.setEditable(false);
+		txtNifSeleccionado.setBounds(283, 22, 125, 30);
+		jpFuncCarrinhos.add(txtNifSeleccionado);
+		txtNifSeleccionado.setColumns(10);
 
 		jpFuncLivros.setBounds(0, 0, 825, 545);
 		panelPrincipal.add(jpFuncLivros);
@@ -831,7 +830,7 @@ public class AppFuncionario implements Serializable {
 		tabelaLivros.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// a linha é actualizada para o caso de ter havido ordenacao
+				// a linha ï¿½ actualizada para o caso de ter havido ordenacao
 				int linha = tabelaLivros.convertRowIndexToModel(tabelaLivros.getSelectedRow());
 				int idLivro = (int) tabelaLivros.getModel().getValueAt(linha, 0);
 				Livro l = gl.viewComics.livroId(idLivro);

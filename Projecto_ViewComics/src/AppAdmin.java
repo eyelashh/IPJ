@@ -179,6 +179,7 @@ public class AppAdmin implements Serializable {
 		DefaultListModel<String> modeloListaLivros = new DefaultListModel<String>();
 		String usernameLogado = admin.getUsername();
 		int idLogado = admin.getId();
+		String nomelogado = admin.getNome();
 
 		frame.setBounds(100, 100, 1280, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -219,6 +220,14 @@ public class AppAdmin implements Serializable {
 		lblBemVindo.setBounds(941, 16, 113, 27);
 		panelcabecalho.add(lblBemVindo);
 
+		// label nome do admin
+		JLabel lblAdminNome = new JLabel("<html>" + nomelogado + "<html>");
+		lblAdminNome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdminNome.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
+		lblAdminNome.setBounds(1066, 15, 160, 27);
+		panelcabecalho.add(lblAdminNome);
+
+		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setLayout(null);
 		panelMenu.setBounds(0, 176, 241, 545);
@@ -399,9 +408,8 @@ public class AppAdmin implements Serializable {
 
 					if (!tabelaLivrosLIVROS.getSelectionModel().isSelectionEmpty()) {
 						int linha = tabelaLivrosLIVROS.convertRowIndexToModel(tabelaLivrosLIVROS.getSelectedRow());
-						int idLivroSelec = (int) tabelaLivrosLIVROS.getModel()
-								.getValueAt(linha, 0);
-						
+						int idLivroSelec = (int) tabelaLivrosLIVROS.getModel().getValueAt(linha, 0);
+
 						Livro l = gl.viewComics.livroId(idLivroSelec);
 						// alterarLivro
 						if (rbAlterarLivro.isSelected()) {
