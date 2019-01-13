@@ -227,6 +227,7 @@ public class AppAdmin implements Serializable {
 		lblAdminNome.setBounds(1066, 15, 160, 27);
 		panelcabecalho.add(lblAdminNome);
 
+		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setLayout(null);
 		panelMenu.setBounds(0, 176, 241, 545);
