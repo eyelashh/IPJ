@@ -1184,12 +1184,12 @@ public class Livraria implements Serializable {
 	// metodo para escrever no ficheiro
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 		
-		String caminhoAtual = new File("").getAbsolutePath();
-		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
-		caminhoAtual = caminhoAtual + "\\Projecto_JavaBank\\\\Autorizacao.txt";
-		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
+//		String caminhoAtual = new File("").getAbsolutePath();
+//		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
+//		caminhoAtual = caminhoAtual + "\\Projecto_JavaBank\\\\Autorizacao.txt";
+//		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
 		
-		//BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
 
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
@@ -1221,7 +1221,7 @@ public class Livraria implements Serializable {
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
-					resetFile();
+//					resetFile();
 
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
