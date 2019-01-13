@@ -1243,7 +1243,7 @@ public class Banco implements Serializable {
 	}
 
 	public String lerDadosPagamento() throws IOException {
-		
+		 
 		String caminhoAtual = new File("").getAbsolutePath();
 		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("\\"));
 		caminhoAtual = caminhoAtual + "\\Projecto_ViewComics\\dadosPagamento.txt";
