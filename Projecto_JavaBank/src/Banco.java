@@ -1114,7 +1114,8 @@ public class Banco implements Serializable {
 							}
 						}
 
-						if (valortotalmes <= ((ContaPoupanca) c).getLimiteMensalDebito() + valortotaldia + levantamento) {
+						if (valortotalmes + valortotaldia + levantamento <= ((ContaPoupanca) c)
+								.getLimiteMensalDebito()) {
 
 							Operacao lev2 = new Levantamento(val.validoperacoes(c.getOperacoes()), func, data,
 									levantamento, desc);
