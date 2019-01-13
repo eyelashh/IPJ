@@ -356,11 +356,61 @@ public class BancoAppFun implements Serializable {
 
 			}
 		});
-		JPanel JpanelOpLevantamento = new JPanel();
-		JpanelOpLevantamento.setVisible(false);
 
 		JPanel JpanelOpDeposito = new JPanel();
 		JpanelOpDeposito.setVisible(false);
+		JPanel JpanelOpLevantamento = new JPanel();
+		JpanelOpLevantamento.setVisible(false);
+		
+				JDateChooser dateChooser4 = new JDateChooser();
+				dateChooser4.setBounds(174, 166, 162, 31);
+				JpanelOpLevantamento.add(dateChooser4);
+				JpanelOpLevantamento.setBounds(263, 247, 516, 313);
+				jpanelOperacoes.add(JpanelOpLevantamento);
+				JpanelOpLevantamento.setLayout(null);
+				
+						tbLevMontante = new JTextField();
+						tbLevMontante.setBounds(174, 83, 162, 31);
+						JpanelOpLevantamento.add(tbLevMontante);
+						
+								JLabel label = new JLabel("Data:");
+								label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+								label.setBounds(164, 131, 50, 23);
+								JpanelOpLevantamento.add(label);
+								
+										JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
+										lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+										lblMontanteLevantamento.setBounds(164, 55, 267, 23);
+										JpanelOpLevantamento.add(lblMontanteLevantamento);
+										
+												JButton btLevConfirmar = new JButton("Confirmar");
+												btLevConfirmar.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+
+														if (val.valValorOperacao(tbLevMontante.getText())) {
+
+															Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
+																	gb.javabank.getContas());
+
+															double levantamento = Double.parseDouble(tbLevMontante.getText());
+
+															java.util.Date data = dateChooser4.getDate();
+
+															gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
+															tbContasaldoc.setText(Double.toString(c.getSaldo()));
+
+
+															tbLevMontante.setText(null);
+															
+															
+
+														}
+													}
+
+												});
+												btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+												btLevConfirmar.setBounds(201, 219, 120, 38);
+												JpanelOpLevantamento.add(btLevConfirmar);
 
 		JpanelOpDeposito.setBounds(263, 247, 516, 313);
 		jpanelOperacoes.add(JpanelOpDeposito);
@@ -480,56 +530,6 @@ public class BancoAppFun implements Serializable {
 
 		JPanel JpanelOpTransferencia = new JPanel();
 		JpanelOpTransferencia.setVisible(false);
-
-		JDateChooser dateChooser4 = new JDateChooser();
-		dateChooser4.setBounds(174, 166, 162, 31);
-		JpanelOpLevantamento.add(dateChooser4);
-		JpanelOpLevantamento.setBounds(263, 247, 516, 313);
-		jpanelOperacoes.add(JpanelOpLevantamento);
-		JpanelOpLevantamento.setLayout(null);
-
-		tbLevMontante = new JTextField();
-		tbLevMontante.setBounds(174, 83, 162, 31);
-		JpanelOpLevantamento.add(tbLevMontante);
-
-		JLabel label = new JLabel("Data:");
-		label.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		label.setBounds(164, 131, 50, 23);
-		JpanelOpLevantamento.add(label);
-
-		JLabel lblMontanteLevantamento = new JLabel("Montante Levantamento:");
-		lblMontanteLevantamento.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-		lblMontanteLevantamento.setBounds(164, 55, 267, 23);
-		JpanelOpLevantamento.add(lblMontanteLevantamento);
-
-		JButton btLevConfirmar = new JButton("Confirmar");
-		btLevConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (val.valValorOperacao(tbLevMontante.getText())) {
-
-					Conta c = gb.javabank.SelectConta(Integer.parseInt((String) cbOperacoesConta.getSelectedItem()),
-							gb.javabank.getContas());
-
-					double levantamento = Double.parseDouble(tbLevMontante.getText());
-
-					java.util.Date data = dateChooser4.getDate();
-
-					gb.javabank.maxlevantamentoOperacaoDiaMes(c, levantamento, func, data);
-					tbContasaldoc.setText(Double.toString(c.getSaldo()));
-
-
-					tbLevMontante.setText(null);
-					
-					
-
-				}
-			}
-
-		});
-		btLevConfirmar.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btLevConfirmar.setBounds(201, 219, 120, 38);
-		JpanelOpLevantamento.add(btLevConfirmar);
 		JpanelOpTransferencia.setLayout(null);
 		JpanelOpTransferencia.setBounds(263, 247, 516, 313);
 		jpanelOperacoes.add(JpanelOpTransferencia);
