@@ -734,6 +734,13 @@ public class BancoAppFun implements Serializable {
 
 				if (!lContas.isSelectionEmpty()) {
 
+					dateChooser_2.setEnabled(true);
+
+					tbContaslimitelevop.setEnabled(true);
+					tbContaslimitelevdia.setEnabled(true);
+					tblJuros.setEnabled(true);
+					tbllimitemes.setEnabled(true);
+
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(lContas.getSelectedValue()),
 							gb.javabank.getContas());
 

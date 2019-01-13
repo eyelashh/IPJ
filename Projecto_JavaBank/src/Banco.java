@@ -1434,8 +1434,12 @@ public class Banco implements Serializable {
 //		
 //		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
 
-		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		BufferedReader fW = new BufferedReader(new FileReader("dadosPagamento.txt"));
+	    
+		
+//
+//		BufferedReader fW = new BufferedReader(
+//				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
 
 //		String caminhoAtual = new File("").getAbsolutePath();
 //		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf("/"));
@@ -1448,6 +1452,7 @@ public class Banco implements Serializable {
 		// FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+
 		String dadosPagamento = fW.readLine();
 
 		return dadosPagamento;

@@ -1196,7 +1196,7 @@ public class Livraria implements Serializable {
 //		caminhoAtual = caminhoAtual + "/Projecto_JavaBank/Autorizacao.txt";
 //		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));	
 //		
-		BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+		BufferedReader fW = new BufferedReader(new FileReader("Autorizacao.txt"));
 
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
