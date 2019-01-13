@@ -1147,18 +1147,21 @@ public class Livraria implements Serializable {
 			fW.newLine();
 			fW.close();
 		}
+		
 
 	}
 
 	// metodo para escrever no ficheiro
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
 
+//		BufferedReader fW = new BufferedReader(
+//				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+
 		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
+
 		String s = fW.readLine();
 		System.out.println(s);
-		
-		
 
 		if (s.equals("AUTORIZADO")) {
 			return true;
@@ -1168,8 +1171,9 @@ public class Livraria implements Serializable {
 		}
 
 	}
+
 //metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
-	public void threadWaitAutorizacao(String s)  {
+	public void threadWaitAutorizacao(String s) {
 
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -1177,40 +1181,38 @@ public class Livraria implements Serializable {
 				int counter = 20;
 				try {
 					escreveDadosPagamentoFicheiro(s);
-					while ((counter-- > 0 )&&(!verificaAutorizacao())) {
+					while ((counter-- > 0) && (!verificaAutorizacao())) {
 
-						//thread espera por autorizacao durante 100 seg 
+						// thread espera por autorizacao durante 100 seg
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
 					resetFile();
-					
+
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
-					}
-					else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
-					
-					
+
 				} catch (ClassNotFoundException | IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 
 		t1.start();
 
 	}
+
 	public void resetFile() throws IOException {
 		File f = new File("dadosPagamento.txt");
 		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 		fW.write("00 00 00");
 		fW.newLine();
 		fW.close();
-		
-		
+
 	}
 }
