@@ -1531,37 +1531,27 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-//				int counter = 1000;
 				while (true) {
 					System.out.println("A aguardar dados correctos");
 
-					try {
-						if (autorizaVenda()) {
-							try {
-								fileAutoriza();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
+						try {
+							if (autorizaVenda()) {
+									fileAutoriza();
+									resetDadosPagamento();
+									fileNaoAutoriza();
+									
+								}
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					try {
-						resetDadosPagamento();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					
 				}
 			}
 
