@@ -1,6 +1,8 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,7 +11,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class GestaoBanco implements Serializable{
+public class GestaoBanco implements Serializable {
 
 	Banco javabank;
 	private File fileUtil;
@@ -27,7 +29,7 @@ public class GestaoBanco implements Serializable{
 		this.fileUtil = new File("fileUtil.dat");
 		this.fileContas = new File("fileContas.dat");
 		this.fileCartao = new File("fileCartao.dat");
-
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -44,7 +46,7 @@ public class GestaoBanco implements Serializable{
 			Utilizador fun = new Funcionario(-2, "Funcionario", "Master", Date.valueOf(LocalDate.now()), "CC", 0, "DEI",
 					910000000, "funcionario", "funcionario", -2);
 			Utilizador clt = new Cliente(-3, "Cliente", "Master", Date.valueOf(LocalDate.now()), "CC", 0, "DEI",
-					910000000, "cliente", "cliente",0);
+					910000000, "cliente", "cliente", 0);
 
 			javabank.addUtilizador(clt);
 			javabank.addUtilizador(fun);
@@ -120,15 +122,15 @@ public class GestaoBanco implements Serializable{
 			}
 		} else
 			try {
-				
-					this.iS = new ObjectInputStream(new FileInputStream(this.fileCartao));
-					try {
-						this.javabank.setCartoes((ArrayList<Cartao>) iS.readObject());
-						iS.close();
-					} catch (ClassNotFoundException y) {
 
-					}
-				
+				this.iS = new ObjectInputStream(new FileInputStream(this.fileCartao));
+				try {
+					this.javabank.setCartoes((ArrayList<Cartao>) iS.readObject());
+					iS.close();
+				} catch (ClassNotFoundException y) {
+
+				}
+
 			} catch (IOException e) {
 
 			}

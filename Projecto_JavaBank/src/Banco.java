@@ -1425,12 +1425,23 @@ public class Banco implements Serializable {
 	}
 
 	public String lerDadosPagamento() throws IOException {
+		
+		
+		
 
-		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+//		String caminhoAtual = new File("").getAbsolutePath();
+//		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf(File.separator));
+//		caminhoAtual = caminhoAtual + File.separator+"dadosPagamento.txt";
+//		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
+		
+	
+		//BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
+		
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
-		String dadosPagamento = fW.readLine();
+		
+		BufferedReader fR = new BufferedReader(new FileReader(new File("dadosPagamento.txt")));
+		String dadosPagamento = fR.readLine();
 
 		return dadosPagamento;
 
@@ -1450,6 +1461,7 @@ public class Banco implements Serializable {
 			ncartaoSTR = sc.next();
 			pinSTR = sc.next();
 		}
+		montanteSTR=montanteSTR.replaceAll(",", ".");
 		double montante = Double.parseDouble(montanteSTR);
 		int nCartao = Integer.parseInt(ncartaoSTR);
 		int pin = Integer.parseInt(pinSTR);
@@ -1475,13 +1487,15 @@ public class Banco implements Serializable {
 	}
 
 	protected void escreveFicheiro() throws ClassNotFoundException, IOException {
+		
+		
 
 		if (autorizaVenda()) {
 			String autorizacao = "AUTORIZADO";
 			File f = new File("Autorizacao.txt");
 			if (f.exists()) {
 
-				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
+				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
@@ -1489,7 +1503,7 @@ public class Banco implements Serializable {
 			} else {
 				f.createNewFile();
 
-				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
+				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
@@ -1499,7 +1513,7 @@ public class Banco implements Serializable {
 			File f = new File("Autorizacao.txt");
 			if (f.exists()) {
 
-				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
+				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
@@ -1507,7 +1521,7 @@ public class Banco implements Serializable {
 			} else {
 				f.createNewFile();
 
-				BufferedWriter fW = new BufferedWriter(new FileWriter(f));
+				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
 				fW.write(autorizacao);
 				fW.newLine();
 				fW.close();
@@ -1521,7 +1535,7 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 20;
+				int counter = 100;
 				while (true) {
 					try {
 						escreveFicheiro();

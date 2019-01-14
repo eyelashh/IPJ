@@ -1153,17 +1153,11 @@ public class Livraria implements Serializable {
 
 	}
 
-//metodo para escrever no ficheiro 
+//metodo para escrever no ficheiro dados pagamento
 	public void escreveDadosPagamentoFicheiro(String s) throws ClassNotFoundException, IOException {
-		// int idCartao, double montante, int codigo
-
-//		String idCartaoSTR=Integer.toString(idCartao);
-//		String montanteSTR = Double.toString(montante);
-//		String codigoSTR=Integer.toString(codigo);
 
 		File f = new File("dadosPagamento.txt");
 		if (f.exists()) {
-			// BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
 			BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 			fW.write(s);
 			fW.newLine();
@@ -1171,7 +1165,6 @@ public class Livraria implements Serializable {
 
 		} else {
 			f.createNewFile();
-			// BufferedReader fR= new BufferedReader(new FileReader("dadosPagamento.txt"));
 			BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 			fW.write(s);
 			fW.newLine();
@@ -1182,15 +1175,19 @@ public class Livraria implements Serializable {
 	}
 
 	// metodo para escrever no ficheiro
+	@SuppressWarnings("resource")
 	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
+		
+		
+		BufferedReader fR = new BufferedReader(new FileReader("Autorizacao.txt"));
 
-		BufferedReader fW = new BufferedReader(
-				new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
+		//BufferedReader fW = new BufferedReader(
+			//	new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
 
 //		BufferedReader fW = new BufferedReader(
 //				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 
-		String s = fW.readLine();
+		String s = fR.readLine();
 		System.out.println(s);
 
 		if (s.equals("AUTORIZADO")) {
@@ -1203,17 +1200,17 @@ public class Livraria implements Serializable {
 	}
 
 //metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
-	public void threadWaitAutorizacao(String s) {
+	public void threadWaitAutorizacao(String s, String nif) {
 
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 20;
+				int counter = 100;
 				try {
 					escreveDadosPagamentoFicheiro(s);
 					while ((counter-- > 0) && (!verificaAutorizacao())) {
 
-						// thread espera por autorizacao durante 100 seg
+						// thread espera por autorizacao durante 100 
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
@@ -1221,6 +1218,8 @@ public class Livraria implements Serializable {
 
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+						removeCarrinho(pesquisarCarrinho(nif));
+						
 					} else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
 					}
