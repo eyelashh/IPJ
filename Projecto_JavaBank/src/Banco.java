@@ -1404,7 +1404,7 @@ public class Banco implements Serializable {
 	}
 	// recebe os dados de pagamento da livraria
 
-	protected void actualizaSaldoAposPagamento(double montantePagamento, int numCartao) {
+	protected void actualizaSaldoEOperacoesAposPagamento(double montantePagamento, int numCartao) {
 
 		int idConta = 0;
 
@@ -1508,6 +1508,7 @@ public class Banco implements Serializable {
 		int pin = Integer.parseInt(pinSTR);
 
 		ArrayList<Cartao> cartoes = this.cartoes;
+		
 		// verifica as condicoes (existencia do cartao , cod Validacao, montante
 		// disponivel)
 		for (Cartao c : cartoes) {
@@ -1515,6 +1516,8 @@ public class Banco implements Serializable {
 				if (c.getCodvalidacao() == pin) {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						autorizado = true;
+						actualizaSaldoEOperacoesAposPagamento(montante, nCartao);
+						
 					}
 
 				}
@@ -1539,7 +1542,7 @@ public class Banco implements Serializable {
 									fileAutoriza();
 									resetDadosPagamento();
 									fileNaoAutoriza();
-									
+									JOptionPane.showMessageDialog(null, "Pagamento autorizado");
 								}
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
