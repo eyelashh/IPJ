@@ -89,7 +89,7 @@ public class AppFuncionario implements Serializable {
 	private JTextField txtTrocoPAGAMENTO;
 	private JPasswordField passwordNova;
 	private JPasswordField passwordAlterarUser;
-	private JPanel jpFuncCarrinhos ;
+	private JPanel jpFuncCarrinhos;
 
 	private GestaoLivraria gl;
 	private Funcionario func;
@@ -317,7 +317,13 @@ public class AppFuncionario implements Serializable {
 				String pin = txtPinMULTIBANCO.getText();
 				String s = montante + " " + numCartao + " " + pin;
 				String nif = textFieldNifPagamento.getText();
-				gl.viewComics.threadWaitAutorizacao(s, nif);
+
+				String montante2 = montante.replace(",", ".");
+				Double montanteDOUBLE = Double.parseDouble(montante2);
+				gl.viewComics.threadWaitAutorizacao(s, nif, montanteDOUBLE);
+
+				modeloListaNif.removeAllElements();
+				gl.viewComics.addArrayLista(gl.viewComics.arrayNifs(), modeloListaNif);
 
 				jpMultibanco.setVisible(false);
 			}
@@ -998,10 +1004,6 @@ public class AppFuncionario implements Serializable {
 		passwordNova = new JPasswordField();
 		passwordNova.setBounds(520, 210, 235, 31);
 		jpFuncConta.add(passwordNova);
-
-		// criar um defaul model para guardar e fazer atualizaçoes da lista
-
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), dmFunListaLivros);
 
 		// logOut
 		btnLogOut.addActionListener(new ActionListener() {

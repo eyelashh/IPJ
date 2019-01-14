@@ -1,3 +1,4 @@
+import java.awt.HeadlessException;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -18,6 +19,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+/**
+ * @author Joana
+ *
+ */
 public class Livraria implements Serializable {
 
 	private int idLivraria;
@@ -40,7 +45,7 @@ public class Livraria implements Serializable {
 	}
 
 	public Livraria(int idLivraria, String nome, ArrayList<Utilizador> utilizadores, ArrayList<Livro> livros,
-			ArrayList<Transacao> transacoes, ArrayList<Sessao> sessoes, ArrayList<Carrinho> carrinhos,
+			 ArrayList<Carrinho> carrinhos,
 			ArrayList<Venda> vendas) {
 		super();
 		this.idLivraria = idLivraria;
@@ -108,24 +113,28 @@ public class Livraria implements Serializable {
 	}
 
 	// adiciona livro
-	public void addLivro(Livro l) {
+	protected void addLivro(Livro l) {
 		this.livros.add(l);
 	}
 
 	// remove um livro
-	public void removeLivros(Livro l) {
+	protected void removeLivros(Livro l) {
 		this.livros.remove(l);
 	}
 
-	public void addVenda(Venda v) {
+	protected void addVenda(Venda v) {
 		this.vendas.add(v);
 	}
 
-	public void removeVenda(Venda v) {
+	protected void removeVenda(Venda v) {
 		this.vendas.remove(v);
 	}
 
-	public String devolveStock(int idLivro) {
+	/**
+	 * @param idLivro
+	 * @return o stock para um dado livro atraves do seu id
+	 */
+	protected String devolveStock(int idLivro) {
 		ArrayList<Livro> livros = this.livros;
 		int stockINT = 0;
 		for (Livro l : livros) {
@@ -135,7 +144,13 @@ public class Livraria implements Serializable {
 		return stockSTR;
 	}
 
-	public void alterarStockLivro(int idLivro, int quantidadeTotal) {
+	/**
+	 * @param idLivro
+	 * @param quantidadeTotal Altera o stock de um livro através do id e da nova
+	 *                        quantidade de stock, util para a actualizacao de stock
+	 *                        e carrinhos
+	 */
+	protected void alterarStockLivro(int idLivro, int quantidadeTotal) {
 
 		for (Livro l : this.livros) {
 			if (l.getIdLivro() == idLivro) {
@@ -147,27 +162,35 @@ public class Livraria implements Serializable {
 	}
 
 	// adiciona utilizadores
-	public void addUtilizador(Utilizador u) {
+	protected void addUtilizador(Utilizador u) {
 		this.utilizadores.add(u);
 	}
 
 	// remove utilizadores
-	public void removeUtilizador(Utilizador u) {
+	protected void removeUtilizador(Utilizador u) {
 		this.utilizadores.remove(u);
 	}
 
 	// adiciona um carrinho
-	public void addCarrinho(Carrinho c) {
+	protected void addCarrinho(Carrinho c) {
 		this.carrinhos.add(c);
 	}
 
 	// remove um carrinho
-	public void removeCarrinho(Carrinho c) {
+	protected void removeCarrinho(Carrinho c) {
 		this.carrinhos.remove(c);
 	}
 
-	// alterar funcionario
-	public void alterarUtilizador(int id, String nome, String contacto, String username, String password) {
+	/**
+	 * Altera um utilizador já existente no sistema
+	 * 
+	 * @param id
+	 * @param nome
+	 * @param contacto
+	 * @param username
+	 * @param password
+	 */
+	protected void alterarUtilizador(int id, String nome, String contacto, String username, String password) {
 
 		boolean funcionarioAlterado = false;
 		for (Utilizador u : this.utilizadores) {
@@ -189,13 +212,19 @@ public class Livraria implements Serializable {
 	}
 
 	// adiciona funcionario
-//	public void adicionarFuncionario(String nome, String contacto, String username, String password) {
+//	protected void adicionarFuncionario(String nome, String contacto, String username, String password) {
 //
 //		this.utilizadores.add(new Funcionario(nome, contacto, username, password));
 //
 //	}
 
-	public void removeLivro(int idLivro, ArrayList<Livro> livros) {
+	/**
+	 * Remove um livro da arrayList de livros em loja
+	 * 
+	 * @param idLivro
+	 * @param livros
+	 */
+	protected void removeLivro(int idLivro, ArrayList<Livro> livros) {
 
 		for (int i = 0; i < livros.size(); i++) {
 			if (livros.get(i).getIdLivro() == idLivro) {
@@ -205,8 +234,14 @@ public class Livraria implements Serializable {
 
 	}
 
-//verifica se o carrinho existe, se nï¿½o existir cria um novo carrinho com o nif introduzido e adiciona-o ao array
-	public boolean carrinhoExiste(String nif) {
+	/**
+	 * Confirma se um dado carrinho existe na loja, sendo que este é identificado
+	 * pelo seu nif
+	 * 
+	 * @param nif
+	 * @return
+	 */
+	protected boolean carrinhoExiste(String nif) {
 
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
@@ -217,9 +252,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	// obtem o preco de um livro atraves do seu id, ï¿½til para calcular o preco de
-	// um carrinho
-	public double precoLivro(int id) {
+	/**
+	 * retorna o preco de um dado livro atraves do seu id
+	 * 
+	 * @param id
+	 * @return preco de um livro
+	 */
+	protected double precoLivro(int id) {
 
 		double preco = 0;
 		// procura no array de livros se o id do livro existe, se sim retorna o preï¿½o
@@ -232,9 +271,14 @@ public class Livraria implements Serializable {
 		return preco;
 	}
 
-	// calcula o montante respectivo a um carrinho consoante os livros e a sua
-	// quantidade
-	public String precoTotalCarrinho(Carrinho c) {
+	/**
+	 * Calcula o preco total do carrinho percorrendo todos os livros do carrinho,
+	 * obtendo o seu preco, e fazendo o somatorio
+	 * 
+	 * @param c
+	 * @return
+	 */
+	protected String precoTotalCarrinho(Carrinho c) {
 
 		double precoTotalDOUBLE = 0;
 
@@ -255,7 +299,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	public String totalLivrosCarrinho(Carrinho c) {
+	/**
+	 * Devolve o numero total de livros num carrinho
+	 * 
+	 * @param carrinho c
+	 * @return
+	 */
+	protected String totalLivrosCarrinho(Carrinho c) {
 
 		int quantidadeTotalItemsINT = 0;
 
@@ -270,7 +320,6 @@ public class Livraria implements Serializable {
 		return quantidadeTotalItemsSTR;
 	}
 
-	// troco carrinho
 	protected double trocoCarrinho(double recebido, double total) {
 
 		double troco = 0;
@@ -282,7 +331,12 @@ public class Livraria implements Serializable {
 	}
 
 	// listar hashMap(livro e qtd) tendo em conta o nif do cliente
-	public String[] listaHashMap(String nif) {
+
+	/**
+	 * @param nif
+	 * @return
+	 */
+	protected String[] listaHashMap(String nif) {
 
 		ArrayList<String> listaC = new ArrayList<String>();
 
@@ -307,8 +361,15 @@ public class Livraria implements Serializable {
 
 	}
 
-	// metodo para verificar se o username e a password coincidem
-	public boolean verificarPassword(String username, String password) {
+	/**
+	 * Metodo para verificar se o username e a password coindidem para a gestao de
+	 * conta de utilizador
+	 * 
+	 * @param username
+	 * @param password
+	 * @return boolean
+	 */
+	protected boolean verificarPassword(String username, String password) {
 
 		boolean dadosCorrectos = false;
 
@@ -323,8 +384,18 @@ public class Livraria implements Serializable {
 
 	}
 
-	// aletrar um livro
-	public void alterarLivro(int idLivro, String titulo, String autor, String preco, String stock, String ano,
+	/**
+	 * Altera um livro existente em loja
+	 * 
+	 * @param idLivro
+	 * @param titulo
+	 * @param autor
+	 * @param preco
+	 * @param stock
+	 * @param ano
+	 * @param descricao
+	 */
+	protected void alterarLivro(int idLivro, String titulo, String autor, String preco, String stock, String ano,
 			String descricao) {
 
 		for (Livro l : this.livros) {
@@ -340,7 +411,18 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void criarLivro(String idSTR, String titulo, String autor, String preco, String stock, String ano,
+	/**
+	 * Cria um novo livro em loja com os paramtetros necessarios
+	 * 
+	 * @param idSTR
+	 * @param titulo
+	 * @param autor
+	 * @param preco
+	 * @param stock
+	 * @param ano
+	 * @param descricao
+	 */
+	protected void criarLivro(String idSTR, String titulo, String autor, String preco, String stock, String ano,
 			String descricao) {
 
 		int idINT = Integer.parseInt(idSTR);
@@ -357,8 +439,14 @@ public class Livraria implements Serializable {
 
 	}
 
-	// verifica o utilizador loggado
-	public Utilizador loggado(String username, String password) {
+	/**
+	 * Verifica o utilizador que se encontra loggado
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	protected Utilizador loggado(String username, String password) {
 
 		Utilizador u_log = new Utilizador();
 
@@ -372,8 +460,15 @@ public class Livraria implements Serializable {
 		return u_log;
 	}
 
-	// alterar username
-	public void alterarUsername(String username, char[] pass, String novoUsername) {
+	/**
+	 * Altera username confirmando previamente se a password inserida pelo user é
+	 * referente ao username inserido
+	 * 
+	 * @param username
+	 * @param pass
+	 * @param novoUsername
+	 */
+	protected void alterarUsername(String username, char[] pass, String novoUsername) {
 
 		String passSTR = String.valueOf(pass);
 		boolean usernameAlterado = false;
@@ -392,8 +487,16 @@ public class Livraria implements Serializable {
 
 	}
 
-	// alterar password
-	public void alterarPassword(String username, char[] pass, char[] novaPass, char[] novaPassConfirm) {
+	/**
+	 * Altera username confirmando previamente se a password antiga inserida pelo
+	 * user esta correcta, pedindo para confirmar a nova password
+	 * 
+	 * @param username
+	 * @param pass
+	 * @param novaPass
+	 * @param novaPassConfirm
+	 */
+	protected void alterarPassword(String username, char[] pass, char[] novaPass, char[] novaPassConfirm) {
 
 		String passSTR = String.valueOf(pass);
 		String novaPassSTR = String.valueOf(novaPass);
@@ -418,79 +521,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	// DISPOR LIVROS NA LISTA POR ARRAY
-	// criar uma nova array de livros consoante vï¿½rios atributos
-	// util para dispor na lista
-
-	public String[] arrayLivros(ArrayList<Livro> livros) {
-
-		String[] listaLivros = new String[this.livros.size()];
-
-		int i = 0;
-		for (Livro l : livros) {
-			listaLivros[i] = l.toString();
-			i++;
-		}
-
-		return listaLivros;
-	}
-
-//listar livros em array por titulo 
-	public String[] listaTitulo(String titulo) {
-
-		ArrayList<String> listaT = new ArrayList<String>();
-		String t = "";
-		for (Livro l : this.livros) {
-			if (l.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
-				t = l.toString();
-				listaT.add(t);
-
-			}
-			t = "";
-		}
-		String[] listaTitulo = new String[listaT.size()];
-		listaTitulo = listaT.toArray(listaTitulo);
-
-		return listaTitulo;
-	}
-
-	// listar livros em array por autor
-	public String[] listaAutor(String autor) {
-
-		ArrayList<String> listaA = new ArrayList<String>();
-		String a = "";
-		for (Livro l : this.livros) {
-			if (l.getAutor().toLowerCase().contains(autor.toLowerCase())) {
-				a = l.toString();
-				listaA.add(a);
-
-			}
-			a = "";
-		}
-		String[] listaAutor = new String[listaA.size()];
-		listaAutor = listaA.toArray(listaAutor);
-
-		return listaAutor;
-	}
-
-	// lista de livros por id
-	public String[] listaLivroId(String id) {
-
-		ArrayList<String> listaId = new ArrayList<String>();
-		for (Livro l : this.livros) {
-			if (Integer.toString(l.getIdLivro()).equals(id)) {
-				listaId.add(l.toString());
-
-			}
-		}
-
-		String[] ArrayLivrosId = listaId.toArray(new String[listaId.size()]);
-		return ArrayLivrosId;
-
-	}
-
-	// mï¿½todo para adicionar um array a uma JList consoante determinado modelo
-
+	/**
+	 * Adiciona um array qualquer a um modelo para, se necessário, formatar uma
+	 * JList
+	 * 
+	 * @param s
+	 * @param dm
+	 */
 	protected void addArrayLista(String[] s, DefaultListModel<String> dm) {
 
 		for (int i = 0; i < s.length; i++) {
@@ -498,22 +535,13 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	// extrair o id de uma string da lista
-	protected int obterIdLivro(String s) {
-
-		int id = 0;
-		if (s != null) {
-			for (Livro l : this.livros) {
-				if (s.equals(l.toString())) {
-					id = l.getIdLivro();
-				}
-			}
-		}
-		return id;
-
-	}
-
-	// pesquisar o livro com determinado id
+	/**
+	 * Retorna uma copia de um livro com um determinado id, para situacoes em que
+	 * seja necessario mostrar os atributos de um livro por ex
+	 * 
+	 * @param id
+	 * @return
+	 */
 	protected Livro livroId(int id) {
 		Livro livro = null;
 		for (Livro l : this.livros) {
@@ -525,9 +553,12 @@ public class Livraria implements Serializable {
 
 	}
 
-	// LISTAR FUNCIONARIOS
-
-	// retorna o array de funcionarios
+	/**
+	 * Cria um array de funcionarios para meter em qualquer lista
+	 * 
+	 * @param util
+	 * @return
+	 */
 	protected String[] arrayFunc(ArrayList<Utilizador> util) {
 
 		ArrayList<String> utilizadores = new ArrayList();
@@ -542,63 +573,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	// id do funcionario
-	protected int obterIdFunc(String s) {
-
-		int id = 0;
-		for (Utilizador u : this.utilizadores) {
-			if ((s.equals(u.toString())) && (u instanceof Funcionario)) {
-				id = u.getId();
-			}
-		}
-		return id;
-
-//String subStringId = new String(s.substring(0, s.indexOf(" ")));
-//int idint=Integer.parseInt(subStringId);
-//return idint;
-	}
-
-	// devolve os funcionario cujo come contem a string nome
-	public String[] listaFunPorNome(String nome) {
-
-		ArrayList<String> listaN = new ArrayList<String>();
-		String n = "";
-		for (Utilizador u : this.utilizadores) {
-			if (u instanceof Funcionario) {
-				if (u.getNome().toLowerCase().contains(nome.toLowerCase())) {
-					n = u.toString();
-					listaN.add(n);
-
-				}
-			}
-
-			n = "";
-		}
-
-		String[] listaTitulo = new String[listaN.size()];
-		listaTitulo = listaN.toArray(listaTitulo);
-
-		return listaTitulo;
-	}
-
-	// devolve o funcionario cujo id ï¿½ igual ao int id
-	protected String[] listaFuncPorId(String id) {
-
-		ArrayList<String> listaId = new ArrayList<String>();
-
-		for (Utilizador u : this.utilizadores) {
-			if ((u instanceof Funcionario) && (Integer.toString(u.getId()).contains(id))) {
-				listaId.add(u.toString());
-			}
-		}
-		String[] listaPorId = new String[listaId.size()];
-		listaPorId = listaId.toArray(listaPorId);
-
-		return listaPorId;
-
-	}
-
-	// retornar um funcionario
+	/**
+	 * Devolve uma copia de um utilizador com determinado id de forma a poder
+	 * visualizar os seus valores dos seus atributos
+	 * 
+	 * @param id
+	 * @return
+	 */
 	protected Utilizador devolveUtilizador(int id) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
@@ -612,7 +593,12 @@ public class Livraria implements Serializable {
 		return func;
 	}
 
-	public void removerUtil(int id) {
+	/**
+	 * Remove um utilizador da lista de utilizadores da livraria através do seu id
+	 * 
+	 * @param id
+	 */
+	protected void removerUtil(int id) {
 
 		for (int i = 0; i < this.utilizadores.size(); i++) {
 			if (utilizadores.get(i).getId() == id) {
@@ -621,7 +607,13 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	public void removerLivro(int idLivro, ArrayList<Livro> livros) {
+	/**
+	 * Remove um livro de um arrayList através do seu id
+	 * 
+	 * @param idLivro
+	 * @param livros
+	 */
+	protected void removerLivro(int idLivro, ArrayList<Livro> livros) {
 
 		for (int i = 0; i < livros.size(); i++) {
 			if (livros.get(i).getIdLivro() == idLivro) {
@@ -630,41 +622,14 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	// lista de funcionario por user
-	public String[] listaFunPorUsername(String username) {
-
-		ArrayList<String> listaU = new ArrayList<String>();
-		for (Utilizador u : this.utilizadores) {
-			if (u instanceof Funcionario) {
-				if (u.getUsername().toLowerCase().contains(username.toLowerCase())) {
-					listaU.add(u.toString());
-
-				}
-			}
-		}
-
-		String[] listaUsername = new String[listaU.size()];
-		listaUsername = listaU.toArray(listaUsername);
-
-		return listaUsername;
-	}
-
-	// lista de funcionario pelo contacto
-	protected String[] listaFuncPorContacto(String contacto) {
-
-		ArrayList<String> listaC = new ArrayList<String>();
-		for (Utilizador u : this.utilizadores) {
-			if ((u instanceof Funcionario) && (u.getContato().contains(contacto))) {
-				listaC.add(u.toString());
-			}
-		}
-		String[] listaContacto = new String[listaC.size()];
-		listaContacto = listaC.toArray(listaContacto);
-		return listaContacto;
-
-	}
-
-//recebe duas strings, soma, e devolve o total em string (CARRINHOS)
+	/**
+	 * Recebe duas strings e efectua o seu somatorio devolvendo o mesmo em string,
+	 * util para operaçoes rapidas das caixas de texto
+	 * 
+	 * @param actual
+	 * @param adicionar
+	 * @return
+	 */
 	protected String adicionarQuantidade(String actual, String adicionar) {
 		String totalStr = actual;
 		if ((actual != null) && (adicionar != null)) {
@@ -680,7 +645,14 @@ public class Livraria implements Serializable {
 		return totalStr;
 	}
 
-//recebe duas string subtrai, e devolve o valor total em string (CARRINHOS)	
+	/**
+	 * Recebe duas strings e efectua a sua subtraccao devolvendo o mesmo em string,
+	 * util para operaçoes rapidas das caixas de texto
+	 * 
+	 * @param actual
+	 * @param adicionar
+	 * @return
+	 */
 	protected String removerQuantidade(String actual, String subtrair) {
 		int actualInt = Integer.parseInt(actual);
 		int subtrairInt = Integer.parseInt(subtrair);
@@ -690,8 +662,15 @@ public class Livraria implements Serializable {
 		return totalStr;
 	}
 
-//adiciona um valor ao stock do livro 
-
+	/**
+	 * Verifica se é possível remover uma quantidade de um certo livro de um
+	 * carrinho de forma a voltar a adiciona-la posteriormente ao stock
+	 * 
+	 * @param qtdremovidaCarrinhoSTR
+	 * @param idLivro
+	 * @param nif
+	 * @return
+	 */
 	protected boolean removerCarrinhoPossivel(String qtdremovidaCarrinhoSTR, int idLivro, String nif) {
 
 		boolean remocaoPossivel = false;
@@ -706,8 +685,15 @@ public class Livraria implements Serializable {
 
 	}
 
-//altera o stock de um carrinho de acordo com a quantidade removida do carrinho de do id do livro
-
+	/**
+	 * Verifica se é possível adicionar uma quantidade de um certo livro a um
+	 * carrinho atraves da verificacao do seu stock
+	 * 
+	 * @param qtdremovidaCarrinhoSTR
+	 * @param idLivro
+	 * @param nif
+	 * @return
+	 */
 	protected boolean adicionarAoCarrinhoPossivel(String qtdadicionadaCarrinhoSTR, int idLivro, String stockLivroSTR) {
 
 		boolean adicaoPossivel = false;
@@ -721,7 +707,14 @@ public class Livraria implements Serializable {
 
 	}
 
-//devolve a quantidade de determinado livro em um carrinho atravï¿½s do id do livro e do nif
+	/**
+	 * Devolve a quantidade de um livro em um carrinho chamando o metodo proprio
+	 * depois de encontrar o carrinho desejado atraves do nif
+	 * 
+	 * @param idLivro
+	 * @param nif
+	 * @return
+	 */
 	protected String quantidadeCarrinho(int idLivro, String nif) {
 
 		int quantidadeInt = 0;
@@ -737,7 +730,14 @@ public class Livraria implements Serializable {
 		return quantidadeStr;
 	}
 
-	// adicionar e remover livros, faz um update
+	/**
+	 * Actualiza o conteudo de um carrinho no que diz respeito a um determinado
+	 * livro
+	 * 
+	 * @param nif
+	 * @param idLivro
+	 * @param quantidade
+	 */
 	protected void updateConteudoCarrinho(String nif, int idLivro, int quantidade) {
 		for (Carrinho c : this.carrinhos) {
 			if (c.getNif().equals(nif)) {
@@ -746,7 +746,12 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	// metodo para verificar se o nif esta correcto
+	/**
+	 * Verifica se o nif introduzido so tem digitos e o comprimento 9
+	 * 
+	 * @param nif
+	 * @return
+	 */
 	protected boolean verificaNif(String nif) {
 
 		if (nif.matches("([0-9]{9})")) {
@@ -756,25 +761,12 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	// listar livros em array por data
-	public String[] listaData(String ano) {
-
-		ArrayList<String> listaD = new ArrayList<String>();
-		String a = "";
-		for (Livro l : this.livros) {
-			if (Integer.toString(l.getAno()).equals(ano)) {
-				a = l.toString();
-				listaD.add(a);
-
-			}
-		}
-		String[] listaData = new String[listaD.size()];
-		listaData = listaD.toArray(listaData);
-
-		return listaData;
-	}
-
-	// lista dos nifs dos carrinhos/clientes
+	/**
+	 * Retorna um array com todos os nifs / carrinhos em loja, estejam finalizados
+	 * ou por finalizar
+	 * 
+	 * @return
+	 */
 	protected String[] arrayNifs() {
 
 		String[] nifs = new String[carrinhos.size()];
@@ -788,8 +780,7 @@ public class Livraria implements Serializable {
 		return nifs;
 	}
 
-	// listar livros em array por titulo
-	public String[] listaNifs(String nif) {
+	protected String[] listaNifs(String nif) {
 
 		ArrayList<String> listaT = new ArrayList<String>();
 		String t = "";
@@ -807,7 +798,13 @@ public class Livraria implements Serializable {
 		return listaTitulo;
 	}
 
-	public Carrinho pesquisarCarrinho(String nif) {
+	/**
+	 * Devolve copia do carrinho correspondente ao nif de input
+	 * 
+	 * @param nif
+	 * @return
+	 */
+	protected Carrinho pesquisarCarrinho(String nif) {
 
 		Carrinho carrinhoNif = new Carrinho();
 		for (Carrinho c : this.carrinhos) {
@@ -818,7 +815,13 @@ public class Livraria implements Serializable {
 		return carrinhoNif;
 	}
 
-	public void tabelaUtilizadores(DefaultTableModel dtm) {
+	/**
+	 * Adiciona a tabela de todos os utilizadores a um modelo de tabela que ira
+	 * corresponder a tabela de utilizadores
+	 * 
+	 * @param dtm
+	 */
+	protected void tabelaUtilizadores(DefaultTableModel dtm) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
 
@@ -832,7 +835,16 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
+	/**
+	 * consoante a string seleccao, e o criterio de pesquisa escolhido numa comboBox
+	 * devolve uma tabela que seleccione os utilizadores e os atribua ao table model
+	 * consoante a necessidade
+	 * 
+	 * @param dtm
+	 * @param criterioSeleccao
+	 * @param pesquisa
+	 */
+	protected void tabelaUtilizadoresCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
 
 		ArrayList<Utilizador> users = this.utilizadores;
 
@@ -863,7 +875,14 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void livrosTabela(DefaultTableModel dtm) {
+	/**
+	 * Atribui os livros e os respectivos atibutos a uum defaulTableModel para que
+	 * sejam ilustrados todos os livros e as suas caracteristicas no tipo de dados
+	 * respectivo
+	 * 
+	 * @param dtm
+	 */
+	protected void livrosTabela(DefaultTableModel dtm) {
 
 		ArrayList<Livro> livros = this.livros;
 
@@ -880,7 +899,16 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void tabelaLivrosCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
+	/**
+	 * Atribui os livros a um default table model consoante o criterio de pesquise e
+	 * a pesquisa respectiva a esse criterio de modo a filtra los para quando se
+	 * efectua uma escolha do comboBox de values tipo String
+	 * 
+	 * @param dtm
+	 * @param criterioSeleccao
+	 * @param pesquisa
+	 */
+	protected void tabelaLivrosCriterioSeleccao(DefaultTableModel dtm, String criterioSeleccao, String pesquisa) {
 
 		ArrayList<Livro> livros = this.livros;
 
@@ -917,16 +945,25 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void tabelaLivrosFiltrarPreco(DefaultTableModel dtm, String criterioSeleccao, String precoMINstr, String precoMAXstr) {
-		
+	/**
+	 * Devolve os dados para o preenchimento da tabela dos livros mas agora
+	 * filtrando por preço maximo e minimo que seram inseridos pelo utilizador
+	 * 
+	 * @param dtm
+	 * @param criterioSeleccao
+	 * @param precoMINstr
+	 * @param precoMAXstr
+	 */
+	protected void tabelaLivrosFiltrarPreco(DefaultTableModel dtm, String criterioSeleccao, String precoMINstr,
+			String precoMAXstr) {
+
 		ArrayList<Livro> livros = this.livros;
-		
-		precoMINstr=precoMINstr.replaceAll(",",".");
-		precoMAXstr=precoMAXstr.replaceAll(",",".");
-		
-		double precoMIN=Double.parseDouble(precoMINstr);
-		double precoMAX=Double.parseDouble(precoMAXstr);
-		
+
+		precoMINstr = precoMINstr.replaceAll(",", ".");
+		precoMAXstr = precoMAXstr.replaceAll(",", ".");
+
+		double precoMIN = Double.parseDouble(precoMINstr);
+		double precoMAX = Double.parseDouble(precoMAXstr);
 
 		for (Livro l : livros) {
 			int id = l.getIdLivro();
@@ -937,50 +974,25 @@ public class Livraria implements Serializable {
 
 			Object[] data = { id, titulo, autor, ano, preco };
 			if (criterioSeleccao.equals("Preco")) {
-				if ((preco>=precoMIN)&&(preco<=precoMAX)) {
+				if ((preco >= precoMIN) && (preco <= precoMAX)) {
 					dtm.addRow(data);
 				}
 			}
 		}
-			
-	}
-	
-	
-	
-	@SuppressWarnings("rawtypes")
-	public void ordenarTabelaLivros(JTable tabela, String criterioOrdenacao) {
-
-		TableRowSorter<TableModel> sorter = new TableRowSorter<>(tabela.getModel());
-		tabela.setRowSorter(sorter);
-		List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-
-		if (criterioOrdenacao.equals("Titulo")) {
-			int columnIndexToSort = 1;
-			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-			sorter.setSortKeys(sortKeys);
-			sorter.sort();
-		} else if (criterioOrdenacao.equals("Autor")) {
-			int columnIndexToSort = 2;
-			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-			sorter.setSortKeys(sortKeys);
-			sorter.sort();
-
-		} else if (criterioOrdenacao.equals("Ano")) {
-			int columnIndexToSort = 3;
-			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
-			sorter.setSortKeys(sortKeys);
-			sorter.sort();
-
-		} else if (criterioOrdenacao.equals("Preco")) {
-			int columnIndexToSort = 4;
-			sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.DESCENDING));
-			sorter.setSortKeys(sortKeys);
-			sorter.sort();
-		}
 
 	}
 
-	public void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
+	/**
+	 * primeiro sao seleccionados todos os livros que estao num carrinho em
+	 * especifico e depois disso os mesmos sao tabelados e tambem calculado o seu
+	 * preco por tipo de livro e a sua quantidade de forma a que se possa
+	 * seleccionar um carrinho e obter o seu conteudo nao so em termos de tipo de
+	 * conteudo mas em peso economico e quantidade
+	 * 
+	 * @param car
+	 * @param dtm
+	 */
+	protected void carrinhoTabela(Carrinho car, DefaultTableModel dtm) {
 
 		Carrinho c = car;
 		ArrayList<Livro> livrosNoCarrinho = new ArrayList<Livro>();
@@ -1007,7 +1019,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void finalizarCarrinho(Carrinho car) {
+	/**
+	 * Altera o atributo finalizado do carrinho para true de forma a que este possa
+	 * ser pago
+	 * 
+	 * @param car
+	 */
+	protected void finalizarCarrinho(Carrinho car) {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
 
 		for (Carrinho c : carrinhos) {
@@ -1027,7 +1045,14 @@ public class Livraria implements Serializable {
 
 	}
 
-	public String[] carrinhosFinalizados() {
+	/**
+	 * devolve um array de carrinhos de estado finalizado , util para colocar na
+	 * lista dos nifs/carrinhos de forma a que o funcionario possa ver que carrinhos
+	 * estao finalizados e prontos para serem pagos
+	 * 
+	 * @return
+	 */
+	protected String[] carrinhosFinalizados() {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
 		ArrayList<String> nifCarrinhosFinalizados = new ArrayList<String>();
 		String nifFinalizado = "";
@@ -1046,7 +1071,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	public String[] carrinhosNAOFinalizados() {
+	/**
+	 * devolve um array de carrinhos de estado nao finalizado , util para colocar na
+	 * lista dos nifs/carrinhos de forma a que o funcionario tenha acesso
+	 * 
+	 * @return
+	 */
+	protected String[] carrinhosNAOFinalizados() {
 		ArrayList<Carrinho> carrinhos = this.carrinhos;
 		ArrayList<String> nifCarrinhosNAOFinalizados = new ArrayList<String>();
 		String nifNAOFinalizado = "";
@@ -1067,7 +1098,16 @@ public class Livraria implements Serializable {
 
 // METODOS ESTATISTICA
 
-	public void updatePrecoLivro(int idLivro, Preco p) {
+	/**
+	 * sendo a alteracao do preco do livro importante para o estudo estatistico cada
+	 * vez que existe uma alteracao de preco de um livro e adicionada uma
+	 * 'AlteracaoPreco' ao arraylist (historico) de todas as suas alteracoes de
+	 * preco
+	 * 
+	 * @param idLivro
+	 * @param p
+	 */
+	protected void updatePrecoLivro(int idLivro, Preco p) {
 
 		for (Livro l : this.livros) {
 			if (l.getIdLivro() == idLivro) {
@@ -1076,7 +1116,7 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	public String devolvePrecosLivroSeleccionado(String seleccao) {
+	protected String devolvePrecosLivroSeleccionado(String seleccao) {
 		ArrayList<Livro> livros = this.livros;
 		String historicoPreco = "nao ha historico";
 		for (Livro l : livros) {
@@ -1086,7 +1126,13 @@ public class Livraria implements Serializable {
 		return historicoPreco;
 	}
 
-	public String[] precosHistoricoArray(String seleccao) {
+	/**
+	 * Retorna o array do historico dos precos do livro selecionado
+	 * 
+	 * @param seleccao
+	 * @return
+	 */
+	protected String[] precosHistoricoArray(String seleccao) {
 
 		ArrayList<Livro> livros = this.livros;
 		String preco = "";
@@ -1111,7 +1157,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void tabelaVendaMontante(DefaultTableModel dtm) {
+	/**
+	 * Traduz todas as vendas da loja para um modelo de tabela para efeitos de
+	 * historial de vendas
+	 * 
+	 * @param dtm
+	 */
+	protected void tabelaVendaMontante(DefaultTableModel dtm) {
 		ArrayList<Venda> vendas = this.vendas;
 		for (Venda v : vendas) {
 			int idVenda = v.getId();
@@ -1122,7 +1174,17 @@ public class Livraria implements Serializable {
 		}
 	}
 
-	public void incrementarVendasLivros(Venda v) {
+	/**
+	 * Sendo que as vendas da livraria possuem um conteudo de idLivro e quantidade,
+	 * tal e qual como os carrinhos, e os livros teem o proprio atributo inteiro
+	 * vendas Cada vez que surge uma venda o seu conteudo e percorrido e para cada
+	 * livro que conste na hashmap conteudo da venda sao incrementadas as vendas
+	 * desse livro atraves do metodo da classe livro incrementarVendas, tambem
+	 * chamado neste metodo
+	 * 
+	 * @param v
+	 */
+	protected void incrementarVendasLivros(Venda v) {
 
 		HashMap<Integer, Integer> venda = v.getConteudoVenda();
 		// id livro , quantidade
@@ -1139,7 +1201,13 @@ public class Livraria implements Serializable {
 
 	}
 
-	public void tabelaLivrosVendas(DefaultTableModel dtm) {
+	/**
+	 * devolve uma tabela com os livros e o numero de vendas ate a data dos mesmos,
+	 * sendo possivel ver qual o livro mais ou menos vendido
+	 * 
+	 * @param dtm
+	 */
+	protected void tabelaLivrosVendas(DefaultTableModel dtm) {
 
 		ArrayList<Livro> livros = this.livros;
 
@@ -1153,8 +1221,16 @@ public class Livraria implements Serializable {
 
 	}
 
-//metodo para escrever no ficheiro dados pagamento
-	public void escreveDadosPagamentoFicheiro(String s) throws ClassNotFoundException, IOException {
+	/**
+	 * verifica se o ficheiro dados de pagamento existe ou nao, se existir escreve a
+	 * string dados de pagamento no formato "montante numcartao pin" que é importada
+	 * da caixa dos dados de pagamento
+	 * 
+	 * @param s
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	protected void escreveDadosPagamentoFicheiro(String s) throws ClassNotFoundException, IOException {
 
 		File f = new File("dadosPagamento.txt");
 		if (f.exists()) {
@@ -1170,22 +1246,24 @@ public class Livraria implements Serializable {
 			fW.newLine();
 			fW.close();
 		}
-		
 
 	}
 
 	// metodo para escrever no ficheiro
+	/**
+	 * Verifica se o ficheiro de autorizacao escrito pelo banco apos envio dos dados
+	 * de pagamento para o mesmo tem escrito AUTORIZACAO ou nao. Se estiver
+	 * autorizado retorna true, se nao , falso.
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	@SuppressWarnings("resource")
-	public boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
-		
-		
+	protected boolean verificaAutorizacao() throws ClassNotFoundException, IOException {
+
+		File f = new File("Autorizacao.txt");
 		BufferedReader fR = new BufferedReader(new FileReader("Autorizacao.txt"));
-
-		//BufferedReader fW = new BufferedReader(
-			//	new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_JavaBank\\Autorizacao.txt"));
-
-//		BufferedReader fW = new BufferedReader(
-//				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
 
 		String s = fR.readLine();
 		System.out.println(s);
@@ -1200,8 +1278,21 @@ public class Livraria implements Serializable {
 	}
 
 //metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
-	public void threadWaitAutorizacao(String s, String nif) {
-		
+	/**
+	 * A partir do momento que é realizado um pagamento via multibanco inicia-se uma
+	 * thread que espera pela autorizacao desse pagamento durante algum tempo, se a
+	 * certo ponto o pagamento for dado como autorizado pelo banco é visto pela
+	 * livraria e aparece uma mensagem de aviso de autorizacao e o contador da
+	 * thread e zerado assim como o ficheiro de dados de pagamento, o carrinho
+	 * respectivo a esse pagamento tambem e removido da loja.
+	 * 
+	 * @param s
+	 * @param nif
+	 */
+	protected void threadWaitAutorizacao(String s, String nif, double montante) {
+
+		Carrinho c = pesquisarCarrinho(nif);
+		boolean aprovado = false;
 
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -1209,35 +1300,56 @@ public class Livraria implements Serializable {
 				int counter = 50;
 				try {
 					escreveDadosPagamentoFicheiro(s);
-					while ((counter-- > 0) && (!verificaAutorizacao())) {
-
-						// thread espera por autorizacao durante 100 
-						System.out.println("wait");
-						Thread.sleep(1000);
-					}
-					if (verificaAutorizacao()) {
-						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
-						removeCarrinho(pesquisarCarrinho(nif));
-						resetFile();
-						
-					} else {
-						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
-					}
-
-				} catch (ClassNotFoundException | IOException | InterruptedException e) {
+				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				while (counter-- > 0) {
+
+					// thread espera por autorizacao durante 100
+					System.out.println("wait");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						if (verificaAutorizacao()) {
+							JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+							Carrinho c = pesquisarCarrinho(nif);
+
+							HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
+							Venda v = new Venda(montante, conteudoVenda, nif);
+							addVenda(v);
+							incrementarVendasLivros(v);
+							removeCarrinho(c);
+							resetFile();
+							counter = 0;
+						}
+					} catch (HeadlessException | ClassNotFoundException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
 
 			}
-		});
 
+		});
 		t1.start();
 
 	}
 
-	public void resetFile() throws IOException {
-		
+	/**
+	 * Metodo para fazer 'reset' ao ficheiro de dados , usado quando se obtem uma
+	 * autorizacao
+	 * 
+	 * @throws IOException
+	 */
+	protected void resetFile() throws IOException {
+
 		File f = new File("dadosPagamento.txt");
 		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 		fW.write("00 00 00");

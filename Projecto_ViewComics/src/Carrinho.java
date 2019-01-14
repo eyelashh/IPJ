@@ -77,6 +77,13 @@ public class Carrinho implements Serializable {
 		return nif;
 	}
 
+	/**
+	 * metodo que actualiza o conteudo de um carrinho com o id de um livro e a
+	 * quantidade
+	 * 
+	 * @param idLivro
+	 * @param quantidade
+	 */
 	public void updateCarrinho(int idLivro, int quantidade) {
 
 		if (this.conteudo.containsKey(idLivro)) {
@@ -90,6 +97,10 @@ public class Carrinho implements Serializable {
 
 	}
 
+	/**retorna a quantidade de um livro especifico no carrinho
+	 * @param idLivro
+	 * @return
+	 */
 	public int quantidadeLivro(int idLivro) {
 
 		int quantidade = 0;
@@ -101,11 +112,9 @@ public class Carrinho implements Serializable {
 			quantidade = 0;
 
 		}
-		
-		
+
 		return quantidade;
 
 	}
-
 
 }

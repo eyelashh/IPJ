@@ -77,8 +77,6 @@ public class AppAdmin implements Serializable {
 	private final ButtonGroup rbGroupLIVROS = new ButtonGroup();
 	private final ButtonGroup rbGroupUtilizadores = new ButtonGroup();
 	private JTextField txtLivroSelecSTATS;
-	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTable tabelaLivrosLIVROS;
 	String[] colunasLivro = { "Id do livro", "Titulo", "Autor" };
 	DefaultTableModel modeloTabelaLivrosLIVROS = new DefaultTableModel(colunasLivro, 0) {
@@ -254,6 +252,71 @@ public class AppAdmin implements Serializable {
 		panelPrincipal.setBounds(240, 176, 1022, 545);
 		Paineltotal.add(panelPrincipal);
 		panelPrincipal.setLayout(null);
+		// gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
+
+		JPanel jpAdmEstatisticas = new JPanel();
+		jpAdmEstatisticas.setBounds(0, 0, 968, 545);
+		panelPrincipal.add(jpAdmEstatisticas);
+		jpAdmEstatisticas.setLayout(null);
+						
+								JLabel lblTabelaComData = new JLabel("Historico de precos");
+								lblTabelaComData.setFont(new Font("Tahoma", Font.BOLD, 14));
+								lblTabelaComData.setBounds(193, 35, 152, 31);
+								jpAdmEstatisticas.add(lblTabelaComData);
+								
+										JScrollPane scrollListaAlteracaoPrecos = new JScrollPane();
+										scrollListaAlteracaoPrecos.setBounds(193, 113, 152, 421);
+										jpAdmEstatisticas.add(scrollListaAlteracaoPrecos);
+										
+												JScrollPane scrollListaLivrosSTATS = new JScrollPane();
+												scrollListaLivrosSTATS.setBounds(10, 113, 173, 421);
+												jpAdmEstatisticas.add(scrollListaLivrosSTATS);
+												
+														JList<String> listaLivrosEstatistica = new JList<String>(modeloListaLivros);
+														scrollListaLivrosSTATS.setViewportView(listaLivrosEstatistica);
+														
+																listaLivrosEstatistica.addListSelectionListener(new ListSelectionListener() {
+																	public void valueChanged(ListSelectionEvent arg0) {
+																		if (!listaLivrosEstatistica.isSelectionEmpty()) {
+																			modeloListaPrecos.removeAllElements();
+																			String seleccao = listaLivrosEstatistica.getSelectedValue();
+																			txtLivroSelecSTATS.setText(seleccao.substring(0, seleccao.indexOf(",")));
+																			gl.viewComics.addArrayLista(gl.viewComics.precosHistoricoArray(seleccao), modeloListaPrecos);
+																			// String historicoPreco=gl.viewComics.devolvePrecosLivroSeleccionado(seleccao);
+																			// txtTesteSTATS.setText(historicoPreco);
+																		} else {
+																			JOptionPane.showMessageDialog(null, "seleccione um livro da lista");
+																		}
+																	}
+																});
+																
+																		txtLivroSelecSTATS = new JTextField();
+																		txtLivroSelecSTATS.setEditable(false);
+																		txtLivroSelecSTATS.setBounds(193, 67, 152, 33);
+																		jpAdmEstatisticas.add(txtLivroSelecSTATS);
+																		txtLivroSelecSTATS.setColumns(10);
+																						
+																								JScrollPane scrollVendasMontante = new JScrollPane();
+																								scrollVendasMontante.setBounds(360, 75, 216, 459);
+																								jpAdmEstatisticas.add(scrollVendasMontante);
+																								
+																										tabelaVendasMontante = new JTable(modeloVendasMontante);
+																										tabelaVendasMontante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+																										tabelaVendasMontante.setAutoCreateRowSorter(true);
+																										scrollVendasMontante.setViewportView(tabelaVendasMontante);
+																										
+																												JScrollPane scrollLivroVendas = new JScrollPane();
+																												scrollLivroVendas.setBounds(600, 75, 341, 459);
+																												jpAdmEstatisticas.add(scrollLivroVendas);
+																												
+																														tabelaLivroVendas = new JTable(modeloLivroVendas);
+																														tabelaLivroVendas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+																														tabelaLivroVendas.setAutoCreateRowSorter(true);
+																														scrollLivroVendas.setViewportView(tabelaLivroVendas);
+																														JList<String> alteracoesPrecos = new JList<String>(modeloListaPrecos);
+																														alteracoesPrecos.setBounds(193, 114, 150, 420);
+																														jpAdmEstatisticas.add(alteracoesPrecos);
+																														jpAdmEstatisticas.setVisible(false);
 
 		JPanel jpAdmLivros = new JPanel();
 		jpAdmLivros.setBounds(0, 0, 763, 545);
@@ -548,7 +611,7 @@ public class AppAdmin implements Serializable {
 		cbCriterioOrdenacaoLIVROS.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				String seleccao = (String) cbCriterioOrdenacaoLIVROS.getSelectedItem();
-				gl.viewComics.ordenarTabelaLivros(tabelaLivrosLIVROS, seleccao);
+				
 			}
 		});
 		cbCriterioOrdenacaoLIVROS.setBounds(163, 24, 158, 25);
@@ -582,8 +645,8 @@ public class AppAdmin implements Serializable {
 				txtDescricaoLivros.setText("");
 				txtAnoLivros.setText("");
 
-				modeloListaLivros.removeAllElements();
-				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
+//				modeloListaLivros.removeAllElements();
+//				gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
 			}
 		});
@@ -815,92 +878,8 @@ public class AppAdmin implements Serializable {
 
 			}
 		});
-		// gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
-
-		JPanel jpAdmEstatisticas = new JPanel();
-		jpAdmEstatisticas.setBounds(0, 0, 968, 545);
-		panelPrincipal.add(jpAdmEstatisticas);
-		jpAdmEstatisticas.setLayout(null);
-
-		JLabel lblLivroMaisVendido = new JLabel("Mais vendas");
-		lblLivroMaisVendido.setBounds(10, 11, 97, 31);
-		jpAdmEstatisticas.add(lblLivroMaisVendido);
-
-		JLabel lblLivroMenosVendido = new JLabel("Menos vendas");
-		lblLivroMenosVendido.setBounds(10, 53, 86, 31);
-		jpAdmEstatisticas.add(lblLivroMenosVendido);
-
-		JLabel lblTabelaComData = new JLabel("Historico de precos");
-		lblTabelaComData.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTabelaComData.setBounds(193, 104, 152, 31);
-		jpAdmEstatisticas.add(lblTabelaComData);
-
-		JScrollPane scrollListaAlteracaoPrecos = new JScrollPane();
-		scrollListaAlteracaoPrecos.setBounds(193, 186, 152, 348);
-		jpAdmEstatisticas.add(scrollListaAlteracaoPrecos);
-		JList<String> alteracoesPrecos = new JList<String>(modeloListaPrecos);
-		scrollListaAlteracaoPrecos.setViewportView(alteracoesPrecos);
-
-		JScrollPane scrollListaLivrosSTATS = new JScrollPane();
-		scrollListaLivrosSTATS.setBounds(31, 113, 152, 421);
-		jpAdmEstatisticas.add(scrollListaLivrosSTATS);
-
-		JList<String> listaLivrosEstatistica = new JList<String>(modeloListaLivros);
-		scrollListaLivrosSTATS.setViewportView(listaLivrosEstatistica);
-
-		listaLivrosEstatistica.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!listaLivrosEstatistica.isSelectionEmpty()) {
-					modeloListaPrecos.removeAllElements();
-					String seleccao = listaLivrosEstatistica.getSelectedValue();
-					txtLivroSelecSTATS.setText(seleccao.substring(0, seleccao.indexOf(",")));
-					gl.viewComics.addArrayLista(gl.viewComics.precosHistoricoArray(seleccao), modeloListaPrecos);
-					// String historicoPreco=gl.viewComics.devolvePrecosLivroSeleccionado(seleccao);
-					// txtTesteSTATS.setText(historicoPreco);
-				} else {
-					JOptionPane.showMessageDialog(null, "seleccione um livro da lista");
-				}
-			}
-		});
-
-		txtLivroSelecSTATS = new JTextField();
-		txtLivroSelecSTATS.setEditable(false);
-		txtLivroSelecSTATS.setBounds(193, 142, 152, 33);
-		jpAdmEstatisticas.add(txtLivroSelecSTATS);
-		txtLivroSelecSTATS.setColumns(10);
-
-		textField_1 = new JTextField();
-		textField_1.setBackground(new Color(204, 255, 51));
-		textField_1.setBounds(93, 13, 246, 26);
-		jpAdmEstatisticas.add(textField_1);
-		textField_1.setColumns(10);
-
-		textField_2 = new JTextField();
-		textField_2.setBackground(new Color(255, 204, 204));
-		textField_2.setColumns(10);
-		textField_2.setBounds(93, 55, 246, 26);
-		jpAdmEstatisticas.add(textField_2);
-
-		JScrollPane scrollVendasMontante = new JScrollPane();
-		scrollVendasMontante.setBounds(360, 75, 216, 459);
-		jpAdmEstatisticas.add(scrollVendasMontante);
-
-		tabelaVendasMontante = new JTable(modeloVendasMontante);
-		tabelaVendasMontante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		gl.viewComics.tabelaVendaMontante(modeloVendasMontante);
-		tabelaVendasMontante.setAutoCreateRowSorter(true);
-		scrollVendasMontante.setViewportView(tabelaVendasMontante);
-
-		JScrollPane scrollLivroVendas = new JScrollPane();
-		scrollLivroVendas.setBounds(600, 75, 341, 459);
-		jpAdmEstatisticas.add(scrollLivroVendas);
-
-		tabelaLivroVendas = new JTable(modeloLivroVendas);
-		tabelaLivroVendas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabelaLivroVendas.setAutoCreateRowSorter(true);
-		scrollLivroVendas.setViewportView(tabelaLivroVendas);
 		gl.viewComics.tabelaLivrosVendas(modeloLivroVendas);
-		jpAdmEstatisticas.setVisible(false);
 		gl.viewComics.livrosTabela(modeloTabelaLivrosLIVROS);
 		gl.viewComics.tabelaUtilizadores(modeloTabelaUTILIZADORES);
 
@@ -1033,10 +1012,7 @@ public class AppAdmin implements Serializable {
 		txtConfirmaPassALTERAPASS = new JPasswordField();
 		txtConfirmaPassALTERAPASS.setBounds(432, 285, 279, 29);
 		jpAdmConta.add(txtConfirmaPassALTERAPASS);
-		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
-//		gl.viewComics.addArrayLista(gl.viewComics.arrayLivros(gl.viewComics.getLivros()), modeloListaLivros);
 
-//		gl.viewComics.addArrayLista(gl.viewComics.arrayFunc(gl.viewComics.getUtilizadores()), modeloListaUTILIZADORES);
 
 		// encaminhar para os respectivos paineis ao clicar nos botoes
 
