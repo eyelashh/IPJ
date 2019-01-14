@@ -1446,6 +1446,7 @@ public class Banco implements Serializable {
 
 	}
 
+
 	public void fileAutoriza() throws IOException {
 
 		String autorizacao = "AUTORIZADO";
@@ -1515,8 +1516,9 @@ public class Banco implements Serializable {
 			if (c.getnCartao() == nCartao) {
 				if (c.getCodvalidacao() == pin) {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
-						autorizado = true;
 						actualizaSaldoEOperacoesAposPagamento(montante, nCartao);
+						autorizado = true;
+						
 						
 					}
 
@@ -1534,15 +1536,17 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				
 				while (true) {
 					System.out.println("A aguardar dados correctos");
 
 						try {
 							if (autorizaVenda()) {
+									
 									fileAutoriza();
 									resetDadosPagamento();
-									fileNaoAutoriza();
-									JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+//									JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+									
 								}
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
