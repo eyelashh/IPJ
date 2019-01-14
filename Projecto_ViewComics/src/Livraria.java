@@ -1206,7 +1206,7 @@ public class Livraria implements Serializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 100;
+				int counter = 50;
 				try {
 					escreveDadosPagamentoFicheiro(s);
 					while ((counter-- > 0) && (!verificaAutorizacao())) {

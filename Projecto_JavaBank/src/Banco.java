@@ -1525,7 +1525,7 @@ public class Banco implements Serializable {
 	}
 
 	public void threadLeDadosAutoriza() throws IOException {
-		
+
 		fileNaoAutoriza();
 
 		Thread t2 = new Thread(new Runnable() {
@@ -1534,7 +1534,7 @@ public class Banco implements Serializable {
 //				int counter = 1000;
 				while (true) {
 					System.out.println("A aguardar dados correctos");
-					
+
 					try {
 						if (autorizaVenda()) {
 							try {
@@ -1543,7 +1543,7 @@ public class Banco implements Serializable {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
+
 						}
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -1555,8 +1555,13 @@ public class Banco implements Serializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 
