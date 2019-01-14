@@ -46,9 +46,10 @@ public class Login {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * 
+	 * neste metedo e efectuado o login
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * 
 	 */
 	private void initialize() throws IOException, ClassNotFoundException {
 		GestaoBanco gb = new GestaoBanco();

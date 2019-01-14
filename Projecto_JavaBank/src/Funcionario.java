@@ -22,6 +22,11 @@ public class Funcionario extends Utilizador implements Serializable {
 		this.idFuncionario = idFuncionario;
 	}
 
+	/**
+	 * @param fun
+	 * @return
+	 * lista um array de funcionarios
+	 */
 	protected String[] listar(ArrayList<Funcionario> fun) {
 		String[] f = new String[fun.size()];
 		String s = "";
