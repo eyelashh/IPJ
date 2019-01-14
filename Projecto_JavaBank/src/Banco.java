@@ -1572,14 +1572,10 @@ public class Banco implements Serializable {
 
 	}
 
-<<<<<<< HEAD
 	/**
 	 * @throws IOException
 	 * escreve resposta no ficheiro autorizaçao para ser lido na livraria.
 	 */
-=======
-
->>>>>>> d2ba564b7e5bc613ed03f48de22db7f86b7a91d4
 	public void fileAutoriza() throws IOException {
 
 		String autorizacao = "AUTORIZADO";
