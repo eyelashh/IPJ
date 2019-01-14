@@ -849,8 +849,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param nomeCliente
-	 * @return
-	 * este metodo retorna uma lista dos cliente recebendo o nome do cliente
+	 * @return este metodo retorna uma lista dos cliente recebendo o nome do cliente
 	 */
 	protected String[] listaClientesNome(String nomeCliente) {
 
@@ -875,8 +874,7 @@ public class Banco implements Serializable {
 	// preenche tabela clientes no cliente pelo nome:
 	/**
 	 * @param model
-	 * @param nome
-	 * este metodo preenche a tabela 
+	 * @param nome  este metodo preenche a tabela
 	 */
 	protected void preenchetabelaclientesNome(DefaultTableModel model, String nome) {
 		int id = 0;
@@ -892,7 +890,6 @@ public class Banco implements Serializable {
 			}
 		}
 	}
-
 
 	// preenche tabela clientes no cliente pelo id:
 	protected void preenchetabelaclientesID(DefaultTableModel model, int idCliente) {
@@ -927,7 +924,7 @@ public class Banco implements Serializable {
 							.getIdConta();
 					Cliente clt = ((Transferencia) contas.get(i).getOperacoes().get(j)).getClt();
 
-					Object[] texto = {id, tipo,  resp, data, valor, contadestino, clt };
+					Object[] texto = { id, tipo, resp, data, valor, contadestino, clt };
 					model.addRow(texto);
 
 				}
@@ -973,7 +970,7 @@ public class Banco implements Serializable {
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					Object[] texto = {  id,tipo, resp, data, valor, null, null };
+					Object[] texto = { id, tipo, resp, data, valor, null, null };
 					model.addRow(texto);
 				}
 
@@ -997,7 +994,7 @@ public class Banco implements Serializable {
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					Object[] texto = { id,  tipo,resp, data, valor, null, null };
+					Object[] texto = { id, tipo, resp, data, valor, null, null };
 					model.addRow(texto);
 
 				}
@@ -1006,6 +1003,7 @@ public class Banco implements Serializable {
 		}
 
 	}
+
 	protected void preenchetabelaOperacoesPagamento(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
@@ -1019,7 +1017,7 @@ public class Banco implements Serializable {
 					Date data = contas.get(i).getOperacoes().get(j).getDataOperacao();
 					Double valor = contas.get(i).getOperacoes().get(j).getValor();
 
-					Object[] texto = { id,  tipo,null, data, valor, null, null };
+					Object[] texto = { id, tipo, null, data, valor, null, null };
 					model.addRow(texto);
 
 				}
@@ -1028,7 +1026,6 @@ public class Banco implements Serializable {
 		}
 
 	}
-	
 
 	protected void preenchetabelaOperacoesTodas(DefaultTableModel model, Conta c) {
 
@@ -1040,37 +1037,35 @@ public class Banco implements Serializable {
 
 				Operacao o = contas.get(i).getOperacoes().get(j);
 				int id = o.getIdOperacao();
-				Funcionario resp=o.getResponsavel();
+				Funcionario resp = o.getResponsavel();
 				double valor = o.getValor();
 				Date data = o.getDataOperacao();
-				String tipo ="";
-				Cliente cliente=null;
-				Conta contaDestino =null;
+				String tipo = "";
+				Cliente cliente = null;
+				Conta contaDestino = null;
 
 				if (o instanceof Levantamento) {
 					tipo = "Levantamento";
-					
-					
+
 				} else if (o instanceof Deposito) {
-					tipo ="Deposito";
+					tipo = "Deposito";
 
 				} else if (o instanceof Transferencia) {
 					tipo = "Transferencia";
-					cliente=((Transferencia) o).getClt();
-					contaDestino=((Transferencia) o).getcontatransf();	
+					cliente = ((Transferencia) o).getClt();
+					contaDestino = ((Transferencia) o).getcontatransf();
 
 				} else if (o instanceof Pagamento) {
-					tipo = "Pagamento";	
+					tipo = "Pagamento";
 				}
 
-				
-					Object[] dados = {id, tipo,  resp,data, valor, contaDestino, cliente};
-					model.addRow(dados);
-
-				}
+				Object[] dados = { id, tipo, resp, data, valor, contaDestino, cliente };
+				model.addRow(dados);
 
 			}
+
 		}
+	}
 
 	// lista das operacoes
 	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
@@ -1409,9 +1404,18 @@ public class Banco implements Serializable {
 	}
 	// recebe os dados de pagamento da livraria
 
-	protected void actualizaSaldoAposPagamento(double montantePagamento, int idConta) {
+	protected void actualizaSaldoAposPagamento(double montantePagamento, int numCartao) {
+
+		int idConta = 0;
+
+		for (Cartao c : this.cartoes) {
+			if (c.getnCartao() == numCartao) {
+				idConta = c.getIdconta();
+			}
+		}
 
 		for (Conta c : this.contas) {
+
 			if (c.getIdConta() == idConta) {
 				double novoSaldo = c.getSaldo() - montantePagamento;
 				c.setSaldo(novoSaldo);
@@ -1421,30 +1425,67 @@ public class Banco implements Serializable {
 				Operacao op = new Pagamento(id, today, montantePagamento, str);
 				c.getOperacoes().add(op);
 			}
+
 		}
 	}
 
 	public String lerDadosPagamento() throws IOException {
-		
-		
-		
 
-//		String caminhoAtual = new File("").getAbsolutePath();
-//		caminhoAtual = caminhoAtual.substring(0, caminhoAtual.lastIndexOf(File.separator));
-//		caminhoAtual = caminhoAtual + File.separator+"dadosPagamento.txt";
-//		BufferedReader fW = new BufferedReader(new FileReader(caminhoAtual));
-		
-	
-		//BufferedReader fW = new BufferedReader(new FileReader("C:\\Users\\Joana\\eclipse-workspace\\IPJ\\Projecto_ViewComics\\dadosPagamento.txt"));
-		
-//		BufferedReader fW = new BufferedReader(
-//				new FileReader("/Users/tamarabarros/IPJ/Projecto_ViewComics/dadosPagamento.txt"));
-		
 		BufferedReader fR = new BufferedReader(new FileReader(new File("dadosPagamento.txt")));
 		String dadosPagamento = fR.readLine();
 
 		return dadosPagamento;
 
+	}
+
+	public void resetDadosPagamento() throws IOException {
+		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
+		fW.write("00 00 00");
+		fW.newLine();
+		fW.close();
+
+	}
+
+	public void fileAutoriza() throws IOException {
+
+		String autorizacao = "AUTORIZADO";
+		File f = new File("Autorizacao.txt");
+		if (f.exists()) {
+
+			BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
+			fW.write(autorizacao);
+			fW.newLine();
+			fW.close();
+
+		} else {
+			f.createNewFile();
+
+			BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
+			fW.write(autorizacao);
+			fW.newLine();
+			fW.close();
+		}
+	}
+
+	public void fileNaoAutoriza() throws IOException {
+
+		String autorizacao = "NAO AUTORIZADO";
+		File f = new File("Autorizacao.txt");
+		if (f.exists()) {
+
+			BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
+			fW.write(autorizacao);
+			fW.newLine();
+			fW.close();
+
+		} else {
+			f.createNewFile();
+
+			BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
+			fW.write(autorizacao);
+			fW.newLine();
+			fW.close();
+		}
 	}
 
 	protected boolean autorizaVenda() throws IOException {
@@ -1461,7 +1502,7 @@ public class Banco implements Serializable {
 			ncartaoSTR = sc.next();
 			pinSTR = sc.next();
 		}
-		montanteSTR=montanteSTR.replaceAll(",", ".");
+		montanteSTR = montanteSTR.replaceAll(",", ".");
 		double montante = Double.parseDouble(montanteSTR);
 		int nCartao = Integer.parseInt(ncartaoSTR);
 		int pin = Integer.parseInt(pinSTR);
@@ -1474,80 +1515,51 @@ public class Banco implements Serializable {
 				if (c.getCodvalidacao() == pin) {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						autorizado = true;
-						int idConta = c.getIdconta();
-						actualizaSaldoAposPagamento(montante, idConta);
-
 					}
 
 				}
 			}
 		}
-
 		return autorizado;
-	}
-
-	protected void escreveFicheiro() throws ClassNotFoundException, IOException {
-		
-		
-
-		if (autorizaVenda()) {
-			String autorizacao = "AUTORIZADO";
-			File f = new File("Autorizacao.txt");
-			if (f.exists()) {
-
-				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
-				fW.write(autorizacao);
-				fW.newLine();
-				fW.close();
-
-			} else {
-				f.createNewFile();
-
-				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
-				fW.write(autorizacao);
-				fW.newLine();
-				fW.close();
-			}
-		} else {
-			String autorizacao = "NAO AUTORIZADO";
-			File f = new File("Autorizacao.txt");
-			if (f.exists()) {
-
-				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
-				fW.write(autorizacao);
-				fW.newLine();
-				fW.close();
-
-			} else {
-				f.createNewFile();
-
-				BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
-				fW.write(autorizacao);
-				fW.newLine();
-				fW.close();
-			}
-
-		}
 
 	}
 
-	public void threadLeDadosAutoriza() {
+	public void threadLeDadosAutoriza() throws IOException {
+		
+		fileNaoAutoriza();
+
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int counter = 100;
+//				int counter = 1000;
 				while (true) {
+					System.out.println("A aguardar dados correctos");
+					
 					try {
-						escreveFicheiro();
-						System.out.println("A aguardar dados correctos");
-						Thread.sleep(1000);
-
-					} catch (ClassNotFoundException | IOException | InterruptedException e) {
+						if (autorizaVenda()) {
+							try {
+								fileAutoriza();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					try {
+						resetDadosPagamento();
+					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+
 				}
 			}
+
 		});
 
 		t2.start();

@@ -1201,6 +1201,7 @@ public class Livraria implements Serializable {
 
 //metodo que inicia uma thread que escreve no ficheiro e espera pela autorizacao
 	public void threadWaitAutorizacao(String s, String nif) {
+		
 
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -1214,11 +1215,10 @@ public class Livraria implements Serializable {
 						System.out.println("wait");
 						Thread.sleep(1000);
 					}
-					resetFile();
-
 					if (verificaAutorizacao()) {
 						JOptionPane.showMessageDialog(null, "Pagamento autorizado");
 						removeCarrinho(pesquisarCarrinho(nif));
+						resetFile();
 						
 					} else {
 						JOptionPane.showMessageDialog(null, "Pagamento nao autorizado");
@@ -1237,6 +1237,7 @@ public class Livraria implements Serializable {
 	}
 
 	public void resetFile() throws IOException {
+		
 		File f = new File("dadosPagamento.txt");
 		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 		fW.write("00 00 00");
