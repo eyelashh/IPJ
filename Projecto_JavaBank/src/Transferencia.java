@@ -31,7 +31,7 @@ public class Transferencia extends Operacao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Transferencia [contatransf=" + contatransf + ", clt=" + clt + "]";
+		return contatransf + " " ;
 	}
 
 }

@@ -129,7 +129,7 @@ public class BancoAppFun implements Serializable {
 	// Aqui estive a adicionar itens ao combobox de pesquisa
 	String[] itens = new String[] { "Nome", "ID" };
 	// Modelo para tabela movimentos
-	String[] colunas = { "Tipo", "IDOperacao", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
+	String[] colunas = { "IDOperacao", "Tipo", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
 	// Modelo lista para a tabela dos movimentos
 	DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
 		public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -948,7 +948,7 @@ public class BancoAppFun implements Serializable {
 					Conta c = gb.javabank.SelectConta(Integer.parseInt(idConta), gb.javabank.getContas());
 
 					gb.javabank.limpatabela(modeloTabela);
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, Integer.parseInt(idConta));
 					// gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
 					// gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
 					// gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
@@ -1343,7 +1343,7 @@ public class BancoAppFun implements Serializable {
 		tableMovimentos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				tbdescop.setText("");
 				int linha = tableMovimentos.getSelectedRow();
 				int id = (int) tableMovimentos.getModel().getValueAt(linha, 0);
 				String desc = gb.javabank.descricaoOpercacoes(id);
@@ -1386,7 +1386,7 @@ public class BancoAppFun implements Serializable {
 				Conta c = gb.javabank.SelectConta(Integer.parseInt((String) lContas.getSelectedValue()),
 						gb.javabank.getContas());
 				if (cbTipoOperacao.getSelectedItem().equals("Todos")) {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, Integer.parseInt((String) lContas.getSelectedValue()));
 
 				} else if (cbTipoOperacao.getSelectedItem().equals("Depositos")) {
 					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
@@ -1401,7 +1401,7 @@ public class BancoAppFun implements Serializable {
 					gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
 
 				} else {
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, Integer.parseInt((String) lContas.getSelectedValue()));
 				}
 			}
 		});
