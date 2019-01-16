@@ -1318,8 +1318,9 @@ public class Livraria implements Serializable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				boolean Autorizado=false;
 				while (counter-- > 0) {
-
+					
 					// thread espera por autorizacao durante 100
 					System.out.println("wait");
 					try {
@@ -1331,22 +1332,27 @@ public class Livraria implements Serializable {
 
 					try {
 						if (verificaAutorizacao()) {
-							JOptionPane.showMessageDialog(null, "Pagamento autorizado");
+							JOptionPane.showMessageDialog(null, "Pagamento AUTORIZADO");
 							Carrinho c = pesquisarCarrinho(nif);
-
 							HashMap<Integer, Integer> conteudoVenda = c.getConteudo();
 							Venda v = new Venda(montante, conteudoVenda, nif);
 							addVenda(v);
 							incrementarVendasLivros(v);
 							removeCarrinho(c);
 							resetFile();
+							resetNaoAutorizado();
 							counter = 0;
+							Autorizado=true;
 						}
 					} catch (HeadlessException | ClassNotFoundException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
+				}
+				
+				if(Autorizado=false) {
+					JOptionPane.showMessageDialog(null, "Pagamento NAO AUTORIZADO");
 				}
 
 			}
@@ -1370,5 +1376,13 @@ public class Livraria implements Serializable {
 		fW.newLine();
 		fW.close();
 
+	}
+	protected void resetNaoAutorizado() throws IOException {
+		File f = new File("Autorizacao.txt");
+		BufferedWriter fW = new BufferedWriter(new FileWriter("Autorizacao.txt"));
+		fW.write("NAO AUTORIZADO");
+		fW.newLine();
+		fW.close();
+		
 	}
 }

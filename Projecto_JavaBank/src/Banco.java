@@ -1690,6 +1690,7 @@ public class Banco implements Serializable {
 									
 									fileAutoriza();
 									resetDadosPagamento();
+									
 //									JOptionPane.showMessageDialog(null, "Pagamento autorizado");
 									
 								}
@@ -1703,6 +1704,7 @@ public class Banco implements Serializable {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						
 					
 				}
 			}
