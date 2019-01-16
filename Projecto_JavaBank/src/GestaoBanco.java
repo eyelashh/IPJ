@@ -21,6 +21,9 @@ public class GestaoBanco implements Serializable {
 	private ObjectOutputStream oS;
 
 	// Construtor:
+	/**
+	 * inicializa o banco
+	 */
 	public GestaoBanco() {
 		// INICIALIZA O BANCO:
 		this.javabank = new Banco();
@@ -32,6 +35,11 @@ public class GestaoBanco implements Serializable {
 		
 	}
 
+	/**
+	 * este metedo cria e le os ficheiros no inicio do arranque do programa
+	 * caso exista ficheiros ja criados este sao lidos e preenchido os arraylists
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	protected void run() {
 
@@ -140,6 +148,15 @@ public class GestaoBanco implements Serializable {
 	// metedo que guarda os ficheiros:
 	// este metedo � chamado quando qualquer uma das janelas tipo adm/clt/fun sao
 	// fechadas ou efectuado logout.
+	/**
+	 * @param util
+	 * @param conta
+	 * @param cartao
+	 * metedo que guarda os ficheiros:
+	// este metedo e chamado quando qualquer uma das janelas tipo adm/clt/fun sao
+	// fechadas ou efectuado logout.
+	 * 
+	 */
 	protected void atualizaficheiro(ArrayList<Utilizador> util, ArrayList<Conta> conta, ArrayList<Cartao> cartao) {
 		try {
 			oS = new ObjectOutputStream(new FileOutputStream(this.fileUtil));

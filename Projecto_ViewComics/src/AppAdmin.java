@@ -35,7 +35,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import javafx.scene.control.SingleSelectionModel;
+//import javafx.scene.control.SingleSelectionModel;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JRadioButton;

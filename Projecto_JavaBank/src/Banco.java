@@ -849,7 +849,8 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param nomeCliente
-	 * @return este metodo retorna uma lista dos cliente recebendo o nome do cliente
+	 * @return
+	 *  este metodo retorna uma lista dos cliente recebendo o nome do cliente
 	 */
 	protected String[] listaClientesNome(String nomeCliente) {
 
@@ -874,7 +875,8 @@ public class Banco implements Serializable {
 	// preenche tabela clientes no cliente pelo nome:
 	/**
 	 * @param model
-	 * @param nome  este metodo preenche a tabela
+	 * @param nome 
+	 *  este metodo preenche a tabela
 	 */
 	protected void preenchetabelaclientesNome(DefaultTableModel model, String nome) {
 		int id = 0;
@@ -892,6 +894,11 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela clientes no cliente pelo id:
+	/**
+	 * @param model
+	 * @param idCliente
+	 * este metedo foi criado para seja preenchido a tabela com  cliente com id que foi dado como parametro.
+	 */
 	protected void preenchetabelaclientesID(DefaultTableModel model, int idCliente) {
 		int id = 0;
 		String cliente;
@@ -907,6 +914,11 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaÃ§oes no cliente:
+	/**
+	 * @param model
+	 * @param c
+	 * preenche tabela operaçoes correnspondente a uma conta c
+	 */
 	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
@@ -935,6 +947,12 @@ public class Banco implements Serializable {
 	}
 
 	// vai buscar a descricao
+	/**
+	 * @param idOperacao
+	 * @return
+	 * 
+	 * devolte a descricao de uma operacao.
+	 */
 	protected String descricaoOpercacoes(int idOperacao) {
 
 		String desc = "";
@@ -956,6 +974,12 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaÃ§oes no cliente:
+	/**
+	 * @param model
+	 * @param c
+	 * 
+	 * preenche uma tabela filtrando apenas os depositos
+	 */
 	protected void preenchetabelaOperacoesDeposito(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
@@ -980,6 +1004,11 @@ public class Banco implements Serializable {
 	}
 
 	// preenche tabela operaÃ§oes no cliente:
+	/**
+	 * @param model
+	 * @param c
+	 * preenche uma tabela filtrando apenas os levantamentos
+	 */
 	protected void preenchetabelaOperacoesLevantamento(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
@@ -1004,6 +1033,11 @@ public class Banco implements Serializable {
 
 	}
 
+	/**
+	 * @param model
+	 * @param c
+	 * preenche uma tabela filtrando apenas os pagamentos
+	 */
 	protected void preenchetabelaOperacoesPagamento(DefaultTableModel model, Conta c) {
 
 		for (int i = 0; i < contas.size(); i++) {
@@ -1027,6 +1061,12 @@ public class Banco implements Serializable {
 
 	}
 
+	
+	/**
+	 * @param model
+	 * @param c
+	 * preenche uma tabela com todas as operaçoes
+	 */
 	protected void preenchetabelaOperacoesTodas(DefaultTableModel model, Conta c) {
 
 		ArrayList<Conta> contas = this.contas;
@@ -1068,6 +1108,12 @@ public class Banco implements Serializable {
 	}
 
 	// lista das operacoes
+	/**
+	 * @param idConta
+	 * @param contas
+	 * @return
+	 * constroi um array de string que depois é lido pelas jlist
+	 */
 	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
 
 		ArrayList<String> operacoes = new ArrayList<String>();
@@ -1094,6 +1140,12 @@ public class Banco implements Serializable {
 	}
 
 	// atribuir cliente a conta e conta ao cliente;
+	/**
+	 * @param model
+	 * @param c
+	 * @param clientes
+	 * metedo para atribuir titulares a uma conta corrente.
+	 */
 	protected void atruibuititularCCorrente(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
 		Integer idconta;
@@ -1115,6 +1167,12 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @param model
+	 * @param c
+	 * @param clientes
+	 * metedo para atribuir titulares a uma conta poupanca.
+	 */
 	protected void atruibuititularCPoupanca(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
 		for (int i = 0; i < model.getRowCount(); i++) {
@@ -1136,6 +1194,11 @@ public class Banco implements Serializable {
 	}
 
 	// faz "Check" true aos clientes que sao titulares da conta selecionada:
+	/**
+	 * @param c
+	 * @param model
+	 * preenche o modelo de lista dos titulares de determinada conta.
+	 */
 	protected void mostratitulares(Conta c, DefaultTableModel model) {
 		int idclt = 0;
 		int idtabela = 0;
@@ -1152,6 +1215,11 @@ public class Banco implements Serializable {
 	}
 
 	// Elimina todas as contas nos clientes:
+	/**
+	 * @param clientes
+	 * @param c
+	 * metedo para remover uma conta dentro de um cliente
+	 */
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
 		Integer idconta = c.getIdConta();
@@ -1182,6 +1250,12 @@ public class Banco implements Serializable {
 	}
 
 	// retorna o cartao
+	/**
+	 * @param cartoes
+	 * @param id
+	 * @return
+	 * cartao que serve para receber informaçao de uma cartao selecionado por id.
+	 */
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
 
 		Cartao card = new Cartao();
@@ -1204,6 +1278,12 @@ public class Banco implements Serializable {
 
 	// cria um cartÃ£o
 
+	/**
+	 * @param idConta
+	 * @param card
+	 * @param c
+	 * cria um cartao para uma conta
+	 */
 	public void criaCartao(int idConta, Cartao card, Conta c) {
 		int i = 0;
 
@@ -1218,6 +1298,11 @@ public class Banco implements Serializable {
 	}
 
 	// retorna a conta atraves do seu numero
+	/**
+	 * @param numConta
+	 * @return
+	 * cria um array de contas abertas para ser lido numa jlist
+	 */
 	protected String[] listaContasNumContaAbertas(String numConta) {
 
 		ArrayList<Conta> contas = this.contas;
@@ -1236,6 +1321,11 @@ public class Banco implements Serializable {
 		return contaId;
 	}
 
+	/**
+	 * @param idCliente
+	 * @return
+	 *	devolve o um array para criar a jlist por id.
+	 */
 	protected String[] listaClientesID(String idCliente) {
 
 		ArrayList<Utilizador> util = this.utilizadores;
@@ -1257,6 +1347,12 @@ public class Banco implements Serializable {
 	}
 
 	// metedo que confirma se a conta existe (usado nas operaï¿½oes)
+	/**
+	 * @param dcbm
+	 * @param id
+	 * @return
+	 * verifica se existe ou nao a conta selecionada.
+	 */
 	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id) {
 		boolean existe = false;
 
@@ -1269,6 +1365,10 @@ public class Banco implements Serializable {
 		return existe;
 	}
 
+	/**
+	 * @param contasp
+	 * metedo que serve para aplicar juros nas contas poupanca
+	 */
 	protected void pagajuros(ArrayList<Conta> contasp) {
 		LocalDate localDate = LocalDate.now();
 		Date agora = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -1300,6 +1400,13 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @param c
+	 * @param levantamento
+	 * @param func
+	 * @param data
+	 * metedo que valida autorizaçao de pagamentos por dia/operaçao e mes. 
+	 */
 	protected void maxlevantamentoOperacaoDiaMes(Conta c, double levantamento, Funcionario func, Date data) {
 
 		Validador val = new Validador();
@@ -1393,6 +1500,11 @@ public class Banco implements Serializable {
 
 	}
 
+	/**
+	 * @param nCartao
+	 * @return
+	 * devolve conta recebendo o id do cartao
+	 */
 	protected Conta obterContaPorCartao(int nCartao) {
 		ArrayList<Conta> contas = this.contas;
 		Conta conta = new Conta();
@@ -1405,6 +1517,11 @@ public class Banco implements Serializable {
 	}
 	// recebe os dados de pagamento da livraria
 
+	/**
+	 * @param montantePagamento
+	 * @param numCartao
+	 * retira ao saldo o valor pago na livraria.
+	 */
 	protected void actualizaSaldoEOperacoesAposPagamento(double montantePagamento, int numCartao) {
 
 		int idConta = 0;
@@ -1430,6 +1547,11 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 * @throws IOException
+	 * le os dados de pagamentos recebido pela livraria no ficheiro.
+	 */
 	public String lerDadosPagamento() throws IOException {
 
 		BufferedReader fR = new BufferedReader(new FileReader(new File("dadosPagamento.txt")));
@@ -1439,6 +1561,10 @@ public class Banco implements Serializable {
 
 	}
 
+	/**
+	 * @throws IOException
+	 * escreve 00 00 00 no ficheiro de dados de pagamentos apos pagamento efectuado
+	 */
 	public void resetDadosPagamento() throws IOException {
 		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
 		fW.write("00 00 00");
@@ -1447,7 +1573,10 @@ public class Banco implements Serializable {
 
 	}
 
-
+	/**
+	 * @throws IOException
+	 * escreve resposta no ficheiro autorizaçao para ser lido na livraria.
+	 */
 	public void fileAutoriza() throws IOException {
 
 		String autorizacao = "AUTORIZADO";
@@ -1469,6 +1598,10 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @throws IOException
+	 * escreve resposta no ficheiro autorizaçao para ser lido na livraria.
+	 */
 	public void fileNaoAutoriza() throws IOException {
 
 		String autorizacao = "NAO AUTORIZADO";
@@ -1490,6 +1623,13 @@ public class Banco implements Serializable {
 		}
 	}
 
+	/**
+	 * @return
+	 * @throws IOException
+	 * valida dados para pagamentos
+	 * verifica as condicoes (existencia do cartao , cod Validacao, montantedisponivel)
+	 * 
+	 */
 	protected boolean autorizaVenda() throws IOException {
 
 		boolean autorizado = false;
@@ -1530,6 +1670,10 @@ public class Banco implements Serializable {
 
 	}
 
+	/**
+	 * @throws IOException
+	 * metedo de thread
+	 */
 	public void threadLeDadosAutoriza() throws IOException {
 
 		fileNaoAutoriza();
