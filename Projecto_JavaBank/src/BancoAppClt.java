@@ -133,7 +133,7 @@ public class BancoAppClt implements Serializable {
 		frame.getContentPane().setLayout(null);
 
 		// Modelo para tabela
-		String[] colunas = { "Tipo", "IDOperacao", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
+		String[] colunas = { "IDOperacao", "Tipo", "Responsavel", "Data", "Valor", "ContaDestino", "Cliente" };
 		DefaultTableModel modeloTabela = new DefaultTableModel(colunas, 0) {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
@@ -254,6 +254,7 @@ public class BancoAppClt implements Serializable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				textFieldCltDescr.setText("");
 				int linha = table.getSelectedRow();
 				int idDesc = (int) table.getModel().getValueAt(linha, 0);
 				String descricao = gb.javabank.descricaoOpercacoes(idDesc);
@@ -346,7 +347,7 @@ public class BancoAppClt implements Serializable {
 						tbNCartao.setText(Integer.toString(card.getnCartao()));
 					}
 
-					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+					gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, Integer.parseInt(numeroConta));
 //					gb.javabank.preenchetabelaOperacoesTransferencia(modeloTabela, c);
 //					gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
 //					gb.javabank.preenchetabelaOperacoesLevantamento(modeloTabela, c);
@@ -454,7 +455,8 @@ public class BancoAppClt implements Serializable {
 							gb.javabank.getContas());
 
 					if (comboBox.getSelectedItem().equals("Todos")) {
-						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela,
+								Integer.parseInt((String) listContasCliente.getSelectedValue()));
 
 					} else if (comboBox.getSelectedItem().equals("Depositos")) {
 						gb.javabank.preenchetabelaOperacoesDeposito(modeloTabela, c);
@@ -469,7 +471,8 @@ public class BancoAppClt implements Serializable {
 						gb.javabank.preenchetabelaOperacoesPagamento(modeloTabela, c);
 
 					} else {
-						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela, c);
+						gb.javabank.preenchetabelaOperacoesTodas(modeloTabela,
+								Integer.parseInt((String) listContasCliente.getSelectedValue()));
 					}
 
 				}

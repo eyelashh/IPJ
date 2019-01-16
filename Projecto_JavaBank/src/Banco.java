@@ -129,7 +129,7 @@ public class Banco implements Serializable {
 	 * @param user
 	 * @param pass
 	 * @return este metodo verifica se o username e a password inserida pelo
-	 *         utilizador ao logar está correcta
+	 *         utilizador ao logar estï¿½ correcta
 	 */
 	public boolean verificarUserPass(String user, String pass) {
 
@@ -849,8 +849,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param nomeCliente
-	 * @return
-	 *  este metodo retorna uma lista dos cliente recebendo o nome do cliente
+	 * @return este metodo retorna uma lista dos cliente recebendo o nome do cliente
 	 */
 	protected String[] listaClientesNome(String nomeCliente) {
 
@@ -875,8 +874,7 @@ public class Banco implements Serializable {
 	// preenche tabela clientes no cliente pelo nome:
 	/**
 	 * @param model
-	 * @param nome 
-	 *  este metodo preenche a tabela
+	 * @param nome  este metodo preenche a tabela
 	 */
 	protected void preenchetabelaclientesNome(DefaultTableModel model, String nome) {
 		int id = 0;
@@ -896,8 +894,8 @@ public class Banco implements Serializable {
 	// preenche tabela clientes no cliente pelo id:
 	/**
 	 * @param model
-	 * @param idCliente
-	 * este metedo foi criado para seja preenchido a tabela com  cliente com id que foi dado como parametro.
+	 * @param idCliente este metedo foi criado para seja preenchido a tabela com
+	 *                  cliente com id que foi dado como parametro.
 	 */
 	protected void preenchetabelaclientesID(DefaultTableModel model, int idCliente) {
 		int id = 0;
@@ -916,8 +914,7 @@ public class Banco implements Serializable {
 	// preenche tabela operaÃ§oes no cliente:
 	/**
 	 * @param model
-	 * @param c
-	 * preenche tabela operaçoes correnspondente a uma conta c
+	 * @param c     preenche tabela operaï¿½oes correnspondente a uma conta c
 	 */
 	protected void preenchetabelaOperacoesTransferencia(DefaultTableModel model, Conta c) {
 
@@ -951,7 +948,7 @@ public class Banco implements Serializable {
 	 * @param idOperacao
 	 * @return
 	 * 
-	 * devolte a descricao de uma operacao.
+	 * 		devolte a descricao de uma operacao.
 	 */
 	protected String descricaoOpercacoes(int idOperacao) {
 
@@ -978,7 +975,7 @@ public class Banco implements Serializable {
 	 * @param model
 	 * @param c
 	 * 
-	 * preenche uma tabela filtrando apenas os depositos
+	 *              preenche uma tabela filtrando apenas os depositos
 	 */
 	protected void preenchetabelaOperacoesDeposito(DefaultTableModel model, Conta c) {
 
@@ -1006,8 +1003,7 @@ public class Banco implements Serializable {
 	// preenche tabela operaÃ§oes no cliente:
 	/**
 	 * @param model
-	 * @param c
-	 * preenche uma tabela filtrando apenas os levantamentos
+	 * @param c     preenche uma tabela filtrando apenas os levantamentos
 	 */
 	protected void preenchetabelaOperacoesLevantamento(DefaultTableModel model, Conta c) {
 
@@ -1035,8 +1031,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param model
-	 * @param c
-	 * preenche uma tabela filtrando apenas os pagamentos
+	 * @param c     preenche uma tabela filtrando apenas os pagamentos
 	 */
 	protected void preenchetabelaOperacoesPagamento(DefaultTableModel model, Conta c) {
 
@@ -1061,47 +1056,48 @@ public class Banco implements Serializable {
 
 	}
 
-	
 	/**
 	 * @param model
-	 * @param c
-	 * preenche uma tabela com todas as operaçoes
+	 * @param c     preenche uma tabela com todas as operaï¿½oes
 	 */
-	protected void preenchetabelaOperacoesTodas(DefaultTableModel model, Conta c) {
+	protected void preenchetabelaOperacoesTodas(DefaultTableModel model, int idConta) {
 
 		ArrayList<Conta> contas = this.contas;
 
 		for (int i = 0; i < contas.size(); i++) {
 
-			for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
+			if (contas.get(i).getIdConta() == idConta) {
 
-				Operacao o = contas.get(i).getOperacoes().get(j);
-				int id = o.getIdOperacao();
-				Funcionario resp = o.getResponsavel();
-				double valor = o.getValor();
-				Date data = o.getDataOperacao();
-				String tipo = "";
-				Cliente cliente = null;
-				Conta contaDestino = null;
+				for (int j = 0; j < contas.get(i).getOperacoes().size(); j++) {
 
-				if (o instanceof Levantamento) {
-					tipo = "Levantamento";
+					Operacao o = contas.get(i).getOperacoes().get(j);
+					int id = o.getIdOperacao();
+					Funcionario resp = o.getResponsavel();
+					double valor = o.getValor();
+					Date data = o.getDataOperacao();
+					String tipo = "";
+					Cliente cliente = null;
+					int contaDestino = 0;
 
-				} else if (o instanceof Deposito) {
-					tipo = "Deposito";
+					if (o instanceof Levantamento) {
+						tipo = "Levantamento";
 
-				} else if (o instanceof Transferencia) {
-					tipo = "Transferencia";
-					cliente = ((Transferencia) o).getClt();
-					contaDestino = ((Transferencia) o).getcontatransf();
+					} else if (o instanceof Deposito) {
+						tipo = "Deposito";
 
-				} else if (o instanceof Pagamento) {
-					tipo = "Pagamento";
+					} else if (o instanceof Transferencia) {
+						tipo = "Transferencia";
+						cliente = ((Transferencia) o).getClt();
+						contaDestino = ((Transferencia) o).getcontatransf().getIdConta();
+
+					} else if (o instanceof Pagamento) {
+						tipo = "Pagamento";
+					}
+
+					Object[] dados = { id, tipo, resp, data, valor, contaDestino, cliente };
+					model.addRow(dados);
+
 				}
-
-				Object[] dados = { id, tipo, resp, data, valor, contaDestino, cliente };
-				model.addRow(dados);
-
 			}
 
 		}
@@ -1111,8 +1107,7 @@ public class Banco implements Serializable {
 	/**
 	 * @param idConta
 	 * @param contas
-	 * @return
-	 * constroi um array de string que depois é lido pelas jlist
+	 * @return constroi um array de string que depois ï¿½ lido pelas jlist
 	 */
 	protected String[] arrayOperacoes(ArrayList<Integer> idConta, ArrayList<Conta> contas) {
 
@@ -1143,8 +1138,7 @@ public class Banco implements Serializable {
 	/**
 	 * @param model
 	 * @param c
-	 * @param clientes
-	 * metedo para atribuir titulares a uma conta corrente.
+	 * @param clientes metedo para atribuir titulares a uma conta corrente.
 	 */
 	protected void atruibuititularCCorrente(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
@@ -1170,8 +1164,7 @@ public class Banco implements Serializable {
 	/**
 	 * @param model
 	 * @param c
-	 * @param clientes
-	 * metedo para atribuir titulares a uma conta poupanca.
+	 * @param clientes metedo para atribuir titulares a uma conta poupanca.
 	 */
 	protected void atruibuititularCPoupanca(DefaultTableModel model, Conta c, ArrayList<Utilizador> clientes) {
 		Utilizador clt;
@@ -1196,8 +1189,7 @@ public class Banco implements Serializable {
 	// faz "Check" true aos clientes que sao titulares da conta selecionada:
 	/**
 	 * @param c
-	 * @param model
-	 * preenche o modelo de lista dos titulares de determinada conta.
+	 * @param model preenche o modelo de lista dos titulares de determinada conta.
 	 */
 	protected void mostratitulares(Conta c, DefaultTableModel model) {
 		int idclt = 0;
@@ -1217,8 +1209,7 @@ public class Banco implements Serializable {
 	// Elimina todas as contas nos clientes:
 	/**
 	 * @param clientes
-	 * @param c
-	 * metedo para remover uma conta dentro de um cliente
+	 * @param c        metedo para remover uma conta dentro de um cliente
 	 */
 	protected void eliminacontaemcliente(ArrayList<Utilizador> clientes, Conta c) {
 		// remover id de contas dentro dos clientes:
@@ -1253,8 +1244,8 @@ public class Banco implements Serializable {
 	/**
 	 * @param cartoes
 	 * @param id
-	 * @return
-	 * cartao que serve para receber informaçao de uma cartao selecionado por id.
+	 * @return cartao que serve para receber informaï¿½ao de uma cartao selecionado
+	 *         por id.
 	 */
 	protected Cartao obterCartao(ArrayList<Cartao> cartoes, int id) {
 
@@ -1281,8 +1272,7 @@ public class Banco implements Serializable {
 	/**
 	 * @param idConta
 	 * @param card
-	 * @param c
-	 * cria um cartao para uma conta
+	 * @param c       cria um cartao para uma conta
 	 */
 	public void criaCartao(int idConta, Cartao card, Conta c) {
 		int i = 0;
@@ -1300,8 +1290,7 @@ public class Banco implements Serializable {
 	// retorna a conta atraves do seu numero
 	/**
 	 * @param numConta
-	 * @return
-	 * cria um array de contas abertas para ser lido numa jlist
+	 * @return cria um array de contas abertas para ser lido numa jlist
 	 */
 	protected String[] listaContasNumContaAbertas(String numConta) {
 
@@ -1323,8 +1312,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param idCliente
-	 * @return
-	 *	devolve o um array para criar a jlist por id.
+	 * @return devolve o um array para criar a jlist por id.
 	 */
 	protected String[] listaClientesID(String idCliente) {
 
@@ -1350,8 +1338,7 @@ public class Banco implements Serializable {
 	/**
 	 * @param dcbm
 	 * @param id
-	 * @return
-	 * verifica se existe ou nao a conta selecionada.
+	 * @return verifica se existe ou nao a conta selecionada.
 	 */
 	protected boolean existeconta(DefaultComboBoxModel<String> dcbm, int id) {
 		boolean existe = false;
@@ -1366,8 +1353,7 @@ public class Banco implements Serializable {
 	}
 
 	/**
-	 * @param contasp
-	 * metedo que serve para aplicar juros nas contas poupanca
+	 * @param contasp metedo que serve para aplicar juros nas contas poupanca
 	 */
 	protected void pagajuros(ArrayList<Conta> contasp) {
 		LocalDate localDate = LocalDate.now();
@@ -1404,8 +1390,8 @@ public class Banco implements Serializable {
 	 * @param c
 	 * @param levantamento
 	 * @param func
-	 * @param data
-	 * metedo que valida autorizaçao de pagamentos por dia/operaçao e mes. 
+	 * @param data         metedo que valida autorizaï¿½ao de pagamentos por
+	 *                     dia/operaï¿½ao e mes.
 	 */
 	protected void maxlevantamentoOperacaoDiaMes(Conta c, double levantamento, Funcionario func, Date data) {
 
@@ -1502,8 +1488,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param nCartao
-	 * @return
-	 * devolve conta recebendo o id do cartao
+	 * @return devolve conta recebendo o id do cartao
 	 */
 	protected Conta obterContaPorCartao(int nCartao) {
 		ArrayList<Conta> contas = this.contas;
@@ -1519,8 +1504,7 @@ public class Banco implements Serializable {
 
 	/**
 	 * @param montantePagamento
-	 * @param numCartao
-	 * retira ao saldo o valor pago na livraria.
+	 * @param numCartao         retira ao saldo o valor pago na livraria.
 	 */
 	protected void actualizaSaldoEOperacoesAposPagamento(double montantePagamento, int numCartao) {
 
@@ -1549,8 +1533,8 @@ public class Banco implements Serializable {
 
 	/**
 	 * @return
-	 * @throws IOException
-	 * le os dados de pagamentos recebido pela livraria no ficheiro.
+	 * @throws IOException le os dados de pagamentos recebido pela livraria no
+	 *                     ficheiro.
 	 */
 	public String lerDadosPagamento() throws IOException {
 
@@ -1562,8 +1546,8 @@ public class Banco implements Serializable {
 	}
 
 	/**
-	 * @throws IOException
-	 * escreve 00 00 00 no ficheiro de dados de pagamentos apos pagamento efectuado
+	 * @throws IOException escreve 00 00 00 no ficheiro de dados de pagamentos apos
+	 *                     pagamento efectuado
 	 */
 	public void resetDadosPagamento() throws IOException {
 		BufferedWriter fW = new BufferedWriter(new FileWriter("dadosPagamento.txt"));
@@ -1574,8 +1558,8 @@ public class Banco implements Serializable {
 	}
 
 	/**
-	 * @throws IOException
-	 * escreve resposta no ficheiro autorizaçao para ser lido na livraria.
+	 * @throws IOException escreve resposta no ficheiro autorizaï¿½ao para ser lido na
+	 *                     livraria.
 	 */
 	public void fileAutoriza() throws IOException {
 
@@ -1599,8 +1583,8 @@ public class Banco implements Serializable {
 	}
 
 	/**
-	 * @throws IOException
-	 * escreve resposta no ficheiro autorizaçao para ser lido na livraria.
+	 * @throws IOException escreve resposta no ficheiro autorizaï¿½ao para ser lido na
+	 *                     livraria.
 	 */
 	public void fileNaoAutoriza() throws IOException {
 
@@ -1625,9 +1609,9 @@ public class Banco implements Serializable {
 
 	/**
 	 * @return
-	 * @throws IOException
-	 * valida dados para pagamentos
-	 * verifica as condicoes (existencia do cartao , cod Validacao, montantedisponivel)
+	 * @throws IOException valida dados para pagamentos verifica as condicoes
+	 *                     (existencia do cartao , cod Validacao,
+	 *                     montantedisponivel)
 	 * 
 	 */
 	protected boolean autorizaVenda() throws IOException {
@@ -1650,7 +1634,7 @@ public class Banco implements Serializable {
 		int pin = Integer.parseInt(pinSTR);
 
 		ArrayList<Cartao> cartoes = this.cartoes;
-		
+
 		// verifica as condicoes (existencia do cartao , cod Validacao, montante
 		// disponivel)
 		for (Cartao c : cartoes) {
@@ -1659,8 +1643,7 @@ public class Banco implements Serializable {
 					if (obterContaPorCartao(nCartao).getSaldo() > montante) {
 						actualizaSaldoEOperacoesAposPagamento(montante, nCartao);
 						autorizado = true;
-						
-						
+
 					}
 
 				}
@@ -1671,8 +1654,7 @@ public class Banco implements Serializable {
 	}
 
 	/**
-	 * @throws IOException
-	 * metedo de thread
+	 * @throws IOException metedo de thread
 	 */
 	public void threadLeDadosAutoriza() throws IOException {
 
@@ -1681,31 +1663,43 @@ public class Banco implements Serializable {
 		Thread t2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				
+
 				while (true) {
 					System.out.println("A aguardar dados correctos");
 
+<<<<<<< HEAD
 						try {
 							if (autorizaVenda()) {
 									
 									fileAutoriza();
 									resetDadosPagamento();
 									
+=======
+					try {
+						if (autorizaVenda()) {
+
+							fileAutoriza();
+							resetDadosPagamento();
+>>>>>>> 45e2f8f9375ef8a91990e565e731ca93b15c2eda
 //									JOptionPane.showMessageDialog(null, "Pagamento autorizado");
-									
-								}
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+
 						}
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+<<<<<<< HEAD
 						
 					
+=======
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+>>>>>>> 45e2f8f9375ef8a91990e565e731ca93b15c2eda
 				}
 			}
 
