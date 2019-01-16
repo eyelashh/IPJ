@@ -572,6 +572,20 @@ public class Livraria implements Serializable {
 		return utilArray;
 
 	}
+	
+	protected String[] arrayLivro() {
+
+		ArrayList<String> livrosSTR =new ArrayList();
+		ArrayList <Livro> livros =this.livros;
+
+		for (Livro l: livros) {
+			livrosSTR.add(l.toString());
+		}
+
+		String[] livrosArray = livrosSTR.toArray(new String[livrosSTR.size()]);
+		return livrosArray;
+
+	}
 
 	/**
 	 * Devolve uma copia de um utilizador com determinado id de forma a poder
